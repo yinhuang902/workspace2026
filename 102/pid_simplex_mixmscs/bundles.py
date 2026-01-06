@@ -5,6 +5,7 @@ import pyomo.environ as pyo
 from pyomo.solvers.plugins.solvers.gurobi_persistent import GurobiPersistent
 from pyomo.opt import SolverStatus, TerminationCondition
 from time import perf_counter
+import sys
 
 # if model is infeasible, just set it to Q_max
 Q_max = 1e10
@@ -382,12 +383,15 @@ class MSBundle:
                     import sys
                     sys.exit(1)
                 else:
-                    # For other cases, use obj_ms as fallback
-                    self._last_ms_val = float(pyo.value(self.model.obj_ms))
+                else:
+                    # STRICT BEHAVIOR: Terminate if dual bound missing
+                    print(f"[Subproblem solving issue] MS Problem dual bound (lb) is None. Term: {term}. Exiting.")
+                    sys.exit(1)
             else:
                 self._last_ms_val = float(lb)
-        except:
-            self._last_ms_val = float(pyo.value(self.model.obj_ms))
+        except Exception as e:
+            print(f"[Subproblem solving issue] MS Problem lb access failed: {e}. Exiting.")
+            sys.exit(1)
 
         # Check if solver has a valid bound
         # For optimal/locally optimal: status should be ok/warning
@@ -595,11 +599,12 @@ class MSBundle:
                 if lb is not None:
                     self._last_ms_val = float(lb)
                 else:
-                    self._last_ms_val = float(pyo.value(m.obj_ms_quad))
-            except Exception:
+                    print(f"[Subproblem solving issue] Quadratic MS dual bound (lb) is None. Exiting.")
+                    sys.exit(1)
+            except Exception as e:
                 # Fallback if dual bound missing or whatever
-                try:
-                    self._last_ms_val = float(pyo.value(m.obj_ms_quad))
+                print(f"[Subproblem solving issue] Quadratic MS lb access failed: {e}. Exiting.")
+                sys.exit(1)
                 except ValueError:
                     # Value error means no solution. Then it's actually NOT ok.
                     ok = False
