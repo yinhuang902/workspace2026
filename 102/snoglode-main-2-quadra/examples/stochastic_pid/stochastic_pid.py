@@ -18,6 +18,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 np.random.seed(17)
 
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 import snoglode as sno
 import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()

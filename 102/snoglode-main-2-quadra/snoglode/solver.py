@@ -9,10 +9,14 @@ from snoglode.components.node import Node
 from snoglode.bounders.upper_bounders import UpperBounder
 from snoglode.utils.ef import ExtensiveForm
 
-from snoglode.utils.plotter import PlotScraper
 from snoglode.utils.solve_stats import SNoGloDeSolutionInformation
 from snoglode.utils.iter_logging import IterLogger, MockIterLogger
 from snoglode.utils.quadratic_bound import compute_quadratic_surrogate_bound
+
+class PlotScraper:
+    def __init__(self): pass
+    def iter_update(self, lb, ub): pass
+
 
 import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()
@@ -315,6 +319,14 @@ class Solver():
         current_node.lb_problem.objective = \
             MPI.COMM_WORLD.allreduce(current_node.lb_problem.objective, op=MPI.SUM)
         
+        # Save original objective for reporting
+        current_node.lb_problem.original_objective = current_node.lb_problem.objective
+
+        # Integrate Quadratic Bound if valid and tighter
+        if hasattr(current_node.lb_problem, 'quadratic_bound') and current_node.lb_problem.quadratic_bound is not None:
+            if current_node.lb_problem.quadratic_bound > current_node.lb_problem.objective:
+                 current_node.lb_problem.objective = current_node.lb_problem.quadratic_bound
+        
     
     def dispatch_ub_solve(self,
                           current_node: Node) -> None:
@@ -460,11 +472,19 @@ class Solver():
 
         # Determine which method would be used for pruning
         method_str = "Orig"
+        quad_lb_val = None
         if hasattr(current_node.lb_problem, 'quadratic_bound') and current_node.lb_problem.quadratic_bound is not None:
-            q_val = current_node.lb_problem.quadratic_bound
-            o_val = current_node.lb_problem.objective
-            if o_val is not None and q_val > o_val:
+            quad_lb_val = current_node.lb_problem.quadratic_bound
+            # Check against ORIGINAL objective to determine method string
+            o_val = getattr(current_node.lb_problem, 'original_objective', current_node.lb_problem.objective)
+            if o_val is not None and quad_lb_val > o_val:
                 method_str = "Quad"
+        
+        # formatting for display
+        # Use original objective for "Node LB" column to show the comparison
+        display_node_lb = getattr(current_node.lb_problem, 'original_objective', current_node.lb_problem.objective)
+        node_lb_str = f"{display_node_lb:.8}" if display_node_lb is not None else "-"
+        quad_lb_str = f"{quad_lb_val:.8}" if quad_lb_val is not None else "-"
 
         outputs = [round(self.runtime,3),
                    self.tree.metrics.nodes.explored,
@@ -475,7 +495,9 @@ class Solver():
                    f"{round(self.tree.metrics.relative_gap*100, 4)}%",
                    round(self.tree.metrics.absolute_gap, 6),
                    self.tree.n_nodes(),
-                   method_str]
+                   method_str,
+                   node_lb_str,
+                   quad_lb_str]
 
         # if this is first iter, print header
         header = ["Time (s)", 
@@ -487,7 +509,9 @@ class Solver():
                   "Rel. Gap", 
                   "Abs. Gap",
                   "# Nodes",
-                  "Prune Method"]
+                  "Prune Method",
+                  "Node LB",
+                  "Quad LB"]
         if self.iteration == 1:
             header_print = ""
             header_line = ""

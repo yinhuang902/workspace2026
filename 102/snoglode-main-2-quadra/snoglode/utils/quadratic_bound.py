@@ -129,8 +129,14 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
         
         Y_vals = []
         
+        # Save state of all variables before fixing
+        saved_state = {}
+        for var in subproblems.subproblem_lifted_vars[subproblem_name]:
+            # Store (lb, ub, is_fixed, value)
+            saved_state[id(var)] = (var.lb, var.ub, var.is_fixed(), var.value)
+
         for x in samples:
-            # Fix variables
+            # Fix variables to sample point
             id_to_val = {lifted_vars[i]['id']: x[i] for i in range(dim)}
             
             for var in subproblems.subproblem_lifted_vars[subproblem_name]:
@@ -144,7 +150,18 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
             if (results.solver.termination_condition == pyo.TerminationCondition.optimal or
                 results.solver.termination_condition == pyo.TerminationCondition.locallyOptimal):
                 model.solutions.load_from(results)
-                obj_val = pyo.value(model.component_data_objects(pyo.Objective, active=True).__next__())
+                
+                # Use Dual Bound (lower_bound) if available, to match user's precision/validity requirements
+                # Fallback to Primal (objective value) if necessary
+                try:
+                    # Gurobi and others usually populate problem.lower_bound
+                    obj_val = results.problem[0].lower_bound
+                    # If lower_bound is not a valid number (e.g. not available), use primal
+                    if obj_val is None or obj_val == float('-inf') or obj_val == float('inf'):
+                         obj_val = pyo.value(model.component_data_objects(pyo.Objective, active=True).__next__())
+                except:
+                     obj_val = pyo.value(model.component_data_objects(pyo.Objective, active=True).__next__())
+                
                 Y_vals.append(obj_val)
             else:
                 # Infeasible or error. 
@@ -154,6 +171,16 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
                 # For now, assign a large penalty.
                 Y_vals.append(1e6) 
         
+        # Restore state of all variables
+        for var in subproblems.subproblem_lifted_vars[subproblem_name]:
+            lb, ub, is_fixed, val = saved_state[id(var)]
+            var.lb = lb
+            var.ub = ub
+            if is_fixed:
+                var.fix(val)
+            else:
+                var.unfix()
+
         Y_vals = np.array(Y_vals)
         
         # Fit
