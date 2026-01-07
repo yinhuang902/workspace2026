@@ -8,7 +8,9 @@ from snoglode.utils.supported import SupportedVars
 import snoglode.utils.MPI as MPI
 from pyomo.opt import SolverFactory
 
-def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solver: SolverFactory, num_samples: int = 10) -> float:
+from typing import Tuple
+
+def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solver: SolverFactory, num_samples: int = 10) -> Tuple[float, float]:
     """
     Computes an experimental lower bound using a quadratic surrogate.
     
@@ -40,7 +42,7 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
     
     dim = len(lifted_vars)
     if dim == 0:
-        return float('-inf')
+        return float('-inf'), float('-inf')
 
     # 2. Sample points
     # Use random uniform.
@@ -59,7 +61,7 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
             # Avoid sampling from empty range
             if lb > ub: 
                 # Infeasible node, should have been caught earlier
-                return float('inf')
+                return float('inf'), float('inf')
             
             val = np.random.uniform(lb, ub)
             
@@ -123,10 +125,39 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
     # Pre-compute pseudo-inverse if possible, or use lstsq
     # X_mat is (N, n_params)
     
+    # Bounds for optimizer
+    # scipy requires (min, max) tuples
+    scipy_bounds = []
+    for lb, ub in bounds:
+        l = lb if lb != float('-inf') else None
+        u = ub if ub != float('inf') else None
+        scipy_bounds.append((l, u))
+        
+    def make_objective(Q, c, b):
+        def objective(x):
+            return x @ Q @ x + c @ x + float(b)
+        return objective
+    
+    def make_jacobian(Q, c):
+        def jacobian(x):
+            return 2 * Q @ x + c
+        return jacobian
+
+    # Initial guess: center of box
+    x0_list = []
+    for lb, ub in bounds:
+        if lb == float('-inf'): lb = -10
+        if ub == float('inf'): ub = 10
+        x0_list.append((lb + ub) / 2.0)
+    x0 = np.array(x0_list)
+    
+    local_agg_b_spec = 0.0
+    
     for subproblem_name in subproblems.names:
         model = subproblems.model[subproblem_name]
         prob = subproblems.probability[subproblem_name]
         
+        b_s_raw = 0.0 # Safety initialization
         Y_vals = []
         
         # Save state of all variables before fixing
@@ -186,6 +217,7 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
         # Fit
         # coeffs = argmin || X_mat * beta - Y ||^2
         if len(Y_vals) > 0:
+            # print(f"DEBUG: Fitting for {subproblem_name}, samples={len(Y_vals)}")
             coeffs, residuals, rank, s = np.linalg.lstsq(X_mat, Y_vals, rcond=None)
             
             # Reconstruct Q, c, b from coeffs
@@ -213,7 +245,7 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
                 c_s[i] = coeffs[idx]
                 idx += 1
             
-            b_s = coeffs[idx]
+            b_s_raw = coeffs[idx]
             
             # Compute offset m_s = min (true - surrogate)
             # Predicted values
@@ -222,18 +254,51 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
             m_s = np.min(diff)
             
             # Shift b_s
-            b_s += m_s
+            b_s = b_s_raw + m_s
             
             # Accumulate weighted by probability
             local_agg_Q += prob * Q_s
             local_agg_c += prob * c_s
             local_agg_b += prob * b_s
 
+            # --- Spectral Bound Calculation (Decomposed) ---
+            # 1. Compute Q_spec (clipped eigenvalues)
+            eig_vals, eig_vecs = np.linalg.eigh(Q_s)
+            eig_vals[eig_vals < 0] = 0.0 # Clip
+            Q_spec = eig_vecs @ np.diag(eig_vals) @ eig_vecs.T
+
+            # 2. Shift Spectral relative to samples
+            Y_pred_spec = []
+            for k in range(len(samples)):
+                x_k = samples[k]
+                quad_term = x_k @ Q_spec @ x_k
+                lin_term = c_s @ x_k 
+                val_k = quad_term + lin_term + b_s_raw
+                Y_pred_spec.append(val_k)
+            Y_pred_spec = np.array(Y_pred_spec)
+
+            diff_spec = Y_vals - Y_pred_spec
+            m_shift_spec = np.min(diff_spec)
+            b_spec = b_s_raw + m_shift_spec
+
+            # 3. Minimize LOCALLY
+            # ms (as per user) = min value of spectral surrogate for this scene
+            res_min = minimize(make_objective(Q_spec, c_s, b_spec), 
+                               x0, 
+                               method='L-BFGS-B', 
+                               jac=make_jacobian(Q_spec, c_s), 
+                               bounds=scipy_bounds)
+            ms_val = res_min.fun # The minimum value
+            
+            # 4. Accumulate Sum of Minima
+            local_agg_b_spec += prob * ms_val
+
     # 4. Aggregate across ranks
     # We need to sum local_agg_Q, local_agg_c, local_agg_b across all ranks
     # MPI.COMM_WORLD.allreduce(..., op=MPI.SUM)
     
-    # Flatten Q for reduction
+    # 4. Aggregate across ranks
+    # Flatten Q for reduction (Original)
     Q_flat = local_agg_Q.flatten()
     
     global_Q_flat = MPI.COMM_WORLD.allreduce(Q_flat, op=MPI.SUM)
@@ -243,30 +308,16 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
     
     global_Q = global_Q_flat.reshape((dim, dim))
     
-    # 5. Minimize aggregated surrogate
-    def objective(x):
-        return x @ global_Q @ x + global_c @ x + global_b[0]
+    # Aggregate Spectral (Scalar)
+    local_val_spec_arr = np.array([local_agg_b_spec])
+    global_val_spec = MPI.COMM_WORLD.allreduce(local_val_spec_arr, op=MPI.SUM)[0]
     
-    def jacobian(x):
-        return 2 * global_Q @ x + global_c
-    
-    # Initial guess: center of box
-    x0 = []
-    for lb, ub in bounds:
-        if lb == float('-inf'): lb = -10
-        if ub == float('inf'): ub = 10
-        x0.append((lb + ub) / 2.0)
-    x0 = np.array(x0)
-    
-    # Bounds for optimizer
-    # scipy requires (min, max) tuples
-    # Handle inf
-    scipy_bounds = []
-    for lb, ub in bounds:
-        l = lb if lb != float('-inf') else None
-        u = ub if ub != float('inf') else None
-        scipy_bounds.append((l, u))
-        
-    res = minimize(objective, x0, method='L-BFGS-B', jac=jacobian, bounds=scipy_bounds)
-    
-    return res.fun
+    # 5. Minimize aggregated surrogate (Original)
+    res_orig = minimize(make_objective(global_Q, global_c, global_b), 
+                        x0, 
+                        method='L-BFGS-B', 
+                        jac=make_jacobian(global_Q, global_c), 
+                        bounds=scipy_bounds)
+    val_orig = res_orig.fun
+
+    return val_orig, global_val_spec

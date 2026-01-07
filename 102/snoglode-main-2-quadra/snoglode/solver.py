@@ -301,12 +301,14 @@ class Solver():
         # Experimental: Compute quadratic surrogate bound
         try:
             # We use the solver from lower_bounder.opt (which is the Pyomo solver factory)
-            q_lb = compute_quadratic_surrogate_bound(current_node, self.subproblems, self.lower_bounder.opt)
+            q_lb, spec_lb = compute_quadratic_surrogate_bound(current_node, self.subproblems, self.lower_bounder.opt)
             current_node.lb_problem.quadratic_bound = q_lb
+            current_node.lb_problem.spectral_quadratic_bound = spec_lb
         except BaseException as e:
             # If it fails, just ignore or log
-            # print(f"DEBUG: Quadratic bound failed: {e}")
+            print(f"DEBUG: Quadratic bound failed: {e}")
             current_node.lb_problem.quadratic_bound = None
+            current_node.lb_problem.spectral_quadratic_bound = None
 
         self.logger.lb_stop()
         
@@ -322,10 +324,24 @@ class Solver():
         # Save original objective for reporting
         current_node.lb_problem.original_objective = current_node.lb_problem.objective
 
-        # Integrate Quadratic Bound if valid and tighter
-        if hasattr(current_node.lb_problem, 'quadratic_bound') and current_node.lb_problem.quadratic_bound is not None:
-            if current_node.lb_problem.quadratic_bound > current_node.lb_problem.objective:
-                 current_node.lb_problem.objective = current_node.lb_problem.quadratic_bound
+        # Integrate Quadratic Bound if valid and tighter (taking MAX of all valid bounds)
+        
+        # Helper to safely get value or -inf
+        def get_val(val):
+            return val if val is not None else float('-inf')
+
+        # Current LB candidates:
+        # 1. current_node.lb_problem.objective (Original DropNonants)
+        # 2. current_node.lb_problem.quadratic_bound
+        # 3. current_node.lb_problem.spectral_quadratic_bound
+        
+        candidates = [
+            current_node.lb_problem.objective,
+            get_val(current_node.lb_problem.quadratic_bound),
+            get_val(current_node.lb_problem.spectral_quadratic_bound)
+        ]
+        
+        current_node.lb_problem.objective = max(candidates)
         
     
     def dispatch_ub_solve(self,
@@ -472,19 +488,33 @@ class Solver():
 
         # Determine which method would be used for pruning
         method_str = "Orig"
-        quad_lb_val = None
-        if hasattr(current_node.lb_problem, 'quadratic_bound') and current_node.lb_problem.quadratic_bound is not None:
-            quad_lb_val = current_node.lb_problem.quadratic_bound
-            # Check against ORIGINAL objective to determine method string
-            o_val = getattr(current_node.lb_problem, 'original_objective', current_node.lb_problem.objective)
-            if o_val is not None and quad_lb_val > o_val:
-                method_str = "Quad"
         
+        # Check if Quad or Spec dominated
+        # We need to re-evaluate max logic to see which one won
+        orig_obj = getattr(current_node.lb_problem, 'original_objective', current_node.lb_problem.objective)
+        quad_obj = getattr(current_node.lb_problem, 'quadratic_bound', None)
+        spec_obj = getattr(current_node.lb_problem, 'spectral_quadratic_bound', None)
+
+        # Basic comparison (treating None as -inf)
+        def val(v): return v if v is not None else float('-inf')
+        
+        v_orig = val(orig_obj)
+        v_quad = val(quad_obj)
+        v_spec = val(spec_obj)
+        
+        max_val = max(v_orig, v_quad, v_spec)
+        
+        # Prioritize labeling: Spec > Quad > Orig
+        if max_val == v_spec and v_spec > v_orig and v_spec > v_quad:
+            method_str = "Spec"
+        elif max_val == v_quad and v_quad > v_orig:
+            method_str = "Quad"
+
         # formatting for display
-        # Use original objective for "Node LB" column to show the comparison
-        display_node_lb = getattr(current_node.lb_problem, 'original_objective', current_node.lb_problem.objective)
+        display_node_lb = orig_obj
         node_lb_str = f"{display_node_lb:.8}" if display_node_lb is not None else "-"
-        quad_lb_str = f"{quad_lb_val:.8}" if quad_lb_val is not None else "-"
+        quad_lb_str = f"{quad_obj:.8}" if quad_obj is not None else "-"
+        spec_lb_str = f"{spec_obj:.8}" if spec_obj is not None else "-"
 
         outputs = [round(self.runtime,3),
                    self.tree.metrics.nodes.explored,
@@ -497,7 +527,8 @@ class Solver():
                    self.tree.n_nodes(),
                    method_str,
                    node_lb_str,
-                   quad_lb_str]
+                   quad_lb_str,
+                   spec_lb_str]
 
         # if this is first iter, print header
         header = ["Time (s)", 
@@ -511,7 +542,8 @@ class Solver():
                   "# Nodes",
                   "Prune Method",
                   "Node LB",
-                  "Quad LB"]
+                  "Quad LB",
+                  "Spec LB"]
         if self.iteration == 1:
             header_print = ""
             header_line = ""

@@ -235,7 +235,7 @@ if __name__ == '__main__':
     
     nonconvex_gurobi_lb = pyo.SolverFactory("gurobi")
     nonconvex_gurobi_lb.options["NonConvex"] = 2
-    nonconvex_gurobi_lb.options["MIPGap"] = 0.2
+    nonconvex_gurobi_lb.options["MIPGap"] = 1e-1
     nonconvex_gurobi_lb.options["TimeLimit"] = 15
     scenarios = [f"scen_{i}" for i in range(1,num_scenarios+1)]
 
@@ -271,7 +271,7 @@ if __name__ == '__main__':
     # quit()
     solver.solve(max_iter=1000,
                  rel_tolerance = 1e-3,
-                 time_limit = 600*6)
+                 time_limit = 60*10)
 
     if (rank==0):
         print("\n====================================================================")
