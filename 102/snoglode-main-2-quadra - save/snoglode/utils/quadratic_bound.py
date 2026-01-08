@@ -8,9 +8,9 @@ from snoglode.utils.supported import SupportedVars
 import snoglode.utils.MPI as MPI
 from pyomo.opt import SolverFactory
 
-from typing import Tuple, Optional
+from typing import Tuple
 
-def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solver: SolverFactory, num_samples: int = 10, seed: Optional[int] = None) -> Tuple[float, float]:
+def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solver: SolverFactory, num_samples: int = 10) -> Tuple[float, float]:
     """
     Computes an experimental lower bound using a quadratic surrogate.
     
@@ -20,9 +20,6 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
     4. Computes ms = min(F_s - Q_s) via global optimization (NonConvex=2).
     5. Computes LB_s = min_box(Q_s) + ms.
     6. Aggregates LB_s across scenarios.
-    
-    Args:
-        seed: Optional seed for reproducible sampling. If provided, uses seed+rank for MPI.
     """
     
     # 1. Identify the box (bounds of lifted variables)
@@ -48,13 +45,6 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
         return float('-inf'), float('-inf')
 
     # 2. Sample points
-    # Create local RNG for reproducibility
-    if seed is not None:
-        rng_seed = seed + MPI.COMM_WORLD.Get_rank()
-        rng = np.random.default_rng(rng_seed)
-    else:
-        rng = np.random.default_rng()
-    
     samples = []
     if num_samples < 1: num_samples = 1
     
@@ -68,7 +58,7 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
             if lb > ub: 
                 return float('inf'), float('inf')
             
-            val = rng.uniform(lb, ub)
+            val = np.random.uniform(lb, ub)
             
             v_type = lifted_vars[i]['type']
             if v_type in [SupportedVars.binary, SupportedVars.integers, SupportedVars.nonnegative_integers]:
@@ -235,42 +225,38 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
             pyomo_vars.append(pvar)
         
         # Build Q_s surrogate expression: x^T Q x + c^T x + b
-        # Use i<=j to avoid double-counting (Q_s is symmetric)
         Q_expr = b_s
         for i in range(dim):
             Q_expr += c_s[i] * pyomo_vars[i]
-            Q_expr += Q_s[i, i] * pyomo_vars[i] * pyomo_vars[i]  # diagonal
-            for j in range(i+1, dim):
-                # off-diagonal: 2 * Q_s[i,j] * x_i * x_j (since Q_s[i,j] = Q_s[j,i] = coeff/2)
-                Q_expr += 2.0 * Q_s[i, j] * pyomo_vars[i] * pyomo_vars[j]
+            for j in range(dim):
+                Q_expr += Q_s[i, j] * pyomo_vars[i] * pyomo_vars[j]
         
         # --- Compute ms = min(F_s - Q_s) via optimization ---
         orig_obj_component = model.component_data_objects(pyo.Objective, active=True).__next__()
         orig_obj_expr = orig_obj_component.expr
         
         ms_val = float('-inf')
-        old_nonconvex = solver.options.get('NonConvex', None)
         try:
             orig_obj_component.deactivate()
             model.temp_ms_obj = pyo.Objective(expr=orig_obj_expr - Q_expr, sense=pyo.minimize)
             
-            # Set NonConvex option before solve
-            solver.options['NonConvex'] = 2
-            res_ms = solver.solve(model, load_solutions=True)
+            res_ms = solver.solve(model, load_solutions=False, options={"NonConvex": 2})
             if (res_ms.solver.termination_condition == pyo.TerminationCondition.optimal or
                 res_ms.solver.termination_condition == pyo.TerminationCondition.locallyOptimal):
-                ms_val = pyo.value(model.temp_ms_obj)
+                try:
+                    ms_val = res_ms.problem[0].lower_bound
+                    if ms_val is None or ms_val == float('-inf') or ms_val == float('inf'):
+                        model.solutions.load_from(res_ms)
+                        ms_val = pyo.value(model.temp_ms_obj)
+                except:
+                    model.solutions.load_from(res_ms)
+                    ms_val = pyo.value(model.temp_ms_obj)
             else:
                 ms_val = float('-inf')
         except Exception as e:
             ms_val = float('-inf')
         finally:
-            # Restore NonConvex option
-            if old_nonconvex is None:
-                solver.options.pop('NonConvex', None)
-            else:
-                solver.options['NonConvex'] = old_nonconvex
-            # Always restore objective
+            # Always restore
             if hasattr(model, 'temp_ms_obj'):
                 model.del_component(model.temp_ms_obj)
             orig_obj_component.activate()
@@ -292,36 +278,35 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
         eig_vals[eig_vals < 0] = 0.0
         Q_spec = eig_vecs @ np.diag(eig_vals) @ eig_vecs.T
         
-        # Build spectral surrogate Pyomo expression (use i<=j to avoid double-counting)
+        # Build spectral surrogate Pyomo expression
         Q_spec_expr = b_s
         for i in range(dim):
             Q_spec_expr += c_s[i] * pyomo_vars[i]
-            Q_spec_expr += Q_spec[i, i] * pyomo_vars[i] * pyomo_vars[i]  # diagonal
-            for j in range(i+1, dim):
-                Q_spec_expr += 2.0 * Q_spec[i, j] * pyomo_vars[i] * pyomo_vars[j]
+            for j in range(dim):
+                Q_spec_expr += Q_spec[i, j] * pyomo_vars[i] * pyomo_vars[j]
         
         # Compute ms_spec = min(F_s - Q_spec) via optimization
         ms_spec_val = float('-inf')
-        old_nonconvex_spec = solver.options.get('NonConvex', None)
         try:
             orig_obj_component.deactivate()
             model.temp_ms_spec_obj = pyo.Objective(expr=orig_obj_expr - Q_spec_expr, sense=pyo.minimize)
             
-            solver.options['NonConvex'] = 2
-            res_ms_spec = solver.solve(model, load_solutions=True)
+            res_ms_spec = solver.solve(model, load_solutions=False, options={"NonConvex": 2})
             if (res_ms_spec.solver.termination_condition == pyo.TerminationCondition.optimal or
                 res_ms_spec.solver.termination_condition == pyo.TerminationCondition.locallyOptimal):
-                ms_spec_val = pyo.value(model.temp_ms_spec_obj)
+                try:
+                    ms_spec_val = res_ms_spec.problem[0].lower_bound
+                    if ms_spec_val is None or ms_spec_val == float('-inf') or ms_spec_val == float('inf'):
+                        model.solutions.load_from(res_ms_spec)
+                        ms_spec_val = pyo.value(model.temp_ms_spec_obj)
+                except:
+                    model.solutions.load_from(res_ms_spec)
+                    ms_spec_val = pyo.value(model.temp_ms_spec_obj)
             else:
                 ms_spec_val = float('-inf')
         except Exception as e:
             ms_spec_val = float('-inf')
         finally:
-            # Restore NonConvex option
-            if old_nonconvex_spec is None:
-                solver.options.pop('NonConvex', None)
-            else:
-                solver.options['NonConvex'] = old_nonconvex_spec
             if hasattr(model, 'temp_ms_spec_obj'):
                 model.del_component(model.temp_ms_spec_obj)
             orig_obj_component.activate()
@@ -347,7 +332,7 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
 
     return global_lb, global_lb_spec
 
-def compute_random_pid_bound(node: Node, subproblems: Subproblems, solver: SolverFactory, max_retries: int = 100, seed: Optional[int] = None) -> float:
+def compute_random_pid_bound(node: Node, subproblems: Subproblems, solver: SolverFactory, max_retries: int = 100) -> float:
     """
     Computes an independent lower bound using a PI-D separated quadratic surrogate.
     
@@ -357,9 +342,6 @@ def compute_random_pid_bound(node: Node, subproblems: Subproblems, solver: Solve
        Kd: independent 1D quadratic.
     3. Computes ms = min (F_s - Q_s) via global optimization.
     4. Computes LB = min (Q_s) + ms.
-    
-    Args:
-        seed: Optional seed for reproducible sampling. If provided, uses seed+rank for MPI.
     """
     
     # 1. Identify variables and box
@@ -392,86 +374,36 @@ def compute_random_pid_bound(node: Node, subproblems: Subproblems, solver: Solve
     dim = len(lifted_vars)
     bounds = [(v['lb'], v['ub']) for v in lifted_vars]
     
-    # 2. Sample 9 FEASIBLE points
-    # We test feasibility by solving one representative scenario
-    # Create local RNG for reproducibility
-    if seed is not None:
-        rng_seed = seed + MPI.COMM_WORLD.Get_rank()
-        rng = np.random.default_rng(rng_seed)
-    else:
-        rng = np.random.default_rng()
-    
+    # 2. Sample 9 points
     num_samples = 9
     samples = []
     
-    # Get first scenario for feasibility testing
-    first_scenario_name = subproblems.names[0]
-    test_model = subproblems.model[first_scenario_name]
-    
-    # Save state of test model variables
-    test_saved_state = {}
-    for var in subproblems.subproblem_lifted_vars[first_scenario_name]:
-        test_saved_state[id(var)] = (var.lb, var.ub, var.is_fixed(), var.value)
-    
-    total_attempts = 0
-    max_total_attempts = num_samples * max_retries
-    
-    while len(samples) < num_samples and total_attempts < max_total_attempts:
-        total_attempts += 1
-        
-        # Generate a random point
-        point = []
-        valid_point = True
-        for i in range(dim):
-            lb, ub = bounds[i]
-            if lb == float('-inf'): lb = -1e4
-            if ub == float('inf'): ub = 1e4
+    for _ in range(num_samples):
+        for _ in range(max_retries):
+            point = []
+            for i in range(dim):
+                lb, ub = bounds[i]
+                if lb == float('-inf'): lb = -1e4
+                if ub == float('inf'): ub = 1e4
+                
+                if lb > ub: return float('-inf') 
+                
+                val = np.random.uniform(lb, ub)
+                
+                # Enforce integrality
+                v_type = lifted_vars[i]['type']
+                if v_type in [SupportedVars.binary, SupportedVars.integers, SupportedVars.nonnegative_integers]:
+                    val = round(val)
+                    val = max(lb, min(ub, val))
+                
+                point.append(val)
             
-            if lb > ub:
-                # Restore test model state before returning
-                for var in subproblems.subproblem_lifted_vars[first_scenario_name]:
-                    lb_v, ub_v, is_fixed, val = test_saved_state[id(var)]
-                    var.lb = lb_v
-                    var.ub = ub_v
-                    if is_fixed: var.fix(val)
-                    else: var.unfix()
-                return float('-inf')
-            
-            val = rng.uniform(lb, ub)
-            
-            # Enforce integrality
-            v_type = lifted_vars[i]['type']
-            if v_type in [SupportedVars.binary, SupportedVars.integers, SupportedVars.nonnegative_integers]:
-                val = round(val)
-                val = max(lb, min(ub, val))
-            
-            point.append(val)
-        
-        # Test feasibility by solving the first scenario with this point fixed
-        id_to_val = {lifted_vars[i]['id']: point[i] for i in range(dim)}
-        for var in subproblems.subproblem_lifted_vars[first_scenario_name]:
-            _, var_id, _ = subproblems.var_to_data[var]
-            if var_id in id_to_val:
-                var.fix(id_to_val[var_id])
-        
-        try:
-            results = solver.solve(test_model, load_solutions=False)
-            is_feasible = (results.solver.termination_condition == pyo.TerminationCondition.optimal or
-                           results.solver.termination_condition == pyo.TerminationCondition.locallyOptimal)
-        except:
-            is_feasible = False
-        
-        # Restore test model variables to saved state (unfix)
-        for var in subproblems.subproblem_lifted_vars[first_scenario_name]:
-            lb_v, ub_v, is_fixed, val = test_saved_state[id(var)]
-            var.lb = lb_v
-            var.ub = ub_v
-            if is_fixed: var.fix(val)
-            else: var.unfix()
-        
-        if is_feasible:
             samples.append(np.array(point))
-    
+            break
+        else:
+            # Failed to find sample after retries
+            return float('-inf')
+
     if len(samples) < num_samples:
         return float('-inf')
 
@@ -573,34 +505,34 @@ def compute_random_pid_bound(node: Node, subproblems: Subproblems, solver: Solve
         orig_obj_component = model.component_data_objects(pyo.Objective, active=True).__next__()
         orig_obj_expr = orig_obj_component.expr
         
-        # Solve ms = min(F - Q) with try/finally for safe restoration
+        # Create temporary objective: min (F - Q)
+        orig_obj_component.deactivate()
+        model.temp_ms_obj = pyo.Objective(expr = orig_obj_expr - Q_expr, sense=pyo.minimize)
+        
+        # Solve globally
         ms_val = float('-inf')
-        old_nonconvex = solver.options.get('NonConvex', None)
         try:
-            orig_obj_component.deactivate()
-            model.temp_ms_obj = pyo.Objective(expr=orig_obj_expr - Q_expr, sense=pyo.minimize)
-            
-            # Set NonConvex option before solve
-            solver.options['NonConvex'] = 2
-            res_ms = solver.solve(model, load_solutions=True)
+            # Explicitly pass NonConvex=2 for Gurobi
+            res_ms = solver.solve(model, load_solutions=False, options={"NonConvex": 2})
             if (res_ms.solver.termination_condition == pyo.TerminationCondition.optimal or
                 res_ms.solver.termination_condition == pyo.TerminationCondition.locallyOptimal):
-                ms_val = pyo.value(model.temp_ms_obj)
+                try:
+                    ms_val = res_ms.problem[0].lower_bound
+                    if ms_val is None or ms_val == float('-inf') or ms_val == float('inf'):
+                         ms_val = pyo.value(model.temp_ms_obj)
+                except:
+                     ms_val = pyo.value(model.temp_ms_obj)
             else:
-                ms_val = float('-inf')  # Failure -> skip method
+                ms_val = float('inf') 
         except Exception as e:
-            ms_val = float('-inf')
-        finally:
-            # Restore NonConvex option
-            if old_nonconvex is None:
-                solver.options.pop('NonConvex', None)
-            else:
-                solver.options['NonConvex'] = old_nonconvex
-            # Always restore objective
-            if hasattr(model, 'temp_ms_obj'):
-                model.del_component(model.temp_ms_obj)
-            orig_obj_component.activate()
+            ms_val = float('-inf') 
+            
+        # Restore model
+        model.del_component(model.temp_ms_obj)
+        orig_obj_component.activate()
         
+        if ms_val == float('inf'):
+            return float('inf')
         if ms_val == float('-inf'):
             return float('-inf')
 
