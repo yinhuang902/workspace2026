@@ -7,6 +7,8 @@ from snoglode.components.subproblems import Subproblems
 from snoglode.utils.supported import SupportedVars
 import snoglode.utils.MPI as MPI
 from pyomo.opt import SolverFactory
+from pyomo.opt import SolverFactory
+from snoglode.utils.ms_solver_helper import _solve_ms_dual_bound_gurobi, _solve_true_recourse_primal_gurobi
 
 from typing import Tuple, Optional
 
@@ -156,19 +158,10 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
                 if var_id in id_to_val:
                     var.fix(id_to_val[var_id])
             
-            results = solver.solve(model, load_solutions=False)
+            # Solve true recourse using strict Gurobi helper
+            success, obj_val = _solve_true_recourse_primal_gurobi(model)
             
-            if (results.solver.termination_condition == pyo.TerminationCondition.optimal or
-                results.solver.termination_condition == pyo.TerminationCondition.locallyOptimal):
-                model.solutions.load_from(results)
-                
-                try:
-                    obj_val = results.problem[0].lower_bound
-                    if obj_val is None or obj_val == float('-inf') or obj_val == float('inf'):
-                         obj_val = pyo.value(model.component_data_objects(pyo.Objective, active=True).__next__())
-                except:
-                     obj_val = pyo.value(model.component_data_objects(pyo.Objective, active=True).__next__())
-                
+            if success:
                 Y_vals.append(obj_val)
             else:
                 Y_vals.append(1e6) 
@@ -249,27 +242,16 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
         orig_obj_expr = orig_obj_component.expr
         
         ms_val = float('-inf')
-        old_nonconvex = solver.options.get('NonConvex', None)
         try:
             orig_obj_component.deactivate()
             model.temp_ms_obj = pyo.Objective(expr=orig_obj_expr - Q_expr, sense=pyo.minimize)
             
-            # Set NonConvex option before solve
-            solver.options['NonConvex'] = 2
-            res_ms = solver.solve(model, load_solutions=True)
-            if (res_ms.solver.termination_condition == pyo.TerminationCondition.optimal or
-                res_ms.solver.termination_condition == pyo.TerminationCondition.locallyOptimal):
-                ms_val = pyo.value(model.temp_ms_obj)
-            else:
-                ms_val = float('-inf')
+            # Use strict Gurobi helper
+            ms_val = _solve_ms_dual_bound_gurobi(model, 'temp_ms_obj')
+            
         except Exception as e:
             ms_val = float('-inf')
         finally:
-            # Restore NonConvex option
-            if old_nonconvex is None:
-                solver.options.pop('NonConvex', None)
-            else:
-                solver.options['NonConvex'] = old_nonconvex
             # Always restore objective
             if hasattr(model, 'temp_ms_obj'):
                 model.del_component(model.temp_ms_obj)
@@ -302,26 +284,17 @@ def compute_quadratic_surrogate_bound(node: Node, subproblems: Subproblems, solv
         
         # Compute ms_spec = min(F_s - Q_spec) via optimization
         ms_spec_val = float('-inf')
-        old_nonconvex_spec = solver.options.get('NonConvex', None)
         try:
             orig_obj_component.deactivate()
             model.temp_ms_spec_obj = pyo.Objective(expr=orig_obj_expr - Q_spec_expr, sense=pyo.minimize)
             
-            solver.options['NonConvex'] = 2
-            res_ms_spec = solver.solve(model, load_solutions=True)
-            if (res_ms_spec.solver.termination_condition == pyo.TerminationCondition.optimal or
-                res_ms_spec.solver.termination_condition == pyo.TerminationCondition.locallyOptimal):
-                ms_spec_val = pyo.value(model.temp_ms_spec_obj)
-            else:
-                ms_spec_val = float('-inf')
+            # Use strict Gurobi helper
+            ms_spec_val = _solve_ms_dual_bound_gurobi(model, 'temp_ms_spec_obj')
+            
         except Exception as e:
             ms_spec_val = float('-inf')
         finally:
-            # Restore NonConvex option
-            if old_nonconvex_spec is None:
-                solver.options.pop('NonConvex', None)
-            else:
-                solver.options['NonConvex'] = old_nonconvex_spec
+            # Always restore objective
             if hasattr(model, 'temp_ms_spec_obj'):
                 model.del_component(model.temp_ms_spec_obj)
             orig_obj_component.activate()
@@ -454,12 +427,9 @@ def compute_random_pid_bound(node: Node, subproblems: Subproblems, solver: Solve
             if var_id in id_to_val:
                 var.fix(id_to_val[var_id])
         
-        try:
-            results = solver.solve(test_model, load_solutions=False)
-            is_feasible = (results.solver.termination_condition == pyo.TerminationCondition.optimal or
-                           results.solver.termination_condition == pyo.TerminationCondition.locallyOptimal)
-        except:
-            is_feasible = False
+        # Use strict Gurobi helper for feasibility check
+        success, _ = _solve_true_recourse_primal_gurobi(test_model)
+        is_feasible = success
         
         # Restore test model variables to saved state (unfix)
         for var in subproblems.subproblem_lifted_vars[first_scenario_name]:
@@ -512,17 +482,10 @@ def compute_random_pid_bound(node: Node, subproblems: Subproblems, solver: Solve
                 if var_id in id_to_val:
                     var.fix(id_to_val[var_id])
             
-            results = solver.solve(model, load_solutions=False)
-            if (results.solver.termination_condition == pyo.TerminationCondition.optimal or
-                results.solver.termination_condition == pyo.TerminationCondition.locallyOptimal):
-                model.solutions.load_from(results)
-                try:
-                    obj_val = results.problem[0].lower_bound
-                    if obj_val is None or obj_val == float('-inf') or obj_val == float('inf'):
-                         obj_val = pyo.value(model.component_data_objects(pyo.Objective, active=True).__next__())
-                except:
-                     obj_val = pyo.value(model.component_data_objects(pyo.Objective, active=True).__next__())
-                
+            # Solve true recourse using strict Gurobi helper
+            success, obj_val = _solve_true_recourse_primal_gurobi(model)
+            
+            if success:
                 Y_vals.append(obj_val)
             else:
                 # Infeasible sample, use penalty
@@ -575,27 +538,16 @@ def compute_random_pid_bound(node: Node, subproblems: Subproblems, solver: Solve
         
         # Solve ms = min(F - Q) with try/finally for safe restoration
         ms_val = float('-inf')
-        old_nonconvex = solver.options.get('NonConvex', None)
         try:
             orig_obj_component.deactivate()
             model.temp_ms_obj = pyo.Objective(expr=orig_obj_expr - Q_expr, sense=pyo.minimize)
             
-            # Set NonConvex option before solve
-            solver.options['NonConvex'] = 2
-            res_ms = solver.solve(model, load_solutions=True)
-            if (res_ms.solver.termination_condition == pyo.TerminationCondition.optimal or
-                res_ms.solver.termination_condition == pyo.TerminationCondition.locallyOptimal):
-                ms_val = pyo.value(model.temp_ms_obj)
-            else:
-                ms_val = float('-inf')  # Failure -> skip method
+            # Use strict Gurobi helper
+            ms_val = _solve_ms_dual_bound_gurobi(model, 'temp_ms_obj')
+            
         except Exception as e:
             ms_val = float('-inf')
         finally:
-            # Restore NonConvex option
-            if old_nonconvex is None:
-                solver.options.pop('NonConvex', None)
-            else:
-                solver.options['NonConvex'] = old_nonconvex
             # Always restore objective
             if hasattr(model, 'temp_ms_obj'):
                 model.del_component(model.temp_ms_obj)
