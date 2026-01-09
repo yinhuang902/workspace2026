@@ -13,6 +13,10 @@ from snoglode.utils.ef import ExtensiveForm
 from snoglode.utils.solve_stats import SNoGloDeSolutionInformation
 from snoglode.utils.iter_logging import IterLogger, MockIterLogger
 from snoglode.utils.quadratic_bound import compute_quadratic_surrogate_bound, compute_random_pid_bound
+from snoglode.utils.wls_quadratic_bound import compute_wls_quadratic_surrogate_bound
+from snoglode.utils.supported import SupportedVars
+
+
 
 class PlotScraper:
     def __init__(self): pass
@@ -25,6 +29,19 @@ size = MPI.COMM_WORLD.Get_size()
 
 import time, math
 import pyomo.environ as pyo
+
+def _compute_box_volume(state: dict) -> float:
+    """
+    Computes the volume of the box defined by the continuous first-stage variables.
+    Volume = product of (ub - lb) for all SupportedVars.reals in the state.
+    """
+    vol = 1.0
+    if SupportedVars.reals in state:
+        for lifted_var in state[SupportedVars.reals].values():
+            lb, ub = float(lifted_var.lb), float(lifted_var.ub)
+            width = max(0.0, ub - lb)
+            vol *= width
+    return vol
 
 class Solver():
     """
@@ -67,6 +84,9 @@ class Solver():
         self.tree = Tree(params = params,
                          subproblems = self.subproblems)
         
+        # Compute root box volume for reporting
+        self._root_box_volume = _compute_box_volume(self.subproblems.root_node_state)
+
         # init bounders (lower, upper, candidate generator)
         self.lower_bounder = self._params._lower_bounder(self._params._lb_solver)
         self.upper_bounder = UpperBounder(candidate_solution_finder = self._params._candidate_solution_finder,
@@ -208,7 +228,24 @@ class Solver():
                                         set_second_stage = bounds_tightening)
         
         # tighten bounds & sync across all existing subproblems
+        # Compute pre-tightening box volume
+        pre_vol = _compute_box_volume(node.state)
+        pre_pct = 0.0
+        if self._root_box_volume > 0:
+            pre_pct = 100.0 * pre_vol / self._root_box_volume
+        node.lb_problem.box_vol_pct = pre_pct
+
         bounds_feasible = self.subproblems.tighten_and_sync_bounds(node)
+
+        # Compute post-tightening box volume
+        if bounds_tightening:
+            post_vol = _compute_box_volume(node.state)
+            post_pct = 0.0
+            if self._root_box_volume > 0:
+                post_pct = 100.0 * post_vol / self._root_box_volume
+            node.lb_problem.box_vol_pct_tight = post_pct
+        else:
+            node.lb_problem.box_vol_pct_tight = pre_pct
         return node, (node_feasible and bounds_feasible)
 
     
@@ -321,6 +358,33 @@ class Solver():
             traceback.print_exc()
             current_node.lb_problem.random_quad_bound = None
 
+        # Experimental: Compute WLS Quadratic Surrogate bound
+        try:
+            wlsq_lb = compute_wls_quadratic_surrogate_bound(current_node, self.subproblems, self.lower_bounder.opt)
+            current_node.lb_problem.wlsq_bound = wlsq_lb
+        except BaseException as e:
+            # If it fails, just ignore or log
+            print(f"DEBUG: WLSQ bound failed: {e}")
+            current_node.lb_problem.wlsq_bound = None
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         self.logger.lb_stop()
         
         # we need to wait for all LB problems at the other subproblems to find obj / feasibility
@@ -357,10 +421,11 @@ class Solver():
         # 4. Random Quad LB (Only if strictly dominates)
         rand_val = get_val(current_node.lb_problem.random_quad_bound)
         
-        if rand_val > max_other:
-            current_node.lb_problem.objective = rand_val
-        else:
-            current_node.lb_problem.objective = max_other
+        # 5. WLSQ LB
+        wlsq_val = get_val(current_node.lb_problem.wlsq_bound)
+        
+        # Update objective to the max of all valid bounds
+        current_node.lb_problem.objective = max(max_other, rand_val, wlsq_val)
         
     
     def dispatch_ub_solve(self,
@@ -514,6 +579,7 @@ class Solver():
         quad_obj = getattr(current_node.lb_problem, 'quadratic_bound', None)
         spec_obj = getattr(current_node.lb_problem, 'spectral_quadratic_bound', None)
         rand_obj = getattr(current_node.lb_problem, 'random_quad_bound', None)
+        wlsq_obj = getattr(current_node.lb_problem, 'wlsq_bound', None)
 
         # Basic comparison (treating None as -inf)
         def val(v): return v if v is not None else float('-inf')
@@ -523,11 +589,14 @@ class Solver():
         v_spec = val(spec_obj)
         
         v_rand = val(rand_obj)
+        v_wlsq = val(wlsq_obj)
         
-        max_val = max(v_orig, v_quad, v_spec, v_rand)
+        max_val = max(v_orig, v_quad, v_spec, v_rand, v_wlsq)
         
-        # Prioritize labeling: Spec > Quad > Orig
-        if max_val == v_rand and v_rand > v_orig and v_rand > v_quad and v_rand > v_spec:
+        # Prioritize labeling: WLSQ > Sepa > Spec > Quad > Orig
+        if max_val == v_wlsq and v_wlsq > v_orig and v_wlsq > v_quad and v_wlsq > v_spec and v_wlsq > v_rand:
+            method_str = "WLSQ"
+        elif max_val == v_rand and v_rand > v_orig and v_rand > v_quad and v_rand > v_spec:
             method_str = "Sepa"
         elif max_val == v_spec and v_spec > v_orig and v_spec > v_quad:
             method_str = "Spec"
@@ -540,6 +609,7 @@ class Solver():
         quad_lb_str = f"{quad_obj:.8g}" if quad_obj is not None else "-"
         spec_lb_str = f"{spec_obj:.8g}" if spec_obj is not None else "-"
         rand_lb_str = f"{rand_obj:.8g}" if rand_obj is not None else "-"
+        wlsq_lb_str = f"{wlsq_obj:.8g}" if wlsq_obj is not None else "-"
 
         main_outputs = [round(self.runtime,3),
                    self.tree.metrics.nodes.explored,
@@ -580,5 +650,9 @@ class Solver():
         print(line_print)
         
         # Print indented detail line with all lower bounds
-        detail_line = f"    LBs: Orig={node_lb_str}, Quad={quad_lb_str}, Spec={spec_lb_str}, Sepa={rand_lb_str}"
+        detail_line = f"    LBs: Orig={node_lb_str}, Quad={quad_lb_str}, Spec={spec_lb_str}, Sepa={rand_lb_str}, WLSQ={wlsq_lb_str}"
+        # Get box volume info
+        box_pct = getattr(current_node.lb_problem, 'box_vol_pct', 0.0)
+        tight_pct = getattr(current_node.lb_problem, 'box_vol_pct_tight', 0.0)
+        detail_line += f" | Box={box_pct:.2f}%, Tight={tight_pct:.2f}%"
         print(detail_line)
