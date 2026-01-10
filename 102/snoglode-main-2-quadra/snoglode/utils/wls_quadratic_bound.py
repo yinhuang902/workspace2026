@@ -244,11 +244,37 @@ def compute_wls_quadratic_surrogate_bound(
     local_agg_lb = 0.0
     
     # 4. Process each scenario
+    local_agg_lb_uniform = 0.0
+    local_agg_lb_A = 0.0
+    
+    # Pre-scale samples for weighting (Method A)
+    # Normalize samples to z in [-1, 1] for weight calculation
+    samples = np.array(samples)
+    # X_norm [i, j]
+    X_norm = np.zeros_like(samples)
+    for j in range(dim):
+        lb, ub = bounds[j]
+        # Handle inf bounds for normalization safety (though samples are finite)
+        l = lb if lb != float('-inf') else -1e4
+        u = ub if ub != float('inf') else 1e4
+        width = u - l
+        if width < 1e-9:
+             X_norm[:, j] = 0.0
+        else:
+             # Map [l, u] -> [-1, 1]
+             # val = 2*(x - l)/(u -l) - 1
+             X_norm[:, j] = 2.0 * (samples[:, j] - l) / width - 1.0
+             
+    # r2 for center weight
+    r2 = np.sum(X_norm**2, axis=1) # (N,)
+    w_center = np.exp(-2.0 * r2)   # alpha=2.0
+    
     for subproblem_name in subproblems.names:
         model = subproblems.model[subproblem_name]
         prob = subproblems.probability[subproblem_name]
         
         Y_vals = []
+        valid_indices = [] # Track valid indices for stats
         
         # Save state
         saved_state = {}
@@ -256,8 +282,8 @@ def compute_wls_quadratic_surrogate_bound(
             saved_state[id(var)] = (var.lb, var.ub, var.is_fixed(), var.value)
             
         # Evaluate samples
-        for x in samples:
-            # ISSUE #2: Use composite keys
+        for i_s, x in enumerate(samples):
+            # Use composite keys
             id_to_val = {(lifted_vars[i]['type'], lifted_vars[i]['id']): x[i] for i in range(dim)}
             
             for var in subproblems.subproblem_lifted_vars[subproblem_name]:
@@ -270,6 +296,7 @@ def compute_wls_quadratic_surrogate_bound(
             
             if success:
                 Y_vals.append(obj_val)
+                valid_indices.append(i_s)
             else:
                 Y_vals.append(1e6)
         
@@ -283,13 +310,82 @@ def compute_wls_quadratic_surrogate_bound(
             
         Y_vals = np.array(Y_vals)
         
-        # Fit coefficients
-        try:
-            beta = np.linalg.solve(PhiT_Phi_reg, Phi.T @ Y_vals)
-        except np.linalg.LinAlgError:
-            return float('-inf')
+        # --- Calculate Weights (Method A) ---
+        w_A = np.ones(num_samples)
+        
+        if len(valid_indices) > 0:
+            Y_valid = Y_vals[valid_indices]
+            # Median and IQR
+            y_ref = np.median(Y_valid)
+            iqr = np.percentile(Y_valid, 75) - np.percentile(Y_valid, 25)
+            tau = max(iqr, 1e-6)
             
-        # Extract coefficients
+            # Sigmoid Low-Value Preference
+            # s_i = 1 / (1 + exp(-(y_ref - y_i)/tau))
+            # compute for ALL samples (Y_vals), though failed ones (1e6) will have s_i ~ 0
+            # overflow protection for exp
+            arg = -(y_ref - Y_vals) / tau
+            # clip arg to avoid overflow
+            arg = np.clip(arg, -50, 50)
+            s = 1.0 / (1.0 + np.exp(arg))
+            
+            w_low = 1.0 + 2.0 * s # eta=2.0
+            
+            # Combine
+            w_raw = w_center * w_low
+            w_A = np.maximum(w_raw, 0.1)
+            w_A = np.minimum(w_A, 10.0) # Safety cap
+        else:
+            w_A = np.ones(num_samples) # Fallback if no valid points
+            
+        # --- Fit & Bound: Uniform ---
+        # Same as original: beta = (Phi^T Phi + lam I)^-1 Phi^T Y
+        try:
+            beta_uni = np.linalg.solve(PhiT_Phi_reg, Phi.T @ Y_vals)
+            lb_uni = _compute_bound_from_beta(beta_uni, dim, lifted_vars, subproblems, subproblem_name, bounds, model)
+        except:
+            lb_uni = float('-inf')
+        
+        local_agg_lb_uniform += prob * lb_uni
+
+        # --- Fit & Bound: Method A (Weighted) ---
+        try:
+            # Weighted Least Squares
+            # sqrt(W) scaling
+            S = np.sqrt(w_A) # (N,)
+            # Phi_w = S[:, None] * Phi
+            Phi_w = Phi * S[:, np.newaxis]
+            Y_w = Y_vals * S
+            
+            # Ridge on weighted data
+            PhiT_Phi_w = Phi_w.T @ Phi_w + reg_matrix
+            beta_A = np.linalg.solve(PhiT_Phi_w, Phi_w.T @ Y_w)
+            
+            lb_A = _compute_bound_from_beta(beta_A, dim, lifted_vars, subproblems, subproblem_name, bounds, model)
+        except:
+            lb_A = float('-inf')
+            
+        local_agg_lb_A += prob * lb_A
+        
+    # Aggregate across ranks
+    local_arr = np.array([local_agg_lb_uniform, local_agg_lb_A])
+    global_arr = MPI.COMM_WORLD.allreduce(local_arr, op=MPI.SUM)
+    
+    global_lb_uniform = global_arr[0]
+    global_lb_A = global_arr[1]
+    
+    # Store on node
+    node.lb_problem.wlsq_uniform_bound = global_lb_uniform
+    node.lb_problem.wlsq_A_bound = global_lb_A
+    
+    return max(global_lb_uniform, global_lb_A)
+
+def _compute_bound_from_beta(beta, dim, lifted_vars, subproblems, subproblem_name, bounds, model):
+    """
+    Helper to compute LB = min_box(Q) + ms given regression coefficients beta.
+    Reuses the logic from the massive loop to avoid duplication.
+    """
+    try:
         b_s = beta[0]
         c_s = beta[1:dim+1]
         quad_coeffs = beta[dim+1:]
@@ -376,10 +472,6 @@ def compute_wls_quadratic_surrogate_bound(
         
         # LB_s = min(Q_s) + ms
         lb_s = min_Q_s + ms_val
-        local_agg_lb += prob * lb_s
-        
-    # Aggregate across ranks
-    local_lb_arr = np.array([local_agg_lb])
-    global_lb = MPI.COMM_WORLD.allreduce(local_lb_arr, op=MPI.SUM)[0]
-    
-    return global_lb
+        return lb_s
+    except:
+        return float('-inf')

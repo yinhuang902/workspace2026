@@ -365,7 +365,10 @@ class Solver():
         except BaseException as e:
             # If it fails, just ignore or log
             print(f"DEBUG: WLSQ bound failed: {e}")
+            traceback.print_exc()
             current_node.lb_problem.wlsq_bound = None
+            current_node.lb_problem.wlsq_uniform_bound = None
+            current_node.lb_problem.wlsq_A_bound = None
 
 
 
@@ -656,3 +659,12 @@ class Solver():
         tight_pct = getattr(current_node.lb_problem, 'box_vol_pct_tight', 0.0)
         detail_line += f" | Box={box_pct:.2f}%, Tight={tight_pct:.2f}%"
         print(detail_line)
+        
+        # Extra WLSQ details
+        wlsq_uni = getattr(current_node.lb_problem, 'wlsq_uniform_bound', None)
+        wlsq_A = getattr(current_node.lb_problem, 'wlsq_A_bound', None)
+        v_uni_str = f"{wlsq_uni:.8g}" if wlsq_uni is not None else "-"
+        v_A_str = f"{wlsq_A:.8g}" if wlsq_A is not None else "-"
+        
+        wlsq_line = f"    WLSQ_uniform={v_uni_str}, WLSQ_A={v_A_str}"
+        print(wlsq_line)
