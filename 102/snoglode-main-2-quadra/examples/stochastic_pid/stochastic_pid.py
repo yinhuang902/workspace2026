@@ -25,7 +25,7 @@ import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()
 size = MPI.COMM_WORLD.Get_size()
 
-num_scenarios = 5
+num_scenarios = 1
 sp = 0.5
 df = pd.read_csv(os.getcwd() + "/data.csv")
 plot_dir =  os.getcwd() + "/plots_snoglode_parallel/"
@@ -271,7 +271,7 @@ if __name__ == '__main__':
     # quit()
     solver.solve(max_iter=1000,
                  rel_tolerance = 1e-3,
-                 time_limit = 60*10)
+                 time_limit = 60*120)
 
     if (rank==0):
         print("\n====================================================================")

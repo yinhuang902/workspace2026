@@ -10,6 +10,13 @@ from pyomo.opt import SolverFactory
 from snoglode.utils.ms_solver_helper import _solve_ms_dual_bound_gurobi, _solve_true_recourse_primal_gurobi
 from typing import Tuple, Optional, List, Dict
 
+# WLSQ Method B Tuning Parameters
+WLSQ_NUM_SAMPLES_DEFAULT = 500  # Default number of samples per iteration
+WLSQ_B_ALPHA = 5.0          # kernel decay alpha for Method B
+WLSQ_B_EPS = 0.1            # weight floor epsilon for Method B
+WLSQ_B_DIAM2_TINY_THRESH = 1e-9   # threshold for "tiny box" fallback (sets diam2=1.0)
+WLSQ_B_DIAM2_SAFE_MIN = 1e-12     # safe denominator threshold for kernel distance
+
 def _identify_pid_vars(node: Node, subproblems: Subproblems) -> Optional[List[Dict]]:
     """
     Identifies the 3 PID variables (Kp, Ki, Kd) by name.
@@ -79,7 +86,7 @@ def compute_wls_quadratic_surrogate_bound(
     node: Node, 
     subproblems: Subproblems, 
     solver: SolverFactory, 
-    num_samples: int = 100, 
+    num_samples: int = WLSQ_NUM_SAMPLES_DEFAULT, 
     seed: Optional[int] = None,
     max_retries: int = 1000
 ) -> float:
@@ -208,7 +215,9 @@ def compute_wls_quadratic_surrogate_bound(
                 var.lb = lb_v
                 var.ub = ub_v
                 if is_fixed: var.fix(val)
-                else: var.unfix()
+                else: 
+                    var.unfix()
+                    var.value = val
                 
         if all_feasible:
             samples.append(np.array(point))
@@ -246,6 +255,7 @@ def compute_wls_quadratic_surrogate_bound(
     # 4. Process each scenario
     local_agg_lb_uniform = 0.0
     local_agg_lb_A = 0.0
+    local_agg_lb_B = 0.0
     
     # Pre-scale samples for weighting (Method A)
     # Normalize samples to z in [-1, 1] for weight calculation
@@ -269,6 +279,59 @@ def compute_wls_quadratic_surrogate_bound(
     r2 = np.sum(X_norm**2, axis=1) # (N,)
     w_center = np.exp(-2.0 * r2)   # alpha=2.0
     
+    # Calculate box diameter squared for Method B
+    diam2 = 0.0
+    for j in range(dim):
+        lb, ub = bounds[j]
+        l = lb if lb != float('-inf') else -1e4
+        u = ub if ub != float('inf') else 1e4
+        diam2 += (u - l)**2
+    if diam2 < WLSQ_B_DIAM2_TINY_THRESH: diam2 = 1.0
+
+    # --- Method B: probability-weighted mixture of kernels over all scenario anchors ---
+    anchors = []
+    probs = []
+    for name in subproblems.names:
+        if hasattr(node.lb_problem, 'subproblem_solutions') and name in node.lb_problem.subproblem_solutions:
+            sol = node.lb_problem.subproblem_solutions[name].lifted_var_solution
+            # Extract x_star = (Kp, Ki, Kd)
+            x_star = []
+            valid = True
+            for lv in lifted_vars:
+                 val = sol.get(lv['type'], {}).get(lv['id'])
+                 if val is None:
+                     valid = False
+                     break
+                 x_star.append(val)
+            
+            if valid:
+                anchors.append(x_star)
+                probs.append(subproblems.probability[name])
+    
+    w_B_shared = np.ones(num_samples)
+    if anchors:
+        anchors = np.array(anchors)
+        probs = np.array(probs)
+        prob_sum = np.sum(probs)
+        if prob_sum > 0:
+            probs = probs / prob_sum
+        else:
+             probs = np.ones(len(probs)) / len(probs)
+             
+        diam2_safe = max(diam2, WLSQ_B_DIAM2_SAFE_MIN)
+        
+        # d2_it = ||samples[i]-anchors[t]||^2 / diam2_safe
+        diffs = samples[:, np.newaxis, :] - anchors[np.newaxis, :, :]
+        dists2 = np.sum(diffs**2, axis=2)
+        d2_it = dists2 / diam2_safe
+        
+        alpha = WLSQ_B_ALPHA
+        kernel_it = np.exp(-alpha * d2_it)
+        mix_i = kernel_it @ probs
+        
+        eps = WLSQ_B_EPS
+        w_B_shared = eps + (1.0 - eps) * mix_i
+
     for subproblem_name in subproblems.names:
         model = subproblems.model[subproblem_name]
         prob = subproblems.probability[subproblem_name]
@@ -306,7 +369,9 @@ def compute_wls_quadratic_surrogate_bound(
             var.lb = lb
             var.ub = ub
             if is_fixed: var.fix(val)
-            else: var.unfix()
+            else: 
+                var.unfix()
+                var.value = val
             
         Y_vals = np.array(Y_vals)
         
@@ -338,6 +403,9 @@ def compute_wls_quadratic_surrogate_bound(
         else:
             w_A = np.ones(num_samples) # Fallback if no valid points
             
+        # --- Calculate Weights (Method B) ---
+        w_B = w_B_shared
+
         # --- Fit & Bound: Uniform ---
         # Same as original: beta = (Phi^T Phi + lam I)^-1 Phi^T Y
         try:
@@ -367,18 +435,36 @@ def compute_wls_quadratic_surrogate_bound(
             
         local_agg_lb_A += prob * lb_A
         
+        # --- Fit & Bound: Method B (Weighted) ---
+        try:
+            # Weighted Least Squares
+            S_B = np.sqrt(w_B)
+            Phi_w_B = Phi * S_B[:, np.newaxis]
+            Y_w_B = Y_vals * S_B
+            
+            PhiT_Phi_w_B = Phi_w_B.T @ Phi_w_B + reg_matrix
+            beta_B = np.linalg.solve(PhiT_Phi_w_B, Phi_w_B.T @ Y_w_B)
+            
+            lb_B = _compute_bound_from_beta(beta_B, dim, lifted_vars, subproblems, subproblem_name, bounds, model)
+        except:
+            lb_B = float('-inf')
+            
+        local_agg_lb_B += prob * lb_B
+        
     # Aggregate across ranks
-    local_arr = np.array([local_agg_lb_uniform, local_agg_lb_A])
+    local_arr = np.array([local_agg_lb_uniform, local_agg_lb_A, local_agg_lb_B])
     global_arr = MPI.COMM_WORLD.allreduce(local_arr, op=MPI.SUM)
     
     global_lb_uniform = global_arr[0]
     global_lb_A = global_arr[1]
+    global_lb_B = global_arr[2]
     
     # Store on node
     node.lb_problem.wlsq_uniform_bound = global_lb_uniform
     node.lb_problem.wlsq_A_bound = global_lb_A
+    node.lb_problem.wlsq_B_bound = global_lb_B
     
-    return max(global_lb_uniform, global_lb_A)
+    return max(global_lb_uniform, global_lb_A, global_lb_B)
 
 def _compute_bound_from_beta(beta, dim, lifted_vars, subproblems, subproblem_name, bounds, model):
     """

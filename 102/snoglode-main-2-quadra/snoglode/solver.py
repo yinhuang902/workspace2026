@@ -16,6 +16,8 @@ from snoglode.utils.quadratic_bound import compute_quadratic_surrogate_bound, co
 from snoglode.utils.wls_quadratic_bound import compute_wls_quadratic_surrogate_bound
 from snoglode.utils.supported import SupportedVars
 
+WLSQ_GLOBAL_SEED = 17
+
 
 
 class PlotScraper:
@@ -360,7 +362,7 @@ class Solver():
 
         # Experimental: Compute WLS Quadratic Surrogate bound
         try:
-            wlsq_lb = compute_wls_quadratic_surrogate_bound(current_node, self.subproblems, self.lower_bounder.opt)
+            wlsq_lb = compute_wls_quadratic_surrogate_bound(current_node, self.subproblems, self.lower_bounder.opt, seed=WLSQ_GLOBAL_SEED)
             current_node.lb_problem.wlsq_bound = wlsq_lb
         except BaseException as e:
             # If it fails, just ignore or log
@@ -663,8 +665,11 @@ class Solver():
         # Extra WLSQ details
         wlsq_uni = getattr(current_node.lb_problem, 'wlsq_uniform_bound', None)
         wlsq_A = getattr(current_node.lb_problem, 'wlsq_A_bound', None)
-        v_uni_str = f"{wlsq_uni:.8g}" if wlsq_uni is not None else "-"
-        v_A_str = f"{wlsq_A:.8g}" if wlsq_A is not None else "-"
+        wlsq_B = getattr(current_node.lb_problem, 'wlsq_B_bound', None)
         
-        wlsq_line = f"    WLSQ_uniform={v_uni_str}, WLSQ_A={v_A_str}"
+        v_uni_str = f"{wlsq_uni:.8g}" if wlsq_uni is not None and math.isfinite(wlsq_uni) else "-"
+        v_A_str = f"{wlsq_A:.8g}" if wlsq_A is not None and math.isfinite(wlsq_A) else "-"
+        v_B_str = f"{wlsq_B:.8g}" if wlsq_B is not None and math.isfinite(wlsq_B) else "-"
+        
+        wlsq_line = f"    WLSQ_uniform={v_uni_str}, WLSQ_A={v_A_str}, WLSQ_B={v_B_str}"
         print(wlsq_line)
