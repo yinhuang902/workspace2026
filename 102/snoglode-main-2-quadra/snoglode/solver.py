@@ -666,10 +666,50 @@ class Solver():
         wlsq_uni = getattr(current_node.lb_problem, 'wlsq_uniform_bound', None)
         wlsq_A = getattr(current_node.lb_problem, 'wlsq_A_bound', None)
         wlsq_B = getattr(current_node.lb_problem, 'wlsq_B_bound', None)
+        wlsq_C = getattr(current_node.lb_problem, 'wlsq_C_bound', None)
+        wlsq_D1 = getattr(current_node.lb_problem, 'wlsq_D1_bound', None)
+        wlsq_D2 = getattr(current_node.lb_problem, 'wlsq_D2_bound', None)
         
         v_uni_str = f"{wlsq_uni:.8g}" if wlsq_uni is not None and math.isfinite(wlsq_uni) else "-"
         v_A_str = f"{wlsq_A:.8g}" if wlsq_A is not None and math.isfinite(wlsq_A) else "-"
         v_B_str = f"{wlsq_B:.8g}" if wlsq_B is not None and math.isfinite(wlsq_B) else "-"
         
-        wlsq_line = f"    WLSQ_uniform={v_uni_str}, WLSQ_A={v_A_str}, WLSQ_B={v_B_str}"
+        v_C_str = f"{wlsq_C:.8g}" if wlsq_C is not None and math.isfinite(wlsq_C) else "-"
+        v_D1_str = f"{wlsq_D1:.8g}" if wlsq_D1 is not None and math.isfinite(wlsq_D1) else "-"
+        v_D2_str = f"{wlsq_D2:.8g}" if wlsq_D2 is not None and math.isfinite(wlsq_D2) else "-"
+        wlsq_line = f"    WLSQ_uniform={v_uni_str}, WLSQ_A={v_A_str}, WLSQ_B={v_B_str}, WLSQ_C={v_C_str}, WLSQ_D1={v_D1_str}, WLSQ_D2={v_D2_str}"
         print(wlsq_line)
+        
+        # UB_WLSQ line
+        # Retrieve UBs
+        ub_uni = getattr(current_node.lb_problem, 'wlsq_uniform_ub', float('nan'))
+        ub_A = getattr(current_node.lb_problem, 'wlsq_A_ub', float('nan'))
+        ub_B = getattr(current_node.lb_problem, 'wlsq_B_ub', float('nan'))
+        ub_C = getattr(current_node.lb_problem, 'wlsq_C_ub', float('nan'))
+        ub_D1 = getattr(current_node.lb_problem, 'wlsq_D1_ub', float('nan'))
+        ub_D2 = getattr(current_node.lb_problem, 'wlsq_D2_ub', float('nan'))
+        
+        ubs = [
+            ('uniform', ub_uni), ('A', ub_A), ('B', ub_B), 
+            ('C', ub_C), ('D1', ub_D1), ('D2', ub_D2)
+        ]
+        
+        # Find best UB (min)
+        best_ub = float('inf')
+        for _, val in ubs:
+            if math.isfinite(val) and val < best_ub:
+                best_ub = val
+                
+        # Format parts
+        parts = []
+        for name, val in ubs:
+            if not math.isfinite(val):
+                parts.append(f"{name}=nan")
+            else:
+                diff = val - self.tree.metrics.ub
+                diff_str = f"{diff:+.4f}"
+                star = "*" if val == best_ub and math.isfinite(best_ub) else ""
+                parts.append(f"{name}={val:.4f}({diff_str}){star}")
+                
+        ub_line = "    UB_WLSQ: " + " | ".join(parts)
+        print(ub_line)
