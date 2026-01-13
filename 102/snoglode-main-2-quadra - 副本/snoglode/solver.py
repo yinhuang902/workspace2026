@@ -360,98 +360,49 @@ class Solver():
                                  node = current_node)
 
         # Experimental: Compute quadratic surrogate bound
-        # Gate by flag
-        if ENABLE_QUAD_LB:
-            try:
-                # We use the solver from lower_bounder.opt (which is the Pyomo solver factory)
-                q_lb, spec_lb = compute_quadratic_surrogate_bound(current_node, self.subproblems, self.lower_bounder.opt)
-                current_node.lb_problem.quadratic_bound = q_lb
-                current_node.lb_problem.spectral_quadratic_bound = spec_lb
-            except BaseException as e:
-                # If it fails, just ignore or log
-                print(f"DEBUG: Quadratic bound failed: {e}")
-                current_node.lb_problem.quadratic_bound = None
-                current_node.lb_problem.spectral_quadratic_bound = None
-        else:
+        try:
+            # We use the solver from lower_bounder.opt (which is the Pyomo solver factory)
+            q_lb, spec_lb = compute_quadratic_surrogate_bound(current_node, self.subproblems, self.lower_bounder.opt)
+            current_node.lb_problem.quadratic_bound = q_lb
+            current_node.lb_problem.spectral_quadratic_bound = spec_lb
+        except BaseException as e:
+            # If it fails, just ignore or log
+            print(f"DEBUG: Quadratic bound failed: {e}")
             current_node.lb_problem.quadratic_bound = None
             current_node.lb_problem.spectral_quadratic_bound = None
 
         # Experimental: Compute Random PID bound
-        # Gate by flag
-        if ENABLE_SEPA_LB:
-            try:
-                rand_lb = compute_random_pid_bound(current_node, self.subproblems, self.lower_bounder.opt)
-                current_node.lb_problem.random_quad_bound = rand_lb
-            except BaseException as e:
-                # If it fails, just ignore or log
-                print(f"DEBUG: Random PID bound failed: {e}")
-                traceback.print_exc()
-                current_node.lb_problem.random_quad_bound = None
-        else:
-             current_node.lb_problem.random_quad_bound = None
+        try:
+            rand_lb = compute_random_pid_bound(current_node, self.subproblems, self.lower_bounder.opt)
+            current_node.lb_problem.random_quad_bound = rand_lb
+        except BaseException as e:
+            # If it fails, just ignore or log
+            print(f"DEBUG: Random PID bound failed: {e}")
+            traceback.print_exc()
+            current_node.lb_problem.random_quad_bound = None
 
         # Experimental: Compute WLS Quadratic Surrogate bound
-        # Construct config dicts
-        wlsq_methods = {
-            'uniform': ENABLE_WLSQ_UNIFORM,
-            'A': ENABLE_WLSQ_A,
-            'B': ENABLE_WLSQ_B,
-            'C': ENABLE_WLSQ_C,
-            'D1': ENABLE_WLSQ_D1,
-            'D2': ENABLE_WLSQ_D2
-        }
-        wlsq_ub_methods = {
-            'uniform': ENABLE_UB_WLSQ_UNIFORM,
-            'A': ENABLE_UB_WLSQ_A,
-            'B': ENABLE_UB_WLSQ_B,
-            'C': ENABLE_UB_WLSQ_C,
-            'D1': ENABLE_UB_WLSQ_D1,
-            'D2': ENABLE_UB_WLSQ_D2
-        }
-        
-        # Only run if AT LEAST ONE method is enabled
-        # Note: ENABLE_WLSQ_LB is used for display purposes (aggregate max), 
-        # but we compute if any variant is enabled.
-        if any(wlsq_methods.values()):
-            try:
-                wlsq_lb = compute_wls_quadratic_surrogate_bound(
-                    current_node, 
-                    self.subproblems, 
-                    self.lower_bounder.opt, 
-                    seed=WLSQ_GLOBAL_SEED,
-                    enabled_methods=wlsq_methods,
-                    enabled_ub_methods=wlsq_ub_methods
-                )
-                current_node.lb_problem.wlsq_bound = wlsq_lb
-            except BaseException as e:
-                # If it fails, just ignore or log
-                print(f"DEBUG: WLSQ bound failed: {e}")
-                traceback.print_exc()
-                current_node.lb_problem.wlsq_bound = None
-                current_node.lb_problem.wlsq_uniform_bound = None
-                current_node.lb_problem.wlsq_A_bound = None
-        else:
+        try:
+            wlsq_lb = compute_wls_quadratic_surrogate_bound(current_node, self.subproblems, self.lower_bounder.opt, seed=WLSQ_GLOBAL_SEED)
+            current_node.lb_problem.wlsq_bound = wlsq_lb
+        except BaseException as e:
+            # If it fails, just ignore or log
+            print(f"DEBUG: WLSQ bound failed: {e}")
+            traceback.print_exc()
             current_node.lb_problem.wlsq_bound = None
             current_node.lb_problem.wlsq_uniform_bound = None
-            # ... others are None by default or handled by display logic check
+            current_node.lb_problem.wlsq_A_bound = None
 
         # Experimental: Run WLSQ Uniform OBBT Diagnostic
-        if ENABLE_OBBT_UNI:
-            try:
-                from snoglode.utils.wls_quadratic_bound import run_surrogate_obbt_uniform
-                if math.isfinite(self.tree.metrics.ub):
-                    # Only run if uniform surrogate was actually computed
-                    if getattr(current_node.lb_problem, 'wlsq_uniform_beta', None) is not None:
-                        vol_ratio = run_surrogate_obbt_uniform(current_node, self.tree.metrics.ub)
-                        current_node.lb_problem.wlsq_uniform_obbt_vol_ratio = vol_ratio
-                    else:
-                        current_node.lb_problem.wlsq_uniform_obbt_vol_ratio = None
-                else:
-                    current_node.lb_problem.wlsq_uniform_obbt_vol_ratio = None
-            except BaseException as e:
-                # print(f"DEBUG: WLSQ OBBT failed: {e}")
+        try:
+            from snoglode.utils.wls_quadratic_bound import run_surrogate_obbt_uniform
+            if math.isfinite(self.tree.metrics.ub):
+                vol_ratio = run_surrogate_obbt_uniform(current_node, self.tree.metrics.ub)
+                current_node.lb_problem.wlsq_uniform_obbt_vol_ratio = vol_ratio
+            else:
                 current_node.lb_problem.wlsq_uniform_obbt_vol_ratio = None
-        else:
+        except BaseException as e:
+            # print(f"DEBUG: WLSQ OBBT failed: {e}")
             current_node.lb_problem.wlsq_uniform_obbt_vol_ratio = None
 
 
@@ -683,7 +634,7 @@ class Solver():
         
         # Prioritize labeling: WLSQ > Sepa > Spec > Quad > Orig
         # Only consider method if it is ENABLED
-        if max_val == v_wlsq and v_wlsq > v_orig and v_wlsq > v_quad and v_wlsq > v_spec and v_wlsq > v_rand:
+        if ENABLE_WLSQ_LB and max_val == v_wlsq and v_wlsq > v_orig and v_wlsq > v_quad and v_wlsq > v_spec and v_wlsq > v_rand:
             method_str = "WLSQ"
         elif ENABLE_SEPA_LB and max_val == v_rand and v_rand > v_orig and v_rand > v_quad and v_rand > v_spec:
             method_str = "Sepa"

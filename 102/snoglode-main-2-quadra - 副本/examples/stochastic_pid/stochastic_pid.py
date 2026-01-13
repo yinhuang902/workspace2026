@@ -29,8 +29,6 @@ num_scenarios = 5
 sp = 0.5
 df = pd.read_csv(os.getcwd() + "/data.csv")
 plot_dir =  os.getcwd() + "/plots_snoglode_parallel/"
-if rank == 0:
-    os.makedirs(plot_dir, exist_ok=True)
 
 class GurobiLBLowerBounder(sno.AbstractLowerBounder):
     def __init__(self, 
@@ -278,7 +276,6 @@ if __name__ == '__main__':
     # quit()
     solver.solve(max_iter=1000,
                  rel_tolerance = 1e-3,
-                 abs_tolerance = 1e-10,
                  time_limit = 60*120)
 
     if (rank==0):
