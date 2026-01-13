@@ -1,4 +1,4 @@
-"""
+﻿"""
 Wraps everything together into one solver
 """
 from typing import Tuple
@@ -15,6 +15,7 @@ from snoglode.utils.iter_logging import IterLogger, MockIterLogger
 from snoglode.utils.quadratic_bound import compute_quadratic_surrogate_bound, compute_random_pid_bound
 from snoglode.utils.wls_quadratic_bound import compute_wls_quadratic_surrogate_bound
 from snoglode.utils.supported import SupportedVars
+from snoglode.utils.plotter_3d import WLSQ3DVisualizer
 
 WLSQ_GLOBAL_SEED = 17
 
@@ -29,15 +30,18 @@ ENABLE_WLSQ_UNIFORM = True
 ENABLE_WLSQ_A = False
 ENABLE_WLSQ_B = False
 ENABLE_WLSQ_C = False
-ENABLE_WLSQ_D1 = False
-ENABLE_WLSQ_D2 = False
+ENABLE_WLSQ_D1 = True
+ENABLE_WLSQ_D2 = True
+ENABLE_WLSQ_E = True   # NEW: Anchor-mixed sampling method
 
 ENABLE_UB_WLSQ_UNIFORM = True
 ENABLE_UB_WLSQ_A = False
 ENABLE_UB_WLSQ_B = False
 ENABLE_UB_WLSQ_C = False
-ENABLE_UB_WLSQ_D1 = False
-ENABLE_UB_WLSQ_D2 = False
+ENABLE_UB_WLSQ_D1 = True
+ENABLE_UB_WLSQ_D2 = True
+ENABLE_UB_WLSQ_E = True   # NEW: UB from anchor-mixed method
+
 
 
 
@@ -147,7 +151,7 @@ class Solver():
         Performs a custom prioritized spatial branch and bound algorithm.
 
         Parameters
-        -----------
+        ----------
         max_iter : int
             maximum number of iterations.
         rel_tolerance : float, optional
@@ -198,7 +202,7 @@ class Solver():
         performs any of the necessary setup for the algorithm.
 
         Parameters
-        -----------
+        ----------
         max_iter : int
             maximum number of iterations.
         rel_tolerance : float
@@ -221,7 +225,8 @@ class Solver():
 
         assert type(collect_plot_info)==bool
         self.collect_plot_info = collect_plot_info
-        if collect_plot_info: self.plotter = PlotScraper()
+        if collect_plot_info: 
+            self.plotter = WLSQ3DVisualizer(base_dir="plots_3d")
 
         self.runtime = 0
         self.iteration = 0
@@ -330,9 +335,9 @@ class Solver():
         terminal, logger, plotter, etc.
         """
         # if we are collecting plot info
-        if self.collect_plot_info:
-            self.plotter.iter_update(lb = self.tree.metrics.lb,
-                                        ub = self.tree.metrics.ub)
+        # if self.collect_plot_info:
+        #     self.plotter.iter_update(lb = self.tree.metrics.lb,
+        #                                 ub = self.tree.metrics.ub)
 
         # update gap, iter, runtime
         self.tree.update_gap()
@@ -344,6 +349,16 @@ class Solver():
 
         # write to log
         self.logger.update()
+
+        # Plotting
+        if self.collect_plot_info and rank==0:
+            try:
+                self.plotter.save_iteration(iteration=self.iteration, node=current_node, subproblems=self.subproblems)
+            except Exception as e:
+                import traceback
+                print(f"[PLOT ERROR] iter={self.iteration}: {e}")
+                traceback.print_exc()
+
 
 
     def dispatch_lb_solve(self,
@@ -398,7 +413,8 @@ class Solver():
             'B': ENABLE_WLSQ_B,
             'C': ENABLE_WLSQ_C,
             'D1': ENABLE_WLSQ_D1,
-            'D2': ENABLE_WLSQ_D2
+            'D2': ENABLE_WLSQ_D2,
+            'E': ENABLE_WLSQ_E
         }
         wlsq_ub_methods = {
             'uniform': ENABLE_UB_WLSQ_UNIFORM,
@@ -406,7 +422,8 @@ class Solver():
             'B': ENABLE_UB_WLSQ_B,
             'C': ENABLE_UB_WLSQ_C,
             'D1': ENABLE_UB_WLSQ_D1,
-            'D2': ENABLE_UB_WLSQ_D2
+            'D2': ENABLE_UB_WLSQ_D2,
+            'E': ENABLE_UB_WLSQ_E
         }
         
         # Only run if AT LEAST ONE method is enabled
@@ -763,6 +780,7 @@ class Solver():
         wlsq_C = getattr(current_node.lb_problem, 'wlsq_C_bound', None)
         wlsq_D1 = getattr(current_node.lb_problem, 'wlsq_D1_bound', None)
         wlsq_D2 = getattr(current_node.lb_problem, 'wlsq_D2_bound', None)
+        wlsq_E = getattr(current_node.lb_problem, 'wlsq_E_bound', None)
         
         v_uni_str = fmt_method(ENABLE_WLSQ_UNIFORM, wlsq_uni)
         v_A_str = fmt_method(ENABLE_WLSQ_A, wlsq_A)
@@ -770,8 +788,9 @@ class Solver():
         v_C_str = fmt_method(ENABLE_WLSQ_C, wlsq_C)
         v_D1_str = fmt_method(ENABLE_WLSQ_D1, wlsq_D1)
         v_D2_str = fmt_method(ENABLE_WLSQ_D2, wlsq_D2)
+        v_E_str = fmt_method(ENABLE_WLSQ_E, wlsq_E)
         
-        wlsq_line = f"    WLSQ_uniform={v_uni_str}, WLSQ_A={v_A_str}, WLSQ_B={v_B_str}, WLSQ_C={v_C_str}, WLSQ_D1={v_D1_str}, WLSQ_D2={v_D2_str}"
+        wlsq_line = f"    WLSQ_uniform={v_uni_str}, WLSQ_A={v_A_str}, WLSQ_B={v_B_str}, WLSQ_C={v_C_str}, WLSQ_D1={v_D1_str}, WLSQ_D2={v_D2_str}, WLSQ_E={v_E_str}"
         print(wlsq_line)
         
         # UB_WLSQ line
@@ -782,8 +801,7 @@ class Solver():
         ub_C = getattr(current_node.lb_problem, 'wlsq_C_ub', float('nan'))
         ub_D1 = getattr(current_node.lb_problem, 'wlsq_D1_ub', float('nan'))
         ub_D2 = getattr(current_node.lb_problem, 'wlsq_D2_ub', float('nan'))
-        
-        ub_D2 = getattr(current_node.lb_problem, 'wlsq_D2_ub', float('nan'))
+        ub_E = getattr(current_node.lb_problem, 'wlsq_E_ub', float('nan'))
         
         # List of all, including disabled (for iteration order)
         # Format: (name, val, enabled_flag)
@@ -794,6 +812,7 @@ class Solver():
             ('C',       ub_C,   ENABLE_UB_WLSQ_C),
             ('D1',      ub_D1,  ENABLE_UB_WLSQ_D1),
             ('D2',      ub_D2,  ENABLE_UB_WLSQ_D2),
+            ('E',       ub_E,   ENABLE_UB_WLSQ_E),
         ]
         
         # Find best UB (min) among implicitly enabled & valid ones

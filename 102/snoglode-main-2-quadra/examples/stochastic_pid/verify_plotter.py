@@ -276,12 +276,11 @@ if __name__ == '__main__':
     # nonconvex_gurobi.solve(ef,
     #                        tee = True)
     # quit()
-    solver.solve(max_iter=1000,
+    solver.solve(max_iter=5,
                  rel_tolerance = 1e-3,
                  abs_tolerance = 1e-10,
-                 time_limit = 60*1,
+                 time_limit = 60*10,
                  collect_plot_info=True)
-
 
     if (rank==0):
         print("\n====================================================================")

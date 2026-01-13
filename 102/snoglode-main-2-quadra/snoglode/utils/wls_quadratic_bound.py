@@ -25,8 +25,8 @@ WLSQ_D_EPS = 0.1          # match WLSQ_B_EPS
 WLSQ_USE_MIXED_SAMPLING = True   # if False -> original pure random sampling
 
 # Mixed sampling parameters
-WLSQ_MIXED_FRACTION_UNIFORM = 0.30   # 30% uniform random points
-WLSQ_MIXED_FRACTION_LOWBIAS = 0.70   # 70% biased-toward-low-value points
+WLSQ_MIXED_FRACTION_UNIFORM = 0.90   # 30% uniform random points
+WLSQ_MIXED_FRACTION_LOWBIAS = 0.10   # 70% biased-toward-low-value points
 # (Ensure fractions sum to 1.0; if not, normalize in code.)
 
 # Candidate oversampling factor for biased selection (draw more candidates, then keep best)
@@ -35,6 +35,25 @@ WLSQ_MIXED_LOWBIAS_OVERSAMPLE = 5    # e.g., draw k*M candidates then pick low-v
 # If we use rank-based “low-value preference”, define a parameter:
 WLSQ_MIXED_RANK_GAMMA = 5.0
 WLSQ_MIXED_EPS = 0.1
+
+# ============ WLSQ Method E: Anchor-Mixed Sampling ============
+# Method E uses samples concentrated near per-scenario solution anchors.
+# Modify these parameters to tune Method E behavior.
+
+# Fraction of samples near anchors vs uniform random
+WLSQ_E_FRACTION_NEAR_ANCHOR = 0.1   # 70% of samples near scenario anchors
+WLSQ_E_FRACTION_UNIFORM = 0.9       # 30% of samples uniformly distributed
+
+# Neighborhood size around anchors (Gaussian sigma as fraction of box width)
+# sigma_j = WLSQ_E_SIGMA_FRAC * (ub_j - lb_j)
+WLSQ_E_SIGMA_FRAC = 0.10             # 10% of box width
+
+# Max rejection attempts for near-anchor sampling
+WLSQ_E_MAX_REJECT = 2000
+
+# Anchor selection: weight by scenario probability or uniform
+WLSQ_E_PICK_BY_PROB = True           # True = proportional to scenario prob; False = uniform
+
 
 def _identify_pid_vars(node: Node, subproblems: Subproblems) -> Optional[List[Dict]]:
     """
@@ -98,6 +117,8 @@ def _identify_pid_vars(node: Node, subproblems: Subproblems) -> Optional[List[Di
             'lb': var_state.lb,
             'ub': var_state.ub
         })
+    
+    return final_vars
         
     return final_vars
 
@@ -119,6 +140,31 @@ def _rank_weights(y: np.ndarray, gamma: float, eps: float) -> np.ndarray:
     w = eps + (1.0 - eps) * w
     return w
 
+def _sample_near_anchor(rng: np.random.Generator, anchor: np.ndarray, bounds: List[Tuple[float, float]], sigma_frac: float) -> List[float]:
+    """
+    Sample a point near the given anchor using Gaussian perturbation.
+    Returns a list of floats clipped to bounds.
+    """
+    dim = len(anchor)
+    point = []
+    for i in range(dim):
+        lb, ub = bounds[i]
+        # Handle infinite bounds
+        if lb == float('-inf'): lb = -1e4
+        if ub == float('inf'): ub = 1e4
+        width = ub - lb
+        
+        if width < 1e-9:
+            # Tiny or degenerate dimension - keep at anchor
+            point.append(anchor[i])
+        else:
+            sigma = sigma_frac * width
+            val = anchor[i] + rng.normal(0, sigma)
+            # Clip to bounds
+            val = max(lb, min(ub, val))
+            point.append(val)
+    return point
+
 def _generate_wlsq_samples(
     node: Node, 
     subproblems: Subproblems, 
@@ -128,14 +174,21 @@ def _generate_wlsq_samples(
     rng: np.random.Generator,
     saved_states: Dict,
     max_retries: int = 1000,
-    use_mixed_sampling: bool = True
+    use_mixed_sampling: bool = True,
+    anchors: Optional[np.ndarray] = None,
+    anchor_probs: Optional[np.ndarray] = None,
+    sampling_mode: str = "mixed_lowbias"
 ) -> List[np.ndarray]:
     """
-    Generates samples using either pure random or mixed (uniform + low-bias) strategy.
+    Generates samples using one of:
+    - "random": pure uniform random
+    - "mixed_lowbias": uniform + low-bias based on y_bar (existing)
+    - "anchor_mixed": uniform + near-anchor sampling
     """
     dim = len(lifted_vars)
     samples = []
     seen_points = set()
+
     
     # Helper to generate random point
     def get_random_point():
@@ -198,97 +251,163 @@ def _generate_wlsq_samples(
                     
         return all_feasible, y_bar
 
-    target_n_u = num_samples
-    target_n_b = 0
-    
-    if use_mixed_sampling:
-        target_n_u = int(round(WLSQ_MIXED_FRACTION_UNIFORM * num_samples))
-        target_n_b = num_samples - target_n_u
-    
-    # 1. Uniform Samples
-    attempts = 0
-    while len(samples) < target_n_u and attempts < target_n_u * max_retries:
-        attempts += 1
-        pt = get_random_point()
-        if pt is None: continue
+    # Determine sampling strategy based on sampling_mode
+    if sampling_mode == "anchor_mixed" and anchors is not None and len(anchors) > 0:
+        # ========== ANCHOR-MIXED SAMPLING ==========
+        target_n_near = int(round(WLSQ_E_FRACTION_NEAR_ANCHOR * num_samples))
+        target_n_uniform = num_samples - target_n_near
         
-        pt_tuple = tuple(np.round(pt, 6))
-        if pt_tuple in seen_points: continue
+        if MPI.COMM_WORLD.Get_rank() == 0:
+            print(f"DEBUG: anchor_mixed sampling: anchors={len(anchors)}, near={target_n_near}, uniform={target_n_uniform}")
         
-        is_feas, _ = check_feasibility(pt, compute_y_bar=False)
-        if is_feas:
-            samples.append(np.array(pt))
-            seen_points.add(pt_tuple)
-
-    # 2. Biased Samples
-    if target_n_b > 0:
-        pool_size = max(WLSQ_MIXED_LOWBIAS_OVERSAMPLE * target_n_b, target_n_b)
-        candidates = []
+        # 1. Sample near anchors
+        near_attempts = 0
+        while len(samples) < target_n_near and near_attempts < WLSQ_E_MAX_REJECT:
+            near_attempts += 1
+            
+            # Pick an anchor
+            anchor_idx = rng.choice(len(anchors), p=anchor_probs)
+            anchor = anchors[anchor_idx]
+            
+            # Sample near it
+            pt = _sample_near_anchor(rng, anchor, bounds, WLSQ_E_SIGMA_FRAC)
+            if pt is None: continue
+            
+            # Round for discrete vars
+            for i in range(dim):
+                v_type = lifted_vars[i]['type']
+                if v_type in [SupportedVars.binary, SupportedVars.integers, SupportedVars.nonnegative_integers]:
+                    lb, ub = bounds[i]
+                    if lb == float('-inf'): lb = -1e4
+                    if ub == float('inf'): ub = 1e4
+                    pt[i] = round(pt[i])
+                    pt[i] = max(lb, min(ub, pt[i]))
+            
+            pt_tuple = tuple(np.round(pt, 6))
+            if pt_tuple in seen_points: continue
+            
+            is_feas, _ = check_feasibility(pt, compute_y_bar=False)
+            if is_feas:
+                samples.append(np.array(pt))
+                seen_points.add(pt_tuple)
         
-        pool_attempts = 0
-        while len(candidates) < pool_size and pool_attempts < pool_size * max_retries:
-            pool_attempts += 1
+        # 2. Uniform samples
+        uniform_attempts = 0
+        n_uniform_got = len(samples)
+        while len(samples) < n_uniform_got + target_n_uniform and uniform_attempts < target_n_uniform * max_retries:
+            uniform_attempts += 1
             pt = get_random_point()
             if pt is None: continue
             
             pt_tuple = tuple(np.round(pt, 6))
             if pt_tuple in seen_points: continue
             
-            # Evaluate y_bar (and feasibility)
-            is_feas, y_bar = check_feasibility(pt, compute_y_bar=True)
-            
-            # We store it even if infeasible (with high cost) to sort, 
-            # but we only pick feasible ones later.
-            candidates.append((pt, y_bar, is_feas))
+            is_feas, _ = check_feasibility(pt, compute_y_bar=False)
+            if is_feas:
+                samples.append(np.array(pt))
+                seen_points.add(pt_tuple)
         
-        # Filter to only feasible candidates for selection
-        feasible_candidates = [c for c in candidates if c[2]]
+        # 3. Fallback fill
+        fallback_attempts = 0
+        while len(samples) < num_samples and fallback_attempts < num_samples * max_retries:
+            fallback_attempts += 1
+            pt = get_random_point()
+            if pt is None: continue
+            pt_tuple = tuple(np.round(pt, 6))
+            if pt_tuple in seen_points: continue
+            is_feas, _ = check_feasibility(pt, compute_y_bar=False)
+            if is_feas:
+                samples.append(np.array(pt))
+                seen_points.add(pt_tuple)
         
-        M = len(feasible_candidates)
-        if M > 0:
-            # Extract y_bar values
-            y_bars = np.array([c[1] for c in feasible_candidates])
+        if MPI.COMM_WORLD.Get_rank() == 0:
+            print(f"DEBUG: anchor_mixed sampling got {len(samples)}/{num_samples} samples")
+        
+    elif sampling_mode == "mixed_lowbias" or use_mixed_sampling:
+        # ========== EXISTING MIXED LOWBIAS SAMPLING ==========
+        target_n_u = int(round(WLSQ_MIXED_FRACTION_UNIFORM * num_samples))
+        target_n_b = num_samples - target_n_u
+        
+        # 1. Uniform Samples
+        attempts = 0
+        while len(samples) < target_n_u and attempts < target_n_u * max_retries:
+            attempts += 1
+            pt = get_random_point()
+            if pt is None: continue
             
-            # Compute ranks (0-based)
-            # argsort gives indices that sort the array
-            # argsort of argsort gives the rank
-            ranks_0based = np.argsort(np.argsort(y_bars))
+            pt_tuple = tuple(np.round(pt, 6))
+            if pt_tuple in seen_points: continue
             
-            # Compute weights
-            denom = max(M - 1, 1)
-            base_w = np.exp(-WLSQ_MIXED_RANK_GAMMA * ranks_0based / denom)
-            w = WLSQ_MIXED_EPS + (1.0 - WLSQ_MIXED_EPS) * base_w
-            
-            # Normalize
-            w_sum = np.sum(w)
-            if w_sum > 0 and np.isfinite(w_sum):
-                p = w / w_sum
-            else:
-                p = np.ones(M) / M
-                
-            # Select indices
-            n_select = min(target_n_b, M)
-            selected_indices = rng.choice(M, size=n_select, replace=False, p=p)
-            
-            for idx in selected_indices:
-                pt = feasible_candidates[idx][0]
-                pt_tuple = tuple(np.round(pt, 6))
-                if pt_tuple not in seen_points:
-                    samples.append(np.array(pt))
-                    seen_points.add(pt_tuple)
+            is_feas, _ = check_feasibility(pt, compute_y_bar=False)
+            if is_feas:
+                samples.append(np.array(pt))
+                seen_points.add(pt_tuple)
 
-    # 3. Fallback (fill up to num_samples)
-    attempts = 0
-    while len(samples) < num_samples and attempts < num_samples * max_retries:
-        attempts += 1
-        pt = get_random_point()
-        if pt is None: continue
-        pt_tuple = tuple(np.round(pt, 6))
-        if pt_tuple in seen_points: continue
-        is_feas, _ = check_feasibility(pt, compute_y_bar=False)
-        if is_feas:
-            samples.append(np.array(pt))
-            seen_points.add(pt_tuple)
+        # 2. Biased Samples
+        if target_n_b > 0:
+            pool_size = max(WLSQ_MIXED_LOWBIAS_OVERSAMPLE * target_n_b, target_n_b)
+            candidates = []
+            
+            pool_attempts = 0
+            while len(candidates) < pool_size and pool_attempts < pool_size * max_retries:
+                pool_attempts += 1
+                pt = get_random_point()
+                if pt is None: continue
+                
+                pt_tuple = tuple(np.round(pt, 6))
+                if pt_tuple in seen_points: continue
+                
+                is_feas, y_bar = check_feasibility(pt, compute_y_bar=True)
+                candidates.append((pt, y_bar, is_feas))
+            
+            feasible_candidates = [c for c in candidates if c[2]]
+            M = len(feasible_candidates)
+            if M > 0:
+                y_bars = np.array([c[1] for c in feasible_candidates])
+                ranks_0based = np.argsort(np.argsort(y_bars))
+                denom = max(M - 1, 1)
+                base_w = np.exp(-WLSQ_MIXED_RANK_GAMMA * ranks_0based / denom)
+                w = WLSQ_MIXED_EPS + (1.0 - WLSQ_MIXED_EPS) * base_w
+                w_sum = np.sum(w)
+                if w_sum > 0 and np.isfinite(w_sum):
+                    p = w / w_sum
+                else:
+                    p = np.ones(M) / M
+                n_select = min(target_n_b, M)
+                selected_indices = rng.choice(M, size=n_select, replace=False, p=p)
+                for idx in selected_indices:
+                    pt = feasible_candidates[idx][0]
+                    pt_tuple = tuple(np.round(pt, 6))
+                    if pt_tuple not in seen_points:
+                        samples.append(np.array(pt))
+                        seen_points.add(pt_tuple)
+
+        # 3. Fallback
+        attempts = 0
+        while len(samples) < num_samples and attempts < num_samples * max_retries:
+            attempts += 1
+            pt = get_random_point()
+            if pt is None: continue
+            pt_tuple = tuple(np.round(pt, 6))
+            if pt_tuple in seen_points: continue
+            is_feas, _ = check_feasibility(pt, compute_y_bar=False)
+            if is_feas:
+                samples.append(np.array(pt))
+                seen_points.add(pt_tuple)
+                
+    else:
+        # ========== PURE RANDOM SAMPLING ==========
+        attempts = 0
+        while len(samples) < num_samples and attempts < num_samples * max_retries:
+            attempts += 1
+            pt = get_random_point()
+            if pt is None: continue
+            pt_tuple = tuple(np.round(pt, 6))
+            if pt_tuple in seen_points: continue
+            is_feas, _ = check_feasibility(pt, compute_y_bar=False)
+            if is_feas:
+                samples.append(np.array(pt))
+                seen_points.add(pt_tuple)
             
     return samples
 
@@ -406,9 +525,9 @@ def compute_wls_quadratic_surrogate_bound(
     
     # Defaults (All enabled if not specified, for backward compat)
     if enabled_methods is None:
-        enabled_methods = {k: True for k in ['uniform', 'A', 'B', 'C', 'D1', 'D2']}
+        enabled_methods = {k: True for k in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E']}
     if enabled_ub_methods is None:
-        enabled_ub_methods = {k: True for k in ['uniform', 'A', 'B', 'C', 'D1', 'D2']}
+        enabled_ub_methods = {k: True for k in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E']}
         
     on_U = enabled_methods.get('uniform', False)
     on_A = enabled_methods.get('A', False)
@@ -416,20 +535,26 @@ def compute_wls_quadratic_surrogate_bound(
     on_C = enabled_methods.get('C', False)
     on_D1 = enabled_methods.get('D1', False)
     on_D2 = enabled_methods.get('D2', False)
+    on_E = enabled_methods.get('E', False)  # NEW: Anchor-mixed sampling method
 
     
     # 1. Identify the box (bounds of lifted variables)
     # ISSUE #1: Select ONLY the three first-stage PID variables (Kp, Ki, Kd) by NAME
     lifted_vars = _identify_pid_vars(node, subproblems)
     if lifted_vars is None:
+        print("DEBUG: WLSQ failed to identify PID vars")
         return float('-inf')
         
     bounds = []
     for lv in lifted_vars:
-        bounds.append((lv['lb'], lv['ub']))
+        # Sanitize bounds: Handle None as +/- inf
+        lb = float(lv['lb']) if lv['lb'] is not None else float('-inf')
+        ub = float(lv['ub']) if lv['ub'] is not None else float('inf')
+        bounds.append((lb, ub))
     
     dim = len(lifted_vars)
     if dim != 3:
+        print(f"DEBUG: WLSQ dim mismatch: {dim}")
         return float('-inf')
 
     # 2. Sample points
@@ -450,35 +575,108 @@ def compute_wls_quadratic_surrogate_bound(
             
     # Use mixed sampler?
     # Optimization: If ONLY uniform is enabled, we don't need mixed/biased sampling.
-    # We need biased sampling if A, B, D1, D2 or C (fallback) might be used.
-    # Actually, B, C, D don't strictly *require* biased samples, but they benefit.
-    # However, user request: "Do not run the y_bar-based pre-screening ... unless ... needs it"
-    # Uniform certainly doesn't.
     use_mixed = WLSQ_USE_MIXED_SAMPLING
     if not (on_A or on_B or on_C or on_D1 or on_D2) and on_U:
-        # Only uniform is on -> disable mixed sampling overhead
         use_mixed = False
-        
-    # We need to temporarily patch/pass this config to _generate_wlsq_samples or manage it via global hack?
-    # _generate_wlsq_samples reads Global WLSQ_USE_MIXED_SAMPLING.
-    # We will pass it as an argument or patch it. 
-    # Let's verify _generate_wlsq_samples signature or definition.
-    # It seems to read the global. We can temporarily override it or Refactor _generate_wlsq_samples.
-    # Refactoring _generate_wlsq_samples is cleaner but out of 'minimal diff' scope if it changes too much.
-    # But wait, local override is better. Let's patch global for this call or just copy logic?
-    # Actually, let's just create a context manager or unsafe patch, OR modify _generate_wlsq_samples to take an arg.
-    # I'll modify _generate_wlsq_samples to take `use_mixed` arg in a separate edit if I can, OR just override the global.
-    # Overriding global is risky in threaded apps but MPI is process-based.
-    # Lets modify the call to _generate_wlsq_samples to accept `use_mixed_sampling` arg if I can edit the definition too.
-    # I will edit the definition of _generate_wlsq_samples in a separate hunk.
     
-    # Ideally: samples = _generate_wlsq_samples(..., use_mixed_sampling=use_mixed)
-    # I'll assume I update the definition.
+    # === ANCHOR EXTRACTION (for Method E) ===
+    anchors_list = []
+    anchor_weights = []
     
-    samples = _generate_wlsq_samples(node, subproblems, lifted_vars, bounds, num_samples, rng, saved_states, max_retries, use_mixed_sampling=use_mixed)
+    if on_E:
+        for scenario_name in subproblems.names:
+            if hasattr(node.lb_problem, 'subproblem_solutions') and scenario_name in node.lb_problem.subproblem_solutions:
+                sol = node.lb_problem.subproblem_solutions[scenario_name].lifted_var_solution
+                anchor_pt = []
+                valid = True
+                for lv in lifted_vars:
+                    val = sol.get(lv['type'], {}).get(lv['id'])
+                    if val is None or not np.isfinite(val):
+                        valid = False
+                        break
+                    anchor_pt.append(val)
+                
+                if valid:
+                    anchors_list.append(np.array(anchor_pt))
+                    if WLSQ_E_PICK_BY_PROB:
+                        anchor_weights.append(subproblems.probability[scenario_name])
+                    else:
+                        anchor_weights.append(1.0)
+    
+    # Convert to arrays and normalize weights for Method E
+    anchors_arr = None
+    anchor_probs_arr = None
+    if len(anchors_list) > 0:
+        anchors_arr = np.array(anchors_list)
+        anchor_weights = np.array(anchor_weights)
+        w_sum = np.sum(anchor_weights)
+        if w_sum > 0:
+            anchor_probs_arr = anchor_weights / w_sum
+        else:
+            anchor_probs_arr = np.ones(len(anchors_list)) / len(anchors_list)
+    
+    # Generate samples for methods uniform/A/B/D1/D2 (original sampling)
+    samples = _generate_wlsq_samples(
+        node, subproblems, lifted_vars, bounds, num_samples, rng, saved_states, max_retries,
+        use_mixed_sampling=use_mixed,
+        anchors=None,
+        anchor_probs=None,
+        sampling_mode="mixed_lowbias" if use_mixed else "random"
+    )
     
     if len(samples) < num_samples:
+        print(f"DEBUG: WLSQ sampling failed. Got {len(samples)}/{num_samples} samples.")
         return float('-inf')
+    
+    # Generate SEPARATE samples for Method E (anchor-mixed sampling)
+    samples_E = []
+    if on_E:
+        if anchors_arr is not None and len(anchors_arr) > 0:
+            samples_E = _generate_wlsq_samples(
+                node, subproblems, lifted_vars, bounds, num_samples, rng, saved_states, max_retries,
+                use_mixed_sampling=False,
+                anchors=anchors_arr,
+                anchor_probs=anchor_probs_arr,
+                sampling_mode="anchor_mixed"
+            )
+            if MPI.COMM_WORLD.Get_rank() == 0:
+                print(f"DEBUG: Method E got {len(samples_E)} anchor-mixed samples")
+        else:
+            # Fallback: if no anchors, use the same samples as other methods
+            samples_E = samples
+            if MPI.COMM_WORLD.Get_rank() == 0:
+                print("DEBUG: Method E fallback to regular samples (no anchors)")
+
+    # --- PLOTTING DATA INIT (Per-Method Schema) ---
+    if not hasattr(node.lb_problem, 'plot_data_wlsq') or node.lb_problem.plot_data_wlsq is None:
+        node.lb_problem.plot_data_wlsq = {}
+    
+    # Methods uniform/A/B/D1/D2 use 'samples'
+    for method_key, is_enabled in [('uniform', on_U), ('A', on_A), ('B', on_B), ('D1', on_D1), ('D2', on_D2)]:
+        if is_enabled:
+            node.lb_problem.plot_data_wlsq[method_key] = {
+                'interp_points': [list(p) for p in samples],
+                'interp_truevals': {},
+                'ms_point': {},
+                'ms_trueval': {}
+            }
+    # Method C uses samples_C (will be populated after sampling)
+    if on_C:
+        node.lb_problem.plot_data_wlsq['C'] = {
+            'interp_points': [],
+            'interp_truevals': {},
+            'ms_point': {},
+            'ms_trueval': {}
+        }
+    # Method E uses samples_E
+    if on_E and len(samples_E) > 0:
+        node.lb_problem.plot_data_wlsq['E'] = {
+            'interp_points': [list(p) for p in samples_E],
+            'interp_truevals': {},
+            'ms_point': {},
+            'ms_trueval': {}
+        }
+    # --------------------------
         
     # 3. Build Design Matrix Phi
     # Full quadratic in 3 vars: 1, x1, x2, x3, x1^2, x1x2, x1x3, x2^2, x2x3, x3^2
@@ -673,6 +871,9 @@ def compute_wls_quadratic_surrogate_bound(
     # Build Phi_C
     Phi_C = []
     if on_C:
+        # Store samples_C in plot_data_wlsq['C']
+        node.lb_problem.plot_data_wlsq['C']['interp_points'] = [list(p) for p in samples_C]
+        
         for x in samples_C:
             row = [1.0]
             for i in range(dim):
@@ -794,9 +995,40 @@ def compute_wls_quadratic_surrogate_bound(
                 success, obj_val = _solve_true_recourse_primal_gurobi(model)
                 if success:
                     Y_vals_C.append(obj_val)
+                if success:
+                    Y_vals_C.append(obj_val)
                 else:
                     Y_vals_C.append(1e6)
         Y_vals_C = np.array(Y_vals_C)
+        
+        # Evaluate samples_E (Method E - anchor-mixed)
+        Y_vals_E = []
+        if on_E and len(samples_E) > 0:
+            for i_s, x in enumerate(samples_E):
+                id_to_val = {(lifted_vars[i]['type'], lifted_vars[i]['id']): x[i] for i in range(dim)}
+                for var in subproblems.subproblem_lifted_vars[subproblem_name]:
+                    v_type, v_id, _ = subproblems.var_to_data[var]
+                    if (v_type, v_id) in id_to_val:
+                        var.fix(id_to_val[(v_type, v_id)])
+                success, obj_val = _solve_true_recourse_primal_gurobi(model)
+                if success:
+                    Y_vals_E.append(obj_val)
+                else:
+                    Y_vals_E.append(1e6)
+        Y_vals_E = np.array(Y_vals_E)
+        
+        # --- PLOTTING DATA COLLECTION (True Values Per Method) ---
+        # Y_vals corresponds to 'samples' used by uniform/A/B/D1/D2
+        # Y_vals_C corresponds to 'samples_C' used by C
+        # Y_vals_E corresponds to 'samples_E' used by E
+        for method_key in ['uniform', 'A', 'B', 'D1', 'D2']:
+            if method_key in node.lb_problem.plot_data_wlsq:
+                node.lb_problem.plot_data_wlsq[method_key]['interp_truevals'][subproblem_name] = list(Y_vals)
+        if 'C' in node.lb_problem.plot_data_wlsq:
+            node.lb_problem.plot_data_wlsq['C']['interp_truevals'][subproblem_name] = list(Y_vals_C)
+        if 'E' in node.lb_problem.plot_data_wlsq:
+            node.lb_problem.plot_data_wlsq['E']['interp_truevals'][subproblem_name] = list(Y_vals_E)
+        # --------------------------------------------
         
         # Restore state
         for var in subproblems.subproblem_lifted_vars[subproblem_name]:
@@ -820,6 +1052,7 @@ def compute_wls_quadratic_surrogate_bound(
             'prob': prob,
             'Y_vals': Y_vals,
             'Y_vals_C': Y_vals_C,
+            'Y_vals_E': Y_vals_E,  # NEW: for Method E
             'valid_indices': valid_indices
         })
 
@@ -835,6 +1068,7 @@ def compute_wls_quadratic_surrogate_bound(
     local_agg_lb_C = 0.0
     local_agg_lb_D1 = 0.0
     local_agg_lb_D2 = 0.0
+    local_agg_lb_E = 0.0  # NEW: for Method E
     
     # Beta accumulators for UB_true
     # Size of beta is 1 + dim + dim*(dim+1)/2
@@ -846,6 +1080,7 @@ def compute_wls_quadratic_surrogate_bound(
     local_beta_agg_C = np.zeros(beta_size)
     local_beta_agg_D1 = np.zeros(beta_size)
     local_beta_agg_D2 = np.zeros(beta_size)
+    local_beta_agg_E = np.zeros(beta_size)  # NEW: for Method E
     
     for data in all_scenario_data:
         subproblem_name = data['name']
@@ -891,8 +1126,13 @@ def compute_wls_quadratic_surrogate_bound(
         if on_U:
             try:
                 beta_uni = np.linalg.solve(PhiT_Phi_reg, Phi.T @ Y_vals)
-                lb_uni = _compute_bound_from_beta(beta_uni, dim, lifted_vars, subproblems, subproblem_name, bounds, model)
+                lb_uni, ms_pt, ms_val = _compute_bound_from_beta(beta_uni, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
                 local_beta_agg_uniform += prob * beta_uni
+                
+                # Store MS point for method 'uniform'
+                if 'uniform' in node.lb_problem.plot_data_wlsq:
+                    node.lb_problem.plot_data_wlsq['uniform']['ms_point'][subproblem_name] = ms_pt
+                    node.lb_problem.plot_data_wlsq['uniform']['ms_trueval'][subproblem_name] = ms_val
             except:
                 lb_uni = float('-inf')
         else:
@@ -907,8 +1147,13 @@ def compute_wls_quadratic_surrogate_bound(
                 Y_w = Y_vals * S
                 PhiT_Phi_w = Phi_w.T @ Phi_w + reg_matrix
                 beta_A = np.linalg.solve(PhiT_Phi_w, Phi_w.T @ Y_w)
-                lb_A = _compute_bound_from_beta(beta_A, dim, lifted_vars, subproblems, subproblem_name, bounds, model)
+                lb_A, ms_pt, ms_val = _compute_bound_from_beta(beta_A, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
                 local_beta_agg_A += prob * beta_A
+                
+                # Store MS point for method 'A'
+                if 'A' in node.lb_problem.plot_data_wlsq:
+                    node.lb_problem.plot_data_wlsq['A']['ms_point'][subproblem_name] = ms_pt
+                    node.lb_problem.plot_data_wlsq['A']['ms_trueval'][subproblem_name] = ms_val
             except:
                 lb_A = float('-inf')
         else:
@@ -923,8 +1168,13 @@ def compute_wls_quadratic_surrogate_bound(
                 Y_w_B = Y_vals * S_B
                 PhiT_Phi_w_B = Phi_w_B.T @ Phi_w_B + reg_matrix
                 beta_B = np.linalg.solve(PhiT_Phi_w_B, Phi_w_B.T @ Y_w_B)
-                lb_B = _compute_bound_from_beta(beta_B, dim, lifted_vars, subproblems, subproblem_name, bounds, model)
+                lb_B, ms_pt, ms_val = _compute_bound_from_beta(beta_B, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
                 local_beta_agg_B += prob * beta_B
+                
+                # Store MS point for method 'B'
+                if 'B' in node.lb_problem.plot_data_wlsq:
+                    node.lb_problem.plot_data_wlsq['B']['ms_point'][subproblem_name] = ms_pt
+                    node.lb_problem.plot_data_wlsq['B']['ms_trueval'][subproblem_name] = ms_val
             except:
                 lb_B = float('-inf')
         else:
@@ -940,8 +1190,13 @@ def compute_wls_quadratic_surrogate_bound(
                 PhiT_Phi_w_C = Phi_w_C.T @ Phi_w_C + (lambda_reg * np.eye(Phi_C.shape[1]))
                 PhiT_Phi_w_C[0, 0] -= lambda_reg
                 beta_C = np.linalg.solve(PhiT_Phi_w_C, Phi_w_C.T @ Y_w_C)
-                lb_C = _compute_bound_from_beta(beta_C, dim, lifted_vars, subproblems, subproblem_name, bounds, model)
+                lb_C, ms_pt, ms_val = _compute_bound_from_beta(beta_C, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
                 local_beta_agg_C += prob * beta_C
+                
+                # Store MS point for method 'C'
+                if 'C' in node.lb_problem.plot_data_wlsq:
+                    node.lb_problem.plot_data_wlsq['C']['ms_point'][subproblem_name] = ms_pt
+                    node.lb_problem.plot_data_wlsq['C']['ms_trueval'][subproblem_name] = ms_val
             except:
                 lb_C = float('-inf')
         else:
@@ -956,8 +1211,13 @@ def compute_wls_quadratic_surrogate_bound(
                 Y_w_D1 = Y_vals * S_D1
                 PhiT_Phi_w_D1 = Phi_w_D1.T @ Phi_w_D1 + reg_matrix
                 beta_D1 = np.linalg.solve(PhiT_Phi_w_D1, Phi_w_D1.T @ Y_w_D1)
-                lb_D1 = _compute_bound_from_beta(beta_D1, dim, lifted_vars, subproblems, subproblem_name, bounds, model)
+                lb_D1, ms_pt, ms_val = _compute_bound_from_beta(beta_D1, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
                 local_beta_agg_D1 += prob * beta_D1
+                
+                # Store MS point for method 'D1'
+                if 'D1' in node.lb_problem.plot_data_wlsq:
+                    node.lb_problem.plot_data_wlsq['D1']['ms_point'][subproblem_name] = ms_pt
+                    node.lb_problem.plot_data_wlsq['D1']['ms_trueval'][subproblem_name] = ms_val
             except:
                 lb_D1 = float('-inf')
         else:
@@ -972,16 +1232,53 @@ def compute_wls_quadratic_surrogate_bound(
                 Y_w_D2 = Y_vals * S_D2
                 PhiT_Phi_w_D2 = Phi_w_D2.T @ Phi_w_D2 + reg_matrix
                 beta_D2 = np.linalg.solve(PhiT_Phi_w_D2, Phi_w_D2.T @ Y_w_D2)
-                lb_D2 = _compute_bound_from_beta(beta_D2, dim, lifted_vars, subproblems, subproblem_name, bounds, model)
+                lb_D2, ms_pt, ms_val = _compute_bound_from_beta(beta_D2, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
                 local_beta_agg_D2 += prob * beta_D2
+                
+                # Store MS point for method 'D2'
+                if 'D2' in node.lb_problem.plot_data_wlsq:
+                    node.lb_problem.plot_data_wlsq['D2']['ms_point'][subproblem_name] = ms_pt
+                    node.lb_problem.plot_data_wlsq['D2']['ms_trueval'][subproblem_name] = ms_val
             except:
                 lb_D2 = float('-inf')
         else:
             lb_D2 = float('-inf')
         local_agg_lb_D2 += prob * lb_D2
         
+        # --- Fit & Bound: Method E (Anchor-mixed sampling, uniform weights) ---
+        Y_vals_E = data.get('Y_vals_E', np.array([]))
+        if on_E and len(Y_vals_E) > 0 and len(samples_E) > 0:
+            try:
+                # Build Phi_E from samples_E
+                Phi_E = []
+                for x in samples_E:
+                    row = [1.0]
+                    for i in range(dim):
+                        row.append(x[i])
+                    for i in range(dim):
+                        for j in range(i, dim):
+                            row.append(x[i] * x[j])
+                    Phi_E.append(row)
+                Phi_E = np.array(Phi_E)
+                
+                # Uniform weighting (like Method Uniform)
+                PhiT_Phi_E = Phi_E.T @ Phi_E + reg_matrix
+                beta_E = np.linalg.solve(PhiT_Phi_E, Phi_E.T @ Y_vals_E)
+                lb_E, ms_pt, ms_val = _compute_bound_from_beta(beta_E, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
+                local_beta_agg_E += prob * beta_E
+                
+                # Store MS point for method 'E'
+                if 'E' in node.lb_problem.plot_data_wlsq:
+                    node.lb_problem.plot_data_wlsq['E']['ms_point'][subproblem_name] = ms_pt
+                    node.lb_problem.plot_data_wlsq['E']['ms_trueval'][subproblem_name] = ms_val
+            except:
+                lb_E = float('-inf')
+        else:
+            lb_E = float('-inf')
+        local_agg_lb_E += prob * lb_E
+        
     # Aggregate across ranks
-    local_arr = np.array([local_agg_lb_uniform, local_agg_lb_A, local_agg_lb_B, local_agg_lb_C, local_agg_lb_D1, local_agg_lb_D2])
+    local_arr = np.array([local_agg_lb_uniform, local_agg_lb_A, local_agg_lb_B, local_agg_lb_C, local_agg_lb_D1, local_agg_lb_D2, local_agg_lb_E])
     global_arr = MPI.COMM_WORLD.allreduce(local_arr, op=MPI.SUM)
     
     global_lb_uniform = global_arr[0]
@@ -990,8 +1287,8 @@ def compute_wls_quadratic_surrogate_bound(
     global_lb_C = global_arr[3]
     global_lb_D1 = global_arr[4]
     global_lb_D2 = global_arr[5]
+    global_lb_E = global_arr[6]  # NEW
     
-    # Store on node
     # Store on node (Set to None if disabled to match legacy behavior/display)
     node.lb_problem.wlsq_uniform_bound = global_lb_uniform if on_U else None
     node.lb_problem.wlsq_A_bound = global_lb_A if on_A else None
@@ -999,12 +1296,13 @@ def compute_wls_quadratic_surrogate_bound(
     node.lb_problem.wlsq_C_bound = global_lb_C if on_C else None
     node.lb_problem.wlsq_D1_bound = global_lb_D1 if on_D1 else None
     node.lb_problem.wlsq_D2_bound = global_lb_D2 if on_D2 else None
+    node.lb_problem.wlsq_E_bound = global_lb_E if on_E else None  # NEW
     
     # --- Compute UB_true for each method ---
     # 1. Aggregate betas
     local_betas = np.concatenate([
         local_beta_agg_uniform, local_beta_agg_A, local_beta_agg_B, 
-        local_beta_agg_C, local_beta_agg_D1, local_beta_agg_D2
+        local_beta_agg_C, local_beta_agg_D1, local_beta_agg_D2, local_beta_agg_E
     ])
     global_betas = MPI.COMM_WORLD.allreduce(local_betas, op=MPI.SUM)
     
@@ -1016,10 +1314,11 @@ def compute_wls_quadratic_surrogate_bound(
     g_beta_C = global_betas[3*bs:4*bs]
     g_beta_D1 = global_betas[4*bs:5*bs]
     g_beta_D2 = global_betas[5*bs:6*bs]
+    g_beta_E = global_betas[6*bs:7*bs]  # NEW
     
     methods = [
         ('uniform', g_beta_uni), ('A', g_beta_A), ('B', g_beta_B), 
-        ('C', g_beta_C), ('D1', g_beta_D1), ('D2', g_beta_D2)
+        ('C', g_beta_C), ('D1', g_beta_D1), ('D2', g_beta_D2), ('E', g_beta_E)
     ]
     
     # Cache evaluations to avoid re-evaluating same point
@@ -1047,9 +1346,49 @@ def compute_wls_quadratic_surrogate_bound(
                 local_obj = _evaluate_true_objective_local(x_star, subproblems, lifted_vars, saved_states)
                 ub_true = MPI.COMM_WORLD.allreduce(local_obj, op=MPI.SUM)
                 eval_cache[x_tuple] = ub_true
+            
+            # --- Store sol_point for plotting ---
+            if m_name in node.lb_problem.plot_data_wlsq:
+                # Validate x_star is finite
+                if len(x_star) >= 3 and all(np.isfinite(x_star[i]) for i in range(3)):
+                    node.lb_problem.plot_data_wlsq[m_name]['sol_point'] = [float(x_star[0]), float(x_star[1]), float(x_star[2])]
+                    
+                    # Compute per-scenario trueval at sol_point for LOCAL scenarios
+                    sol_truevals = {}
+                    id_to_val = {(lifted_vars[i]['type'], lifted_vars[i]['id']): x_star[i] for i in range(dim)}
+                    
+                    for subproblem_name in subproblems.names:
+                        model = subproblems.model[subproblem_name]
+                        # Save state
+                        saved_state_local = {}
+                        for var in subproblems.subproblem_lifted_vars[subproblem_name]:
+                            saved_state_local[id(var)] = (var.lb, var.ub, var.is_fixed(), var.value)
+                        
+                        # Fix vars to x_star
+                        for var in subproblems.subproblem_lifted_vars[subproblem_name]:
+                            v_type, v_id, _ = subproblems.var_to_data[var]
+                            if (v_type, v_id) in id_to_val:
+                                var.fix(id_to_val[(v_type, v_id)])
+                        
+                        # Solve
+                        success, obj_val = _solve_true_recourse_primal_gurobi(model)
+                        sol_truevals[subproblem_name] = obj_val if success else 1e6
+                        
+                        # Restore state
+                        for var in subproblems.subproblem_lifted_vars[subproblem_name]:
+                            lb_v, ub_v, is_fixed, val = saved_state_local[id(var)]
+                            var.lb = lb_v
+                            var.ub = ub_v
+                            if is_fixed: var.fix(val)
+                            else: 
+                                var.unfix()
+                                var.value = val
+                    
+                    node.lb_problem.plot_data_wlsq[m_name]['sol_trueval'] = sol_truevals
         
         # Store on node
         setattr(node.lb_problem, f'wlsq_{m_name}_ub', ub_true)
+
 
     # --- OBBT Diagnostic for Uniform ---
     # Store aggregated beta and mbar for uniform
@@ -1076,7 +1415,8 @@ def compute_wls_quadratic_surrogate_bound(
                global_lb_B if on_B else float('-inf'),
                global_lb_C if on_C else float('-inf'),
                global_lb_D1 if on_D1 else float('-inf'),
-               global_lb_D2 if on_D2 else float('-inf'))
+               global_lb_D2 if on_D2 else float('-inf'),
+               global_lb_E if on_E else float('-inf'))
 
 def run_surrogate_obbt_uniform(node: Node, ub: float) -> Optional[float]:
     """
@@ -1205,7 +1545,7 @@ def run_surrogate_obbt_uniform(node: Node, ub: float) -> Optional[float]:
         print(f"DEBUG: OBBT solve failed: {e}")
         return None
 
-def _compute_bound_from_beta(beta, dim, lifted_vars, subproblems, subproblem_name, bounds, model):
+def _compute_bound_from_beta(beta, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=False):
     """
     Helper to compute LB = min_box(Q) + ms given regression coefficients beta.
     Reuses the logic from the massive loop to avoid duplication.
@@ -1297,6 +1637,31 @@ def _compute_bound_from_beta(beta, dim, lifted_vars, subproblems, subproblem_nam
         
         # LB_s = min(Q_s) + ms
         lb_s = min_Q_s + ms_val
+        
+        if return_ms_point:
+            # Extract MS point
+            ms_point = [pyo.value(v) for v in pyomo_vars]
+            
+            # Compute true recourse at MS point
+            # Fix vars
+            id_to_val = {(lifted_vars[i]['type'], lifted_vars[i]['id']): ms_point[i] for i in range(dim)}
+            for var in subproblems.subproblem_lifted_vars[subproblem_name]:
+                v_type, v_id, _ = subproblems.var_to_data[var]
+                if (v_type, v_id) in id_to_val:
+                    var.fix(id_to_val[(v_type, v_id)])
+            
+            success, ms_true_val = _solve_true_recourse_primal_gurobi(model)
+            if not success:
+                ms_true_val = float('inf')
+                
+            # Restore vars
+            for var in subproblems.subproblem_lifted_vars[subproblem_name]:
+                var.unfix()
+
+            return lb_s, ms_point, ms_true_val
+            
         return lb_s
     except:
+        if return_ms_point:
+            return float('-inf'), None, float('inf')
         return float('-inf')
