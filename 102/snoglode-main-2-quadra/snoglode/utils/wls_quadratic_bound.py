@@ -9,6 +9,7 @@ import snoglode.utils.MPI as MPI
 from pyomo.opt import SolverFactory
 from snoglode.utils.ms_solver_helper import _solve_ms_dual_bound_gurobi, _solve_true_recourse_primal_gurobi
 from typing import Tuple, Optional, List, Dict
+import math
 
 # WLSQ Method B Tuning Parameters
 WLSQ_NUM_SAMPLES_DEFAULT = 100  # Default number of samples per iteration
@@ -968,7 +969,153 @@ def compute_wls_quadratic_surrogate_bound(
         # Store on node
         setattr(node.lb_problem, f'wlsq_{m_name}_ub', ub_true)
 
+    # --- OBBT Diagnostic for Uniform ---
+    # Store aggregated beta and mbar for uniform
+    # m_s = lb_s - min_box(Q_s)
+    # We need to reconstruct m_s accumulation. 
+    # Since we didn't accumulate m_s in the loop, we can infer it:
+    # global_lb_uniform = sum(prob * (min_Q_s + m_s)) = sum(prob*min_Q_s) + sum(prob*m_s)
+    # So mbar = global_lb_uniform - min_box(Q_bar)
+    # This is valid because sum(prob * min(Q_s)) != min(sum prob*Q_s) generally, 
+    # BUT the "shift" logic in WLSQ is: Q_s_shifted = Q_s + m_s.
+    # The aggregated surrogate is Q_bar = sum(prob * Q_s).
+    # The aggregated lower bound function is L(x) = sum(prob * (Q_s(x) + m_s)) = Q_bar(x) + mbar.
+    # So we can just define mbar = global_lb_uniform - min_box(Q_bar).
+    
+    min_Q_bar, _ = _minimize_quadratic(g_beta_uni, dim, bounds)
+    if math.isfinite(min_Q_bar):
+        mbar_uniform = global_lb_uniform - min_Q_bar
+        node.lb_problem.wlsq_uniform_beta = g_beta_uni
+        node.lb_problem.wlsq_uniform_mbar = mbar_uniform
+    
     return max(global_lb_uniform, global_lb_A, global_lb_B, global_lb_C, global_lb_D1, global_lb_D2)
+
+def run_surrogate_obbt_uniform(node: Node, ub: float) -> Optional[float]:
+    """
+    Runs OBBT on the WLSQ Uniform surrogate: Q_bar(x) + mbar <= UB.
+    Returns volume ratio (new_vol / old_vol) or None if failed.
+    """
+    if not hasattr(node.lb_problem, 'wlsq_uniform_beta') or \
+       not hasattr(node.lb_problem, 'wlsq_uniform_mbar'):
+        return None
+        
+    beta = node.lb_problem.wlsq_uniform_beta
+    mbar = node.lb_problem.wlsq_uniform_mbar
+    
+    # Identify vars (re-identify to be safe, or pass in)
+    # We need the lifted_vars list to map back to node state
+    # For now, we'll assume the node state has the 3 PID vars in SupportedVars.reals
+    # and we can find them. But to be precise, we need the exact mapping used in WLSQ.
+    # We can re-use _identify_pid_vars if we had subproblems, but we don't have them here easily.
+    # However, we know the dimension is 3 and the order is Kp, Ki, Kd (from _identify_pid_vars).
+    
+    # Let's try to find them in the node state
+    # We know they are reals.
+    if SupportedVars.reals not in node.state: return None
+    
+    # We need to match the order used in WLSQ. 
+    # WLSQ uses _identify_pid_vars which sorts by name length/etc.
+    # We should probably pass lifted_vars or bounds to this function, 
+    # but to keep signature simple, we'll try to reconstruct.
+    # Actually, we can just use the bounds from the node state directly if we find the 3 vars.
+    
+    # Heuristic: Find 3 vars with "kp", "ki", "kd" in name
+    vars_found = []
+    for vid, vdata in node.state[SupportedVars.reals].items():
+        name = vdata.name.lower()
+        if 'kp' in name or 'k_p' in name: vars_found.append(('kp', vid, vdata))
+        elif 'ki' in name or 'k_i' in name: vars_found.append(('ki', vid, vdata))
+        elif 'kd' in name or 'k_d' in name: vars_found.append(('kd', vid, vdata))
+            
+    # Sort by role to match WLSQ order: kp, ki, kd
+    vars_found.sort(key=lambda x: {'kp':0, 'ki':1, 'kd':2}.get(x[0], 99))
+    
+    if len(vars_found) != 3:
+        print(f"DEBUG: OBBT var identification failed. Found {len(vars_found)} vars: {[v[0] for v in vars_found]}")
+        return None
+    
+    dim = 3
+    bounds = [(v[2].lb, v[2].ub) for v in vars_found]
+    
+    # Build Pyomo model
+    m = pyo.ConcreteModel()
+    m.x = pyo.Var(range(dim), bounds=lambda m, i: bounds[i])
+    
+    # Quadratic constraint: x'Qx + c'x + b + mbar <= UB
+    b_s = beta[0]
+    c_s = beta[1:dim+1]
+    quad_coeffs = beta[dim+1:]
+    
+    def quad_rule(m):
+        expr = b_s + mbar
+        # Linear
+        for i in range(dim):
+            expr += c_s[i] * m.x[i]
+        # Quadratic
+        idx = 0
+        for i in range(dim):
+            for j in range(i, dim):
+                val = quad_coeffs[idx]
+                if i == j:
+                    expr += val * m.x[i] * m.x[i]
+                else:
+                    expr += val * m.x[i] * m.x[j]
+                idx += 1
+        return expr <= ub
+        
+    m.q_con = pyo.Constraint(rule=quad_rule)
+    
+    # Solve min/max for each var
+    solver = SolverFactory('gurobi')
+    solver.options['NonConvex'] = 2
+    solver.options['TimeLimit'] = 2
+    solver.options['OutputFlag'] = 0
+    
+    new_bounds = []
+    
+    try:
+        for i in range(dim):
+            # Min
+            m.obj = pyo.Objective(expr=m.x[i], sense=pyo.minimize)
+            res = solver.solve(m)
+            if (res.solver.status == pyo.SolverStatus.ok and 
+                res.solver.termination_condition == pyo.TerminationCondition.optimal):
+                lb_new = pyo.value(m.x[i])
+            else:
+                lb_new = bounds[i][0] # Fallback
+                
+            # Max
+            m.obj = pyo.Objective(expr=m.x[i], sense=pyo.maximize)
+            res = solver.solve(m)
+            if (res.solver.status == pyo.SolverStatus.ok and 
+                res.solver.termination_condition == pyo.TerminationCondition.optimal):
+                ub_new = pyo.value(m.x[i])
+            else:
+                ub_new = bounds[i][1] # Fallback
+                
+            # Intersect with original
+            lb_final = max(bounds[i][0], lb_new)
+            ub_final = min(bounds[i][1], ub_new)
+            
+            # Safety
+            if lb_final > ub_final + 1e-6: return None # Infeasible
+            lb_final = min(lb_final, ub_final)
+            
+            new_bounds.append((lb_final, ub_final))
+            
+        # Compute volume ratio
+        old_vol = 1.0
+        new_vol = 1.0
+        for i in range(dim):
+            old_vol *= (bounds[i][1] - bounds[i][0])
+            new_vol *= (new_bounds[i][1] - new_bounds[i][0])
+            
+        if old_vol < 1e-12: return 1.0
+        return new_vol / old_vol
+        
+    except Exception as e:
+        print(f"DEBUG: OBBT solve failed: {e}")
+        return None
 
 def _compute_bound_from_beta(beta, dim, lifted_vars, subproblems, subproblem_name, bounds, model):
     """

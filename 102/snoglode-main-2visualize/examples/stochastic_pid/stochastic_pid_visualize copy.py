@@ -270,58 +270,6 @@ class VisualizingSolver(sno.Solver):
         # End loop
         self.logger.complete()
 
-    def dispatch_lb_solve(self, current_node):
-        """
-        Override to gather subproblem solutions for visualization.
-        """
-        # Call parent method to solve
-        super().dispatch_lb_solve(current_node)
-        
-        # Gather subproblem solutions from all ranks to rank 0
-        # current_node.lb_problem.subproblem_solutions is a dict of StatisticsOfOneLBSubproblem
-        # We need to gather these dictionaries.
-        
-        # Each rank has a subset of subproblems populated in subproblem_solutions
-        # We want to merge them into one dict on rank 0.
-        
-        # Note: StatisticsOfOneLBSubproblem objects might not be easily picklable or mergeable 
-        # if they contain complex objects, but they seem to contain simple types (objective, dicts).
-        
-        # However, snoglode.utils.solve_stats.OneLowerBoundSolve initializes ALL subproblem keys 
-        # but only populates the ones this rank owns.
-        # So we need to be careful about merging.
-        
-        # Let's extract the relevant data (lifted_var_solution) for the subproblems OWNED by this rank.
-        # self.subproblems.names contains ALL names.
-        # self.subproblems.subset_subproblem_names contains names owned by this rank.
-        
-        local_solutions = {}
-        if current_node.lb_problem.feasible:
-            # Access the OneLowerBoundSolve object
-            # Wait, current_node.lb_problem.subproblem_solutions IS the dict from OneLowerBoundSolve.subproblem_solutions
-            # See solver.py: node.lb_problem.is_feasible(statistics) -> self.subproblem_solutions = statistics.subproblem_solutions
-            
-            # So it is a dict: subproblem_name -> StatisticsOfOneLBSubproblem
-            
-            for name in self.subproblems.names:
-                if name in current_node.lb_problem.subproblem_solutions:
-                    stats = current_node.lb_problem.subproblem_solutions[name]
-                    # We want the lifted_var_solution: {var_type: {var_id: value}}
-                    local_solutions[name] = stats.lifted_var_solution
-        
-        # Gather all local_solutions to rank 0
-        all_solutions_list = MPI.COMM_WORLD.gather(local_solutions, root=0)
-        
-        if rank == 0:
-            # Merge list of dicts into one dict
-            full_solutions = {}
-            for sol_dict in all_solutions_list:
-                full_solutions.update(sol_dict)
-            
-            # Store this temporarily in the node for visualization
-            # We can attach it to the node object dynamically
-            current_node.viz_subproblem_solutions = full_solutions
-
 
     def visualize_iteration(self, bounds_pre, bounds_post, current_node):
         """
@@ -409,43 +357,6 @@ class VisualizingSolver(sno.Solver):
              except:
                  pass
 
-        # 6. Scenario Optimal Solutions (Green Dots)
-        if hasattr(current_node, 'viz_subproblem_solutions') and current_node.viz_subproblem_solutions:
-            scen_kp = []
-            scen_ki = []
-            scen_kd = []
-            
-            print(f"\n--- Iteration {self.iteration} Scenario Solutions ---")
-            for scen_name, lifted_vars in current_node.viz_subproblem_solutions.items():
-                # lifted_vars is {var_type: {var_id: value}}
-                # We need to find K_p, K_i, K_d
-                # They are likely in SupportedVars.reals or 'Reals'
-                
-                # Helper to find value
-                def get_val(v_name):
-                    for vtype in lifted_vars:
-                        if v_name in lifted_vars[vtype]:
-                            return lifted_vars[vtype][v_name]
-                    return None
-                
-                kp = get_val('K_p')
-                ki = get_val('K_i')
-                kd = get_val('K_d')
-                
-                if kp is not None and ki is not None and kd is not None:
-                    scen_kp.append(kp)
-                    scen_ki.append(ki)
-                    scen_kd.append(kd)
-                    print(f"  {scen_name}: K_p={kp:.4f}, K_i={ki:.4f}, K_d={kd:.4f}")
-            
-            if scen_kp:
-                fig.add_trace(go.Scatter3d(
-                    x=scen_kp, y=scen_ki, z=scen_kd,
-                    mode='markers',
-                    marker=dict(size=4, color='green'),
-                    name='Scenario Optima'
-                ))
-
         # Update Layout
         fig.update_layout(
             title=f"Iteration {self.iteration} | Nodes: {num_alive} | LB: {self.tree.metrics.lb:.4f} | UB: {self.tree.metrics.ub:.4f}",
@@ -464,11 +375,14 @@ class VisualizingSolver(sno.Solver):
             print(f"Saved plot to {filename}")
         
         # Display
-        # User requested to retain each image individually, so we do NOT clear output.
-        # clear_output(wait=True)
-        
-        # Use display(fig) for inline notebook plotting
-        display(fig)
+        # clear_output(wait=True) # Removed to preserve history as requested
+        # fig.show() method is safer for ensuring correct renderer is used in various notebook environments
+        # instead of printing the object repr.
+        try:
+            fig.show()
+        except Exception as e:
+            print(f"Warning: Could not display figure: {e}")
+        # display(fig) # Caused raw text output in some contexts
 
 
 if __name__ == '__main__':

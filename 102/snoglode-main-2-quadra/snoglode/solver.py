@@ -18,6 +18,27 @@ from snoglode.utils.supported import SupportedVars
 
 WLSQ_GLOBAL_SEED = 17
 
+# --- Display Configuration Flags ---
+ENABLE_QUAD_LB = True
+ENABLE_SPEC_LB = True
+ENABLE_SEPA_LB = True
+ENABLE_WLSQ_LB = True
+ENABLE_OBBT_UNI = True
+
+ENABLE_WLSQ_UNIFORM = True
+ENABLE_WLSQ_A = True
+ENABLE_WLSQ_B = True
+ENABLE_WLSQ_C = True
+ENABLE_WLSQ_D1 = True
+ENABLE_WLSQ_D2 = True
+
+ENABLE_UB_WLSQ_UNIFORM = True
+ENABLE_UB_WLSQ_A = True
+ENABLE_UB_WLSQ_B = True
+ENABLE_UB_WLSQ_C = True
+ENABLE_UB_WLSQ_D1 = True
+ENABLE_UB_WLSQ_D2 = True
+
 
 
 class PlotScraper:
@@ -372,6 +393,19 @@ class Solver():
             current_node.lb_problem.wlsq_uniform_bound = None
             current_node.lb_problem.wlsq_A_bound = None
 
+        # Experimental: Run WLSQ Uniform OBBT Diagnostic
+        try:
+            from snoglode.utils.wls_quadratic_bound import run_surrogate_obbt_uniform
+            if math.isfinite(self.tree.metrics.ub):
+                vol_ratio = run_surrogate_obbt_uniform(current_node, self.tree.metrics.ub)
+                current_node.lb_problem.wlsq_uniform_obbt_vol_ratio = vol_ratio
+            else:
+                current_node.lb_problem.wlsq_uniform_obbt_vol_ratio = None
+        except BaseException as e:
+            # print(f"DEBUG: WLSQ OBBT failed: {e}")
+            current_node.lb_problem.wlsq_uniform_obbt_vol_ratio = None
+
+
 
 
 
@@ -611,10 +645,7 @@ class Solver():
         # formatting for display
         display_node_lb = orig_obj
         node_lb_str = f"{display_node_lb:.8g}" if display_node_lb is not None else "-"
-        quad_lb_str = f"{quad_obj:.8g}" if quad_obj is not None else "-"
-        spec_lb_str = f"{spec_obj:.8g}" if spec_obj is not None else "-"
-        rand_lb_str = f"{rand_obj:.8g}" if rand_obj is not None else "-"
-        wlsq_lb_str = f"{wlsq_obj:.8g}" if wlsq_obj is not None else "-"
+        # quad_lb_str, spec_lb_str, etc. are now handled below with flags
 
         main_outputs = [round(self.runtime,3),
                    self.tree.metrics.nodes.explored,
@@ -654,12 +685,25 @@ class Solver():
             line_print += f"  {output:>14}"
         print(line_print)
         
+        # Helper for conditional formatting
+        def fmt_val(enabled, value, fmt="{:.8g}"):
+            if not enabled: return "-"
+            if value is None or not math.isfinite(value): return "-"
+            return fmt.format(value)
+
         # Print indented detail line with all lower bounds
+        quad_lb_str = fmt_val(ENABLE_QUAD_LB, quad_obj)
+        spec_lb_str = fmt_val(ENABLE_SPEC_LB, spec_obj)
+        rand_lb_str = fmt_val(ENABLE_SEPA_LB, rand_obj)
+        wlsq_lb_str = fmt_val(ENABLE_WLSQ_LB, wlsq_obj)
+
         detail_line = f"    LBs: Orig={node_lb_str}, Quad={quad_lb_str}, Spec={spec_lb_str}, Sepa={rand_lb_str}, WLSQ={wlsq_lb_str}"
         # Get box volume info
         box_pct = getattr(current_node.lb_problem, 'box_vol_pct', 0.0)
         tight_pct = getattr(current_node.lb_problem, 'box_vol_pct_tight', 0.0)
-        detail_line += f" | Box={box_pct:.2f}%, Tight={tight_pct:.2f}%"
+        obbt_ratio = getattr(current_node.lb_problem, 'wlsq_uniform_obbt_vol_ratio', None)
+        obbt_str = fmt_val(ENABLE_OBBT_UNI, obbt_ratio, "{:.2%}")
+        detail_line += f" | Box={box_pct:.2f}%, Tight={tight_pct:.2f}%, OBBT_uni={obbt_str}"
         print(detail_line)
         
         # Extra WLSQ details
@@ -670,13 +714,13 @@ class Solver():
         wlsq_D1 = getattr(current_node.lb_problem, 'wlsq_D1_bound', None)
         wlsq_D2 = getattr(current_node.lb_problem, 'wlsq_D2_bound', None)
         
-        v_uni_str = f"{wlsq_uni:.8g}" if wlsq_uni is not None and math.isfinite(wlsq_uni) else "-"
-        v_A_str = f"{wlsq_A:.8g}" if wlsq_A is not None and math.isfinite(wlsq_A) else "-"
-        v_B_str = f"{wlsq_B:.8g}" if wlsq_B is not None and math.isfinite(wlsq_B) else "-"
+        v_uni_str = fmt_val(ENABLE_WLSQ_UNIFORM, wlsq_uni)
+        v_A_str = fmt_val(ENABLE_WLSQ_A, wlsq_A)
+        v_B_str = fmt_val(ENABLE_WLSQ_B, wlsq_B)
+        v_C_str = fmt_val(ENABLE_WLSQ_C, wlsq_C)
+        v_D1_str = fmt_val(ENABLE_WLSQ_D1, wlsq_D1)
+        v_D2_str = fmt_val(ENABLE_WLSQ_D2, wlsq_D2)
         
-        v_C_str = f"{wlsq_C:.8g}" if wlsq_C is not None and math.isfinite(wlsq_C) else "-"
-        v_D1_str = f"{wlsq_D1:.8g}" if wlsq_D1 is not None and math.isfinite(wlsq_D1) else "-"
-        v_D2_str = f"{wlsq_D2:.8g}" if wlsq_D2 is not None and math.isfinite(wlsq_D2) else "-"
         wlsq_line = f"    WLSQ_uniform={v_uni_str}, WLSQ_A={v_A_str}, WLSQ_B={v_B_str}, WLSQ_C={v_C_str}, WLSQ_D1={v_D1_str}, WLSQ_D2={v_D2_str}"
         print(wlsq_line)
         
@@ -689,10 +733,13 @@ class Solver():
         ub_D1 = getattr(current_node.lb_problem, 'wlsq_D1_ub', float('nan'))
         ub_D2 = getattr(current_node.lb_problem, 'wlsq_D2_ub', float('nan'))
         
-        ubs = [
-            ('uniform', ub_uni), ('A', ub_A), ('B', ub_B), 
-            ('C', ub_C), ('D1', ub_D1), ('D2', ub_D2)
-        ]
+        ubs = []
+        if ENABLE_UB_WLSQ_UNIFORM: ubs.append(('uniform', ub_uni))
+        if ENABLE_UB_WLSQ_A: ubs.append(('A', ub_A))
+        if ENABLE_UB_WLSQ_B: ubs.append(('B', ub_B))
+        if ENABLE_UB_WLSQ_C: ubs.append(('C', ub_C))
+        if ENABLE_UB_WLSQ_D1: ubs.append(('D1', ub_D1))
+        if ENABLE_UB_WLSQ_D2: ubs.append(('D2', ub_D2))
         
         # Find best UB (min)
         best_ub = float('inf')

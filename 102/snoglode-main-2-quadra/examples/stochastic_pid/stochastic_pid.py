@@ -156,8 +156,13 @@ def build_pid_model(scenario_name):
     '''''''''''''''
     # define model variables 
     m.K_p = pyo.Var(domain=pyo.Reals, bounds=[-10, 10])         # controller gain
+    m.K_i = pyo.Var(domain=pyo.Reals, bounds=[-90, -80])       # integral gain 
+    m.K_d = pyo.Var(domain=pyo.Reals, bounds=[0, 10])      # dervative gain
+    '''
+    m.K_p = pyo.Var(domain=pyo.Reals, bounds=[-10, 10])         # controller gain
     m.K_i = pyo.Var(domain=pyo.Reals, bounds=[-100, 100])       # integral gain 
     m.K_d = pyo.Var(domain=pyo.Reals, bounds=[-100, 1000])      # dervative gain
+    '''
     m.x_s = pyo.Var(m.t, domain=pyo.Reals, bounds=[-2.5, 2.5])  # state-time trajectories 
     m.e_s = pyo.Var(m.t, domain=pyo.Reals)                      # change in x from set point 
     m.u_s = pyo.Var(m.t, domain=pyo.Reals, bounds=[-5.0, 5.0])  

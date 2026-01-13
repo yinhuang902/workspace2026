@@ -15,6 +15,10 @@ import matplotlib.pyplot as plt
 import pandas as pd
 np.random.seed(17)
 
+
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 import snoglode as sno
 import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()
@@ -151,8 +155,13 @@ def build_pid_model(scenario_name):
     '''''''''''''''
     # define model variables 
     m.K_p = pyo.Var(domain=pyo.Reals, bounds=[-10, 10])         # controller gain
+    m.K_i = pyo.Var(domain=pyo.Reals, bounds=[-90, -80])       # integral gain 
+    m.K_d = pyo.Var(domain=pyo.Reals, bounds=[0, 10])      # dervative gain
+    '''
+    m.K_p = pyo.Var(domain=pyo.Reals, bounds=[-10, 10])         # controller gain
     m.K_i = pyo.Var(domain=pyo.Reals, bounds=[-100, 100])       # integral gain 
     m.K_d = pyo.Var(domain=pyo.Reals, bounds=[-100, 1000])      # dervative gain
+    '''
     m.x_s = pyo.Var(m.t, domain=pyo.Reals, bounds=[-2.5, 2.5])  # state-time trajectories 
     m.e_s = pyo.Var(m.t, domain=pyo.Reals)                      # change in x from set point 
     m.u_s = pyo.Var(m.t, domain=pyo.Reals, bounds=[-5.0, 5.0])  
@@ -230,7 +239,7 @@ if __name__ == '__main__':
     
     nonconvex_gurobi_lb = pyo.SolverFactory("gurobi")
     nonconvex_gurobi_lb.options["NonConvex"] = 2
-    nonconvex_gurobi_lb.options["MIPGap"] = 0.2
+    nonconvex_gurobi_lb.options["MIPGap"] = 1e-1
     nonconvex_gurobi_lb.options["TimeLimit"] = 15
     scenarios = [f"scen_{i}" for i in range(1,num_scenarios+1)]
 
