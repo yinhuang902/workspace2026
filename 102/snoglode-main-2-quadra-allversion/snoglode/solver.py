@@ -188,75 +188,6 @@ class Solver():
             # update terminal, logs, plotter, etc.
             self.dispatch_updates(bnb_result, current_node)
         
-        # Generate WLSQ method comparison plots at end
-        if self.collect_plot_info and rank == 0:
-            try:
-                import matplotlib
-                matplotlib.use('Agg')  # Non-interactive backend
-                import matplotlib.pyplot as plt
-                import numpy as np
-                import os
-                
-                # Enabled method flags
-                enabled_lb_methods = {
-                    'uniform': ENABLE_WLSQ_UNIFORM,
-                    'A': ENABLE_WLSQ_A,
-                    'B': ENABLE_WLSQ_B,
-                    'C': ENABLE_WLSQ_C,
-                    'D1': ENABLE_WLSQ_D1,
-                    'D2': ENABLE_WLSQ_D2,
-                    'E': ENABLE_WLSQ_E
-                }
-                enabled_ub_methods = {
-                    'uniform': ENABLE_UB_WLSQ_UNIFORM,
-                    'A': ENABLE_UB_WLSQ_A,
-                    'B': ENABLE_UB_WLSQ_B,
-                    'C': ENABLE_UB_WLSQ_C,
-                    'D1': ENABLE_UB_WLSQ_D1,
-                    'D2': ENABLE_UB_WLSQ_D2,
-                    'E': ENABLE_UB_WLSQ_E
-                }
-                
-                iterations = self.wlsq_hist["iter"]
-                if len(iterations) > 0:
-                    # Plot 1: Lower Bounds
-                    fig, ax = plt.subplots(figsize=(10, 6))
-                    for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E']:
-                        if enabled_lb_methods.get(method, False):
-                            lb_series = self.wlsq_hist["lb"][method]
-                            ax.plot(iterations, lb_series, marker='o', markersize=3, label=method, linewidth=2)
-                    ax.set_xlabel('Iteration', fontsize=12)
-                    ax.set_ylabel('Lower Bound', fontsize=12)
-                    ax.set_title('WLSQ Lower Bound by Method', fontsize=14, fontweight='bold')
-                    ax.legend(loc='best', fontsize=10)
-                    ax.grid(True, alpha=0.3)
-                    plt.tight_layout()
-                    plt.savefig('plots_3d/lb_compare.png', dpi=200, bbox_inches='tight')
-                    plt.close(fig)
-                    
-                    # Plot 2: Upper Bounds
-                    fig, ax = plt.subplots(figsize=(10, 6))
-                    for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E']:
-                        if enabled_ub_methods.get(method, False):
-                            ub_series = self.wlsq_hist["ub"][method]
-                            ax.plot(iterations, ub_series, marker='s', markersize=3, label=method, linewidth=2)
-                    ax.set_xlabel('Iteration', fontsize=12)
-                    ax.set_ylabel('Upper Bound', fontsize=12)
-                    ax.set_title('WLSQ Upper Bound by Method', fontsize=14, fontweight='bold')
-                    ax.legend(loc='best', fontsize=10)
-                    ax.grid(True, alpha=0.3)
-                    plt.tight_layout()
-                    plt.savefig('plots_3d/ub_compare.png', dpi=200, bbox_inches='tight')
-                    plt.close(fig)
-                    
-                    print(f"[SUMMARY] Generated WLSQ comparison plots: lb_compare.png, ub_compare.png")
-                else:
-                    print("[SUMMARY] No iteration data to plot")
-            except Exception as e:
-                import traceback
-                print(f"[SUMMARY PLOT ERROR] Failed to generate comparison plots: {e}")
-                traceback.print_exc()
-        
         # write log summary when termination conditions met
         self.logger.complete()
 
@@ -296,18 +227,6 @@ class Solver():
         self.collect_plot_info = collect_plot_info
         if collect_plot_info: 
             self.plotter = WLSQ3DVisualizer(base_dir="plots_3d")
-            
-            # Initialize WLSQ history tracker (rank 0 only)
-            if rank == 0:
-                self.wlsq_hist = {
-                    "iter": [],
-                    "lb": {},
-                    "ub": {}
-                }
-                # Initialize series for each method
-                for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E']:
-                    self.wlsq_hist["lb"][method] = []
-                    self.wlsq_hist["ub"][method] = []
 
         self.runtime = 0
         self.iteration = 0
@@ -439,17 +358,6 @@ class Solver():
                 import traceback
                 print(f"[PLOT ERROR] iter={self.iteration}: {e}")
                 traceback.print_exc()
-            
-            # Record WLSQ history for summary plots
-            import numpy as np
-            self.wlsq_hist["iter"].append(self.iteration)
-            for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E']:
-                # LB
-                lb_val = getattr(current_node.lb_problem, f'wlsq_{method}_bound', None)
-                self.wlsq_hist["lb"][method].append(float(lb_val) if lb_val is not None and math.isfinite(lb_val) else np.nan)
-                # UB
-                ub_val = getattr(current_node.lb_problem, f'wlsq_{method}_ub', None)
-                self.wlsq_hist["ub"][method].append(float(ub_val) if ub_val is not None and math.isfinite(ub_val) else np.nan)
 
 
 
@@ -562,28 +470,6 @@ class Solver():
                 current_node.lb_problem.wlsq_uniform_obbt_vol_ratio = None
         else:
             current_node.lb_problem.wlsq_uniform_obbt_vol_ratio = None
-
-        # Update global UB if any WLSQ method produces a better UB
-        wlsq_ub_candidates = [
-            getattr(current_node.lb_problem, 'wlsq_uniform_ub', float('nan')),
-            getattr(current_node.lb_problem, 'wlsq_A_ub', float('nan')),
-            getattr(current_node.lb_problem, 'wlsq_B_ub', float('nan')),
-            getattr(current_node.lb_problem, 'wlsq_C_ub', float('nan')),
-            getattr(current_node.lb_problem, 'wlsq_D1_ub', float('nan')),
-            getattr(current_node.lb_problem, 'wlsq_D2_ub', float('nan')),
-            getattr(current_node.lb_problem, 'wlsq_E_ub', float('nan'))
-        ]
-        
-        # Find the best (minimum) WLSQ UB
-        best_wlsq_ub = float('inf')
-        for ub_val in wlsq_ub_candidates:
-            if math.isfinite(ub_val) and ub_val < best_wlsq_ub:
-                best_wlsq_ub = ub_val
-        
-        # Update global UB if WLSQ found a better one
-        if math.isfinite(best_wlsq_ub) and best_wlsq_ub < self.tree.metrics.ub:
-            self.tree.metrics.ub = best_wlsq_ub
-
 
 
 

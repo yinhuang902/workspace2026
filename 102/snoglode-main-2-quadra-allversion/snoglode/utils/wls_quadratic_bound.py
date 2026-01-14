@@ -25,8 +25,8 @@ WLSQ_D_EPS = 0.1          # match WLSQ_B_EPS
 WLSQ_USE_MIXED_SAMPLING = True   # if False -> original pure random sampling
 
 # Mixed sampling parameters
-WLSQ_MIXED_FRACTION_UNIFORM = 0.60   # 30% uniform random points
-WLSQ_MIXED_FRACTION_LOWBIAS = 0.40   # 70% biased-toward-low-value points
+WLSQ_MIXED_FRACTION_UNIFORM = 0.90   # 30% uniform random points
+WLSQ_MIXED_FRACTION_LOWBIAS = 0.10   # 70% biased-toward-low-value points
 # (Ensure fractions sum to 1.0; if not, normalize in code.)
 
 # Candidate oversampling factor for biased selection (draw more candidates, then keep best)
@@ -41,8 +41,8 @@ WLSQ_MIXED_EPS = 0.1
 # Modify these parameters to tune Method E behavior.
 
 # Fraction of samples near anchors vs uniform random
-WLSQ_E_FRACTION_NEAR_ANCHOR = 0.4   # 70% of samples near scenario anchors
-WLSQ_E_FRACTION_UNIFORM = 0.6       # 30% of samples uniformly distributed
+WLSQ_E_FRACTION_NEAR_ANCHOR = 0.1   # 70% of samples near scenario anchors
+WLSQ_E_FRACTION_UNIFORM = 0.9       # 30% of samples uniformly distributed
 
 # Neighborhood size around anchors (Gaussian sigma as fraction of box width)
 # sigma_j = WLSQ_E_SIGMA_FRAC * (ub_j - lb_j)
@@ -257,7 +257,8 @@ def _generate_wlsq_samples(
         target_n_near = int(round(WLSQ_E_FRACTION_NEAR_ANCHOR * num_samples))
         target_n_uniform = num_samples - target_n_near
         
-
+        if MPI.COMM_WORLD.Get_rank() == 0:
+            print(f"DEBUG: anchor_mixed sampling: anchors={len(anchors)}, near={target_n_near}, uniform={target_n_uniform}")
         
         # 1. Sample near anchors
         near_attempts = 0
@@ -319,7 +320,8 @@ def _generate_wlsq_samples(
                 samples.append(np.array(pt))
                 seen_points.add(pt_tuple)
         
-
+        if MPI.COMM_WORLD.Get_rank() == 0:
+            print(f"DEBUG: anchor_mixed sampling got {len(samples)}/{num_samples} samples")
         
     elif sampling_mode == "mixed_lowbias" or use_mixed_sampling:
         # ========== EXISTING MIXED LOWBIAS SAMPLING ==========
@@ -637,11 +639,13 @@ def compute_wls_quadratic_surrogate_bound(
                 anchor_probs=anchor_probs_arr,
                 sampling_mode="anchor_mixed"
             )
-
+            if MPI.COMM_WORLD.Get_rank() == 0:
+                print(f"DEBUG: Method E got {len(samples_E)} anchor-mixed samples")
         else:
             # Fallback: if no anchors, use the same samples as other methods
             samples_E = samples
-
+            if MPI.COMM_WORLD.Get_rank() == 0:
+                print("DEBUG: Method E fallback to regular samples (no anchors)")
 
     # --- PLOTTING DATA INIT (Per-Method Schema) ---
     if not hasattr(node.lb_problem, 'plot_data_wlsq') or node.lb_problem.plot_data_wlsq is None:
