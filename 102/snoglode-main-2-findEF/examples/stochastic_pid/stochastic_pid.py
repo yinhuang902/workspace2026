@@ -1,9 +1,6 @@
 '''
 generating pyomo model for PID example
 '''
-import os
-os.environ['MKL_THREADING_LAYER'] = 'SEQUENTIAL'
-
 import pyomo.environ as pyo
 from pyomo.opt import TerminationCondition, SolverStatus
 from pyomo.contrib.alternative_solutions.aos_utils import get_active_objective
@@ -18,19 +15,19 @@ import matplotlib.pyplot as plt
 import pandas as pd
 np.random.seed(17)
 
+
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 import snoglode as sno
 import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()
 size = MPI.COMM_WORLD.Get_size()
 
-num_scenarios = 1
+num_scenarios = 2
 sp = 0.5
 df = pd.read_csv(os.getcwd() + "/data.csv")
 plot_dir =  os.getcwd() + "/plots_snoglode_parallel/"
-if rank == 0:
-    os.makedirs(plot_dir, exist_ok=True)
 
 class GurobiLBLowerBounder(sno.AbstractLowerBounder):
     def __init__(self, 
@@ -278,10 +275,7 @@ if __name__ == '__main__':
     # quit()
     solver.solve(max_iter=1000,
                  rel_tolerance = 1e-3,
-                 abs_tolerance = 1e-10,
-                 time_limit = 60*10,
-                 collect_plot_info=True)
-
+                 time_limit = 60*3)
 
     if (rank==0):
         print("\n====================================================================")

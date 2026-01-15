@@ -42,6 +42,13 @@ ENABLE_UB_WLSQ_D1 = True
 ENABLE_UB_WLSQ_D2 = True
 ENABLE_UB_WLSQ_E = True   # NEW: UB from anchor-mixed method
 
+# --- Summary Plot Configuration ---
+# Y-axis range for the final comparison plots (modify as needed)
+SUMMARY_PLOT_LB_YMIN = 0.9
+SUMMARY_PLOT_LB_YMAX = 1.0
+SUMMARY_PLOT_UB_YMIN = 0.9
+SUMMARY_PLOT_UB_YMAX = 1.0
+
 
 
 
@@ -221,14 +228,20 @@ class Solver():
                 if len(iterations) > 0:
                     # Plot 1: Lower Bounds
                     fig, ax = plt.subplots(figsize=(10, 6))
+                    # Plot original SNoGloDe LB
+                    ax.plot(iterations, self.wlsq_hist["original_lb"], 
+                            marker='D', markersize=4, label='Original SNoGloDe', 
+                            linewidth=2.5, linestyle='--', color='black', zorder=10)
+                    # Plot WLSQ methods
                     for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E']:
                         if enabled_lb_methods.get(method, False):
                             lb_series = self.wlsq_hist["lb"][method]
-                            ax.plot(iterations, lb_series, marker='o', markersize=3, label=method, linewidth=2)
+                            ax.plot(iterations, lb_series, marker='o', markersize=3, label=f'WLSQ_{method}', linewidth=2)
                     ax.set_xlabel('Iteration', fontsize=12)
                     ax.set_ylabel('Lower Bound', fontsize=12)
-                    ax.set_title('WLSQ Lower Bound by Method', fontsize=14, fontweight='bold')
-                    ax.legend(loc='best', fontsize=10)
+                    ax.set_title('Lower Bound Comparison', fontsize=14, fontweight='bold')
+                    ax.set_ylim(SUMMARY_PLOT_LB_YMIN, SUMMARY_PLOT_LB_YMAX)
+                    ax.legend(loc='best', fontsize=9)
                     ax.grid(True, alpha=0.3)
                     plt.tight_layout()
                     plt.savefig('plots_3d/lb_compare.png', dpi=200, bbox_inches='tight')
@@ -236,14 +249,20 @@ class Solver():
                     
                     # Plot 2: Upper Bounds
                     fig, ax = plt.subplots(figsize=(10, 6))
+                    # Plot original SNoGloDe UB
+                    ax.plot(iterations, self.wlsq_hist["original_ub"], 
+                            marker='D', markersize=4, label='Original SNoGloDe', 
+                            linewidth=2.5, linestyle='--', color='black', zorder=10)
+                    # Plot WLSQ methods
                     for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E']:
                         if enabled_ub_methods.get(method, False):
                             ub_series = self.wlsq_hist["ub"][method]
-                            ax.plot(iterations, ub_series, marker='s', markersize=3, label=method, linewidth=2)
+                            ax.plot(iterations, ub_series, marker='s', markersize=3, label=f'WLSQ_{method}', linewidth=2)
                     ax.set_xlabel('Iteration', fontsize=12)
                     ax.set_ylabel('Upper Bound', fontsize=12)
-                    ax.set_title('WLSQ Upper Bound by Method', fontsize=14, fontweight='bold')
-                    ax.legend(loc='best', fontsize=10)
+                    ax.set_title('Upper Bound Comparison', fontsize=14, fontweight='bold')
+                    ax.set_ylim(SUMMARY_PLOT_UB_YMIN, SUMMARY_PLOT_UB_YMAX)
+                    ax.legend(loc='best', fontsize=9)
                     ax.grid(True, alpha=0.3)
                     plt.tight_layout()
                     plt.savefig('plots_3d/ub_compare.png', dpi=200, bbox_inches='tight')
@@ -302,7 +321,9 @@ class Solver():
                 self.wlsq_hist = {
                     "iter": [],
                     "lb": {},
-                    "ub": {}
+                    "ub": {},
+                    "original_lb": [],
+                    "original_ub": []
                 }
                 # Initialize series for each method
                 for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E']:
@@ -443,6 +464,13 @@ class Solver():
             # Record WLSQ history for summary plots
             import numpy as np
             self.wlsq_hist["iter"].append(self.iteration)
+            
+            # Record original SNoGloDe LB/UB
+            orig_lb = self.tree.metrics.lb if hasattr(self.tree.metrics, 'lb') else np.nan
+            orig_ub = self.tree.metrics.ub if hasattr(self.tree.metrics, 'ub') else np.nan
+            self.wlsq_hist["original_lb"].append(float(orig_lb) if math.isfinite(orig_lb) else np.nan)
+            self.wlsq_hist["original_ub"].append(float(orig_ub) if math.isfinite(orig_ub) else np.nan)
+            
             for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E']:
                 # LB
                 lb_val = getattr(current_node.lb_problem, f'wlsq_{method}_bound', None)
