@@ -383,7 +383,6 @@ class MSBundle:
                     import sys
                     sys.exit(1)
                 else:
-                else:
                     # STRICT BEHAVIOR: Terminate if dual bound missing
                     print(f"[Subproblem solving issue] MS Problem dual bound (lb) is None. Term: {term}. Exiting.")
                     sys.exit(1)

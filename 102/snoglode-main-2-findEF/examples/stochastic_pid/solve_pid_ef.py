@@ -27,7 +27,7 @@ import stochastic_pid
 def main():
     # 3. Setup SolverParameters
     # Reuse model construction from stochastic_pid
-    num_scenarios = 10
+    num_scenarios = 1
     # CRITICAL: Update the module's global variable so that build_pid_model calculates 
     # the correct probability (1/num_scenarios). Otherwise it uses the value in the file.
     stochastic_pid.num_scenarios = num_scenarios

@@ -1,6 +1,9 @@
 '''
 generating pyomo model for PID example
 '''
+import os
+os.environ['MKL_THREADING_LAYER'] = 'SEQUENTIAL'
+
 import pyomo.environ as pyo
 from pyomo.opt import TerminationCondition, SolverStatus
 from pyomo.contrib.alternative_solutions.aos_utils import get_active_objective
@@ -15,23 +18,19 @@ import matplotlib.pyplot as plt
 import pandas as pd
 np.random.seed(17)
 
-
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-
 import snoglode as sno
 import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()
 size = MPI.COMM_WORLD.Get_size()
 
-num_scenarios = 5
+num_scenarios = 2
 sp = 0.5
 df = pd.read_csv(os.getcwd() + "/data.csv")
 plot_dir =  os.getcwd() + "/plots_snoglode_parallel/"
-
-USE_ABS_GAP_STOP = True
-ABS_GAP_TOL = 1e-2
-REL_GAP_TOL = 1e-8
+if rank == 0:
+    os.makedirs(plot_dir, exist_ok=True)
 
 class GurobiLBLowerBounder(sno.AbstractLowerBounder):
     def __init__(self, 
@@ -103,7 +102,7 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
 def build_pid_model(scenario_name):
     '''
     Build instance of pyomo PID model 
-    
+
     Parameters
     -----------
     setpoint_change: float
@@ -112,7 +111,7 @@ def build_pid_model(scenario_name):
         List containing the values for the model uncertainty in the form: [tau_xs, tau_us, tau_ds]
     disturbance: float
         Value for the disturbance 
-        
+
     Returns
     -----------
     m: Concrete Pyomo model 
@@ -158,15 +157,14 @@ def build_pid_model(scenario_name):
     ## Variables ##
     '''''''''''''''
     # define model variables 
-    '''
     m.K_p = pyo.Var(domain=pyo.Reals, bounds=[-10, 10])         # controller gain
     m.K_i = pyo.Var(domain=pyo.Reals, bounds=[-90, -80])       # integral gain 
     m.K_d = pyo.Var(domain=pyo.Reals, bounds=[0, 10])      # dervative gain
     '''
     m.K_p = pyo.Var(domain=pyo.Reals, bounds=[-10, 10])         # controller gain
     m.K_i = pyo.Var(domain=pyo.Reals, bounds=[-100, 100])       # integral gain 
-    m.K_d = pyo.Var(domain=pyo.Reals, bounds=[-1, 2])      # dervative gain
-
+    m.K_d = pyo.Var(domain=pyo.Reals, bounds=[-100, 1000])      # dervative gain
+    '''
     m.x_s = pyo.Var(m.t, domain=pyo.Reals, bounds=[-2.5, 2.5])  # state-time trajectories 
     m.e_s = pyo.Var(m.t, domain=pyo.Reals)                      # change in x from set point 
     m.u_s = pyo.Var(m.t, domain=pyo.Reals, bounds=[-5.0, 5.0])  
@@ -278,32 +276,15 @@ if __name__ == '__main__':
     # nonconvex_gurobi.solve(ef,
     #                        tee = True)
     # quit()
-    solver.solve(max_iter=1000,
-                 rel_tolerance = REL_GAP_TOL,
-                 abs_tolerance = ABS_GAP_TOL if USE_ABS_GAP_STOP else -1.0,
-                 time_limit = 60*15)
+    solver.solve(max_iter=5,
+                 rel_tolerance = 1e-3,
+                 abs_tolerance = 1e-10,
+                 time_limit = 60*10,
+                 collect_plot_info=True)
 
     if (rank==0):
         print("\n====================================================================")
         print("SOLUTION")
-        print(f"Final Upper Bound (UB): {solver.tree.metrics.ub}")
-        # Print first-stage variables (they are identical across all scenarios)
-        first_scen = solver.subproblems.names[0]
-        
-        K_p_val, K_i_val, K_d_val = None, None, None
-        
-        # Construct keys based on scenario name
-        kp_key = f"{first_scen}.K_p"
-        ki_key = f"{first_scen}.K_i"
-        kd_key = f"{first_scen}.K_d"
-        
-        sol = solver.solution.subproblem_solutions[first_scen]
-        
-        if kp_key in sol: K_p_val = sol[kp_key]
-        if ki_key in sol: K_i_val = sol[ki_key]
-        if kd_key in sol: K_d_val = sol[kd_key]
-
-        print(f"Final Point: K_p = {K_p_val}, K_i = {K_i_val}, K_d = {K_d_val}")
         for n in solver.subproblems.names:
             print(f"subproblem = {n}")
             x, u = {}, {}
@@ -328,7 +309,7 @@ if __name__ == '__main__':
                     time = float(stripped_time)
                     var_val = solver.solution.subproblem_solutions[n][vn]
                     u[time] = var_val
-            
+
             # plot
             scen_num = n.split("_")[1]
             plt.suptitle(f"Scenario {scen_num}")
