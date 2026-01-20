@@ -25,7 +25,7 @@ import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()
 size = MPI.COMM_WORLD.Get_size()
 
-num_scenarios = 1
+num_scenarios = 5
 sp = 0.5
 df = pd.read_csv(os.getcwd() + "/data.csv")
 plot_dir =  os.getcwd() + "/plots_snoglode_parallel/"
@@ -242,7 +242,7 @@ if __name__ == '__main__':
     
     nonconvex_gurobi_lb = pyo.SolverFactory("gurobi")
     nonconvex_gurobi_lb.options["NonConvex"] = 2
-    nonconvex_gurobi_lb.options["MIPGap"] = 1e-1
+    nonconvex_gurobi_lb.options["MIPGap"] = 1e-2
     nonconvex_gurobi_lb.options["TimeLimit"] = 15
     scenarios = [f"scen_{i}" for i in range(1,num_scenarios+1)]
 
@@ -277,9 +277,9 @@ if __name__ == '__main__':
     #                        tee = True)
     # quit()
     solver.solve(max_iter=1000,
-                 rel_tolerance = 1e-3,
-                 abs_tolerance = 1e-10,
-                 time_limit = 60*10,
+                 rel_tolerance = 1e-4,
+                 abs_tolerance = 1e-4,
+                 time_limit = 60*60*8,
                  collect_plot_info=True)
 
 

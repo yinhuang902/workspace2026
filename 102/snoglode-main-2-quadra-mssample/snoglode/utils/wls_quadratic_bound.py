@@ -654,6 +654,8 @@ def compute_wls_quadratic_surrogate_bound(
         # We use "pure random" for the shared set as per spec
         # CRITICAL: Must be identical across ranks. Use seed WITHOUT rank.
         seed_shared = seed if seed is not None else 42
+        # OPTIONAL: vary by iteration to avoid same 100 points every time
+        seed_shared = seed_shared + 104729 * iteration
         rng_shared = np.random.default_rng(seed_shared)
         
         # Option A: Uniform sampling without feasibility check
@@ -1031,8 +1033,6 @@ def compute_wls_quadratic_surrogate_bound(
                 success, obj_val = _solve_true_recourse_primal_gurobi(model)
                 if success:
                     Y_vals_C.append(obj_val)
-                if success:
-                    Y_vals_C.append(obj_val)
                 else:
                     Y_vals_C.append(1e6)
         Y_vals_C = np.array(Y_vals_C)
@@ -1081,6 +1081,10 @@ def compute_wls_quadratic_surrogate_bound(
                 ms_points_indices.append(len(samples_F_local) - 1)
             
             # 3. Evaluate F_s for ALL points (Shared + MS)
+            # OPTIONAL: Populate interp_points for Method F (overwriting per scenario, but better than empty)
+            if 'F' in node.lb_problem.plot_data_wlsq:
+                node.lb_problem.plot_data_wlsq['F']['interp_points'] = [list(p) for p in samples_F_local]
+
             # CRITICAL: We MUST recompute F_s for MS points to ensure freshness
             for i_s, x in enumerate(samples_F_local):
                 id_to_val = {(lifted_vars[i]['type'], lifted_vars[i]['id']): x[i] for i in range(dim)}
@@ -1226,13 +1230,13 @@ def compute_wls_quadratic_surrogate_bound(
         if on_U:
             try:
                 beta_uni = np.linalg.solve(PhiT_Phi_reg, Phi.T @ Y_vals)
-                lb_uni, ms_pt, ms_val = _compute_bound_from_beta(beta_uni, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
+                lb_uni, ms_pt, ms_resid, ms_true = _compute_bound_from_beta(beta_uni, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
                 local_beta_agg_uniform += prob * beta_uni
                 
                 # Store MS point for method 'uniform'
                 if 'uniform' in node.lb_problem.plot_data_wlsq:
                     node.lb_problem.plot_data_wlsq['uniform']['ms_point'][subproblem_name] = ms_pt
-                    node.lb_problem.plot_data_wlsq['uniform']['ms_trueval'][subproblem_name] = ms_val
+                    node.lb_problem.plot_data_wlsq['uniform']['ms_trueval'][subproblem_name] = ms_true
             except:
                 lb_uni = float('-inf')
         else:
@@ -1247,13 +1251,13 @@ def compute_wls_quadratic_surrogate_bound(
                 Y_w = Y_vals * S
                 PhiT_Phi_w = Phi_w.T @ Phi_w + reg_matrix
                 beta_A = np.linalg.solve(PhiT_Phi_w, Phi_w.T @ Y_w)
-                lb_A, ms_pt, ms_val = _compute_bound_from_beta(beta_A, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
+                lb_A, ms_pt, ms_resid, ms_true = _compute_bound_from_beta(beta_A, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
                 local_beta_agg_A += prob * beta_A
                 
                 # Store MS point for method 'A'
                 if 'A' in node.lb_problem.plot_data_wlsq:
                     node.lb_problem.plot_data_wlsq['A']['ms_point'][subproblem_name] = ms_pt
-                    node.lb_problem.plot_data_wlsq['A']['ms_trueval'][subproblem_name] = ms_val
+                    node.lb_problem.plot_data_wlsq['A']['ms_trueval'][subproblem_name] = ms_true
             except:
                 lb_A = float('-inf')
         else:
@@ -1268,13 +1272,13 @@ def compute_wls_quadratic_surrogate_bound(
                 Y_w_B = Y_vals * S_B
                 PhiT_Phi_w_B = Phi_w_B.T @ Phi_w_B + reg_matrix
                 beta_B = np.linalg.solve(PhiT_Phi_w_B, Phi_w_B.T @ Y_w_B)
-                lb_B, ms_pt, ms_val = _compute_bound_from_beta(beta_B, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
+                lb_B, ms_pt, ms_resid, ms_true = _compute_bound_from_beta(beta_B, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
                 local_beta_agg_B += prob * beta_B
                 
                 # Store MS point for method 'B'
                 if 'B' in node.lb_problem.plot_data_wlsq:
                     node.lb_problem.plot_data_wlsq['B']['ms_point'][subproblem_name] = ms_pt
-                    node.lb_problem.plot_data_wlsq['B']['ms_trueval'][subproblem_name] = ms_val
+                    node.lb_problem.plot_data_wlsq['B']['ms_trueval'][subproblem_name] = ms_true
             except:
                 lb_B = float('-inf')
         else:
@@ -1290,13 +1294,13 @@ def compute_wls_quadratic_surrogate_bound(
                 PhiT_Phi_w_C = Phi_w_C.T @ Phi_w_C + (lambda_reg * np.eye(Phi_C.shape[1]))
                 PhiT_Phi_w_C[0, 0] -= lambda_reg
                 beta_C = np.linalg.solve(PhiT_Phi_w_C, Phi_w_C.T @ Y_w_C)
-                lb_C, ms_pt, ms_val = _compute_bound_from_beta(beta_C, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
+                lb_C, ms_pt, ms_resid, ms_true = _compute_bound_from_beta(beta_C, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
                 local_beta_agg_C += prob * beta_C
                 
                 # Store MS point for method 'C'
                 if 'C' in node.lb_problem.plot_data_wlsq:
                     node.lb_problem.plot_data_wlsq['C']['ms_point'][subproblem_name] = ms_pt
-                    node.lb_problem.plot_data_wlsq['C']['ms_trueval'][subproblem_name] = ms_val
+                    node.lb_problem.plot_data_wlsq['C']['ms_trueval'][subproblem_name] = ms_true
             except:
                 lb_C = float('-inf')
         else:
@@ -1311,13 +1315,13 @@ def compute_wls_quadratic_surrogate_bound(
                 Y_w_D1 = Y_vals * S_D1
                 PhiT_Phi_w_D1 = Phi_w_D1.T @ Phi_w_D1 + reg_matrix
                 beta_D1 = np.linalg.solve(PhiT_Phi_w_D1, Phi_w_D1.T @ Y_w_D1)
-                lb_D1, ms_pt, ms_val = _compute_bound_from_beta(beta_D1, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
+                lb_D1, ms_pt, ms_resid, ms_true = _compute_bound_from_beta(beta_D1, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
                 local_beta_agg_D1 += prob * beta_D1
                 
                 # Store MS point for method 'D1'
                 if 'D1' in node.lb_problem.plot_data_wlsq:
                     node.lb_problem.plot_data_wlsq['D1']['ms_point'][subproblem_name] = ms_pt
-                    node.lb_problem.plot_data_wlsq['D1']['ms_trueval'][subproblem_name] = ms_val
+                    node.lb_problem.plot_data_wlsq['D1']['ms_trueval'][subproblem_name] = ms_true
             except:
                 lb_D1 = float('-inf')
         else:
@@ -1332,13 +1336,13 @@ def compute_wls_quadratic_surrogate_bound(
                 Y_w_D2 = Y_vals * S_D2
                 PhiT_Phi_w_D2 = Phi_w_D2.T @ Phi_w_D2 + reg_matrix
                 beta_D2 = np.linalg.solve(PhiT_Phi_w_D2, Phi_w_D2.T @ Y_w_D2)
-                lb_D2, ms_pt, ms_val = _compute_bound_from_beta(beta_D2, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
+                lb_D2, ms_pt, ms_resid, ms_true = _compute_bound_from_beta(beta_D2, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
                 local_beta_agg_D2 += prob * beta_D2
                 
                 # Store MS point for method 'D2'
                 if 'D2' in node.lb_problem.plot_data_wlsq:
                     node.lb_problem.plot_data_wlsq['D2']['ms_point'][subproblem_name] = ms_pt
-                    node.lb_problem.plot_data_wlsq['D2']['ms_trueval'][subproblem_name] = ms_val
+                    node.lb_problem.plot_data_wlsq['D2']['ms_trueval'][subproblem_name] = ms_true
             except:
                 lb_D2 = float('-inf')
         else:
@@ -1364,13 +1368,13 @@ def compute_wls_quadratic_surrogate_bound(
                 # Uniform weighting (like Method Uniform)
                 PhiT_Phi_E = Phi_E.T @ Phi_E + reg_matrix
                 beta_E = np.linalg.solve(PhiT_Phi_E, Phi_E.T @ Y_vals_E)
-                lb_E, ms_pt, ms_val = _compute_bound_from_beta(beta_E, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
+                lb_E, ms_pt, ms_resid, ms_true = _compute_bound_from_beta(beta_E, dim, lifted_vars, subproblems, subproblem_name, bounds, model, return_ms_point=True)
                 local_beta_agg_E += prob * beta_E
                 
                 # Store MS point for method 'E'
                 if 'E' in node.lb_problem.plot_data_wlsq:
                     node.lb_problem.plot_data_wlsq['E']['ms_point'][subproblem_name] = ms_pt
-                    node.lb_problem.plot_data_wlsq['E']['ms_trueval'][subproblem_name] = ms_val
+                    node.lb_problem.plot_data_wlsq['E']['ms_trueval'][subproblem_name] = ms_true
             except:
                 lb_E = float('-inf')
         else:
@@ -1855,8 +1859,13 @@ def _compute_bound_from_beta(beta, dim, lifted_vars, subproblems, subproblem_nam
                     var.unfix()
                     var.value = val_v
 
-            # ms_val IS the residual (min F - Q)
-            return lb_s, np.array(ms_point), ms_val, ms_true_val
+            # ms_val IS the residual (min F - Q) FROM THE DUAL, but we want the exact residual for the repo
+            # Compute Q_s(ms_pt)
+            ms_arr = np.array(ms_point)
+            q_at_ms = ms_arr @ Q_s @ ms_arr + c_s @ ms_arr + b_s
+            ms_residual_true = ms_true_val - q_at_ms
+
+            return lb_s, np.array(ms_point), ms_residual_true, ms_true_val
             
         return lb_s
     except Exception:

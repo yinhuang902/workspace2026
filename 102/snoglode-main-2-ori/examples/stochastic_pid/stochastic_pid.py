@@ -4,6 +4,7 @@ generating pyomo model for PID example
 import pyomo.environ as pyo
 from pyomo.opt import TerminationCondition, SolverStatus
 from pyomo.contrib.alternative_solutions.aos_utils import get_active_objective
+from pyomo.common.errors import ApplicationError
 import pyomo.dae as dae 
 from typing import Tuple, Optional
 from idaes.core.solvers import get_solver
@@ -20,7 +21,7 @@ import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()
 size = MPI.COMM_WORLD.Get_size()
 
-num_scenarios = 10
+num_scenarios = 5
 sp = 0.5
 df = pd.read_csv(os.getcwd() + "/data.csv")
 plot_dir =  os.getcwd() + "/plots_snoglode_parallel/"
@@ -52,8 +53,11 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
             self.opt.options["MIPGap"] = self.current_milp_gap
 
         # warm start with the ipopt solution
-        ipopt.solve(subproblem_model,
-                    load_solutions = True)
+        try:
+            ipopt.solve(subproblem_model,
+                        load_solutions = True)
+        except ApplicationError:
+            print("Ipopt solver failed (likely Access Violation). proceeding without warm start.")
         
         # solve explicitly to global optimality with gurobi
         results = self.opt.solve(subproblem_model,
@@ -63,10 +67,13 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
         
         # if we reached the maximum time limit, use the ipopt solution
         if results.solver.termination_condition==TerminationCondition.maxTimeLimit:
-            results = ipopt.solve(subproblem_model,
-                                  load_solutions = False, 
-                                  symbolic_solver_labels = True,
-                                  tee = False)
+            try:
+                results = ipopt.solve(subproblem_model,
+                                      load_solutions = False, 
+                                      symbolic_solver_labels = True,
+                                      tee = False)
+            except ApplicationError:
+                print("Ipopt solver failed again. Reverting to Gurobi results (TimeLimit).")
             
         # if the solution is optimal, return objective value
         if results.solver.termination_condition==TerminationCondition.optimal and \
@@ -152,7 +159,7 @@ def build_pid_model(scenario_name):
     # define model variables 
     m.K_p = pyo.Var(domain=pyo.Reals, bounds=[-10, 10])         # controller gain
     m.K_i = pyo.Var(domain=pyo.Reals, bounds=[-100, 100])       # integral gain 
-    m.K_d = pyo.Var(domain=pyo.Reals, bounds=[-100, 1000])      # dervative gain
+    m.K_d = pyo.Var(domain=pyo.Reals, bounds=[-10, 10])      # dervative gain
     m.x_s = pyo.Var(m.t, domain=pyo.Reals, bounds=[-2.5, 2.5])  # state-time trajectories 
     m.e_s = pyo.Var(m.t, domain=pyo.Reals)                      # change in x from set point 
     m.u_s = pyo.Var(m.t, domain=pyo.Reals, bounds=[-5.0, 5.0])  
@@ -230,7 +237,7 @@ if __name__ == '__main__':
     
     nonconvex_gurobi_lb = pyo.SolverFactory("gurobi")
     nonconvex_gurobi_lb.options["NonConvex"] = 2
-    nonconvex_gurobi_lb.options["MIPGap"] = 1e-1
+    nonconvex_gurobi_lb.options["MIPGap"] = 1e-2
     nonconvex_gurobi_lb.options["TimeLimit"] = 15
     scenarios = [f"scen_{i}" for i in range(1,num_scenarios+1)]
 
@@ -265,8 +272,8 @@ if __name__ == '__main__':
     #                        tee = True)
     # quit()
     solver.solve(max_iter=1000,
-                 rel_tolerance = 1e-3,
-                 time_limit = 60*10)
+                 rel_tolerance = 1e-2,
+                 time_limit = 60*60*8)
 
     if (rank==0):
         print("\n====================================================================")
