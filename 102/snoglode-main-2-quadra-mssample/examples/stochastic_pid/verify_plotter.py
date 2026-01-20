@@ -25,38 +25,12 @@ import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()
 size = MPI.COMM_WORLD.Get_size()
 
-num_scenarios = 5
+num_scenarios = 2
 sp = 0.5
 df = pd.read_csv(os.getcwd() + "/data.csv")
 plot_dir =  os.getcwd() + "/plots_snoglode_parallel/"
 if rank == 0:
     os.makedirs(plot_dir, exist_ok=True)
-
-Kp_ref = -9.988319
-Ki_ref = -99.987421
-Kd_ref = 0.850030
-k = 13
-rp = 10
-ri = 100
-rd = 100
-
-# --- root bounds (the original big box) ---
-Kp_root = (-10.0, 10.0)
-Ki_root = (-100.0, 100.0)
-Kd_root = (-100.0, 1000.0)
-
-def clip_interval(lb, ub, root):
-    return (max(lb, root[0]), min(ub, root[1]))
-
-# shrinking bounds around the reference point
-scale = 2**(-k)
-
-Kp_lb, Kp_ub = clip_interval(Kp_ref - rp*scale, Kp_ref + rp*scale, Kp_root)
-Ki_lb, Ki_ub = clip_interval(Ki_ref - ri*scale, Ki_ref + ri*scale, Ki_root)
-Kd_lb, Kd_ub = clip_interval(Kd_ref - rd*scale, Kd_ref + rd*scale, Kd_root)
-print(f"Kp bounds: {Kp_lb}, {Kp_ub}")
-print(f"Ki bounds: {Ki_lb}, {Ki_ub}")
-print(f"Kd bounds: {Kd_lb}, {Kd_ub}")
 
 class GurobiLBLowerBounder(sno.AbstractLowerBounder):
     def __init__(self, 
@@ -166,7 +140,6 @@ def build_pid_model(scenario_name):
     '''''''''''''''
     # define time set 
     T = 15
-
     m.time = pyo.RangeSet(0,T)
     m.t = dae.ContinuousSet(bounds=(0,T))
 
@@ -184,10 +157,14 @@ def build_pid_model(scenario_name):
     ## Variables ##
     '''''''''''''''
     # define model variables 
-    m.K_p = pyo.Var(domain=pyo.Reals, bounds=(Kp_lb, Kp_ub))
-    m.K_i = pyo.Var(domain=pyo.Reals, bounds=(Ki_lb, Ki_ub))
-    m.K_d = pyo.Var(domain=pyo.Reals, bounds=(Kd_lb, Kd_ub))
-
+    m.K_p = pyo.Var(domain=pyo.Reals, bounds=[-10, 10])         # controller gain
+    m.K_i = pyo.Var(domain=pyo.Reals, bounds=[-90, -80])       # integral gain 
+    m.K_d = pyo.Var(domain=pyo.Reals, bounds=[0, 10])      # dervative gain
+    '''
+    m.K_p = pyo.Var(domain=pyo.Reals, bounds=[-10, 10])         # controller gain
+    m.K_i = pyo.Var(domain=pyo.Reals, bounds=[-100, 100])       # integral gain 
+    m.K_d = pyo.Var(domain=pyo.Reals, bounds=[-100, 1000])      # dervative gain
+    '''
     m.x_s = pyo.Var(m.t, domain=pyo.Reals, bounds=[-2.5, 2.5])  # state-time trajectories 
     m.e_s = pyo.Var(m.t, domain=pyo.Reals)                      # change in x from set point 
     m.u_s = pyo.Var(m.t, domain=pyo.Reals, bounds=[-5.0, 5.0])  
@@ -265,7 +242,7 @@ if __name__ == '__main__':
     
     nonconvex_gurobi_lb = pyo.SolverFactory("gurobi")
     nonconvex_gurobi_lb.options["NonConvex"] = 2
-    nonconvex_gurobi_lb.options["MIPGap"] = 1e-2
+    nonconvex_gurobi_lb.options["MIPGap"] = 1e-1
     nonconvex_gurobi_lb.options["TimeLimit"] = 15
     scenarios = [f"scen_{i}" for i in range(1,num_scenarios+1)]
 
@@ -299,84 +276,66 @@ if __name__ == '__main__':
     # nonconvex_gurobi.solve(ef,
     #                        tee = True)
     # quit()
-    solver.solve(max_iter=1000,
-                 rel_tolerance = 1e-8,
+    solver.solve(max_iter=5,
+                 rel_tolerance = 1e-3,
                  abs_tolerance = 1e-10,
-                 time_limit = 60*60*1,
+                 time_limit = 60*10,
                  collect_plot_info=True)
-
 
     if (rank==0):
         print("\n====================================================================")
         print("SOLUTION")
-        print(f"Final Upper Bound (UB): {solver.tree.metrics.ub:.12g}")
-        print(f"Final Lower Bound (LB): {solver.tree.metrics.lb:.12g}")
-        print(f"Final Relative Gap: {solver.tree.metrics.relative_gap*100:.6f}%")
-        print(f"Final Absolute Gap: {solver.tree.metrics.absolute_gap:.2e}")
-        print()
-        
-        # Check if subproblem_solutions was saved
-        if solver.solution.subproblem_solutions is None:
-            print("WARNING: Full solution details not available.")
-            print("  (This can happen if UB was updated via surrogate bounds instead of full solve)")
-            print("====================================================================")
-        else:
-            for n in solver.subproblems.names:
-                print(f"subproblem = {n}")
-                x, u = {}, {}
+        for n in solver.subproblems.names:
+            print(f"subproblem = {n}")
+            x, u = {}, {}
+            for vn in solver.solution.subproblem_solutions[n]:
+
+                # display first stage only (for sanity check)
+                if vn=="K_p" or vn=="K_i" or vn=="K_d":
+                    var_val = solver.solution.subproblem_solutions[n][vn]
+                    print(f"  var name = {vn}, value = {var_val}")
+
+                # collect plot data on x_s, u_s
+                if "x_s" in vn:
+                    _, half_stripped_time = vn.split("[")
+                    stripped_time = half_stripped_time.split("]")[0]
+                    time = float(stripped_time)
+                    var_val = solver.solution.subproblem_solutions[n][vn]
+                    x[time] = var_val
                 
-                if solver.solution.subproblem_solutions.get(n) is None:
-                    print(f"  No solution stored for {n}")
-                    continue
-                    
-                for vn in solver.solution.subproblem_solutions[n]:
+                if "u_s" in vn:
+                    _, half_stripped_time = vn.split("[")
+                    stripped_time = half_stripped_time.split("]")[0]
+                    time = float(stripped_time)
+                    var_val = solver.solution.subproblem_solutions[n][vn]
+                    u[time] = var_val
 
-                    # display first stage only (for sanity check)
-                    if vn=="K_p" or vn=="K_i" or vn=="K_d":
-                        var_val = solver.solution.subproblem_solutions[n][vn]
-                        print(f"  var name = {vn}, value = {var_val}")
+            # plot
+            scen_num = n.split("_")[1]
+            plt.suptitle(f"Scenario {scen_num}")
+            plt.subplot(1, 2, 1)
+            plt.plot(x.keys(), x.values())
+            row_data = df.iloc[int(scen_num)]
+            # setpoint_change = row_data["setpoint_change"]
+            setpoint_change = sp
+            plt.axhline(y = setpoint_change, 
+                        color='r', 
+                        linestyle='dotted', 
+                        linewidth=2, 
+                        label="set point")
+            plt.xlabel('Time')
+            plt.ylabel('x')
+            plt.legend()
 
-                    # collect plot data on x_s, u_s
-                    if "x_s" in vn:
-                        _, half_stripped_time = vn.split("[")
-                        stripped_time = half_stripped_time.split("]")[0]
-                        time = float(stripped_time)
-                        var_val = solver.solution.subproblem_solutions[n][vn]
-                        x[time] = var_val
-                    
-                    if "u_s" in vn:
-                        _, half_stripped_time = vn.split("[")
-                        stripped_time = half_stripped_time.split("]")[0]
-                        time = float(stripped_time)
-                        var_val = solver.solution.subproblem_solutions[n][vn]
-                        u[time] = var_val
+            plt.subplot(1, 2, 2)
+            plt.plot(u.keys(), u.values())
+            plt.xlabel('Time')
+            plt.ylabel('u')
 
-                # plot
-                scen_num = n.split("_")[1]
-                plt.suptitle(f"Scenario {scen_num}")
-                plt.subplot(1, 2, 1)
-                plt.plot(x.keys(), x.values())
-                row_data = df.iloc[int(scen_num)]
-                # setpoint_change = row_data["setpoint_change"]
-                setpoint_change = sp
-                plt.axhline(y = setpoint_change, 
-                            color='r', 
-                            linestyle='dotted', 
-                            linewidth=2, 
-                            label="set point")
-                plt.xlabel('Time')
-                plt.ylabel('x')
-                plt.legend()
+            plt.tight_layout()
+            plt.savefig(plot_dir + f'scen_{scen_num}.png',
+                        dpi=300)
+            plt.clf()
 
-                plt.subplot(1, 2, 2)
-                plt.plot(u.keys(), u.values())
-                plt.xlabel('Time')
-                plt.ylabel('u')
-
-                plt.tight_layout()
-                plt.savefig(plot_dir + f'scen_{scen_num}.png',
-                            dpi=300)
-                plt.clf()
-
-                print()
-            print("====================================================================")
+            print()
+        print("====================================================================")

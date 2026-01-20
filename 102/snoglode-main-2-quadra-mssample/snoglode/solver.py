@@ -33,6 +33,7 @@ ENABLE_WLSQ_C = False
 ENABLE_WLSQ_D1 = True
 ENABLE_WLSQ_D2 = True
 ENABLE_WLSQ_E = True   # NEW: Anchor-mixed sampling method
+ENABLE_WLSQ_F = True   # NEW: Shared random + MS Point Repo method
 
 ENABLE_UB_WLSQ_UNIFORM = True
 ENABLE_UB_WLSQ_A = False
@@ -41,6 +42,7 @@ ENABLE_UB_WLSQ_C = False
 ENABLE_UB_WLSQ_D1 = True
 ENABLE_UB_WLSQ_D2 = True
 ENABLE_UB_WLSQ_E = True   # NEW: UB from anchor-mixed method
+ENABLE_UB_WLSQ_F = True   # NEW: UB from Method F
 
 # --- Summary Plot Configuration ---
 # Y-axis range for the final comparison plots (modify as needed)
@@ -145,6 +147,12 @@ class Solver():
 
         # track solution
         self.solution = SNoGloDeSolutionInformation()
+        
+        # Initialize MS Point Repositories (one per scenario)
+        # Keyed by scenario name (string) or index if needed. 
+        # We'll populate it on demand or in dispatch_setup if we have names.
+        self.ms_repos = {} 
+        
         self.logger.init_stop()
     
 
@@ -212,7 +220,8 @@ class Solver():
                     'C': ENABLE_WLSQ_C,
                     'D1': ENABLE_WLSQ_D1,
                     'D2': ENABLE_WLSQ_D2,
-                    'E': ENABLE_WLSQ_E
+                    'E': ENABLE_WLSQ_E,
+                    'F': ENABLE_WLSQ_F
                 }
                 enabled_ub_methods = {
                     'uniform': ENABLE_UB_WLSQ_UNIFORM,
@@ -221,7 +230,8 @@ class Solver():
                     'C': ENABLE_UB_WLSQ_C,
                     'D1': ENABLE_UB_WLSQ_D1,
                     'D2': ENABLE_UB_WLSQ_D2,
-                    'E': ENABLE_UB_WLSQ_E
+                    'E': ENABLE_UB_WLSQ_E,
+                    'F': ENABLE_UB_WLSQ_F
                 }
                 
                 iterations = self.wlsq_hist["iter"]
@@ -233,7 +243,7 @@ class Solver():
                             marker='D', markersize=4, label='Original SNoGloDe', 
                             linewidth=2.5, linestyle='--', color='black', zorder=10)
                     # Plot WLSQ methods
-                    for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E']:
+                    for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E', 'F']:
                         if enabled_lb_methods.get(method, False):
                             lb_series = self.wlsq_hist["lb"][method]
                             ax.plot(iterations, lb_series, marker='o', markersize=3, label=f'WLSQ_{method}', linewidth=2)
@@ -254,7 +264,7 @@ class Solver():
                             marker='D', markersize=4, label='Original SNoGloDe', 
                             linewidth=2.5, linestyle='--', color='black', zorder=10)
                     # Plot WLSQ methods
-                    for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E']:
+                    for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E', 'F']:
                         if enabled_ub_methods.get(method, False):
                             ub_series = self.wlsq_hist["ub"][method]
                             ax.plot(iterations, ub_series, marker='s', markersize=3, label=f'WLSQ_{method}', linewidth=2)
@@ -326,7 +336,7 @@ class Solver():
                     "original_ub": []
                 }
                 # Initialize series for each method
-                for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E']:
+                for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E', 'F']:
                     self.wlsq_hist["lb"][method] = []
                     self.wlsq_hist["ub"][method] = []
 
@@ -471,7 +481,7 @@ class Solver():
             self.wlsq_hist["original_lb"].append(float(orig_lb) if math.isfinite(orig_lb) else np.nan)
             self.wlsq_hist["original_ub"].append(float(orig_ub) if math.isfinite(orig_ub) else np.nan)
             
-            for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E']:
+            for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E', 'F']:
                 # LB
                 lb_val = getattr(current_node.lb_problem, f'wlsq_{method}_bound', None)
                 self.wlsq_hist["lb"][method].append(float(lb_val) if lb_val is not None and math.isfinite(lb_val) else np.nan)
@@ -534,7 +544,8 @@ class Solver():
             'C': ENABLE_WLSQ_C,
             'D1': ENABLE_WLSQ_D1,
             'D2': ENABLE_WLSQ_D2,
-            'E': ENABLE_WLSQ_E
+            'E': ENABLE_WLSQ_E,
+            'F': ENABLE_WLSQ_F
         }
         wlsq_ub_methods = {
             'uniform': ENABLE_UB_WLSQ_UNIFORM,
@@ -543,7 +554,8 @@ class Solver():
             'C': ENABLE_UB_WLSQ_C,
             'D1': ENABLE_UB_WLSQ_D1,
             'D2': ENABLE_UB_WLSQ_D2,
-            'E': ENABLE_UB_WLSQ_E
+            'E': ENABLE_UB_WLSQ_E,
+            'F': ENABLE_UB_WLSQ_F
         }
         
         # Only run if AT LEAST ONE method is enabled
@@ -557,7 +569,9 @@ class Solver():
                     self.lower_bounder.opt, 
                     seed=WLSQ_GLOBAL_SEED,
                     enabled_methods=wlsq_methods,
-                    enabled_ub_methods=wlsq_ub_methods
+                    enabled_ub_methods=wlsq_ub_methods,
+                    ms_repos=self.ms_repos,
+                    iteration=self.iteration
                 )
                 current_node.lb_problem.wlsq_bound = wlsq_lb
             except BaseException as e:
@@ -599,7 +613,8 @@ class Solver():
             getattr(current_node.lb_problem, 'wlsq_C_ub', float('nan')),
             getattr(current_node.lb_problem, 'wlsq_D1_ub', float('nan')),
             getattr(current_node.lb_problem, 'wlsq_D2_ub', float('nan')),
-            getattr(current_node.lb_problem, 'wlsq_E_ub', float('nan'))
+            getattr(current_node.lb_problem, 'wlsq_E_ub', float('nan')),
+            getattr(current_node.lb_problem, 'wlsq_F_ub', float('nan'))
         ]
         
         # Find the best (minimum) WLSQ UB
@@ -923,6 +938,7 @@ class Solver():
         wlsq_D1 = getattr(current_node.lb_problem, 'wlsq_D1_bound', None)
         wlsq_D2 = getattr(current_node.lb_problem, 'wlsq_D2_bound', None)
         wlsq_E = getattr(current_node.lb_problem, 'wlsq_E_bound', None)
+        wlsq_F = getattr(current_node.lb_problem, 'wlsq_F_bound', None)
         
         v_uni_str = fmt_method(ENABLE_WLSQ_UNIFORM, wlsq_uni)
         v_A_str = fmt_method(ENABLE_WLSQ_A, wlsq_A)
@@ -931,8 +947,9 @@ class Solver():
         v_D1_str = fmt_method(ENABLE_WLSQ_D1, wlsq_D1)
         v_D2_str = fmt_method(ENABLE_WLSQ_D2, wlsq_D2)
         v_E_str = fmt_method(ENABLE_WLSQ_E, wlsq_E)
+        v_F_str = fmt_method(ENABLE_WLSQ_F, wlsq_F)
         
-        wlsq_line = f"    WLSQ_uniform={v_uni_str}, WLSQ_A={v_A_str}, WLSQ_B={v_B_str}, WLSQ_C={v_C_str}, WLSQ_D1={v_D1_str}, WLSQ_D2={v_D2_str}, WLSQ_E={v_E_str}"
+        wlsq_line = f"    WLSQ_uniform={v_uni_str}, WLSQ_A={v_A_str}, WLSQ_B={v_B_str}, WLSQ_C={v_C_str}, WLSQ_D1={v_D1_str}, WLSQ_D2={v_D2_str}, WLSQ_E={v_E_str}, WLSQ_F={v_F_str}"
         print(wlsq_line)
         
         # UB_WLSQ line
@@ -944,6 +961,7 @@ class Solver():
         ub_D1 = getattr(current_node.lb_problem, 'wlsq_D1_ub', float('nan'))
         ub_D2 = getattr(current_node.lb_problem, 'wlsq_D2_ub', float('nan'))
         ub_E = getattr(current_node.lb_problem, 'wlsq_E_ub', float('nan'))
+        ub_F = getattr(current_node.lb_problem, 'wlsq_F_ub', float('nan'))
         
         # List of all, including disabled (for iteration order)
         # Format: (name, val, enabled_flag)
@@ -955,6 +973,7 @@ class Solver():
             ('D1',      ub_D1,  ENABLE_UB_WLSQ_D1),
             ('D2',      ub_D2,  ENABLE_UB_WLSQ_D2),
             ('E',       ub_E,   ENABLE_UB_WLSQ_E),
+            ('F',       ub_F,   ENABLE_UB_WLSQ_F),
         ]
         
         # Find best UB (min) among implicitly enabled & valid ones

@@ -25,7 +25,7 @@ import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()
 size = MPI.COMM_WORLD.Get_size()
 
-num_scenarios = 5
+num_scenarios = 2
 sp = 0.5
 df = pd.read_csv(os.getcwd() + "/data.csv")
 plot_dir =  os.getcwd() + "/plots_snoglode_parallel/"
@@ -35,7 +35,7 @@ if rank == 0:
 Kp_ref = -9.988319
 Ki_ref = -99.987421
 Kd_ref = 0.850030
-k = 13
+k = 2
 rp = 10
 ri = 100
 rd = 100
