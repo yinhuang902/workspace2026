@@ -26,23 +26,23 @@ ENABLE_SEPA_LB = False
 ENABLE_WLSQ_LB = False
 ENABLE_OBBT_UNI = False
 
-ENABLE_WLSQ_UNIFORM = True
+ENABLE_WLSQ_UNIFORM = False
 ENABLE_WLSQ_A = False
 ENABLE_WLSQ_B = False
 ENABLE_WLSQ_C = False
-ENABLE_WLSQ_D1 = True
-ENABLE_WLSQ_D2 = True
-ENABLE_WLSQ_E = True   # NEW: Anchor-mixed sampling method
-ENABLE_WLSQ_F = True   # NEW: Shared random + MS Point Repo method
+ENABLE_WLSQ_D1 = False
+ENABLE_WLSQ_D2 = False
+ENABLE_WLSQ_E = False   # NEW: Anchor-mixed sampling method
+ENABLE_WLSQ_F = False   # NEW: Shared random + MS Point Repo method
 
-ENABLE_UB_WLSQ_UNIFORM = True
+ENABLE_UB_WLSQ_UNIFORM = False
 ENABLE_UB_WLSQ_A = False
 ENABLE_UB_WLSQ_B = False
 ENABLE_UB_WLSQ_C = False
-ENABLE_UB_WLSQ_D1 = True
-ENABLE_UB_WLSQ_D2 = True
-ENABLE_UB_WLSQ_E = True   # NEW: UB from anchor-mixed method
-ENABLE_UB_WLSQ_F = True   # NEW: UB from Method F
+ENABLE_UB_WLSQ_D1 = False
+ENABLE_UB_WLSQ_D2 = False
+ENABLE_UB_WLSQ_E = False   # NEW: UB from anchor-mixed method
+ENABLE_UB_WLSQ_F = False   # NEW: UB from Method F
 
 # --- Summary Plot Configuration ---
 # Y-axis range for the final comparison plots (modify as needed)
