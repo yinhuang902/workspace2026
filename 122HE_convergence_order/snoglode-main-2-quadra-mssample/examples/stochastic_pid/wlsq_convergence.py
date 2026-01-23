@@ -48,8 +48,16 @@ F_TRUE = 0.9735317475835165
 # Global scenario count
 NUM_SCENARIOS = 5
 
+# WLSQ method keys (exact keys used in repo: solver.py and wls_quadratic_bound.py)
+WLSQ_METHOD_KEYS = ['uniform', 'A', 'B', 'C', 'D1', 'D2', 'E', 'F']
+
+# Default k values to evaluate (set to None to use CLI args k_min/k_max/k_step)
+# Example: DEFAULT_K_LIST = [0, 2, 4, 6, 8, 10]
+DEFAULT_K_LIST = [0, 2, 4, 6, 8, 10]
+
 # --- Helper Functions ---
 def clip_interval(lb, ub, root):
+    """Clip interval to root bounds: (shrinking interval) ∩ (root interval)"""
     return (max(lb, root[0]), min(ub, root[1]))
 
 # --- Model Builder ---
@@ -159,8 +167,12 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
             return False, None
         if results.solver.termination_condition == TerminationCondition.optimal and results.solver.status == SolverStatus.ok:
             subproblem_model.solutions.load_from(results)
+            # Fix: successor_obj may not exist in standalone context
             if self.current_milp_gap > 0 and hasattr(results.problem, 'lower_bound') and results.problem.lower_bound is not None:
-                parent_obj = pyo.value(subproblem_model.successor_obj)
+                if hasattr(subproblem_model, 'successor_obj'):
+                    parent_obj = pyo.value(subproblem_model.successor_obj)
+                else:
+                    parent_obj = float('-inf')
                 return True, max(parent_obj, results.problem.lower_bound)
             return True, pyo.value(get_active_objective(subproblem_model))
         elif results.solver.termination_condition == TerminationCondition.infeasible:
@@ -173,12 +185,43 @@ def main():
     parser = argparse.ArgumentParser(description="Estimate WLSQ LB convergence order.")
     parser.add_argument("--k_min", type=int, default=0)
     parser.add_argument("--k_max", type=int, default=8)
+    parser.add_argument("--k_step", type=int, default=1, help="Step size for k iteration")
+    parser.add_argument("--k_list", type=str, default="",
+                        help="Explicit comma-separated list of k values (overrides k_min/k_max/k_step)")
     parser.add_argument("--scenarios", type=int, default=5)
     parser.add_argument("--outdir", type=str, default="plots_wlsq_conv")
     parser.add_argument("--seed", type=int, default=17)
+    parser.add_argument("--methods", type=str, default="uniform,E,F",
+                        help="Comma-separated list of WLSQ methods to enable (from: uniform,A,B,C,D1,D2,E,F)")
+    parser.add_argument("--debug_wlsq", action="store_true",
+                        help="Print debug info about WLSQ return values and node.lb_problem attributes")
     args = parser.parse_args()
 
     os.makedirs(args.outdir, exist_ok=True)
+
+    # Determine k values to use (priority: DEFAULT_K_LIST > --k_list > k_min/k_max/k_step)
+    if DEFAULT_K_LIST is not None:
+        k_values = sorted(set(DEFAULT_K_LIST))
+    elif args.k_list.strip():
+        # Parse explicit k list
+        try:
+            k_values = sorted(set(int(x.strip()) for x in args.k_list.split(',') if x.strip()))
+        except ValueError as e:
+            print(f"ERROR: Invalid --k_list format: {e}")
+            sys.exit(1)
+    else:
+        # Use k_min, k_max, k_step
+        k_values = list(range(args.k_min, args.k_max + 1, args.k_step))
+    
+    print(f"k values to evaluate: {k_values}")
+
+    # Parse enabled methods
+    enabled_method_list = [m.strip() for m in args.methods.split(',') if m.strip()]
+    for m in enabled_method_list:
+        if m not in WLSQ_METHOD_KEYS:
+            print(f"WARNING: Unknown method '{m}'. Valid keys: {WLSQ_METHOD_KEYS}")
+    
+    print(f"Enabled WLSQ methods: {enabled_method_list}")
 
     NUM_SCENARIOS = args.scenarios
     scenarios = [f"scen_{i}" for i in range(1, NUM_SCENARIOS+1)]
@@ -206,17 +249,17 @@ def main():
     params.set_bounds_tightening(fbbt=True, obbt=False)
     solver = sno.Solver(params)
 
-    # MS Point Repositories (as solver.py does)
+    # MS Point Repositories - initialized as empty dict (same as solver.py line 154)
     ms_repos = {}
 
-    # Method names
-    method_names = ['Orig', 'uniform', 'A', 'B', 'C', 'D1', 'D2']
+    # Method names to track (Orig + WLSQ methods)
+    all_methods = ['Orig'] + enabled_method_list
 
     results_data = []
-    print(f"Starting WLSQ convergence estimation k={args.k_min}..{args.k_max}")
+    print(f"Starting WLSQ convergence estimation")
     print(f"F_TRUE = {F_TRUE}, seed = {args.seed}")
 
-    for k in range(args.k_min, args.k_max + 1):
+    for k in k_values:
         scale = 2**(-k)
         Kp_l, Kp_u = clip_interval(Kp_ref - rp*scale, Kp_ref + rp*scale, Kp_root)
         Ki_l, Ki_u = clip_interval(Ki_ref - ri*scale, Ki_ref + ri*scale, Ki_root)
@@ -261,15 +304,13 @@ def main():
         print(f"  Orig: LB={LB_orig:.6f}, gap={row['gap_Orig']:.6e}, time={time_orig:.2f}s")
 
         # --- WLSQ Methods ---
-        # Compute all WLSQ bounds in one call (as solver.py does)
-        enabled_methods = {
-            'uniform': True, 'A': True, 'B': True, 'C': True, 'D1': True, 'D2': True, 'E': False, 'F': False
-        }
-        enabled_ub_methods = {m: False for m in enabled_methods}
+        enabled_methods = {m: (m in enabled_method_list) for m in WLSQ_METHOD_KEYS}
+        enabled_ub_methods = {m: False for m in WLSQ_METHOD_KEYS}
 
         t1 = time.time()
+        wlsq_return_val = None
         try:
-            wlsq_lb = compute_wls_quadratic_surrogate_bound(
+            wlsq_return_val = compute_wls_quadratic_surrogate_bound(
                 node=node,
                 subproblems=solver.subproblems,
                 solver=solver.lower_bounder.opt,
@@ -280,24 +321,35 @@ def main():
                 iteration=k
             )
         except Exception as e:
-            print(f"  WLSQ failed: {e}")
-            wlsq_lb = float('nan')
+            print(f"  WLSQ computation failed: {e}")
+            import traceback
+            traceback.print_exc()
         time_wlsq = time.time() - t1
 
-        # Extract individual method bounds from node.lb_problem attributes
-        for method in ['uniform', 'A', 'B', 'C', 'D1', 'D2']:
+        if args.debug_wlsq:
+            print(f"  [DEBUG] WLSQ return type: {type(wlsq_return_val)}, value: {wlsq_return_val}")
+            wlsq_attrs = [a for a in dir(node.lb_problem) if 'wlsq' in a.lower() or 'wls' in a.lower()]
+            print(f"  [DEBUG] node.lb_problem WLSQ attrs: {wlsq_attrs}")
+            for attr in wlsq_attrs:
+                val = getattr(node.lb_problem, attr, None)
+                if val is not None and not callable(val):
+                    val_str = f"{val:.6f}" if isinstance(val, float) else str(val)[:50]
+                    print(f"    {attr} = {val_str}")
+
+        for method in enabled_method_list:
             attr_name = f"wlsq_{method}_bound"
             lb_val = getattr(node.lb_problem, attr_name, None)
             if lb_val is None or not math.isfinite(lb_val):
                 lb_val = float('nan')
             row[f"LB_{method}"] = lb_val
             row[f"gap_{method}"] = F_TRUE - lb_val if math.isfinite(lb_val) else float('nan')
-            row[f"time_{method}"] = time_wlsq / len([m for m in enabled_methods if enabled_methods[m]])
+            row[f"time_{method}"] = time_wlsq
             if math.isfinite(lb_val):
                 print(f"  {method}: LB={lb_val:.6f}, gap={row[f'gap_{method}']:.6e}")
             else:
-                print(f"  {method}: FAILED")
+                print(f"  {method}: FAILED or NaN")
 
+        row["time_wlsq_total"] = time_wlsq
         results_data.append(row)
 
     # Save CSV
@@ -308,33 +360,20 @@ def main():
 
     # --- Regression & Plotting ---
     colors = {
-        'Orig': 'black',
-        'uniform': 'blue',
-        'A': 'green',
-        'B': 'red',
-        'C': 'purple',
-        'D1': 'orange',
-        'D2': 'brown'
+        'Orig': 'black', 'uniform': 'blue', 'A': 'green', 'B': 'red',
+        'C': 'purple', 'D1': 'orange', 'D2': 'brown', 'E': 'cyan', 'F': 'magenta'
     }
     markers = {
-        'Orig': 'D',
-        'uniform': 'o',
-        'A': 's',
-        'B': '^',
-        'C': 'v',
-        'D1': '<',
-        'D2': '>'
+        'Orig': 'D', 'uniform': 'o', 'A': 's', 'B': '^',
+        'C': 'v', 'D1': '<', 'D2': '>', 'E': 'p', 'F': 'h'
     }
 
     print("\n=== Convergence Order Summary ===")
     
-    # Plot 1: loglog gap vs diam
     fig1, ax1 = plt.subplots(figsize=(10, 7))
-    
-    # Plot 2: semilogy gap vs k
     fig2, ax2 = plt.subplots(figsize=(10, 7))
 
-    for method in method_names:
+    for method in all_methods:
         gap_col = f"gap_{method}"
         if gap_col not in df_res.columns:
             continue
@@ -353,14 +392,12 @@ def main():
             
             print(f"  {method}: p={slope:.4f}, R^2={r_squared:.4f}")
             
-            # Plot 1
             ax1.loglog(df_valid["diam_Linf"], df_valid[gap_col], 
                       marker=markers.get(method, 'o'), color=colors.get(method, 'gray'),
                       linestyle='-', label=f'{method} (p={slope:.2f})', markersize=6)
         else:
-            print(f"  {method}: Not enough valid points")
+            print(f"  {method}: Not enough valid points ({len(df_valid)} points with gap>0)")
         
-        # Plot 2 (all points, including invalid)
         valid_mask = df_res[gap_col] > 0
         if valid_mask.any():
             ax2.semilogy(df_res.loc[valid_mask, "k"], df_res.loc[valid_mask, gap_col],

@@ -25,7 +25,7 @@ WLSQ_D_EPS = 0.1          # match WLSQ_B_EPS
 WLSQ_USE_MIXED_SAMPLING = True   # if False -> original pure random sampling
 
 # Mixed sampling parameters
-WLSQ_MIXED_FRACTION_UNIFORM = 0.60   # 30% uniform random points
+WLSQ_MIXED_FRACTION_UNIFORM = 0.60   # % uniform random points
 WLSQ_MIXED_FRACTION_LOWBIAS = 0.40   # 70% biased-toward-low-value points
 # (Ensure fractions sum to 1.0; if not, normalize in code.)
 

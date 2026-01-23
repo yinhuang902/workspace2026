@@ -30,16 +30,16 @@ ENABLE_WLSQ_UNIFORM = True
 ENABLE_WLSQ_A = False
 ENABLE_WLSQ_B = False
 ENABLE_WLSQ_C = False
-ENABLE_WLSQ_D1 = True
-ENABLE_WLSQ_D2 = True
+ENABLE_WLSQ_D1 = False
+ENABLE_WLSQ_D2 = False
 ENABLE_WLSQ_E = True   # NEW: Anchor-mixed sampling method
 
 ENABLE_UB_WLSQ_UNIFORM = True
 ENABLE_UB_WLSQ_A = False
 ENABLE_UB_WLSQ_B = False
 ENABLE_UB_WLSQ_C = False
-ENABLE_UB_WLSQ_D1 = True
-ENABLE_UB_WLSQ_D2 = True
+ENABLE_UB_WLSQ_D1 = False
+ENABLE_UB_WLSQ_D2 = False
 ENABLE_UB_WLSQ_E = True   # NEW: UB from anchor-mixed method
 
 # --- Summary Plot Configuration ---
