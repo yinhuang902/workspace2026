@@ -25,38 +25,14 @@ import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()
 size = MPI.COMM_WORLD.Get_size()
 
-num_scenarios = 5
+num_scenarios = 50
 sp = 0.5
 df = pd.read_csv(os.getcwd() + "/data.csv")
 plot_dir =  os.getcwd() + "/plots_snoglode_parallel/"
 if rank == 0:
     os.makedirs(plot_dir, exist_ok=True)
 
-Kp_ref = -9.988319
-Ki_ref = -99.987421
-Kd_ref = 0.850030
-k = 4
-rp = 10
-ri = 100
-rd = 100
 
-# --- root bounds (the original big box) ---
-Kp_root = (-10.0, 10.0)
-Ki_root = (-100.0, 100.0)
-Kd_root = (-100.0, 1000.0)
-
-def clip_interval(lb, ub, root):
-    return (max(lb, root[0]), min(ub, root[1]))
-
-# shrinking bounds around the reference point
-scale = 2**(-k)
-
-Kp_lb, Kp_ub = clip_interval(Kp_ref - rp*scale, Kp_ref + rp*scale, Kp_root)
-Ki_lb, Ki_ub = clip_interval(Ki_ref - ri*scale, Ki_ref + ri*scale, Ki_root)
-Kd_lb, Kd_ub = clip_interval(Kd_ref - rd*scale, Kd_ref + rd*scale, Kd_root)
-print(f"Kp bounds: {Kp_lb}, {Kp_ub}")
-print(f"Ki bounds: {Ki_lb}, {Ki_ub}")
-print(f"Kd bounds: {Kd_lb}, {Kd_ub}")
 
 class GurobiLBLowerBounder(sno.AbstractLowerBounder):
     def __init__(self, 
@@ -184,9 +160,9 @@ def build_pid_model(scenario_name):
     ## Variables ##
     '''''''''''''''
     # define model variables 
-    m.K_p = pyo.Var(domain=pyo.Reals, bounds=(Kp_lb, Kp_ub))
-    m.K_i = pyo.Var(domain=pyo.Reals, bounds=(Ki_lb, Ki_ub))
-    m.K_d = pyo.Var(domain=pyo.Reals, bounds=(Kd_lb, Kd_ub))
+    m.K_p = pyo.Var(domain=pyo.Reals, bounds=[-10, 10])         # controller gain
+    m.K_i = pyo.Var(domain=pyo.Reals, bounds=[-100, 100])       # integral gain 
+    m.K_d = pyo.Var(domain=pyo.Reals, bounds=[-100, 1000])      # dervative gain
 
     m.x_s = pyo.Var(m.t, domain=pyo.Reals, bounds=[-2.5, 2.5])  # state-time trajectories 
     m.e_s = pyo.Var(m.t, domain=pyo.Reals)                      # change in x from set point 
@@ -265,7 +241,7 @@ if __name__ == '__main__':
     
     nonconvex_gurobi_lb = pyo.SolverFactory("gurobi")
     nonconvex_gurobi_lb.options["NonConvex"] = 2
-    nonconvex_gurobi_lb.options["MIPGap"] = 1e-2
+    nonconvex_gurobi_lb.options["MIPGap"] = 1e-1
     nonconvex_gurobi_lb.options["TimeLimit"] = 15
     scenarios = [f"scen_{i}" for i in range(1,num_scenarios+1)]
 
@@ -302,7 +278,7 @@ if __name__ == '__main__':
     solver.solve(max_iter=1000,
                  rel_tolerance = 1e-8,
                  abs_tolerance = 1e-10,
-                 time_limit = 60*5*1,
+                 time_limit = 60*60*6,
                  collect_plot_info=True)
 
 

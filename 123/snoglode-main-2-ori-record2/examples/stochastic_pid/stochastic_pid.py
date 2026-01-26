@@ -1,9 +1,6 @@
 '''
 generating pyomo model for PID example
 '''
-import os
-os.environ['MKL_THREADING_LAYER'] = 'SEQUENTIAL'
-
 import pyomo.environ as pyo
 from pyomo.opt import TerminationCondition, SolverStatus
 from pyomo.contrib.alternative_solutions.aos_utils import get_active_objective
@@ -18,45 +15,76 @@ import matplotlib.pyplot as plt
 import pandas as pd
 np.random.seed(17)
 
+
 import sys
+import csv
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 import snoglode as sno
 import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()
 size = MPI.COMM_WORLD.Get_size()
 
-num_scenarios = 5
+
+class CSVResultWriter:
+    """
+    Writes iteration data from the SNoGloDe solver to CSV incrementally.
+    Each iteration's data is written immediately as the algorithm runs.
+    """
+    def __init__(self, csv_path: str):
+        self.csv_path = csv_path
+        self.solver = None  # Will be set after solver creation
+        self.header_written = False
+        self.fieldnames = ['Iteration', 'Time_s', 'Nodes_Explored', 'LB', 'UB', 
+                           'Rel_Gap_Pct', 'Abs_Gap', 'Num_Nodes']
+    
+    def set_solver(self, solver):
+        """Set reference to solver to access metrics."""
+        self.solver = solver
+        # Create/overwrite the CSV file and write header
+        with open(self.csv_path, 'w', newline='') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=self.fieldnames)
+            writer.writeheader()
+        self.header_written = True
+    
+    def iter_update(self, lb, ub, **kwargs):
+        """
+        Called each iteration to capture solver metrics.
+        Writes data immediately to CSV file.
+        """
+        if self.solver is None:
+            return
+        
+        # Access metrics from solver - called after dispatch_updates,
+        # so iteration and runtime are already updated
+        row = {
+            'Iteration': self.solver.iteration,
+            'Time_s': round(self.solver.runtime, 3) if hasattr(self.solver, 'runtime') else 0,
+            'Nodes_Explored': self.solver.tree.metrics.nodes.explored,
+            'LB': lb,
+            'UB': ub,
+            'Rel_Gap_Pct': round(self.solver.tree.metrics.relative_gap * 100, 4),
+            'Abs_Gap': round(self.solver.tree.metrics.absolute_gap, 6),
+            'Num_Nodes': self.solver.tree.n_nodes()
+        }
+        
+        # Append row immediately to CSV file
+        with open(self.csv_path, 'a', newline='') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=self.fieldnames)
+            writer.writerow(row)
+    
+    def save(self):
+        """
+        Called at end of solve. Data is already written incrementally,
+        so just print confirmation message.
+        """
+        print(f"\nResults saved to: {self.csv_path}")
+
+
+num_scenarios = 50
 sp = 0.5
 df = pd.read_csv(os.getcwd() + "/data.csv")
 plot_dir =  os.getcwd() + "/plots_snoglode_parallel/"
-if rank == 0:
-    os.makedirs(plot_dir, exist_ok=True)
-
-Kp_ref = -9.988319
-Ki_ref = -99.987421
-Kd_ref = 0.850030
-k = 4
-rp = 10
-ri = 100
-rd = 100
-
-# --- root bounds (the original big box) ---
-Kp_root = (-10.0, 10.0)
-Ki_root = (-100.0, 100.0)
-Kd_root = (-100.0, 1000.0)
-
-def clip_interval(lb, ub, root):
-    return (max(lb, root[0]), min(ub, root[1]))
-
-# shrinking bounds around the reference point
-scale = 2**(-k)
-
-Kp_lb, Kp_ub = clip_interval(Kp_ref - rp*scale, Kp_ref + rp*scale, Kp_root)
-Ki_lb, Ki_ub = clip_interval(Ki_ref - ri*scale, Ki_ref + ri*scale, Ki_root)
-Kd_lb, Kd_ub = clip_interval(Kd_ref - rd*scale, Kd_ref + rd*scale, Kd_root)
-print(f"Kp bounds: {Kp_lb}, {Kp_ub}")
-print(f"Ki bounds: {Ki_lb}, {Ki_ub}")
-print(f"Kd bounds: {Kd_lb}, {Kd_ub}")
 
 class GurobiLBLowerBounder(sno.AbstractLowerBounder):
     def __init__(self, 
@@ -95,7 +123,7 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
                                  tee = False)
         
         # if we reached the maximum time limit, use the ipopt solution
-        if results.solver.termination_condition==TerminationCondition.maxTimeLimit or results.solver.termination_condition==TerminationCondition.maxIterations:
+        if results.solver.termination_condition==TerminationCondition.maxTimeLimit:
             results = ipopt.solve(subproblem_model,
                                   load_solutions = False, 
                                   symbolic_solver_labels = True,
@@ -166,7 +194,6 @@ def build_pid_model(scenario_name):
     '''''''''''''''
     # define time set 
     T = 15
-
     m.time = pyo.RangeSet(0,T)
     m.t = dae.ContinuousSet(bounds=(0,T))
 
@@ -184,10 +211,15 @@ def build_pid_model(scenario_name):
     ## Variables ##
     '''''''''''''''
     # define model variables 
-    m.K_p = pyo.Var(domain=pyo.Reals, bounds=(Kp_lb, Kp_ub))
-    m.K_i = pyo.Var(domain=pyo.Reals, bounds=(Ki_lb, Ki_ub))
-    m.K_d = pyo.Var(domain=pyo.Reals, bounds=(Kd_lb, Kd_ub))
-
+    '''
+    m.K_p = pyo.Var(domain=pyo.Reals, bounds=[-10, 10])         # controller gain
+    m.K_i = pyo.Var(domain=pyo.Reals, bounds=[-90, -80])       # integral gain 
+    m.K_d = pyo.Var(domain=pyo.Reals, bounds=[0, 10])      # dervative gain
+    '''
+    m.K_p = pyo.Var(domain=pyo.Reals, bounds=[-10, 10])         # controller gain
+    m.K_i = pyo.Var(domain=pyo.Reals, bounds=[-100, 100])       # integral gain 
+    m.K_d = pyo.Var(domain=pyo.Reals, bounds=[-100, 1000])      # dervative gain
+    
     m.x_s = pyo.Var(m.t, domain=pyo.Reals, bounds=[-2.5, 2.5])  # state-time trajectories 
     m.e_s = pyo.Var(m.t, domain=pyo.Reals)                      # change in x from set point 
     m.u_s = pyo.Var(m.t, domain=pyo.Reals, bounds=[-5.0, 5.0])  
@@ -265,7 +297,7 @@ if __name__ == '__main__':
     
     nonconvex_gurobi_lb = pyo.SolverFactory("gurobi")
     nonconvex_gurobi_lb.options["NonConvex"] = 2
-    nonconvex_gurobi_lb.options["MIPGap"] = 1e-2
+    nonconvex_gurobi_lb.options["MIPGap"] = 1e-1
     nonconvex_gurobi_lb.options["TimeLimit"] = 15
     scenarios = [f"scen_{i}" for i in range(1,num_scenarios+1)]
 
@@ -295,88 +327,90 @@ if __name__ == '__main__':
     if (rank==0): params.display()
 
     solver = sno.Solver(params)
+    
+    # Set up CSV result writer to capture iteration data
+    csv_result_path = os.path.join(os.path.dirname(__file__), "sp_snog_result.csv")
+    csv_writer = CSVResultWriter(csv_path=csv_result_path)
+    csv_writer.set_solver(solver)
+    
+    # Monkey-patch dispatch_updates to capture iteration data
+    # This wraps the original method without changing core algorithm behavior
+    original_dispatch_updates = solver.dispatch_updates
+    def wrapped_dispatch_updates(bnb_result):
+        original_dispatch_updates(bnb_result)
+        # After dispatch_updates completes, capture the iteration data
+        csv_writer.iter_update(
+            lb=solver.tree.metrics.lb,
+            ub=solver.tree.metrics.ub
+        )
+    solver.dispatch_updates = wrapped_dispatch_updates
+    
     # ef = solver.get_ef()
     # nonconvex_gurobi.solve(ef,
     #                        tee = True)
     # quit()
     solver.solve(max_iter=1000,
-                 rel_tolerance = 1e-8,
-                 abs_tolerance = 1e-10,
-                 time_limit = 60*5*1,
-                 collect_plot_info=True)
-
+                 rel_tolerance = 1e-6,
+                 time_limit = 60*60*10)
+    
+    # Save the collected iteration data to CSV
+    if (rank==0):
+        csv_writer.save()
 
     if (rank==0):
         print("\n====================================================================")
         print("SOLUTION")
-        print(f"Final Upper Bound (UB): {solver.tree.metrics.ub:.12g}")
-        print(f"Final Lower Bound (LB): {solver.tree.metrics.lb:.12g}")
-        print(f"Final Relative Gap: {solver.tree.metrics.relative_gap*100:.6f}%")
-        print(f"Final Absolute Gap: {solver.tree.metrics.absolute_gap:.2e}")
-        print()
-        
-        # Check if subproblem_solutions was saved
-        if solver.solution.subproblem_solutions is None:
-            print("WARNING: Full solution details not available.")
-            print("  (This can happen if UB was updated via surrogate bounds instead of full solve)")
-            print("====================================================================")
-        else:
-            for n in solver.subproblems.names:
-                print(f"subproblem = {n}")
-                x, u = {}, {}
+        for n in solver.subproblems.names:
+            print(f"subproblem = {n}")
+            x, u = {}, {}
+            for vn in solver.solution.subproblem_solutions[n]:
+
+                # display first stage only (for sanity check)
+                if vn=="K_p" or vn=="K_i" or vn=="K_d":
+                    var_val = solver.solution.subproblem_solutions[n][vn]
+                    print(f"  var name = {vn}, value = {var_val}")
+
+                # collect plot data on x_s, u_s
+                if "x_s" in vn:
+                    _, half_stripped_time = vn.split("[")
+                    stripped_time = half_stripped_time.split("]")[0]
+                    time = float(stripped_time)
+                    var_val = solver.solution.subproblem_solutions[n][vn]
+                    x[time] = var_val
                 
-                if solver.solution.subproblem_solutions.get(n) is None:
-                    print(f"  No solution stored for {n}")
-                    continue
-                    
-                for vn in solver.solution.subproblem_solutions[n]:
+                if "u_s" in vn:
+                    _, half_stripped_time = vn.split("[")
+                    stripped_time = half_stripped_time.split("]")[0]
+                    time = float(stripped_time)
+                    var_val = solver.solution.subproblem_solutions[n][vn]
+                    u[time] = var_val
 
-                    # display first stage only (for sanity check)
-                    if vn=="K_p" or vn=="K_i" or vn=="K_d":
-                        var_val = solver.solution.subproblem_solutions[n][vn]
-                        print(f"  var name = {vn}, value = {var_val}")
+            # plot
+            scen_num = n.split("_")[1]
+            plt.suptitle(f"Scenario {scen_num}")
+            plt.subplot(1, 2, 1)
+            plt.plot(x.keys(), x.values())
+            row_data = df.iloc[int(scen_num)]
+            # setpoint_change = row_data["setpoint_change"]
+            setpoint_change = sp
+            plt.axhline(y = setpoint_change, 
+                        color='r', 
+                        linestyle='dotted', 
+                        linewidth=2, 
+                        label="set point")
+            plt.xlabel('Time')
+            plt.ylabel('x')
+            plt.legend()
 
-                    # collect plot data on x_s, u_s
-                    if "x_s" in vn:
-                        _, half_stripped_time = vn.split("[")
-                        stripped_time = half_stripped_time.split("]")[0]
-                        time = float(stripped_time)
-                        var_val = solver.solution.subproblem_solutions[n][vn]
-                        x[time] = var_val
-                    
-                    if "u_s" in vn:
-                        _, half_stripped_time = vn.split("[")
-                        stripped_time = half_stripped_time.split("]")[0]
-                        time = float(stripped_time)
-                        var_val = solver.solution.subproblem_solutions[n][vn]
-                        u[time] = var_val
+            plt.subplot(1, 2, 2)
+            plt.plot(u.keys(), u.values())
+            plt.xlabel('Time')
+            plt.ylabel('u')
 
-                # plot
-                scen_num = n.split("_")[1]
-                plt.suptitle(f"Scenario {scen_num}")
-                plt.subplot(1, 2, 1)
-                plt.plot(x.keys(), x.values())
-                row_data = df.iloc[int(scen_num)]
-                # setpoint_change = row_data["setpoint_change"]
-                setpoint_change = sp
-                plt.axhline(y = setpoint_change, 
-                            color='r', 
-                            linestyle='dotted', 
-                            linewidth=2, 
-                            label="set point")
-                plt.xlabel('Time')
-                plt.ylabel('x')
-                plt.legend()
+            plt.tight_layout()
+            plt.savefig(plot_dir + f'scen_{scen_num}.png',
+                        dpi=300)
+            plt.clf()
 
-                plt.subplot(1, 2, 2)
-                plt.plot(u.keys(), u.values())
-                plt.xlabel('Time')
-                plt.ylabel('u')
-
-                plt.tight_layout()
-                plt.savefig(plot_dir + f'scen_{scen_num}.png',
-                            dpi=300)
-                plt.clf()
-
-                print()
-            print("====================================================================")
+            print()
+        print("====================================================================")

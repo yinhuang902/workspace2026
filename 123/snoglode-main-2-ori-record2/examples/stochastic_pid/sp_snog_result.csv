@@ -1,0 +1,3 @@
+Iteration,Time_s,Nodes_Explored,LB,UB,Rel_Gap_Pct,Abs_Gap,Num_Nodes
+1,37.213,1,0.9559982075639628,inf,inf,inf,2
+2,77.172,2,0.9559982075639628,0.9825078546041404,2.6982,0.02651,3
