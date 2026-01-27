@@ -59,7 +59,7 @@ def main():
     print("Solving EF with Gurobi...")
     opt = pyo.SolverFactory("gurobi")
     opt.options["NonConvex"] = 2
-    opt.options["MIPGap"] = 1e-8
+    opt.options["MIPGap"] = 1e-2
     opt.options["TimeLimit"] = 60*5
     
     results = opt.solve(ef, tee=True, load_solutions=False)
