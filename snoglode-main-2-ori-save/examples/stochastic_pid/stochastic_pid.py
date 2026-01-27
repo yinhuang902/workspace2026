@@ -24,7 +24,7 @@ import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()
 size = MPI.COMM_WORLD.Get_size()
 
-num_scenarios = 10
+num_scenarios = 50
 sp = 0.5
 df = pd.read_csv(os.getcwd() + "/data.csv")
 plot_dir =  os.getcwd() + "/plots_snoglode_parallel/"
@@ -56,11 +56,8 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
             self.opt.options["MIPGap"] = self.current_milp_gap
 
         # warm start with the ipopt solution
-        try:
-            ipopt.solve(subproblem_model,
-                        load_solutions = True)
-        except Exception as e:
-            print(f"Warning: Ipopt warm start failed with error: {e}. Proceeding to Gurobi solve.")
+        ipopt.solve(subproblem_model,
+                    load_solutions = True)
         
         # solve explicitly to global optimality with gurobi
         results = self.opt.solve(subproblem_model,
@@ -70,14 +67,10 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
         
         # if we reached the maximum time limit, use the ipopt solution
         if results.solver.termination_condition==TerminationCondition.maxTimeLimit:
-            try:
-                results = ipopt.solve(subproblem_model,
-                                      load_solutions = False, 
-                                      symbolic_solver_labels = True,
-                                      tee = False)
-            except Exception as e:
-                print(f"Warning: Ipopt fallback failed with error: {e}. Returning very low lower bound.")
-                return True, -1e30
+            results = ipopt.solve(subproblem_model,
+                                  load_solutions = False, 
+                                  symbolic_solver_labels = True,
+                                  tee = False)
             
         # if the solution is optimal, return objective value
         if results.solver.termination_condition==TerminationCondition.optimal and \
@@ -100,13 +93,6 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
         # if the solution is not feasible, return None
         elif results.solver.termination_condition == TerminationCondition.infeasible:
             return False, None
-        elif results.solver.termination_condition == TerminationCondition.unbounded:
-            # If unbounded, we treat it as feasible with a worst-case lower bound
-            return True, -1e30
-        elif results.solver.termination_condition == TerminationCondition.maxTimeLimit:
-            # If we got here, Gurobi timed out and Ipopt didn't rescue us.
-            print("Warning: Gurobi timed out and Ipopt fallback was unavailable or also timed out.")
-            return True, -1e30
         else: raise RuntimeError(f"unexpected termination_condition for lower bounding problem: {results.solver.termination_condition}")
     
 
@@ -254,7 +240,7 @@ if __name__ == '__main__':
     
     nonconvex_gurobi_lb = pyo.SolverFactory("gurobi")
     nonconvex_gurobi_lb.options["NonConvex"] = 2
-    nonconvex_gurobi_lb.options["MIPGap"] = 1e-2
+    nonconvex_gurobi_lb.options["MIPGap"] = 1e-1
     nonconvex_gurobi_lb.options["TimeLimit"] = 15
     scenarios = [f"scen_{i}" for i in range(1,num_scenarios+1)]
 

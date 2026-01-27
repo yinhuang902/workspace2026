@@ -55,12 +55,14 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
                 self.current_milp_gap = 1e-2
             self.opt.options["MIPGap"] = self.current_milp_gap
 
+        subproblem_name = kwargs.get('subproblem_name', 'Unknown')
+
         # warm start with the ipopt solution
         try:
             ipopt.solve(subproblem_model,
                         load_solutions = True)
         except Exception as e:
-            print(f"Warning: Ipopt warm start failed with error: {e}. Proceeding to Gurobi solve.")
+            print(f"WARNING: Ipopt crashed on subproblem '{subproblem_name}'. Proceeding to Gurobi without warm start. Error: {e}")
         
         # solve explicitly to global optimality with gurobi
         results = self.opt.solve(subproblem_model,
@@ -68,20 +70,26 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
                                  symbolic_solver_labels = True,
                                  tee = False)
         
-        # if we reached the maximum time limit, use the ipopt solution
-        if results.solver.termination_condition==TerminationCondition.maxTimeLimit:
+        # if we reached the maximum time limit, try to use the ipopt solution for Primal side-effects
+        # but KEEP the Gurobi results for the Dual Bound (LB) info!
+        if results.solver.termination_condition == TerminationCondition.maxTimeLimit:
             try:
-                results = ipopt.solve(subproblem_model,
-                                      load_solutions = False, 
-                                      symbolic_solver_labels = True,
-                                      tee = False)
+                ipopt.solve(subproblem_model,
+                            load_solutions = True, 
+                            symbolic_solver_labels = True,
+                            tee = False)
             except Exception as e:
-                print(f"Warning: Ipopt fallback failed with error: {e}. Returning very low lower bound.")
-                return True, -1e30
+                print(f"WARNING: Ipopt fallback crashed on subproblem '{subproblem_name}'. Ignoring primal update. Error: {e}")
             
+
+
         # if the solution is optimal, return objective value
-        if results.solver.termination_condition==TerminationCondition.optimal and \
-            results.solver.status==SolverStatus.ok:
+        if (results.solver.termination_condition == TerminationCondition.optimal or \
+            results.solver.termination_condition == TerminationCondition.maxIterations) and \
+           (results.solver.status == SolverStatus.ok or results.solver.status == SolverStatus.warning):
+            
+            if results.solver.termination_condition == TerminationCondition.maxIterations:
+                print(f"DEBUG: 'maxIterations' reached for subproblem: {subproblem_name}")
 
             # load in solutions, return [feasibility = True, obj]
             subproblem_model.solutions.load_from(results)
@@ -90,7 +98,10 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
             # if we do not have a sufficiently small gap, return LB
             if self.current_milp_gap > 0: 
                 parent_obj = pyo.value(subproblem_model.successor_obj)
-                return True, max(parent_obj, results.problem.lower_bound)
+                # Ensure we handle potential attribute errors or missing bounds safely
+                try: lb = results.problem.lower_bound
+                except: lb = float('-inf')
+                return True, max(parent_obj, lb)
             
             #otw return normal objective
             else: 
@@ -100,14 +111,42 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
         # if the solution is not feasible, return None
         elif results.solver.termination_condition == TerminationCondition.infeasible:
             return False, None
-        elif results.solver.termination_condition == TerminationCondition.unbounded:
-            # If unbounded, we treat it as feasible with a worst-case lower bound
-            return True, -1e30
-        elif results.solver.termination_condition == TerminationCondition.maxTimeLimit:
-            # If we got here, Gurobi timed out and Ipopt didn't rescue us.
-            print("Warning: Gurobi timed out and Ipopt fallback was unavailable or also timed out.")
-            return True, -1e30
-        else: raise RuntimeError(f"unexpected termination_condition for lower bounding problem: {results.solver.termination_condition}")
+        
+        # Robust handling for maxTimeLimit / Unbounded / InfeasibleOrUnbounded
+        else:
+            term_cond = results.solver.termination_condition
+            print(f"DEBUG: Non-optimal termination '{term_cond}' for subproblem: {subproblem_name}")
+            
+            # Logic to find a VALID Lower Bound (Dual Bound) - matching DropNonants strategy
+            lb_val = None
+            LB_FLOOR = -1e10
+
+            # Priority 1: Solver's reported lower bound
+            try:
+                val = results.problem.lower_bound
+                if val != float('-inf') and val != float('inf'):
+                     lb_val = val
+            except: 
+                pass
+
+            # Priority 2: Successor objective (valid due to cuts)
+            if lb_val is None:
+                try:
+                    succ_obj = pyo.value(subproblem_model.successor_obj)
+                    if succ_obj != float('-inf'):
+                         lb_val = succ_obj
+                except:
+                    pass
+            
+            # Priority 3: Conservative fallback
+            if lb_val is None:
+                 if term_cond == TerminationCondition.unbounded or term_cond == TerminationCondition.infeasibleOrUnbounded:
+                      lb_val = float('-inf')
+                 else:
+                      lb_val = LB_FLOOR
+                      print(f"WARNING: Using conservative LB_FLOOR {LB_FLOOR} for subproblem {subproblem_name}")
+
+            return True, lb_val
     
 
 def build_pid_model(scenario_name):
@@ -284,13 +323,73 @@ if __name__ == '__main__':
     if (rank==0): params.display()
 
     solver = sno.Solver(params)
+    
+    # ---------------------------------------------------------
+    # CSV Logging Implementation (Monkey Patch)
+    # ---------------------------------------------------------
+    import csv
+
+    # CSV Logging Setup
+    csv_filename = os.getcwd() + "/sp_snog_result.csv"
+    csv_header = ["Time (s)", "Nodes Explored", "Pruned by", "Bound Update", "LB", "UB", "Rel. Gap", "Abs. Gap", "# Nodes"]
+
+    # Initialize CSV with header (only on rank 0)
+    if rank == 0:
+        with open(csv_filename, mode='w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(csv_header)
+
+    # Monkey patch display_status to log to CSV
+    original_display_status = solver.display_status
+
+    def csv_logging_display_status(bnb_result):
+        # Call original method first to maintain console output
+        original_display_status(bnb_result)
+        
+        # Only log on rank 0
+        if rank == 0:
+            # Replicate logic to extract formatted data
+            pruned = " "
+            if "pruned by bound" in bnb_result:
+                pruned = "Bound"
+            elif "pruned by infeasibility" in bnb_result:
+                pruned = "Infeas."
+            
+            bound_update = " "
+            if "ublb" in bnb_result:
+                bound_update = "* L U"
+            elif "ub" in bnb_result:
+                bound_update = "* U  "
+            elif "lb" in bnb_result:
+                bound_update = "* L  "
+
+            # Extract metrics
+            row = [
+                round(solver.runtime, 3),
+                solver.tree.metrics.nodes.explored,
+                pruned,
+                bound_update,
+                f"{solver.tree.metrics.lb:.8}",
+                f"{solver.tree.metrics.ub:.8}",
+                f"{round(solver.tree.metrics.relative_gap*100, 4)}%",
+                round(solver.tree.metrics.absolute_gap, 6),
+                solver.tree.n_nodes()
+            ]
+            
+            with open(csv_filename, mode='a', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow(row)
+
+    solver.display_status = csv_logging_display_status
+    # ---------------------------------------------------------
+
     # ef = solver.get_ef()
     # nonconvex_gurobi.solve(ef,
     #                        tee = True)
     # quit()
     solver.solve(max_iter=1000,
                  rel_tolerance = 1e-5,
-                 time_limit = 60*60*1)
+                 time_limit = 60*60*6)
 
     if (rank==0):
         print("\n====================================================================")

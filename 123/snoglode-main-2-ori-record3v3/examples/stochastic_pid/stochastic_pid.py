@@ -55,12 +55,14 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
                 self.current_milp_gap = 1e-2
             self.opt.options["MIPGap"] = self.current_milp_gap
 
+        subproblem_name = kwargs.get('subproblem_name', 'Unknown')
+
         # warm start with the ipopt solution
         try:
             ipopt.solve(subproblem_model,
                         load_solutions = True)
         except Exception as e:
-            print(f"Warning: Ipopt warm start failed with error: {e}. Proceeding to Gurobi solve.")
+            print(f"WARNING: Ipopt crashed on subproblem '{subproblem_name}'. Proceeding to Gurobi without warm start. Error: {e}")
         
         # solve explicitly to global optimality with gurobi
         results = self.opt.solve(subproblem_model,
@@ -70,18 +72,20 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
         
         # if we reached the maximum time limit, use the ipopt solution
         if results.solver.termination_condition==TerminationCondition.maxTimeLimit:
-            try:
-                results = ipopt.solve(subproblem_model,
-                                      load_solutions = False, 
-                                      symbolic_solver_labels = True,
-                                      tee = False)
-            except Exception as e:
-                print(f"Warning: Ipopt fallback failed with error: {e}. Returning very low lower bound.")
-                return True, -1e30
+            results = ipopt.solve(subproblem_model,
+                                  load_solutions = False, 
+                                  symbolic_solver_labels = True,
+                                  tee = False)
             
+
+
         # if the solution is optimal, return objective value
-        if results.solver.termination_condition==TerminationCondition.optimal and \
-            results.solver.status==SolverStatus.ok:
+        if (results.solver.termination_condition == TerminationCondition.optimal or \
+            results.solver.termination_condition == TerminationCondition.maxIterations) and \
+           (results.solver.status == SolverStatus.ok or results.solver.status == SolverStatus.warning):
+            
+            if results.solver.termination_condition == TerminationCondition.maxIterations:
+                print(f"DEBUG: 'maxIterations' reached for subproblem: {subproblem_name}")
 
             # load in solutions, return [feasibility = True, obj]
             subproblem_model.solutions.load_from(results)
@@ -100,14 +104,12 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
         # if the solution is not feasible, return None
         elif results.solver.termination_condition == TerminationCondition.infeasible:
             return False, None
+        
         elif results.solver.termination_condition == TerminationCondition.unbounded:
-            # If unbounded, we treat it as feasible with a worst-case lower bound
-            return True, -1e30
-        elif results.solver.termination_condition == TerminationCondition.maxTimeLimit:
-            # If we got here, Gurobi timed out and Ipopt didn't rescue us.
-            print("Warning: Gurobi timed out and Ipopt fallback was unavailable or also timed out.")
-            return True, -1e30
-        else: raise RuntimeError(f"unexpected termination_condition for lower bounding problem: {results.solver.termination_condition}")
+            print(f"DEBUG: 'unbounded' condition for subproblem: {subproblem_name}")
+            return True, float('-inf')
+
+        else: raise RuntimeError(f"unexpected termination_condition for lower bounding problem: {results.solver.termination_condition}. Subproblem: {subproblem_name}")
     
 
 def build_pid_model(scenario_name):
@@ -254,7 +256,7 @@ if __name__ == '__main__':
     
     nonconvex_gurobi_lb = pyo.SolverFactory("gurobi")
     nonconvex_gurobi_lb.options["NonConvex"] = 2
-    nonconvex_gurobi_lb.options["MIPGap"] = 1e-2
+    nonconvex_gurobi_lb.options["MIPGap"] = 1e-1
     nonconvex_gurobi_lb.options["TimeLimit"] = 15
     scenarios = [f"scen_{i}" for i in range(1,num_scenarios+1)]
 
@@ -284,6 +286,66 @@ if __name__ == '__main__':
     if (rank==0): params.display()
 
     solver = sno.Solver(params)
+    
+    # ---------------------------------------------------------
+    # CSV Logging Implementation (Monkey Patch)
+    # ---------------------------------------------------------
+    import csv
+
+    # CSV Logging Setup
+    csv_filename = os.getcwd() + "/sp_snog_result.csv"
+    csv_header = ["Time (s)", "Nodes Explored", "Pruned by", "Bound Update", "LB", "UB", "Rel. Gap", "Abs. Gap", "# Nodes"]
+
+    # Initialize CSV with header (only on rank 0)
+    if rank == 0:
+        with open(csv_filename, mode='w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(csv_header)
+
+    # Monkey patch display_status to log to CSV
+    original_display_status = solver.display_status
+
+    def csv_logging_display_status(bnb_result):
+        # Call original method first to maintain console output
+        original_display_status(bnb_result)
+        
+        # Only log on rank 0
+        if rank == 0:
+            # Replicate logic to extract formatted data
+            pruned = " "
+            if "pruned by bound" in bnb_result:
+                pruned = "Bound"
+            elif "pruned by infeasibility" in bnb_result:
+                pruned = "Infeas."
+            
+            bound_update = " "
+            if "ublb" in bnb_result:
+                bound_update = "* L U"
+            elif "ub" in bnb_result:
+                bound_update = "* U  "
+            elif "lb" in bnb_result:
+                bound_update = "* L  "
+
+            # Extract metrics
+            row = [
+                round(solver.runtime, 3),
+                solver.tree.metrics.nodes.explored,
+                pruned,
+                bound_update,
+                f"{solver.tree.metrics.lb:.8}",
+                f"{solver.tree.metrics.ub:.8}",
+                f"{round(solver.tree.metrics.relative_gap*100, 4)}%",
+                round(solver.tree.metrics.absolute_gap, 6),
+                solver.tree.n_nodes()
+            ]
+            
+            with open(csv_filename, mode='a', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow(row)
+
+    solver.display_status = csv_logging_display_status
+    # ---------------------------------------------------------
+
     # ef = solver.get_ef()
     # nonconvex_gurobi.solve(ef,
     #                        tee = True)

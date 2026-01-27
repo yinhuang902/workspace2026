@@ -55,12 +55,11 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
                 self.current_milp_gap = 1e-2
             self.opt.options["MIPGap"] = self.current_milp_gap
 
-        # warm start with the ipopt solution
+        # warm start with the ipopt solution (wrapped in try/except for safety)
         try:
-            ipopt.solve(subproblem_model,
-                        load_solutions = True)
+            ipopt.solve(subproblem_model, load_solutions=True)
         except Exception as e:
-            print(f"Warning: Ipopt warm start failed with error: {e}. Proceeding to Gurobi solve.")
+            print(f"WARNING: Ipopt warm-start failed for {getattr(subproblem_model, 'name', 'unknown')}: {e}")
         
         # solve explicitly to global optimality with gurobi
         results = self.opt.solve(subproblem_model,
@@ -68,16 +67,38 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
                                  symbolic_solver_labels = True,
                                  tee = False)
         
-        # if we reached the maximum time limit, use the ipopt solution
-        if results.solver.termination_condition==TerminationCondition.maxTimeLimit:
+        # if we reached the maximum time limit, try ipopt fallback but use Gurobi dual bound
+        if results.solver.termination_condition == TerminationCondition.maxTimeLimit:
+            gurobi_dual_bound = None
             try:
-                results = ipopt.solve(subproblem_model,
-                                      load_solutions = False, 
-                                      symbolic_solver_labels = True,
-                                      tee = False)
+                gurobi_dual_bound = results.problem.lower_bound
+            except (AttributeError, TypeError):
+                pass
+            
+            # Try Ipopt as primal recovery (wrapped in try/except)
+            try:
+                ipopt_results = ipopt.solve(subproblem_model,
+                                            load_solutions=False,
+                                            symbolic_solver_labels=True,
+                                            tee=False)
+                if ipopt_results.solver.termination_condition == TerminationCondition.optimal:
+                    subproblem_model.solutions.load_from(ipopt_results)
             except Exception as e:
-                print(f"Warning: Ipopt fallback failed with error: {e}. Returning very low lower bound.")
-                return True, -1e30
+                print(f"WARNING: Ipopt fallback failed for {getattr(subproblem_model, 'name', 'unknown')}: {e}")
+            
+            # Return valid LB: prefer Gurobi dual bound, else successor_obj
+            parent_obj = pyo.value(subproblem_model.successor_obj) if hasattr(subproblem_model, 'successor_obj') else float('-inf')
+            
+            if gurobi_dual_bound is not None and not (gurobi_dual_bound != gurobi_dual_bound):  # NaN check
+                lb_value = max(parent_obj, gurobi_dual_bound) if parent_obj > float('-inf') else gurobi_dual_bound
+                print(f"DEBUG: TimeLimit for {getattr(subproblem_model, 'name', 'unknown')}, using dual_bound={gurobi_dual_bound}")
+                return True, lb_value
+            elif parent_obj > float('-inf'):
+                print(f"DEBUG: TimeLimit for {getattr(subproblem_model, 'name', 'unknown')}, using successor_obj={parent_obj}")
+                return True, parent_obj
+            else:
+                print(f"WARNING: TimeLimit for {getattr(subproblem_model, 'name', 'unknown')} with no valid bound, using -1e10")
+                return True, -1e10
             
         # if the solution is optimal, return objective value
         if results.solver.termination_condition==TerminationCondition.optimal and \
@@ -100,14 +121,27 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
         # if the solution is not feasible, return None
         elif results.solver.termination_condition == TerminationCondition.infeasible:
             return False, None
-        elif results.solver.termination_condition == TerminationCondition.unbounded:
-            # If unbounded, we treat it as feasible with a worst-case lower bound
-            return True, -1e30
-        elif results.solver.termination_condition == TerminationCondition.maxTimeLimit:
-            # If we got here, Gurobi timed out and Ipopt didn't rescue us.
-            print("Warning: Gurobi timed out and Ipopt fallback was unavailable or also timed out.")
-            return True, -1e30
-        else: raise RuntimeError(f"unexpected termination_condition for lower bounding problem: {results.solver.termination_condition}")
+        
+        # Handle other non-optimal terminations (unbounded, infeasibleOrUnbounded, etc.)
+        # IMPORTANT: Do NOT raise or return (False, None) - that marks node as infeasible!
+        else:
+            termination = results.solver.termination_condition
+            model_name = getattr(subproblem_model, 'name', 'unknown')
+            print(f"WARNING: Non-optimal termination '{termination}' for subproblem '{model_name}'")
+            
+            # Try to get a valid LB from dual bound or successor_obj
+            parent_obj = pyo.value(subproblem_model.successor_obj) if hasattr(subproblem_model, 'successor_obj') else float('-inf')
+            try:
+                dual_bound = results.problem.lower_bound
+                if dual_bound is not None and not (dual_bound != dual_bound):  # NaN check
+                    return True, max(parent_obj, dual_bound) if parent_obj > float('-inf') else dual_bound
+            except (AttributeError, TypeError):
+                pass
+            
+            if parent_obj > float('-inf'):
+                return True, parent_obj
+            else:
+                return True, -1e10  # Conservative floor
     
 
 def build_pid_model(scenario_name):
