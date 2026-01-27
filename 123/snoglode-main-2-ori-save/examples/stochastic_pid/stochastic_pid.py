@@ -10,10 +10,105 @@ from idaes.core.solvers import get_solver
 ipopt = get_solver("ipopt")
 
 import os
+import csv
 import numpy as np 
 import matplotlib.pyplot as plt
 import pandas as pd
 np.random.seed(17)
+
+
+# =============================================================================
+# CSV Result Logger - writes iteration data progressively to sp_snog_result.csv
+# =============================================================================
+class CSVResultLogger:
+    """Logs solver iteration data to CSV file as the algorithm runs."""
+    
+    def __init__(self, filepath: str):
+        self.filepath = filepath
+        self.file = None
+        self.writer = None
+        self.headers = [
+            "Time (s)", "Nodes Explored", "Pruned by", "Bound Update",
+            "LB", "UB", "Rel. Gap (%)", "Abs. Gap", "# Nodes"
+        ]
+    
+    def start(self):
+        """Initialize CSV file with headers."""
+        self.file = open(self.filepath, 'w', newline='', encoding='utf-8')
+        self.writer = csv.writer(self.file)
+        self.writer.writerow(self.headers)
+        self.file.flush()
+    
+    def write_row(self, runtime, nodes_explored, pruned, bound_update, 
+                  lb, ub, rel_gap_pct, abs_gap, n_nodes):
+        """Write one iteration row to CSV."""
+        if self.writer is not None:
+            self.writer.writerow([
+                round(runtime, 6),
+                nodes_explored,
+                pruned,
+                bound_update,
+                lb,
+                ub,
+                rel_gap_pct,
+                abs_gap,
+                n_nodes
+            ])
+            self.file.flush()
+    
+    def close(self):
+        """Close the CSV file."""
+        if self.file is not None:
+            self.file.close()
+            self.file = None
+            self.writer = None
+
+
+def wrap_solver_for_csv_logging(solver, csv_logger):
+    """
+    Wrap the solver's dispatch_updates method to also log data to CSV.
+    This does NOT modify the core algorithm logic.
+    """
+    original_dispatch_updates = solver.dispatch_updates
+    
+    def wrapped_dispatch_updates(bnb_result: str):
+        # Call the original method first (core algorithm unchanged)
+        original_dispatch_updates(bnb_result)
+        
+        # Only log on rank 0 (same as display_status)
+        if rank == 0:
+            # Extract data from solver (same fields as display_status)
+            runtime = solver.runtime
+            nodes_explored = solver.tree.metrics.nodes.explored
+            
+            # Pruned status
+            pruned = ""
+            if "pruned by bound" in bnb_result:
+                pruned = "Bound"
+            elif "pruned by infeasibility" in bnb_result:
+                pruned = "Infeas."
+            
+            # Bound update status
+            bound_update = ""
+            if "ublb" in bnb_result:
+                bound_update = "L U"
+            elif "ub" in bnb_result:
+                bound_update = "U"
+            elif "lb" in bnb_result:
+                bound_update = "L"
+            
+            lb = solver.tree.metrics.lb
+            ub = solver.tree.metrics.ub
+            rel_gap_pct = round(solver.tree.metrics.relative_gap * 100, 6)
+            abs_gap = round(solver.tree.metrics.absolute_gap, 8)
+            n_nodes = solver.tree.n_nodes()
+            
+            csv_logger.write_row(
+                runtime, nodes_explored, pruned, bound_update,
+                lb, ub, rel_gap_pct, abs_gap, n_nodes
+            )
+    
+    solver.dispatch_updates = wrapped_dispatch_updates
 
 
 import sys
@@ -24,7 +119,8 @@ import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()
 size = MPI.COMM_WORLD.Get_size()
 
-num_scenarios = 10
+num_scenarios = 2
+
 sp = 0.5
 df = pd.read_csv(os.getcwd() + "/data.csv")
 plot_dir =  os.getcwd() + "/plots_snoglode_parallel/"
@@ -322,9 +418,24 @@ if __name__ == '__main__':
     # nonconvex_gurobi.solve(ef,
     #                        tee = True)
     # quit()
-    solver.solve(max_iter=1000,
-                 rel_tolerance = 1e-5,
-                 time_limit = 60*60*1)
+    
+    # Set up CSV logging (writes to sp_snog_result.csv progressively)
+    csv_result_path = os.path.join(os.getcwd(), "sp_snog_result.csv")
+    csv_logger = CSVResultLogger(csv_result_path)
+    if rank == 0:
+        csv_logger.start()
+        print(f"\nCSV results will be written to: {csv_result_path}")
+    wrap_solver_for_csv_logging(solver, csv_logger)
+    
+    try:
+        solver.solve(max_iter=1000,
+                     rel_tolerance = 1e-5,
+                     time_limit = 60*60*2)
+    finally:
+        # Ensure CSV file is properly closed
+        if rank == 0:
+            csv_logger.close()
+            print(f"\nCSV results saved to: {csv_result_path}")
 
     if (rank==0):
         print("\n====================================================================")
