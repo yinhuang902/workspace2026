@@ -1,0 +1,11 @@
+
+pid_simplex_mixmscs_time
+初始的单纯加了最大时间的版本
+
+
+pid_simplex_mixmscs_time_refub
+有个预设的（希望是snoglode初始几轮的ub值）ub的版本，不知道是否能把开始的卡着的大gap阶段快速过去
+
+
+pid_simplex_mixmscs_time_moreub
+对每个simplex都计算cs点根据均值算simplexub的版本

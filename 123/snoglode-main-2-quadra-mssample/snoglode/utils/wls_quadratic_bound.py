@@ -13,7 +13,7 @@ import math
 from snoglode.utils.ms_point_repo import MSPointRepo
 
 # WLSQ Method B Tuning Parameters
-WLSQ_NUM_SAMPLES_DEFAULT = 100  # Default number of samples per iteration
+WLSQ_NUM_SAMPLES_DEFAULT = 70  # Default number of samples per iteration
 WLSQ_B_ALPHA = 5.0          # kernel decay alpha for Method B
 WLSQ_B_EPS = 0.1            # weight floor epsilon for Method B
 WLSQ_B_DIAM2_TINY_THRESH = 1e-9   # threshold for "tiny box" fallback (sets diam2=1.0)
@@ -1557,6 +1557,9 @@ def compute_wls_quadratic_surrogate_bound(
         
         # Store on node
         setattr(node.lb_problem, f'wlsq_{m_name}_ub', ub_true)
+        # Store solution point if valid
+        if x_star is not None:
+             setattr(node.lb_problem, f'wlsq_{m_name}_sol', x_star)
 
 
     # --- OBBT Diagnostic for Uniform ---

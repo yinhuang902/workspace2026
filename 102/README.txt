@@ -34,7 +34,8 @@ snoglode-main-2-quadra-mssample
 加入ms node到sample的版本（wlsq_F）
 
 
-
+snoglode-main-2-quadra-mssample - 副本
+测试小范围只有snoglode收集数据的版本
 
 
 

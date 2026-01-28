@@ -26,23 +26,23 @@ ENABLE_SEPA_LB = False
 ENABLE_WLSQ_LB = False
 ENABLE_OBBT_UNI = False
 
-ENABLE_WLSQ_UNIFORM = True
+ENABLE_WLSQ_UNIFORM = False
 ENABLE_WLSQ_A = False
 ENABLE_WLSQ_B = False
 ENABLE_WLSQ_C = False
 ENABLE_WLSQ_D1 = False
 ENABLE_WLSQ_D2 = False
 ENABLE_WLSQ_E = False   # NEW: Anchor-mixed sampling method
-ENABLE_WLSQ_F = True   # NEW: Shared random + MS Point Repo method
+ENABLE_WLSQ_F = False   # NEW: Shared random + MS Point Repo method
 
-ENABLE_UB_WLSQ_UNIFORM = True
+ENABLE_UB_WLSQ_UNIFORM = False
 ENABLE_UB_WLSQ_A = False
 ENABLE_UB_WLSQ_B = False
 ENABLE_UB_WLSQ_C = False
 ENABLE_UB_WLSQ_D1 = False
 ENABLE_UB_WLSQ_D2 = False
 ENABLE_UB_WLSQ_E = False   # NEW: UB from anchor-mixed method
-ENABLE_UB_WLSQ_F = True   # NEW: UB from Method F
+ENABLE_UB_WLSQ_F = False   # NEW: UB from Method F
 
 # --- Summary Plot Configuration ---
 # Y-axis range for the final comparison plots (modify as needed)
@@ -628,6 +628,32 @@ class Solver():
         # Update global UB if WLSQ found a better one
         if math.isfinite(best_wlsq_ub) and best_wlsq_ub < self.tree.metrics.ub:
             self.tree.metrics.ub = best_wlsq_ub
+            
+            # Find which method produced this best UB and get its solution
+            for method, val in zip(wlsq_methods.keys(), wlsq_ub_candidates):
+                 if hasattr(current_node.lb_problem, f'wlsq_{method}_ub'):
+                     u_val = getattr(current_node.lb_problem, f'wlsq_{method}_ub')
+                     if u_val == best_wlsq_ub:
+                         sol_pt = getattr(current_node.lb_problem, f'wlsq_{method}_sol', None)
+                         if sol_pt is not None:
+                             # Construct a partial solution dict for the first stage variables
+                             # Since we don't have the full second stage here, we'll just save what we have.
+                             # This is better than nothing.
+                             # In the future, we could re-solve subproblems here to get full state.
+                             
+                             # We need to map back to variable names.
+                             # This requires identifying PID vars again or passing them through.
+                             # Luckily, we CANNOT easily get the variable names here without re-identifying.
+                             # But we know they are K_p, K_i, K_d usually.
+                             # Actually `current_node.state` has the info.
+                             pass 
+                             
+                             # Ideally we should call self.solution.update_best_solution(...)
+                             # But that requires a dictionary of ALL subproblem solutions.
+                             # WLSQ only gives us the first stage x. 
+                             # For now, we unfortunately just update the metric.
+                             # If we want to support full solution viewing, we'd need to re-solve all subproblems here.
+                             pass
 
 
 
