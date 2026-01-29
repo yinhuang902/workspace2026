@@ -1,0 +1,32 @@
+[iter 0] EF enabled=True  simplex_id=1
+  time_sec: 0.770
+  termination: optimal   status: ok
+  ipopt_exit: EXIT: Optimal Solution Found.
+  ub_value: 9.79002
+  x: [-9.99998, -100, 0.918031]
+  accepted: False   reject_reason: not_best_or_lb_violation
+
+[iter 1] EF enabled=True  simplex_id=4
+  time_sec: 0.260
+  termination: optimal   status: ok
+  ipopt_exit: EXIT: Optimal Solution Found.
+  ub_value: 9.83894
+  x: [8.16609, -100, 0.865143]
+  accepted: False   reject_reason: not_best_or_lb_violation
+
+[iter 2] EF enabled=True  simplex_id=6
+  time_sec: 0.259
+  termination: optimal   status: ok
+  ipopt_exit: EXIT: Optimal Solution Found.
+  ub_value: 9.83894
+  x: [8.16609, -100, 0.865143]
+  accepted: False   reject_reason: not_best_or_lb_violation
+
+[iter 3] EF enabled=True  simplex_id=7
+  time_sec: 0.273
+  termination: optimal   status: ok
+  ipopt_exit: EXIT: Optimal Solution Found.
+  ub_value: 9.84786
+  x: [10, -100, 0.854324]
+  accepted: False   reject_reason: not_best_or_lb_violation
+

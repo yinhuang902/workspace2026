@@ -9,3 +9,4 @@ pid_simplex_mixmscs_time_refub
 
 pid_simplex_mixmscs_time_moreub
 对每个simplex都计算cs点根据均值算simplexub的版本
+会出现负数gap，不知为何
