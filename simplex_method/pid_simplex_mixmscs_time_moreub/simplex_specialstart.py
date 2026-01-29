@@ -16,6 +16,7 @@ from utils import (
     _print_candidates_table, plot_iteration_plotly, LAST_DEBUG
 )
 from bundles import SurrogateLBBundle
+from iter_logger import IterationLogger
 
 # === Debug switches (temporary, can be removed later) ===
 DEBUG_LB_SIMPLEX_SCATTER = True        
@@ -87,6 +88,7 @@ class SimplexMesh:
         self.tets.pop(simplex_index)
         self.tets.extend(new_tets)
         self.last_split_kind = "interior"
+        return 4  # LB/UB per user definition: return n_children for new_ids detection
 
     # ---------- New: point on edge => 2 sub-simplices ----------
     def subdivide_edge(self, simplex_index: int, new_node_index: int, edge_verts):
@@ -120,6 +122,7 @@ class SimplexMesh:
 
         self.tets.extend([t1, t2])
         self.last_split_kind = "edge"
+        return 2  # LB/UB per user definition: return n_children for new_ids detection
 
     # ---------- New: point on face => 3 sub-simplices ----------
     def subdivide_face(self, simplex_index: int, new_node_index: int, face_verts):
@@ -155,6 +158,7 @@ class SimplexMesh:
 
         self.tets.extend([t1, t2, t3])
         self.last_split_kind = "face"
+        return 3  # LB/UB per user definition: return n_children for new_ids detection
 
     def as_delaunay_like(self):
         """
@@ -364,6 +368,9 @@ def evaluate_all_tetra(nodes, scen_values, ms_bundles, first_vars_list,
         xms_scene = []
         c_scene = []          # c_{T,s}
         cpts_scene = []       # Point (Kp,Ki,Kd) corresponding to c_s
+        # For logging: store solve metadata per scene
+        ms_meta_per_scene = []
+        cs_meta_per_scene = []
 
         for ω in range(S):
             cache_key = (int(ω), key_base)
@@ -372,10 +379,16 @@ def evaluate_all_tetra(nodes, scen_values, ms_bundles, first_vars_list,
             if hit:
                 # cache is now (ms_val, new_pt_ms, c_val, c_pt)
                 ms_val, new_pt_ms, c_val, c_pt = ms_cache[cache_key]
+                # Cached: no fresh metadata, use None
+                ms_meta_per_scene.append(None)
+                cs_meta_per_scene.append(None)
             else:
                 ms_val, new_pt_ms, c_val, c_pt = ms_on_tetra_for_scene(
                     ms_bundles[ω], verts, fverts_per_scene[ω]
                 )
+                # Capture solve metadata from the bundle
+                ms_meta_per_scene.append(getattr(ms_bundles[ω], 'last_solve_meta', None))
+                cs_meta_per_scene.append(getattr(ms_bundles[ω], 'last_cs_meta', None))
                 if cache_on and (ms_cache is not None):
                     ms_cache[cache_key] = (ms_val, new_pt_ms, c_val, c_pt)
                 if tracker is not None:
@@ -435,6 +448,9 @@ def evaluate_all_tetra(nodes, scen_values, ms_bundles, first_vars_list,
             "best_scene": best_scene,
             "volume": vol,
             "n_infeas_verts": n_infeas_verts,
+            # For logging: per-scene solve metadata
+            "ms_meta_per_scene": ms_meta_per_scene,
+            "cs_meta_per_scene": cs_meta_per_scene,
         })
 
 
@@ -719,10 +735,37 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
     cum_time = 0.0             # NEW: Cumulative time
 
     # === Create CSV file for incremental logging ===
+    # LB/UB per user definition: main columns use per-iteration values, extra columns for monotonic envelopes
     csv_path = "simplex_result.csv"
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["Time (s)", "# Nodes", "LB", "UB", "Rel. Gap", "Abs. Gap"])
+        writer.writerow(["Time (s)", "# Nodes", "LB", "UB", "Rel. Gap", "Abs. Gap", "best_LB_ever", "best_UB_ever"])
+
+    # === Initialize per-iteration diagnostic logger ===
+    iter_logger = IterationLogger(path="simplex_result.txt")
+    # UB provenance tracking state (note: logger also stores this, but we track here for clarity)
+    ub_updated_this_iter = False
+    ub_source_current = "unknown"
+    ub_simplex_id_current = None
+    ub_origin_iter_current = None
+    
+    # LB/UB per user definition: incumbent UB (not reset per iteration)
+    UB_incumbent = float("inf")
+    
+    # LB/UB per user definition: initialize selected_simplex_id for logging
+    selected_simplex_id = None
+    
+    # LB/UB per user definition: compute initial UB from mesh vertices BEFORE the loop
+    # This initializes UB_incumbent from the initial vertex evaluations
+    if len(nodes) >= 4:
+        f_sum_initial = [
+            sum(scen_values[s][i] for s in range(S))
+            for i in range(len(nodes))
+        ]
+        UB_incumbent = float(min(f_sum_initial))
+        # Provenance logging: initial UB from vertices before loop
+        iter_logger.update_ub_provenance(updated=True, source="init", simplex_id=None, origin_iter=-1)
+
 
     while len(nodes) < target_nodes:
         t_iter0 = perf_counter()
@@ -736,14 +779,30 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
 
         ms_prev_calls = [len(b.solve_time_hist) for b in ms_bundles]
 
+        # === Reset iteration-specific tracking ===
+        ub_updated_this_iter = False
+        ub_source_this_iter = None  # will track source if UB updates
+        ub_simplex_id_this_iter = None
+        
+        # LB/UB per user definition: track simplex count before split
+        n_simplices_before = len(tet_mesh.tets)
+
         # 1) Global UB
         f_sum_per_node = [
             sum(scen_values[s][i] for s in range(S))
             for i in range(len(nodes))
         ]
         ub_idx = int(np.argmin(f_sum_per_node))
-        UB_global = float(f_sum_per_node[ub_idx])
+        UB_vertex = float(f_sum_per_node[ub_idx])
+        # LB/UB per user definition: Initialize UB_incumbent from vertex UB only on first iter
+        if it == 0:
+            UB_incumbent = min(UB_incumbent, UB_vertex)
+        # LB/UB per user definition: UB_global tracks incumbent, NOT reset to UB_vertex each iter
+        UB_global = UB_incumbent
         UB_node = tuple(nodes[ub_idx])
+        
+        # Track vertex as initial UB source for this iteration (debug only)
+        vertex_ub_simplex_id = None  # vertex is not tied to a specific simplex for now
 
         # 2) Evaluate all tetrahedrons (single scene)
         t_ms0 = perf_counter()
@@ -916,45 +975,59 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
             LB_global = float(min(r["LB"] for r in per_tet))
             lb_simp_rec = min(per_tet, key=lambda r: r["LB"])
 
-        # === UPDATE best_lb_ever FIRST before any UB candidate checks ===
-        # This ensures all UB candidates are validated against the highest LB ever seen
-        best_lb_ever = max(best_lb_ever, LB_global)
+        # LB/UB per user definition: best_lb_ever update disabled here, done AFTER end-of-iter
+        # best_lb_ever = max(best_lb_ever, LB_global)  # DISABLED
 
-        # NEW: avg c_s UB candidate
-        # Collect finite c_pts from lb_simp_rec, compute average, evaluate true objective
-        c_pts_list = lb_simp_rec.get("c_point_per_scene", [])
-        valid_c_pts = [
-            pt for pt in c_pts_list
-            if pt is not None and all(math.isfinite(v) for v in pt)
-        ]
-        if valid_c_pts:
-            x_avg = tuple(np.mean(valid_c_pts, axis=0))
-            # Evaluate TRUE objective at x_avg for each scenario
-            ub_avg_vals = [
-                evaluate_Q_at(base_bundles[s], first_vars_list[s], x_avg)
-                for s in range(S)
-            ]
-            ub_avg_val = float(sum(ub_avg_vals))  # same aggregation as UB_global
-            # Update UB if this improves it AND doesn't violate best_lb_ever
-            if ub_avg_val < UB_global and ub_avg_val >= best_lb_ever - 1e-8:
-                UB_global = ub_avg_val
-                UB_node = x_avg
-                ub_idx = None  # Mark that UB is not from a mesh node
-                # === NEW: Add this candidate to the library so it's never forgotten ===
-                ub_candidate_library.append((x_avg, ub_avg_val))
-                if verbose:
-                    print(f"[Iter {it}] NEW: avg c_s UB candidate improved UB: {ub_avg_val:.6e} (added to library)")
+        # LB/UB per user definition: DISABLED - UB candidates only from NEW simplices (end-of-iter)
+        # The following avg_cs and library reuse blocks are disabled per user spec.
+        # UB is now computed ONLY from new simplices after split.
+        
+        # # NEW: avg c_s UB candidate (DISABLED per user spec)
+        # # Collect finite c_pts from lb_simp_rec, compute average, evaluate true objective
+        # c_pts_list = lb_simp_rec.get("c_point_per_scene", [])
+        # valid_c_pts = [
+        #     pt for pt in c_pts_list
+        #     if pt is not None and all(math.isfinite(v) for v in pt)
+        # ]
+        # if valid_c_pts:
+        #     x_avg = tuple(np.mean(valid_c_pts, axis=0))
+        #     # Evaluate TRUE objective at x_avg for each scenario
+        #     ub_avg_vals = [
+        #         evaluate_Q_at(base_bundles[s], first_vars_list[s], x_avg)
+        #         for s in range(S)
+        #     ]
+        #     ub_avg_val = float(sum(ub_avg_vals))  # same aggregation as UB_global
+        #     # Update UB if this improves it AND doesn't violate best_lb_ever
+        #     if ub_avg_val < UB_global and ub_avg_val >= best_lb_ever - 1e-8:
+        #         UB_global = ub_avg_val
+        #         UB_node = x_avg
+        #         ub_idx = None  # Mark that UB is not from a mesh node
+        #         # === NEW: Add this candidate to the library so it's never forgotten ===
+        #         ub_candidate_library.append((x_avg, ub_avg_val))
+        #         # Track UB provenance
+        #         ub_updated_this_iter = True
+        #         ub_source_this_iter = "avg_cs"
+        #         ub_simplex_id_this_iter = tuple(sorted(lb_simp_rec["vert_idx"]))
+        #         if verbose:
+        #             print(f"[Iter {it}] NEW: avg c_s UB candidate improved UB: {ub_avg_val:.6e} (added to library)")
 
-        # === NEW: Check all candidates in the library to ensure UB never increases ===
-        # IMPORTANT: Only use library entries that are still valid (>= best_lb_ever)
-        for lib_pt, lib_ub_val in ub_candidate_library:
-            if lib_ub_val < UB_global and lib_ub_val >= best_lb_ever - 1e-8:
-                UB_global = lib_ub_val
-                UB_node = lib_pt
-                ub_idx = None
+        # # === NEW: Check all candidates in the library to ensure UB never increases === (DISABLED per user spec)
+        # # IMPORTANT: Only use library entries that are still valid (>= best_lb_ever)
+        # for lib_pt, lib_ub_val in ub_candidate_library:
+        #     if lib_ub_val < UB_global and lib_ub_val >= best_lb_ever - 1e-8:
+        #         UB_global = lib_ub_val
+        #         UB_node = lib_pt
+        #         ub_idx = None
+        #         # Track UB provenance (library reuse)
+        #         ub_updated_this_iter = True
+        #         ub_source_this_iter = "library_reuse"
+        #         ub_simplex_id_this_iter = None
 
-        # === Update best_ub_ever for monotonic tracking ===
-        best_ub_ever = min(best_ub_ever, UB_global)
+        # LB/UB per user definition: best_ub_ever update disabled here, done AFTER end-of-iter
+        # best_ub_ever = min(best_ub_ever, UB_global)  # DISABLED
+
+        # LB/UB per user definition: UB provenance updated ONLY at end-of-iter, not here
+        # (Removed pre-split provenance updates per user spec)
 
         # ======= Consistency check: selected simplex LB(=LB_global) should not exceed UB_global =======
         # Theoretically surrogate is underestimator, so LB_global <= UB_global should always hold
@@ -1026,11 +1099,12 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
         ms_iter = ms_a
 
 
-        # === Print the current round's optimality gap ===
+        # === Print the current round's optimality gap (PRE-SPLIT, not final) ===
+        # Note: This is before end-of-iter update; final gap printed later
         gap_abs = float(UB_global - LB_global)
         gap_pct = (gap_abs / (abs(UB_global) + 1e-16)) * 100.0
         if verbose:
-            print(f"[Iter {it}] Optimality abs-gap: {gap_abs:.6e} ({gap_pct:.3f}%)")
+            print(f"[Iter {it}] Pre-split gap: {gap_abs:.6e} ({gap_pct:.3f}%)")
 
         # 7) record
         LB_hist.append(LB_global)
@@ -1059,39 +1133,11 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
             kind = "none"
         split_kind_hist.append(kind)
 
-        # === Append current iteration to CSV (using monotonic best bounds) ===
-        iter_time = iter_time_hist[-1]
-        n_nodes = node_count[-1]
-        # Use best_lb_ever and best_ub_ever for monotonic bounds in CSV
-        lb_val = best_lb_ever / S
-        ub_val = best_ub_ever / S
-        abs_gap = (best_ub_ever - best_lb_ever) / S
-        rel_gap = abs_gap / (abs(ub_val) + 1e-16)
-        with open(csv_path, "a", newline="", encoding="utf-8") as f:
-            writer = csv.writer(f)
-            writer.writerow([f"{iter_time:.3f}", n_nodes, f"{lb_val:.9f}", f"{ub_val:.9f}", f"{rel_gap*100:.4f}%", f"{abs_gap:.5f}"])
+        # LB/UB per user definition: CSV writing moved to AFTER end-of-iter block
 
 
 
-        # === Convergence stopping condition ===
-        if gap_stop_tol is not None and float(gap_stop_tol) > 0.0:
-            gap_rel = float(UB_global - LB_global) / (abs(UB_global) + 1e-16)
-            if gap_rel <= float(gap_stop_tol):
-                if verbose:
-                    print(f"[Iter {it}] Stop: UB-LB gap {gap_rel:.6e} <= tol {float(gap_stop_tol):.6e}.")
-                    t_iter = perf_counter() - t_iter0
-                    timing["iter_total_time"][timing_idx] = t_iter
-                break
-
-        # === Time limit stopping condition ===
-        if time_limit is not None and time_limit > 0:
-            elapsed = perf_counter() - t_start
-            if elapsed >= time_limit:
-                if verbose:
-                    print(f"[Iter {it}] Stop: Time limit reached ({elapsed:.2f}s >= {time_limit:.2f}s).")
-                    t_iter = perf_counter() - t_iter0
-                    timing["iter_total_time"][timing_idx] = t_iter
-                break
+        # LB/UB per user definition: Stop conditions moved to AFTER end-of-iter block
 
         # 8) print
         # NEW: Guard simp_with_min computation - only valid if ub_idx is an integer index into nodes
@@ -1514,6 +1560,16 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
             sid = int(chosen_cand["simplex_index"])
             loc_type = chosen_cand.get("loc_type", "interior")
             loc_info = chosen_cand.get("loc_info", None)
+            
+            # LB/UB per user definition: save selected simplex record BEFORE split
+            selected_rec_before_split = chosen_cand.get("_rec", None)
+            if selected_rec_before_split is None:
+                # Try to find it from per_tet
+                for r in per_tet:
+                    if r["simplex_index"] == sid:
+                        selected_rec_before_split = r
+                        break
+            selected_simplex_id = tuple(sorted(selected_rec_before_split["vert_idx"])) if selected_rec_before_split else None
 
             # Assign code to split type: 1=interior, 2=edge, 3=face
             split_code = {"interior": 1, "edge": 2, "face": 3}.get(loc_type, 0)
@@ -1521,27 +1577,267 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 print(f"[Iter {it}] subdivision type = {loc_type} "
                       f"(code={split_code}) on simplex T{sid}")
 
+            # LB/UB per user definition: capture n_children from subdivide
             if loc_type == "edge" and loc_info is not None:
                 edge_verts = loc_info["edge_verts"]   # Here follows the meaning defined in _snap_feature
                 if verbose:
                     print(f"           edge local verts = {edge_verts}")
-                tet_mesh.subdivide_edge(sid, new_node_index, edge_verts)
+                n_children = tet_mesh.subdivide_edge(sid, new_node_index, edge_verts)
             elif loc_type == "face" and loc_info is not None:
                 face_verts = loc_info["face_verts"]
                 if verbose:
                     print(f"           face local verts = {face_verts}")
-                tet_mesh.subdivide_face(sid, new_node_index, face_verts)
+                n_children = tet_mesh.subdivide_face(sid, new_node_index, face_verts)
             else:
                 # Default treated as interior point, star subdivision
-                tet_mesh.subdivide(sid, new_node_index)
+                n_children = tet_mesh.subdivide(sid, new_node_index)
+        else:
+            n_children = 0  # No split happened
 
         add_node_hist.append(new_node)
         if verbose:
             print(f"[Iter {it}] Elapsed: {perf_counter() - t_iter0:.3f}s")
 
+        # ====================================================================
+        # LB/UB per user definition: end-of-iter min-LB and incumbent UB from NEW simplices only
+        # ====================================================================
+        
+        # Track which simplex indices are "new" this iteration
+        # LB/UB per user definition: ALWAYS use n_children-based calculation (no it==0 special case)
+        # subdivide does pop()+extend(), so new children are at the END of tets list
+        n_simplices_after = len(tet_mesh.tets)
+        # new_ids = last n_children indices after subdivide
+        new_simplex_indices = list(range(n_simplices_after - n_children, n_simplices_after))
+        
+        # Re-evaluate per_tet for ALL simplices after split (to get updated LB_local values)
+        _, per_tet_end = evaluate_all_tetra(
+            nodes, scen_values, ms_bundles, first_vars_list,
+            ms_cache=ms_cache, cache_on=True, tracker=tracker,
+            tet_mesh=tet_mesh,
+        )
+        
+        # Build per_tet dict for quick lookup
+        per_tet_dict = {r["simplex_index"]: r for r in per_tet_end}
+        
+        # LB_global_end = min over ALL simplices of LB_local
+        LB_global_end = float(min(r["LB"] for r in per_tet_end))
+        lb_simp_rec_end = min(per_tet_end, key=lambda r: r["LB"])
+        
+        # LB/UB per user definition: best_lb_ever update moved to AFTER end-of-iter CSV/stop logic
+        
+        # UB_global_end: generate candidates ONLY from NEW simplices
+        # LB/UB per user definition: use incumbent logic (min with previous UB)
+        UB_global_end = UB_incumbent  # Start from incumbent (not reset per iteration)
+        ub_source_end = ub_source_this_iter if ub_updated_this_iter else ub_source_current
+        ub_updated_end = False
+        
+        for new_idx in new_simplex_indices:
+            if new_idx not in per_tet_dict:
+                continue
+            rec = per_tet_dict[new_idx]
+            
+            # (a) avgMS point: average of per-scenario xms points for this simplex
+            xms_list = rec.get("xms_per_scene", [])
+            valid_xms = [pt for pt in xms_list if pt is not None and all(math.isfinite(v) for v in pt)]
+            if valid_xms:
+                avg_ms_pt = tuple(np.mean(valid_xms, axis=0))
+                # Evaluate TRUE objective at avg_ms_pt (expected value)
+                true_val = 0.0
+                for s in range(S):
+                    true_val += evaluate_Q_at(base_bundles[s], first_vars_list[s], avg_ms_pt)
+                
+                # LB/UB per user definition: allow incumbent update when true_val < UB
+                # If true_val < LB_global_end, emit warning (potential invalid LB) but still update
+                if true_val < LB_global_end - 1e-8:
+                    print(f"[Iter {it}] WARNING: UB candidate {true_val/S:.6e} < LB {LB_global_end/S:.6e} (potential invalid LB)")
+                if true_val < UB_global_end:
+                    UB_global_end = true_val
+                    UB_node = avg_ms_pt
+                    ub_updated_end = True
+                    ub_source_end = "avgMS_new_simplex"
+                    ub_simplex_id_this_iter = tuple(sorted(rec["vert_idx"]))
+                    # Add to library for monotonicity
+                    ub_candidate_library.append((avg_ms_pt, true_val))
+                    if verbose:
+                        print(f"[Iter {it}] UB candidate from new simplex {new_idx}: {true_val/S:.6e} (per scenario)")
+            
+            # (b) EF point: skip cleanly if not implemented/enabled
+            # (EF is not implemented in this code path per prior comments)
+        
+        # Provenance logging uses end-of-iter incumbent UB only
+        # Update provenance if UB changed this iteration
+        if ub_updated_end:
+            ub_updated_this_iter = True
+            ub_source_current = ub_source_end
+            ub_origin_iter_current = it
+            ub_simplex_id_current = ub_simplex_id_this_iter
+            iter_logger.update_ub_provenance(
+                updated=True,
+                source=ub_source_end,
+                simplex_id=ub_simplex_id_this_iter,
+                origin_iter=it
+            )
+        else:
+            iter_logger.update_ub_provenance(updated=False)
+        
+        # === OVERRIDE LB_hist/UB_hist with end-of-iteration values ===
+        # These will be used for both CSV and summary table
+        if LB_hist:
+            LB_hist[-1] = LB_global_end
+        if UB_hist:
+            UB_hist[-1] = UB_global_end
+        
+        # Also update the current-iteration LB_global/UB_global for consistency
+        LB_global = LB_global_end
+        UB_global = UB_global_end
+        lb_simp_rec = lb_simp_rec_end
+        
+        # LB/UB per user definition: update incumbent UB
+        UB_incumbent = UB_global_end
+        
+        # ====================================================================
+        # End of LB/UB per user definition
+        # ====================================================================
 
         t_iter = perf_counter() - t_iter0
         timing["iter_total_time"][timing_idx] = t_iter 
+        
+        # === Update best_lb_ever / best_ub_ever AFTER end-of-iter ===
+        # LB/UB per user definition: update monotonic envelopes using end-of-iter values
+        best_lb_ever = max(best_lb_ever, LB_global_end)
+        best_ub_ever = min(best_ub_ever, UB_global_end)
+        
+        # === Append current iteration to CSV (AFTER end-of-iter update) ===
+        # LB/UB per user definition: use end-of-iter LB/UB (same as summary table)
+        iter_time = iter_time_hist[-1]
+        n_nodes = node_count[-1]
+        lb_val = LB_global_end / S  # end-of-iteration LB
+        ub_val = UB_global_end / S  # end-of-iteration UB
+        abs_gap = (UB_global_end - LB_global_end) / S
+        rel_gap = abs_gap / (abs(ub_val) + 1e-16)
+        # Additional monotonic envelope columns
+        lb_ever = best_lb_ever / S
+        ub_ever = best_ub_ever / S
+        with open(csv_path, "a", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([f"{iter_time:.3f}", n_nodes, f"{lb_val:.9f}", f"{ub_val:.9f}", f"{rel_gap*100:.4f}%", f"{abs_gap:.5f}", f"{lb_ever:.9f}", f"{ub_ever:.9f}"])
+
+        # === Convergence stopping condition (AFTER end-of-iter) ===
+        if gap_stop_tol is not None and float(gap_stop_tol) > 0.0:
+            gap_rel_end = float(UB_global_end - LB_global_end) / (abs(UB_global_end) + 1e-16)
+            if gap_rel_end <= float(gap_stop_tol):
+                if verbose:
+                    print(f"[Iter {it}] Stop: UB-LB gap {gap_rel_end:.6e} <= tol {float(gap_stop_tol):.6e}.")
+                break
+
+        # === Time limit stopping condition ===
+        if time_limit is not None and time_limit > 0:
+            elapsed = perf_counter() - t_start
+            if elapsed >= time_limit:
+                if verbose:
+                    print(f"[Iter {it}] Stop: Time limit reached ({elapsed:.2f}s >= {time_limit:.2f}s).")
+                break
+
+        # === Per-iteration diagnostic logging ===
+        try:
+            # EF info: no EF solve in this code path
+            ef_info = {
+                "EF_attempted": False,
+                "EF_enabled": None,
+                "time_sec": None,
+                "status": None,
+                "termination_condition": None,
+                "solver_status": None,
+                "used_for_UB": None,
+            }
+
+            # UB info
+            ub_info = {"updated_this_iter": ub_updated_this_iter}
+
+            # LB simplex tracking
+            # LB/UB per user definition: use pre-saved selected_simplex_id (saved BEFORE split)
+            # selected_simplex_id: the simplex chosen for branching/splitting this iteration (before split)
+            # Note: selected_simplex_id was saved when chosen_cand was processed, before the split
+            lb_selected_simplex_id = selected_simplex_id if 'selected_simplex_id' in dir() else None
+            
+            # best_simplex_id_before_split: the branching simplex (same as selected)
+            lb_best_before_split = lb_selected_simplex_id
+            
+            # best_simplex_id_after_split: computed from lb_simp_rec_end (argmin LB after split/rebuild)
+            lb_best_after_split = tuple(sorted(lb_simp_rec_end["vert_idx"])) if lb_simp_rec_end else None
+            
+            # Check if after-split best stays in selected (same vertex set implies stayed)
+            stays_in_selected = (lb_best_before_split == lb_best_after_split) if lb_best_before_split and lb_best_after_split else None
+            
+            lb_info = {
+                "selected_simplex_id": lb_selected_simplex_id,
+                "best_simplex_id_before_split": lb_best_before_split,
+                "best_simplex_id_after_split": lb_best_after_split,
+                "stays_in_selected": stays_in_selected,
+            }
+
+            # MS/CS fallback aggregation for the CURRENT global-LB simplex
+            # Use metadata stored in lb_simp_rec, NOT from ms_bundles (which may be stale/wrong simplex)
+            ms_status_summary = {}
+            ms_fallback_scenarios = []
+            ms_fallback_reason_counts = {}
+            cs_status_summary = {}
+            cs_fallback_scenarios = []
+            cs_fallback_reason_counts = {}
+
+            ms_meta_list = lb_simp_rec.get("ms_meta_per_scene", []) if lb_simp_rec else []
+            cs_meta_list = lb_simp_rec.get("cs_meta_per_scene", []) if lb_simp_rec else []
+
+            for s in range(len(ms_meta_list)):
+                # MS metadata
+                ms_meta = ms_meta_list[s]
+                if ms_meta:
+                    st = ms_meta.get("status", "unknown")
+                    ms_status_summary[st] = ms_status_summary.get(st, 0) + 1
+                    if ms_meta.get("used_fallback", False):
+                        ms_fallback_scenarios.append(s)
+                        reason = ms_meta.get("fallback_reason", "other")
+                        ms_fallback_reason_counts[reason] = ms_fallback_reason_counts.get(reason, 0) + 1
+                else:
+                    ms_status_summary["cached"] = ms_status_summary.get("cached", 0) + 1
+
+            for s in range(len(cs_meta_list)):
+                # CS metadata
+                cs_meta = cs_meta_list[s]
+                if cs_meta:
+                    st = cs_meta.get("status", "unknown")
+                    cs_status_summary[st] = cs_status_summary.get(st, 0) + 1
+                    if cs_meta.get("used_fallback", False):
+                        cs_fallback_scenarios.append(s)
+                        reason = cs_meta.get("fallback_reason", "other")
+                        cs_fallback_reason_counts[reason] = cs_fallback_reason_counts.get(reason, 0) + 1
+                else:
+                    cs_status_summary["cached"] = cs_status_summary.get("cached", 0) + 1
+
+            ms_agg = {
+                "status_summary": ms_status_summary,
+                "fallback_any": len(ms_fallback_scenarios) > 0,
+                "fallback_count": len(ms_fallback_scenarios),
+                "fallback_scenarios": ms_fallback_scenarios,
+                "fallback_reason_counts": ms_fallback_reason_counts,
+            }
+
+            cs_agg = {
+                "status_summary": cs_status_summary,
+                "fallback_any": len(cs_fallback_scenarios) > 0,
+                "fallback_count": len(cs_fallback_scenarios),
+                "fallback_scenarios": cs_fallback_scenarios,
+                "fallback_reason_counts": cs_fallback_reason_counts,
+            }
+
+            # Log this iteration
+            iter_logger.log_iteration(it, ef_info, ub_info, lb_info, ms_agg, cs_agg)
+
+        except Exception as e:
+            # Logging must never crash the algorithm
+            if verbose:
+                print(f"[Iter {it}] Warning: diagnostic logging failed: {e}")
+
         it += 1
 
     # === Final summary table (like Gurobi log) ===
@@ -1589,6 +1885,9 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
             )
 
 
+
+    # === Close iteration logger ===
+    iter_logger.close()
 
     return {
         "nodes": np.array(nodes, float),

@@ -328,6 +328,31 @@ class MSBundle:
         # Here we still only record ms solve time
         self.solve_time_hist.append(dt)
 
+        # Extract solver status/termination for logging
+        termination = res.solver.termination_condition
+        solver_status = res.solver.status
+
+        # Map termination condition to status string for logging
+        def _term_to_status(term):
+            if term in {TerminationCondition.optimal, TerminationCondition.locallyOptimal}:
+                return "optimal"
+            elif term == TerminationCondition.maxTimeLimit:
+                return "time_limit"
+            elif term == TerminationCondition.maxIterations:
+                return "iter_limit"
+            elif term in {TerminationCondition.infeasible, TerminationCondition.infeasibleOrUnbounded}:
+                return "infeasible"
+            elif solver_status == SolverStatus.aborted:
+                return "aborted"
+            elif solver_status == SolverStatus.error:
+                return "error"
+            else:
+                return "unknown"
+
+        status_str = _term_to_status(termination)
+        used_fallback = False
+        fallback_reason = None
+
         # Capture dual bound for MS problem
         try:
             lb = res.problem.lower_bound
@@ -344,25 +369,43 @@ class MSBundle:
                 else:
                     # For other cases, use obj_ms as fallback
                     self._last_ms_val = float(pyo.value(self.model.obj_ms))
+                    used_fallback = True
+                    fallback_reason = "no_dual_bound"
             else:
                 self._last_ms_val = float(lb)
         except:
             self._last_ms_val = float(pyo.value(self.model.obj_ms))
+            used_fallback = True
+            fallback_reason = "no_lower_bound"
 
         # Check if solver has a valid bound
         # For optimal/locally optimal: status should be ok/warning
         # For time/iteration limits: status is aborted but we can still use the bound
-        termination = res.solver.termination_condition
         ok = False
         
         if termination in {TerminationCondition.optimal, TerminationCondition.locallyOptimal}:
-            ok = res.solver.status in {SolverStatus.ok, SolverStatus.warning}
+            ok = solver_status in {SolverStatus.ok, SolverStatus.warning}
         elif termination in {TerminationCondition.maxTimeLimit, TerminationCondition.maxIterations}:
             # Accept aborted status when hitting limits - bound may still be valid
-            ok = res.solver.status in {SolverStatus.ok, SolverStatus.warning, SolverStatus.aborted}
+            ok = solver_status in {SolverStatus.ok, SolverStatus.warning, SolverStatus.aborted}
         
         if not ok:
-            print(f"[Subproblem solving issue] MS Problem not optimal. Status: {res.solver.status}, Term: {termination}. Ignoring simplex.")
+            print(f"[Subproblem solving issue] MS Problem not optimal. Status: {solver_status}, Term: {termination}. Ignoring simplex.")
+            if not used_fallback:
+                used_fallback = True
+                fallback_reason = "nonoptimal_used_obj"
+
+        # Store metadata for logging (backward compatible - does not change return)
+        self.last_solve_meta = {
+            "status": status_str,
+            "termination_condition": str(termination) if termination else "None",
+            "solver_status": str(solver_status) if solver_status else "None",
+            "used_fallback": used_fallback,
+            "fallback_reason": fallback_reason,
+            "time_sec": dt,
+            "ok": ok,
+        }
+
         return ok
 
 
@@ -385,17 +428,41 @@ class MSBundle:
         dt = perf_counter() - t0
         self.solve_const_time_hist.append(dt)  # Record c_s solve time
         
+        # Extract solver status/termination for logging
+        termination = res.solver.termination_condition
+        solver_status = res.solver.status
+
+        # Map termination condition to status string for logging
+        def _term_to_status(term):
+            if term in {TerminationCondition.optimal, TerminationCondition.locallyOptimal}:
+                return "optimal"
+            elif term == TerminationCondition.maxTimeLimit:
+                return "time_limit"
+            elif term == TerminationCondition.maxIterations:
+                return "iter_limit"
+            elif term in {TerminationCondition.infeasible, TerminationCondition.infeasibleOrUnbounded}:
+                return "infeasible"
+            elif solver_status == SolverStatus.aborted:
+                return "aborted"
+            elif solver_status == SolverStatus.error:
+                return "error"
+            else:
+                return "unknown"
+
+        status_str = _term_to_status(termination)
+        used_fallback = False
+        fallback_reason = None
+
         # Check if solver has a valid bound
         # For optimal/locally optimal: status should be ok/warning
         # For time/iteration limits: status is aborted but we can still use the bound
-        termination = res.solver.termination_condition
         has_bound = False
         
         if termination in {TerminationCondition.optimal, TerminationCondition.locallyOptimal}:
-            has_bound = res.solver.status in {SolverStatus.ok, SolverStatus.warning}
+            has_bound = solver_status in {SolverStatus.ok, SolverStatus.warning}
         elif termination in {TerminationCondition.maxTimeLimit, TerminationCondition.maxIterations}:
             # Accept aborted status when hitting limits - bound may still be valid
-            has_bound = res.solver.status in {SolverStatus.ok, SolverStatus.warning, SolverStatus.aborted}
+            has_bound = solver_status in {SolverStatus.ok, SolverStatus.warning, SolverStatus.aborted}
         
         if has_bound:
             # Use actual objective value for c_s instead of dual bound
@@ -409,7 +476,9 @@ class MSBundle:
                     if dual_bound is not None and math.isfinite(dual_bound):
                         c_val = dual_bound
                     else:
-                        c_val = -1e2
+                        c_val = float('-inf')  # Conservative: no valid dual bound
+                        used_fallback = True
+                        fallback_reason = "no_dual_bound"
 
                     # Also get the candidate point
                     try:
@@ -423,22 +492,42 @@ class MSBundle:
                     # Objective value is inf or -inf, treat as failed
                     c_val = None
                     cand_pt = None
+                    used_fallback = True
+                    fallback_reason = "infeasible_or_error"
             except Exception as e:
                 # Cannot access objective value
                 print(f"[Subproblem solving issue] Constant Cut (c_s) objective access error: {e}. Using -inf.")
                 c_val = None
                 cand_pt = None
+                used_fallback = True
+                fallback_reason = "no_lower_bound"
             
             if c_val is None:
                 # Objective value not available - use -inf to maintain lower bound property
                 print(f"[Subproblem solving issue] Objective value unavailable for c_s, using -inf (conservative lower bound)")
                 c_val = float('-inf')
                 cand_pt = None
+                if not used_fallback:
+                    used_fallback = True
+                    fallback_reason = "nonoptimal_used_obj"
         else:
             # Solver didn't reach a valid state
-            print(f"[Subproblem solving issue] Constant Cut (c_s) failed. Status: {res.solver.status}, Term: {res.solver.termination_condition}. Using -inf.")
+            print(f"[Subproblem solving issue] Constant Cut (c_s) failed. Status: {solver_status}, Term: {termination}. Using -inf.")
             c_val = float('-inf')
             cand_pt = None
+            used_fallback = True
+            fallback_reason = "infeasible_or_error"
+
+        # Store metadata for logging (backward compatible - does not change return)
+        self.last_cs_meta = {
+            "status": status_str,
+            "termination_condition": str(termination) if termination else "None",
+            "solver_status": str(solver_status) if solver_status else "None",
+            "used_fallback": used_fallback,
+            "fallback_reason": fallback_reason,
+            "time_sec": dt,
+            "ok": has_bound,
+        }
 
         # Switch back to ms objective for future use
         self.obj_const.deactivate()
