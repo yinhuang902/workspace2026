@@ -1,57 +1,40 @@
- 50 scenario, ms point, 1e-3
-======================================================================
-ALGORITHM TERMINATION SUMMARY
-======================================================================
-Termination Reason: TARGET NODE LIMIT REACHED
-  ✓ Number of nodes (25) >= target (25)
-  ⚠ Gap tolerance NOT met: 3.141799e-03 > 1.000000e-04
+ 50 scenario, 1e-2
+k = 4
+time_limit = 60*60*1
 
-Final Statistics:
-  Total nodes:       25
-  Total iterations:  17
-  Final UB:          4.911443e+01
-  Final LB:          4.896012e+01
-  Absolute gap:      1.543077e-01
-  Relative gap:      0.3142%
-======================================================================
+Kp bounds: -10.0, -9.363319
+Ki bounds: -100.0, -93.737421
+Kd bounds: -5.39997, 7.10003
 
-===== Simplex search summary (per-scenario) =====
-  Time (s)  # Nodes             LB             UB   Rel. Gap   Abs. Gap   #simplex    #active   Split       Selection
----------------------------------------------------------------------------------------------------------------------
-  2296.884        8    0.979256404    2.231400918   56.1147%    1.25214          6          6    none        ms(dist)
-  2586.878        9    0.979207654    2.231400918   56.1169%    1.25219          7          7    edge             c_s
-  2978.397       10    0.979202160    0.983239591    0.4106%    0.00404         10          8interior             c_s
-  3301.821       11    0.979201567    0.982288651    0.3143%    0.00309         13          8interior             c_s
-  3682.121       12    0.979201559    0.982288651    0.3143%    0.00309         16         11interior             c_s
-  3874.762       13    0.979201578    0.982288651    0.3143%    0.00309         16         10interior             c_s
-  3946.152       14    0.979201821    0.982288651    0.3142%    0.00309         16         10interior             c_s
-  4136.560       15    0.979202064    0.982288651    0.3142%    0.00309         17         11interior             c_s
-  4322.847       16    0.979202317    0.982288651    0.3142%    0.00309         18         12interior             c_s
-  4507.304       17    0.979202475    0.982288651    0.3142%    0.00309         19         13interior             c_s
-  4579.600       18    0.979202478    0.982288651    0.3142%    0.00309         19         13interior             c_s
-  4650.120       19    0.979202479    0.982288651    0.3142%    0.00309         19         13interior             c_s
-  4721.191       20    0.979202477    0.982288651    0.3142%    0.00309         19         13interior             c_s
-  4795.534       21    0.979202484    0.982288651    0.3142%    0.00309         19         13interior             c_s
-  4866.640       22    0.979202479    0.982288651    0.3142%    0.00309         19         13interior             c_s
-  4938.487       23    0.979202490    0.982288651    0.3142%    0.00309         19         13interior             c_s
-  5010.073       24    0.979202498    0.982288651    0.3142%    0.00309         19         13interior             c_s
 
-===== Final PID Parameters (corresponding to current UB) =====
-Kp = -9.994999
-Ki = -99.999995
-Kd = 2.562909
-UB = 49.114433
-============================================================
+        Time (s)  Nodes Explored       Pruned by                              LB              UB        Rel. Gap        Abs. Gap         # Nodes    Prune Method
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+         656.982               1                           * L U      0.97199858      0.97969809         0.7859%        7.70e-03               2            Orig
+    LBs: Orig=0.97199858, Quad=-, Spec=-, Sepa=-, WLSQ=- | Box=100.00%, Tight=100.00%, OBBT_uni=-
+    WLSQ_uniform=-, WLSQ_A=-, WLSQ_B=-, WLSQ_C=-, WLSQ_D1=-, WLSQ_D2=-, WLSQ_E=-, WLSQ_F=0.96903082
+    UB_WLSQ: uniform=- | A=- | B=- | C=- | D1=- | D2=- | E=- | F=0.9807(+0.0010)*
+         1582.31               2                                      0.97199858      0.97969809         0.7859%        7.70e-03               3            WLSQ
+    LBs: Orig=0.97357538, Quad=-, Spec=-, Sepa=-, WLSQ=- | Box=50.33%, Tight=50.33%, OBBT_uni=-
+    WLSQ_uniform=-, WLSQ_A=-, WLSQ_B=-, WLSQ_C=-, WLSQ_D1=-, WLSQ_D2=-, WLSQ_E=-, WLSQ_F=0.97836184
+    UB_WLSQ: uniform=- | A=- | B=- | C=- | D1=- | D2=- | E=- | F=0.9798(+0.0001)*
+        2483.533               3                           * L        0.97707185      0.97969809         0.2681%        2.63e-03               4            WLSQ
+    LBs: Orig=0.97297427, Quad=-, Spec=-, Sepa=-, WLSQ=- | Box=49.67%, Tight=49.67%, OBBT_uni=-
+    WLSQ_uniform=-, WLSQ_A=-, WLSQ_B=-, WLSQ_C=-, WLSQ_D1=-, WLSQ_D2=-, WLSQ_E=-, WLSQ_F=0.97707185
+    UB_WLSQ: uniform=- | A=- | B=- | C=- | D1=- | D2=- | E=- | F=0.9803(+0.0007)*
+        3276.221               4                                      0.97707185      0.97969039         0.2673%        2.62e-03               5            WLSQ
+    LBs: Orig=0.97713255, Quad=-, Spec=-, Sepa=-, WLSQ=- | Box=4.97%, Tight=4.97%, OBBT_uni=-
+    WLSQ_uniform=-, WLSQ_A=-, WLSQ_B=-, WLSQ_C=-, WLSQ_D1=-, WLSQ_D2=-, WLSQ_E=-, WLSQ_F=0.97953137
+    UB_WLSQ: uniform=- | A=- | B=- | C=- | D1=- | D2=- | E=- | F=0.9797(+0.0000)*
+        3850.217               5                           * L        0.97821735      0.97969039         0.1504%        1.47e-03               6            WLSQ
+    LBs: Orig=0.97343736, Quad=-, Spec=-, Sepa=-, WLSQ=- | Box=44.70%, Tight=44.70%, OBBT_uni=-
+    WLSQ_uniform=-, WLSQ_A=-, WLSQ_B=-, WLSQ_C=-, WLSQ_D1=-, WLSQ_D2=-, WLSQ_E=-, WLSQ_F=0.97821735
+    UB_WLSQ: uniform=- | A=- | B=- | C=- | D1=- | D2=- | E=- | F=0.9807(+0.0011)*
+SNoGloDe converged - timed out.
+[SUMMARY] Generated WLSQ comparison plots: lb_compare.png, ub_compare.png
 
-============================================================
-✓ Final UB is better than all corner vertices
-Best corner vertex objective: 111.570046
-Final UB:                     49.114433
-Improvement: 6.245561e+01
-============================================================
-[Time] Main loop total: 5033.607s
-
-==== Done ====
-Total nodes: 25
-Best UB: 49.11443256125217
-Last LB: 48.9601249039255
+====================================================================
+SOLUTION
+Final Upper Bound (UB): 0.979690394715
+Final Lower Bound (LB): 0.978217349685
+Final Relative Gap: 0.150358%
+Final Absolute Gap: 1.47e-03

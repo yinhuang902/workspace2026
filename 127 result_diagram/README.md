@@ -3,7 +3,14 @@ simplex_result_1
 
 
 simplex_result_2
-50 scenario, ms point, 1e-3
+50 scenario, ms point, 1e-2
+avg c_s ub version
+
+
+simplex_result_3
+50 scenario, ms point, 1e-3(?)
+
+
 
 
 
