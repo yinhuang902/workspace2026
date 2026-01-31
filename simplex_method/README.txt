@@ -3,8 +3,11 @@ pid_simplex_mixmscs_time
 初始的单纯加了最大时间的版本
 
 
-pid_simplex_mixmscs_time_refub
+pid_simplex_mixmscs_time_refub_save
 有个预设的（希望是snoglode初始几轮的ub值）ub的版本，不知道是否能把开始的卡着的大gap阶段快速过去
+
+pid_simplex_mixmscs_time_refub
+新版本，老版本每轮重新算一遍，但是好像改坏了，要重头开始一下
 
 
 pid_simplex_mixmscs_time_moreub

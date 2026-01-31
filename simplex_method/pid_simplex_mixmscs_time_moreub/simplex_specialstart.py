@@ -24,10 +24,7 @@ DEBUG_LB_SIMPLEX_SCATTER_GRID_N = 8
 DEBUG_LB_SIMPLEX_SCATTER_NPTS = 300     
 DEBUG_LB_SIMPLEX_SCATTER_OUTDIR = "lb_debug_plots1"
 
-# choose c_s setting
-TOL_MS_C = 1e2      # Distance threshold between ms point and c_s point
-TOL_C_VERTS = 1e2   # Distance threshold between c_s point and simplex vertices
-# choose ms setting
+# Tolerance settings for ms/c point distance checks
 TOL_MS_C = 1e-3      # Distance threshold between ms point and c_s point
 TOL_C_VERTS = 1e2   # Distance threshold between c_s point and simplex vertices
 
@@ -279,6 +276,137 @@ def ms_on_tetra_for_scene(ms_bundle, tet_vertices, fverts_scene):
         c_pt = None
 
     return ms_val, new_pt_ms, c_val, c_pt
+
+
+# ------------------------- Evaluate ONE tetrahedron (incremental helper) -------------------------
+def evaluate_one_tet(idxs, nodes, scen_values, ms_bundles, first_vars_list,
+                     ms_cache=None, cache_on=True, tracker=None):
+    """
+    Evaluate a single tetrahedron and return a per-tet record.
+    
+    This is the incremental version for evaluating newly created child tetrahedra
+    after subdivision, avoiding full recomputation of all tetrahedra.
+    
+    Args:
+        idxs: list/tuple of 4 vertex indices into nodes
+        nodes: list of (Kp, Ki, Kd) tuples for all current nodes
+        scen_values: list[list[float]], scen_values[s][i] = Q_s(node_i)
+        ms_bundles: list of MSBundle for each scenario
+        first_vars_list: list of first-stage Pyomo variables per scenario
+        ms_cache: dict for caching ms/c results
+        cache_on: whether to use cache
+        tracker: SimplexTracker for bookkeeping
+    
+    Returns:
+        dict with per-tet record fields, or None if tetrahedron has zero volume
+    """
+    pts = np.asarray(nodes, dtype=float)
+    S = len(ms_bundles)
+    
+    idxs = list(map(int, idxs))
+    verts = [tuple(pts[i]) for i in idxs]
+    
+    # Volume check
+    v0, v1, v2, v3 = np.array(verts)
+    vol = abs(np.linalg.det(np.stack([v1 - v0, v2 - v0, v3 - v0], axis=1)) / 6.0)
+    
+    mins = pts.min(axis=0)
+    maxs = pts.max(axis=0)
+    diam = float(np.linalg.norm(maxs - mins))
+    vol_tol = 1e-12 * max(diam**3, 1.0)
+    
+    if vol < vol_tol:
+        return None
+    
+    # Use the sorted tuple of vertex indices as the unique ID of the simplex
+    simplex_id = tuple(sorted(idxs))
+    if tracker is not None:
+        tracker.note_created(simplex_id)
+    
+    fverts_per_scene = [[scen_values[s][i] for i in idxs] for s in range(S)]
+    fverts_sum = [sum(fverts_per_scene[s][j] for s in range(S)) for j in range(4)]
+    
+    # Per-scene ms + constant-cut solve with cache
+    key_base = tuple(sorted(idxs))
+    ms_scene = []
+    xms_scene = []
+    c_scene = []
+    cpts_scene = []
+    ms_meta_per_scene = []
+    cs_meta_per_scene = []
+    
+    for ω in range(S):
+        cache_key = (int(ω), key_base)
+        hit = (cache_on and (ms_cache is not None) and (cache_key in ms_cache))
+        
+        if hit:
+            ms_val, new_pt_ms, c_val, c_pt = ms_cache[cache_key]
+            ms_meta_per_scene.append(None)
+            cs_meta_per_scene.append(None)
+        else:
+            ms_val, new_pt_ms, c_val, c_pt = ms_on_tetra_for_scene(
+                ms_bundles[ω], verts, fverts_per_scene[ω]
+            )
+            ms_meta_per_scene.append(getattr(ms_bundles[ω], 'last_solve_meta', None))
+            cs_meta_per_scene.append(getattr(ms_bundles[ω], 'last_cs_meta', None))
+            if cache_on and (ms_cache is not None):
+                ms_cache[cache_key] = (ms_val, new_pt_ms, c_val, c_pt)
+            if tracker is not None:
+                tracker.note_ms_recomputed(simplex_id)
+        
+        ms_scene.append(ms_val)
+        xms_scene.append(new_pt_ms)
+        c_scene.append(c_val)
+        cpts_scene.append(c_pt)
+    
+    if MS_AGG == "sum":
+        ms_total = float(np.sum(ms_scene))
+        c_total = float(np.sum(c_scene))
+    elif MS_AGG == "mean":
+        ms_total = float(np.mean(ms_scene))
+        c_total = float(np.mean(c_scene))
+    else:
+        raise ValueError("MS_AGG must be 'sum' or 'mean'")
+    
+    UB = float(np.max(fverts_sum) + ms_total)
+    
+    # Solve true surrogate LB
+    LB_sur = solve_surrogate_lb_for_tet(fverts_per_scene, ms_scene, c_scene)
+    
+    best_scene = int(np.argmin(ms_scene))
+    x_ms_best = xms_scene[best_scene]
+    
+    # Count infeasible vertices (Q >= 1e5 in any scenario)
+    n_infeas_verts = 0
+    for j in range(4):
+        is_infeas = False
+        for s in range(S):
+            if fverts_per_scene[s][j] >= 1e5 - 1e-9:
+                is_infeas = True
+                break
+        if is_infeas:
+            n_infeas_verts += 1
+    
+    return {
+        "simplex_id": simplex_id,
+        "vert_idx": idxs,
+        "verts": verts,
+        "fverts_sum": fverts_sum,
+        "ms_per_scene": ms_scene,
+        "xms_per_scene": xms_scene,
+        "c_per_scene": c_scene,
+        "c_point_per_scene": cpts_scene,
+        "ms": ms_total,
+        "c_agg": c_total,
+        "LB": LB_sur,
+        "UB": UB,
+        "x_ms_best_scene": x_ms_best,
+        "best_scene": best_scene,
+        "volume": vol,
+        "n_infeas_verts": n_infeas_verts,
+        "ms_meta_per_scene": ms_meta_per_scene,
+        "cs_meta_per_scene": cs_meta_per_scene,
+    }
 
 
 # ------------------------- Evaluate all tetrahedra (per-scene) -------------------------
@@ -636,15 +764,6 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
             scen_values[ω][i] = evaluate_Q_at(base_bundles[ω], first_vars_list[ω], node)
     timing["init_Q_time"] = perf_counter() - t_init_q0
 
-
-    # cache f_ω(node_i)
-    scen_values = [[None]*len(nodes) for _ in range(S)]
-    t_init_q0 = perf_counter()
-    for i, node in enumerate(nodes):
-        for ω in range(S):
-            scen_values[ω][i] = evaluate_Q_at(base_bundles[ω], first_vars_list[ω], node)
-    timing["init_Q_time"] = perf_counter() - t_init_q0
-
     # ==== NEW: exact optima for validation / plotting ====
     exact_points_per_scen = None
     exact_point_agg = None
@@ -665,6 +784,18 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
     it = 0
     stop_due_to_collision = False
     ms_cache = {}   # (scene_idx, sorted(vert_idx)) -> (ms_val, new_pt_ms, c_val, c_pt)
+
+    # === INCREMENTAL: Initial per-tet evaluation (ONCE before main loop) ===
+    _, per_tet_init = evaluate_all_tetra(
+        nodes, scen_values, ms_bundles, first_vars_list,
+        ms_cache=ms_cache, cache_on=True, tracker=tracker,
+        tet_mesh=tet_mesh,
+    )
+    # Build persistent dict keyed by simplex_id (stable across subdivisions)
+    tet_records = {}
+    for r in per_tet_init:
+        sid = r.get("simplex_id", tuple(sorted(r["vert_idx"])))
+        tet_records[sid] = r
 
     # === NEW: helper to nudge candidate point slightly into simplex interior (if necessary) ===
     def _snap_feature(cand_pt, rec,
@@ -804,13 +935,18 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
         # Track vertex as initial UB source for this iteration (debug only)
         vertex_ub_simplex_id = None  # vertex is not tied to a specific simplex for now
 
-        # 2) Evaluate all tetrahedrons (single scene)
+        # 2) INCREMENTAL: Build per_tet from persistent tet_records (no recomputation)
         t_ms0 = perf_counter()
-        tri, per_tet = evaluate_all_tetra(
-            nodes, scen_values, ms_bundles, first_vars_list,
-            ms_cache=ms_cache, cache_on=True, tracker=tracker,
-            tet_mesh=tet_mesh,          # === NEW: use incremental mesh
-        )
+        per_tet = []
+        for simplex_index, idxs in enumerate(tet_mesh.tets):
+            sid = tuple(sorted(idxs))
+            if sid not in tet_records:
+                raise KeyError(f"[Iter {it}] Missing tet_records for simplex_id {sid} at index {simplex_index}")
+            rec = tet_records[sid].copy()
+            rec["simplex_index"] = simplex_index
+            rec["vert_idx"] = list(idxs)  # Current order in tet_mesh
+            per_tet.append(rec)
+        tri = tet_mesh.as_delaunay_like()
         t_ms = perf_counter() - t_ms0
         timing["iter_ms_time"][timing_idx] = t_ms
 
@@ -1577,6 +1713,10 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 print(f"[Iter {it}] subdivision type = {loc_type} "
                       f"(code={split_code}) on simplex T{sid}")
 
+            # INCREMENTAL: Capture parent simplex_id BEFORE subdivide (for tet_records update)
+            parent_idxs = list(tet_mesh.tets[sid])
+            parent_id = tuple(sorted(parent_idxs))
+
             # LB/UB per user definition: capture n_children from subdivide
             if loc_type == "edge" and loc_info is not None:
                 edge_verts = loc_info["edge_verts"]   # Here follows the meaning defined in _snap_feature
@@ -1609,12 +1749,66 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
         # new_ids = last n_children indices after subdivide
         new_simplex_indices = list(range(n_simplices_after - n_children, n_simplices_after))
         
-        # Re-evaluate per_tet for ALL simplices after split (to get updated LB_local values)
-        _, per_tet_end = evaluate_all_tetra(
-            nodes, scen_values, ms_bundles, first_vars_list,
-            ms_cache=ms_cache, cache_on=True, tracker=tracker,
-            tet_mesh=tet_mesh,
-        )
+        # === INCREMENTAL: Update tet_records instead of re-evaluating all ===
+        # Evaluate ONLY new children (guard against n_children == 0)
+        child_ids = []
+        if n_children > 0:
+            # Delete parent record (parent is replaced by children)
+            if parent_id in tet_records:
+                del tet_records[parent_id]
+            
+            for child_idxs in tet_mesh.tets[-n_children:]:
+                child_rec = evaluate_one_tet(
+                    list(child_idxs), nodes, scen_values, ms_bundles, first_vars_list,
+                    ms_cache=ms_cache, cache_on=True, tracker=tracker
+                )
+                child_id = tuple(sorted(child_idxs))
+                if child_rec is not None:
+                    tet_records[child_id] = child_rec
+                    child_ids.append(child_id)
+                else:
+                    # Degenerate (zero-volume) child: insert placeholder so assertions pass
+                    # LB/UB = +inf ensures this tet is never selected
+                    tet_records[child_id] = {
+                        "simplex_id": child_id,
+                        "vert_idx": list(child_idxs),
+                        "verts": [tuple(nodes[i]) for i in child_idxs],
+                        "fverts_sum": [float('inf')] * 4,
+                        "ms_per_scene": [],
+                        "xms_per_scene": [],
+                        "c_per_scene": [],
+                        "c_point_per_scene": [],
+                        "ms": float('inf'),
+                        "c_agg": float('inf'),
+                        "LB": float('inf'),
+                        "UB": float('inf'),
+                        "x_ms_best_scene": None,
+                        "best_scene": 0,
+                        "volume": 0.0,
+                        "n_infeas_verts": 4,
+                        "ms_meta_per_scene": [],
+                        "cs_meta_per_scene": [],
+                    }
+                    child_ids.append(child_id)
+        
+        # === DEFENSIVE ASSERTIONS: ensure tet_records matches tet_mesh.tets ===
+        assert len(tet_records) == len(tet_mesh.tets), \
+            f"[Iter {it}] tet_records count mismatch: {len(tet_records)} records vs {len(tet_mesh.tets)} tets"
+        for tidx, tets_idxs in enumerate(tet_mesh.tets):
+            tsid = tuple(sorted(tets_idxs))
+            assert tsid in tet_records, \
+                f"[Iter {it}] Missing tet_records for simplex_id {tsid} at tet index {tidx}"
+        
+        # Rebuild per_tet_end from tet_records (no recomputation)
+        per_tet_end = []
+        for simplex_index, idxs in enumerate(tet_mesh.tets):
+            sid = tuple(sorted(idxs))
+            if sid not in tet_records:
+                raise KeyError(f"[Iter {it}] Missing tet_records for simplex_id {sid} at index {simplex_index}")
+            rec = tet_records[sid].copy()
+            rec["simplex_index"] = simplex_index
+            rec["vert_idx"] = list(idxs)
+            per_tet_end.append(rec)
         
         # Build per_tet dict for quick lookup
         per_tet_dict = {r["simplex_index"]: r for r in per_tet_end}
