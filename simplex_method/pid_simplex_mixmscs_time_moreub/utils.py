@@ -516,18 +516,22 @@ class SimplexTracker:
     def note_created(self, simplex_id):
         if simplex_id not in self._created_ids:
             self._created_ids.add(simplex_id)
-            self.current.created += 1
+            if self.current is not None:
+                self.current.created += 1
             self.cum_created += 1
 
     def note_active(self, simplex_id, has_ub: bool = False):
         if simplex_id not in self._active_ids:
             self._active_ids.add(simplex_id)
-            self.current.active += 1
+            if self.current is not None:
+                self.current.active += 1
         if has_ub and simplex_id not in self._active_with_ub_ids:
             self._active_with_ub_ids.add(simplex_id)
-            self.current.active_with_ub += 1
+            if self.current is not None:
+                self.current.active_with_ub += 1
 
     def note_ms_recomputed(self, simplex_id):
         if simplex_id not in self._ms_recomp_ids:
             self._ms_recomp_ids.add(simplex_id)
-            self.current.ms_recomputed += 1
+            if self.current is not None:
+                self.current.ms_recomputed += 1

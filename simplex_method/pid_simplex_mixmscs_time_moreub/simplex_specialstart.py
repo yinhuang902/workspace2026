@@ -1960,8 +1960,14 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
             # best_simplex_id_after_split: computed from lb_simp_rec_end (argmin LB after split/rebuild)
             lb_best_after_split = tuple(sorted(lb_simp_rec_end["vert_idx"])) if lb_simp_rec_end else None
             
-            # Check if after-split best stays in selected (same vertex set implies stayed)
-            stays_in_selected = (lb_best_before_split == lb_best_after_split) if lb_best_before_split and lb_best_after_split else None
+            # Check if after-split best LB simplex is one of the children created from the split.
+            # We use child_ids (the exact IDs of newly created children) rather than comparing 
+            # simplex IDs directly, because a simplex sharing vertices with parent could be a 
+            # neighboring simplex that existed before the split.
+            if lb_best_after_split is not None and child_ids:
+                stays_in_selected = lb_best_after_split in child_ids
+            else:
+                stays_in_selected = None
             
             lb_info = {
                 "selected_simplex_id": lb_selected_simplex_id,
