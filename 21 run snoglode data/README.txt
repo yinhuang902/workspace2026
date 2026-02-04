@@ -3,4 +3,9 @@
 
 snoglode-main-2-ori-rundata
 先改造成run serially并且记录数据跑起来
-现在home pc上用1e-2 serially 50scen运行，同时改了Kd的bound
+
+
+
+--------------------data-----------------------------
+sp_snog_result_1e2
+home pc，1e-2， serially 50scen，改了Kd的bound

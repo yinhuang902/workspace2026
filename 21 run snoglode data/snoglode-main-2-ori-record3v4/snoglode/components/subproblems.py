@@ -17,9 +17,24 @@ size = MPI.COMM_WORLD.Get_size()
 import logging
 logging.getLogger('pyomo.core').setLevel(logging.ERROR)
 
+# Module-level logger for bounds validation
+logger = logging.getLogger(__name__)
+
 import numpy as np
 import math
 import itertools
+
+# Tolerance for repairing tiny numerical inversions in bounds
+BND_EPS = 1e-9
+
+def _is_finite(x):
+    """Check if x is a finite number (not None, NaN, or inf)."""
+    return x is not None and isinstance(x, (int, float)) and math.isfinite(x)
+
+
+class InconsistentBoundsError(Exception):
+    """Raised when bounds are inconsistent (lb > ub) beyond numerical tolerance."""
+    pass
 
 class Subproblems():
     """
@@ -326,14 +341,83 @@ class Subproblems():
         feasible = self._tighten_rank_subproblem_bounds(node)
         if not feasible: return False
 
+        # Validate bounds after rank tightening
+        if not self._validate_and_repair_node_state_bounds(node.state, where="after_rank_tighten"):
+            return False
+
         # (2) if in parallel, determine new bounds for all subproblems on all ranks
         # update the node
         self._sync_all_lifted_vars(node.state)
 
+        # Validate bounds after MPI sync
+        if not self._validate_and_repair_node_state_bounds(node.state, where="after_mpi_sync"):
+            return False
+
         # (3) set new bounds on all subproblems
         # NOTE: don't reset the second stage this time (modified in place)
-        self.set_all_states(node.state,
-                            set_second_stage = False)
+        try:
+            self.set_all_states(node.state,
+                                set_second_stage = False)
+        except InconsistentBoundsError as e:
+            logger.error(str(e))
+            return False
+        return True
+
+
+    def _validate_and_repair_node_state_bounds(self, node_state: dict, where: str) -> bool:
+        """
+        Validate and repair bounds in node_state for all lifted variables.
+        
+        - Tiny inversions (lb > ub by <= BND_EPS) are repaired by collapsing to midpoint.
+        - Large inversions or NaN values cause the method to return False (infeasible).
+        
+        Parameters
+        ----------
+        node_state : dict
+            The state dictionary containing bounds for all lifted variables.
+        where : str
+            A label indicating where this validation is being called from (for logging).
+            
+        Returns
+        -------
+        bool
+            True if bounds are valid (possibly after repair), False if infeasible.
+        """
+        for var_domain in SupportedVars:
+            for var_id, lifted_var_state in node_state[var_domain].items():
+                lb = lifted_var_state.lb
+                ub = lifted_var_state.ub
+                
+                # Handle None as ±inf (shouldn't happen often for node state, but be safe)
+                if lb is None:
+                    lb = -math.inf
+                if ub is None:
+                    ub = math.inf
+                
+                # Check for NaN (not ±inf which are allowed)
+                if (not math.isfinite(lb) and lb not in (-math.inf, math.inf)):
+                    logger.error(f"[bounds-nan:{where}] {var_domain}:{var_id} has NaN lb={lb}")
+                    return False
+                if (not math.isfinite(ub) and ub not in (-math.inf, math.inf)):
+                    logger.error(f"[bounds-nan:{where}] {var_domain}:{var_id} has NaN ub={ub}")
+                    return False
+                
+                # Check for inversion
+                if lb > ub:
+                    delta = lb - ub
+                    if delta <= BND_EPS:
+                        # Tiny numerical inversion: collapse to midpoint
+                        mid = 0.5 * (lb + ub)
+                        lifted_var_state.lb = mid
+                        lifted_var_state.ub = mid
+                        logger.warning(
+                            f"[bounds-fix:{where}] tiny inversion repaired for {var_domain}:{var_id} "
+                            f"lb={lb} ub={ub} -> {mid}")
+                    else:
+                        logger.error(
+                            f"[bounds-infeasible:{where}] large inversion for {var_domain}:{var_id} "
+                            f"lb={lb} ub={ub} delta={delta}")
+                        return False
         return True
 
 
@@ -656,10 +740,34 @@ class Subproblems():
         if lifted_var_state.is_fixed: lifted_var.fix(lifted_var_state.value)
         else: lifted_var.unfix()
 
-        # update bounds
-        assert lifted_var_state.lb <= lifted_var_state.ub
-        lifted_var.lb = lifted_var_state.lb
-        lifted_var.ub = lifted_var_state.ub
+        # update bounds with robust validation
+        lb = lifted_var_state.lb
+        ub = lifted_var_state.ub
+        if lb is None: lb = -math.inf
+        if ub is None: ub = math.inf
+        
+        # Check for NaN/invalid values (allow ±inf)
+        if (not math.isfinite(lb) and lb not in (-math.inf, math.inf)) or \
+           (not math.isfinite(ub) and ub not in (-math.inf, math.inf)):
+            raise InconsistentBoundsError(
+                f"[bounds-invalid] {subproblem_name} var={lifted_var.name} has non-finite lb/ub: lb={lb}, ub={ub}")
+        
+        # Handle lb > ub case
+        if lb > ub:
+            delta = lb - ub
+            if delta <= BND_EPS:
+                mid = 0.5 * (lb + ub)
+                logger.warning(
+                    f"[bounds-fix:update_state] {subproblem_name} {lifted_var.name} tiny inversion repaired: "
+                    f"old lb={lifted_var_state.lb}, ub={lifted_var_state.ub} -> {mid}")
+                lb = mid
+                ub = mid
+            else:
+                raise InconsistentBoundsError(
+                    f"[bounds-infeasible] {subproblem_name} {lifted_var.name} lb>ub: lb={lb}, ub={ub}, delta={delta}")
+        
+        lifted_var.lb = lb
+        lifted_var.ub = ub
 
     
     def _perform_fbbt(self, 
@@ -856,8 +964,27 @@ class Subproblems():
                 if lb_best is None: lb_best = float("-inf")
                 if ub_best is None: ub_best = float("inf")
 
-                node.state[var_domain][var_id].lb = max(lb_fbbt, lb_obbt, lb_best)
-                node.state[var_domain][var_id].ub = min(ub_fbbt, ub_obbt, ub_best)
+                new_lb = max(lb_fbbt, lb_obbt, lb_best)
+                new_ub = min(ub_fbbt, ub_obbt, ub_best)
+                
+                # Local check for bounds inversion after tightening
+                if new_lb > new_ub:
+                    delta = new_lb - new_ub
+                    if delta <= BND_EPS:
+                        mid = 0.5 * (new_lb + new_ub)
+                        logger.warning(
+                            f"[bounds-fix:tighten] {subproblem_name} {var_domain}:{var_id} tiny inversion repaired: "
+                            f"lb={new_lb}, ub={new_ub} -> {mid}")
+                        new_lb = mid
+                        new_ub = mid
+                    else:
+                        logger.error(
+                            f"[bounds-infeasible:tighten] {subproblem_name} {var_domain}:{var_id} "
+                            f"lb>ub: lb={new_lb}, ub={new_ub}, delta={delta}")
+                        return False
+                
+                node.state[var_domain][var_id].lb = new_lb
+                node.state[var_domain][var_id].ub = new_ub
         
         return True
         
@@ -883,21 +1010,25 @@ class Subproblems():
             lb = bounds[0]
             ub = bounds[1]
 
-            # if we don't have one of these bounds, it's fine
-            if lb == None or ub == None: return True
+            # if we don't have one of these bounds, skip this var (not an error)
+            if lb is None or ub is None:
+                continue
+            
+            # Check for NaN/inf - reject if non-finite
+            if not math.isfinite(lb) or not math.isfinite(ub):
+                return False
 
             if lb > ub:
-
                 delta = lb - ub
-                assert (delta <= 1e-8)
-                lb = lb - 5*delta
-                ub = ub + 5*delta
-
-                # if that did not fix it, assume model infeasible.
-                if lb > ub: return False
-
-                # update revised bounds
-                variable_bounds[var] = (lb, ub)
+                if delta <= BND_EPS:
+                    # Repair tiny numerical inversion
+                    mid = 0.5 * (lb + ub)
+                    lb = mid - 5 * delta
+                    ub = mid + 5 * delta
+                    variable_bounds[var] = (lb, ub)
+                else:
+                    # Large inversion - infeasible
+                    return False
         
         # everything's fixed, return.
         return True
