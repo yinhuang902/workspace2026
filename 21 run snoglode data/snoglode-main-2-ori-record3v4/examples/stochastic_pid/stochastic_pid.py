@@ -28,7 +28,7 @@ size = MPI.COMM_WORLD.Get_size()
 print("MPI size =", MPI.COMM_WORLD.Get_size(), "rank =", MPI.COMM_WORLD.Get_rank())
 
 
-num_scenarios = 50
+num_scenarios = 10
 sp = 0.5
 df = pd.read_csv(os.getcwd() + "/data.csv")
 plot_dir =  os.getcwd() + "/plots_snoglode_parallel/"
@@ -297,7 +297,7 @@ if __name__ == '__main__':
     
     nonconvex_gurobi_lb = pyo.SolverFactory("gurobi")
     nonconvex_gurobi_lb.options["NonConvex"] = 2
-    nonconvex_gurobi_lb.options["MIPGap"] = 1e-3
+    nonconvex_gurobi_lb.options["MIPGap"] = 1e-1
     nonconvex_gurobi_lb.options["TimeLimit"] = 15
     scenarios = [f"scen_{i}" for i in range(1,num_scenarios+1)]
 

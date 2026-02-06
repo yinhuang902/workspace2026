@@ -4,7 +4,7 @@ from snoglode.components.parameters import SolverParameters
 
 # bounders
 from snoglode.bounders.upper_bounders import AbstractCandidateGenerator, AverageLowerBoundSolution, SolveExtensiveForm
-from snoglode.bounders.lower_bounders import AbstractLowerBounder, DropNonants
+from snoglode.bounders.lower_bounders import AbstractLowerBounder, DropNonants, LGLowerBounder
 
 # queues
 from snoglode.components.queues import QueueStrategy

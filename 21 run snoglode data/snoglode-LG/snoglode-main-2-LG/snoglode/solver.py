@@ -293,7 +293,8 @@ class Solver():
         # here, we solve all of the models associated with this subproblem.
         self.logger.lb_start()
         self.lower_bounder.solve(subproblems = self.subproblems,
-                                 node = current_node)
+                                 node = current_node,
+                                 tree_ub = self.tree.metrics.ub)
         self.logger.lb_stop()
         
         # we need to wait for all LB problems at the other subproblems to find obj / feasibility

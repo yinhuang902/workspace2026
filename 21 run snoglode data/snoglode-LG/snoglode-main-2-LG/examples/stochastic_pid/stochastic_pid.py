@@ -1,6 +1,10 @@
 '''
 generating pyomo model for PID example
 '''
+# Ensure correct snoglode version is loaded (with LG cut pool integration)
+import sys
+sys.path.insert(0, r"c:\Users\pc\Desktop\GitWorkspace2026\21 run snoglode data\snoglode-LG\snoglode-main-2-LG")
+
 import pyomo.environ as pyo
 from pyomo.opt import TerminationCondition, SolverStatus
 from pyomo.contrib.alternative_solutions.aos_utils import get_active_objective
@@ -20,7 +24,7 @@ import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()
 size = MPI.COMM_WORLD.Get_size()
 
-num_scenarios = 2
+num_scenarios = 5
 sp = 0.5
 df = pd.read_csv(os.getcwd() + "/data.csv")
 plot_dir =  os.getcwd() + "/plots_snoglode_parallel/"
@@ -50,9 +54,13 @@ class GurobiLBLowerBounder(sno.AbstractLowerBounder):
                 self.current_milp_gap = 1e-4
             self.opt.options["MIPGap"] = self.current_milp_gap
 
-        # warm start with the ipopt solution
-        ipopt.solve(subproblem_model,
-                    load_solutions = True)
+        # warm start with the ipopt solution (optional - may fail on some models)
+        try:
+            ipopt.solve(subproblem_model,
+                        load_solutions = True)
+        except Exception as e:
+            # IPOPT failed - continue without warm start
+            pass
         
         # solve explicitly to global optimality with gurobi
         results = self.opt.solve(subproblem_model,
@@ -224,7 +232,7 @@ if __name__ == '__main__':
     
     nonconvex_gurobi_lb = pyo.SolverFactory("gurobi")
     nonconvex_gurobi_lb.options["NonConvex"] = 2
-    nonconvex_gurobi_lb.options["MIPGap"] = 1e-1
+    nonconvex_gurobi_lb.options["MIPGap"] = 1e-2
     nonconvex_gurobi_lb.options["TimeLimit"] = 15
     scenarios = [f"scen_{i}" for i in range(1,num_scenarios+1)]
 
@@ -240,13 +248,13 @@ if __name__ == '__main__':
                                   cg_solver = ipopt,
                                   ub_solver = nonconvex_gurobi)
     params.set_bounders(candidate_solution_finder = sno.SolveExtensiveForm,
-                        lower_bounder = GurobiLBLowerBounder)
+                        lower_bounder = sno.LGLowerBounder)
     params.set_bounds_tightening(fbbt=True, 
                                  obbt=True,
                                  obbt_solver_opt=obbt_solver_opts)
-    # params.set_branching(selection_strategy = sno.MaximumDisagreement)
-    params.set_branching(selection_strategy = sno.HybridBranching,
-                         partition_strategy = sno.ExpectedValue)
+    # Use RandomSelection + Midpoint for LG compatibility (other strategies require subproblem solutions)
+    params.set_branching(selection_strategy = sno.RandomSelection,
+                         partition_strategy = sno.Midpoint)
     
     params.activate_verbose()
     # if (size==1): params.set_logging(fname = os.getcwd() + "/logs/stochastic_pid_log")
@@ -259,8 +267,8 @@ if __name__ == '__main__':
     #                        tee = True)
     # quit()
     solver.solve(max_iter=1000,
-                 rel_tolerance = 1e-3,
-                 time_limit = 60*6)
+                 rel_tolerance = 1e-6,
+                 time_limit = 60*15)
 
     if (rank==0):
         print("\n====================================================================")
