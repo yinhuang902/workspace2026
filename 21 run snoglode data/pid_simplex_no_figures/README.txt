@@ -1,0 +1,6 @@
+pid_simplex_mixmscs_time_moreub-clean
+是不输出图片，不保存html的版本，但没有改成serially，要到fir上运行
+
+
+pid_simplex_mixmscs_time_moreub-clean-serially
+预备要改成seriallly版本，但还没改
