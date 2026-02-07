@@ -16,6 +16,8 @@ office pc:
 C:\Users\Administrator\OneDrive\Desktop\workspace2026
 
 cd C:\Users\Administrator\Desktop\workspace2026
+
+cd C:\Users\Administrator\OneDrive\Desktop\workspace2026
 git pull
 
 cd C:\Users\Administrator\OneDrive\Desktop\workspace2026
@@ -23,3 +25,4 @@ git add .
 git commit -m "updated"
 git push
 =================================
+iamHYIN829.

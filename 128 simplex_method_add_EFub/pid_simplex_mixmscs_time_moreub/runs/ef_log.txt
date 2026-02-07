@@ -710,3 +710,11 @@
   x: [-9.99998, -100, 0.918031]
   accepted: True   reject_reason: None
 
+[iter 0] EF enabled=True  simplex_id=1
+  time_sec: 0.467
+  termination: optimal   status: ok
+  ipopt_exit: EXIT: Optimal Solution Found.
+  ub_value: 9.79002
+  x: [-9.99998, -100, 0.918031]
+  accepted: True   reject_reason: None
+

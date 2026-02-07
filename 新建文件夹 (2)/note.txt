@@ -1,7 +1,0 @@
-sim_1e2_2h
-simplex, 1e-2, not serially, 2h
-
-
-
-snog_1e3_6h
-snoglode, 1e-3, serially, 6h

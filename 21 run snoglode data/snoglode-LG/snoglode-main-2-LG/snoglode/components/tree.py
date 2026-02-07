@@ -534,11 +534,15 @@ class Tree():
         converged : bool
             if we have converged or not.
         """
+        # Refuse gap-based convergence when bounds are inconsistent or undefined
+        bounds_bad = (getattr(self.metrics, 'bounds_inconsistent', False)
+                      or getattr(self.metrics, 'gap_undefined', False))
+
         # run out of nodes? gap tolerance met?
-        if self.metrics.absolute_gap <= self.abs_tolerance:
+        if not bounds_bad and self.metrics.absolute_gap <= self.abs_tolerance:
             if (rank==0): print("SNoGloDe converged - absolute gap tolerance met.")
             return True
-        elif self.metrics.relative_gap <= self.rel_tolerance:
+        elif not bounds_bad and self.metrics.relative_gap <= self.rel_tolerance:
             if (rank==0): print("SNoGloDe converged - relative gap tolerance met.")
             return True
         elif self.time_limit <= current_time:
@@ -604,8 +608,41 @@ class Tree():
         """
         Takes the current values in lower_bound and upper_bound
         and recalculates relative / absolute gap.
+
+        If UB < LB beyond numerical tolerance, marks bounds as
+        inconsistent and forces gaps to +inf so gap-based
+        convergence cannot trigger.
         """
-        self.metrics.absolute_gap = self.metrics.ub - self.metrics.lb
+        _INCONSISTENT_TOL = 1e-8
+        ub = self.metrics.ub
+        lb = self.metrics.lb
+
+        # --- Non-finite guard (inf / NaN) ---
+        if not math.isfinite(ub) or not math.isfinite(lb):
+            self.metrics.gap_undefined = True
+            self.metrics.absolute_gap = math.inf
+            self.metrics.relative_gap = math.inf
+            return
+
+        self.metrics.gap_undefined = False
+        raw_gap = ub - lb
+
+        # --- Inconsistency guard (UB < LB) ---
+        if raw_gap < -_INCONSISTENT_TOL:
+            self.metrics.bounds_inconsistent = True
+            self.metrics.absolute_gap = math.inf
+            self.metrics.relative_gap = math.inf
+            if rank == 0:
+                print(f"WARNING: INCONSISTENT BOUNDS  UB={ub:.8f} "
+                      f"< LB={lb:.8f}  (diff={raw_gap:.2e}).  "
+                      f"Gap forced to +inf; convergence blocked.")
+            return
+
+        self.metrics.bounds_inconsistent = False
+
+        # Clamp tiny numerical negatives to zero for display
+        self.metrics.absolute_gap = max(raw_gap, 0.0)
+
         if self.metrics.absolute_gap == 0:
             self.metrics.relative_gap = 0
         elif self.metrics.ub == 0:
