@@ -94,6 +94,24 @@ class BaseBundle:
                 self.model.solutions.load_from(res)
                 val = float(pyo.value(self.model.obj_expr))
                 return val
+
+            # --- NEW: Load Gurobi's incumbent on timeout ---
+            # When Gurobi times out, the model's variable values remain stale
+            # (from the prior warm-start). Loading the incumbent ensures that
+            # downstream solvers (e.g. IPOPT on the EF) inherit good variable
+            # values. The primal objective is still a valid feasible evaluation.
+            elif term in {TerminationCondition.maxTimeLimit, TerminationCondition.maxIterations}:
+                if len(res.solution) > 0:
+                    self.model.solutions.load_from(res)
+                    val = float(pyo.value(self.model.obj_expr))
+                    print(f"[BaseBundle.eval_at] Gurobi {term} for K={K_tuple}. "
+                          f"Loaded incumbent, obj={val:.6e}")
+                    return val
+                else:
+                    print(f"[BaseBundle.eval_at] Gurobi {term} for K={K_tuple}, "
+                          f"no feasible incumbent found. Returning Q_max.")
+                    return Q_max
+
             else:
                 # Infeasible or error
                 print(f"[BaseBundle.eval_at] Infeasible/Error for K={K_tuple}: status={status}, term={term}")

@@ -1,0 +1,14 @@
+# debug_q_timing.txt — NON-OPTIMAL Q-value (evaluate_Q_at) solves only
+# Format: [Iter N] scenario=..., point=..., time=...s, status=..., term=..., obj=...
+
+[Iter 33] scenario=1, point=(-1.7154, -100.0000, 17.1540), time=0.0088s, status=warning, term=infeasibleOrUnbounded, obj=10000000000.0
+[Iter 33] scenario=4, point=(-1.7154, -100.0000, 17.1540), time=0.0083s, status=warning, term=infeasibleOrUnbounded, obj=10000000000.0
+[Iter 33] scenario=5, point=(-1.7154, -100.0000, 17.1540), time=0.0106s, status=warning, term=infeasibleOrUnbounded, obj=10000000000.0
+[Iter 33] scenario=9, point=(-1.7154, -100.0000, 17.1540), time=0.0097s, status=warning, term=infeasibleOrUnbounded, obj=10000000000.0
+[Iter 33] scenario=10, point=(-1.7154, -100.0000, 17.1540), time=0.0082s, status=warning, term=infeasibleOrUnbounded, obj=10000000000.0
+[Iter 33] scenario=12, point=(-1.7154, -100.0000, 17.1540), time=0.0207s, status=warning, term=infeasibleOrUnbounded, obj=10000000000.0
+[Iter 33] scenario=13, point=(-1.7154, -100.0000, 17.1540), time=0.0148s, status=warning, term=infeasibleOrUnbounded, obj=10000000000.0
+[Iter 33] scenario=16, point=(-1.7154, -100.0000, 17.1540), time=0.0120s, status=warning, term=infeasibleOrUnbounded, obj=10000000000.0
+[Iter 33] scenario=17, point=(-1.7154, -100.0000, 17.1540), time=0.0130s, status=warning, term=infeasibleOrUnbounded, obj=10000000000.0
+[Iter 33] scenario=18, point=(-1.7154, -100.0000, 17.1540), time=0.0096s, status=warning, term=infeasibleOrUnbounded, obj=10000000000.0
+[Iter 33] scenario=19, point=(-1.7154, -100.0000, 17.1540), time=0.0125s, status=warning, term=infeasibleOrUnbounded, obj=10000000000.0

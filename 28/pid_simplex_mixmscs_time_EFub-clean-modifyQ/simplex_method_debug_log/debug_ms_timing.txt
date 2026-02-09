@@ -1,0 +1,30 @@
+# debug_ms_timing.txt — NON-OPTIMAL MS (ms_on_tetra) solves only
+# Format: [Iter N] scenario=..., simplex_idx=..., verts=..., time=...s, status=..., dual_bound=..., primal_obj=...
+
+[Iter 0] scenario=0, simplex_idx=5, verts=(1, 3, 4, 5), time=0.0215s, status=infeasible, dual_bound=None, primal_obj=-4841501603.511731
+[Iter 0] scenario=10, simplex_idx=5, verts=(0, 1, 4, 8), time=0.0647s, status=infeasible, dual_bound=None, primal_obj=-5016363604.671422
+[Iter 0] scenario=0, simplex_idx=6, verts=(0, 3, 4, 8), time=15.0102s, status=time_limit, dual_bound=-1.2286219675544585, primal_obj=-1.2286219675544585
+[Iter 0] scenario=1, simplex_idx=6, verts=(0, 3, 4, 8), time=15.0086s, status=time_limit, dual_bound=-1.5168155245030241, primal_obj=-1.5168155245030246
+[Iter 0] scenario=2, simplex_idx=6, verts=(0, 3, 4, 8), time=15.0389s, status=time_limit, dual_bound=-1.427282626945858, primal_obj=-1.4272826269458583
+[Iter 0] scenario=3, simplex_idx=6, verts=(0, 3, 4, 8), time=15.0123s, status=time_limit, dual_bound=-1.187130085646387, primal_obj=-1.187130085646387
+[Iter 0] scenario=4, simplex_idx=6, verts=(0, 3, 4, 8), time=15.0109s, status=time_limit, dual_bound=-1.3515400856401214, primal_obj=-1.351540085640121
+[Iter 0] scenario=6, simplex_idx=6, verts=(0, 3, 4, 8), time=15.0157s, status=time_limit, dual_bound=-1.1652773573740236, primal_obj=-1.1652773573740238
+[Iter 0] scenario=8, simplex_idx=6, verts=(0, 3, 4, 8), time=15.0282s, status=time_limit, dual_bound=-1.1822267254340497, primal_obj=-1.1822267254340495
+[Iter 0] scenario=9, simplex_idx=6, verts=(0, 3, 4, 8), time=15.0415s, status=time_limit, dual_bound=-1.3833194554987354, primal_obj=-1.3833194554987351
+[Iter 0] scenario=10, simplex_idx=6, verts=(0, 3, 4, 8), time=15.3441s, status=time_limit, dual_bound=-1.4121532524580782, primal_obj=-1.412153252458078
+[Iter 0] scenario=11, simplex_idx=6, verts=(0, 3, 4, 8), time=15.0662s, status=time_limit, dual_bound=-1.1822453386268088, primal_obj=-1.1822453386268088
+[Iter 0] scenario=12, simplex_idx=6, verts=(0, 3, 4, 8), time=15.0102s, status=time_limit, dual_bound=-1.4570881807206457, primal_obj=-1.4570881807206455
+[Iter 0] scenario=13, simplex_idx=6, verts=(0, 3, 4, 8), time=15.4622s, status=time_limit, dual_bound=-1.3090484560397, primal_obj=-1.3090484560397004
+[Iter 0] scenario=14, simplex_idx=6, verts=(0, 3, 4, 8), time=15.0243s, status=time_limit, dual_bound=-1.2351477279560361, primal_obj=-1.2351477279560357
+[Iter 0] scenario=15, simplex_idx=6, verts=(0, 3, 4, 8), time=15.1450s, status=time_limit, dual_bound=-1.0535734305390283, primal_obj=-1.0535734305390285
+[Iter 0] scenario=16, simplex_idx=6, verts=(0, 3, 4, 8), time=15.4535s, status=time_limit, dual_bound=-1.403084938409314, primal_obj=-1.4030849384093145
+[Iter 0] scenario=17, simplex_idx=6, verts=(0, 3, 4, 8), time=15.0366s, status=time_limit, dual_bound=-1.4207997234541316, primal_obj=-1.4207997234541316
+[Iter 0] scenario=19, simplex_idx=6, verts=(0, 3, 4, 8), time=15.0318s, status=time_limit, dual_bound=-1.4336253851789054, primal_obj=-1.4336253851789056
+[Iter 2] scenario=10, simplex_idx=10, verts=(1, 4, 8, 10), time=0.0707s, status=infeasible, dual_bound=None, primal_obj=-0.0008269996495049448
+[Iter 2] scenario=15, simplex_idx=12, verts=(1, 8, 9, 10), time=0.1889s, status=infeasible, dual_bound=None, primal_obj=-123793037.44162312
+[Iter 4] scenario=15, simplex_idx=14, verts=(1, 8, 10, 12), time=0.1903s, status=infeasible, dual_bound=None, primal_obj=-72087233.88431269
+[Iter 7] scenario=15, simplex_idx=18, verts=(1, 8, 10, 15), time=0.1822s, status=infeasible, dual_bound=None, primal_obj=-115769432.27383198
+[Iter 15] scenario=15, simplex_idx=35, verts=(1, 8, 15, 23), time=0.1785s, status=infeasible, dual_bound=None, primal_obj=-116036007.21941414
+[Iter 22] scenario=15, simplex_idx=50, verts=(1, 8, 23, 30), time=0.2227s, status=infeasible, dual_bound=None, primal_obj=-115999941.81617682
+[Iter 23] scenario=15, simplex_idx=53, verts=(1, 8, 30, 31), time=0.3878s, status=infeasible, dual_bound=None, primal_obj=-116155357.11166549
+[Iter 30] scenario=15, simplex_idx=69, verts=(1, 8, 31, 38), time=0.1707s, status=infeasible, dual_bound=None, primal_obj=-115758456.61570662

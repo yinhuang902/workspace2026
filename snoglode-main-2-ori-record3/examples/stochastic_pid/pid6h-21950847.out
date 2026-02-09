@@ -1,0 +1,7 @@
+JobID: 21950847
+Node:  fc30607
+Start: Thu Feb  5 18:55:38 PST 2026
+Work:  /home/yinhuang/snoglode-main-2-ori-record3/examples/stochastic_pid
+-rw-r----- 1 yinhuang yinhuang 17K Feb  5 18:48 /home/yinhuang/snoglode-main-2-ori-record3/examples/stochastic_pid/stochastic_pid.py
+Python: /home/yinhuang/micromamba/envs/pidsp-sim-fir/bin/python
+Python 3.11.14

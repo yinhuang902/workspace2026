@@ -1,0 +1,8 @@
+# debug_timelimit.txt — subproblems that hit Gurobi TimeLimit
+# Format: [Iter N] [MS/CS TimeLimit] simplex_idx=..., verts=..., scenario=..., dual_bound=..., primal_obj=..., dual<primal=...
+
+[Iter 0] [CS TimeLimit] simplex_idx=0, verts=(0, 2, 3, 4), scenario=0, dual_bound=1.0050154109910314, primal_obj=1.0050154109910314, dual<primal=False
+[Iter 0] [CS TimeLimit] simplex_idx=0, verts=(0, 2, 3, 4), scenario=1, dual_bound=0.9871781605801218, primal_obj=0.9871781605801216, dual<primal=False
+[Iter 0] [CS TimeLimit] simplex_idx=0, verts=(0, 2, 3, 4), scenario=2, dual_bound=1.0847037712795615, primal_obj=1.0847037712795615, dual<primal=False
+[Iter 0] [CS TimeLimit] simplex_idx=0, verts=(0, 2, 3, 4), scenario=3, dual_bound=1.4825160948292533, primal_obj=1.482516094829253, dual<primal=False
+[Iter 0] [CS TimeLimit] simplex_idx=0, verts=(0, 2, 3, 4), scenario=4, dual_bound=1.0005775690580183, primal_obj=1.0005775690580183, dual<primal=False

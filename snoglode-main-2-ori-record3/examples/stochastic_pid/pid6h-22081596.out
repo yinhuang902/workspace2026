@@ -1,0 +1,191 @@
+JobID: 22081596
+Node:  fc30601
+Start: Fri Feb  6 23:20:58 PST 2026
+Work:  /home/yinhuang/snoglode-main-2-ori-record3/examples/stochastic_pid
+-rw-r----- 1 yinhuang yinhuang 17K Feb  6 23:18 /home/yinhuang/snoglode-main-2-ori-record3/examples/stochastic_pid/stochastic_pid.py
+Python: /home/yinhuang/micromamba/envs/pidsp-sim-fir/bin/python
+Python 3.11.14
+No mpi4py detected - running in serial.
+--------------------------------------------------
+SNoGloDe Solver Parameters
+--------------------------------------------------
+
+Subproblem Names:
+  - scen_1
+  - scen_2
+  - scen_3
+  - scen_4
+  - scen_5
+  - scen_6
+  - scen_7
+  - scen_8
+  - scen_9
+  - scen_10
+  - scen_11
+  - scen_12
+  - scen_13
+  - scen_14
+  - scen_15
+  - scen_16
+  - scen_17
+  - scen_18
+  - scen_19
+  - scen_20
+  - scen_21
+  - scen_22
+  - scen_23
+  - scen_24
+  - scen_25
+  - scen_26
+  - scen_27
+  - scen_28
+  - scen_29
+  - scen_30
+  - scen_31
+  - scen_32
+  - scen_33
+  - scen_34
+  - scen_35
+  - scen_36
+  - scen_37
+  - scen_38
+  - scen_39
+  - scen_40
+  - scen_41
+  - scen_42
+  - scen_43
+  - scen_44
+  - scen_45
+  - scen_46
+  - scen_47
+  - scen_48
+  - scen_49
+  - scen_50
+Total # subproblems: 50
+
+LB solver: gurobi
+UB solver: gurobi
+CG solver: ipopt
+
+Global convergance guaranteed: True
+Epsilon: 0.001
+Perform FBBT: True
+Perform OBBT: True
+Relax binaries at LB: False
+Relax integers at LB: False
+
+Bounder Information
+  - Lower Bounder: GurobiLBLowerBounder
+  - Candidate Generator: SolveExtensiveForm
+
+Queuing strategy: QueueStrategy.bound
+Using a node feasibility checker? : False
+
+Branching Information
+  - Selection Strategy: HybridBranching
+  - Partition Strategy: ExpectedValue
+
+Verbose: True
+No log file generated.
+
+--------------------------------------------------
+Generating the models for the subproblems.
+	Scenario scen_1 has 3 first stage vars.
+	Scenario scen_2 has 3 first stage vars.
+	Scenario scen_3 has 3 first stage vars.
+	Scenario scen_4 has 3 first stage vars.
+	Scenario scen_5 has 3 first stage vars.
+	Scenario scen_6 has 3 first stage vars.
+	Scenario scen_7 has 3 first stage vars.
+	Scenario scen_8 has 3 first stage vars.
+	Scenario scen_9 has 3 first stage vars.
+	Scenario scen_10 has 3 first stage vars.
+	Scenario scen_11 has 3 first stage vars.
+	Scenario scen_12 has 3 first stage vars.
+	Scenario scen_13 has 3 first stage vars.
+	Scenario scen_14 has 3 first stage vars.
+	Scenario scen_15 has 3 first stage vars.
+	Scenario scen_16 has 3 first stage vars.
+	Scenario scen_17 has 3 first stage vars.
+	Scenario scen_18 has 3 first stage vars.
+	Scenario scen_19 has 3 first stage vars.
+	Scenario scen_20 has 3 first stage vars.
+	Scenario scen_21 has 3 first stage vars.
+	Scenario scen_22 has 3 first stage vars.
+	Scenario scen_23 has 3 first stage vars.
+	Scenario scen_24 has 3 first stage vars.
+	Scenario scen_25 has 3 first stage vars.
+	Scenario scen_26 has 3 first stage vars.
+	Scenario scen_27 has 3 first stage vars.
+	Scenario scen_28 has 3 first stage vars.
+	Scenario scen_29 has 3 first stage vars.
+	Scenario scen_30 has 3 first stage vars.
+	Scenario scen_31 has 3 first stage vars.
+	Scenario scen_32 has 3 first stage vars.
+	Scenario scen_33 has 3 first stage vars.
+	Scenario scen_34 has 3 first stage vars.
+	Scenario scen_35 has 3 first stage vars.
+	Scenario scen_36 has 3 first stage vars.
+	Scenario scen_37 has 3 first stage vars.
+	Scenario scen_38 has 3 first stage vars.
+	Scenario scen_39 has 3 first stage vars.
+	Scenario scen_40 has 3 first stage vars.
+	Scenario scen_41 has 3 first stage vars.
+	Scenario scen_42 has 3 first stage vars.
+	Scenario scen_43 has 3 first stage vars.
+	Scenario scen_44 has 3 first stage vars.
+	Scenario scen_45 has 3 first stage vars.
+	Scenario scen_46 has 3 first stage vars.
+	Scenario scen_47 has 3 first stage vars.
+	Scenario scen_48 has 3 first stage vars.
+	Scenario scen_49 has 3 first stage vars.
+	Scenario scen_50 has 3 first stage vars.
+Finished generating subproblem models.
+Node rooted.
+Using EF method for candidate solution. No EF bound. Building EF.
+EF built.
+        Time (s)  Nodes Explored       Pruned by                              LB              UB        Rel. Gap        Abs. Gap         # Nodes
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+          83.561               1                           * L U      0.94606771      0.98250461         3.7086%        0.036437               2
+          150.83               2                           * U        0.94606771      0.98071727         3.5331%         0.03465               3
+         230.787               3                           * L        0.94810888      0.98071727          3.325%        0.032608               4
+         289.757               4                                      0.94810888      0.98071727          3.325%        0.032608               5
+         380.841               5                           * L        0.95046428      0.98071727         3.0848%        0.030253               6
+         434.518               6                                      0.95046428      0.98071727         3.0848%        0.030253               7
+          530.36               7                           * L        0.95199159      0.98071727          2.929%        0.028726               8
+         611.982               8                                      0.95199159      0.98071727          2.929%        0.028726               9
+         688.954               9                           * L U      0.95273138      0.98071726         2.8536%        0.027986              10
+         761.719              10                           * U        0.95273138      0.97980614         2.7633%        0.027075              11
+         854.922              11                           * L        0.95348905      0.97980614         2.6859%        0.026317              12
+         953.528              12                                      0.95348905      0.97980614         2.6859%        0.026317              13
+        1026.288              13                           * L        0.95361174      0.97980614         2.6734%        0.026194              14
+        1123.255              14                                      0.95361174      0.97980614         2.6734%        0.026194              15
+        1218.442              15                           * L        0.95539576      0.97980614         2.4913%         0.02441              16
+        1291.972              16                                      0.95539576      0.97980614         2.4913%         0.02441              17
+        1389.805              17                           * L        0.95592128      0.97980614         2.4377%        0.023885              18
+        1480.043              18                                      0.95592128      0.97980614         2.4377%        0.023885              19
+        1565.964              19                                      0.95592128      0.97980614         2.4377%        0.023885              20
+        1625.716              20                                      0.95592128      0.97980614         2.4377%        0.023885              21
+        1712.435              21                           * L        0.95597854      0.97980614         2.4319%        0.023828              22
+         1762.15              22                           * U        0.95597854      0.97980533         2.4318%        0.023827              23
+        1804.315              23                           * L        0.95686524      0.97980533         2.3413%         0.02294              24
+        2328.043              24           Bound                      0.95686524      0.97980533         2.3413%         0.02294              23
+        2387.074              25                           * L         0.9569032      0.97980533         2.3374%        0.022902              24
+WARNING: Unexpected condition for the variable scen_4.K_i LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_9.K_i LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_12.K_i LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_22.K_i LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_28.K_i LB
+problem.TerminationCondition = maxTimeLimit
+        3017.182              26           Bound                       0.9569032      0.97980533         2.3374%        0.022902              23
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        3117.458              27                           * L        0.95695759      0.97980533         2.3319%        0.022848              24
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588457 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_50'. Using dual lower_bound=0.99690313 as valid LB.
+        3397.294              28                                      0.95695759      0.97980533         2.3319%        0.022848              25
+INFO: Gurobi maxTimeLimit on 'scen_1'. Using dual lower_bound=0.94464263 as valid LB.

@@ -1,0 +1,1144 @@
+======================================================================
+[Iter 0] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 1, 3, 4)
+  Parent LB:      0.990800247 (per-scen)
+  Prev global LB: 0.990800247 (per-scen, min over all pre-split)
+  New children (2):
+    T5 (0, 3, 4, 8): LB = 0.979235593 *** CHILD LB < PARENT LB *** *** CHILD LB < PREV GLOBAL LB ***
+    T6 (1, 3, 4, 8): LB = 0.982196839 *** CHILD LB < PARENT LB *** *** CHILD LB < PREV GLOBAL LB ***
+  Min LB among OLD (unchanged) simplices: T4 (1, 3, 4, 5): 1.000142465
+  New global LB:  0.979235593 (per-scen, from T5 (0, 3, 4, 8))
+  >> LB DECREASED: 0.990800247 -> 0.979235593 (delta = -1.16e-02)
+  >> CAUSE: A child simplex has lower LB than any pre-split simplex
+======================================================================
+
+======================================================================
+[Iter 1] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 3, 4, 8)
+  Parent LB:      0.979235593 (per-scen)
+  Prev global LB: 0.979235593 (per-scen, min over all pre-split)
+  New children (4):
+    T6 (0, 3, 4, 9): LB = 0.979235346 *** CHILD LB < PARENT LB *** *** CHILD LB < PREV GLOBAL LB ***
+    T7 (3, 4, 8, 9): LB = 0.979725559
+    T8 (0, 4, 8, 9): LB = 0.979206804 *** CHILD LB < PARENT LB *** *** CHILD LB < PREV GLOBAL LB ***
+    T9 (0, 3, 8, 9): LB = 0.979267279
+  Min LB among OLD (unchanged) simplices: T5 (1, 3, 4, 8): 0.982196839
+  New global LB:  0.979206804 (per-scen, from T8 (0, 4, 8, 9))
+  >> LB DECREASED: 0.979235593 -> 0.979206804 (delta = -2.88e-05)
+  >> CAUSE: A child simplex has lower LB than any pre-split simplex
+======================================================================
+
+======================================================================
+[Iter 2] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 4, 8, 9)
+  Parent LB:      0.979206804 (per-scen)
+  Prev global LB: 0.979206804 (per-scen, min over all pre-split)
+  New children (4):
+    T9 (0, 4, 9, 10): LB = 0.979215499
+    T10 (4, 8, 9, 10): LB = 0.979721610
+    T11 (0, 4, 8, 10): LB = 0.979230054
+    T12 (0, 8, 9, 10): LB = 0.979200983 *** CHILD LB < PARENT LB *** *** CHILD LB < PREV GLOBAL LB ***
+  Min LB among OLD (unchanged) simplices: T6 (0, 3, 4, 9): 0.979235346
+  New global LB:  0.979200983 (per-scen, from T12 (0, 8, 9, 10))
+  >> LB DECREASED: 0.979206804 -> 0.979200983 (delta = -5.82e-06)
+  >> CAUSE: A child simplex has lower LB than any pre-split simplex
+======================================================================
+
+======================================================================
+[Iter 3] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 9, 10)
+  Parent LB:      0.979200983 (per-scen)
+  Prev global LB: 0.979200983 (per-scen, min over all pre-split)
+  New children (4):
+    T12 (0, 9, 10, 11): LB = 0.979212013
+    T15 (0, 8, 9, 11): LB = 0.979201004
+  Min LB among OLD (unchanged) simplices: T9 (0, 4, 9, 10): 0.979215499
+  New global LB:  0.979201004 (per-scen, from T15 (0, 8, 9, 11))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 4] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 9, 11)
+  Parent LB:      0.979201004 (per-scen)
+  Prev global LB: 0.979201004 (per-scen, min over all pre-split)
+  New children (4):
+    T17 (0, 8, 11, 12): LB = 0.979201048
+  Min LB among OLD (unchanged) simplices: T12 (0, 9, 10, 11): 0.979212013
+  New global LB:  0.979201048 (per-scen, from T17 (0, 8, 11, 12))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 5] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 11, 12)
+  Parent LB:      0.979201048 (per-scen)
+  Prev global LB: 0.979201048 (per-scen, min over all pre-split)
+  New children (4):
+    T20 (0, 8, 11, 13): LB = 0.979201025 *** CHILD LB < PARENT LB *** *** CHILD LB < PREV GLOBAL LB ***
+  Min LB among OLD (unchanged) simplices: T12 (0, 9, 10, 11): 0.979212013
+  New global LB:  0.979201025 (per-scen, from T20 (0, 8, 11, 13))
+  >> LB DECREASED: 0.979201048 -> 0.979201025 (delta = -2.33e-08)
+  >> CAUSE: A child simplex has lower LB than any pre-split simplex
+======================================================================
+
+======================================================================
+[Iter 6] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 11, 13)
+  Parent LB:      0.979201025 (per-scen)
+  Prev global LB: 0.979201025 (per-scen, min over all pre-split)
+  New children (2):
+    T21 (0, 8, 11, 14): LB = 0.979201026
+    T22 (0, 8, 13, 14): LB = 0.979201020 *** CHILD LB < PARENT LB *** *** CHILD LB < PREV GLOBAL LB ***
+  Min LB among OLD (unchanged) simplices: T12 (0, 9, 10, 11): 0.979212013
+  New global LB:  0.979201020 (per-scen, from T22 (0, 8, 13, 14))
+  >> LB DECREASED: 0.979201025 -> 0.979201020 (delta = -4.52e-09)
+  >> CAUSE: A child simplex has lower LB than any pre-split simplex
+======================================================================
+
+======================================================================
+[Iter 7] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 13, 14)
+  Parent LB:      0.979201020 (per-scen)
+  Prev global LB: 0.979201020 (per-scen, min over all pre-split)
+  New children (4):
+    T22 (0, 8, 14, 15): LB = 0.979201024
+  Min LB among OLD (unchanged) simplices: T21 (0, 8, 11, 14): 0.979201026
+  New global LB:  0.979201024 (per-scen, from T22 (0, 8, 14, 15))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 8] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 14, 15)
+  Parent LB:      0.979201024 (per-scen)
+  Prev global LB: 0.979201024 (per-scen, min over all pre-split)
+  New children (4):
+    T26 (0, 8, 15, 16): LB = 0.979201058
+  Min LB among OLD (unchanged) simplices: T21 (0, 8, 11, 14): 0.979201026
+  New global LB:  0.979201026 (per-scen, from T21 (0, 8, 11, 14))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 9] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 11, 14)
+  Parent LB:      0.979201026 (per-scen)
+  Prev global LB: 0.979201026 (per-scen, min over all pre-split)
+  New children (2):
+    T28 (0, 8, 11, 17): LB = 0.979201071
+    T29 (0, 8, 14, 17): LB = 0.979201024 *** CHILD LB < PARENT LB *** *** CHILD LB < PREV GLOBAL LB ***
+  Min LB among OLD (unchanged) simplices: T25 (0, 8, 15, 16): 0.979201058
+  New global LB:  0.979201024 (per-scen, from T29 (0, 8, 14, 17))
+  >> LB DECREASED: 0.979201026 -> 0.979201024 (delta = -2.05e-09)
+  >> CAUSE: A child simplex has lower LB than any pre-split simplex
+======================================================================
+
+======================================================================
+[Iter 10] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 14, 17)
+  Parent LB:      0.979201024 (per-scen)
+  Prev global LB: 0.979201024 (per-scen, min over all pre-split)
+  New children (4):
+    T29 (0, 8, 17, 18): LB = 0.979201075
+  Min LB among OLD (unchanged) simplices: T25 (0, 8, 15, 16): 0.979201058
+  New global LB:  0.979201058 (per-scen, from T25 (0, 8, 15, 16))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 11] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 15, 16)
+  Parent LB:      0.979201058 (per-scen)
+  Prev global LB: 0.979201058 (per-scen, min over all pre-split)
+  New children (4):
+    T33 (0, 8, 15, 19): LB = 0.979201066
+  Min LB among OLD (unchanged) simplices: T27 (0, 8, 11, 17): 0.979201071
+  New global LB:  0.979201066 (per-scen, from T33 (0, 8, 15, 19))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 12] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 15, 19)
+  Parent LB:      0.979201066 (per-scen)
+  Prev global LB: 0.979201066 (per-scen, min over all pre-split)
+  New children (4):
+    T36 (0, 8, 15, 20): LB = 0.979201097
+    T37 (0, 15, 19, 20): LB = 0.979227835
+  Min LB among OLD (unchanged) simplices: T27 (0, 8, 11, 17): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T27 (0, 8, 11, 17))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 13] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 11, 17)
+  Parent LB:      0.979201071 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (2):
+    T38 (0, 8, 11, 21): LB = 0.979201094
+    T39 (0, 8, 17, 21): LB = 0.979201034 *** CHILD LB < PARENT LB *** *** CHILD LB < PREV GLOBAL LB ***
+  Min LB among OLD (unchanged) simplices: T27 (0, 8, 17, 18): 0.979201075
+  New global LB:  0.979201034 (per-scen, from T39 (0, 8, 17, 21))
+  >> LB DECREASED: 0.979201071 -> 0.979201034 (delta = -3.70e-08)
+  >> CAUSE: A child simplex has lower LB than any pre-split simplex
+======================================================================
+
+======================================================================
+[Iter 14] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 17, 21)
+  Parent LB:      0.979201034 (per-scen)
+  Prev global LB: 0.979201034 (per-scen, min over all pre-split)
+  New children (4):
+    T39 (0, 8, 21, 22): LB = 0.979201103
+  Min LB among OLD (unchanged) simplices: T27 (0, 8, 17, 18): 0.979201075
+  New global LB:  0.979201075 (per-scen, from T27 (0, 8, 17, 18))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 15] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 17, 18)
+  Parent LB:      0.979201075 (per-scen)
+  Prev global LB: 0.979201075 (per-scen, min over all pre-split)
+  New children (4):
+    T43 (0, 8, 18, 23): LB = 0.979202587
+    T44 (0, 17, 18, 23): LB = 0.979209327
+  Min LB among OLD (unchanged) simplices: T37 (0, 8, 11, 21): 0.979201094
+  New global LB:  0.979201094 (per-scen, from T37 (0, 8, 11, 21))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 16] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 11, 21)
+  Parent LB:      0.979201094 (per-scen)
+  Prev global LB: 0.979201094 (per-scen, min over all pre-split)
+  New children (4):
+    T45 (0, 8, 11, 24): LB = 0.979201085 *** CHILD LB < PARENT LB *** *** CHILD LB < PREV GLOBAL LB ***
+    T46 (0, 8, 21, 24): LB = 0.979201103
+  Min LB among OLD (unchanged) simplices: T34 (0, 8, 15, 20): 0.979201097
+  New global LB:  0.979201085 (per-scen, from T45 (0, 8, 11, 24))
+  >> LB DECREASED: 0.979201094 -> 0.979201085 (delta = -9.07e-09)
+  >> CAUSE: A child simplex has lower LB than any pre-split simplex
+======================================================================
+
+======================================================================
+[Iter 17] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 11, 24)
+  Parent LB:      0.979201085 (per-scen)
+  Prev global LB: 0.979201085 (per-scen, min over all pre-split)
+  New children (4):
+    T48 (0, 8, 11, 25): LB = 0.979201045 *** CHILD LB < PARENT LB *** *** CHILD LB < PREV GLOBAL LB ***
+  Min LB among OLD (unchanged) simplices: T34 (0, 8, 15, 20): 0.979201097
+  New global LB:  0.979201045 (per-scen, from T48 (0, 8, 11, 25))
+  >> LB DECREASED: 0.979201085 -> 0.979201045 (delta = -4.07e-08)
+  >> CAUSE: A child simplex has lower LB than any pre-split simplex
+======================================================================
+
+======================================================================
+[Iter 18] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 11, 25)
+  Parent LB:      0.979201045 (per-scen)
+  Prev global LB: 0.979201045 (per-scen, min over all pre-split)
+  New children (4):
+    T52 (0, 8, 25, 26): LB = 0.979202196
+    T53 (0, 11, 25, 26): LB = 0.979209379
+  Min LB among OLD (unchanged) simplices: T34 (0, 8, 15, 20): 0.979201097
+  New global LB:  0.979201097 (per-scen, from T34 (0, 8, 15, 20))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 19] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 15, 20)
+  Parent LB:      0.979201097 (per-scen)
+  Prev global LB: 0.979201097 (per-scen, min over all pre-split)
+  New children (4):
+    T55 (0, 8, 15, 27): LB = 0.979201319
+  Min LB among OLD (unchanged) simplices: T44 (0, 8, 21, 24): 0.979201103
+  New global LB:  0.979201103 (per-scen, from T44 (0, 8, 21, 24))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 20] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 21, 22)
+  Parent LB:      0.979201103 (per-scen)
+  Prev global LB: 0.979201103 (per-scen, min over all pre-split)
+  New children (4):
+    T58 (0, 8, 22, 28): LB = 0.979202327
+    T59 (0, 21, 22, 28): LB = 0.979222408
+  Min LB among OLD (unchanged) simplices: T43 (0, 8, 21, 24): 0.979201103
+  New global LB:  0.979201103 (per-scen, from T43 (0, 8, 21, 24))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 21] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 15, 27)
+  Parent LB:      0.979201319 (per-scen)
+  Prev global LB: 0.979201103 (per-scen, min over all pre-split)
+  New children (4):
+    T61 (0, 8, 15, 29): LB = 0.979201872
+  Min LB among OLD (unchanged) simplices: T43 (0, 8, 21, 24): 0.979201103
+  New global LB:  0.979201103 (per-scen, from T43 (0, 8, 21, 24))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 22] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 15, 29)
+  Parent LB:      0.979201872 (per-scen)
+  Prev global LB: 0.979201103 (per-scen, min over all pre-split)
+  New children (4):
+    T63 (0, 8, 29, 30): LB = 0.979201071 *** CHILD LB < PARENT LB *** *** CHILD LB < PREV GLOBAL LB ***
+    T65 (0, 15, 29, 30): LB = 0.979206636
+  Min LB among OLD (unchanged) simplices: T43 (0, 8, 21, 24): 0.979201103
+  New global LB:  0.979201071 (per-scen, from T63 (0, 8, 29, 30))
+  >> LB DECREASED: 0.979201103 -> 0.979201071 (delta = -3.19e-08)
+  >> CAUSE: A child simplex has lower LB than any pre-split simplex
+======================================================================
+
+======================================================================
+[Iter 23] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 25, 26)
+  Parent LB:      0.979202196 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T66 (0, 8, 26, 31): LB = 0.979201088 *** CHILD LB < PARENT LB ***
+    T68 (0, 25, 26, 31): LB = 0.979207543
+  Min LB among OLD (unchanged) simplices: T62 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T62 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 24] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 26, 31)
+  Parent LB:      0.979201088 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T69 (0, 8, 26, 32): LB = 0.979201086 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T62 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T62 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 25] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 26, 32)
+  Parent LB:      0.979201086 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T72 (0, 8, 26, 33): LB = 0.979201116
+    T73 (0, 8, 32, 33): LB = 0.979201299
+  Min LB among OLD (unchanged) simplices: T62 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T62 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 26] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 26, 33)
+  Parent LB:      0.979201116 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T75 (0, 8, 26, 34): LB = 0.979201173
+  Min LB among OLD (unchanged) simplices: T62 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T62 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 27] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 26, 34)
+  Parent LB:      0.979201173 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T78 (0, 8, 26, 35): LB = 0.979201136 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T62 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T62 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 28] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 26, 35)
+  Parent LB:      0.979201136 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T81 (0, 8, 26, 36): LB = 0.979201268
+  Min LB among OLD (unchanged) simplices: T62 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T62 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 29] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 26, 36)
+  Parent LB:      0.979201268 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T84 (0, 8, 26, 37): LB = 0.979202251
+    T86 (0, 26, 36, 37): LB = 0.979206524
+  Min LB among OLD (unchanged) simplices: T62 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T62 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 30] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 26, 37)
+  Parent LB:      0.979202251 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T87 (0, 8, 26, 38): LB = 0.979202637
+  Min LB among OLD (unchanged) simplices: T62 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T62 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 31] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 22, 28)
+  Parent LB:      0.979202327 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T91 (0, 8, 22, 39): LB = 0.979201103 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T61 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T61 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 32] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 22, 39)
+  Parent LB:      0.979201103 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T94 (0, 8, 22, 40): LB = 0.979201342
+  Min LB among OLD (unchanged) simplices: T61 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T61 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 33] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 22, 40)
+  Parent LB:      0.979201342 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T97 (0, 8, 22, 41): LB = 0.979201772
+  Min LB among OLD (unchanged) simplices: T61 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T61 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 34] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 22, 41)
+  Parent LB:      0.979201772 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T100 (0, 8, 22, 42): LB = 0.979201688 *** CHILD LB < PARENT LB ***
+    T101 (0, 22, 41, 42): LB = 0.979208292
+  Min LB among OLD (unchanged) simplices: T61 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T61 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 35] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 22, 42)
+  Parent LB:      0.979201688 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T103 (0, 8, 22, 43): LB = 0.979202198
+  Min LB among OLD (unchanged) simplices: T61 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T61 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 36] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 22, 43)
+  Parent LB:      0.979202198 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T106 (0, 8, 22, 44): LB = 0.979201835 *** CHILD LB < PARENT LB ***
+    T107 (0, 22, 43, 44): LB = 0.979206058
+  Min LB among OLD (unchanged) simplices: T61 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T61 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 37] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 22, 44)
+  Parent LB:      0.979201835 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T109 (0, 8, 22, 45): LB = 0.979202091
+  Min LB among OLD (unchanged) simplices: T61 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T61 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 38] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 22, 45)
+  Parent LB:      0.979202091 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T112 (0, 8, 22, 46): LB = 0.979202257
+  Min LB among OLD (unchanged) simplices: T61 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T61 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 39] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 22, 46)
+  Parent LB:      0.979202257 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T115 (0, 8, 22, 47): LB = 0.979202565
+  Min LB among OLD (unchanged) simplices: T61 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T61 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 40] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 22, 47)
+  Parent LB:      0.979202565 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T119 (0, 22, 47, 48): LB = 0.979202611
+  Min LB among OLD (unchanged) simplices: T61 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T61 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 41] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 18, 23)
+  Parent LB:      0.979202587 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T121 (0, 8, 18, 49): LB = 0.979201142 *** CHILD LB < PARENT LB ***
+    T122 (0, 18, 23, 49): LB = 0.979207251
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 42] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 18, 49)
+  Parent LB:      0.979201142 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T124 (0, 8, 18, 50): LB = 0.979201329
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 43] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 18, 50)
+  Parent LB:      0.979201329 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T127 (0, 8, 18, 51): LB = 0.979201987
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 44] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 18, 51)
+  Parent LB:      0.979201987 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T130 (0, 8, 18, 52): LB = 0.979201592 *** CHILD LB < PARENT LB ***
+    T131 (0, 18, 51, 52): LB = 0.979206121
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 45] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 18, 52)
+  Parent LB:      0.979201592 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T133 (0, 8, 18, 53): LB = 0.979202261
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 46] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 18, 53)
+  Parent LB:      0.979202261 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T136 (0, 8, 18, 54): LB = 0.979201951 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 47] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 18, 54)
+  Parent LB:      0.979201951 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T139 (0, 8, 18, 55): LB = 0.979202426
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 48] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 18, 55)
+  Parent LB:      0.979202426 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T142 (0, 8, 18, 56): LB = 0.979202453
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 49] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 18, 56)
+  Parent LB:      0.979202453 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T145 (0, 8, 18, 57): LB = 0.979202248 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 50] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 18, 57)
+  Parent LB:      0.979202248 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T148 (0, 8, 18, 58): LB = 0.979202710
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 51] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 22, 47, 48)
+  Parent LB:      0.979202611 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T152 (0, 22, 47, 59): LB = 0.979202517 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 52] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 22, 47, 59)
+  Parent LB:      0.979202517 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T155 (0, 22, 47, 60): LB = 0.979202159 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 53] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 22, 47, 60)
+  Parent LB:      0.979202159 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T158 (0, 22, 47, 61): LB = 0.979202670
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 54] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 26, 38)
+  Parent LB:      0.979202637 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T160 (0, 8, 38, 62): LB = 0.979202773
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 55] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 22, 47, 61)
+  Parent LB:      0.979202670 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T164 (0, 22, 47, 63): LB = 0.979202802
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 56] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 18, 58)
+  Parent LB:      0.979202710 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T166 (0, 8, 18, 64): LB = 0.979203326
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 57] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 38, 62)
+  Parent LB:      0.979202773 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T168 (0, 8, 62, 65): LB = 0.979202735 *** CHILD LB < PARENT LB ***
+    T169 (0, 8, 38, 65): LB = 0.979201205 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 58] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 62, 65)
+  Parent LB:      0.979202735 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T171 (0, 8, 62, 66): LB = 0.979203200
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 59] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 22, 47, 63)
+  Parent LB:      0.979202802 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T176 (0, 22, 47, 67): LB = 0.979202208 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 60] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 22, 47, 67)
+  Parent LB:      0.979202208 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T179 (0, 22, 47, 68): LB = 0.979201794 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 61] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 22, 47, 68)
+  Parent LB:      0.979201794 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T182 (0, 22, 47, 69): LB = 0.979201663 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 62] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 22, 47, 69)
+  Parent LB:      0.979201663 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T183 (0, 47, 69, 70): LB = 0.979201426 *** CHILD LB < PARENT LB ***
+    T185 (0, 22, 47, 70): LB = 0.979202128
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 63] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 62, 66)
+  Parent LB:      0.979203200 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T186 (0, 8, 62, 71): LB = 0.979202382 *** CHILD LB < PARENT LB ***
+    T188 (0, 62, 66, 71): LB = 0.979206647
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 64] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 62, 71)
+  Parent LB:      0.979202382 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T189 (0, 8, 62, 72): LB = 0.979202842
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 65] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 62, 72)
+  Parent LB:      0.979202842 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T193 (0, 8, 72, 73): LB = 0.979202520 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 66] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 72, 73)
+  Parent LB:      0.979202520 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T195 (0, 8, 73, 74): LB = 0.979202249 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 67] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 73, 74)
+  Parent LB:      0.979202249 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T199 (0, 8, 74, 75): LB = 0.979202060 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 68] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 74, 75)
+  Parent LB:      0.979202060 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T201 (0, 8, 75, 76): LB = 0.979202102
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 69] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 75, 76)
+  Parent LB:      0.979202102 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T204 (0, 8, 75, 77): LB = 0.979202061 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 70] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 75, 77)
+  Parent LB:      0.979202061 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T208 (0, 8, 77, 78): LB = 0.979202162
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 71] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 77, 78)
+  Parent LB:      0.979202162 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T211 (0, 8, 77, 79): LB = 0.979201933 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 72] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 77, 79)
+  Parent LB:      0.979201933 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T214 (0, 8, 77, 80): LB = 0.979202034
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 73] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 77, 80)
+  Parent LB:      0.979202034 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T217 (0, 8, 77, 81): LB = 0.979201915 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 74] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 77, 81)
+  Parent LB:      0.979201915 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T220 (0, 8, 77, 82): LB = 0.979201356 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 75] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 77, 82)
+  Parent LB:      0.979201356 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T223 (0, 8, 77, 83): LB = 0.979201348 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 76] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 77, 83)
+  Parent LB:      0.979201348 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T226 (0, 8, 77, 84): LB = 0.979201337 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 77] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 77, 84)
+  Parent LB:      0.979201337 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T229 (0, 8, 77, 85): LB = 0.979201325 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 78] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 77, 85)
+  Parent LB:      0.979201325 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T232 (0, 8, 77, 86): LB = 0.979201258 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 79] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 77, 86)
+  Parent LB:      0.979201258 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T235 (0, 8, 77, 87): LB = 0.979201281
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 80] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 8, 77, 87)
+  Parent LB:      0.979201281 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T239 (0, 77, 87, 88): LB = 0.979201269 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 81] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 77, 87, 88)
+  Parent LB:      0.979201269 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T242 (0, 77, 87, 89): LB = 0.979201912
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 82] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 77, 87, 89)
+  Parent LB:      0.979201912 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T245 (0, 77, 87, 90): LB = 0.979201201 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 83] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 77, 87, 90)
+  Parent LB:      0.979201201 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T248 (0, 77, 87, 91): LB = 0.979201189 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 84] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 77, 87, 91)
+  Parent LB:      0.979201189 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T251 (0, 77, 87, 92): LB = 0.979201168 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 85] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 77, 87, 92)
+  Parent LB:      0.979201168 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T254 (0, 77, 87, 93): LB = 0.979201152 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 86] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 77, 87, 93)
+  Parent LB:      0.979201152 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T256 (0, 77, 93, 94): LB = 0.979201133 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 87] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 77, 93, 94)
+  Parent LB:      0.979201133 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T260 (0, 77, 94, 95): LB = 0.979201092 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 88] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 77, 94, 95)
+  Parent LB:      0.979201092 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T263 (0, 77, 94, 96): LB = 0.979201083 *** CHILD LB < PARENT LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201071 (per-scen, from T60 (0, 8, 29, 30))
+  >> LB did not decrease (OK)
+======================================================================
+
+======================================================================
+[Iter 89] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 77, 94, 96)
+  Parent LB:      0.979201083 (per-scen)
+  Prev global LB: 0.979201071 (per-scen, min over all pre-split)
+  New children (4):
+    T266 (0, 77, 94, 97): LB = 0.979201059 *** CHILD LB < PARENT LB *** *** CHILD LB < PREV GLOBAL LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201059 (per-scen, from T266 (0, 77, 94, 97))
+  >> LB DECREASED: 0.979201071 -> 0.979201059 (delta = -1.21e-08)
+  >> CAUSE: A child simplex has lower LB than any pre-split simplex
+======================================================================
+
+======================================================================
+[Iter 90] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 77, 94, 97)
+  Parent LB:      0.979201059 (per-scen)
+  Prev global LB: 0.979201059 (per-scen, min over all pre-split)
+  New children (4):
+    T269 (0, 77, 94, 98): LB = 0.979201044 *** CHILD LB < PARENT LB *** *** CHILD LB < PREV GLOBAL LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201044 (per-scen, from T269 (0, 77, 94, 98))
+  >> LB DECREASED: 0.979201059 -> 0.979201044 (delta = -1.47e-08)
+  >> CAUSE: A child simplex has lower LB than any pre-split simplex
+======================================================================
+
+======================================================================
+[Iter 91] LB SPLIT DIAGNOSTIC
+  Parent simplex: (0, 77, 94, 98)
+  Parent LB:      0.979201044 (per-scen)
+  Prev global LB: 0.979201044 (per-scen, min over all pre-split)
+  New children (4):
+    T272 (0, 77, 94, 99): LB = 0.979201036 *** CHILD LB < PARENT LB *** *** CHILD LB < PREV GLOBAL LB ***
+  Min LB among OLD (unchanged) simplices: T60 (0, 8, 29, 30): 0.979201071
+  New global LB:  0.979201036 (per-scen, from T272 (0, 77, 94, 99))
+  >> LB DECREASED: 0.979201044 -> 0.979201036 (delta = -8.12e-09)
+  >> CAUSE: A child simplex has lower LB than any pre-split simplex
+======================================================================
+

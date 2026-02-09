@@ -1,0 +1,29 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) CCconfig        6)  ucx/1.14.1         11) flexiblas/3.3.1
+  2) gentoo/2023     7)  libfabric/1.18.0   12) aocl-blas/5.1
+  3) gcccore/.12.3   8)  pmix/4.2.4         13) aocl-lapack/5.1
+  4) gcc/12.3        9)  ucc/1.2.0          14) StdEnv/2023
+  5) hwloc/2.9.1     10) openmpi/4.1.5
+Traceback (most recent call last):
+  File "/home/yinhuang/snoglode-main-2-ori-record3/examples/stochastic_pid/stochastic_pid.py", line 362, in <module>
+    solver.solve(max_iter=1000,
+  File "/home/yinhuang/snoglode-main-2-ori-record3/snoglode/solver.py", line 130, in solve
+    if current_node_feasible: self.dispatch_node_solver(current_node)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yinhuang/snoglode-main-2-ori-record3/snoglode/solver.py", line 224, in dispatch_node_solver
+    self.dispatch_ub_solve(current_node)
+  File "/home/yinhuang/snoglode-main-2-ori-record3/snoglode/solver.py", line 321, in dispatch_ub_solve
+    self.upper_bounder.candidate_solution_finder.generate(node = current_node,
+  File "/home/yinhuang/snoglode-main-2-ori-record3/snoglode/bounders/upper_bounders.py", line 278, in generate
+    return self.generate_candidate(node, subproblems)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yinhuang/snoglode-main-2-ori-record3/snoglode/bounders/upper_bounders.py", line 404, in generate_candidate
+    ef_results = self.opt.solve(subproblems.ef.model, 
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yinhuang/micromamba/envs/pidsp-sim-fir/lib/python3.11/site-packages/pyomo/opt/base/solvers.py", line 688, in solve
+    _model.solutions.load_from(
+  File "/home/yinhuang/micromamba/envs/pidsp-sim-fir/lib/python3.11/site-packages/pyomo/core/base/PyomoModel.py", line 231, in load_from
+    raise ValueError(
+ValueError: Cannot load a SolverResults object with bad status: error

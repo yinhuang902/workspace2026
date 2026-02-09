@@ -1,0 +1,2476 @@
+# debug_lb_after_split.txt — LB analysis after simplex split
+# Shows: selected simplex LB, all child LBs, new global LB, INSIDE/OUTSIDE
+
+======================================================================
+[Iter 0] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 1, 3, 4)
+  Parent LB: 0.990800247 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 1.333333e+05
+  Children (2):
+    T5 (0, 3, 4, 8): LB = 0.979286444
+    T6 (1, 3, 4, 8): LB = 0.982197172
+  New global LB: 0.979286444 (from T5 (0, 3, 4, 8))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 1] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 3, 4, 8)
+  Parent LB: 0.979286444 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 8.069591e+04
+  Children (4):
+    T6 (0, 3, 4, 9): LB = 0.979235346
+    T7 (3, 4, 8, 9): LB = 0.979725559
+    T8 (0, 4, 8, 9): LB = 0.979206804
+    T9 (0, 3, 8, 9): LB = 0.979268534
+  New global LB: 0.979206804 (from T8 (0, 4, 8, 9))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 2] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 4, 8, 9)
+  Parent LB: 0.979206804 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.017398e+01
+  Children (4):
+    T9 (0, 4, 9, 10): LB = 0.979215499
+    T10 (4, 8, 9, 10): LB = 0.979721610
+    T11 (0, 4, 8, 10): LB = 0.979230054
+    T12 (0, 8, 9, 10): LB = 0.979200983
+  New global LB: 0.979200983 (from T12 (0, 8, 9, 10))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 3] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 9, 10)
+  Parent LB: 0.979200983 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 5.043494e-03
+  Children (4):
+    T12 (0, 9, 10, 11): LB = 0.979212013
+    T15 (0, 8, 9, 11): LB = 0.979201004
+  New global LB: 0.979201004 (from T15 (0, 8, 9, 11))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 4] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 9, 11)
+  Parent LB: 0.979201004 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 4.781639e-03
+  Children (4):
+    T17 (0, 8, 11, 12): LB = 0.979201048
+  New global LB: 0.979201048 (from T17 (0, 8, 11, 12))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 5] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 11, 12)
+  Parent LB: 0.979201048 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 4.776332e-03
+  Children (4):
+    T20 (0, 8, 11, 13): LB = 0.979201025
+  New global LB: 0.979201025 (from T20 (0, 8, 11, 13))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 6] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 11, 13)
+  Parent LB: 0.979201025 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 4.751649e-03
+  Children (2):
+    T21 (0, 8, 11, 14): LB = 0.979201026
+    T22 (0, 8, 13, 14): LB = 0.979201020
+  New global LB: 0.979201020 (from T22 (0, 8, 13, 14))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 7] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 13, 14)
+  Parent LB: 0.979201020 (per-scen)
+  EF true_obj: 0.979664420 (per-scen)
+  Simplex volume: 1.061953e-03
+  Children (4):
+    T22 (0, 8, 14, 15): LB = 0.979201024
+  New global LB: 0.979201024 (from T22 (0, 8, 14, 15))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 8] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 14, 15)
+  Parent LB: 0.979201024 (per-scen)
+  EF true_obj: 0.979664420 (per-scen)
+  Simplex volume: 1.058573e-03
+  Children (4):
+    T26 (0, 8, 15, 16): LB = 0.979201058
+  New global LB: 0.979201026 (from T21 (0, 8, 11, 14))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 9] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 11, 14)
+  Parent LB: 0.979201026 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 3.689696e-03
+  Children (2):
+    T28 (0, 8, 11, 17): LB = 0.979201071
+    T29 (0, 8, 14, 17): LB = 0.979201024
+  New global LB: 0.979201024 (from T29 (0, 8, 14, 17))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 10] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 14, 17)
+  Parent LB: 0.979201024 (per-scen)
+  EF true_obj: 0.979664418 (per-scen)
+  Simplex volume: 1.087974e-03
+  Children (4):
+    T29 (0, 8, 17, 18): LB = 0.979201075
+  New global LB: 0.979201058 (from T25 (0, 8, 15, 16))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 11] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 15, 16)
+  Parent LB: 0.979201058 (per-scen)
+  EF true_obj: 0.979664420 (per-scen)
+  Simplex volume: 1.057712e-03
+  Children (4):
+    T33 (0, 8, 15, 19): LB = 0.979201066
+  New global LB: 0.979201066 (from T33 (0, 8, 15, 19))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 12] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 15, 19)
+  Parent LB: 0.979201066 (per-scen)
+  EF true_obj: 0.979664419 (per-scen)
+  Simplex volume: 1.056909e-03
+  Children (4):
+    T36 (0, 8, 15, 20): LB = 0.979201097
+    T37 (0, 15, 19, 20): LB = 0.979227835
+  New global LB: 0.979201071 (from T27 (0, 8, 11, 17))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 13] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 11, 17)
+  Parent LB: 0.979201071 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.601722e-03
+  Children (2):
+    T38 (0, 8, 11, 21): LB = 0.979201094
+    T39 (0, 8, 17, 21): LB = 0.979201034
+  New global LB: 0.979201034 (from T39 (0, 8, 17, 21))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 14] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 17, 21)
+  Parent LB: 0.979201034 (per-scen)
+  EF true_obj: 0.979664417 (per-scen)
+  Simplex volume: 1.113477e-03
+  Children (4):
+    T39 (0, 8, 21, 22): LB = 0.979201103
+  New global LB: 0.979201075 (from T27 (0, 8, 17, 18))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 15] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 17, 18)
+  Parent LB: 0.979201075 (per-scen)
+  EF true_obj: 0.979664419 (per-scen)
+  Simplex volume: 1.084547e-03
+  Children (4):
+    T43 (0, 8, 18, 23): LB = 0.979202587
+    T44 (0, 17, 18, 23): LB = 0.979209327
+  New global LB: 0.979201094 (from T37 (0, 8, 11, 21))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 16] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 11, 21)
+  Parent LB: 0.979201094 (per-scen)
+  EF true_obj: 0.979664419 (per-scen)
+  Simplex volume: 1.488246e-03
+  Children (4):
+    T45 (0, 8, 11, 24): LB = 0.979201085
+    T46 (0, 8, 21, 24): LB = 0.979201103
+  New global LB: 0.979201085 (from T45 (0, 8, 11, 24))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 17] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 11, 24)
+  Parent LB: 0.979201085 (per-scen)
+  EF true_obj: 0.979664243 (per-scen)
+  Simplex volume: 1.357743e-03
+  Children (4):
+    T48 (0, 8, 11, 25): LB = 0.979201045
+  New global LB: 0.979201045 (from T48 (0, 8, 11, 25))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 18] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 11, 25)
+  Parent LB: 0.979201045 (per-scen)
+  EF true_obj: 0.979664243 (per-scen)
+  Simplex volume: 1.354839e-03
+  Children (4):
+    T52 (0, 8, 25, 26): LB = 0.979202196
+    T53 (0, 11, 25, 26): LB = 0.979209379
+  New global LB: 0.979201097 (from T34 (0, 8, 15, 20))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 19] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 15, 20)
+  Parent LB: 0.979201097 (per-scen)
+  EF true_obj: 0.979664408 (per-scen)
+  Simplex volume: 9.537891e-04
+  Children (4):
+    T55 (0, 8, 15, 27): LB = 0.979201319
+  New global LB: 0.979201103 (from T44 (0, 8, 21, 24))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 20] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 21, 24)
+  Parent LB: 0.979201103 (per-scen)
+  EF true_obj: 0.979664408 (per-scen)
+  Simplex volume: 1.237522e-04
+  Children (4):
+    T57 (0, 8, 24, 28): LB = 0.979213400
+  New global LB: 0.979201103 (from T36 (0, 8, 21, 22))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 21] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 21, 22)
+  Parent LB: 0.979201103 (per-scen)
+  EF true_obj: 0.979664417 (per-scen)
+  Simplex volume: 1.110006e-03
+  Children (4):
+    T61 (0, 8, 22, 29): LB = 0.979202327
+    T62 (0, 21, 22, 29): LB = 0.979222408
+  New global LB: 0.979201319 (from T53 (0, 8, 15, 27))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 22] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 15, 27)
+  Parent LB: 0.979201319 (per-scen)
+  EF true_obj: 0.979664408 (per-scen)
+  Simplex volume: 9.528542e-04
+  Children (4):
+    T64 (0, 8, 15, 30): LB = 0.979201872
+  New global LB: 0.979201872 (from T64 (0, 8, 15, 30))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 23] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 15, 30)
+  Parent LB: 0.979201872 (per-scen)
+  EF true_obj: 0.979664408 (per-scen)
+  Simplex volume: 9.463267e-04
+  Children (4):
+    T66 (0, 8, 30, 31): LB = 0.979201071
+    T68 (0, 15, 30, 31): LB = 0.979206636
+  New global LB: 0.979201071 (from T66 (0, 8, 30, 31))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 24] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 30, 31)
+  Parent LB: 0.979201071 (per-scen)
+  EF true_obj: 0.979664243 (per-scen)
+  Simplex volume: 8.778623e-04
+  Children (4):
+    T69 (0, 8, 30, 32): LB = 0.979201090
+  New global LB: 0.979201090 (from T69 (0, 8, 30, 32))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 25] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 30, 32)
+  Parent LB: 0.979201090 (per-scen)
+  EF true_obj: 0.979664243 (per-scen)
+  Simplex volume: 8.770990e-04
+  Children (2):
+    T72 (0, 8, 30, 33): LB = 0.979201072
+    T73 (0, 8, 32, 33): LB = 0.979201094
+  New global LB: 0.979201072 (from T72 (0, 8, 30, 33))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 26] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 30, 33)
+  Parent LB: 0.979201072 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 1.630115e-04
+  Children (4):
+    T73 (0, 8, 30, 34): LB = 0.979201519
+  New global LB: 0.979201094 (from T72 (0, 8, 32, 33))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 27] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 32, 33)
+  Parent LB: 0.979201094 (per-scen)
+  EF true_obj: 0.979664420 (per-scen)
+  Simplex volume: 7.140875e-04
+  Children (4):
+    T76 (0, 8, 33, 35): LB = 0.979201119
+  New global LB: 0.979201119 (from T76 (0, 8, 33, 35))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 28] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 33, 35)
+  Parent LB: 0.979201119 (per-scen)
+  EF true_obj: 0.979664417 (per-scen)
+  Simplex volume: 7.083548e-04
+  Children (4):
+    T79 (0, 8, 33, 36): LB = 0.979201122
+    T80 (0, 8, 35, 36): LB = 0.979201264
+  New global LB: 0.979201122 (from T79 (0, 8, 33, 36))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 29] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 33, 36)
+  Parent LB: 0.979201122 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 6.746131e-04
+  Children (4):
+    T82 (0, 8, 33, 37): LB = 0.979201151
+  New global LB: 0.979201151 (from T82 (0, 8, 33, 37))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 30] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 33, 37)
+  Parent LB: 0.979201151 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 6.740181e-04
+  Children (4):
+    T85 (0, 8, 33, 38): LB = 0.979201137
+    T86 (0, 8, 37, 38): LB = 0.979201264
+  New global LB: 0.979201137 (from T85 (0, 8, 33, 38))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 31] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 33, 38)
+  Parent LB: 0.979201137 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 6.383103e-04
+  Children (4):
+    T88 (0, 8, 33, 39): LB = 0.979201185
+  New global LB: 0.979201185 (from T88 (0, 8, 33, 39))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 32] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 33, 39)
+  Parent LB: 0.979201185 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 6.238425e-04
+  Children (4):
+    T92 (0, 8, 39, 40): LB = 0.979201152
+  New global LB: 0.979201152 (from T92 (0, 8, 39, 40))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 33] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 39, 40)
+  Parent LB: 0.979201152 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 6.218411e-04
+  Children (4):
+    T95 (0, 8, 39, 41): LB = 0.979202943
+    T96 (0, 39, 40, 41): LB = 0.979205973
+  New global LB: 0.979201264 (from T79 (0, 8, 35, 36))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 34] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 35, 36)
+  Parent LB: 0.979201264 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 2.957824e-05
+  Children (4):
+    T97 (0, 8, 36, 42): LB = 0.979202533
+  New global LB: 0.979201264 (from T84 (0, 8, 37, 38))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 35] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 37, 38)
+  Parent LB: 0.979201264 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.513430e-05
+  Children (4):
+    T101 (0, 8, 37, 43): LB = 0.979201340
+  New global LB: 0.979201340 (from T101 (0, 8, 37, 43))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 36] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 37, 43)
+  Parent LB: 0.979201340 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.510369e-05
+  Children (4):
+    T104 (0, 8, 37, 44): LB = 0.979201530
+  New global LB: 0.979201519 (from T72 (0, 8, 30, 34))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 37] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 30, 34)
+  Parent LB: 0.979201519 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 1.515964e-04
+  Children (4):
+    T106 (0, 8, 30, 45): LB = 0.979201133
+  New global LB: 0.979201133 (from T106 (0, 8, 30, 45))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 38] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 30, 45)
+  Parent LB: 0.979201133 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 1.510757e-04
+  Children (4):
+    T109 (0, 8, 30, 46): LB = 0.979201165
+  New global LB: 0.979201165 (from T109 (0, 8, 30, 46))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 39] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 30, 46)
+  Parent LB: 0.979201165 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 1.509473e-04
+  Children (4):
+    T113 (0, 8, 46, 47): LB = 0.979201107
+  New global LB: 0.979201107 (from T113 (0, 8, 46, 47))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 40] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 46, 47)
+  Parent LB: 0.979201107 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 1.507696e-04
+  Children (4):
+    T116 (0, 8, 46, 48): LB = 0.979201174
+  New global LB: 0.979201174 (from T116 (0, 8, 46, 48))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 41] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 46, 48)
+  Parent LB: 0.979201174 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 1.505366e-04
+  Children (4):
+    T118 (0, 8, 48, 49): LB = 0.979201142
+  New global LB: 0.979201142 (from T118 (0, 8, 48, 49))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 42] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 48, 49)
+  Parent LB: 0.979201142 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 1.502917e-04
+  Children (4):
+    T121 (0, 8, 48, 50): LB = 0.979201161
+  New global LB: 0.979201161 (from T121 (0, 8, 48, 50))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 43] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 48, 50)
+  Parent LB: 0.979201161 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 1.500253e-04
+  Children (4):
+    T125 (0, 8, 50, 51): LB = 0.979202580
+  New global LB: 0.979201530 (from T103 (0, 8, 37, 44))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 44] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 37, 44)
+  Parent LB: 0.979201530 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.507294e-05
+  Children (4):
+    T128 (0, 8, 37, 52): LB = 0.979202085
+  New global LB: 0.979202085 (from T128 (0, 8, 37, 52))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 45] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 37, 52)
+  Parent LB: 0.979202085 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.503275e-05
+  Children (4):
+    T131 (0, 8, 37, 53): LB = 0.979201877
+  New global LB: 0.979201877 (from T131 (0, 8, 37, 53))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 46] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 37, 53)
+  Parent LB: 0.979201877 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.500386e-05
+  Children (4):
+    T133 (0, 8, 53, 54): LB = 0.979202423
+  New global LB: 0.979202196 (from T49 (0, 8, 25, 26))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 47] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 25, 26)
+  Parent LB: 0.979202196 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 1.286784e-03
+  Children (4):
+    T136 (0, 8, 26, 55): LB = 0.979201088
+    T138 (0, 25, 26, 55): LB = 0.979207543
+  New global LB: 0.979201088 (from T136 (0, 8, 26, 55))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 48] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 26, 55)
+  Parent LB: 0.979201088 (per-scen)
+  EF true_obj: 0.979664411 (per-scen)
+  Simplex volume: 1.251470e-03
+  Children (4):
+    T139 (0, 8, 26, 56): LB = 0.979201086
+  New global LB: 0.979201086 (from T139 (0, 8, 26, 56))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 49] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 26, 56)
+  Parent LB: 0.979201086 (per-scen)
+  EF true_obj: 0.979664411 (per-scen)
+  Simplex volume: 1.250222e-03
+  Children (4):
+    T142 (0, 8, 26, 57): LB = 0.979201116
+    T143 (0, 8, 56, 57): LB = 0.979201299
+  New global LB: 0.979201116 (from T142 (0, 8, 26, 57))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 50] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 26, 57)
+  Parent LB: 0.979201116 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 1.206072e-03
+  Children (4):
+    T145 (0, 8, 26, 58): LB = 0.979201173
+  New global LB: 0.979201173 (from T145 (0, 8, 26, 58))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 51] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 26, 58)
+  Parent LB: 0.979201173 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 1.205166e-03
+  Children (4):
+    T148 (0, 8, 26, 59): LB = 0.979201136
+  New global LB: 0.979201136 (from T148 (0, 8, 26, 59))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 52] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 26, 59)
+  Parent LB: 0.979201136 (per-scen)
+  EF true_obj: 0.979664408 (per-scen)
+  Simplex volume: 1.203949e-03
+  Children (4):
+    T151 (0, 8, 26, 60): LB = 0.979201268
+  New global LB: 0.979201268 (from T151 (0, 8, 26, 60))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 53] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 26, 60)
+  Parent LB: 0.979201268 (per-scen)
+  EF true_obj: 0.979664408 (per-scen)
+  Simplex volume: 1.202747e-03
+  Children (4):
+    T154 (0, 8, 26, 61): LB = 0.979202251
+    T156 (0, 26, 60, 61): LB = 0.979206524
+  New global LB: 0.979201299 (from T142 (0, 8, 56, 57))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 54] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 56, 57)
+  Parent LB: 0.979201299 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 4.085945e-05
+  Children (4):
+    T158 (0, 8, 56, 62): LB = 0.979201481
+  New global LB: 0.979201481 (from T158 (0, 8, 56, 62))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 55] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 56, 62)
+  Parent LB: 0.979201481 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 4.080645e-05
+  Children (4):
+    T161 (0, 8, 56, 63): LB = 0.979201619
+  New global LB: 0.979201619 (from T161 (0, 8, 56, 63))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 56] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 56, 63)
+  Parent LB: 0.979201619 (per-scen)
+  EF true_obj: 0.979664408 (per-scen)
+  Simplex volume: 4.076647e-05
+  Children (4):
+    T163 (0, 8, 63, 64): LB = 0.979203437
+  New global LB: 0.979202251 (from T153 (0, 8, 26, 61))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 57] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 26, 61)
+  Parent LB: 0.979202251 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 1.143487e-03
+  Children (4):
+    T166 (0, 8, 26, 65): LB = 0.979202637
+  New global LB: 0.979202327 (from T59 (0, 8, 22, 29))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 58] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 22, 29)
+  Parent LB: 0.979202327 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 1.054299e-03
+  Children (4):
+    T170 (0, 8, 22, 66): LB = 0.979201103
+  New global LB: 0.979201103 (from T170 (0, 8, 22, 66))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 59] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 22, 66)
+  Parent LB: 0.979201103 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 1.052677e-03
+  Children (4):
+    T173 (0, 8, 22, 67): LB = 0.979201342
+  New global LB: 0.979201342 (from T173 (0, 8, 22, 67))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 60] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 22, 67)
+  Parent LB: 0.979201342 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 1.051578e-03
+  Children (4):
+    T176 (0, 8, 22, 68): LB = 0.979201772
+  New global LB: 0.979201772 (from T176 (0, 8, 22, 68))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 61] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 22, 68)
+  Parent LB: 0.979201772 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 1.050467e-03
+  Children (4):
+    T179 (0, 8, 22, 69): LB = 0.979201688
+    T180 (0, 22, 68, 69): LB = 0.979208292
+  New global LB: 0.979201688 (from T179 (0, 8, 22, 69))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 62] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 22, 69)
+  Parent LB: 0.979201688 (per-scen)
+  EF true_obj: 0.979664408 (per-scen)
+  Simplex volume: 1.000562e-03
+  Children (4):
+    T182 (0, 8, 22, 70): LB = 0.979202198
+  New global LB: 0.979202198 (from T182 (0, 8, 22, 70))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 63] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 22, 70)
+  Parent LB: 0.979202198 (per-scen)
+  EF true_obj: 0.979664408 (per-scen)
+  Simplex volume: 9.976662e-04
+  Children (4):
+    T185 (0, 8, 22, 71): LB = 0.979201835
+    T186 (0, 22, 70, 71): LB = 0.979206058
+  New global LB: 0.979201835 (from T185 (0, 8, 22, 71))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 64] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 22, 71)
+  Parent LB: 0.979201835 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 9.531353e-04
+  Children (4):
+    T188 (0, 8, 22, 72): LB = 0.979202091
+  New global LB: 0.979202091 (from T188 (0, 8, 22, 72))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 65] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 22, 72)
+  Parent LB: 0.979202091 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 9.360620e-04
+  Children (4):
+    T191 (0, 8, 22, 73): LB = 0.979202257
+  New global LB: 0.979202257 (from T191 (0, 8, 22, 73))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 66] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 22, 73)
+  Parent LB: 0.979202257 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 9.352687e-04
+  Children (4):
+    T194 (0, 8, 22, 74): LB = 0.979202565
+  New global LB: 0.979202423 (from T131 (0, 8, 53, 54))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 67] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 53, 54)
+  Parent LB: 0.979202423 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.495978e-05
+  Children (4):
+    T196 (0, 8, 53, 75): LB = 0.979201288
+  New global LB: 0.979201288 (from T196 (0, 8, 53, 75))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 68] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 53, 75)
+  Parent LB: 0.979201288 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.491429e-05
+  Children (4):
+    T199 (0, 8, 53, 76): LB = 0.979201187
+  New global LB: 0.979201187 (from T199 (0, 8, 53, 76))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 69] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 53, 76)
+  Parent LB: 0.979201187 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.485652e-05
+  Children (4):
+    T203 (0, 8, 76, 77): LB = 0.979201244
+  New global LB: 0.979201244 (from T203 (0, 8, 76, 77))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 70] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 76, 77)
+  Parent LB: 0.979201244 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.472820e-05
+  Children (4):
+    T206 (0, 8, 76, 78): LB = 0.979201314
+  New global LB: 0.979201314 (from T206 (0, 8, 76, 78))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 71] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 76, 78)
+  Parent LB: 0.979201314 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.469768e-05
+  Children (4):
+    T209 (0, 8, 76, 79): LB = 0.979201368
+  New global LB: 0.979201368 (from T209 (0, 8, 76, 79))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 72] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 76, 79)
+  Parent LB: 0.979201368 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.466125e-05
+  Children (4):
+    T212 (0, 8, 76, 80): LB = 0.979201365
+  New global LB: 0.979201365 (from T212 (0, 8, 76, 80))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 73] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 76, 80)
+  Parent LB: 0.979201365 (per-scen)
+  EF true_obj: 0.979664408 (per-scen)
+  Simplex volume: 3.462096e-05
+  Children (4):
+    T214 (0, 8, 80, 81): LB = 0.979201359
+  New global LB: 0.979201359 (from T214 (0, 8, 80, 81))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 74] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 80, 81)
+  Parent LB: 0.979201359 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.457204e-05
+  Children (4):
+    T218 (0, 8, 81, 82): LB = 0.979201353
+  New global LB: 0.979201353 (from T218 (0, 8, 81, 82))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 75] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 81, 82)
+  Parent LB: 0.979201353 (per-scen)
+  EF true_obj: 0.979664408 (per-scen)
+  Simplex volume: 3.453836e-05
+  Children (4):
+    T220 (0, 8, 82, 83): LB = 0.979201265
+  New global LB: 0.979201265 (from T220 (0, 8, 82, 83))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 76] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 82, 83)
+  Parent LB: 0.979201265 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.449748e-05
+  Children (4):
+    T223 (0, 8, 82, 84): LB = 0.979201254
+  New global LB: 0.979201254 (from T223 (0, 8, 82, 84))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 77] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 82, 84)
+  Parent LB: 0.979201254 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.445741e-05
+  Children (4):
+    T228 (0, 82, 84, 85): LB = 0.979201248
+  New global LB: 0.979201248 (from T228 (0, 82, 84, 85))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 78] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 82, 84, 85)
+  Parent LB: 0.979201248 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.440239e-05
+  Children (4):
+    T231 (0, 82, 84, 86): LB = 0.979201206
+  New global LB: 0.979201206 (from T231 (0, 82, 84, 86))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 79] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 82, 84, 86)
+  Parent LB: 0.979201206 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.436985e-05
+  Children (4):
+    T234 (0, 82, 84, 87): LB = 0.979201151
+  New global LB: 0.979201151 (from T234 (0, 82, 84, 87))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 80] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 82, 84, 87)
+  Parent LB: 0.979201151 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 3.433494e-05
+  Children (4):
+    T237 (0, 82, 84, 88): LB = 0.979201200
+  New global LB: 0.979201200 (from T237 (0, 82, 84, 88))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 81] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 82, 84, 88)
+  Parent LB: 0.979201200 (per-scen)
+  EF true_obj: 0.979664408 (per-scen)
+  Simplex volume: 3.430495e-05
+  Children (2):
+    T239 (0, 82, 84, 89): LB = 0.979201733
+  New global LB: 0.979201733 (from T239 (0, 82, 84, 89))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 82] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 82, 84, 89)
+  Parent LB: 0.979201733 (per-scen)
+  EF true_obj: 0.979664882 (per-scen)
+  Simplex volume: 2.995400e-05
+  Children (4):
+    T240 (0, 82, 84, 90): LB = 0.979201706
+  New global LB: 0.979201706 (from T240 (0, 82, 84, 90))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 83] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 82, 84, 90)
+  Parent LB: 0.979201706 (per-scen)
+  EF true_obj: 0.979664884 (per-scen)
+  Simplex volume: 2.993128e-05
+  Children (4):
+    T244 (0, 82, 90, 91): LB = 0.979202975
+  New global LB: 0.979202533 (from T93 (0, 8, 36, 42))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 84] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 36, 42)
+  Parent LB: 0.979202533 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 2.955230e-05
+  Children (4):
+    T246 (0, 8, 42, 92): LB = 0.979201220
+  New global LB: 0.979201220 (from T246 (0, 8, 42, 92))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 85] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 42, 92)
+  Parent LB: 0.979201220 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.823662e-05
+  Children (4):
+    T249 (0, 8, 42, 93): LB = 0.979201429
+  New global LB: 0.979201429 (from T249 (0, 8, 42, 93))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 86] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 42, 93)
+  Parent LB: 0.979201429 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.820533e-05
+  Children (4):
+    T252 (0, 8, 42, 94): LB = 0.979201388
+  New global LB: 0.979201388 (from T252 (0, 8, 42, 94))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 87] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 42, 94)
+  Parent LB: 0.979201388 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.810890e-05
+  Children (4):
+    T255 (0, 8, 42, 95): LB = 0.979201846
+  New global LB: 0.979201846 (from T255 (0, 8, 42, 95))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 88] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 42, 95)
+  Parent LB: 0.979201846 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.798735e-05
+  Children (4):
+    T257 (0, 8, 95, 96): LB = 0.979201861
+  New global LB: 0.979201861 (from T257 (0, 8, 95, 96))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 89] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 95, 96)
+  Parent LB: 0.979201861 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.795901e-05
+  Children (4):
+    T261 (0, 8, 96, 97): LB = 0.979201496
+  New global LB: 0.979201496 (from T261 (0, 8, 96, 97))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 90] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 96, 97)
+  Parent LB: 0.979201496 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.793292e-05
+  Children (4):
+    T263 (0, 8, 97, 98): LB = 0.979201259
+  New global LB: 0.979201259 (from T263 (0, 8, 97, 98))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 91] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 97, 98)
+  Parent LB: 0.979201259 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.775831e-05
+  Children (4):
+    T267 (0, 8, 98, 99): LB = 0.979201866
+  New global LB: 0.979201866 (from T267 (0, 8, 98, 99))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 92] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 98, 99)
+  Parent LB: 0.979201866 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.772249e-05
+  Children (4):
+    T269 (0, 8, 99, 100): LB = 0.979201235
+  New global LB: 0.979201235 (from T269 (0, 8, 99, 100))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 93] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 99, 100)
+  Parent LB: 0.979201235 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.768927e-05
+  Children (4):
+    T272 (0, 8, 99, 101): LB = 0.979201253
+  New global LB: 0.979201253 (from T272 (0, 8, 99, 101))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 94] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 99, 101)
+  Parent LB: 0.979201253 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.766802e-05
+  Children (4):
+    T275 (0, 8, 99, 102): LB = 0.979201245
+  New global LB: 0.979201245 (from T275 (0, 8, 99, 102))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 95] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 99, 102)
+  Parent LB: 0.979201245 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.742812e-05
+  Children (4):
+    T279 (0, 8, 102, 103): LB = 0.979201230
+  New global LB: 0.979201230 (from T279 (0, 8, 102, 103))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 96] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 102, 103)
+  Parent LB: 0.979201230 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.588119e-05
+  Children (4):
+    T282 (0, 8, 102, 104): LB = 0.979201287
+  New global LB: 0.979201287 (from T282 (0, 8, 102, 104))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 97] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 102, 104)
+  Parent LB: 0.979201287 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.585321e-05
+  Children (4):
+    T285 (0, 8, 102, 105): LB = 0.979201327
+  New global LB: 0.979201327 (from T285 (0, 8, 102, 105))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 98] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 102, 105)
+  Parent LB: 0.979201327 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.556062e-05
+  Children (4):
+    T288 (0, 8, 102, 106): LB = 0.979201312
+  New global LB: 0.979201312 (from T288 (0, 8, 102, 106))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 99] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 102, 106)
+  Parent LB: 0.979201312 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.553289e-05
+  Children (4):
+    T290 (0, 8, 106, 107): LB = 0.979201327
+  New global LB: 0.979201327 (from T290 (0, 8, 106, 107))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 100] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 106, 107)
+  Parent LB: 0.979201327 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.549861e-05
+  Children (4):
+    T293 (0, 8, 106, 108): LB = 0.979201258
+  New global LB: 0.979201258 (from T293 (0, 8, 106, 108))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 101] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 106, 108)
+  Parent LB: 0.979201258 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 2.546837e-05
+  Children (4):
+    T296 (0, 8, 106, 109): LB = 0.979203016
+  New global LB: 0.979202565 (from T192 (0, 8, 22, 74))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 102] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 22, 74)
+  Parent LB: 0.979202565 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 9.343623e-04
+  Children (4):
+    T301 (0, 22, 74, 110): LB = 0.979202611
+  New global LB: 0.979202580 (from T121 (0, 8, 50, 51))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 103] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 50, 51)
+  Parent LB: 0.979202580 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 1.424246e-04
+  Children (4):
+    T303 (0, 8, 50, 111): LB = 0.979202629
+  New global LB: 0.979202587 (from T40 (0, 8, 18, 23))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 104] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 18, 23)
+  Parent LB: 0.979202587 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 1.030096e-03
+  Children (4):
+    T306 (0, 8, 18, 112): LB = 0.979201142
+    T307 (0, 18, 23, 112): LB = 0.979207251
+  New global LB: 0.979201142 (from T306 (0, 8, 18, 112))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 105] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 18, 112)
+  Parent LB: 0.979201142 (per-scen)
+  EF true_obj: 0.979664408 (per-scen)
+  Simplex volume: 9.808725e-04
+  Children (4):
+    T309 (0, 8, 18, 113): LB = 0.979201329
+  New global LB: 0.979201329 (from T309 (0, 8, 18, 113))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 106] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 18, 113)
+  Parent LB: 0.979201329 (per-scen)
+  EF true_obj: 0.979664408 (per-scen)
+  Simplex volume: 9.795853e-04
+  Children (4):
+    T312 (0, 8, 18, 114): LB = 0.979201987
+  New global LB: 0.979201987 (from T312 (0, 8, 18, 114))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 107] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 18, 114)
+  Parent LB: 0.979201987 (per-scen)
+  EF true_obj: 0.979664408 (per-scen)
+  Simplex volume: 9.783843e-04
+  Children (4):
+    T315 (0, 8, 18, 115): LB = 0.979201592
+    T316 (0, 18, 114, 115): LB = 0.979206121
+  New global LB: 0.979201592 (from T315 (0, 8, 18, 115))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 108] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 18, 115)
+  Parent LB: 0.979201592 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 9.344292e-04
+  Children (4):
+    T318 (0, 8, 18, 116): LB = 0.979202261
+  New global LB: 0.979202261 (from T318 (0, 8, 18, 116))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 109] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 18, 116)
+  Parent LB: 0.979202261 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 9.287841e-04
+  Children (4):
+    T321 (0, 8, 18, 117): LB = 0.979201951
+  New global LB: 0.979201951 (from T321 (0, 8, 18, 117))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 110] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 18, 117)
+  Parent LB: 0.979201951 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 9.278403e-04
+  Children (4):
+    T324 (0, 8, 18, 118): LB = 0.979202426
+  New global LB: 0.979202426 (from T324 (0, 8, 18, 118))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 111] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 18, 118)
+  Parent LB: 0.979202426 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 9.269311e-04
+  Children (4):
+    T327 (0, 8, 18, 119): LB = 0.979202453
+  New global LB: 0.979202453 (from T327 (0, 8, 18, 119))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 112] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 18, 119)
+  Parent LB: 0.979202453 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 9.260821e-04
+  Children (4):
+    T330 (0, 8, 18, 120): LB = 0.979202248
+  New global LB: 0.979202248 (from T330 (0, 8, 18, 120))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 113] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 18, 120)
+  Parent LB: 0.979202248 (per-scen)
+  EF true_obj: 0.979664411 (per-scen)
+  Simplex volume: 9.236254e-04
+  Children (4):
+    T333 (0, 8, 18, 121): LB = 0.979202710
+  New global LB: 0.979202611 (from T299 (0, 22, 74, 110))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 114] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 22, 74, 110)
+  Parent LB: 0.979202611 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 9.328702e-04
+  Children (4):
+    T337 (0, 22, 74, 122): LB = 0.979202517
+  New global LB: 0.979202517 (from T337 (0, 22, 74, 122))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 115] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 22, 74, 122)
+  Parent LB: 0.979202517 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 9.319820e-04
+  Children (4):
+    T340 (0, 22, 74, 123): LB = 0.979202159
+  New global LB: 0.979202159 (from T340 (0, 22, 74, 123))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 116] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 22, 74, 123)
+  Parent LB: 0.979202159 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 9.311508e-04
+  Children (4):
+    T343 (0, 22, 74, 124): LB = 0.979202670
+  New global LB: 0.979202629 (from T301 (0, 8, 50, 111))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 117] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 50, 111)
+  Parent LB: 0.979202629 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 1.422942e-04
+  Children (4):
+    T344 (0, 8, 111, 125): LB = 0.979202936
+  New global LB: 0.979202637 (from T161 (0, 8, 26, 65))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 118] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 26, 65)
+  Parent LB: 0.979202637 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 1.141814e-03
+  Children (4):
+    T348 (0, 8, 65, 126): LB = 0.979202773
+  New global LB: 0.979202670 (from T341 (0, 22, 74, 124))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 119] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 22, 74, 124)
+  Parent LB: 0.979202670 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 9.303236e-04
+  Children (4):
+    T352 (0, 22, 74, 127): LB = 0.979202802
+  New global LB: 0.979202710 (from T330 (0, 8, 18, 121))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 120] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 18, 121)
+  Parent LB: 0.979202710 (per-scen)
+  EF true_obj: 0.979664411 (per-scen)
+  Simplex volume: 9.223939e-04
+  Children (4):
+    T354 (0, 8, 18, 128): LB = 0.979203326
+  New global LB: 0.979202773 (from T346 (0, 8, 65, 126))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 121] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 65, 126)
+  Parent LB: 0.979202773 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 1.140429e-03
+  Children (4):
+    T356 (0, 8, 126, 129): LB = 0.979202735
+    T357 (0, 8, 65, 129): LB = 0.979201205
+  New global LB: 0.979201205 (from T357 (0, 8, 65, 129))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 122] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 65, 129)
+  Parent LB: 0.979201205 (per-scen)
+  EF true_obj: 0.979664407 (per-scen)
+  Simplex volume: 8.162677e-05
+  Children (4):
+    T359 (0, 8, 129, 130): LB = 0.979202761
+  New global LB: 0.979202735 (from T356 (0, 8, 126, 129))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 123] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 126, 129)
+  Parent LB: 0.979202735 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 1.053425e-03
+  Children (4):
+    T362 (0, 8, 126, 131): LB = 0.979203200
+  New global LB: 0.979202761 (from T358 (0, 8, 129, 130))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 124] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 8, 129, 130)
+  Parent LB: 0.979202761 (per-scen)
+  EF true_obj: 0.979664414 (per-scen)
+  Simplex volume: 8.076093e-05
+  Children (2):
+    T365 (0, 8, 129, 132): LB = 0.979203761
+    T366 (0, 8, 130, 132): LB = 0.979203820
+  New global LB: 0.979202802 (from T350 (0, 22, 74, 127))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 125] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 22, 74, 127)
+  Parent LB: 0.979202802 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 9.291820e-04
+  Children (4):
+    T368 (0, 22, 74, 133): LB = 0.979202208
+  New global LB: 0.979202208 (from T368 (0, 22, 74, 133))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 126] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 22, 74, 133)
+  Parent LB: 0.979202208 (per-scen)
+  EF true_obj: 0.979664409 (per-scen)
+  Simplex volume: 9.278834e-04
+  Children (4):
+    T371 (0, 22, 74, 134): LB = 0.979201794
+  New global LB: 0.979201794 (from T371 (0, 22, 74, 134))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 127] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 22, 74, 134)
+  Parent LB: 0.979201794 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 9.269140e-04
+  Children (4):
+    T374 (0, 22, 74, 135): LB = 0.979201663
+  New global LB: 0.979201663 (from T374 (0, 22, 74, 135))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 128] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 22, 74, 135)
+  Parent LB: 0.979201663 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 9.259828e-04
+  Children (4):
+    T375 (0, 74, 135, 136): LB = 0.979201426
+    T377 (0, 22, 74, 136): LB = 0.979202128
+  New global LB: 0.979201426 (from T375 (0, 74, 135, 136))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 129] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 135, 136)
+  Parent LB: 0.979201426 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 9.084884e-05
+  Children (4):
+    T380 (0, 74, 136, 137): LB = 0.979201615
+  New global LB: 0.979201615 (from T380 (0, 74, 136, 137))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 130] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 136, 137)
+  Parent LB: 0.979201615 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 9.077156e-05
+  Children (4):
+    T383 (0, 74, 136, 138): LB = 0.979201210
+  New global LB: 0.979201210 (from T383 (0, 74, 136, 138))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 131] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 136, 138)
+  Parent LB: 0.979201210 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 9.069889e-05
+  Children (4):
+    T384 (0, 74, 138, 139): LB = 0.979201299
+  New global LB: 0.979201299 (from T384 (0, 74, 138, 139))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 132] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 138, 139)
+  Parent LB: 0.979201299 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 9.062117e-05
+  Children (4):
+    T387 (0, 74, 138, 140): LB = 0.979201243
+  New global LB: 0.979201243 (from T387 (0, 74, 138, 140))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 133] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 138, 140)
+  Parent LB: 0.979201243 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 8.738694e-05
+  Children (4):
+    T392 (0, 74, 140, 141): LB = 0.979201553
+  New global LB: 0.979201553 (from T392 (0, 74, 140, 141))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 134] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 140, 141)
+  Parent LB: 0.979201553 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 8.731639e-05
+  Children (4):
+    T393 (0, 74, 141, 142): LB = 0.979201179
+  New global LB: 0.979201179 (from T393 (0, 74, 141, 142))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 135] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 141, 142)
+  Parent LB: 0.979201179 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 8.484816e-05
+  Children (4):
+    T398 (0, 74, 142, 143): LB = 0.979201092
+  New global LB: 0.979201092 (from T398 (0, 74, 142, 143))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 136] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 142, 143)
+  Parent LB: 0.979201092 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 8.475282e-05
+  Children (4):
+    T401 (0, 74, 142, 144): LB = 0.979201098
+  New global LB: 0.979201098 (from T401 (0, 74, 142, 144))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 137] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 142, 144)
+  Parent LB: 0.979201098 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 8.468018e-05
+  Children (4):
+    T402 (0, 74, 144, 145): LB = 0.979200942
+  New global LB: 0.979200942 (from T402 (0, 74, 144, 145))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 138] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 144, 145)
+  Parent LB: 0.979200942 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 8.460338e-05
+  Children (2):
+    T405 (0, 74, 144, 146): LB = 0.979201014
+    T406 (0, 144, 145, 146): LB = 0.979200934
+  New global LB: 0.979200934 (from T406 (0, 144, 145, 146))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 139] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 144, 145, 146)
+  Parent LB: 0.979200934 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 4.257368e-05
+  Children (4):
+    T408 (0, 145, 146, 147): LB = 0.979201746
+  New global LB: 0.979201014 (from T405 (0, 74, 144, 146))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 140] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 144, 146)
+  Parent LB: 0.979201014 (per-scen)
+  EF true_obj: 0.979664412 (per-scen)
+  Simplex volume: 4.202970e-05
+  Children (4):
+    T411 (0, 74, 146, 148): LB = 0.979200947
+  New global LB: 0.979200947 (from T411 (0, 74, 146, 148))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 141] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 146, 148)
+  Parent LB: 0.979200947 (per-scen)
+  EF true_obj: 0.979664412 (per-scen)
+  Simplex volume: 4.198286e-05
+  Children (4):
+    T414 (0, 74, 146, 149): LB = 0.979204291
+  New global LB: 0.979201746 (from T407 (0, 145, 146, 147))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 142] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 145, 146, 147)
+  Parent LB: 0.979201746 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 4.252459e-05
+  Children (4):
+    T417 (0, 145, 146, 150): LB = 0.979201543
+  New global LB: 0.979201543 (from T417 (0, 145, 146, 150))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 143] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 145, 146, 150)
+  Parent LB: 0.979201543 (per-scen)
+  EF true_obj: 0.979664420 (per-scen)
+  Simplex volume: 3.731346e-05
+  Children (4):
+    T420 (0, 145, 146, 151): LB = 0.979201059
+  New global LB: 0.979201059 (from T420 (0, 145, 146, 151))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 144] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 145, 146, 151)
+  Parent LB: 0.979201059 (per-scen)
+  EF true_obj: 0.979664421 (per-scen)
+  Simplex volume: 3.723883e-05
+  Children (4):
+    T423 (0, 145, 146, 152): LB = 0.979201016
+  New global LB: 0.979201016 (from T423 (0, 145, 146, 152))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 145] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 145, 146, 152)
+  Parent LB: 0.979201016 (per-scen)
+  EF true_obj: 0.979664421 (per-scen)
+  Simplex volume: 3.719374e-05
+  Children (4):
+    T426 (0, 145, 146, 153): LB = 0.979201027
+  New global LB: 0.979201027 (from T426 (0, 145, 146, 153))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 146] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 145, 146, 153)
+  Parent LB: 0.979201027 (per-scen)
+  EF true_obj: 0.979664421 (per-scen)
+  Simplex volume: 3.716394e-05
+  Children (4):
+    T428 (0, 145, 153, 154): LB = 0.979201040
+  New global LB: 0.979201040 (from T428 (0, 145, 153, 154))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 147] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 145, 153, 154)
+  Parent LB: 0.979201040 (per-scen)
+  EF true_obj: 0.979664421 (per-scen)
+  Simplex volume: 3.515971e-05
+  Children (4):
+    T431 (0, 145, 153, 155): LB = 0.979201056
+  New global LB: 0.979201056 (from T431 (0, 145, 153, 155))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 148] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 145, 153, 155)
+  Parent LB: 0.979201056 (per-scen)
+  EF true_obj: 0.979664421 (per-scen)
+  Simplex volume: 3.327786e-05
+  Children (4):
+    T434 (0, 145, 153, 156): LB = 0.979201049
+  New global LB: 0.979201049 (from T434 (0, 145, 153, 156))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 149] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 145, 153, 156)
+  Parent LB: 0.979201049 (per-scen)
+  EF true_obj: 0.979664421 (per-scen)
+  Simplex volume: 3.325113e-05
+  Children (4):
+    T437 (0, 145, 153, 157): LB = 0.979201051
+  New global LB: 0.979201051 (from T437 (0, 145, 153, 157))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 150] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 145, 153, 157)
+  Parent LB: 0.979201051 (per-scen)
+  EF true_obj: 0.979664421 (per-scen)
+  Simplex volume: 3.322463e-05
+  Children (4):
+    T440 (0, 145, 153, 158): LB = 0.979201026
+  New global LB: 0.979201026 (from T440 (0, 145, 153, 158))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 151] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 145, 153, 158)
+  Parent LB: 0.979201026 (per-scen)
+  EF true_obj: 0.979664421 (per-scen)
+  Simplex volume: 3.144658e-05
+  Children (4):
+    T442 (0, 153, 158, 159): LB = 0.979201025
+  New global LB: 0.979201025 (from T442 (0, 153, 158, 159))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 152] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 153, 158, 159)
+  Parent LB: 0.979201025 (per-scen)
+  EF true_obj: 0.979664421 (per-scen)
+  Simplex volume: 3.140369e-05
+  Children (4):
+    T445 (0, 153, 158, 160): LB = 0.979201021
+  New global LB: 0.979201021 (from T445 (0, 153, 158, 160))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 153] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 153, 158, 160)
+  Parent LB: 0.979201021 (per-scen)
+  EF true_obj: 0.979664421 (per-scen)
+  Simplex volume: 3.137035e-05
+  Children (4):
+    T448 (0, 153, 158, 161): LB = 0.979201022
+  New global LB: 0.979201022 (from T448 (0, 153, 158, 161))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 154] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 153, 158, 161)
+  Parent LB: 0.979201022 (per-scen)
+  EF true_obj: 0.979664421 (per-scen)
+  Simplex volume: 3.133487e-05
+  Children (4):
+    T451 (0, 153, 158, 162): LB = 0.979201027
+  New global LB: 0.979201027 (from T451 (0, 153, 158, 162))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 155] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 153, 158, 162)
+  Parent LB: 0.979201027 (per-scen)
+  EF true_obj: 0.979664421 (per-scen)
+  Simplex volume: 3.129517e-05
+  Children (4):
+    T454 (0, 153, 158, 163): LB = 0.979201028
+  New global LB: 0.979201028 (from T454 (0, 153, 158, 163))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 156] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 153, 158, 163)
+  Parent LB: 0.979201028 (per-scen)
+  EF true_obj: 0.979664421 (per-scen)
+  Simplex volume: 3.033704e-05
+  Children (4):
+    T459 (0, 158, 163, 164): LB = 0.979201027
+  New global LB: 0.979201027 (from T459 (0, 158, 163, 164))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 157] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 158, 163, 164)
+  Parent LB: 0.979201027 (per-scen)
+  EF true_obj: 0.979664421 (per-scen)
+  Simplex volume: 2.940531e-05
+  Children (4):
+    T461 (0, 163, 164, 165): LB = 0.979201389
+  New global LB: 0.979201389 (from T461 (0, 163, 164, 165))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 158] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 163, 164, 165)
+  Parent LB: 0.979201389 (per-scen)
+  EF true_obj: 0.979664422 (per-scen)
+  Simplex volume: 2.850044e-05
+  Children (2):
+    T463 (0, 164, 165, 166): LB = 0.979201029
+  New global LB: 0.979201029 (from T463 (0, 164, 165, 166))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 159] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 164, 165, 166)
+  Parent LB: 0.979201029 (per-scen)
+  EF true_obj: 0.979664410 (per-scen)
+  Simplex volume: 2.531310e-05
+  Children (2):
+  New global LB: 0.979202128 (from T376 (0, 22, 74, 136))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 160] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 22, 74, 136)
+  Parent LB: 0.979202128 (per-scen)
+  EF true_obj: 0.979664803 (per-scen)
+  Simplex volume: 8.343230e-04
+  Children (4):
+    T465 (0, 74, 136, 168): LB = 0.979202209
+  New global LB: 0.979202209 (from T465 (0, 74, 136, 168))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 161] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 136, 168)
+  Parent LB: 0.979202209 (per-scen)
+  EF true_obj: 0.979664803 (per-scen)
+  Simplex volume: 8.333569e-04
+  Children (4):
+    T468 (0, 74, 136, 169): LB = 0.979202214
+  New global LB: 0.979202214 (from T468 (0, 74, 136, 169))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 162] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 136, 169)
+  Parent LB: 0.979202214 (per-scen)
+  EF true_obj: 0.979664803 (per-scen)
+  Simplex volume: 8.327191e-04
+  Children (4):
+    T473 (0, 74, 169, 170): LB = 0.979202137
+  New global LB: 0.979202137 (from T473 (0, 74, 169, 170))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 163] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 169, 170)
+  Parent LB: 0.979202137 (per-scen)
+  EF true_obj: 0.979664806 (per-scen)
+  Simplex volume: 8.318406e-04
+  Children (4):
+    T474 (0, 74, 170, 171): LB = 0.979202405
+  New global LB: 0.979202405 (from T474 (0, 74, 170, 171))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 164] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 170, 171)
+  Parent LB: 0.979202405 (per-scen)
+  EF true_obj: 0.979664806 (per-scen)
+  Simplex volume: 8.308566e-04
+  Children (4):
+    T477 (0, 74, 170, 172): LB = 0.979202150
+  New global LB: 0.979202150 (from T477 (0, 74, 170, 172))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 165] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 170, 172)
+  Parent LB: 0.979202150 (per-scen)
+  EF true_obj: 0.979664806 (per-scen)
+  Simplex volume: 8.301757e-04
+  Children (4):
+    T480 (0, 74, 170, 173): LB = 0.979202059
+  New global LB: 0.979202059 (from T480 (0, 74, 170, 173))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 166] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 170, 173)
+  Parent LB: 0.979202059 (per-scen)
+  EF true_obj: 0.979664806 (per-scen)
+  Simplex volume: 8.294453e-04
+  Children (4):
+    T483 (0, 74, 170, 174): LB = 0.979202198
+  New global LB: 0.979202198 (from T483 (0, 74, 170, 174))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 167] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 170, 174)
+  Parent LB: 0.979202198 (per-scen)
+  EF true_obj: 0.979664806 (per-scen)
+  Simplex volume: 8.285888e-04
+  Children (4):
+    T486 (0, 74, 170, 175): LB = 0.979202174
+  New global LB: 0.979202174 (from T486 (0, 74, 170, 175))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 168] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 170, 175)
+  Parent LB: 0.979202174 (per-scen)
+  EF true_obj: 0.979664806 (per-scen)
+  Simplex volume: 8.278289e-04
+  Children (4):
+    T489 (0, 74, 170, 176): LB = 0.979201652
+  New global LB: 0.979201652 (from T489 (0, 74, 170, 176))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 169] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 170, 176)
+  Parent LB: 0.979201652 (per-scen)
+  EF true_obj: 0.979664807 (per-scen)
+  Simplex volume: 8.246619e-04
+  Children (4):
+    T492 (0, 74, 170, 177): LB = 0.979202158
+  New global LB: 0.979202158 (from T492 (0, 74, 170, 177))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 170] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 170, 177)
+  Parent LB: 0.979202158 (per-scen)
+  EF true_obj: 0.979664804 (per-scen)
+  Simplex volume: 8.064857e-04
+  Children (4):
+    T497 (0, 74, 177, 178): LB = 0.979201720
+  New global LB: 0.979201720 (from T497 (0, 74, 177, 178))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 171] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 177, 178)
+  Parent LB: 0.979201720 (per-scen)
+  EF true_obj: 0.979664807 (per-scen)
+  Simplex volume: 8.057142e-04
+  Children (4):
+    T500 (0, 74, 177, 179): LB = 0.979201699
+  New global LB: 0.979201699 (from T500 (0, 74, 177, 179))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 172] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 177, 179)
+  Parent LB: 0.979201699 (per-scen)
+  EF true_obj: 0.979664810 (per-scen)
+  Simplex volume: 8.050102e-04
+  Children (4):
+    T503 (0, 74, 177, 180): LB = 0.979201545
+  New global LB: 0.979201545 (from T503 (0, 74, 177, 180))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 173] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 177, 180)
+  Parent LB: 0.979201545 (per-scen)
+  EF true_obj: 0.979664812 (per-scen)
+  Simplex volume: 8.042472e-04
+  Children (4):
+    T504 (0, 74, 180, 181): LB = 0.979201589
+  New global LB: 0.979201589 (from T504 (0, 74, 180, 181))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 174] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 180, 181)
+  Parent LB: 0.979201589 (per-scen)
+  EF true_obj: 0.979664812 (per-scen)
+  Simplex volume: 8.030622e-04
+  Children (4):
+    T507 (0, 74, 180, 182): LB = 0.979201996
+  New global LB: 0.979201996 (from T507 (0, 74, 180, 182))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 175] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 180, 182)
+  Parent LB: 0.979201996 (per-scen)
+  EF true_obj: 0.979664812 (per-scen)
+  Simplex volume: 8.024578e-04
+  Children (4):
+    T510 (0, 74, 180, 183): LB = 0.979201582
+  New global LB: 0.979201582 (from T510 (0, 74, 180, 183))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 176] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 180, 183)
+  Parent LB: 0.979201582 (per-scen)
+  EF true_obj: 0.979664812 (per-scen)
+  Simplex volume: 8.014615e-04
+  Children (2):
+    T513 (0, 74, 180, 184): LB = 0.979201577
+    T514 (0, 74, 183, 184): LB = 0.979205712
+  New global LB: 0.979201577 (from T513 (0, 74, 180, 184))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 177] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 180, 184)
+  Parent LB: 0.979201577 (per-scen)
+  EF true_obj: 0.979664812 (per-scen)
+  Simplex volume: 7.165562e-04
+  Children (4):
+    T514 (0, 74, 180, 185): LB = 0.979201478
+  New global LB: 0.979201478 (from T514 (0, 74, 180, 185))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 178] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 180, 185)
+  Parent LB: 0.979201478 (per-scen)
+  EF true_obj: 0.979664812 (per-scen)
+  Simplex volume: 7.160119e-04
+  Children (4):
+    T517 (0, 74, 180, 186): LB = 0.979201491
+  New global LB: 0.979201491 (from T517 (0, 74, 180, 186))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 179] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 74, 180, 186)
+  Parent LB: 0.979201491 (per-scen)
+  EF true_obj: 0.979664812 (per-scen)
+  Simplex volume: 7.132361e-04
+  Children (4):
+    T522 (0, 180, 186, 187): LB = 0.979201566
+  New global LB: 0.979201566 (from T522 (0, 180, 186, 187))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 180] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 180, 186, 187)
+  Parent LB: 0.979201566 (per-scen)
+  EF true_obj: 0.979664812 (per-scen)
+  Simplex volume: 7.105249e-04
+  Children (4):
+    T525 (0, 180, 186, 188): LB = 0.979201647
+  New global LB: 0.979201647 (from T525 (0, 180, 186, 188))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 181] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 180, 186, 188)
+  Parent LB: 0.979201647 (per-scen)
+  EF true_obj: 0.979664812 (per-scen)
+  Simplex volume: 7.080836e-04
+  Children (4):
+    T528 (0, 180, 186, 189): LB = 0.979201577
+  New global LB: 0.979201577 (from T528 (0, 180, 186, 189))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 182] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 180, 186, 189)
+  Parent LB: 0.979201577 (per-scen)
+  EF true_obj: 0.979664812 (per-scen)
+  Simplex volume: 7.058016e-04
+  Children (4):
+    T530 (0, 186, 189, 190): LB = 0.979201556
+  New global LB: 0.979201556 (from T530 (0, 186, 189, 190))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 183] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 186, 189, 190)
+  Parent LB: 0.979201556 (per-scen)
+  EF true_obj: 0.979664814 (per-scen)
+  Simplex volume: 7.048619e-04
+  Children (4):
+    T533 (0, 186, 189, 191): LB = 0.979201526
+  New global LB: 0.979201526 (from T533 (0, 186, 189, 191))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 184] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 186, 189, 191)
+  Parent LB: 0.979201526 (per-scen)
+  EF true_obj: 0.979664817 (per-scen)
+  Simplex volume: 7.042366e-04
+  Children (4):
+    T536 (0, 186, 189, 192): LB = 0.979201463
+  New global LB: 0.979201463 (from T536 (0, 186, 189, 192))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 185] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 186, 189, 192)
+  Parent LB: 0.979201463 (per-scen)
+  EF true_obj: 0.979664819 (per-scen)
+  Simplex volume: 7.033248e-04
+  Children (4):
+    T539 (0, 186, 189, 193): LB = 0.979201465
+  New global LB: 0.979201465 (from T539 (0, 186, 189, 193))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 186] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 186, 189, 193)
+  Parent LB: 0.979201465 (per-scen)
+  EF true_obj: 0.979664822 (per-scen)
+  Simplex volume: 7.027585e-04
+  Children (4):
+    T542 (0, 186, 189, 194): LB = 0.979201669
+    T543 (0, 186, 193, 194): LB = 0.979201453
+  New global LB: 0.979201453 (from T543 (0, 186, 193, 194))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 187] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 186, 193, 194)
+  Parent LB: 0.979201453 (per-scen)
+  EF true_obj: 0.979664821 (per-scen)
+  Simplex volume: 3.477046e-05
+  Children (4):
+    T545 (0, 186, 194, 195): LB = 0.979201455
+  New global LB: 0.979201455 (from T545 (0, 186, 194, 195))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 188] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 186, 194, 195)
+  Parent LB: 0.979201455 (per-scen)
+  EF true_obj: 0.979664822 (per-scen)
+  Simplex volume: 3.473355e-05
+  Children (4):
+    T547 (0, 194, 195, 196): LB = 0.979201457
+  New global LB: 0.979201457 (from T547 (0, 194, 195, 196))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 189] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 194, 195, 196)
+  Parent LB: 0.979201457 (per-scen)
+  EF true_obj: 0.979664821 (per-scen)
+  Simplex volume: 3.367293e-05
+  Children (4):
+    T551 (0, 194, 196, 197): LB = 0.979201456
+  New global LB: 0.979201456 (from T551 (0, 194, 196, 197))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 190] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 194, 196, 197)
+  Parent LB: 0.979201456 (per-scen)
+  EF true_obj: 0.979664824 (per-scen)
+  Simplex volume: 3.263888e-05
+  Children (4):
+    T555 (0, 196, 197, 198): LB = 0.979201450
+  New global LB: 0.979201450 (from T555 (0, 196, 197, 198))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 191] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 196, 197, 198)
+  Parent LB: 0.979201450 (per-scen)
+  EF true_obj: 0.979664822 (per-scen)
+  Simplex volume: 3.162687e-05
+  Children (2):
+    T556 (0, 197, 198, 199): LB = 0.979201453
+  New global LB: 0.979201453 (from T556 (0, 197, 198, 199))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 192] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 197, 198, 199)
+  Parent LB: 0.979201453 (per-scen)
+  EF true_obj: 0.979664824 (per-scen)
+  Simplex volume: 2.810285e-05
+  Children (2):
+    T558 (0, 198, 199, 200): LB = 0.979201457
+  New global LB: 0.979201457 (from T558 (0, 198, 199, 200))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 193] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 198, 199, 200)
+  Parent LB: 0.979201457 (per-scen)
+  EF true_obj: 0.979664823 (per-scen)
+  Simplex volume: 2.494502e-05
+  Children (2):
+  New global LB: 0.979201669 (from T542 (0, 186, 189, 194))
+  Location: OUTSIDE
+======================================================================
+
+======================================================================
+[Iter 194] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 186, 189, 194)
+  Parent LB: 0.979201669 (per-scen)
+  EF true_obj: 0.979665055 (per-scen)
+  Simplex volume: 6.672072e-04
+  Children (4):
+    T561 (0, 186, 194, 202): LB = 0.979201660
+  New global LB: 0.979201660 (from T561 (0, 186, 194, 202))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 195] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 186, 194, 202)
+  Parent LB: 0.979201660 (per-scen)
+  EF true_obj: 0.979665055 (per-scen)
+  Simplex volume: 6.661428e-04
+  Children (4):
+    T562 (0, 194, 202, 203): LB = 0.979201662
+  New global LB: 0.979201662 (from T562 (0, 194, 202, 203))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 196] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 194, 202, 203)
+  Parent LB: 0.979201662 (per-scen)
+  EF true_obj: 0.979665055 (per-scen)
+  Simplex volume: 6.458009e-04
+  Children (4):
+    T566 (0, 202, 203, 204): LB = 0.979201725
+  New global LB: 0.979201725 (from T566 (0, 202, 203, 204))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 197] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 202, 203, 204)
+  Parent LB: 0.979201725 (per-scen)
+  EF true_obj: 0.979665058 (per-scen)
+  Simplex volume: 6.257892e-04
+  Children (4):
+    T570 (0, 203, 204, 205): LB = 0.979201665
+  New global LB: 0.979201665 (from T570 (0, 203, 204, 205))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 198] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 203, 204, 205)
+  Parent LB: 0.979201665 (per-scen)
+  EF true_obj: 0.979665058 (per-scen)
+  Simplex volume: 6.063933e-04
+  Children (2):
+    T571 (0, 204, 205, 206): LB = 0.979201667
+    T572 (203, 204, 205, 206): LB = 0.985193538
+  New global LB: 0.979201667 (from T571 (0, 204, 205, 206))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 199] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 204, 205, 206)
+  Parent LB: 0.979201667 (per-scen)
+  EF true_obj: 0.979665058 (per-scen)
+  Simplex volume: 5.388259e-04
+  Children (2):
+    T572 (204, 205, 206, 207): LB = 0.983537392
+    T573 (0, 205, 206, 207): LB = 0.979201666
+  New global LB: 0.979201666 (from T573 (0, 205, 206, 207))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 200] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 205, 206, 207)
+  Parent LB: 0.979201666 (per-scen)
+  EF true_obj: 0.979665059 (per-scen)
+  Simplex volume: 4.774689e-04
+  Children (2):
+    T573 (205, 206, 207, 208): LB = 0.983460111
+    T574 (0, 206, 207, 208): LB = 0.979201639
+  New global LB: 0.979201639 (from T574 (0, 206, 207, 208))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 201] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 206, 207, 208)
+  Parent LB: 0.979201639 (per-scen)
+  EF true_obj: 0.979665058 (per-scen)
+  Simplex volume: 4.230635e-04
+  Children (2):
+    T574 (206, 207, 208, 209): LB = 0.979201914
+    T575 (0, 207, 208, 209): LB = 0.979201665
+  New global LB: 0.979201665 (from T575 (0, 207, 208, 209))
+  Location: INSIDE
+======================================================================
+
+======================================================================
+[Iter 202] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 207, 208, 209)
+  Parent LB: 0.979201665 (per-scen)
+  EF true_obj: 0.979665058 (per-scen)
+  Simplex volume: 3.197585e-04
+  Children (2):
+    T575 (207, 208, 209, 210): LB = 0.979201665
+    T576 (0, 208, 209, 210): LB = 0.979205417
+  New global LB: 0.979201665 (from T575 (207, 208, 209, 210))
+  Location: INSIDE
+======================================================================
+

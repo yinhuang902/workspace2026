@@ -3,5 +3,8 @@ simplex, 1e-2, not serially, 2h, TimeLimit=15
 
 
 
-snog_1e3_6h
+snog_1e3_TL15_6h
 snoglode, 1e-3, serially, 6h, TimeLimit=15
+
+snog_1e3_TL30_6h
+snoglode, 1e-3, serially, 6h, TimeLimit=30

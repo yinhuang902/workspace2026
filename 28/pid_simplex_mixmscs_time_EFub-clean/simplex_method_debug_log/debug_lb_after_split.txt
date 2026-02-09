@@ -1,0 +1,17 @@
+# debug_lb_after_split.txt — LB analysis after simplex split
+# Shows: selected simplex LB, all child LBs, new global LB, INSIDE/OUTSIDE
+
+======================================================================
+[Iter 0] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (3, 4, 6, 7)
+  Parent LB: 0.983169565 (per-scen)
+  EF true_obj: 0.972508757 (per-scen)
+  Simplex volume: 1.333333e+05
+  Children (3):
+    T5 (4, 6, 7, 8): LB = 0.971421021
+    T6 (3, 4, 7, 8): LB = 0.972218981
+    T7 (3, 4, 6, 8): LB = 0.972730029
+  New global LB: 0.971421021 (from T5 (4, 6, 7, 8))
+  Location: INSIDE
+======================================================================
+

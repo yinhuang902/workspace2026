@@ -1,0 +1,58 @@
+# debug_ef_solver.txt — EF solver details per iteration (dual: ipopt + gurobi)
+# Each iteration has per-solver lines + winner line
+
+--- [Iter 0] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.965s, ef_obj=0.9796536626177264, true_obj(per-scen)=1.073400404, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=True, UB_incumbent=1.073400404, LB_global_end=0.979894959, UB_global_end=1.073400404
+
+--- [Iter 1] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.446s, ef_obj=0.9796536629740177, true_obj(per-scen)=1.073400376, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=True, UB_incumbent=1.073400376, LB_global_end=0.978819841, UB_global_end=1.073400376
+
+--- [Iter 2] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.341s, ef_obj=0.9796536631209002, true_obj(per-scen)=1.073399729, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=True, UB_incumbent=1.073399729, LB_global_end=0.978794146, UB_global_end=1.073399729
+
+--- [Iter 3] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.192s, ef_obj=0.979653624093216, true_obj(per-scen)=1.073402296, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=False, UB_incumbent=1.073399729, LB_global_end=0.978794324, UB_global_end=1.073399729
+
+--- [Iter 4] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.219s, ef_obj=0.9796536242261502, true_obj(per-scen)=1.073402293, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=False, UB_incumbent=1.073399729, LB_global_end=0.978794314, UB_global_end=1.073399729
+
+--- [Iter 5] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.417s, ef_obj=0.9796536620800195, true_obj(per-scen)=1.073399980, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=False, UB_incumbent=1.073399729, LB_global_end=0.978794258, UB_global_end=1.073399729
+
+--- [Iter 6] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.300s, ef_obj=0.97965366338378, true_obj(per-scen)=1.073399908, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=False, UB_incumbent=1.073399729, LB_global_end=0.978794349, UB_global_end=1.073399729
+
+--- [Iter 7] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.339s, ef_obj=1.0725106524261316, true_obj(per-scen)=1.072691610, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=True, UB_incumbent=1.072691610, LB_global_end=0.978794078, UB_global_end=1.072691610
+
+--- [Iter 8] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.320s, ef_obj=1.0725129490587553, true_obj(per-scen)=1.072693444, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=False, UB_incumbent=1.072691610, LB_global_end=0.978795456, UB_global_end=1.072691610
+
+--- [Iter 9] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.288s, ef_obj=1.072562607398525, true_obj(per-scen)=1.072733085, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=False, UB_incumbent=1.072691610, LB_global_end=0.978795581, UB_global_end=1.072691610
+
+--- [Iter 10] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.311s, ef_obj=1.067979649102469, true_obj(per-scen)=1.072693441, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=False, UB_incumbent=1.072691610, LB_global_end=0.978795551, UB_global_end=1.072691610
+
