@@ -1,0 +1,800 @@
+JobID: 22218035
+Node:  fc30410
+Start: Sun Feb  8 00:45:23 PST 2026
+Work:  /home/yinhuang/snoglode-main-2-ori-record3/examples/stochastic_pid
+-rw-r----- 1 yinhuang yinhuang 17K Feb  8 00:41 /home/yinhuang/snoglode-main-2-ori-record3/examples/stochastic_pid/stochastic_pid.py
+Python: /home/yinhuang/micromamba/envs/pidsp-sim-fir/bin/python
+Python 3.11.14
+No mpi4py detected - running in serial.
+--------------------------------------------------
+SNoGloDe Solver Parameters
+--------------------------------------------------
+
+Subproblem Names:
+  - scen_1
+  - scen_2
+  - scen_3
+  - scen_4
+  - scen_5
+  - scen_6
+  - scen_7
+  - scen_8
+  - scen_9
+  - scen_10
+  - scen_11
+  - scen_12
+  - scen_13
+  - scen_14
+  - scen_15
+  - scen_16
+  - scen_17
+  - scen_18
+  - scen_19
+  - scen_20
+  - scen_21
+  - scen_22
+  - scen_23
+  - scen_24
+  - scen_25
+  - scen_26
+  - scen_27
+  - scen_28
+  - scen_29
+  - scen_30
+  - scen_31
+  - scen_32
+  - scen_33
+  - scen_34
+  - scen_35
+  - scen_36
+  - scen_37
+  - scen_38
+  - scen_39
+  - scen_40
+  - scen_41
+  - scen_42
+  - scen_43
+  - scen_44
+  - scen_45
+  - scen_46
+  - scen_47
+  - scen_48
+  - scen_49
+  - scen_50
+Total # subproblems: 50
+
+LB solver: gurobi
+UB solver: gurobi
+CG solver: ipopt
+
+Global convergance guaranteed: True
+Epsilon: 0.001
+Perform FBBT: True
+Perform OBBT: True
+Relax binaries at LB: False
+Relax integers at LB: False
+
+Bounder Information
+  - Lower Bounder: GurobiLBLowerBounder
+  - Candidate Generator: SolveExtensiveForm
+
+Queuing strategy: QueueStrategy.bound
+Using a node feasibility checker? : False
+
+Branching Information
+  - Selection Strategy: HybridBranching
+  - Partition Strategy: ExpectedValue
+
+Verbose: True
+No log file generated.
+
+--------------------------------------------------
+Generating the models for the subproblems.
+	Scenario scen_1 has 3 first stage vars.
+	Scenario scen_2 has 3 first stage vars.
+	Scenario scen_3 has 3 first stage vars.
+	Scenario scen_4 has 3 first stage vars.
+	Scenario scen_5 has 3 first stage vars.
+	Scenario scen_6 has 3 first stage vars.
+	Scenario scen_7 has 3 first stage vars.
+	Scenario scen_8 has 3 first stage vars.
+	Scenario scen_9 has 3 first stage vars.
+	Scenario scen_10 has 3 first stage vars.
+	Scenario scen_11 has 3 first stage vars.
+	Scenario scen_12 has 3 first stage vars.
+	Scenario scen_13 has 3 first stage vars.
+	Scenario scen_14 has 3 first stage vars.
+	Scenario scen_15 has 3 first stage vars.
+	Scenario scen_16 has 3 first stage vars.
+	Scenario scen_17 has 3 first stage vars.
+	Scenario scen_18 has 3 first stage vars.
+	Scenario scen_19 has 3 first stage vars.
+	Scenario scen_20 has 3 first stage vars.
+	Scenario scen_21 has 3 first stage vars.
+	Scenario scen_22 has 3 first stage vars.
+	Scenario scen_23 has 3 first stage vars.
+	Scenario scen_24 has 3 first stage vars.
+	Scenario scen_25 has 3 first stage vars.
+	Scenario scen_26 has 3 first stage vars.
+	Scenario scen_27 has 3 first stage vars.
+	Scenario scen_28 has 3 first stage vars.
+	Scenario scen_29 has 3 first stage vars.
+	Scenario scen_30 has 3 first stage vars.
+	Scenario scen_31 has 3 first stage vars.
+	Scenario scen_32 has 3 first stage vars.
+	Scenario scen_33 has 3 first stage vars.
+	Scenario scen_34 has 3 first stage vars.
+	Scenario scen_35 has 3 first stage vars.
+	Scenario scen_36 has 3 first stage vars.
+	Scenario scen_37 has 3 first stage vars.
+	Scenario scen_38 has 3 first stage vars.
+	Scenario scen_39 has 3 first stage vars.
+	Scenario scen_40 has 3 first stage vars.
+	Scenario scen_41 has 3 first stage vars.
+	Scenario scen_42 has 3 first stage vars.
+	Scenario scen_43 has 3 first stage vars.
+	Scenario scen_44 has 3 first stage vars.
+	Scenario scen_45 has 3 first stage vars.
+	Scenario scen_46 has 3 first stage vars.
+	Scenario scen_47 has 3 first stage vars.
+	Scenario scen_48 has 3 first stage vars.
+	Scenario scen_49 has 3 first stage vars.
+	Scenario scen_50 has 3 first stage vars.
+Finished generating subproblem models.
+Node rooted.
+Using EF method for candidate solution. No EF bound. Building EF.
+EF built.
+INFO: Gurobi maxTimeLimit on 'scen_3'. Using dual lower_bound=1.0427155 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_15'. Using dual lower_bound=1.0528905 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        Time (s)  Nodes Explored       Pruned by                              LB              UB        Rel. Gap        Abs. Gap         # Nodes
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+         266.861               1                           * L U       0.9713566      0.98233032         1.1171%        0.010974               2
+INFO: Gurobi maxTimeLimit on 'scen_3'. Using dual lower_bound=1.0427155 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+         470.022               2                                       0.9713566      0.98233032         1.1171%        0.010974               3
+INFO: Gurobi maxTimeLimit on 'scen_3'. Using dual lower_bound=1.0427155 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_15'. Using dual lower_bound=1.0528905 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_33'. Using dual lower_bound=1.0939653 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+         802.885               3                           * L        0.97270838      0.98233032         0.9795%        0.009622               4
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+         941.812               4                                      0.97270838      0.98233032         0.9795%        0.009622               5
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        1134.101               5                           * L        0.97278185      0.98233032          0.972%        0.009548               6
+INFO: Gurobi maxTimeLimit on 'scen_3'. Using dual lower_bound=1.0427155 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_15'. Using dual lower_bound=1.0528905 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_33'. Using dual lower_bound=1.0939653 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        1406.817               6                                      0.97278185      0.98233032          0.972%        0.009548               7
+INFO: Gurobi maxTimeLimit on 'scen_3'. Using dual lower_bound=1.0427155 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_15'. Using dual lower_bound=1.0528905 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_33'. Using dual lower_bound=1.0939653 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_36'. Using dual lower_bound=1.0471206 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_39'. Using dual lower_bound=0.97443031 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        1795.484               7                           * L        0.97324255      0.98233032         0.9251%        0.009088               8
+INFO: Gurobi maxTimeLimit on 'scen_3'. Using dual lower_bound=1.0427155 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_15'. Using dual lower_bound=1.0528905 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_33'. Using dual lower_bound=1.0939653 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        2077.704               8                                      0.97324255      0.98233032         0.9251%        0.009088               9
+INFO: Gurobi maxTimeLimit on 'scen_3'. Using dual lower_bound=1.0427155 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_33'. Using dual lower_bound=1.1010917 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_34'. Using dual lower_bound=1.0268835 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        2418.338               9                           * L        0.97350374      0.98233032         0.8985%        0.008827              10
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        2605.269              10                                      0.97350374      0.98233032         0.8985%        0.008827              11
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+        2766.136              11                           * L        0.97364339      0.98233032         0.8843%        0.008687              12
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99987246 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+         2956.25              12                                      0.97364339      0.98233032         0.8843%        0.008687              13
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        3144.258              13                           * L        0.97365577      0.98233032         0.8831%        0.008675              14
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        3311.957              14                           * U        0.97365577      0.98063689         0.7119%        0.006981              15
+        3710.057              15           Bound           * L        0.97372241      0.98063689         0.7051%        0.006914              14
+INFO: Gurobi maxTimeLimit on 'scen_3'. Using dual lower_bound=1.0427155 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_15'. Using dual lower_bound=1.0528905 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_39'. Using dual lower_bound=0.97443031 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        3958.228              16                                      0.97372241      0.98063689         0.7051%        0.006914              15
+INFO: Gurobi maxTimeLimit on 'scen_3'. Using dual lower_bound=1.0427155 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_11'. Using dual lower_bound=1.0258063 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_15'. Using dual lower_bound=1.0528905 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_33'. Using dual lower_bound=1.0939653 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_39'. Using dual lower_bound=0.97443031 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+         4306.64              17                           * L        0.97376508      0.98063689         0.7007%        0.006872              16
+        4354.955              18                                      0.97376508      0.98063689         0.7007%        0.006872              17
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0722638 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_34'. Using dual lower_bound=1.0268835 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_39'. Using dual lower_bound=0.97443031 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        4646.722              19                           * L        0.97387241      0.98063689         0.6898%        0.006764              18
+        4719.905              20                                      0.97387241      0.98063689         0.6898%        0.006764              19
+INFO: Gurobi maxTimeLimit on 'scen_3'. Using dual lower_bound=1.0427155 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_11'. Using dual lower_bound=1.0258063 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_15'. Using dual lower_bound=1.0528905 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_33'. Using dual lower_bound=1.0969511 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_36'. Using dual lower_bound=1.0471206 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        5102.689              21                           * L        0.97390094      0.98063689         0.6869%        0.006736              20
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_15'. Using dual lower_bound=1.0528905 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        5342.311              22                                      0.97390094      0.98063689         0.6869%        0.006736              21
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+        5507.551              23                           * L        0.97406178      0.98063689         0.6705%        0.006575              22
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_15'. Using dual lower_bound=1.0528905 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        5716.969              24                                      0.97406178      0.98063689         0.6705%        0.006575              23
+        6093.545              25           Bound           * L        0.97409851      0.98063689         0.6667%        0.006538              22
+        6182.935              26                                      0.97409851      0.98063689         0.6667%        0.006538              23
+        6588.086              27           Bound           * L        0.97415232      0.98063689         0.6613%        0.006485              22
+        6707.466              28                           * U        0.97415232      0.98051659         0.6491%        0.006364              23
+        6813.177              29                           * L U       0.9744213      0.98045806         0.6157%        0.006037              24
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        6977.532              30                                       0.9744213      0.98045806         0.6157%        0.006037              25
+        7068.139              31           Bound           * L        0.97454519      0.98045806         0.6031%        0.005913              24
+        7145.587              32                           * U        0.97454519      0.97999506         0.5561%         0.00545              25
+INFO: Gurobi maxTimeLimit on 'scen_6'. Using dual lower_bound=1.0033295 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_11'. Using dual lower_bound=1.0258063 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_15'. Using dual lower_bound=1.0648502 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_33'. Using dual lower_bound=1.0964965 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_36'. Using dual lower_bound=1.0471206 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_39'. Using dual lower_bound=0.97443031 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0917754 as valid LB.
+         7520.96              33                           * L        0.97464595      0.97999506         0.5458%        0.005349              26
+        7640.452              34                                      0.97464595      0.97999506         0.5458%        0.005349              27
+INFO: Gurobi maxTimeLimit on 'scen_3'. Using dual lower_bound=1.0427155 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_6'. Using dual lower_bound=1.0033295 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_25'. Using dual lower_bound=1.0435502 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.083274 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_33'. Using dual lower_bound=1.0939653 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_39'. Using dual lower_bound=0.97443031 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        8074.834              35                           * L        0.97489275      0.97999506         0.5206%        0.005102              28
+        8442.724              36           Bound                      0.97489275      0.97999506         0.5206%        0.005102              27
+        8557.158              37                           * L        0.97497828      0.97999506         0.5119%        0.005017              28
+        8648.065              38                                      0.97497828      0.97999506         0.5119%        0.005017              29
+        9031.301              39           Bound           * L        0.97500787      0.97999506         0.5089%        0.004987              28
+        9461.553              40           Bound                      0.97500787      0.97999506         0.5089%        0.004987              27
+        9560.503              41                           * L        0.97506284      0.97999506         0.5033%        0.004932              28
+        9666.499              42                                      0.97506284      0.97999506         0.5033%        0.004932              29
+        9751.782              43           Bound           * L        0.97508361      0.97999506         0.5012%        0.004911              28
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_34'. Using dual lower_bound=1.0268835 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_39'. Using dual lower_bound=0.97443031 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        9994.238              44                                      0.97508361      0.97999506         0.5012%        0.004911              29
+       10091.055              45           Bound           * L        0.97513041      0.97999506         0.4964%        0.004865              28
+       10135.388              46                                      0.97513041      0.97999506         0.4964%        0.004865              29
+       10297.493              47                           * L        0.97514211      0.97999506         0.4952%        0.004853              30
+INFO: Gurobi maxTimeLimit on 'scen_6'. Using dual lower_bound=1.0033295 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_14'. Using dual lower_bound=0.99014101 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_25'. Using dual lower_bound=1.0459903 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_34'. Using dual lower_bound=1.0370788 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_36'. Using dual lower_bound=1.0471206 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_39'. Using dual lower_bound=0.97443031 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0917754 as valid LB.
+       10699.284              48                                      0.97514211      0.97999506         0.4952%        0.004853              31
+       10780.738              49                           * L        0.97521602      0.97999506         0.4877%        0.004779              32
+INFO: Gurobi maxTimeLimit on 'scen_3'. Using dual lower_bound=1.0466389 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_6'. Using dual lower_bound=1.0033295 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_11'. Using dual lower_bound=1.0258063 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_34'. Using dual lower_bound=1.0268835 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_36'. Using dual lower_bound=1.0471206 as valid LB.
+       11061.979              50                                      0.97521602      0.97999506         0.4877%        0.004779              33
+       11105.806              51                           * L        0.97525093      0.97999506         0.4841%        0.004744              34
+       11142.585              52                                      0.97525093      0.97999506         0.4841%        0.004744              35
+INFO: Gurobi maxTimeLimit on 'scen_3'. Using dual lower_bound=1.0501546 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_11'. Using dual lower_bound=1.0285245 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_25'. Using dual lower_bound=1.0435502 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0760301 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_34'. Using dual lower_bound=1.0268835 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_39'. Using dual lower_bound=0.97443031 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+       11506.247              53                           * L        0.97527222      0.97999506         0.4819%        0.004723              36
+       11551.204              54                                      0.97527222      0.97999506         0.4819%        0.004723              37
+INFO: Gurobi maxTimeLimit on 'scen_39'. Using dual lower_bound=0.97443034 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0940196 as valid LB.
+       11742.047              55           Bound           * L        0.97540642      0.97999506         0.4682%        0.004589              36
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+        11974.31              56                                      0.97540642      0.97999506         0.4682%        0.004589              37
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_34'. Using dual lower_bound=1.0268835 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+       12232.864              57                           * L        0.97544627      0.97999506         0.4642%        0.004549              38
+       12329.378              58                                      0.97544627      0.97999506         0.4642%        0.004549              39
+       12418.261              59           Bound           * L        0.97545065      0.97999506         0.4637%        0.004544              38
+INFO: Gurobi maxTimeLimit on 'scen_3'. Using dual lower_bound=1.0427155 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_11'. Using dual lower_bound=1.0258063 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_15'. Using dual lower_bound=1.0528905 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_33'. Using dual lower_bound=1.0969511 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_36'. Using dual lower_bound=1.0471206 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+       12718.912              60                                      0.97545065      0.97999506         0.4637%        0.004544              39
+WARNING: Unexpected condition for the variable scen_26.K_i LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_26.K_i LB
+problem.TerminationCondition = maxTimeLimit
+INFO: Gurobi maxTimeLimit on 'scen_15'. Using dual lower_bound=1.2921189 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.2026082 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_33'. Using dual lower_bound=1.2826587 as valid LB.
+       13235.098              61           Bound           * L        0.97553573      0.97999506          0.455%        0.004459              38
+       13265.476              62                                      0.97553573      0.97999506          0.455%        0.004459              39
+       13316.652              63                           * L        0.97558267      0.97999506         0.4502%        0.004412              40
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+       13479.797              64                                      0.97558267      0.97999506         0.4502%        0.004412              41
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.2041744 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.4687157 as valid LB.
+       13658.572              65           Bound           * L        0.97570132      0.97999506         0.4381%        0.004294              40
+INFO: Gurobi maxTimeLimit on 'scen_3'. Using dual lower_bound=1.0501546 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_11'. Using dual lower_bound=1.0285245 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_14'. Using dual lower_bound=0.98819046 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_25'. Using dual lower_bound=1.0435502 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0760301 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_33'. Using dual lower_bound=1.1054641 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_34'. Using dual lower_bound=1.0268835 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_36'. Using dual lower_bound=1.0531981 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_38'. Using dual lower_bound=0.9840422 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_39'. Using dual lower_bound=0.97443031 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+       14119.443              66                                      0.97570132      0.97999506         0.4381%        0.004294              41
+       14154.833              67                           * L        0.97578243      0.97999506         0.4299%        0.004213              42
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_34'. Using dual lower_bound=1.0268835 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_43'. Using dual lower_bound=1.0779918 as valid LB.
+       14441.831              68                                      0.97578243      0.97999506         0.4299%        0.004213              43
+INFO: Gurobi maxTimeLimit on 'scen_34'. Using dual lower_bound=1.0268835 as valid LB.
+       14644.549              69                           * L        0.97587262      0.97999506         0.4207%        0.004122              44
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_34'. Using dual lower_bound=1.0268835 as valid LB.
+       14803.119              70                                      0.97587262      0.97999506         0.4207%        0.004122              45
+WARNING: Unexpected condition for the variable scen_17.K_i LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_17.K_i LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_45.K_i LB
+problem.TerminationCondition = maxTimeLimit
+       15293.038              71           Bound           * L        0.97587737      0.97999506         0.4202%        0.004118              44
+INFO: Gurobi maxTimeLimit on 'scen_8'. Using dual lower_bound=0.99984646 as valid LB.
+INFO: Gurobi maxTimeLimit on 'scen_29'. Using dual lower_bound=1.0588911 as valid LB.
+       15527.677              72                                      0.97587737      0.97999506         0.4202%        0.004118              45
+       15703.415              73                           * L        0.97590753      0.97999506         0.4171%        0.004088              46
+       15750.841              74                                      0.97590753      0.97999506         0.4171%        0.004088              47
+       15809.021              75                           * L        0.97596618      0.97999506         0.4111%        0.004029              48
+       15848.291              76                                      0.97596618      0.97999506         0.4111%        0.004029              49
+       15888.869              77                           * L        0.97600063      0.97999506         0.4076%        0.003994              50
+       15930.368              78                                      0.97600063      0.97999506         0.4076%        0.003994              51
+        15971.56              79                           * L         0.9760097      0.97999506         0.4067%        0.003985              52
+       16011.613              80                                       0.9760097      0.97999506         0.4067%        0.003985              53
+       16051.024              81                           * L        0.97602862      0.97999506         0.4047%        0.003966              54
+INFO: Gurobi maxTimeLimit on 'scen_39'. Using dual lower_bound=0.97443031 as valid LB.
+        16164.92              82                                      0.97602862      0.97999506         0.4047%        0.003966              55
+        16249.22              83                           * L        0.97605745      0.97999506         0.4018%        0.003938              56
+       16296.375              84                                      0.97605745      0.97999506         0.4018%        0.003938              57
+       16425.504              85                           * L        0.97606805      0.97999506         0.4007%        0.003927              58
+       16474.892              86                                      0.97606805      0.97999506         0.4007%        0.003927              59
+        16519.62              87                           * L        0.97607876      0.97999506         0.3996%        0.003916              60
+        16652.34              88                                      0.97607876      0.97999506         0.3996%        0.003916              61
+       16677.752              89                           * L        0.97608305      0.97999506         0.3992%        0.003912              62
+       16720.338              90                                      0.97608305      0.97999506         0.3992%        0.003912              63
+       16768.336              91                           * L         0.9760834      0.97999506         0.3992%        0.003912              64
+       16815.587              92                           * U         0.9760834      0.97999355          0.399%         0.00391              65
+       16869.728              93                           * L        0.97608968      0.97999355         0.3984%        0.003904              66
+       16912.017              94                                      0.97608968      0.97999355         0.3984%        0.003904              67
+       16968.787              95                           * L        0.97610237      0.97999355         0.3971%        0.003891              68
+       17011.486              96                           * U        0.97610237      0.97997822         0.3955%        0.003876              69
+       17048.462              97           Bound           * L        0.97612176      0.97997822         0.3935%        0.003856              68
+       17096.231              98                                      0.97612176      0.97997822         0.3935%        0.003856              69
+       17134.027              99                           * L        0.97612632      0.97997822         0.3931%        0.003852              70
+       17188.439             100                                      0.97612632      0.97997822         0.3931%        0.003852              71
+       17230.697             101                           * L         0.9761381      0.97997822         0.3919%         0.00384              72
+       17268.262             102                                       0.9761381      0.97997822         0.3919%         0.00384              73
+       17319.053             103                           * L         0.9761381      0.97997822         0.3919%         0.00384              74
+       17358.539             104                                       0.9761381      0.97997822         0.3919%         0.00384              75
+       17401.086             105                           * L        0.97614323      0.97997822         0.3913%        0.003835              76
+       17453.994             106                                      0.97614323      0.97997822         0.3913%        0.003835              77
+       17484.785             107                           * L        0.97615222      0.97997822         0.3904%        0.003826              78
+       17509.034             108                                      0.97615222      0.97997822         0.3904%        0.003826              79
+       17546.392             109                           * L        0.97617058      0.97997822         0.3885%        0.003808              80
+        17586.35             110                                      0.97617058      0.97997822         0.3885%        0.003808              81
+       17626.122             111                           * L        0.97617058      0.97997822         0.3885%        0.003808              82
+       17666.902             112                                      0.97617058      0.97997822         0.3885%        0.003808              83
+       17700.884             113                           * L        0.97617213      0.97997822         0.3884%        0.003806              84
+       17743.091             114                                      0.97617213      0.97997822         0.3884%        0.003806              85
+       17799.278             115                           * L        0.97617276      0.97997822         0.3883%        0.003805              86
+       17835.761             116                                      0.97617276      0.97997822         0.3883%        0.003805              87
+        17877.27             117                           * L         0.9761791      0.97997822         0.3877%        0.003799              88
+       17925.463             118                                       0.9761791      0.97997822         0.3877%        0.003799              89
+       17959.722             119                           * L         0.9761791      0.97997822         0.3877%        0.003799              90
+       17995.597             120                                       0.9761791      0.97997822         0.3877%        0.003799              91
+        18029.53             121                                       0.9761791      0.97997822         0.3877%        0.003799              92
+       18062.182             122                                       0.9761791      0.97997822         0.3877%        0.003799              93
+       18098.101             123                                       0.9761791      0.97997822         0.3877%        0.003799              94
+       18132.699             124                                       0.9761791      0.97997822         0.3877%        0.003799              95
+       18167.254             125                                       0.9761791      0.97997822         0.3877%        0.003799              96
+       18203.028             126                                       0.9761791      0.97997822         0.3877%        0.003799              97
+       18234.611             127                           * L        0.97617948      0.97997822         0.3876%        0.003799              98
+       18263.374             128                                      0.97617948      0.97997822         0.3876%        0.003799              99
+       18292.086             129                           * L        0.97618663      0.97997822         0.3869%        0.003792             100
+       18325.959             130                                      0.97618663      0.97997822         0.3869%        0.003792             101
+       18359.264             131                                      0.97618663      0.97997822         0.3869%        0.003792             102
+       18387.117             132                                      0.97618663      0.97997822         0.3869%        0.003792             103
+       18407.106             133                           * L        0.97618665      0.97997822         0.3869%        0.003792             104
+        18442.17             134                                      0.97618665      0.97997822         0.3869%        0.003792             105
+       18475.647             135                           * L         0.9761868      0.97997822         0.3869%        0.003791             106
+       18507.176             136                                       0.9761868      0.97997822         0.3869%        0.003791             107
+       18546.495             137                           * L        0.97619006      0.97997822         0.3866%        0.003788             108
+       18580.459             138                                      0.97619006      0.97997822         0.3866%        0.003788             109
+       18613.044             139                                      0.97619006      0.97997822         0.3866%        0.003788             110
+       18646.508             140                                      0.97619006      0.97997822         0.3866%        0.003788             111
+       18678.968             141                           * L        0.97619097      0.97997822         0.3865%        0.003787             112
+       18712.799             142                                      0.97619097      0.97997822         0.3865%        0.003787             113
+       18759.061             143                           * L        0.97619099      0.97997822         0.3865%        0.003787             114
+       18794.135             144                                      0.97619099      0.97997822         0.3865%        0.003787             115
+       18833.906             145                           * L        0.97619103      0.97997822         0.3865%        0.003787             116
+       18870.183             146                                      0.97619103      0.97997822         0.3865%        0.003787             117
+       18909.555             147                           * L        0.97619142      0.97997822         0.3864%        0.003787             118
+       18947.132             148                                      0.97619142      0.97997822         0.3864%        0.003787             119
+       18986.393             149                           * L        0.97619213      0.97997822         0.3863%        0.003786             120
+       19024.892             150                                      0.97619213      0.97997822         0.3863%        0.003786             121
+       19056.911             151                                      0.97619213      0.97997822         0.3863%        0.003786             122
+       19101.375             152                                      0.97619213      0.97997822         0.3863%        0.003786             123
+       19133.621             153                           * L        0.97619226      0.97997822         0.3863%        0.003786             124
+       19169.419             154                                      0.97619226      0.97997822         0.3863%        0.003786             125
+       19211.367             155                           * L        0.97619422      0.97997822         0.3861%        0.003784             126
+       19245.197             156                                      0.97619422      0.97997822         0.3861%        0.003784             127
+       19285.273             157                           * L        0.97619523      0.97997822          0.386%        0.003783             128
+       19319.354             158                                      0.97619523      0.97997822          0.386%        0.003783             129
+       19347.265             159                           * L        0.97619701      0.97997822         0.3858%        0.003781             130
+       19385.748             160                                      0.97619701      0.97997822         0.3858%        0.003781             131
+       19412.664             161                                      0.97619701      0.97997822         0.3858%        0.003781             132
+       19452.838             162                                      0.97619701      0.97997822         0.3858%        0.003781             133
+       19477.515             163                           * L        0.97619854      0.97997822         0.3857%         0.00378             134
+       19517.964             164                                      0.97619854      0.97997822         0.3857%         0.00378             135
+       19553.539             165                                      0.97619854      0.97997822         0.3857%         0.00378             136
+       19589.502             166                                      0.97619854      0.97997822         0.3857%         0.00378             137
+       19620.681             167                           * L        0.97620161      0.97997822         0.3854%        0.003777             138
+       19657.889             168                                      0.97620161      0.97997822         0.3854%        0.003777             139
+       19688.288             169                                      0.97620161      0.97997822         0.3854%        0.003777             140
+       19721.148             170                                      0.97620161      0.97997822         0.3854%        0.003777             141
+       19755.089             171                           * L        0.97620167      0.97997822         0.3854%        0.003777             142
+       19787.225             172                                      0.97620167      0.97997822         0.3854%        0.003777             143
+       19823.803             173                                      0.97620167      0.97997822         0.3854%        0.003777             144
+       19868.771             174                                      0.97620167      0.97997822         0.3854%        0.003777             145
+       19903.683             175                           * L        0.97620221      0.97997822         0.3853%        0.003776             146
+       19932.412             176                                      0.97620221      0.97997822         0.3853%        0.003776             147
+       19957.102             177                                      0.97620221      0.97997822         0.3853%        0.003776             148
+       19986.053             178                                      0.97620221      0.97997822         0.3853%        0.003776             149
+       20013.374             179                           * L        0.97620286      0.97997822         0.3852%        0.003775             150
+       20039.694             180                                      0.97620286      0.97997822         0.3852%        0.003775             151
+       20065.586             181                           * L        0.97620317      0.97997822         0.3852%        0.003775             152
+       20101.742             182                                      0.97620317      0.97997822         0.3852%        0.003775             153
+       20139.518             183                           * L        0.97620317      0.97997822         0.3852%        0.003775             154
+       20171.311             184                                      0.97620317      0.97997822         0.3852%        0.003775             155
+       20206.537             185                           * L        0.97620317      0.97997822         0.3852%        0.003775             156
+       20246.477             186                                      0.97620317      0.97997822         0.3852%        0.003775             157
+       20282.571             187                           * L        0.97620324      0.97997822         0.3852%        0.003775             158
+       20318.049             188                                      0.97620324      0.97997822         0.3852%        0.003775             159
+       20353.311             189                                      0.97620324      0.97997822         0.3852%        0.003775             160
+       20389.102             190                                      0.97620324      0.97997822         0.3852%        0.003775             161
+       20424.786             191                                      0.97620324      0.97997822         0.3852%        0.003775             162
+       20446.037             192                                      0.97620324      0.97997822         0.3852%        0.003775             163
+       20470.946             193                                      0.97620324      0.97997822         0.3852%        0.003775             164
+        20502.17             194                                      0.97620324      0.97997822         0.3852%        0.003775             165
+       20535.707             195                           * L        0.97620438      0.97997822         0.3851%        0.003774             166
+       20566.902             196                                      0.97620438      0.97997822         0.3851%        0.003774             167
+       20599.987             197                           * L        0.97620815      0.97997822         0.3847%         0.00377             168
+       20626.983             198                                      0.97620815      0.97997822         0.3847%         0.00377             169
+       20648.566             199                           * L        0.97621044      0.97997822         0.3845%        0.003768             170
+       20680.742             200                                      0.97621044      0.97997822         0.3845%        0.003768             171
+        20714.16             201                           * L        0.97621082      0.97997822         0.3844%        0.003767             172
+       20740.805             202                                      0.97621082      0.97997822         0.3844%        0.003767             173
+       20774.258             203                                      0.97621082      0.97997822         0.3844%        0.003767             174
+        20811.79             204                                      0.97621082      0.97997822         0.3844%        0.003767             175
+       20842.721             205                                      0.97621082      0.97997822         0.3844%        0.003767             176
+       20868.228             206                                      0.97621082      0.97997822         0.3844%        0.003767             177
+       20905.221             207                                      0.97621082      0.97997822         0.3844%        0.003767             178
+       20925.938             208                                      0.97621082      0.97997822         0.3844%        0.003767             179
+       20955.783             209                                      0.97621082      0.97997822         0.3844%        0.003767             180
+         20981.1             210                                      0.97621082      0.97997822         0.3844%        0.003767             181
+        21011.63             211                                      0.97621082      0.97997822         0.3844%        0.003767             182
+       21043.136             212                                      0.97621082      0.97997822         0.3844%        0.003767             183
+        21064.55             213                           * L        0.97621177      0.97997822         0.3843%        0.003766             184
+       21101.909             214                                      0.97621177      0.97997822         0.3843%        0.003766             185
+       21139.289             215                                      0.97621177      0.97997822         0.3843%        0.003766             186
+       21173.664             216                                      0.97621177      0.97997822         0.3843%        0.003766             187
+       21205.844             217                           * L        0.97621235      0.97997822         0.3843%        0.003766             188
+       21241.771             218                                      0.97621235      0.97997822         0.3843%        0.003766             189
+       21283.235             219                           * L        0.97621656      0.97997822         0.3839%        0.003762             190
+WARNING: Unexpected condition for the variable scen_16.K_i LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_17.K_i LB
+problem.TerminationCondition = maxTimeLimit
+       21759.673             220           Bound                      0.97621656      0.97997822         0.3839%        0.003762             189
+       21842.085             221                           * L        0.97621885      0.97997822         0.3836%        0.003759             190
+       21876.301             222                                      0.97621885      0.97997822         0.3836%        0.003759             191
+       21923.515             223                           * L          0.976219      0.97997822         0.3836%        0.003759             192
+       21966.823             224                                        0.976219      0.97997822         0.3836%        0.003759             193
+       22008.551             225                           * L        0.97621999      0.97997822         0.3835%        0.003758             194
+       22046.831             226                                      0.97621999      0.97997822         0.3835%        0.003758             195
+       22075.698             227                           * L        0.97622244      0.97997822         0.3833%        0.003756             196
+        22105.56             228                                      0.97622244      0.97997822         0.3833%        0.003756             197
+        22130.41             229                           * L         0.9762241      0.97997822         0.3831%        0.003754             198
+        22165.65             230                                       0.9762241      0.97997822         0.3831%        0.003754             199
+       22211.025             231                           * L        0.97622459      0.97997822          0.383%        0.003754             200
+       22242.042             232                                      0.97622459      0.97997822          0.383%        0.003754             201
+       22283.308             233                           * L         0.9762253      0.97997822          0.383%        0.003753             202
+       22321.538             234                                       0.9762253      0.97997822          0.383%        0.003753             203
+       22356.066             235                           * L        0.97622602      0.97997822         0.3829%        0.003752             204
+       22388.988             236                                      0.97622602      0.97997822         0.3829%        0.003752             205
+       22417.855             237                           * L        0.97622671      0.97997822         0.3828%        0.003752             206
+       22445.885             238                                      0.97622671      0.97997822         0.3828%        0.003752             207
+       22481.942             239                           * L        0.97622671      0.97997822         0.3828%        0.003752             208
+       22516.475             240                                      0.97622671      0.97997822         0.3828%        0.003752             209
+       22550.718             241                           * L        0.97622865      0.97997822         0.3826%         0.00375             210
+       22579.735             242                                      0.97622865      0.97997822         0.3826%         0.00375             211
+       22610.549             243                           * L        0.97622882      0.97997822         0.3826%        0.003749             212
+       22640.145             244                                      0.97622882      0.97997822         0.3826%        0.003749             213
+       22669.713             245                           * L        0.97622931      0.97997822         0.3826%        0.003749             214
+       22698.858             246                                      0.97622931      0.97997822         0.3826%        0.003749             215
+       22731.473             247                           * L        0.97622971      0.97997822         0.3825%        0.003749             216
+         22760.5             248                                      0.97622971      0.97997822         0.3825%        0.003749             217
+       22792.334             249                           * L         0.9762298      0.97997822         0.3825%        0.003748             218
+       22823.825             250                                       0.9762298      0.97997822         0.3825%        0.003748             219
+       22860.163             251                           * L        0.97622987      0.97997822         0.3825%        0.003748             220
+       22885.056             252                                      0.97622987      0.97997822         0.3825%        0.003748             221
+       22909.858             253                           * L        0.97622998      0.97997822         0.3825%        0.003748             222
+       22942.733             254                                      0.97622998      0.97997822         0.3825%        0.003748             223
+        22980.37             255                                      0.97622998      0.97997822         0.3825%        0.003748             224
+       23013.146             256                                      0.97622998      0.97997822         0.3825%        0.003748             225
+       23042.894             257                           * L        0.97623036      0.97997822         0.3824%        0.003748             226
+       23073.098             258                                      0.97623036      0.97997822         0.3824%        0.003748             227
+        23108.05             259                           * L        0.97623197      0.97997822         0.3823%        0.003746             228
+       23144.397             260                                      0.97623197      0.97997822         0.3823%        0.003746             229
+       23175.662             261                           * L        0.97623204      0.97997822         0.3823%        0.003746             230
+       23207.009             262                                      0.97623204      0.97997822         0.3823%        0.003746             231
+       23235.707             263                           * L        0.97623204      0.97997822         0.3823%        0.003746             232
+        23264.78             264                                      0.97623204      0.97997822         0.3823%        0.003746             233
+       23294.487             265                           * L        0.97623204      0.97997822         0.3823%        0.003746             234
+       23324.628             266                                      0.97623204      0.97997822         0.3823%        0.003746             235
+       23356.969             267                           * L        0.97623208      0.97997822         0.3823%        0.003746             236
+       23391.177             268                                      0.97623208      0.97997822         0.3823%        0.003746             237
+       23424.267             269                           * L        0.97623222      0.97997822         0.3823%        0.003746             238
+       23455.526             270                                      0.97623222      0.97997822         0.3823%        0.003746             239
+       23486.533             271                           * L        0.97623222      0.97997822         0.3823%        0.003746             240
+       23522.197             272                                      0.97623222      0.97997822         0.3823%        0.003746             241
+        23545.92             273                                      0.97623222      0.97997822         0.3823%        0.003746             242
+       23578.442             274                                      0.97623222      0.97997822         0.3823%        0.003746             243
+         23605.4             275                           * L        0.97623306      0.97997822         0.3822%        0.003745             244
+       23636.589             276                                      0.97623306      0.97997822         0.3822%        0.003745             245
+       23670.771             277                           * L        0.97623324      0.97997822         0.3821%        0.003745             246
+        23698.95             278                                      0.97623324      0.97997822         0.3821%        0.003745             247
+       23731.677             279                           * L        0.97623675      0.97997822         0.3818%        0.003741             248
+        23780.85             280                                      0.97623675      0.97997822         0.3818%        0.003741             249
+       23809.812             281                           * L        0.97623943      0.97997822         0.3815%        0.003739             250
+        23838.53             282                                      0.97623943      0.97997822         0.3815%        0.003739             251
+       23865.912             283                           * L        0.97623991      0.97997822         0.3815%        0.003738             252
+        23902.87             284                                      0.97623991      0.97997822         0.3815%        0.003738             253
+       23940.938             285                                      0.97623991      0.97997822         0.3815%        0.003738             254
+       23977.418             286                                      0.97623991      0.97997822         0.3815%        0.003738             255
+       24011.874             287                           * L        0.97624068      0.97997822         0.3814%        0.003738             256
+       24045.598             288                                      0.97624068      0.97997822         0.3814%        0.003738             257
+       24076.211             289                           * L        0.97624093      0.97997822         0.3814%        0.003737             258
+       24105.418             290                                      0.97624093      0.97997822         0.3814%        0.003737             259
+       24140.264             291                           * L        0.97624118      0.97997822         0.3813%        0.003737             260
+        24169.53             292                                      0.97624118      0.97997822         0.3813%        0.003737             261
+       24191.389             293                                      0.97624118      0.97997822         0.3813%        0.003737             262
+       24220.802             294                                      0.97624118      0.97997822         0.3813%        0.003737             263
+       24246.976             295                           * L        0.97624194      0.97997822         0.3813%        0.003736             264
+       24286.484             296                                      0.97624194      0.97997822         0.3813%        0.003736             265
+        24316.67             297                           * L        0.97624212      0.97997822         0.3812%        0.003736             266
+       24348.083             298                                      0.97624212      0.97997822         0.3812%        0.003736             267
+       24380.425             299                           * L        0.97624232      0.97997822         0.3812%        0.003736             268
+       24413.778             300                                      0.97624232      0.97997822         0.3812%        0.003736             269
+       24454.797             301                           * L        0.97624397      0.97997822         0.3811%        0.003734             270
+       24488.895             302                                      0.97624397      0.97997822         0.3811%        0.003734             271
+       24522.711             303                           * L        0.97624433      0.97997822          0.381%        0.003734             272
+       24557.452             304                                      0.97624433      0.97997822          0.381%        0.003734             273
+       24590.152             305                           * L        0.97624528      0.97997822         0.3809%        0.003733             274
+       24629.892             306                                      0.97624528      0.97997822         0.3809%        0.003733             275
+       24667.286             307                           * L        0.97624565      0.97997822         0.3809%        0.003733             276
+       24699.941             308                                      0.97624565      0.97997822         0.3809%        0.003733             277
+       24732.271             309                           * L        0.97624576      0.97997822         0.3809%        0.003732             278
+       24769.149             310                                      0.97624576      0.97997822         0.3809%        0.003732             279
+       24798.602             311                           * L        0.97624691      0.97997822         0.3808%        0.003731             280
+       24830.813             312                                      0.97624691      0.97997822         0.3808%        0.003731             281
+       24876.539             313                           * L        0.97624702      0.97997822         0.3807%        0.003731             282
+       24912.446             314                                      0.97624702      0.97997822         0.3807%        0.003731             283
+       24954.275             315                           * L        0.97624704      0.97997822         0.3807%        0.003731             284
+       24985.779             316                                      0.97624704      0.97997822         0.3807%        0.003731             285
+       25021.573             317                           * L        0.97624721      0.97997822         0.3807%        0.003731             286
+       25057.496             318                                      0.97624721      0.97997822         0.3807%        0.003731             287
+       25097.457             319                           * L        0.97624733      0.97997822         0.3807%        0.003731             288
+       25129.867             320                                      0.97624733      0.97997822         0.3807%        0.003731             289
+       25163.421             321                           * L        0.97624755      0.97997822         0.3807%        0.003731             290
+       25197.936             322                                      0.97624755      0.97997822         0.3807%        0.003731             291
+       25249.413             323                           * L        0.97624755      0.97997822         0.3807%        0.003731             292
+        25281.63             324                                      0.97624755      0.97997822         0.3807%        0.003731             293
+       25322.082             325                                      0.97624755      0.97997822         0.3807%        0.003731             294
+       25354.617             326                                      0.97624755      0.97997822         0.3807%        0.003731             295
+       25378.611             327                           * L        0.97624765      0.97997822         0.3807%        0.003731             296
+       25411.272             328                                      0.97624765      0.97997822         0.3807%        0.003731             297
+       25447.622             329                           * L        0.97624791      0.97997822         0.3807%         0.00373             298
+       25475.411             330                                      0.97624791      0.97997822         0.3807%         0.00373             299
+       25499.259             331                                      0.97624791      0.97997822         0.3807%         0.00373             300
+       25527.349             332                                      0.97624791      0.97997822         0.3807%         0.00373             301
+        25555.83             333                           * L        0.97624803      0.97997822         0.3806%         0.00373             302
+       25586.762             334                                      0.97624803      0.97997822         0.3806%         0.00373             303
+       25620.679             335                                      0.97624803      0.97997822         0.3806%         0.00373             304
+       25651.783             336                                      0.97624803      0.97997822         0.3806%         0.00373             305
+        25680.93             337                           * L        0.97624811      0.97997822         0.3806%         0.00373             306
+       25722.206             338                                      0.97624811      0.97997822         0.3806%         0.00373             307
+       25758.308             339                           * L        0.97624824      0.97997822         0.3806%         0.00373             308
+       25794.527             340                                      0.97624824      0.97997822         0.3806%         0.00373             309
+       25824.412             341                           * L        0.97624869      0.97997822         0.3806%         0.00373             310
+       25854.799             342                                      0.97624869      0.97997822         0.3806%         0.00373             311
+       25880.472             343                                      0.97624869      0.97997822         0.3806%         0.00373             312
+       25912.369             344                                      0.97624869      0.97997822         0.3806%         0.00373             313
+        25936.43             345                           * L        0.97624877      0.97997822         0.3806%        0.003729             314
+       25973.933             346                                      0.97624877      0.97997822         0.3806%        0.003729             315
+       26009.137             347                           * L        0.97624889      0.97997822         0.3806%        0.003729             316
+       26031.024             348                                      0.97624889      0.97997822         0.3806%        0.003729             317
+       26061.953             349                                      0.97624889      0.97997822         0.3806%        0.003729             318
+       26084.353             350                                      0.97624889      0.97997822         0.3806%        0.003729             319
+       26114.277             351                           * L        0.97624895      0.97997822         0.3805%        0.003729             320
+       26145.155             352                                      0.97624895      0.97997822         0.3805%        0.003729             321
+       26184.181             353                           * L        0.97624926      0.97997822         0.3805%        0.003729             322
+       26209.997             354                           * U        0.97624926      0.97997811         0.3805%        0.003729             323
+       26237.165             355                           * L        0.97624965      0.97997811         0.3805%        0.003728             324
+       26275.231             356                                      0.97624965      0.97997811         0.3805%        0.003728             325
+       26329.021             357                                      0.97624965      0.97997811         0.3805%        0.003728             326
+       26374.971             358                                      0.97624965      0.97997811         0.3805%        0.003728             327
+       26414.182             359                           * L        0.97624973      0.97997811         0.3805%        0.003728             328
+       26447.179             360                                      0.97624973      0.97997811         0.3805%        0.003728             329
+       26477.925             361                                      0.97624973      0.97997811         0.3805%        0.003728             330
+       26509.338             362                                      0.97624973      0.97997811         0.3805%        0.003728             331
+       26540.715             363                           * L        0.97624974      0.97997811         0.3805%        0.003728             332
+       26594.076             364                                      0.97624974      0.97997811         0.3805%        0.003728             333
+       26641.254             365                           * L        0.97624982      0.97997811         0.3804%        0.003728             334
+       26677.308             366                                      0.97624982      0.97997811         0.3804%        0.003728             335
+       26711.765             367                           * L        0.97624991      0.97997811         0.3804%        0.003728             336
+       26752.291             368                                      0.97624991      0.97997811         0.3804%        0.003728             337
+       26785.834             369                           * L        0.97625009      0.97997811         0.3804%        0.003728             338
+       26825.106             370                                      0.97625009      0.97997811         0.3804%        0.003728             339
+       26849.572             371                                      0.97625009      0.97997811         0.3804%        0.003728             340
+       26884.533             372                                      0.97625009      0.97997811         0.3804%        0.003728             341
+       26907.854             373                           * L        0.97625067      0.97997811         0.3804%        0.003727             342
+       26953.287             374                                      0.97625067      0.97997811         0.3804%        0.003727             343
+       26988.437             375                           * L         0.9762512      0.97997811         0.3803%        0.003727             344
+       27018.073             376                                       0.9762512      0.97997811         0.3803%        0.003727             345
+       27047.638             377                           * L        0.97625159      0.97997811         0.3803%        0.003727             346
+       27092.243             378                                      0.97625159      0.97997811         0.3803%        0.003727             347
+       27127.105             379                           * L        0.97625173      0.97997811         0.3803%        0.003726             348
+       27160.484             380                                      0.97625173      0.97997811         0.3803%        0.003726             349
+       27192.121             381                           * L        0.97625174      0.97997811         0.3803%        0.003726             350
+       27225.851             382                                      0.97625174      0.97997811         0.3803%        0.003726             351
+       27257.893             383                                      0.97625174      0.97997811         0.3803%        0.003726             352
+        27291.27             384                                      0.97625174      0.97997811         0.3803%        0.003726             353
+       27322.614             385                           * L        0.97625272      0.97997811         0.3801%        0.003725             354
+       27349.553             386                                      0.97625272      0.97997811         0.3801%        0.003725             355
+       27386.467             387                                      0.97625272      0.97997811         0.3801%        0.003725             356
+       27419.092             388                                      0.97625272      0.97997811         0.3801%        0.003725             357
+       27444.546             389                           * L        0.97625303      0.97997811         0.3801%        0.003725             358
+       27474.387             390                                      0.97625303      0.97997811         0.3801%        0.003725             359
+       27504.998             391                           * L        0.97625334      0.97997811         0.3801%        0.003725             360
+       27539.685             392                                      0.97625334      0.97997811         0.3801%        0.003725             361
+        27568.36             393                           * L        0.97625335      0.97997811         0.3801%        0.003725             362
+       27604.474             394                                      0.97625335      0.97997811         0.3801%        0.003725             363
+       27630.155             395                                      0.97625335      0.97997811         0.3801%        0.003725             364
+       27661.562             396                                      0.97625335      0.97997811         0.3801%        0.003725             365
+       27700.287             397                           * L        0.97625346      0.97997811         0.3801%        0.003725             366
+       27731.403             398                                      0.97625346      0.97997811         0.3801%        0.003725             367
+       27764.408             399                           * L        0.97625347      0.97997811         0.3801%        0.003725             368
+       27794.521             400                                      0.97625347      0.97997811         0.3801%        0.003725             369
+       27819.189             401                                      0.97625347      0.97997811         0.3801%        0.003725             370
+       27848.307             402                                      0.97625347      0.97997811         0.3801%        0.003725             371
+       27875.479             403                           * L        0.97625367      0.97997811         0.3801%        0.003724             372
+       27904.339             404                                      0.97625367      0.97997811         0.3801%        0.003724             373
+       27933.302             405                           * L        0.97625367      0.97997811         0.3801%        0.003724             374
+       27960.088             406                                      0.97625367      0.97997811         0.3801%        0.003724             375
+       27982.062             407                                      0.97625367      0.97997811         0.3801%        0.003724             376
+       28012.696             408                                      0.97625367      0.97997811         0.3801%        0.003724             377
+       28032.215             409                           * L        0.97625379      0.97997811           0.38%        0.003724             378
+       28061.371             410                                      0.97625379      0.97997811           0.38%        0.003724             379
+       28090.023             411                           * L         0.9762547      0.97997811         0.3799%        0.003723             380
+       28120.019             412                                       0.9762547      0.97997811         0.3799%        0.003723             381
+       28143.036             413                                       0.9762547      0.97997811         0.3799%        0.003723             382
+       28171.575             414                                       0.9762547      0.97997811         0.3799%        0.003723             383
+       28194.942             415                           * L        0.97625509      0.97997811         0.3799%        0.003723             384
+       28224.196             416                                      0.97625509      0.97997811         0.3799%        0.003723             385
+       28251.881             417                                      0.97625509      0.97997811         0.3799%        0.003723             386
+       28277.545             418                                      0.97625509      0.97997811         0.3799%        0.003723             387
+       28305.252             419                           * L        0.97625515      0.97997811         0.3799%        0.003723             388
+       28335.935             420                                      0.97625515      0.97997811         0.3799%        0.003723             389
+       28366.468             421                                      0.97625515      0.97997811         0.3799%        0.003723             390
+       28393.403             422                                      0.97625515      0.97997811         0.3799%        0.003723             391
+       28445.336             423                           * L        0.97625548      0.97997811         0.3799%        0.003723             392
+       28472.229             424                                      0.97625548      0.97997811         0.3799%        0.003723             393
+       28494.521             425                                      0.97625548      0.97997811         0.3799%        0.003723             394
+        28526.35             426                                      0.97625548      0.97997811         0.3799%        0.003723             395
+       28560.452             427                           * L        0.97625601      0.97997811         0.3798%        0.003722             396
+       28589.626             428                                      0.97625601      0.97997811         0.3798%        0.003722             397
+       28614.949             429                           * L         0.9762563      0.97997811         0.3798%        0.003722             398
+       28644.222             430                                       0.9762563      0.97997811         0.3798%        0.003722             399
+       28666.031             431                                       0.9762563      0.97997811         0.3798%        0.003722             400
+       28695.596             432                                       0.9762563      0.97997811         0.3798%        0.003722             401
+       28717.349             433                           * L        0.97625634      0.97997811         0.3798%        0.003722             402
+       28746.669             434                                      0.97625634      0.97997811         0.3798%        0.003722             403
+       28770.929             435                                      0.97625634      0.97997811         0.3798%        0.003722             404
+       28790.583             436                                      0.97625634      0.97997811         0.3798%        0.003722             405
+       28818.767             437                           * L        0.97625658      0.97997811         0.3798%        0.003722             406
+        28861.49             438                                      0.97625658      0.97997811         0.3798%        0.003722             407
+       28890.018             439                           * L        0.97625658      0.97997811         0.3798%        0.003722             408
+       28917.904             440                                      0.97625658      0.97997811         0.3798%        0.003722             409
+       28945.611             441                           * L        0.97625661      0.97997811         0.3798%        0.003721             410
+       28975.253             442                                      0.97625661      0.97997811         0.3798%        0.003721             411
+       29004.743             443                           * L        0.97625754      0.97997811         0.3797%        0.003721             412
+       29035.015             444                                      0.97625754      0.97997811         0.3797%        0.003721             413
+       29065.362             445                           * L        0.97625762      0.97997811         0.3796%         0.00372             414
+       29092.003             446                                      0.97625762      0.97997811         0.3796%         0.00372             415
+       29118.526             447                                      0.97625762      0.97997811         0.3796%         0.00372             416
+       29145.945             448                                      0.97625762      0.97997811         0.3796%         0.00372             417
+       29168.289             449                                      0.97625762      0.97997811         0.3796%         0.00372             418
+       29198.066             450                                      0.97625762      0.97997811         0.3796%         0.00372             419
+       29220.108             451                           * L        0.97625767      0.97997811         0.3796%         0.00372             420
+       29248.644             452                                      0.97625767      0.97997811         0.3796%         0.00372             421
+       29277.399             453                           * L        0.97625939      0.97997811         0.3795%        0.003719             422
+       29306.148             454                                      0.97625939      0.97997811         0.3795%        0.003719             423
+       29342.334             455                           * L        0.97626007      0.97997811         0.3794%        0.003718             424
+       29376.327             456                                      0.97626007      0.97997811         0.3794%        0.003718             425
+         29403.6             457                           * L        0.97626073      0.97997811         0.3793%        0.003717             426
+       29430.131             458                                      0.97626073      0.97997811         0.3793%        0.003717             427
+        29457.41             459                                      0.97626073      0.97997811         0.3793%        0.003717             428

@@ -494,9 +494,10 @@ class MSBundle:
         self.obj_const.activate()
         self.gp.set_objective(self.obj_const)
 
+        '''
         # ---- Override MIPGap and TimeLimit for tighter Q-value solve ----
         _CS_MIPGAP = 5*1e-4
-        _CS_TIMELIMIT = 3
+        _CS_TIMELIMIT = 60
         _orig_mipgap = getattr(self, 'mip_gap', None)
         self.gp.set_gurobi_param('MIPGap', _CS_MIPGAP)
         try:
@@ -504,6 +505,7 @@ class MSBundle:
         except Exception:
             _orig_timelimit = None
         self.gp.set_gurobi_param('TimeLimit', _CS_TIMELIMIT)
+        '''
 
         # ---- IPOPT warm-start (same as SNoGloDe) ----
         # Solve with IPOPT first to find a good local minimum.
@@ -637,11 +639,7 @@ class MSBundle:
             return has_bound, c_val, cand_pt
 
         finally:
-            # ---- Always restore original MIPGap, TimeLimit and ms objective ----
-            if _orig_mipgap is not None:
-                self.gp.set_gurobi_param('MIPGap', _orig_mipgap)
-            if _orig_timelimit is not None:
-                self.gp.set_gurobi_param('TimeLimit', _orig_timelimit)
+            # ---- Always restore ms objective ----
             self.obj_const.deactivate()
             self.obj_ms.activate()
             self.gp.set_objective(self.obj_ms)
@@ -666,7 +664,6 @@ class SurrogateLBBundle:
         s.t. t_s >= As_s(lam) + ms_s
              t_s >= c_s
 
-    这里 S（场景数）在构造时固定；每次调用 compute_lb 时只更新系数，不改结构。
     """
     def __init__(self, S: int, options: dict | None = None):
         self.S = int(S)

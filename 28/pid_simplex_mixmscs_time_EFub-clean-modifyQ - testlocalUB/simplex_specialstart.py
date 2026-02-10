@@ -2288,6 +2288,20 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
             _diag_lines.append(f"  Selected (parent) simplex: {parent_id}")
             _diag_lines.append(f"  Parent LB: {parent_LB/S:.9f} (per-scen)")
 
+            # --- (1) Was UB_node inside the selected (parent) simplex BEFORE the split? ---
+            _ub_pt_pre = np.asarray(UB_node, dtype=float)
+            _V_pre = np.array(selected_rec_before_split["verts"], dtype=float)
+            _T_pre = (_V_pre[1:] - _V_pre[0]).T
+            try:
+                _lam123_pre = np.linalg.solve(_T_pre, _ub_pt_pre - _V_pre[0])
+                _lam0_pre = 1.0 - _lam123_pre.sum()
+                _lam_pre = np.array([_lam0_pre, *_lam123_pre])
+                _ub_in_parent = bool(np.all(_lam_pre >= -1e-8))
+                _lam_str = ", ".join(f"{l:.8f}" for l in _lam_pre)
+                _diag_lines.append(f"  UB in parent (pre-split): {_ub_in_parent}  λ=[{_lam_str}]")
+            except np.linalg.LinAlgError:
+                _diag_lines.append(f"  UB in parent (pre-split): DEGENERATE (cannot compute)")
+
             # EF solution on this simplex (if available)
             _ef_raw = ef_iter_info.get("ef_obj")
             _ef_recalc = ef_iter_info.get("true_obj")
@@ -2321,7 +2335,16 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                     child_lb = float(child_rec["LB"])
                     child_id = tuple(sorted(child_rec["vert_idx"]))
                     child_lbs.append(child_lb)
-                    _diag_lines.append(f"    T{new_idx} {child_id}: LB = {child_lb/S:.9f}")
+                    # avg_cs: average constant-cut dual bound across scenarios
+                    _child_c = child_rec.get("c_per_scene", [])
+                    _child_c_arr = np.asarray(_child_c, dtype=float)
+                    _finite_c = _child_c_arr[np.isfinite(_child_c_arr)]
+                    if _finite_c.size > 0:
+                        _avg_cs = float(np.mean(_finite_c))
+                        _avg_cs_str = f"{_avg_cs:.9f}"
+                    else:
+                        _avg_cs_str = "N/A"
+                    _diag_lines.append(f"    T{new_idx} {child_id}: LB = {child_lb/S:.9f}, avg_cs = {_avg_cs_str}")
             
             new_global_min_id = tuple(sorted(lb_simp_rec_end["vert_idx"]))
             _diag_lines.append(f"  New global LB: {LB_global_end/S:.9f} (from T{lb_simp_rec_end['simplex_index']} {new_global_min_id})")
@@ -2363,6 +2386,37 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                                    f"time={_ip_time:.3f}s, ef_obj={_ip_ef_obj}, true_obj(per-scen)={_ip_true_ps}")
             else:
                 _diag_lines.append(f"  EF-IPOPT: not available")
+
+            # --- (2) Which post-split simplex contains the (possibly updated) UB point? ---
+            _ub_pt_diag = np.asarray(UB_node, dtype=float)
+            _ub_in_children = []
+            _ub_in_old = []
+            _geom_tol_diag = 1e-8
+            for _r_end in per_tet_end:
+                _V_end = np.array(_r_end["verts"], dtype=float)
+                _T_end = (_V_end[1:] - _V_end[0]).T
+                try:
+                    _lam123_end = np.linalg.solve(_T_end, _ub_pt_diag - _V_end[0])
+                    _lam0_end = 1.0 - _lam123_end.sum()
+                    _lam_all_end = np.array([_lam0_end, *_lam123_end])
+                    if np.all(_lam_all_end >= -_geom_tol_diag):
+                        _end_idx = _r_end["simplex_index"]
+                        _end_id = tuple(sorted(_r_end["vert_idx"]))
+                        _lam_s = ", ".join(f"{l:.8f}" for l in _lam_all_end)
+                        _entry = f"T{_end_idx} {_end_id} (LB={_r_end['LB']/S:.9f}, λ=[{_lam_s}])"
+                        if _end_idx in new_simplex_indices:
+                            _ub_in_children.append(_entry)
+                        else:
+                            _ub_in_old.append(_entry)
+                except np.linalg.LinAlgError:
+                    pass
+            _diag_lines.append(f"  UB in child simplex (post-split): {len(_ub_in_children) > 0}")
+            for _s_info in _ub_in_children:
+                _diag_lines.append(f"    CHILD: {_s_info}")
+            for _s_info in _ub_in_old:
+                _diag_lines.append(f"    OLD:   {_s_info}")
+            if not _ub_in_children and not _ub_in_old:
+                _diag_lines.append(f"    (UB point is outside mesh)")
 
             _diag_lines.append("=" * 70)
             

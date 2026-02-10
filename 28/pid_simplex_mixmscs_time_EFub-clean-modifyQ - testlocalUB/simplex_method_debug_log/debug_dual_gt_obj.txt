@@ -1,13 +1,9 @@
 # debug_dual_gt_obj.txt — subproblems where dual_bound > primal_obj
 # Format: [Iter N] [MS/CS] simplex_idx=..., verts=..., scenario=..., dual_bound=..., primal_obj=..., gap=...
 
-[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=0, dual_bound=-5931172758.065578, primal_obj=-5931172758.06558, gap=1.9073486328125e-06
-[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=1, dual_bound=-5944270569.009912, primal_obj=-5944270569.0099125, gap=9.5367431640625e-07
-[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=2, dual_bound=-5905519795.390634, primal_obj=-5905519795.390635, gap=9.5367431640625e-07
-[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=6, dual_bound=-5872931710.270994, primal_obj=-5872931710.270995, gap=9.5367431640625e-07
-[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=9, dual_bound=-5929518852.813504, primal_obj=-5929518852.813505, gap=9.5367431640625e-07
-[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=11, dual_bound=-5849699343.461683, primal_obj=-5849699343.461685, gap=1.9073486328125e-06
-[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=12, dual_bound=-5942322544.582008, primal_obj=-5942322544.582009, gap=9.5367431640625e-07
-[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=14, dual_bound=-5822231290.133675, primal_obj=-5822231290.133676, gap=9.5367431640625e-07
-[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=15, dual_bound=-5851104828.593573, primal_obj=-5851104828.593574, gap=9.5367431640625e-07
-[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=19, dual_bound=-5935715608.200904, primal_obj=-5935715608.200906, gap=1.9073486328125e-06
+[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=0, dual_bound=-5776540149.946902, primal_obj=-5776540149.946904, gap=1.9073486328125e-06
+[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=2, dual_bound=-5849076197.126979, primal_obj=-5849076197.12698, gap=9.5367431640625e-07
+[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=6, dual_bound=-5715015050.0905485, primal_obj=-5715015050.090549, gap=9.5367431640625e-07
+[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=8, dual_bound=-5700613629.07822, primal_obj=-5700613629.078222, gap=1.9073486328125e-06
+[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=10, dual_bound=-5805663859.001272, primal_obj=-5805663859.001273, gap=9.5367431640625e-07
+[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=12, dual_bound=-5878224371.950761, primal_obj=-5878224371.950762, gap=9.5367431640625e-07

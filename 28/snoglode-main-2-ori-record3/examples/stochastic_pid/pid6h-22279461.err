@@ -1,0 +1,27 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) CCconfig        6)  ucx/1.14.1         11) flexiblas/3.3.1
+  2) gentoo/2023     7)  libfabric/1.18.0   12) aocl-blas/5.1
+  3) gcccore/.12.3   8)  pmix/4.2.4         13) aocl-lapack/5.1
+  4) gcc/12.3        9)  ucc/1.2.0          14) StdEnv/2023
+  5) hwloc/2.9.1     10) openmpi/4.1.5
+Traceback (most recent call last):
+  File "/home/yinhuang/snoglode-main-2-ori-record3/examples/stochastic_pid/stochastic_pid.py", line 362, in <module>
+    solver.solve(max_iter=1000,
+  File "/home/yinhuang/snoglode-main-2-ori-record3/snoglode/solver.py", line 127, in solve
+    current_node, current_node_feasible = self.dispatch_node_selection()
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yinhuang/snoglode-main-2-ori-record3/snoglode/solver.py", line 205, in dispatch_node_selection
+    bounds_feasible = self.subproblems.tighten_and_sync_bounds(node)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yinhuang/snoglode-main-2-ori-record3/snoglode/components/subproblems.py", line 335, in tighten_and_sync_bounds
+    self.set_all_states(node.state,
+  File "/home/yinhuang/snoglode-main-2-ori-record3/snoglode/components/subproblems.py", line 233, in set_all_states
+    self.set_subproblem_state(subproblem_name = subproblem_name,
+  File "/home/yinhuang/snoglode-main-2-ori-record3/snoglode/components/subproblems.py", line 264, in set_subproblem_state
+    self._update_lifted_var_state(subproblem_name = subproblem_name,
+  File "/home/yinhuang/snoglode-main-2-ori-record3/snoglode/components/subproblems.py", line 660, in _update_lifted_var_state
+    assert lifted_var_state.lb <= lifted_var_state.ub
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
