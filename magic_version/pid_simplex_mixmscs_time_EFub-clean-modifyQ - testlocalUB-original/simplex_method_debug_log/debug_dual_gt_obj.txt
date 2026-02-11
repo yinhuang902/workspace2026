@@ -1,0 +1,7 @@
+# debug_dual_gt_obj.txt — subproblems where dual_bound > primal_obj
+# Format: [Iter N] [MS/CS] simplex_idx=..., verts=..., scenario=..., dual_bound=..., primal_obj=..., gap=...
+
+[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=1, dual_bound=-5719282197.107623, primal_obj=-5719282197.107625, gap=1.9073486328125e-06
+[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=3, dual_bound=-5735560905.982111, primal_obj=-5735560905.982112, gap=9.5367431640625e-07
+[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=4, dual_bound=-5718799845.420235, primal_obj=-5718799845.420236, gap=9.5367431640625e-07
+[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=7, dual_bound=-5912409938.036966, primal_obj=-5912409938.036967, gap=9.5367431640625e-07

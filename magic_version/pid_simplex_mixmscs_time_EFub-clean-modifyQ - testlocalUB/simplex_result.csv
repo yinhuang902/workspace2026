@@ -1,0 +1,2 @@
+Time (s),# Nodes,LB,UB,Rel. Gap,Abs. Gap,best_LB_ever,best_UB_ever,LB_in_split,UB_in_split,LB_selected,Rel_Gap_selected
+24.415,8,0.992696277,0.987738771,-0.5019045%,-0.00496,0.992696277,0.987738771,INSIDE,INSIDE,1.001068719,-1.3495418%
