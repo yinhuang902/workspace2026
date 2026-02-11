@@ -489,9 +489,17 @@ class LGLowerBounder(AbstractLowerBounder):
                 model.solutions.load_from(results)
             except:
                 return None, None, "optimal_load_failed"
-            obj_val = pyo.value(get_active_objective(model))
+            # For valid LG cuts, v_val must be a LOWER BOUND on the
+            # subproblem objective.  The primal incumbent is an upper bound
+            # when MIPGap > 0; use the solver's dual bound instead.
+            dual_bound = self.retrieve_solver_lb(results)
+            primal_obj = pyo.value(get_active_objective(model))
+            if dual_bound is not None and math.isfinite(dual_bound):
+                cut_val = dual_bound
+            else:
+                cut_val = primal_obj
             y_vals = self._extract_y_vals(model, subproblem_name, subproblems)
-            return obj_val, y_vals, "optimal"
+            return cut_val, y_vals, "optimal"
         
         if term_cond in [TerminationCondition.maxTimeLimit, 
                          TerminationCondition.maxIterations,

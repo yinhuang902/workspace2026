@@ -1,0 +1,6 @@
+
+pid_simplex_fv1-bounds
+每次换simplex都修改变量bounds的版本，之前有modify Q，现在应该已经禁用
+
+pid_simplex_fv1
+原版，禁用了任何修改MIPGap的行为

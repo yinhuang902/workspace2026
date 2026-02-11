@@ -28,7 +28,7 @@ import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()
 size = MPI.COMM_WORLD.Get_size()
 
-num_scenarios = 5
+num_scenarios = 50
 
 
 
@@ -290,8 +290,8 @@ if __name__ == '__main__':
     
     nonconvex_gurobi_lb = pyo.SolverFactory("gurobi")
     nonconvex_gurobi_lb.options["NonConvex"] = 2
-    nonconvex_gurobi_lb.options["MIPGap"] = 1e-1
-    nonconvex_gurobi_lb.options["TimeLimit"] = 60
+    nonconvex_gurobi_lb.options["MIPGap"] = 1e-4
+    nonconvex_gurobi_lb.options["TimeLimit"] = 180
     scenarios = [f"scen_{i}" for i in range(1,num_scenarios+1)]
 
     obbt_solver_opts = {

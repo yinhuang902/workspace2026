@@ -227,6 +227,47 @@ def build_pid_model(scenario_name):
 
 
 if __name__ == '__main__':
+    # ---- Debug log setup ------------------------------------------------
+    import sys as _sys
+    _script_dir = os.path.dirname(os.path.abspath(__file__))
+    _debug_dir  = os.path.join(_script_dir, "pidsp_debug")
+    os.makedirs(_debug_dir, exist_ok=True)
+    _debug_log_path = os.path.join(_debug_dir, "debug_log.txt")
+
+    # Prefixes that should go ONLY to the log file, not the console
+    _LOG_ONLY_PREFIXES = ("LG APPX", "WARNING: LG APPX", "DEBUG RMP", "RMP DIAG")
+
+    class _Tee:
+        """Duplicate stdout to a file; suppress debug lines from console."""
+        def __init__(self, filepath, stream, suppress_prefixes=()):
+            self._file   = open(filepath, "w", encoding="utf-8")
+            self._stream = stream
+            self._suppress = suppress_prefixes
+            self._suppressing = False          # tracks if last line was suppressed
+        def write(self, data):
+            # Always write everything to the log file
+            self._file.write(data)
+            # Only write to console if the line doesn't match a suppressed prefix;
+            # also swallow blank lines that follow suppressed output.
+            for line in data.splitlines(True):
+                stripped = line.lstrip()
+                if any(stripped.startswith(p) for p in self._suppress):
+                    self._suppressing = True
+                elif stripped.strip() == "" and self._suppressing:
+                    pass  # swallow blank lines between suppressed lines
+                else:
+                    self._suppressing = False
+                    self._stream.write(line)
+        def flush(self):
+            self._stream.flush()
+            self._file.flush()
+        def close(self):
+            self._file.close()
+
+    _tee = _Tee(_debug_log_path, _sys.stdout, suppress_prefixes=_LOG_ONLY_PREFIXES)
+    _sys.stdout = _tee
+    # ---------------------------------------------------------------------
+
     nonconvex_gurobi = pyo.SolverFactory("gurobi")
     nonconvex_gurobi.options["NonConvex"] = 2
     
@@ -267,7 +308,7 @@ if __name__ == '__main__':
     #                        tee = True)
     # quit()
     solver.solve(max_iter=1000,
-                 rel_tolerance = 1e-6,
+                 rel_tolerance = 1e-4,
                  time_limit = 60*15)
 
     if (rank==0):
