@@ -5,11 +5,6 @@
 现在即使计算子问题超时也把目前的变量值给到ipopt
 至少在5scenario解决了这个UB太大的问题，在50sceanrio待试验
 
-
-snoglode-main-2-ori-record3中有好的解决了EF问题的simplex版本，pid_simplex_mixmscs_time_EFub-clean是它的复制save版本
-
-
-
 Here's a detailed summary of the change:
 
 Change: Load Gurobi's Incumbent on Timeout

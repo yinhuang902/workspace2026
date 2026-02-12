@@ -10,6 +10,5 @@ snog_1e3_TL30_6h
 snoglode, 1e-3, serially, 6h, TimeLimit=30
 
 
-snog_1e3_TL60_18h.csv
-snoglode-main-2-ori-record3-oldwolog
-snoglode, 1e-3, serially, 18h, TimeLimit=60
+
+
