@@ -1,0 +1,1245 @@
+[Time] Data load & scenario build: 0.259s
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+[Tighten] rounds=1, changed=False
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2689754
+Academic license 2689754 - for non-commercial use only - registered to yi___@math.ubc.ca
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+Set parameter MIPGap to value 0.001
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 15
+[Time] Persistent wrapper (GurobiPersistent) setup: 1.959s
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=other
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=other
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=other
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=other
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=other
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=other
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=other
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=other
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=other
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=other
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[EF-UB] Initialized SimplexEFUb with 50 scenarios, time_ub=60.0s
+Discarded solution information
+Discarded solution information
+[Invariant] MS scen None: dual=-5.559750e+09 > primal=-5.559750e+09
+Discarded solution information
+[Invariant] MS scen None: dual=-5.522609e+09 > primal=-5.522609e+09
+Discarded solution information
+Discarded solution information
+[Invariant] MS scen None: dual=-5.554608e+09 > primal=-5.554608e+09
+Discarded solution information
+[Invariant] MS scen None: dual=-5.546842e+09 > primal=-5.546842e+09
+Discarded solution information
+Discarded solution information
+[Invariant] MS scen None: dual=-5.532692e+09 > primal=-5.532692e+09
+Discarded solution information
+Discarded solution information
+Discarded solution information
+[Invariant] MS scen None: dual=-5.551896e+09 > primal=-5.551896e+09
+Discarded solution information
+Discarded solution information
+Discarded solution information
+Discarded solution information
+Discarded solution information
+Discarded solution information
+[Invariant] MS scen None: dual=-5.563288e+09 > primal=-5.563288e+09
+Discarded solution information
+Discarded solution information
+Discarded solution information
+Discarded solution information
+Discarded solution information
+Discarded solution information
+Discarded solution information
+Discarded solution information
+Discarded solution information
+[Invariant] MS scen None: dual=-5.479110e+09 > primal=-5.479110e+09
+Discarded solution information
+[Invariant] MS scen None: dual=-5.562070e+09 > primal=-5.562070e+09
+Discarded solution information
+Discarded solution information
+Discarded solution information
+[Invariant] MS scen None: dual=-5.476649e+09 > primal=-5.476649e+09
+Discarded solution information
+Discarded solution information
+Discarded solution information
+[Invariant] MS scen None: dual=-5.559913e+09 > primal=-5.559913e+09
+Discarded solution information
+Discarded solution information
+[Invariant] MS scen None: dual=-5.510593e+09 > primal=-5.510593e+09
+Discarded solution information
+Discarded solution information
+Discarded solution information
+[Invariant] MS scen None: dual=-5.532109e+09 > primal=-5.532109e+09
+Discarded solution information
+[Invariant] MS scen None: dual=-5.440714e+09 > primal=-5.440714e+09
+Discarded solution information
+Discarded solution information
+[Invariant] MS scen None: dual=-5.566262e+09 > primal=-5.566262e+09
+Discarded solution information
+Discarded solution information
+[Invariant] MS scen None: dual=-5.546757e+09 > primal=-5.546757e+09
+Discarded solution information
+Discarded solution information
+Discarded solution information
+Discarded solution information
+Discarded solution information
+Discarded solution information
+Discarded solution information
+[Invariant] MS scen None: dual=-6.026920e+09 > primal=-6.026920e+09
+[Invariant] MS scen None: dual=-6.044831e+09 > primal=-6.044831e+09
+[Invariant] MS scen None: dual=-6.009929e+09 > primal=-6.009929e+09
+[Invariant] MS scen None: dual=-5.983412e+09 > primal=-5.983412e+09
+[Invariant] MS scen None: dual=-6.017156e+09 > primal=-6.017156e+09
+[Invariant] MS scen None: dual=-6.039632e+09 > primal=-6.039632e+09
+[Invariant] MS scen None: dual=-6.024586e+09 > primal=-6.024586e+09
+[Invariant] MS scen None: dual=-5.995499e+09 > primal=-5.995499e+09
+[Invariant] MS scen None: dual=-6.021363e+09 > primal=-6.021363e+09
+[Invariant] MS scen None: dual=-6.042132e+09 > primal=-6.042132e+09
+[Invariant] MS scen None: dual=-5.991586e+09 > primal=-5.991586e+09
+[Invariant] MS scen None: dual=-6.014791e+09 > primal=-6.014791e+09
+[Invariant] MS scen None: dual=-5.628277e+09 > primal=-5.628277e+09
+[Invariant] MS scen None: dual=-5.631814e+09 > primal=-5.631814e+09
+[Invariant] MS scen None: dual=-5.660837e+09 > primal=-5.660837e+09
+[Invariant] MS scen None: dual=-5.616388e+09 > primal=-5.616388e+09
+[Invariant] MS scen None: dual=-5.612241e+09 > primal=-5.612241e+09
+[Invariant] MS scen None: dual=-5.625887e+09 > primal=-5.625887e+09
+[Invariant] MS scen None: dual=-5.641254e+09 > primal=-5.641254e+09
+[Invariant] MS scen None: dual=-5.607478e+09 > primal=-5.607478e+09
+[Invariant] MS scen None: dual=-5.617120e+09 > primal=-5.617120e+09
+[Invariant] MS scen None: dual=-5.610408e+09 > primal=-5.610408e+09
+[Invariant] MS scen None: dual=-5.618986e+09 > primal=-5.618986e+09
+[Invariant] MS scen None: dual=-5.648744e+09 > primal=-5.648744e+09
+[Invariant] MS scen None: dual=-5.628623e+09 > primal=-5.628623e+09
+[Invariant] MS scen None: dual=-5.632333e+09 > primal=-5.632333e+09
+[Invariant] MS scen None: dual=-5.645010e+09 > primal=-5.645010e+09
+[Invariant] MS scen None: dual=-5.644053e+09 > primal=-5.644053e+09
+[Invariant] MS scen None: dual=-5.931173e+09 > primal=-5.931173e+09
+[Invariant] MS scen None: dual=-5.944271e+09 > primal=-5.944271e+09
+[Invariant] MS scen None: dual=-5.905520e+09 > primal=-5.905520e+09
+[Invariant] MS scen None: dual=-5.872932e+09 > primal=-5.872932e+09
+[Invariant] MS scen None: dual=-5.929519e+09 > primal=-5.929519e+09
+[Invariant] MS scen None: dual=-5.849699e+09 > primal=-5.849699e+09
+[Invariant] MS scen None: dual=-5.942323e+09 > primal=-5.942323e+09
+[Invariant] MS scen None: dual=-5.822231e+09 > primal=-5.822231e+09
+[Invariant] MS scen None: dual=-5.851105e+09 > primal=-5.851105e+09
+[Invariant] MS scen None: dual=-5.935716e+09 > primal=-5.935716e+09
+[Invariant] MS scen None: dual=-5.914496e+09 > primal=-5.914496e+09
+[Invariant] MS scen None: dual=-5.822808e+09 > primal=-5.822808e+09
+[Invariant] MS scen None: dual=-5.904536e+09 > primal=-5.904536e+09
+[Invariant] MS scen None: dual=-5.934350e+09 > primal=-5.934350e+09
+[Invariant] MS scen None: dual=-5.742972e+09 > primal=-5.742972e+09
+[Invariant] MS scen None: dual=-5.777262e+09 > primal=-5.777262e+09
+[Invariant] MS scen None: dual=-5.769900e+09 > primal=-5.769900e+09
+[Invariant] MS scen None: dual=-5.774641e+09 > primal=-5.774641e+09
+[Invariant] MS scen None: dual=-5.789952e+09 > primal=-5.789952e+09
+[Invariant] MS scen None: dual=-5.772717e+09 > primal=-5.772717e+09
+[Invariant] MS scen None: dual=-5.691837e+09 > primal=-5.691837e+09
+[Invariant] MS scen None: dual=-5.790238e+09 > primal=-5.790238e+09
+[Invariant] MS scen None: dual=-5.692036e+09 > primal=-5.692036e+09
+[Invariant] MS scen None: dual=-5.741430e+09 > primal=-5.741430e+09
+[Invariant] MS scen None: dual=-5.680930e+09 > primal=-5.680930e+09
+[Invariant] MS scen None: dual=-5.752986e+09 > primal=-5.752986e+09
+[Invariant] MS scen None: dual=-5.729898e+09 > primal=-5.729898e+09
+[Invariant] MS scen None: dual=-5.769133e+09 > primal=-5.769133e+09
+[Invariant] MS scen None: dual=-5.760966e+09 > primal=-5.760966e+09
+[Bundle] MS scen None: infeasibleOrUnbounded. ms_val=nan.
+[Bundle] MS scen None: not optimal. Status=warning, Term=infeasibleOrUnbounded.
+[Invariant] MS scen None: dual=-5.842821e+09 > primal=-5.842821e+09
+[Invariant] MS scen None: dual=-5.868426e+09 > primal=-5.868426e+09
+[Invariant] MS scen None: dual=-5.881849e+09 > primal=-5.881849e+09
+[Invariant] MS scen None: dual=-5.000000e+09 > primal=-5.000000e+09
+[Invariant] MS scen None: dual=-5.857186e+09 > primal=-5.857186e+09
+[Invariant] MS scen None: dual=-5.861173e+09 > primal=-5.861173e+09
+[Invariant] MS scen None: dual=-5.847746e+09 > primal=-5.847746e+09
+[Invariant] MS scen None: dual=-5.852069e+09 > primal=-5.852069e+09
+[Invariant] MS scen None: dual=-5.839436e+09 > primal=-5.839436e+09
+[Invariant] MS scen None: dual=-5.835150e+09 > primal=-5.835150e+09
+[Invariant] MS scen None: dual=-5.843925e+09 > primal=-5.843925e+09
+[Invariant] MS scen None: dual=-5.872866e+09 > primal=-5.872866e+09
+[Invariant] MS scen None: dual=-5.886261e+09 > primal=-5.886261e+09
+[Bundle] MS scen None: infeasibleOrUnbounded. ms_val=nan.
+[Bundle] MS scen None: not optimal. Status=warning, Term=infeasibleOrUnbounded.
+[Invariant] MS scen None: dual=-5.854670e+09 > primal=-5.854670e+09
+[Invariant] MS scen None: dual=-5.857857e+09 > primal=-5.857857e+09
+[Invariant] MS scen None: dual=-5.841612e+09 > primal=-5.841612e+09
+[Iter 0] #simplices = 6, #active = 6, bad-quality cut = 0
+== [Iter 0] ACTIVE simplices: LB / UB / sum(ms_s) / sum(c_s) (per-scenario) ==
+simp                    LB                UB            sum_ms           sum_c_s                Range(As)             Range(As+ms) #InfV
+----------------------------------------------------------------------------------------------------------------------------------------
+T0            9.949265e-01      4.475109e+09     -2.762446e+11      4.974633e+01     [1.12e+02, 5.00e+11]    [-2.76e+11, 2.24e+11]     1
+T1            9.792441e-01      3.982426e+09     -3.008787e+11      4.896221e+01     [1.12e+02, 5.00e+11]    [-3.01e+11, 1.99e+11]     1
+T2            9.847633e-01      4.365180e+09     -2.817410e+11      4.923817e+01     [1.11e+02, 5.00e+11]    [-2.82e+11, 2.18e+11]     1
+T3            9.817082e-01      4.093508e+09     -2.953246e+11      4.908541e+01     [1.11e+02, 5.00e+11]    [-2.95e+11, 2.05e+11]     1
+T4            1.003181e+00      4.255282e+09     -2.872359e+11      5.015907e+01     [1.35e+02, 5.00e+11]    [-2.87e+11, 2.13e+11]     2
+T5            9.957187e-01               inf               inf      4.978593e+01     [1.35e+02, 5.00e+11]               [inf, inf]     2
+
+== [Iter 0] INACTIVE simplices: LB / UB / sum(ms_s) / sum(c_s) (per-scenario) ==
+  (none)
+[Iter 0] created=6 (cum=6), active=6, active+UB=2, ms_recomputed=6
+[Iter 0] EF-UB improved incumbent: 9.796644e-01 (per-scen), K=(-9.99919741833476, -99.99840722447925, 0.8509979726328813)
+[Iter 0] Pre-split gap: 2.101447e-02 (0.043%)
+[Iter 0] Active simplex ratio = 1.000000
+[Iter 0] UB node (-9.99919741833476, -99.99840722447925, 0.8509979726328813) is in simplices [2, 3]
+[Iter 0] LB = 48.962206 = UB(48.983220) + ms_b(-3.009e+11) from T1
+Chosen node (-10.0, -100.0, 21.488615893979542) with ms=-6.061e+09 (simp T1, scene 33, rank #1, source=ms(dist))
+[Iter 0] LB simplex = T1, next node simplex = T1, scene 33
+[Selected Simp Info] Iter 0 | Simplex T1 Vertices:
+  v0: (-10.0, 100.0, 100.0)
+  v1: (-10.0, -100.0, 100.0)
+  v2: (10.0, -100.0, -100.0)
+  v3: (-10.0, -100.0, -100.0)
+  -> New Point: (-10.0, -100.0, 21.488615893979542)
+[Iter 0] candidate rank #1: T1, scene=33, ms=-6.061e+09
+== ms candidates (sorted by (ms, -dist)) ==
+rank   simp   scene           ms    mind(all)                             pt
+----------------------------------------------------------------------------
+   1     T1      33  -6.0614e+09     7.88e+01  (-9.9572, -100.0000, 21.2284)
+   2     T1      23  -6.0488e+09     7.90e+01 (-10.0000, -100.0000, 20.9756)
+   3     T1       3  -6.0448e+09     7.91e+01  (-9.9756, -100.0000, 20.8966)
+   4     T1      14  -6.0430e+09     7.91e+01  (-9.9409, -100.0000, 20.8598)
+   5     T1      38  -6.0430e+09     7.91e+01  (-9.9679, -100.0000, 20.8595)
+   6     T1      35  -6.0421e+09     7.92e+01 (-10.0000, -100.0000, 20.8427)
+   7     T1      11  -6.0396e+09     7.92e+01  (-9.9937, -100.0000, 20.7926)
+   8     T1       6  -6.0382e+09     7.92e+01  (-9.9996, -100.0000, 20.7642)
+   9     T1       8  -6.0335e+09     7.93e+01 (-10.0000, -100.0000, 20.6702)
+  10     T1      29  -6.0323e+09     7.94e+01 (-10.0000, -100.0000, 20.6459)
+
+[Iter 0] per_tet=6, active after q_cut=6, tri_is_None=False
+[Iter 0] bad-quality active simplices (q < 1e-09): 0
+[Iter 0] evaluating Q for scenario 0
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 1
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 2
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 3
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 4
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 5
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 6
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 7
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 8
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 9
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 10
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 11
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 12
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 13
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 14
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=error, term=error
+[Iter 0] evaluating Q for scenario 15
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 16
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 17
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 18
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 19
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 20
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 21
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 22
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 23
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 24
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=error, term=error
+[Iter 0] evaluating Q for scenario 25
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 26
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 27
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 28
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 29
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 30
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 31
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 32
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 33
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 34
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 35
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 36
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 37
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=error, term=error
+[Iter 0] evaluating Q for scenario 38
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 39
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 40
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 41
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 42
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 43
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 44
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 45
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 46
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 47
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 48
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+[Iter 0] evaluating Q for scenario 49
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 21.488615893979542): status=warning, term=infeasibleOrUnbounded
+
+[Iter 0] Next Point Details:
+Simplex   Scene   Type    As             ms             As+ms          Q              (Kp, Ki, Kd)                  
+--------------------------------------------------------------------------------------------------------------------
+T1        33      ms(dist)6.0614e+09     -6.0614e+09    3.3576e+01     1.0000e+10     (-10.0000, -100.0000, 21.4886)
+
+[Iter 0] subdivision type = edge (code=2) on simplex T1
+           edge local verts = (1, 0)
+[Iter 0] Elapsed: 2889.704s
+[Invariant] MS scen None: dual=-9.886927e+09 > primal=-9.886927e+09
+[Invariant] MS scen None: dual=-9.908986e+09 > primal=-9.908986e+09
+[Invariant] MS scen None: dual=-9.898112e+09 > primal=-9.898112e+09
+[Invariant] MS scen None: dual=-9.947736e+09 > primal=-9.947736e+09
+[Invariant] MS scen None: dual=-9.905029e+09 > primal=-9.905029e+09
+[Invariant] MS scen None: dual=-9.876850e+09 > primal=-9.876850e+09
+[Invariant] MS scen None: dual=-9.893028e+09 > primal=-9.893028e+09
+[Invariant] MS scen None: dual=-9.872503e+09 > primal=-9.872503e+09
+[Invariant] MS scen None: dual=-9.891597e+09 > primal=-9.891597e+09
+[Invariant] MS scen None: dual=-9.891942e+09 > primal=-9.891942e+09
+[Invariant] MS scen None: dual=-9.956731e+09 > primal=-9.956731e+09
+[Invariant] MS scen None: dual=-9.867244e+09 > primal=-9.867244e+09
+[Invariant] MS scen None: dual=-9.912659e+09 > primal=-9.912659e+09
+[Invariant] MS scen None: dual=-9.880103e+09 > primal=-9.880103e+09
+[Invariant] MS scen None: dual=-9.950801e+09 > primal=-9.950801e+09
+[Invariant] MS scen None: dual=-9.901837e+09 > primal=-9.901837e+09
+[Invariant] MS scen None: dual=-9.921449e+09 > primal=-9.921449e+09
+[Invariant] MS scen None: dual=-9.947159e+09 > primal=-9.947159e+09
+[Invariant] MS scen None: dual=-9.887038e+09 > primal=-9.887038e+09
+[Invariant] MS scen None: dual=-9.913712e+09 > primal=-9.913712e+09
+[Invariant] MS scen None: dual=-9.857191e+09 > primal=-9.857191e+09
+[Invariant] MS scen None: dual=-9.923452e+09 > primal=-9.923452e+09
+[Invariant] MS scen None: dual=-9.905934e+09 > primal=-9.905934e+09
+[Invariant] MS scen None: dual=-9.977539e+09 > primal=-9.977539e+09
+[Invariant] MS scen None: dual=-9.914224e+09 > primal=-9.914224e+09
+[Invariant] MS scen None: dual=-9.946604e+09 > primal=-9.946604e+09
+[Invariant] MS scen None: dual=-9.915321e+09 > primal=-9.915321e+09
+[Invariant] MS scen None: dual=-9.856148e+09 > primal=-9.856148e+09
+[Invariant] MS scen None: dual=-9.892177e+09 > primal=-9.892177e+09
+[Invariant] MS scen None: dual=-9.915749e+09 > primal=-9.915749e+09
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.956359713307245, -99.99998858066857, 20.36593430838526): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=other
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-9.805367218879661, -100.0, 20.30633253468426): status=warning, term=infeasibleOrUnbounded
+[Iter 0] Stop: Time limit reached (3514.64s >= 1200.00s).
+
+===== Simplex search summary (per-scenario) =====
+  Time (s)  # Nodes             LB             UB   Rel. Gap   Abs. Gap   #simplex    #active   Split       Selection
+---------------------------------------------------------------------------------------------------------------------
+  2889.396        8    0.979231382    0.979664409    0.0442%    0.00043          6          6    none        ms(dist)
+[Time] Main loop total: 3530.888s
+
+==== Done ====
+Total nodes: 9
+Best UB: 48.98322045472241
+Last LB: 48.96156911393111

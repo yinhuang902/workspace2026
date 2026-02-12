@@ -1,0 +1,220 @@
+--------------------------------------------------
+SNoGloDe Solver Parameters
+--------------------------------------------------
+
+Subproblem Names:
+  - scen_1
+  - scen_2
+  - scen_3
+  - scen_4
+  - scen_5
+Total # subproblems: 5
+
+LB solver: gurobi
+UB solver: gurobi
+CG solver: ipopt
+
+Global convergance guaranteed: True
+Epsilon: 0.001
+Perform FBBT: True
+Perform OBBT: True
+Relax binaries at LB: False
+Relax integers at LB: False
+
+Bounder Information
+  - Lower Bounder: LGLowerBounder
+  - Candidate Generator: SolveExtensiveForm
+
+Queuing strategy: QueueStrategy.bound
+Using a node feasibility checker? : False
+
+Branching Information
+  - Selection Strategy: RandomSelection
+  - Partition Strategy: Midpoint
+
+Verbose: True
+No log file generated.
+
+--------------------------------------------------
+Generating the models for the subproblems.
+	Scenario scen_1 has 3 first stage vars.
+	Scenario scen_2 has 3 first stage vars.
+	Scenario scen_3 has 3 first stage vars.
+	Scenario scen_4 has 3 first stage vars.
+	Scenario scen_5 has 3 first stage vars.
+Finished generating subproblem models.
+Node rooted.
+Using EF method for candidate solution. No EF bound. Building EF.
+EF built.
+WARNING: LG APPX UB_eff=1.964016 (tree UB=inf)
+LG APPX [k=0]: alpha=2.000000, zLB_k=0.964016, zLB_best=0.964016, UB_eff=1.964016[fallback], gap=1.000000, denom=78247.589626, step=0.000026, valid_dual=5/5, edges=4/4
+LG APPX [k=0]: ||lam||=0.0000, max|lam|=0.0000, max_adj_disagree=197.799433
+LG APPX [k=0]: cuts_added=5
+LG APPX [k=1]: alpha=1.000000, zLB_k=0.561439, zLB_best=0.964016, UB_eff=1.964016[fallback], gap=1.402577, denom=80801.817411, step=0.000017, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=1]: ||lam||=0.0071, max|lam|=0.0051, max_adj_disagree=200.998697
+LG APPX [k=1]: cuts_added=5
+LG APPX [k=2]: alpha=0.500000, zLB_k=0.277678, zLB_best=0.964016, UB_eff=1.964016[fallback], gap=1.686338, denom=80479.340902, step=0.000010, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=2]: ||lam||=0.0121, max|lam|=0.0085, max_adj_disagree=200.598904
+LG APPX [k=2]: cuts_added=5
+LG APPX [k=3]: alpha=0.250000, zLB_k=0.109472, zLB_best=0.964016, UB_eff=1.964016[fallback], gap=1.854544, denom=121201.707034, step=0.000004, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=3]: ||lam||=0.0150, max|lam|=0.0106, max_adj_disagree=200.998825
+LG APPX [k=3]: cuts_added=5
+LG APPX [k=4]: alpha=0.125000, zLB_k=0.012847, zLB_best=0.964016, UB_eff=1.964016[fallback], gap=1.951168, denom=121202.705870, step=0.000002, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=4]: ||lam||=0.0161, max|lam|=0.0114, max_adj_disagree=200.999951
+LG APPX [k=4]: cuts_added=5
+LG APPX [k=5]: alpha=0.062500, zLB_k=-0.035807, zLB_best=0.964016, UB_eff=1.964016[fallback], gap=1.999823, denom=120914.864892, step=0.000001, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=5]: ||lam||=0.0167, max|lam|=0.0118, max_adj_disagree=200.997545
+LG APPX [k=5]: cuts_added=5
+LG APPX [k=6]: alpha=0.031250, zLB_k=-0.064169, zLB_best=0.964016, UB_eff=1.964016[fallback], gap=2.028184, denom=120919.733692, step=0.000001, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=6]: ||lam||=0.0171, max|lam|=0.0120, max_adj_disagree=200.998159
+LG APPX [k=6]: cuts_added=5
+LG APPX [k=7]: alpha=0.015625, zLB_k=-0.076494, zLB_best=0.964016, UB_eff=1.964016[fallback], gap=2.040509, denom=120919.767195, step=0.000000, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=7]: ||lam||=0.0172, max|lam|=0.0121, max_adj_disagree=200.997546
+LG APPX [k=7]: cuts_added=5
+LG APPX [k=8]: alpha=0.007812, zLB_k=-0.083439, zLB_best=0.964016, UB_eff=1.964016[fallback], gap=2.047454, denom=120923.113668, step=0.000000, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=8]: ||lam||=0.0173, max|lam|=0.0122, max_adj_disagree=200.998178
+LG APPX [k=8]: cuts_added=5
+LG APPX [k=9]: alpha=0.003906, zLB_k=-0.086642, zLB_best=0.964016, UB_eff=1.964016[fallback], gap=2.050658, denom=121427.079577, step=0.000000, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=9]: ||lam||=0.0173, max|lam|=0.0122, max_adj_disagree=201.323630
+LG APPX [k=9]: cuts_added=5
+DEBUG RMP: Node 0, new=50, pool=48, total=98
+RMP DIAG: y_at_bound=2/3, obj=0.964318
+DEBUG RMP: Node 0, obj=0.9643184958442861
+        Time (s)  Nodes Explored       Pruned by                              LB              UB        Rel. Gap        Abs. Gap         # Nodes
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+          34.479               1                           * U         0.9643185      0.97564644         1.1611%        0.011328               2
+LG APPX [k=0]: alpha=2.000000, zLB_k=0.444573, zLB_best=0.444573, UB_eff=0.975646[tree], gap=0.531074, denom=27144.932565, step=0.000039, valid_dual=5/5, edges=4/4
+LG APPX [k=0]: ||lam||=0.0173, max|lam|=0.0122, max_adj_disagree=97.202441
+LG APPX [k=0]: cuts_added=5
+LG APPX [k=1]: alpha=1.000000, zLB_k=0.220181, zLB_best=0.444573, UB_eff=0.975646[tree], gap=0.755465, denom=27978.472796, step=0.000027, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=1]: ||lam||=0.0231, max|lam|=0.0159, max_adj_disagree=98.738002
+LG APPX [k=1]: cuts_added=5
+LG APPX [k=2]: alpha=0.500000, zLB_k=0.057848, zLB_best=0.444573, UB_eff=0.975646[tree], gap=0.917798, denom=28321.640063, step=0.000016, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=2]: ||lam||=0.0273, max|lam|=0.0185, max_adj_disagree=99.071273
+LG APPX [k=2]: cuts_added=5
+LG APPX [k=3]: alpha=0.250000, zLB_k=-0.038718, zLB_best=0.444573, UB_eff=0.975646[tree], gap=1.014364, denom=28493.005633, step=0.000009, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=3]: ||lam||=0.0299, max|lam|=0.0200, max_adj_disagree=99.207596
+LG APPX [k=3]: cuts_added=5
+LG APPX [k=4]: alpha=0.125000, zLB_k=-0.094525, zLB_best=0.444573, UB_eff=0.975646[tree], gap=1.070171, denom=28579.507026, step=0.000005, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=4]: ||lam||=0.0314, max|lam|=0.0209, max_adj_disagree=99.270548
+LG APPX [k=4]: cuts_added=5
+LG APPX [k=5]: alpha=0.062500, zLB_k=-0.117775, zLB_best=0.444573, UB_eff=0.975646[tree], gap=1.093422, denom=28623.197608, step=0.000002, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=5]: ||lam||=0.0321, max|lam|=0.0213, max_adj_disagree=99.301000
+LG APPX [k=5]: cuts_added=5
+LG APPX [k=6]: alpha=0.031250, zLB_k=-0.137421, zLB_best=0.444573, UB_eff=0.975646[tree], gap=1.113068, denom=28645.048320, step=0.000001, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=6]: ||lam||=0.0325, max|lam|=0.0216, max_adj_disagree=99.315908
+LG APPX [k=6]: cuts_added=5
+LG APPX [k=7]: alpha=0.015625, zLB_k=-0.138527, zLB_best=0.444573, UB_eff=0.975646[tree], gap=1.114174, denom=28656.053937, step=0.000001, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=7]: ||lam||=0.0327, max|lam|=0.0217, max_adj_disagree=99.323338
+LG APPX [k=7]: cuts_added=5
+LG APPX [k=8]: alpha=0.007812, zLB_k=-0.139705, zLB_best=0.444573, UB_eff=0.975646[tree], gap=1.115351, denom=28661.533523, step=0.000000, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=8]: ||lam||=0.0328, max|lam|=0.0217, max_adj_disagree=99.327017
+LG APPX [k=8]: cuts_added=5
+LG APPX [k=9]: alpha=0.003906, zLB_k=-0.144435, zLB_best=0.444573, UB_eff=0.975646[tree], gap=1.120081, denom=28664.269110, step=0.000000, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=9]: ||lam||=0.0328, max|lam|=0.0218, max_adj_disagree=99.328849
+LG APPX [k=9]: cuts_added=5
+DEBUG RMP: Node 1, new=50, pool=94, total=144
+RMP DIAG: y_at_bound=2/3, obj=0.964439
+DEBUG RMP: Node 1, obj=0.9644385805849779
+         212.827               2                           * U         0.9643185      0.97393712         0.9876%        0.009619               3
+LG APPX [k=0]: alpha=2.000000, zLB_k=0.437651, zLB_best=0.437651, UB_eff=0.973937[tree], gap=0.536287, denom=38346.430965, step=0.000028, valid_dual=5/5, edges=4/4
+LG APPX [k=0]: ||lam||=0.0173, max|lam|=0.0122, max_adj_disagree=99.305572
+LG APPX [k=0]: cuts_added=5
+LG APPX [k=1]: alpha=1.000000, zLB_k=0.217789, zLB_best=0.437651, UB_eff=0.973937[tree], gap=0.756148, denom=38877.728086, step=0.000019, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=1]: ||lam||=0.0217, max|lam|=0.0150, max_adj_disagree=99.574348
+LG APPX [k=1]: cuts_added=5
+LG APPX [k=2]: alpha=0.500000, zLB_k=0.063002, zLB_best=0.437651, UB_eff=0.973937[tree], gap=0.910935, denom=39640.160217, step=0.000011, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=2]: ||lam||=0.0251, max|lam|=0.0169, max_adj_disagree=101.653281
+LG APPX [k=2]: cuts_added=5
+LG APPX [k=3]: alpha=0.250000, zLB_k=-0.055139, zLB_best=0.437651, UB_eff=0.973937[tree], gap=1.029076, denom=41088.310382, step=0.000006, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=3]: ||lam||=0.0271, max|lam|=0.0181, max_adj_disagree=101.982782
+LG APPX [k=3]: cuts_added=5
+LG APPX [k=4]: alpha=0.125000, zLB_k=-0.080969, zLB_best=0.437651, UB_eff=0.973937[tree], gap=1.054907, denom=39770.074499, step=0.000003, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=4]: ||lam||=0.0283, max|lam|=0.0187, max_adj_disagree=101.729667
+LG APPX [k=4]: cuts_added=5
+LG APPX [k=5]: alpha=0.062500, zLB_k=-0.132112, zLB_best=0.437651, UB_eff=0.973937[tree], gap=1.106050, denom=39783.350913, step=0.000002, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=5]: ||lam||=0.0289, max|lam|=0.0190, max_adj_disagree=101.742061
+LG APPX [k=5]: cuts_added=5
+LG APPX [k=6]: alpha=0.031250, zLB_k=-0.145794, zLB_best=0.437651, UB_eff=0.973937[tree], gap=1.119731, denom=39793.297132, step=0.000001, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=6]: ||lam||=0.0292, max|lam|=0.0192, max_adj_disagree=101.748351
+LG APPX [k=6]: cuts_added=5
+LG APPX [k=7]: alpha=0.015625, zLB_k=-0.127570, zLB_best=0.437651, UB_eff=0.973937[tree], gap=1.101507, denom=39804.768907, step=0.000000, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=7]: ||lam||=0.0294, max|lam|=0.0193, max_adj_disagree=101.751484
+LG APPX [k=7]: cuts_added=5
+LG APPX [k=8]: alpha=0.007812, zLB_k=-0.156445, zLB_best=0.437651, UB_eff=0.973937[tree], gap=1.130382, denom=39800.626755, step=0.000000, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=8]: ||lam||=0.0294, max|lam|=0.0193, max_adj_disagree=101.753015
+LG APPX [k=8]: cuts_added=5
+LG APPX [k=9]: alpha=0.003906, zLB_k=-0.158105, zLB_best=0.437651, UB_eff=0.973937[tree], gap=1.132042, denom=41108.239693, step=0.000000, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=9]: ||lam||=0.0295, max|lam|=0.0193, max_adj_disagree=101.982707
+LG APPX [k=9]: cuts_added=5
+DEBUG RMP: Node 2, new=50, pool=97, total=147
+RMP DIAG: y_at_bound=2/3, obj=0.964319
+DEBUG RMP: Node 2, obj=0.9643185031847559
+         388.146               3                                       0.9643185      0.97393712         0.9876%        0.009619               4
+LG APPX [k=0]: alpha=2.000000, zLB_k=-0.135741, zLB_best=-0.135741, UB_eff=0.973937[tree], gap=1.109678, denom=37334.952810, step=0.000059, valid_dual=5/5, edges=4/4
+LG APPX [k=0]: ||lam||=0.0295, max|lam|=0.0193, max_adj_disagree=99.556256
+LG APPX [k=0]: cuts_added=5
+LG APPX [k=1]: alpha=1.000000, zLB_k=-0.597437, zLB_best=-0.135741, UB_eff=0.973937[tree], gap=1.571374, denom=37435.373303, step=0.000042, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=1]: ||lam||=0.0403, max|lam|=0.0252, max_adj_disagree=99.555933
+LG APPX [k=1]: cuts_added=5
+LG APPX [k=2]: alpha=0.500000, zLB_k=-0.922274, zLB_best=-0.135741, UB_eff=0.973937[tree], gap=1.896211, denom=39530.782277, step=0.000024, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=2]: ||lam||=0.0481, max|lam|=0.0294, max_adj_disagree=99.545320
+LG APPX [k=2]: cuts_added=5
+LG APPX [k=3]: alpha=0.250000, zLB_k=-1.113287, zLB_best=-0.135741, UB_eff=0.973937[tree], gap=2.087224, denom=39539.126789, step=0.000013, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=3]: ||lam||=0.0528, max|lam|=0.0318, max_adj_disagree=99.556830
+LG APPX [k=3]: cuts_added=5
+LG APPX [k=4]: alpha=0.125000, zLB_k=-1.217464, zLB_best=-0.135741, UB_eff=0.973937[tree], gap=2.191401, denom=39539.603846, step=0.000007, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=4]: ||lam||=0.0553, max|lam|=0.0331, max_adj_disagree=99.559344
+LG APPX [k=4]: cuts_added=5
+LG APPX [k=5]: alpha=0.062500, zLB_k=-1.266480, zLB_best=-0.135741, UB_eff=0.973937[tree], gap=2.240417, denom=39539.344303, step=0.000004, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=5]: ||lam||=0.0567, max|lam|=0.0338, max_adj_disagree=99.558541
+LG APPX [k=5]: cuts_added=5
+LG APPX [k=6]: alpha=0.031250, zLB_k=-1.293232, zLB_best=-0.135741, UB_eff=0.973937[tree], gap=2.267170, denom=39539.757176, step=0.000002, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=6]: ||lam||=0.0574, max|lam|=0.0341, max_adj_disagree=99.559384
+LG APPX [k=6]: cuts_added=5
+LG APPX [k=7]: alpha=0.015625, zLB_k=-1.306410, zLB_best=-0.135741, UB_eff=0.973937[tree], gap=2.280347, denom=39539.790996, step=0.000001, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=7]: ||lam||=0.0577, max|lam|=0.0343, max_adj_disagree=99.559379
+LG APPX [k=7]: cuts_added=5
+LG APPX [k=8]: alpha=0.007812, zLB_k=-1.317086, zLB_best=-0.135741, UB_eff=0.973937[tree], gap=2.291024, denom=39539.487955, step=0.000000, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=8]: ||lam||=0.0579, max|lam|=0.0344, max_adj_disagree=99.559383
+LG APPX [k=8]: cuts_added=5
+LG APPX [k=9]: alpha=0.003906, zLB_k=-1.327070, zLB_best=-0.135741, UB_eff=0.973937[tree], gap=2.301007, denom=39539.519253, step=0.000000, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=9]: ||lam||=0.0580, max|lam|=0.0344, max_adj_disagree=99.559378
+LG APPX [k=9]: cuts_added=5
+DEBUG RMP: Node 5, new=50, pool=147, total=197
+RMP DIAG: y_at_bound=2/3, obj=0.964318
+DEBUG RMP: Node 5, obj=0.964318374446753
+         710.417               4                                      0.96431837      0.97393712         0.9876%        0.009619               5
+LG APPX [k=0]: alpha=2.000000, zLB_k=-0.160321, zLB_best=-0.160321, UB_eff=0.973937[tree], gap=1.134258, denom=10083.692925, step=0.000225, valid_dual=5/5, edges=4/4
+LG APPX [k=0]: ||lam||=0.0580, max|lam|=0.0344, max_adj_disagree=50.474069
+LG APPX [k=0]: cuts_added=5
+LG APPX [k=1]: alpha=1.000000, zLB_k=-0.626310, zLB_best=-0.160321, UB_eff=0.973937[tree], gap=1.600248, denom=10200.001123, step=0.000157, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=1]: ||lam||=0.0802, max|lam|=0.0456, max_adj_disagree=50.527363
+LG APPX [k=1]: cuts_added=5
+LG APPX [k=2]: alpha=0.500000, zLB_k=-0.943650, zLB_best=-0.160321, UB_eff=0.973937[tree], gap=1.917587, denom=10196.359150, step=0.000094, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=2]: ||lam||=0.0958, max|lam|=0.0533, max_adj_disagree=50.510467
+LG APPX [k=2]: cuts_added=5
+LG APPX [k=3]: alpha=0.250000, zLB_k=-1.150902, zLB_best=-0.160321, UB_eff=0.973937[tree], gap=2.124839, denom=10198.683900, step=0.000052, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=3]: ||lam||=0.1052, max|lam|=0.0580, max_adj_disagree=50.527896
+LG APPX [k=3]: cuts_added=5
+LG APPX [k=4]: alpha=0.125000, zLB_k=-1.260641, zLB_best=-0.160321, UB_eff=0.973937[tree], gap=2.234578, denom=10200.148944, step=0.000027, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=4]: ||lam||=0.1104, max|lam|=0.0606, max_adj_disagree=50.526955
+LG APPX [k=4]: cuts_added=5
+LG APPX [k=5]: alpha=0.062500, zLB_k=-1.314580, zLB_best=-0.160321, UB_eff=0.973937[tree], gap=2.288517, denom=10200.226109, step=0.000014, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=5]: ||lam||=0.1131, max|lam|=0.0619, max_adj_disagree=50.526993
+LG APPX [k=5]: cuts_added=5
+LG APPX [k=6]: alpha=0.031250, zLB_k=-1.342406, zLB_best=-0.160321, UB_eff=0.973937[tree], gap=2.316343, denom=10200.252546, step=0.000007, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=6]: ||lam||=0.1145, max|lam|=0.0626, max_adj_disagree=50.522175
+LG APPX [k=6]: cuts_added=5
+LG APPX [k=7]: alpha=0.015625, zLB_k=-1.357804, zLB_best=-0.160321, UB_eff=0.973937[tree], gap=2.331741, denom=10200.495262, step=0.000004, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=7]: ||lam||=0.1152, max|lam|=0.0629, max_adj_disagree=50.528106
+LG APPX [k=7]: cuts_added=5
+LG APPX [k=8]: alpha=0.007812, zLB_k=-1.375364, zLB_best=-0.160321, UB_eff=0.973937[tree], gap=2.349302, denom=10199.569321, step=0.000002, valid_dual=5/5, edges=4/4 (alpha HALVED)
+LG APPX [k=8]: ||lam||=0.1156, max|lam|=0.0631, max_adj_disagree=50.522194
+LG APPX [k=8]: cuts_added=5
+LG APPX [k=9]: alpha=0.003906, zLB_k=-1.241905, zLB_best=-0.160321, UB_eff=0.973937[tree], gap=2.215842, denom=5101.527983, step=0.000002, valid_dual=3/5, edges=2/4 (alpha HALVED)
+LG APPX [k=9]: ||lam||=0.1158, max|lam|=0.0632, max_adj_disagree=50.528117
+LG APPX [k=9]: cuts_added=3
+DEBUG RMP: Node 7, new=48, pool=195, total=243
+RMP DIAG: y_at_bound=2/3, obj=0.964318
+DEBUG RMP: Node 7, obj=0.9643184382095911
