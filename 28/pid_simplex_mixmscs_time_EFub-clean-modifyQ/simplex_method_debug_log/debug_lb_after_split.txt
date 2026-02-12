@@ -3082,3 +3082,69 @@
   Inactivate simplex 271: vol=8.261e-05 < 1e-4, max_edge=9.921e+01, min_edge=1.202e-06, aspect=8.252e+07
   Inactivate simplex 274: vol=2.443e-05 < 1e-4, max_edge=9.921e+01, min_edge=4.139e-06, aspect=2.397e+07
 [Iter 146] Shape check: triggered=5, inactivated=5, passed=0
+======================================================================
+[Iter 146] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (8, 102, 103, 153)
+  Parent LB: 0.983991757 (per-scen)
+  EF ef_obj(IPOPT): 0.196833890, true_obj(recalc): 0.984169459, used=min=0.196833890 (per-scen)
+  Simplex volume: 2.863793e-04
+  Children (4):
+    T372 (8, 102, 103, 154): LB = 0.983991773
+  New global LB: 0.983990493 (from T28 (4, 13, 14, 19))
+  Location: OUTSIDE
+  Avg CS point Q-value: 0.984170611 (per-scen), point=(np.float64(-9.989405591310907), np.float64(-99.97852270544777), np.float64(0.8255416164707465))
+  Current UB: 0.984167030 (per-scen)
+  UB point: (-9.999875518011553, -99.99999796639749, 0.7895519935050919)
+  UB source: avgCS_new_simplex
+  UB simplex: (0, 1, 4, 8)
+  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.362s, ef_obj=0.9841694512414965, true_obj(per-scen)=0.984169459
+======================================================================
+
+  Inactivate simplex 28: vol=2.592e-05 < 1e-4, max_edge=1.036e+02, min_edge=2.913e-04, aspect=3.556e+05
+  Inactivate simplex 244: vol=4.838e-05 < 1e-4, max_edge=9.961e+01, min_edge=3.972e-05, aspect=2.508e+06
+  Inactivate simplex 260: vol=2.559e-05 < 1e-4, max_edge=1.854e+01, min_edge=5.136e-05, aspect=3.610e+05
+  Inactivate simplex 271: vol=8.261e-05 < 1e-4, max_edge=9.921e+01, min_edge=1.202e-06, aspect=8.252e+07
+  Inactivate simplex 274: vol=2.443e-05 < 1e-4, max_edge=9.921e+01, min_edge=4.139e-06, aspect=2.397e+07
+[Iter 147] Shape check: triggered=5, inactivated=5, passed=0
+======================================================================
+[Iter 147] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (8, 102, 103, 154)
+  Parent LB: 0.983991773 (per-scen)
+  EF ef_obj(IPOPT): 0.196833901, true_obj(recalc): 0.984169511, used=min=0.196833901 (per-scen)
+  Simplex volume: 2.803886e-04
+  Children (4):
+    T375 (8, 102, 103, 155): LB = 0.983991793
+  New global LB: 0.983990493 (from T28 (4, 13, 14, 19))
+  Location: OUTSIDE
+  Avg CS point Q-value: 0.984170633 (per-scen), point=(np.float64(-9.98931282877965), np.float64(-99.97833246191873), np.float64(0.8250389707030932))
+  Current UB: 0.984167030 (per-scen)
+  UB point: (-9.999875518011553, -99.99999796639749, 0.7895519935050919)
+  UB source: avgCS_new_simplex
+  UB simplex: (0, 1, 4, 8)
+  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.366s, ef_obj=0.9841695032007597, true_obj(per-scen)=0.984169511
+======================================================================
+
+  Inactivate simplex 28: vol=2.592e-05 < 1e-4, max_edge=1.036e+02, min_edge=2.913e-04, aspect=3.556e+05
+  Inactivate simplex 244: vol=4.838e-05 < 1e-4, max_edge=9.961e+01, min_edge=3.972e-05, aspect=2.508e+06
+  Inactivate simplex 260: vol=2.559e-05 < 1e-4, max_edge=1.854e+01, min_edge=5.136e-05, aspect=3.610e+05
+  Inactivate simplex 271: vol=8.261e-05 < 1e-4, max_edge=9.921e+01, min_edge=1.202e-06, aspect=8.252e+07
+  Inactivate simplex 274: vol=2.443e-05 < 1e-4, max_edge=9.921e+01, min_edge=4.139e-06, aspect=2.397e+07
+[Iter 148] Shape check: triggered=5, inactivated=5, passed=0
+======================================================================
+[Iter 148] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (8, 102, 103, 155)
+  Parent LB: 0.983991793 (per-scen)
+  EF ef_obj(IPOPT): 0.196833912, true_obj(recalc): 0.984169566, used=min=0.196833912 (per-scen)
+  Simplex volume: 2.746035e-04
+  Children (4):
+    T378 (8, 102, 103, 156): LB = 0.983991810
+  New global LB: 0.983990493 (from T28 (4, 13, 14, 19))
+  Location: OUTSIDE
+  Avg CS point Q-value: 0.984170677 (per-scen), point=(np.float64(-9.989206735308814), np.float64(-99.97811540334007), np.float64(0.8255187158721959))
+  Current UB: 0.984167030 (per-scen)
+  UB point: (-9.999875518011553, -99.99999796639749, 0.7895519935050919)
+  UB source: avgCS_new_simplex
+  UB simplex: (0, 1, 4, 8)
+  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.235s, ef_obj=0.9841695580934622, true_obj(per-scen)=0.984169566
+======================================================================
+

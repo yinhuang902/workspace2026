@@ -1,0 +1,65 @@
+iter=0
+node_id=0
+parent_id=None
+depth=0
+selected_box_bounds=K_p=(-9.029152350988284,9.999999998350672); K_i=(-99.99999999833955,99.99999999835967); K_d=(-99.99999999833955,99.99999999835967)
+box_volume=761166.0939
+vertices=NA
+current_ub_point_in_box=NA
+LB_value_this_iter=0.9783249532616327
+UB_value_current=inf
+pruned=0
+prune_reason=none
+---
+iter=1
+node_id=1
+parent_id=0
+depth=1
+selected_box_bounds=K_p=(-9.02915234768517,0.349389255569483); K_i=(-99.99999999501864,99.99999999671934); K_d=(-99.9999999966791,99.99999999671934)
+box_volume=375141.6641
+vertices=NA
+current_ub_point_in_box=NA
+LB_value_this_iter=0.9785660599322422
+UB_value_current=inf
+pruned=0
+prune_reason=none
+---
+iter=2
+node_id=2
+parent_id=0
+depth=1
+selected_box_bounds=K_p=(2.1986120967347094,5.266850558921325); K_i=(-99.97750249317914,99.99662505583392); K_d=(-99.9999999966791,99.99999999671934)
+box_volume=122713.6619
+vertices=NA
+current_ub_point_in_box=NA
+LB_value_this_iter=0.9802216952706034
+UB_value_current=inf
+pruned=0
+prune_reason=none
+---
+iter=3
+node_id=3
+parent_id=1
+depth=2
+selected_box_bounds=K_p=(-9.02915234603451,-5.865798290438257); K_i=(-99.00496033332173,99.84957665520142); K_d=(-99.99999999501864,99.99999999671934)
+box_volume=125809.4612
+vertices=NA
+current_ub_point_in_box=NA
+LB_value_this_iter=0.9788350560521836
+UB_value_current=inf
+pruned=0
+prune_reason=none
+---
+iter=4
+node_id=4
+parent_id=1
+depth=2
+selected_box_bounds=K_p=(-5.016190749174368,0.34938909053294437); K_i=(-99.99999999335819,99.99999999507901); K_d=(-99.99999999501864,99.99999999507901)
+box_volume=214623.1936
+vertices=NA
+current_ub_point_in_box=NA
+LB_value_this_iter=0.9797571656373052
+UB_value_current=inf
+pruned=0
+prune_reason=none
+---

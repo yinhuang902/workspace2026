@@ -1,0 +1,149 @@
+# Snoglode: 4-Version Comparison & Recommendation
+
+## Overview
+
+The four versions share the same core algorithm ([solver.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-EFfixed/snoglode/solver.py), [branching.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-EFfixed/snoglode/components/branching.py), [node.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-EFfixed/snoglode/components/node.py), [parameters.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-EFfixed/snoglode/components/parameters.py), [compute.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-EFfixed/snoglode/utils/compute.py), [ef.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-EFfixed/snoglode/utils/ef.py) are **byte-identical** across all four). The differences are concentrated in **3 files** plus the example runner:
+
+| File | EFfixed | ori-record3 | ori-record3-log | ori-record3v5 |
+|------|---------|-------------|-----------------|---------------|
+| [snoglode/solver.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-EFfixed/snoglode/solver.py) | ✅ same | baseline | ✅ same | ✅ same |
+| [snoglode/bounders/lower_bounders.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-EFfixed/snoglode/bounders/lower_bounders.py) | ✅ same | baseline | ✅ same | ⚠️ **modified** |
+| [snoglode/bounders/upper_bounders.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-EFfixed/snoglode/bounders/upper_bounders.py) | ✅ same | baseline | 🔧 logging only | ⚠️ **modified** |
+| [snoglode/components/subproblems.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-EFfixed/snoglode/components/subproblems.py) | ✅ same | baseline | ✅ same | ⚠️ **modified** |
+| [snoglode/components/tree.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-EFfixed/snoglode/components/tree.py) | ✅ same | baseline | 🔧 logging only | ✅ same |
+| `examples/.../stochastic_pid.py` | ✅ same | baseline | 🔧 logging added | ⚠️ **modified** |
+| Config: `num_scenarios` | 5 | 5 | 5 | **50** |
+| Config: `rel_tolerance` | 1e-5 | 1e-5 | 1e-5 | **1e-6** |
+
+---
+
+## Version-by-Version Breakdown
+
+### 1. `snoglode-main-2-ori-record3` — The Baseline
+
+This is the **reference version**. All other versions derive from it.
+
+Key characteristics:
+- Timeout handling in [stochastic_pid.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-EFfixed/examples/stochastic_pid/stochastic_pid.py): uses Gurobi's dual bound (`results.problem.lower_bound`) directly when `maxTimeLimit` is hit; raises `RuntimeError` on any other unexpected termination condition
+- In [lower_bounders.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-EFfixed/snoglode/bounders/lower_bounders.py): only accepts `TerminationCondition.optimal` + `SolverStatus.ok`; raises `RuntimeError` otherwise
+- In [upper_bounders.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-EFfixed/snoglode/bounders/upper_bounders.py): uses a simple `else: return False, None` for non-optimal UB subproblems
+- In [subproblems.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-EFfixed/snoglode/components/subproblems.py): simple `assert lb <= ub` with a hard `assert (delta <= 1e-8)` for bounds inversion repair
+
+---
+
+### 2. `snoglode-main-2-EFfixed` — Identical to Baseline
+
+> [!IMPORTANT]
+> **EFfixed is byte-identical to ori-record3 in every [.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/diff_versions.py) file.** Despite the name suggesting an "EF fix", no code differences exist. This version can be safely discarded as a duplicate.
+
+---
+
+### 3. `snoglode-main-2-ori-record3-log` — Baseline + Debug Logging
+
+Changes are **purely additive logging** — no algorithmic behavior changes:
+
+#### [tree.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-ori-record3-log/snoglode/components/tree.py)
+- Adds `root.depth = 0` on root node initialization
+- Propagates `depth` attribute to child nodes after branching
+
+#### [upper_bounders.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-ori-record3-log/snoglode/bounders/upper_bounders.py)
+- Stores `_debug_last_solver_status` and `_debug_last_tc` after EF solve for external logging
+
+#### [stochastic_pid.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-ori-record3-log/examples/stochastic_pid/stochastic_pid.py)
+- **Major addition**: ~100 lines of monkey-patched debug logging infrastructure:
+  - `debug_reachtimelimit.txt` — records timed-out subproblems
+  - `debug_log/debug_ef_solver.txt` — EF solver status per iteration
+  - `debug_log/debug_dual.txt` — per-scenario dual bound details
+  - `debug_log/debug_iter_info.txt` — per-iteration summary (LB, UB, gap, etc.)
+- Wraps `dispatch_node_selection`, `solve_a_subproblem`, `dispatch_updates`, and `solve_ef` with logging hooks
+
+> [!NOTE]
+> These logging changes do **not** alter any algorithm behavior. The debug hooks only read solver state — they never modify decisions, bounds, or solutions.
+
+---
+
+### 4. `snoglode-main-2-ori-record3v5` — Baseline + Robustness Improvements
+
+This version contains **significant algorithmic changes** for robustness:
+
+#### [lower_bounders.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-ori-record3v5/snoglode/bounders/lower_bounders.py)
+```diff
+ # Acceptance condition broadened:
+-if results.solver.termination_condition == TerminationCondition.optimal and \
+-    results.solver.status == SolverStatus.ok:
++if (results.solver.termination_condition == TerminationCondition.optimal or \
++    results.solver.termination_condition == TerminationCondition.maxIterations) and \
++   (results.solver.status == SolverStatus.ok or results.solver.status == SolverStatus.warning):
+```
+- Adds `safely_get_lower_bound()` helper + `LB_FLOOR = -1e10` constant
+- Replaces `RuntimeError` with robust fallback: tries solver's dual bound → successor objective → conservative `LB_FLOOR`
+- Loads incumbent solution even on non-optimal termination (for warm-start)
+
+#### [upper_bounders.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-ori-record3v5/snoglode/bounders/upper_bounders.py)
+```diff
+-else:
+-    return False, None
++elif results.solver.termination_condition == TerminationCondition.infeasible:
++    return False, None
++else:
++    # Try to recover incumbent; if none, return inf (valid weak UB)
++    try:
++        subproblem_model.solutions.load_from(results)
++        obj = pyo.value(get_active_objective(subproblem_model))
++        if obj is not None: return True, obj
++    except: pass
++    return True, float('inf')
+```
+- Only returns [(False, None)](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/diff_versions.py#7-21) for truly infeasible; otherwise tries to recover an incumbent or returns `+inf` as a weak but valid UB
+
+#### [subproblems.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-ori-record3v5/snoglode/components/subproblems.py)
+- **Bounds validation overhaul**: Replaces `assert lb <= ub` with detailed NaN/inf checks, tiny inversion repair (midpoint), and `InconsistentBoundsError` for large inversions
+- **Bounds tightening**: Adds safety checks after FBBT/OBBT with repair or `return False` for infeasible nodes
+- **Feasibility check**: Uses `continue` instead of `return True` for `None` bounds; adds `math.isfinite()` check
+- Adds two new methods: `unrelax_all_integers()` and `save_results_to_dict()`
+
+#### [stochastic_pid.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-ori-record3v5/examples/stochastic_pid/stochastic_pid.py)
+- **Timeout handling**: On `maxTimeLimit`, runs IPOPT as fallback for primal side-effects (instead of just using Gurobi's dual bound)
+- **Catch-all termination**: Replaces `else: raise RuntimeError` with a 3-priority LB recovery strategy (solver dual bound → successor objective → LB_FLOOR/`-inf`)
+- Removes `ApplicationError` import and `math` import (moved into library)
+- Config: **`num_scenarios = 50`** (vs 5), **`rel_tolerance = 1e-6`** (vs 1e-5)
+
+---
+
+## Summary of Differences
+
+```mermaid
+graph LR
+    A["ori-record3<br/>(Baseline)"] -->|identical| B["EFfixed"]
+    A -->|+ debug logging<br/>no algo change| C["ori-record3-log"]
+    A -->|+ robustness<br/>+ bounds validation<br/>+ error recovery| D["ori-record3v5"]
+```
+
+| Category | ori-record3 / EFfixed | ori-record3-log | ori-record3v5 |
+|---|---|---|---|
+| **Non-optimal termination** | `RuntimeError` (crash) | `RuntimeError` (crash) | Graceful recovery with fallback LB |
+| **Bounds inversion** | `assert delta <= 1e-8` (crash) | Same as baseline | Midpoint repair or `InconsistentBoundsError` |
+| **UB for non-infeasible timeout** | Returns [(False, None)](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/diff_versions.py#7-21) | Same as baseline | Tries incumbent, else returns `+inf` |
+| **NaN/inf bounds check** | None | None | Explicit validation |
+| **Debug logging** | None | ✅ Extensive | None |
+| **IPOPT fallback on timeout** | No | No | ✅ Yes |
+| **num_scenarios** | 5 | 5 | 50 |
+| **rel_tolerance** | 1e-5 | 1e-5 | 1e-6 |
+
+---
+
+## Recommendation
+
+> [!IMPORTANT]
+> **For production/research runs, use `snoglode-main-2-ori-record3v5`** — it is the most robust version:
+> - Won't crash on solver timeouts or unexpected termination conditions
+> - Has proper bounds validation that prevents silent numerical corruption
+> - Gracefully degrades with conservative fallback bounds instead of `RuntimeError`
+
+> [!TIP]
+> **However, note two config differences** in [stochastic_pid.py](file:///c:/Users/Administrator/OneDrive/Desktop/workspace2026/211%20choose%20version/snoglode-main-2-EFfixed/examples/stochastic_pid/stochastic_pid.py) that you may want to adjust:
+> 1. `num_scenarios = 50` (vs 5 in others) — change this to match your intended experiment
+> 2. `rel_tolerance = 1e-6` (vs 1e-5) — tighter tolerance means slower convergence; choose based on your accuracy needs
+
+> [!NOTE]
+> If you also need debug logging, the cleanest approach is to **merge the logging additions from ori-record3-log into ori-record3v5**. The logging changes are non-algorithmic and fully compatible — they only add read-only hooks around existing solver methods.

@@ -1,0 +1,6 @@
+Time (s),Nodes Explored,Pruned by,Bound Update,LB,UB,Rel. Gap,Abs. Gap,# Nodes
+7521.362,1, ,* L  ,0.97832495,inf,inf%,inf,2
+11786.586,2, , ,0.97832495,inf,inf%,inf,3
+16131.955,3, ,* L  ,0.97856606,inf,inf%,inf,4
+21834.23,4, , ,0.97856606,inf,inf%,inf,5
+26139.596,5, ,* L  ,0.97883506,inf,inf%,inf,6

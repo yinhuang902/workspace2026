@@ -3,7 +3,3 @@
 
 [Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=0, dual_bound=-5776540149.946902, primal_obj=-5776540149.946904, gap=1.9073486328125e-06
 [Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=2, dual_bound=-5849076197.126979, primal_obj=-5849076197.12698, gap=9.5367431640625e-07
-[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=6, dual_bound=-5715015050.0905485, primal_obj=-5715015050.090549, gap=9.5367431640625e-07
-[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=8, dual_bound=-5700613629.07822, primal_obj=-5700613629.078222, gap=1.9073486328125e-06
-[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=10, dual_bound=-5805663859.001272, primal_obj=-5805663859.001273, gap=9.5367431640625e-07
-[Iter 0] [MS] simplex_idx=3, verts=(3, 4, 6, 7), scenario=12, dual_bound=-5878224371.950761, primal_obj=-5878224371.950762, gap=9.5367431640625e-07

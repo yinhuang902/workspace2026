@@ -1,22 +1,8 @@
 # debug_timelimit.txt — subproblems that hit Gurobi TimeLimit
 # Format: [Iter N] [MS/CS TimeLimit] simplex_idx=..., verts=..., scenario=..., dual_bound=..., primal_obj=..., dual<primal=...
 
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=0, dual_bound=-1.3129988609661711, primal_obj=-1.3129988609661711, dual<primal=False
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=1, dual_bound=-1.5473215903906399, primal_obj=-1.5473215903906397, dual<primal=True
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=2, dual_bound=-1.4755193212866136, primal_obj=-1.4755193212866136, dual<primal=False
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=3, dual_bound=-1.0220581557094472, primal_obj=-1.0220581557094466, dual<primal=True
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=4, dual_bound=-1.3271149000155114, primal_obj=-1.327114900015511, dual<primal=True
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=5, dual_bound=-1.553807774806637, primal_obj=-1.553807774806637, dual<primal=False
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=6, dual_bound=-1.2698984065172596, primal_obj=-1.2698984065172596, dual<primal=False
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=7, dual_bound=-1.5525996340385406, primal_obj=-1.5525996340385408, dual<primal=False
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=8, dual_bound=-1.1540868569918703, primal_obj=-1.1540868569918705, dual<primal=False
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=9, dual_bound=-1.437035428559724, primal_obj=-1.4370354285597238, dual<primal=True
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=10, dual_bound=-1.3443505894230967, primal_obj=-1.3443505894230965, dual<primal=True
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=11, dual_bound=-1.18550316831317, primal_obj=-1.18550316831317, dual<primal=False
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=12, dual_bound=-1.4859583773111071, primal_obj=-1.4859583773111078, dual<primal=False
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=13, dual_bound=-1.3631814725077946, primal_obj=-1.3631814725077949, dual<primal=False
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=14, dual_bound=-1.334929552634277, primal_obj=-1.3349295526342766, dual<primal=True
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=15, dual_bound=-1.0984873273763223, primal_obj=-1.0984873273763218, dual<primal=True
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=16, dual_bound=-1.438377239245297, primal_obj=-1.438377239245297, dual<primal=False
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=17, dual_bound=-1.4516067469454792, primal_obj=-1.4516067469454799, dual<primal=False
-[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=19, dual_bound=-1.4403139167061398, primal_obj=-1.44031391670614, dual<primal=False
+[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=0, dual_bound=-1.3129989593162306, primal_obj=-1.3129989593162301, dual<primal=True
+[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=1, dual_bound=-1.5477175819908588, primal_obj=-1.5477175819908584, dual<primal=True
+[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=2, dual_bound=-1.4799151711606104, primal_obj=-1.4799151711606107, dual<primal=False
+[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=3, dual_bound=-1.0220581559122672, primal_obj=-1.022058155912267, dual<primal=True
+[Iter 0] [MS TimeLimit] simplex_idx=6, verts=(3, 4, 7, 8), scenario=4, dual_bound=-1.330154267712677, primal_obj=-1.3301542677126772, dual<primal=False
