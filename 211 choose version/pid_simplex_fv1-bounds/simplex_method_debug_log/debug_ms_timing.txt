@@ -1,9 +1,11 @@
 # debug_ms_timing.txt — NON-OPTIMAL MS (ms_on_tetra) solves only
 # Format: [Iter N] scenario=..., simplex_idx=..., verts=..., time=...s, status=..., dual_bound=..., primal_obj=...
 
-[Iter 0] scenario=0, simplex_idx=5, verts=(1, 3, 4, 5), time=0.0207s, status=infeasible, dual_bound=None, primal_obj=-3987546797.6424775
-[Iter 0] scenario=0, simplex_idx=6, verts=(0, 3, 4, 8), time=60.0100s, status=time_limit, dual_bound=-1.2286220596532649, primal_obj=-1.2286220596532647
-[Iter 0] scenario=1, simplex_idx=6, verts=(0, 3, 4, 8), time=60.0126s, status=time_limit, dual_bound=-1.5168155255976978, primal_obj=-1.5168155255976976
-[Iter 0] scenario=2, simplex_idx=6, verts=(0, 3, 4, 8), time=60.0079s, status=time_limit, dual_bound=-1.4272826203681404, primal_obj=-1.4272826203681401
-[Iter 0] scenario=3, simplex_idx=6, verts=(0, 3, 4, 8), time=60.0096s, status=time_limit, dual_bound=-1.187130085646387, primal_obj=-1.187130085646387
-[Iter 0] scenario=4, simplex_idx=6, verts=(0, 3, 4, 8), time=60.0114s, status=time_limit, dual_bound=-1.3515400876328303, primal_obj=-1.3515400876328303
+[Iter 0] scenario=0, simplex_idx=5, verts=(1, 3, 4, 5), time=0.0833s, status=infeasible, dual_bound=None, primal_obj=-2576070168.7349443
+[Iter 0] scenario=0, simplex_idx=6, verts=(0, 3, 4, 8), time=60.5079s, status=time_limit, dual_bound=-1.2286219675544585, primal_obj=-1.2286219675544585
+[Iter 0] scenario=1, simplex_idx=6, verts=(0, 3, 4, 8), time=60.0168s, status=time_limit, dual_bound=-1.516815524867548, primal_obj=-1.5168155248675481
+[Iter 0] scenario=2, simplex_idx=6, verts=(0, 3, 4, 8), time=60.5799s, status=time_limit, dual_bound=-1.4272827475617456, primal_obj=-1.427282747561746
+[Iter 0] scenario=3, simplex_idx=6, verts=(0, 3, 4, 8), time=60.6646s, status=time_limit, dual_bound=-1.187130085646387, primal_obj=-1.187130085646387
+[Iter 0] scenario=4, simplex_idx=6, verts=(0, 3, 4, 8), time=60.0381s, status=time_limit, dual_bound=-1.3515400856401214, primal_obj=-1.351540085640121
+[Iter 58] scenario=1, simplex_idx=111, verts=(1, 56, 57, 66), time=0.2190s, status=infeasible, dual_bound=None, primal_obj=-39655015.11265148
+[Iter 58] scenario=4, simplex_idx=111, verts=(1, 56, 57, 66), time=0.2833s, status=infeasible, dual_bound=None, primal_obj=-4.368116979236447e-10

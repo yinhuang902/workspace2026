@@ -1,0 +1,33 @@
+# debug_ef_solver.txt — EF solver details per iteration (dual: ipopt + gurobi)
+# Each iteration has per-solver lines + winner line
+
+--- [Iter 0] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.161s, ef_obj=0.9841670257415726, true_obj(per-scen)=0.984167047, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=True, UB_incumbent=0.984167047, LB_global_end=0.984138838, UB_global_end=0.984167047
+
+--- [Iter 1] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.106s, ef_obj=0.9841670252034732, true_obj(per-scen)=0.984167046, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=True, UB_incumbent=0.984167046, LB_global_end=0.984011642, UB_global_end=0.984167046
+
+--- [Iter 2] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.142s, ef_obj=0.9841671975905564, true_obj(per-scen)=0.984167219, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=False, UB_incumbent=0.984167046, LB_global_end=0.984003525, UB_global_end=0.984167046
+
+--- [Iter 3] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.529s, ef_obj=0.9841705443628838, true_obj(per-scen)=0.984170552, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=False, UB_incumbent=0.984167046, LB_global_end=0.984003570, UB_global_end=0.984167046
+
+--- [Iter 4] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.182s, ef_obj=0.9841705451223515, true_obj(per-scen)=0.984170553, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=False, UB_incumbent=0.984167046, LB_global_end=0.983994972, UB_global_end=0.984167046
+
+--- [Iter 5] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.307s, ef_obj=0.9841705458840841, true_obj(per-scen)=0.984170554, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=False, UB_incumbent=0.984167046, LB_global_end=0.984006668, UB_global_end=0.984167046
+

@@ -1,0 +1,3 @@
+# debug_q_timing.txt — NON-OPTIMAL Q-value (evaluate_Q_at) solves only
+# Format: [Iter N] scenario=..., point=..., time=...s, status=..., term=..., obj=...
+

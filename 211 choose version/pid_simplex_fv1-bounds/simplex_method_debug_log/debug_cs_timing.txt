@@ -1,3 +1,4 @@
 # debug_cs_timing.txt — NON-OPTIMAL c_s (Q-value) solves only
 # Format: [Iter N] scenario=..., simplex_idx=..., verts=..., time=...s, status=..., dual_bound=..., primal_obj=...
 
+[Iter 58] scenario=1, simplex_idx=111, verts=(1, 56, 57, 66), time=0.2376s, status=infeasible, dual_bound=None, primal_obj=148.576585089125

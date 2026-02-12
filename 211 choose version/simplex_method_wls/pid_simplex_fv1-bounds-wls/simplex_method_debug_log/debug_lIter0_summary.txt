@@ -1,0 +1,56 @@
+# debug_lIter0_summary.txt — Iteration 0 summary
+# Per-simplex: LB, avg dual bound, avg c_s Q-value, IPOPT result
+# Plus: current UB, UB source, next chosen simplex
+
+======================================================================
+[Iter 0] FULL SIMPLEX SUMMARY
+  Number of simplices: 6
+  Number of scenarios: 5
+
+  --- T0 (0, 2, 3, 4) ---
+    LB: 1.023823361 (per-scen)
+    Avg dual bound (ms): 1.023823361
+    Avg c_s point Q-value: 1.029604297 (per-scen), point=(np.float64(-6.0620065304541), np.float64(58.51782041696829), np.float64(0.8793115604388315))
+    Volume: 1.333333e+05
+  --- T1 (0, 1, 3, 4) ---
+    LB: 0.995534401 (per-scen)
+    Avg dual bound (ms): 0.995534401
+    Avg c_s point Q-value: 0.986724037 (per-scen), point=(np.float64(-9.845925697581922), np.float64(-79.71825282988846), np.float64(0.3325870844161896))
+    Volume: 1.333333e+05
+  --- T2 (3, 4, 5, 7) ---
+    LB: 1.026329228 (per-scen)
+    Avg dual bound (ms): 1.026329228
+    Avg c_s point Q-value: 1.043905090 (per-scen), point=(np.float64(9.077167782006544), np.float64(-49.92730762415967), np.float64(0.06494899495840553))
+    Volume: 1.333333e+05
+  --- T3 (3, 4, 6, 7) ---
+    LB: 1.001068719 (per-scen)
+    Avg dual bound (ms): 1.001068719
+    Avg c_s point Q-value: 0.997187262 (per-scen), point=(np.float64(9.973034807111855), np.float64(60.625967779860545), np.float64(1.0024382816169126))
+    Volume: 1.333333e+05
+  --- T4 (2, 3, 4, 6) ---
+    LB: 1.023669841 (per-scen)
+    Avg dual bound (ms): 1.023669841
+    Avg c_s point Q-value: 1.027969910 (per-scen), point=(np.float64(-0.29935078806133353), np.float64(53.909967708963336), np.float64(-0.010302061245718936))
+    Volume: 1.333333e+05
+  --- T5 (1, 3, 4, 5) ---
+    LB: 1.043635900 (per-scen)
+    Avg dual bound (ms): 1.043635900
+    Avg c_s point Q-value: 0.996912267 (per-scen), point=(np.float64(0.5494773303301398), np.float64(-64.47194271199646), np.float64(0.4584425949525386))
+    Volume: 1.333333e+05
+
+  --- IPOPT EF Result (selected LB simplex only) ---
+    Selected simplex: T1 (0, 1, 3, 4)
+    EF-IPOPT: ok=True, ef_obj(per-scen)=0.196833405, true_obj(per-scen)=0.984167047, status=ok, term=optimal, time=0.161s
+    EF-IPOPT K point: (-9.999891529588373, -99.99979183385918, 0.8142777652971412)
+    Barycentric coords: [0.000001, 0.504070, 0.000005, 0.495923]
+
+  --- Current UB ---
+    UB value: 0.984167047 (per-scen)
+    UB point: (-9.999891529588373, -99.99979183385918, 0.8142777652971412)
+    UB source: EF_ipopt
+
+  --- Next Chosen Simplex ---
+    Simplex: T1 (0, 1, 3, 4)
+    Scene: 3, source: c_s
+    New point: (-9.233467561678685, -98.4408518452537, 0.32994040845543465)
+======================================================================

@@ -1103,7 +1103,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
             if not active_mask.get(sid, False):
                 continue
             q = tet_quality(r["verts"])
-            r["quality"] = q       # 顺便把质量存进去，plot里也可以用
+            r["quality"] = q      
             if q < q_cut:
                 active_mask[sid] = False
                 bad_quality_count += 1
@@ -1467,7 +1467,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                     "K_ef": ef_iter_info["K_ef"],
                     "ef_obj": ef_iter_info["ef_obj"],
                     "true_obj": ef_iter_info["true_obj"],
-                    "ub_updated": ef_iter_info["ub_updated_by_ef"],
+                    "ub_updated": "",  # placeholder — filled after end-of-iter
                     "UB_incumbent": f"{UB_incumbent/S:.9f}",
                     # LB construction terms (from pre-split selected simplex)
                     "lb_simp_LB_sur": f"{lb_simp_rec['LB']:.6f}",
@@ -2014,7 +2014,8 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 _print_candidates_table(candidates_sorted, nodes, topN=10)
                 print()
 
-        # === Iter 0 summary log ===
+        # === Iter 0 summary log (deferred — UB section added after end-of-iter) ===
+        _i0_deferred = None
         if it == 0:
             try:
                 _i0_lines = []
@@ -2086,18 +2087,6 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 else:
                     _i0_lines.append(f"    EF-IPOPT: not available or failed")
 
-                # Current UB
-                _i0_lines.append("")
-                _i0_lines.append("  --- Current UB ---")
-                try:
-                    _ub_ps = f"{UB_incumbent/S:.9f}" if math.isfinite(UB_incumbent) else str(UB_incumbent)
-                except Exception:
-                    _ub_ps = "N/A"
-                _i0_lines.append(f"    UB value: {_ub_ps} (per-scen)")
-                _i0_lines.append(f"    UB point: {UB_node}")
-                _ub_src = ub_source_this_iter if ub_updated_this_iter else ub_source_current
-                _i0_lines.append(f"    UB source: {_ub_src}")
-
                 # Next chosen simplex
                 _i0_lines.append("")
                 _i0_lines.append("  --- Next Chosen Simplex ---")
@@ -2114,13 +2103,10 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 else:
                     _i0_lines.append(f"    No candidate chosen (collision or stop)")
 
-                _i0_lines.append("=" * 70)
-
-                with open(dbg_iter0_summary_path, "a", encoding="utf-8") as _fi0:
-                    _fi0.write("\n".join(_i0_lines) + "\n")
+                # UB section deferred — will be inserted after end-of-iter update
+                _i0_deferred = _i0_lines  # store partial lines
             except Exception as _e:
-                # Debug log must never crash the algorithm
-                print(f"[debug_lIter0_summary] WARNING: failed to write: {_e}")
+                print(f"[debug_lIter0_summary] WARNING: failed to build partial: {_e}")
 
         # ------------------------------------------------
 
@@ -2348,7 +2334,8 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
         LB_global_end = float(min(r["LB"] for r in per_tet_end))
         lb_simp_rec_end = min(per_tet_end, key=lambda r: r["LB"])
         
-        # === LB Split Diagnostic: compare parent vs children LBs ===
+        # === LB Split Diagnostic: compare parent vs children LBs (deferred — UB added after end-of-iter) ===
+        _diag_deferred = None
         if selected_rec_before_split is not None:
             parent_LB = float(selected_rec_before_split["LB"])
             parent_id = tuple(sorted(selected_rec_before_split["vert_idx"]))
@@ -2369,6 +2356,27 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
             _diag_lines.append(f"[Iter {it}] LB SPLIT DIAGNOSTIC")
             _diag_lines.append(f"  Selected (parent) simplex: {parent_id}")
             _diag_lines.append(f"  Parent LB: {parent_LB/S:.9f} (per-scen)")
+
+            # --- Parent avg constant cut (avg dual bound across scenarios) ---
+            _parent_c_scene = selected_rec_before_split.get("c_per_scene", [])
+            _parent_finite_c = [float(x) for x in _parent_c_scene if math.isfinite(float(x))]
+            if _parent_finite_c:
+                _parent_avg_cut = sum(_parent_finite_c) / S
+                _diag_lines.append(f"  Parent avg constant cut: {_parent_avg_cut:.9f} (per-scen)")
+            else:
+                _diag_lines.append(f"  Parent avg constant cut: N/A")
+
+            # --- Parent avg c_s Q-value ---
+            _parent_cs_pts = selected_rec_before_split.get("c_point_per_scene", [])
+            _parent_valid_cs = [pt for pt in _parent_cs_pts if pt is not None and all(math.isfinite(v) for v in pt)]
+            if _parent_valid_cs:
+                _parent_avg_cs_pt = tuple(np.mean(_parent_valid_cs, axis=0))
+                _parent_cs_q = 0.0
+                for _s in range(S):
+                    _parent_cs_q += evaluate_Q_at(base_bundles[_s], first_vars_list[_s], _parent_avg_cs_pt)
+                _diag_lines.append(f"  Parent avg c_s Q-value: {_parent_cs_q/S:.9f} (per-scen), point={_parent_avg_cs_pt}")
+            else:
+                _diag_lines.append(f"  Parent avg c_s Q-value: N/A (no valid c_s points)")
 
             # EF solution on this simplex (if available)
             _ef_raw = ef_iter_info.get("ef_obj")
@@ -2403,33 +2411,26 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                     child_lb = float(child_rec["LB"])
                     child_id = tuple(sorted(child_rec["vert_idx"]))
                     child_lbs.append(child_lb)
-                    _diag_lines.append(f"    T{new_idx} {child_id}: LB = {child_lb/S:.9f}")
+                    # Child avg constant cut
+                    _ch_c_scene = child_rec.get("c_per_scene", [])
+                    _ch_finite_c = [float(x) for x in _ch_c_scene if math.isfinite(float(x))]
+                    _ch_avg_cut_str = f"{sum(_ch_finite_c)/S:.9f}" if _ch_finite_c else "N/A"
+                    # Child avg c_s Q-value
+                    _ch_cs_pts = child_rec.get("c_point_per_scene", [])
+                    _ch_valid_cs = [pt for pt in _ch_cs_pts if pt is not None and all(math.isfinite(v) for v in pt)]
+                    if _ch_valid_cs:
+                        _ch_avg_cs_pt = tuple(np.mean(_ch_valid_cs, axis=0))
+                        _ch_cs_q = 0.0
+                        for _s in range(S):
+                            _ch_cs_q += evaluate_Q_at(base_bundles[_s], first_vars_list[_s], _ch_avg_cs_pt)
+                        _ch_cs_q_str = f"{_ch_cs_q/S:.9f}"
+                    else:
+                        _ch_cs_q_str = "N/A"
+                    _diag_lines.append(f"    T{new_idx} {child_id}: LB={child_lb/S:.9f}, avg_cut={_ch_avg_cut_str}, avg_cs_Q={_ch_cs_q_str}")
             
             new_global_min_id = tuple(sorted(lb_simp_rec_end["vert_idx"]))
             _diag_lines.append(f"  New global LB: {LB_global_end/S:.9f} (from T{lb_simp_rec_end['simplex_index']} {new_global_min_id})")
             _diag_lines.append(f"  Location: {location_str}")
-
-            # --- Avg CS point Q-value (true objective at mean of c_s solution points) ---
-            _cs_pts = lb_simp_rec.get("c_point_per_scene", [])
-            _valid_cs_pts = [pt for pt in _cs_pts if pt is not None and all(math.isfinite(v) for v in pt)]
-            if _valid_cs_pts:
-                _avg_cs_pt = tuple(np.mean(_valid_cs_pts, axis=0))
-                _cs_true_val = 0.0
-                for s in range(S):
-                    _cs_true_val += evaluate_Q_at(base_bundles[s], first_vars_list[s], _avg_cs_pt)
-                _diag_lines.append(f"  Avg CS point Q-value: {_cs_true_val/S:.9f} (per-scen), point={_avg_cs_pt}")
-            else:
-                _diag_lines.append(f"  Avg CS point Q-value: N/A (no valid c_s points)")
-
-            # --- Current UB info + simplex provenance ---
-            try:
-                _ub_ps = f"{UB_incumbent/S:.9f}" if math.isfinite(UB_incumbent) else str(UB_incumbent)
-            except Exception:
-                _ub_ps = "N/A"
-            _diag_lines.append(f"  Current UB: {_ub_ps} (per-scen)")
-            _diag_lines.append(f"  UB point: {UB_node}")
-            _diag_lines.append(f"  UB source: {ub_source_this_iter if ub_updated_this_iter else ub_source_current}")
-            _diag_lines.append(f"  UB simplex: {ub_simplex_id_this_iter if ub_updated_this_iter else ub_simplex_id_current}")
 
             # --- IPOPT EF solver status ---
             _ipopt_res = _ef_dual_results.get("ipopt", {})
@@ -2446,16 +2447,8 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
             else:
                 _diag_lines.append(f"  EF-IPOPT: not available")
 
-            _diag_lines.append("=" * 70)
-            
-            # Print to console
-            if verbose:
-                for line in _diag_lines:
-                    print(line)
-            
-            # Write to debug_lb_after_split.txt (append within this run)
-            with open(dbg_lb_split_path, "a", encoding="utf-8") as _fdiag:
-                _fdiag.write("\n".join(_diag_lines) + "\n\n")
+            # UB section deferred — will be appended after end-of-iter update
+            _diag_deferred = _diag_lines  # store partial lines
         
         # UB_global_end: generate candidates ONLY from NEW simplices
         # LB/UB per user definition: use incumbent logic (min with previous UB)
@@ -2597,7 +2590,52 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
         # LB/UB per user definition: update monotonic envelopes using end-of-iter values
         best_lb_ever = max(best_lb_ever, LB_global_end)
         best_ub_ever = min(best_ub_ever, UB_global_end)
-        
+
+        # === DEFERRED WRITES: complete and write Iter0 summary and LB split diagnostic ===
+        # Now UB_incumbent, UB_global_end, ub_source_end, ub_updated_end are all finalized.
+        _final_ub_src = ub_source_end if ub_updated_end else (ub_source_this_iter if ub_updated_this_iter else ub_source_current)
+        _final_ub_simplex = ub_simplex_id_this_iter if (ub_updated_end or ub_updated_this_iter) else ub_simplex_id_current
+        try:
+            _final_ub_ps = f"{UB_incumbent/S:.9f}" if math.isfinite(UB_incumbent) else str(UB_incumbent)
+        except Exception:
+            _final_ub_ps = "N/A"
+
+        # Fill deferred _ef_log_row placeholder
+        if _ef_log_row is not None:
+            _ef_log_row["ub_updated"] = bool(ub_updated_end or ub_updated_this_iter)
+
+        # --- Write deferred Iter0 summary ---
+        if _i0_deferred is not None:
+            try:
+                _i0_deferred.append("")
+                _i0_deferred.append("  --- Current UB (end-of-iter) ---")
+                _i0_deferred.append(f"    UB value: {_final_ub_ps} (per-scen)")
+                _i0_deferred.append(f"    UB point: {UB_node}")
+                _i0_deferred.append(f"    UB source: {_final_ub_src}")
+                _i0_deferred.append(f"    UB updated this iter: {ub_updated_end or ub_updated_this_iter}")
+                _i0_deferred.append("=" * 70)
+                with open(dbg_iter0_summary_path, "a", encoding="utf-8") as _fi0:
+                    _fi0.write("\n".join(_i0_deferred) + "\n")
+            except Exception as _e:
+                print(f"[debug_lIter0_summary] WARNING: failed to write: {_e}")
+
+        # --- Write deferred LB split diagnostic ---
+        if _diag_deferred is not None:
+            try:
+                _diag_deferred.append(f"  Current UB (end-of-iter): {_final_ub_ps} (per-scen)")
+                _diag_deferred.append(f"  UB point: {UB_node}")
+                _diag_deferred.append(f"  UB source: {_final_ub_src}")
+                _diag_deferred.append(f"  UB simplex: {_final_ub_simplex}")
+                _diag_deferred.append(f"  UB updated this iter: {ub_updated_end or ub_updated_this_iter}")
+                _diag_deferred.append("=" * 70)
+                if verbose:
+                    for line in _diag_deferred:
+                        print(line)
+                with open(dbg_lb_split_path, "a", encoding="utf-8") as _fdiag:
+                    _fdiag.write("\n".join(_diag_deferred) + "\n\n")
+            except Exception as _e:
+                print(f"[debug_lb_after_split] WARNING: failed to write: {_e}")
+
         # === Append current iteration to CSV (AFTER end-of-iter update) ===
         # LB/UB per user definition: use end-of-iter LB/UB (same as summary table)
         iter_time = iter_time_hist[-1]
@@ -2656,8 +2694,9 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                         f"true_obj(per-scen)={_s_true_ps}{_lb_str}\n"
                     )
                 _winner = ef_iter_info.get('solver_status', 'none').split(':')[0] if ef_iter_info.get('ef_ok') else 'none'
+                _overall_ub_updated = ub_updated_end or ub_updated_this_iter
                 _fef.write(
-                    f"  [winner] {_winner}, ub_updated={ef_iter_info.get('ub_updated_by_ef', False)}, "
+                    f"  [winner] {_winner}, ub_updated={_overall_ub_updated}, ub_source={_final_ub_src}, "
                     f"UB_incumbent={UB_incumbent/S:.9f}, "
                     f"LB_global_end={LB_global_end/S:.9f}, "
                     f"UB_global_end={UB_global_end/S:.9f}\n\n"
@@ -2691,11 +2730,11 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 "status": ef_iter_info.get("solver_status"),
                 "termination_condition": ef_iter_info.get("termination_condition"),
                 "solver_status": ef_iter_info.get("solver_status"),
-                "used_for_UB": ef_iter_info.get("ub_updated_by_ef", False),
+                "used_for_UB": bool(ub_updated_end or ub_updated_this_iter),
             }
 
             # UB info
-            ub_info = {"updated_this_iter": ub_updated_this_iter}
+            ub_info = {"updated_this_iter": bool(ub_updated_end or ub_updated_this_iter)}
 
             # LB simplex tracking
             # LB/UB per user definition: use pre-saved selected_simplex_id (saved BEFORE split)
