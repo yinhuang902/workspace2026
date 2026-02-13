@@ -273,8 +273,8 @@ if __name__ == '__main__':
     
     nonconvex_gurobi_lb = pyo.SolverFactory("gurobi")
     nonconvex_gurobi_lb.options["NonConvex"] = 2
-    nonconvex_gurobi_lb.options["MIPGap"] = 1e-1
-    nonconvex_gurobi_lb.options["TimeLimit"] = 15
+    nonconvex_gurobi_lb.options["MIPGap"] = 1e-3
+    nonconvex_gurobi_lb.options["TimeLimit"] = 60
     scenarios = [f"scen_{i}" for i in range(1,num_scenarios+1)]
 
     obbt_solver_opts = {
@@ -298,18 +298,22 @@ if __name__ == '__main__':
                          partition_strategy = sno.Midpoint)
     
     params.activate_verbose()
+    params._csv_log_path = os.path.join(os.getcwd(), 'pidsp_debug', 'iter_log.csv')
     # if (size==1): params.set_logging(fname = os.getcwd() + "/logs/stochastic_pid_log")
     # else: params.set_logging(fname = os.getcwd() + "/logs/stochastic_pid_log_parallel")
     if (rank==0): params.display()
 
     solver = sno.Solver(params)
+    solver.lower_bounder.K = 3              # more LG inner-loop iterations
+    solver.tree.cut_pool.max_cuts_per_scenario = 20  # more cuts retained per scenario
     # ef = solver.get_ef()
     # nonconvex_gurobi.solve(ef,
     #                        tee = True)
     # quit()
     solver.solve(max_iter=1000,
                  rel_tolerance = 1e-4,
-                 time_limit = 60*15)
+                 abs_tolerance = 1e-8,
+                 time_limit = 60*60*3)
 
     if (rank==0):
         print("\n====================================================================")

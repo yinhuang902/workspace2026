@@ -766,11 +766,13 @@ class Subproblems():
                                             warmstart = False)
             model.del_component(model._obbt)
             
-            # set new values
+            # set new values (guard against None from solver timeout)
             for var in variables:
                 new_lb, new_ub = variable_ranges[var]
-                var.lb = new_lb
-                var.ub = new_ub
+                if new_lb is not None:
+                    var.lb = new_lb
+                if new_ub is not None:
+                    var.ub = new_ub
 
             # perform again and evaluate the tolerance
             tol_met = False
@@ -784,18 +786,25 @@ class Subproblems():
                                                     warmstart = False)
                 model.del_component(model._obbt)
                 
-                # set new bounds
+                # set new bounds (guard against None from solver timeout)
                 for var in variables:
                     new_lb, new_ub = variable_ranges_update[var]
-                    var.lb = new_lb
-                    var.ub = new_ub
+                    if new_lb is not None:
+                        var.lb = new_lb
+                    if new_ub is not None:
+                        var.ub = new_ub
                 
                 # check if we have met the tolerance for all of the bounds
                 tol_met = True
                 for var in variables:
                     old_lb, old_ub = variable_ranges[var]
                     new_lb, new_ub = variable_ranges_update[var]
-                    if (old_lb - new_lb > tol) or (old_ub - new_ub > tol): 
+                    # skip tolerance check if either bound is None (solver timed out)
+                    old_lb_safe = old_lb if old_lb is not None else (new_lb if new_lb is not None else 0.0)
+                    new_lb_safe = new_lb if new_lb is not None else old_lb_safe
+                    old_ub_safe = old_ub if old_ub is not None else (new_ub if new_ub is not None else 0.0)
+                    new_ub_safe = new_ub if new_ub is not None else old_ub_safe
+                    if (old_lb_safe - new_lb_safe > tol) or (old_ub_safe - new_ub_safe > tol): 
                         tol_met = False
                         variable_ranges = variable_ranges_update
                         break
@@ -877,6 +886,12 @@ class Subproblems():
                 var_domain, var_id, _ = self.var_to_data[var]
                 lb_best = node.state[var_domain][var_id].lb
                 ub_best = node.state[var_domain][var_id].ub
+
+                # Guard against None bounds from solver timeout
+                if lb_fbbt is None: lb_fbbt = lb_best
+                if ub_fbbt is None: ub_fbbt = ub_best
+                if lb_obbt is None: lb_obbt = lb_best
+                if ub_obbt is None: ub_obbt = ub_best
 
                 node.state[var_domain][var_id].lb = max(lb_fbbt, lb_obbt, lb_best)
                 node.state[var_domain][var_id].ub = min(ub_fbbt, ub_obbt, ub_best)
