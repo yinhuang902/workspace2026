@@ -41,9 +41,9 @@ def build_pid_model(T=15, h=0.75, scen=None, weights=(10.0, 0.01),
     # Note: test_ms_dae_model.py uses hardcoded bounds, we keep flexibility here but default to same
     bx = bounds.get("x",  (-2.5, 2.5))
     bu = bounds.get("u",  (-5.0, 5.0))
-    bKp= bounds.get("Kp", (-1, 0))      # Updated to match test script
-    bKi= bounds.get("Ki", (-101, -99))  # Updated to match test script
-    bKd= bounds.get("Kd", (0, 1))       # Updated to match test script
+    bKp= bounds.get("Kp", (-10, 10))      # Updated to match test script
+    bKi= bounds.get("Ki", (-100, 100))  # Updated to match test script
+    bKd= bounds.get("Kd", (-100, 100))       # Updated to match test script
     be = bounds.get("e",  (None, None))
     bI = bounds.get("I",  (None, None))
 

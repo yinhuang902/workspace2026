@@ -1,3 +1,42 @@
 
 
-想在simplex method中加入snog的ub计算的版本，但是不知为何好像在5场景还是从56%开始，并且10场景运行6分钟会出现负数gap
+我想知道我的算法逻辑：目前这个版本的代码每一轮会选择UB所在的simplex来分裂，那么新的UB候选就永远会在最初选定的单形中，那么我们会永远把这个单形分割下去，越来越小。但我观察日志以后发现当前选定的simplex volumn出现过变大，这是怎么回事
+
+I'd like to understand my algorithm logic: In the current version of the code, each round selects the simplex containing the UB for splitting. Therefore, new UB candidates will always be within the initially selected simplex, leading to an indefinite splitting of this simplex, making it smaller and smaller. However, after observing the logs, I noticed that the currently selected simplex volume has increased at times. What could be causing this?
+
+我不同意你的观点，EF解和平均ms点都是在每一轮的当前选定的simplex中计算的，怎么可能跳到当前选定的simplex之外呢
+
+
+
+
+
+
+
+
+
+
+simp1e1sc10  22784302 7h
+simp 1e3sc10  22784326 7h
+snog 1e1sc10   22784282 2d
+snog 1e3sc10    22784278 2d
+
+
+
+
+sbatch run_app_7h.sbatch
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
