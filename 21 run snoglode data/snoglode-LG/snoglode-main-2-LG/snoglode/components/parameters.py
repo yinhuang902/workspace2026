@@ -82,6 +82,7 @@ class SolverParameters():
         self._logname = "log"
         self._loglevel = "INFO" # "DEBUG"
         self.inherit_solutions_from_parent(True)
+        self._csv_log_path = None  # path to CSV iteration log (None = disabled)
 
 
     def guarantee_global_convergence(self) -> None:

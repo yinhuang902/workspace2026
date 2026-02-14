@@ -9,6 +9,7 @@ from typing import Tuple, Optional
 import pyomo.environ as pyo
 from pyomo.opt import TerminationCondition, SolverStatus
 from pyomo.contrib.alternative_solutions.aos_utils import get_active_objective
+import time as _time
 
 # suppress warnings when loading infeasible models
 import logging
@@ -462,13 +463,15 @@ class LGLowerBounder(AbstractLowerBounder):
         """
         super().__init__(solver = solver, 
                          inherit_solutions = inherit_solutions)
-        self.K = 10              # Fixed number of inner-loop iterations
+        self.K = 5              # Fixed number of inner-loop iterations
         self._cut_signatures = set()
         self.initial_ub_estimate = initial_ub_estimate
         # Appendix step-size parameters
         self.alpha_init = 2.0    # alpha^0 in (0, 2]
         self.alpha_min = 1e-6    # floor for alpha halving
         self.improvement_tol = 1e-6  # zLB improvement tolerance
+        self._constant_cut_nodes = set()  # Cache: node IDs with constant cuts already computed
+        self._iter_timing = {}  # Populated per LG solve for debug_LG_runtime.txt
     
     # ------------------------------------------------------------------
     # Subproblem evaluation helpers (unchanged from previous version)
@@ -489,17 +492,18 @@ class LGLowerBounder(AbstractLowerBounder):
                 model.solutions.load_from(results)
             except:
                 return None, None, "optimal_load_failed"
-            # For valid LG cuts, v_val must be a LOWER BOUND on the
-            # subproblem objective.  The primal incumbent is an upper bound
-            # when MIPGap > 0; use the solver's dual bound instead.
+            # For valid LG cuts, v_val must be a PROVEN LOWER BOUND.
+            # The primal incumbent is an upper bound when MIPGap > 0;
+            # only use the solver's dual bound.
             dual_bound = self.retrieve_solver_lb(results)
-            primal_obj = pyo.value(get_active_objective(model))
-            if dual_bound is not None and math.isfinite(dual_bound):
-                cut_val = dual_bound
-            else:
-                cut_val = primal_obj
             y_vals = self._extract_y_vals(model, subproblem_name, subproblems)
-            return cut_val, y_vals, "optimal"
+            if dual_bound is not None and math.isfinite(dual_bound):
+                return dual_bound, y_vals, "optimal"
+            else:
+                if rank == 0:
+                    print(f"LG: scenario {subproblem_name} optimal but dual bound "
+                          f"unavailable; skipping cut (no primal fallback).")
+                return None, y_vals, "optimal_no_dual_bound"
         
         if term_cond in [TerminationCondition.maxTimeLimit, 
                          TerminationCondition.maxIterations,
@@ -533,6 +537,89 @@ class LGLowerBounder(AbstractLowerBounder):
                 return None
             y_vals[var_id] = val
         return y_vals
+
+    # ------------------------------------------------------------------
+    # CZ-style constant cuts (mu=0)
+    # ------------------------------------------------------------------
+    def _compute_constant_cuts(self, node, subproblems, node_var_bounds, all_var_ids):
+        """
+        Before the LG inner loop, compute a CZ-style constant cut (mu=0)
+        for every scenario under the CURRENT node bounds.
+
+        This guarantees every scenario has at least one cut in the RMP,
+        eliminating the conservative fallback when LG subproblem solves
+        produce None/non-finite dual bounds.
+
+        Called once per node.id (cached).
+        """
+        if node.id in self._constant_cut_nodes:
+            return  # already computed for this node
+
+        mu_zero = {vid: 0.0 for vid in all_var_ids}
+
+        # Set mu=0 on all local scenario models and solve
+        local_const_cuts = {}  # scenario_name -> v_val (finite dual bound)
+        local_failed = []      # scenario names that failed
+
+        for subproblem_name in subproblems.names:
+            model = subproblems.model[subproblem_name]
+
+            # Set mu = 0 on the Lagrangian param
+            for vid in model.lg_mu:
+                model.lg_mu[vid].set_value(0.0)
+
+            # Relax binaries/integers if configured
+            if subproblems.relax_binaries:
+                subproblems.relax_all_binaries()
+            if subproblems.relax_integers:
+                subproblems.relax_all_integers()
+
+            # Solve
+            results = self.opt.solve(model, load_solutions=False, tee=False)
+
+            try:
+                dual_bound, y_vals, reason = self._evaluate_lg_subproblem(
+                    results, model, subproblem_name, subproblems)
+            except Exception as e:
+                dual_bound, y_vals, reason = None, None, f"exception_{e}"
+
+            if dual_bound is not None and math.isfinite(dual_bound):
+                local_const_cuts[subproblem_name] = dual_bound
+            else:
+                local_failed.append(subproblem_name)
+
+        # Gather results to rank 0
+        all_local_cuts = MPI.COMM_WORLD.gather(local_const_cuts, root=0)
+        all_local_failed = MPI.COMM_WORLD.gather(local_failed, root=0)
+
+        if rank == 0:
+            global_cuts = {}
+            global_failed = []
+            for d in all_local_cuts:
+                global_cuts.update(d)
+            for fl in all_local_failed:
+                global_failed.extend(fl)
+
+            # Store in cut pool
+            if hasattr(self, 'cut_pool') and self.cut_pool is not None:
+                for sname, v_val in global_cuts.items():
+                    self.cut_pool.add_or_replace_constant_cut(
+                        node_id=node.id,
+                        scenario_name=sname,
+                        mu_vector=cp.deepcopy(mu_zero),
+                        v_val=v_val,
+                        y_bounds=node_var_bounds,
+                        iteration=-1)
+
+            # Diagnostics
+            total = len(global_cuts) + len(global_failed)
+            print(f"CZ CONST CUTS [node {node.id}]: "
+                  f"{len(global_cuts)}/{total} scenarios got finite v_val")
+            if global_failed:
+                print(f"CZ CONST CUTS [node {node.id}]: "
+                      f"MISSING scenarios: {global_failed}")
+
+        self._constant_cut_nodes.add(node.id)
 
     # ------------------------------------------------------------------
     # lam -> mu  incidence mapping (chain graph)
@@ -671,6 +758,20 @@ class LGLowerBounder(AbstractLowerBounder):
         prob_by_scenario_early = MPI.COMM_WORLD.bcast(prob_by_scenario_early, root=0)
 
         # ==================================================================
+        #       CZ CONSTANT CUTS  (mu=0, once per node)
+        # ==================================================================
+        _t_cz_start = _time.perf_counter()
+        self._compute_constant_cuts(node, subproblems, node_var_bounds, all_var_ids)
+        _t_cz_end = _time.perf_counter()
+
+        # Init timing accumulators for this LG solve
+        _timing = {
+            'cz_total': _t_cz_end - _t_cz_start,
+            'inner_loop': {},       # k -> {'scenario_solves': {sname: dt}, 'mpi_gather': dt}
+            'rmp_total': 0.0,
+        }
+
+        # ==================================================================
         #                       INNER  LOOP
         # ==================================================================
         for k in range(self.K):
@@ -685,6 +786,7 @@ class LGLowerBounder(AbstractLowerBounder):
             # (3) Scenario solves -- FULLY INDEPENDENT -------------------------
             local_results = {}   # name -> (dual_bound, y_vals)
             local_reason  = {}   # name -> str
+            _k_scenario_times = {}  # scenario -> solve time
 
             for subproblem_name in subproblems.names:
                 model = subproblems.model[subproblem_name]
@@ -699,6 +801,7 @@ class LGLowerBounder(AbstractLowerBounder):
                 if subproblems.relax_integers:
                     subproblems.relax_all_integers()
 
+                _t_sc_start = _time.perf_counter()
                 results = self.opt.solve(model, load_solutions=False, tee=False)
 
                 try:
@@ -706,13 +809,28 @@ class LGLowerBounder(AbstractLowerBounder):
                         results, model, subproblem_name, subproblems)
                 except Exception as e:
                     dual_bound, y_vals, reason = None, None, f"exception_{e}"
+                _t_sc_end = _time.perf_counter()
+                _k_scenario_times[subproblem_name] = _t_sc_end - _t_sc_start
 
                 local_results[subproblem_name] = (dual_bound, y_vals)
                 local_reason[subproblem_name]  = reason
 
             # (4) Gather to rank 0 (AFTER all local solves) -------------------
+            _t_gather_start = _time.perf_counter()
             all_local_results = MPI.COMM_WORLD.gather(local_results, root=0)
             all_local_reasons = MPI.COMM_WORLD.gather(local_reason,  root=0)
+            all_k_scenario_times = MPI.COMM_WORLD.gather(_k_scenario_times, root=0)
+            _t_gather_end = _time.perf_counter()
+
+            # Collect timing for this k
+            if rank == 0:
+                merged_sc_times = {}
+                for d in all_k_scenario_times:
+                    merged_sc_times.update(d)
+                _timing['inner_loop'][k] = {
+                    'scenario_solves': merged_sc_times,
+                    'mpi_gather': _t_gather_end - _t_gather_start,
+                }
 
             node_infeasible     = False
             global_results      = {}
@@ -869,6 +987,7 @@ class LGLowerBounder(AbstractLowerBounder):
         # ==================================================================
         #            END INNER LOOP  --  Solve RMP on Rank 0
         # ==================================================================
+        _t_rmp_start = _time.perf_counter()
         rmp_obj = None
         rmp_feasible = False
         use_conservative_lb = False
@@ -892,8 +1011,12 @@ class LGLowerBounder(AbstractLowerBounder):
                 pool_cuts = self.cut_pool.get_cuts_for_rmp(
                     node_var_bounds, all_scenario_names)
                 all_cuts.extend(pool_cuts)
+                # Include CZ constant cuts for this node
+                const_cuts = self.cut_pool.get_constant_cuts_for_node(node.id)
+                all_cuts.extend(const_cuts)
                 print(f"DEBUG RMP: Node {node.id}, new={len(new_cuts)}, "
-                      f"pool={len(pool_cuts)}, total={len(all_cuts)}")
+                      f"pool={len(pool_cuts)}, const={len(const_cuts)}, "
+                      f"total={len(all_cuts)}")
 
             cut_count = {s: 0 for s in all_scenario_names}
             for (s_name, _, _) in all_cuts:
@@ -939,6 +1062,12 @@ class LGLowerBounder(AbstractLowerBounder):
         else:
             node.lb_problem.is_infeasible()
             node.ub_problem.is_infeasible()
+
+        _t_rmp_end = _time.perf_counter()
+        _timing['rmp_total'] = _t_rmp_end - _t_rmp_start
+
+        # Export timing data for debug_LG_runtime.txt
+        self._iter_timing = _timing
 
 
     def _solve_rmp(self, node, subproblems, cuts,

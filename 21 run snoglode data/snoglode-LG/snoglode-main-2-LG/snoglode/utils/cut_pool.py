@@ -150,6 +150,49 @@ class CutPool:
         self._cut_count_by_scenario: Dict[str, int] = {}
         self._cut_signatures: set = set()  # For duplicate detection
         self._duplicates_skipped: int = 0  # Counter for diagnostics
+        # Constant cuts (mu=0, CZ-style) stored per (node_id, scenario)
+        self._constant_cuts: Dict[Tuple[int, str], LagrangeanCut] = {}
+    
+    # ---- Constant (CZ-style) cut management --------------------------------
+
+    def add_or_replace_constant_cut(self,
+                                     node_id: int,
+                                     scenario_name: str,
+                                     mu_vector: Dict[str, float],
+                                     v_val: float,
+                                     y_bounds: Dict[str, Tuple[float, float]],
+                                     iteration: int = -1) -> None:
+        """
+        Store a constant cut (mu=0) for a given node and scenario.
+        Overwrites any previous constant cut for the same (node_id, scenario).
+        
+        These cuts are kept separate from the main pool to avoid
+        polluting the pruning / deduplication logic.
+        """
+        cut = LagrangeanCut(
+            scenario_name=scenario_name,
+            mu_vector=copy.deepcopy(mu_vector),
+            v_val=v_val,
+            iteration=iteration,
+            node_id=node_id,
+            y_bounds=copy.deepcopy(y_bounds),
+            is_global=(node_id == 0)
+        )
+        self._constant_cuts[(node_id, scenario_name)] = cut
+
+    def get_constant_cuts_for_node(self,
+                                    node_id: int) -> List[Tuple[str, Dict[str, float], float]]:
+        """
+        Return all constant cuts for a given node_id in RMP-ready format.
+        
+        Constant cuts are always valid for the node they were computed on
+        (same y_bounds), so no domain check is needed.
+        """
+        result = []
+        for (nid, sname), cut in self._constant_cuts.items():
+            if nid == node_id:
+                result.append(cut.to_constraint_data())
+        return result
     
     def add_cut(self, cut: LagrangeanCut) -> bool:
         """

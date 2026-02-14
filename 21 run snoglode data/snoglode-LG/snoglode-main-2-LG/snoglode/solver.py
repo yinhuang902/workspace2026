@@ -17,7 +17,7 @@ import snoglode.utils.MPI as MPI
 rank = MPI.COMM_WORLD.Get_rank()
 size = MPI.COMM_WORLD.Get_size()
 
-import time, math
+import time, math, os, csv
 import pyomo.environ as pyo
 
 class Solver():
@@ -126,6 +126,12 @@ class Solver():
         # while we have not met any termination conditions, proceed through tree.
         while (not self.tree.converged(self.runtime)) and (self.iteration <= max_iter):
 
+            # Reset per-iteration timing attributes
+            self._t_bounds_tightening = 0.0
+            self._t_lb_total = 0.0
+            self._t_cg = 0.0
+            self._t_ub = 0.0
+
             # grab a node & perform any preprocessing
             current_node, current_node_feasible = self.dispatch_node_selection()
 
@@ -136,10 +142,19 @@ class Solver():
             bnb_result = self.dispatch_bnb(current_node)
             
             # update terminal, logs, plotter, etc.
+            self._current_node = current_node
             self.dispatch_updates(bnb_result)
         
         # write log summary when termination conditions met
         self.logger.complete()
+        # Close debug timing file
+        if rank == 0 and self._debug_runtime_file is not None:
+            self._debug_runtime_file.close()
+            self._debug_runtime_file = None
+        # Close CSV log file
+        if rank == 0 and self._csv_f is not None:
+            self._csv_f.close()
+            self._csv_f = None
 
 
     def dispatch_setup(self,
@@ -180,6 +195,40 @@ class Solver():
         self.runtime = 0
         self.iteration = 0
 
+        # Open debug_LG_runtime.txt (overwrite) for timing instrumentation
+        self._debug_runtime_file = None
+        if rank == 0:
+            debug_dir = os.path.join(os.getcwd(), 'pidsp_debug')
+            os.makedirs(debug_dir, exist_ok=True)
+            self._debug_runtime_file = open(
+                os.path.join(debug_dir, 'debug_LG_runtime.txt'), 'w')
+            self._debug_runtime_file.write(
+                'debug_LG_runtime.txt - LG per-iteration timing breakdown\n')
+            self._debug_runtime_file.write('=' * 70 + '\n\n')
+
+        # Open CSV iteration log if configured
+        self._csv_f = None
+        self._csv_w = None
+        self._best_lb_ever = float('-inf')
+        self._best_ub_ever = float('inf')
+        csv_path = getattr(self._params, '_csv_log_path', None)
+        if rank == 0 and csv_path is not None:
+            csv_dir = os.path.dirname(csv_path)
+            if csv_dir:
+                os.makedirs(csv_dir, exist_ok=True)
+            self._csv_f = open(csv_path, 'w', newline='')
+            self._csv_w = csv.writer(self._csv_f)
+            self._csv_w.writerow([
+                'time_sec', 'iter', 'nodes_explored', 'current_node_id',
+                'n_open_nodes', 'lb_global_min_open', 'ub_global_incumbent',
+                'rel_gap_current', 'abs_gap_current',
+                'current_node_lb', 'parent_node_lb',
+                'best_lb_ever', 'best_ub_ever',
+                'rel_gap_best_ever', 'abs_gap_best_ever',
+                'cz_const_ok_count', 'cz_const_total',
+            ])
+            self._csv_f.flush()
+
         MPI.COMM_WORLD.barrier() # ensures timing is synced
         self.start_time = time.perf_counter() # start time marker
         self.logger.alg_start(self.start_time)
@@ -205,7 +254,9 @@ class Solver():
                                         set_second_stage = bounds_tightening)
         
         # tighten bounds & sync across all existing subproblems
+        _t_bt = time.perf_counter()
         bounds_feasible = self.subproblems.tighten_and_sync_bounds(node)
+        self._t_bounds_tightening = time.perf_counter() - _t_bt
         return node, (node_feasible and bounds_feasible)
 
     
@@ -281,6 +332,14 @@ class Solver():
         # write to log
         self.logger.update()
 
+        # Flush per-iteration timing to debug_LG_runtime.txt
+        if rank == 0 and self._debug_runtime_file is not None:
+            self._write_debug_timing()
+
+        # Write CSV row
+        if rank == 0 and self._csv_w is not None:
+            self._write_csv_row()
+
 
     def dispatch_lb_solve(self,
                           current_node: Node) -> None:
@@ -292,9 +351,11 @@ class Solver():
         """
         # here, we solve all of the models associated with this subproblem.
         self.logger.lb_start()
+        _t_lb = time.perf_counter()
         self.lower_bounder.solve(subproblems = self.subproblems,
                                  node = current_node,
                                  tree_ub = self.tree.metrics.ub)
+        self._t_lb_total = time.perf_counter() - _t_lb
         self.logger.lb_stop()
         
         # we need to wait for all LB problems at the other subproblems to find obj / feasibility
@@ -321,9 +382,11 @@ class Solver():
                     
                 # generate a candidate
                 self.logger.cg_start()
+                _t_cg = time.perf_counter()
                 candidate_found, candidate_solution, candidate_objective = \
                     self.upper_bounder.candidate_solution_finder.generate(node = current_node,
                                                                         subproblems = self.subproblems)
+                self._t_cg = time.perf_counter() - _t_cg
                 self.logger.cg_stop()
 
                 # if we found a candidate & we need to solve for globally optimal subproblem specific vars
@@ -332,9 +395,11 @@ class Solver():
                     # if we solve ub, fix to candidate and solve subproblems again.
                     if (self.solve_ub):
                         self.logger.ub_start()
+                        _t_ub = time.perf_counter()
                         self.upper_bounder.solve(subproblems = self.subproblems,
                                                  node = current_node,
                                                  candidate_solution = candidate_solution)
+                        self._t_ub = time.perf_counter() - _t_ub
                         self.logger.ub_stop()
                     
                     # otw, the candidate solution is representative of our ub feasible solution
@@ -400,6 +465,136 @@ class Solver():
     
         # otw all feasibility have passed, return True
         else: return True
+
+
+    def _write_debug_timing(self):
+        """Write per-iteration timing breakdown to debug_LG_runtime.txt."""
+        f = self._debug_runtime_file
+        if f is None:
+            return
+
+        f.write(f'ITERATION {self.iteration}\n')
+        f.write('-' * 60 + '\n')
+
+        total_time = (
+            self._t_bounds_tightening + self._t_lb_total
+            + self._t_cg + self._t_ub
+        )
+        if total_time <= 0:
+            total_time = 1e-12  # avoid div-by-zero
+
+        def pct(v):
+            return f'{v/total_time*100:.1f}%'
+
+        # 1. Bounds Tightening
+        bt = self._t_bounds_tightening
+        f.write(f'  [Bounds Tightening]  {bt:.4f}s ({pct(bt)})\n')
+
+        # 2-4. LG sub-components (CZ, inner loop, RMP)
+        lg_timing = getattr(self.lower_bounder, '_iter_timing', {})
+        cz = lg_timing.get('cz_total', 0.0)
+        rmp = lg_timing.get('rmp_total', 0.0)
+        inner = lg_timing.get('inner_loop', {})
+
+        f.write(f'  [CZ Constant Cuts]   {cz:.4f}s ({pct(cz)})\n')
+
+        inner_total = 0.0
+        for k in sorted(inner.keys()):
+            kd = inner[k]
+            sc_times = kd.get('scenario_solves', {})
+            k_sum = sum(sc_times.values())
+            inner_total += k_sum
+            f.write(f'  [Inner Loop k={k}]    {k_sum:.4f}s ({pct(k_sum)})\n')
+            for sname in sorted(sc_times.keys()):
+                f.write(f'      {sname}: {sc_times[sname]:.4f}s\n')
+
+        f.write(f'  [RMP Solve]          {rmp:.4f}s ({pct(rmp)})\n')
+
+        # 5. Candidate Generation
+        cg = self._t_cg
+        f.write(f'  [Candidate Gen]      {cg:.4f}s ({pct(cg)})\n')
+
+        # 6. UB Solve
+        ub = self._t_ub
+        f.write(f'  [UB Solve]           {ub:.4f}s ({pct(ub)})\n')
+
+        # Summary
+        f.write(f'  TOTAL (wall): {total_time:.4f}s\n')
+        f.write(f'  Breakdown: BT={pct(bt)}  CZ={pct(cz)}  '
+                f'InnerLoop={pct(inner_total)}  RMP={pct(rmp)}  '
+                f'CG={pct(cg)}  UB={pct(ub)}\n')
+        f.write('\n')
+        f.flush()
+
+    
+    def _write_csv_row(self):
+        """Write one CSV row with all LB variant columns."""
+        node = getattr(self, '_current_node', None)
+        m = self.tree.metrics
+
+        # Update best-ever trackers
+        lb_global = m.lb
+        ub_global = m.ub
+        if math.isfinite(lb_global):
+            self._best_lb_ever = max(self._best_lb_ever, lb_global)
+        if math.isfinite(ub_global):
+            self._best_ub_ever = min(self._best_ub_ever, ub_global)
+
+        # Current node info
+        node_id = node.id if node else float('nan')
+        cur_node_lb = float('nan')
+        parent_lb = float('nan')
+        if node:
+            lbp = getattr(node, 'lb_problem', None)
+            if lbp and hasattr(lbp, 'objective') and lbp.objective is not None:
+                cur_node_lb = lbp.objective
+            parent = getattr(node, 'parent', None)
+            if parent:
+                plbp = getattr(parent, 'lb_problem', None)
+                if plbp and hasattr(plbp, 'objective') and plbp.objective is not None:
+                    parent_lb = plbp.objective
+
+        # Best-ever gap
+        blb = self._best_lb_ever
+        bub = self._best_ub_ever
+        if math.isfinite(blb) and math.isfinite(bub) and abs(bub) > 1e-30:
+            rel_gap_best = (bub - blb) / abs(bub)
+            abs_gap_best = bub - blb
+        else:
+            rel_gap_best = float('nan')
+            abs_gap_best = float('nan')
+
+        # CZ constant-cut info
+        cz_ok = float('nan')
+        cz_total = float('nan')
+        cp = getattr(self.lower_bounder, 'cut_pool', None)
+        if cp and node:
+            cc = getattr(cp, '_constant_cuts', {})
+            node_cc = [(nid, s) for (nid, s) in cc if nid == node.id]
+            if node_cc:
+                cz_ok = len(node_cc)
+                cz_total = len(self.subproblems.all_names)
+
+        self._csv_w.writerow([
+            round(self.runtime, 4),
+            self.iteration,
+            m.nodes.explored,
+            node_id,
+            self.tree.n_nodes(),
+            lb_global,
+            ub_global,
+            m.relative_gap,
+            m.absolute_gap,
+            cur_node_lb,
+            parent_lb,
+            blb if math.isfinite(blb) else float('nan'),
+            bub if math.isfinite(bub) else float('nan'),
+            rel_gap_best,
+            abs_gap_best,
+            cz_ok,
+            cz_total,
+        ])
+        self._csv_f.flush()
 
     
     def get_ef(self) -> pyo.ConcreteModel:
