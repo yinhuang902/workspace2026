@@ -1,0 +1,23 @@
+# debug_ef_solver.txt — EF solver details per iteration (dual: ipopt + gurobi)
+# Each iteration has per-solver lines + winner line
+
+--- [Iter 0] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.021s, ef_obj=-108390.00259008261, true_obj(per-scen)=-108390.002590083, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=True, UB_incumbent=-108390.002590083, LB_global_end=-115261.111111111, UB_global_end=-108390.002590083
+
+--- [Iter 1] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.021s, ef_obj=-108390.00259008259, true_obj(per-scen)=-108390.002590083, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=False, UB_incumbent=-108390.002590083, LB_global_end=-115261.111111111, UB_global_end=-108390.002590083
+
+--- [Iter 2] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.022s, ef_obj=-108390.00259008259, true_obj(per-scen)=-108390.002590083, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=False, UB_incumbent=-108390.002590083, LB_global_end=-115261.111111111, UB_global_end=-108390.002590083
+
+--- [Iter 3] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.028s, ef_obj=-108390.00259008008, true_obj(per-scen)=-108390.002590080, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=False, UB_incumbent=-108390.002590083, LB_global_end=-115261.111111111, UB_global_end=-108390.002590083
+

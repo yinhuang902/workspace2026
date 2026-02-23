@@ -1,0 +1,1049 @@
+﻿======================================================================
+  Farmer Regression Test ù mode=SMOKE
+======================================================================
+  Results dir:     C:\Users\pc\Desktop\GitWorkspace2026\219_simplex_fv\pid_simplex_fv\results\farmer_smoke
+  Random seed:     42
+  Scenarios:       ['good', 'fair', 'bad']
+  target_nodes:    120
+  gap_stop_tol:    1e-08
+  time_limit:      None (unlimited)
+  enable_ef_ub:    True
+  ef_time_ub:      30.0
+  Known optimal:   -108390.0
+======================================================================
+
+[1] Building farmer scenario models...
+    3 scenarios built in 0.00s
+    First-stage dim: 3
+      var[0] = x[wheat], bounds=[0, 500]
+      var[1] = x[corn], bounds=[0, 500]
+      var[2] = x[beets], bounds=[0, 500]
+
+[2] Building solver bundles (BaseBundle + MSBundle)...
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2689754
+Academic license 2689754 - for non-commercial use only - registered to yi___@math.ubc.ca
+Set parameter MIPGap to value 1e-06
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 30
+Set parameter MIPGap to value 1e-06
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 30
+Set parameter MIPGap to value 1e-06
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 30
+    Done in 1.52s
+
+[3] Running simplex algorithm...
+----------------------------------------------------------------------
+[BaseBundle.eval_at] Infeasible/Error for K=(0.0, 500.0, 500.0): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(0.0, 500.0, 500.0): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(0.0, 500.0, 500.0): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(500.0, 0.0, 500.0): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(500.0, 0.0, 500.0): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(500.0, 0.0, 500.0): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(500.0, 500.0, 0.0): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(500.0, 500.0, 0.0): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(500.0, 500.0, 0.0): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(500.0, 500.0, 500.0): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(500.0, 500.0, 500.0): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(500.0, 500.0, 500.0): status=warning, term=infeasible
+[TIMING] Pre-loop vertex Q evals: 0.08s  (8 nodes x 3 scenarios = 24 solves)
+[EF-UB] Initialized ipopt EF with 3 scenarios, time_ub=30.0s
+
+======================================================================
+[TIMING] === Pre-loop phase summary ===
+  corners_and_mesh               :       0.00s
+  vertex_Q_evals                 :       0.08s
+  exact_optima                   :       0.00s
+  ef_init                        :       0.01s
+  TOTAL                          :       0.08s
+======================================================================
+
+Set parameter MIPGap to value 0.1
+Set parameter MIPGap to value 0.1
+Set parameter MIPGap to value 0.1
+[Iter 0] MIPGap overridden to 0.1 (original: 1e-06)
+[DBG] entering evaluate_all_tetra ...
+[DBG] evaluate_all_tetra: start
+[DBG] evaluate_all_tetra: building mesh ...
+[DBG] evaluate_all_tetra: 6 simplices, entering loop ...
+Discarded solution information
+Discarded solution information
+Discarded solution information
+[Iter 0] MIPGap restored to 1e-06
+[Iter 0] #simplices = 6, #active = 6, bad-quality cut = 0, bad-shape cut = 0
+== [Iter 0] ACTIVE simplices: LB / UB / sum(ms_s) / sum(c_s) (per-scenario) ==
+simp                    LB                UB            sum_ms           sum_c_s                Range(As)             Range(As+ms) #InfV
+----------------------------------------------------------------------------------------------------------------------------------------
+T0           -9.501111e+04      4.999865e+09     -1.500041e+10     -2.850333e+05    [-1.59e+05, 3.00e+10]    [-1.50e+10, 1.50e+10]     1
+T1           -1.154056e+05      4.999865e+09     -1.500041e+10     -3.462167e+05    [-1.59e+05, 3.00e+10]    [-1.50e+10, 1.50e+10]     1
+T2           -5.310000e+04      1.000000e+10      0.000000e+00     -1.593000e+05    [-1.59e+05, 3.00e+10]    [-1.59e+05, 3.00e+10]     3
+T3           -5.310000e+04      1.000000e+10      0.000000e+00     -1.593000e+05    [-1.59e+05, 3.00e+10]    [-1.59e+05, 3.00e+10]     3
+T4           -6.292222e+04      9.999986e+09     -4.280533e+04     -1.887667e+05    [-1.59e+05, 3.00e+10]    [-2.02e+05, 3.00e+10]     2
+T5           -1.076833e+05      9.999932e+09     -2.045600e+05     -3.230500e+05    [-1.59e+05, 3.00e+10]    [-3.64e+05, 3.00e+10]     2
+
+== [Iter 0] INACTIVE simplices: LB / UB / sum(ms_s) / sum(c_s) (per-scenario) ==
+  (none)
+[Iter 0] created=6 (cum=6), active=6, active+UB=6, ms_recomputed=6
+[BaseBundle.eval_at] Infeasible/Error for K=(170.0000033003596, 79.99999920032666, 250.0000024992864): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(170.0000033003596, 79.99999920032666, 250.0000024992864): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(170.0000033003596, 79.99999920032666, 250.0000024992864): status=warning, term=infeasible
+[Iter 0] EF-ipopt: ok=True, ef_obj=-108390.00259008261, true_obj=1.000000e+10, time=0.021s
+[Iter 0] Pre-split gap: 1.869167e+05 (117.336%)
+[Iter 0] Active simplex ratio = 1.000000
+[Iter 0] UB point (500.0, 0.0, 0.0) is geometrically in simplices [0, 1, 2, 3, 4, 5]
+  T0 verts=[3, 2, 4, 0]: lam=[0.000000, 0.000000, 1.000000, 0.000000], LB=-285033.333333333, c_s=[-152033.3333333333, -94800.0, -38200.0]
+  T1 verts=[3, 1, 4, 0]: lam=[0.000000, -0.000000, 1.000000, -0.000000], LB=-346216.666666667, c_s=[-167666.66666666666, -118600.0, -59950.0]
+  T2 verts=[3, 5, 7, 4]: lam=[0.000000, -0.000000, -0.000000, 1.000000], LB=-159300.000000000, c_s=[-95600.0, -53100.0, -10600.0]
+  T3 verts=[3, 6, 7, 4]: lam=[0.000000, 0.000000, 0.000000, 1.000000], LB=-159300.000000000, c_s=[-95600.0, -53100.0, -10600.0]
+  T4 verts=[3, 6, 2, 4]: lam=[0.000000, -0.000000, -0.000000, 1.000000], LB=-188766.666666667, c_s=[-106666.66666666666, -63100.0, -19000.0]
+  T5 verts=[3, 5, 1, 4]: lam=[0.000000, 0.000000, 0.000000, 1.000000], LB=-323050.000000000, c_s=[-156600.0, -108600.0, -57850.0]
+
+== [Iter 0] CS DUAL vs PRIMAL diagnostic (simplices containing UB point) ==
+  --- T0 ---
+    scen 0: status=optimal, dual=-152033.333333333, primal=-152033.333333333  ? dual ? primal (gap=0.000000e+00)
+             cs_primal_K=(66.66666666666667, 216.66666666666669, 216.66666666666669)
+             indep_Q(cs_K)=-152033.333333333  ? dual ? indep_Q (consistent, diff=0.000000e+00)
+    scen 1: status=optimal, dual=-94800.000000000, primal=-94800.000000000  ? dual ? primal (gap=0.000000e+00)
+             cs_primal_K=(80.0, 210.0, 210.0)
+             indep_Q(cs_K)=-94800.000000000  ? dual ? indep_Q (consistent, diff=0.000000e+00)
+    scen 2: status=optimal, dual=-38200.000000000, primal=-38200.000000000  ? dual ? primal (gap=0.000000e+00)
+             cs_primal_K=(100.0, 200.0, 200.0)
+             indep_Q(cs_K)=-38200.000000000  ? dual ? indep_Q (consistent, diff=0.000000e+00)
+  sum(c_s_dual)=-285033.333333333, UB_total=-477900.000000000, UB_per_scen=-159300.000000000
+
+  == Per-scenario Q_s at K_EF = (500.0, 0.0, 0.0) ==
+    scen 0: Q_s(K_EF)=-95600.000000000, c_s_dual=-152033.333333333  ? Q_s(K_EF) > c_s_dual (diff=5.643333e+04)
+    scen 1: Q_s(K_EF)=-53100.000000000, c_s_dual=-94800.000000000  ? Q_s(K_EF) > c_s_dual (diff=4.170000e+04)
+    scen 2: Q_s(K_EF)=-10600.000000000, c_s_dual=-38200.000000000  ? Q_s(K_EF) > c_s_dual (diff=2.760000e+04)
+    SUM Q_s(K_EF)=-159300.000000000, sum(c_s)=-285033.333333333, diff=1.257333e+05
+  --- T1 ---
+    scen 0: status=optimal, dual=-167666.666666667, primal=-167666.666666667  ? dual ? primal (gap=-2.910383e-11)
+             cs_primal_K=(183.33333333333331, 66.66666666666667, 250.0)
+             indep_Q(cs_K)=-167666.666666667  ? dual ? indep_Q (consistent, diff=-2.910383e-11)
+    scen 1: status=optimal, dual=-118600.000000000, primal=-118600.000000000  ? dual ? primal (gap=0.000000e+00)
+             cs_primal_K=(120.0, 80.0, 300.0)
+             indep_Q(cs_K)=-118600.000000000  ? dual ? indep_Q (consistent, diff=0.000000e+00)
+    scen 2: status=optimal, dual=-59950.000000000, primal=-59950.000000000  ? dual ? primal (gap=0.000000e+00)
+             cs_primal_K=(100.0, 25.0, 375.0)
+             indep_Q(cs_K)=-59950.000000000  ? dual ? indep_Q (consistent, diff=0.000000e+00)
+  sum(c_s_dual)=-346216.666666667, UB_total=-477900.000000000, UB_per_scen=-159300.000000000
+
+  == Per-scenario Q_s at K_EF = (500.0, 0.0, 0.0) ==
+    scen 0: Q_s(K_EF)=-95600.000000000, c_s_dual=-167666.666666667  ? Q_s(K_EF) > c_s_dual (diff=7.206667e+04)
+    scen 1: Q_s(K_EF)=-53100.000000000, c_s_dual=-118600.000000000  ? Q_s(K_EF) > c_s_dual (diff=6.550000e+04)
+    scen 2: Q_s(K_EF)=-10600.000000000, c_s_dual=-59950.000000000  ? Q_s(K_EF) > c_s_dual (diff=4.935000e+04)
+    SUM Q_s(K_EF)=-159300.000000000, sum(c_s)=-346216.666666667, diff=1.869167e+05
+  --- T2 ---
+    scen 0: status=optimal, dual=-95600.000000000, primal=-95600.000000000  ? dual ? primal (gap=0.000000e+00)
+             cs_primal_K=(500.0, 0.0, 0.0)
+             indep_Q(cs_K)=-95600.000000000  ? dual ? indep_Q (consistent, diff=0.000000e+00)
+    scen 1: status=optimal, dual=-53100.000000000, primal=-53100.000000000  ? dual ? primal (gap=0.000000e+00)
+             cs_primal_K=(500.0, 0.0, 0.0)
+             indep_Q(cs_K)=-53100.000000000  ? dual ? indep_Q (consistent, diff=0.000000e+00)
+    scen 2: status=optimal, dual=-10600.000000000, primal=-10600.000000000  ? dual ? primal (gap=0.000000e+00)
+             cs_primal_K=(500.0, 0.0, 0.0)
+             indep_Q(cs_K)=-10600.000000000  ? dual ? indep_Q (consistent, diff=0.000000e+00)
+  sum(c_s_dual)=-159300.000000000, UB_total=-477900.000000000, UB_per_scen=-159300.000000000
+
+  == Per-scenario Q_s at K_EF = (500.0, 0.0, 0.0) ==
+    scen 0: Q_s(K_EF)=-95600.000000000, c_s_dual=-95600.000000000  ~ Q_s(K_EF) ? c_s_dual (within tol)
+    scen 1: Q_s(K_EF)=-53100.000000000, c_s_dual=-53100.000000000  ~ Q_s(K_EF) ? c_s_dual (within tol)
+    scen 2: Q_s(K_EF)=-10600.000000000, c_s_dual=-10600.000000000  ~ Q_s(K_EF) ? c_s_dual (within tol)
+    SUM Q_s(K_EF)=-159300.000000000, sum(c_s)=-159300.000000000, diff=0.000000e+00
+  --- T3 ---
+    scen 0: status=optimal, dual=-95600.000000000, primal=-95600.000000000  ? dual ? primal (gap=0.000000e+00)
+             cs_primal_K=(500.0, 0.0, 0.0)
+             indep_Q(cs_K)=-95600.000000000  ? dual ? indep_Q (consistent, diff=0.000000e+00)
+    scen 1: status=optimal, dual=-53100.000000000, primal=-53100.000000000  ? dual ? primal (gap=0.000000e+00)
+             cs_primal_K=(500.0, 0.0, 0.0)
+             indep_Q(cs_K)=-53100.000000000  ? dual ? indep_Q (consistent, diff=0.000000e+00)
+    scen 2: status=optimal, dual=-10600.000000000, primal=-10600.000000000  ? dual ? primal (gap=0.000000e+00)
+             cs_primal_K=(500.0, 0.0, 0.0)
+             indep_Q(cs_K)=-10600.000000000  ? dual ? indep_Q (consistent, diff=0.000000e+00)
+  sum(c_s_dual)=-159300.000000000, UB_total=-477900.000000000, UB_per_scen=-159300.000000000
+
+  == Per-scenario Q_s at K_EF = (500.0, 0.0, 0.0) ==
+    scen 0: Q_s(K_EF)=-95600.000000000, c_s_dual=-95600.000000000  ~ Q_s(K_EF) ? c_s_dual (within tol)
+    scen 1: Q_s(K_EF)=-53100.000000000, c_s_dual=-53100.000000000  ~ Q_s(K_EF) ? c_s_dual (within tol)
+    scen 2: Q_s(K_EF)=-10600.000000000, c_s_dual=-10600.000000000  ~ Q_s(K_EF) ? c_s_dual (within tol)
+    SUM Q_s(K_EF)=-159300.000000000, sum(c_s)=-159300.000000000, diff=0.000000e+00
+  --- T4 ---
+    scen 0: status=optimal, dual=-106666.666666667, primal=-106666.666666667  ? dual ? primal (gap=-1.455192e-11)
+             cs_primal_K=(433.3333333333333, 66.66666666666667, 0.0)
+             indep_Q(cs_K)=-106666.666666667  ? dual ? indep_Q (consistent, diff=-1.455192e-11)
+    scen 1: status=optimal, dual=-63100.000000000, primal=-63100.000000000  ? dual ? primal (gap=0.000000e+00)
+             cs_primal_K=(420.0, 80.0, 0.0)
+             indep_Q(cs_K)=-63100.000000000  ? dual ? indep_Q (consistent, diff=0.000000e+00)
+    scen 2: status=optimal, dual=-19000.000000000, primal=-19000.000000000  ? dual ? primal (gap=0.000000e+00)
+             cs_primal_K=(400.0, 99.99999999999999, 0.0)
+             indep_Q(cs_K)=-19000.000000000  ? dual ? indep_Q (consistent, diff=0.000000e+00)
+  sum(c_s_dual)=-188766.666666667, UB_total=-477900.000000000, UB_per_scen=-159300.000000000
+
+  == Per-scenario Q_s at K_EF = (500.0, 0.0, 0.0) ==
+    scen 0: Q_s(K_EF)=-95600.000000000, c_s_dual=-106666.666666667  ? Q_s(K_EF) > c_s_dual (diff=1.106667e+04)
+    scen 1: Q_s(K_EF)=-53100.000000000, c_s_dual=-63100.000000000  ? Q_s(K_EF) > c_s_dual (diff=1.000000e+04)
+    scen 2: Q_s(K_EF)=-10600.000000000, c_s_dual=-19000.000000000  ? Q_s(K_EF) > c_s_dual (diff=8.400000e+03)
+    SUM Q_s(K_EF)=-159300.000000000, sum(c_s)=-188766.666666667, diff=2.946667e+04
+  --- T5 ---
+    scen 0: status=optimal, dual=-156600.000000000, primal=-156600.000000000  ? dual ? primal (gap=0.000000e+00)
+             cs_primal_K=(250.0, 0.0, 250.0)
+             indep_Q(cs_K)=-156600.000000000  ? dual ? indep_Q (consistent, diff=0.000000e+00)
+    scen 1: status=optimal, dual=-108600.000000000, primal=-108600.000000000  ? dual ? primal (gap=0.000000e+00)
+             cs_primal_K=(200.0, 0.0, 300.0)
+             indep_Q(cs_K)=-108600.000000000  ? dual ? indep_Q (consistent, diff=0.000000e+00)
+    scen 2: status=optimal, dual=-57850.000000000, primal=-57850.000000000  ? dual ? primal (gap=0.000000e+00)
+             cs_primal_K=(125.0, 0.0, 375.0)
+             indep_Q(cs_K)=-57850.000000000  ? dual ? indep_Q (consistent, diff=0.000000e+00)
+  sum(c_s_dual)=-323050.000000000, UB_total=-477900.000000000, UB_per_scen=-159300.000000000
+
+  == Per-scenario Q_s at K_EF = (500.0, 0.0, 0.0) ==
+    scen 0: Q_s(K_EF)=-95600.000000000, c_s_dual=-156600.000000000  ? Q_s(K_EF) > c_s_dual (diff=6.100000e+04)
+    scen 1: Q_s(K_EF)=-53100.000000000, c_s_dual=-108600.000000000  ? Q_s(K_EF) > c_s_dual (diff=5.550000e+04)
+    scen 2: Q_s(K_EF)=-10600.000000000, c_s_dual=-57850.000000000  ? Q_s(K_EF) > c_s_dual (diff=4.725000e+04)
+    SUM Q_s(K_EF)=-159300.000000000, sum(c_s)=-323050.000000000, diff=1.637500e+05
+
+[Iter 0] LB = -346216.666667 = UB(-159300.000000) + ms_b(-1.500e+10) from T1
+[Iter 0] Scene 0: Switched to c_s point. dist_ms_c=2.59e+02 < 1000.0, dist_c_verts=3.17e+02 > 1e-06
+[Iter 0] Scene 1: Switched to c_s point. dist_ms_c=2.14e+02 < 1000.0, dist_c_verts=2.47e+02 > 1e-06
+[Iter 0] Scene 2: Switched to c_s point. dist_ms_c=2.76e+02 < 1000.0, dist_c_verts=1.62e+02 > 1e-06
+Chosen node (183.33333333333331, 66.66666666666667, 250.0) with ms=-5.000e+09 (simp T1, scene 0, rank #1, source=c_s)
+[Iter 0] LB simplex = T1, next node simplex = T1, scene 0
+[Selected Simp Info] Iter 0 | Simplex T1 Vertices:
+  v0: (0.0, 500.0, 500.0)
+  v1: (0.0, 0.0, 500.0)
+  v2: (500.0, 0.0, 0.0)
+  v3: (0.0, 0.0, 0.0)
+  -> New Point: (183.33333333333331, 66.66666666666667, 250.0)
+[Iter 0] candidate rank #1: T1, scene=0, ms=-5.000e+09
+== ms candidates (sorted by (ms, -dist)) ==
+rank   simp   scene           ms    mind(all)                             pt
+----------------------------------------------------------------------------
+   1     T1       0  -5.0002e+09     3.17e+02  (183.3333, 66.6667, 250.0000)
+   2     T1       1  -5.0001e+09     2.47e+02  (120.0000, 80.0000, 300.0000)
+   3     T1       2  -5.0001e+09     1.62e+02  (100.0000, 25.0000, 375.0000)
+
+[Iter 0] per_tet=6, active after q_cut=6, tri_is_None=False
+[Iter 0] bad-quality active simplices (q < 0): 0
+[Iter 0] evaluating Q for scenario 0
+[Iter 0] evaluating Q for scenario 1
+[Iter 0] evaluating Q for scenario 2
+
+[Iter 0] Next Point Details:
+Simplex   Scene   Type    As             ms             As+ms          Q              (Kp, Ki, Kd)                  
+--------------------------------------------------------------------------------------------------------------------
+T1        0       c_s     1.3333e+09     -5.0002e+09    -3.6669e+09    -1.6767e+05    (183.3333, 66.6667, 250.0000) 
+
+[Iter 0] subdivision type = interior (code=1) on simplex T1
+[Iter 0] Elapsed: 0.742s
+[DBG] evaluate_all_tetra: start
+[DBG] evaluate_all_tetra: building mesh ...
+[DBG] evaluate_all_tetra: 9 simplices, entering loop ...
+======================================================================
+[Iter 0] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 1, 3, 4)
+  Parent LB: -115405.555555556 (per-scen)
+  EF ef_obj(IPOPT): -36130.000863361, true_obj(recalc): 10000000000.000000000, used=min=-36130.000863361 (per-scen)
+  Simplex volume: 2.083333e+07
+  Children (4):
+    T5 (0, 1, 4, 8): LB = -114294.444444444
+    T6 (0, 3, 4, 8): LB = -109172.222222222
+    T7 (0, 1, 3, 8): LB = -115261.111111111
+    T8 (1, 3, 4, 8): LB = -114294.444444444
+  New global LB: -115261.111111111 (from T7 (0, 1, 3, 8))
+  Location: INSIDE
+  Avg CS point Q-value: -103716.666666667 (per-scen), point=(np.float64(134.44444444444443), np.float64(57.22222222222223), np.float64(308.3333333333333))
+  Current UB: -53100.000000000 (per-scen)
+  UB point: (500.0, 0.0, 0.0)
+  UB source: unknown
+  UB simplex: None
+  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.021s, ef_obj=-108390.00259008261, true_obj(per-scen)=10000000000.000000000
+======================================================================
+[Iter 0] UB candidate from new simplex 5 (avgMS): -6.566074e+04 (per scenario)
+[Iter 0] UB candidate from new simplex 5 (avgCS): -1.026056e+05 (per scenario)
+[Iter 0] UB candidate from new simplex 6 (avgCS): -1.083744e+05 (per scenario)
+
+======================================================================
+[TIMING] === Iter 0 phase breakdown (total 1.17s) ===
+  1_vertex_UB                    :       0.00s  (  0.0%)  
+  2_evaluate_all_tetra           :       0.53s  ( 45.3%)  ######################
+  3_active_filter_print          :       0.00s  (  0.1%)  
+  4_LB_selection                 :       0.00s  (  0.0%)  
+  5_EF_UB_solve                  :       0.15s  ( 12.5%)  ######
+  6_candidate_selection          :       0.06s  (  4.7%)  ##
+  7_Q_eval_new_node              :       0.01s  (  0.8%)  
+  8_mesh_subdivide               :       0.00s  (  0.0%)  
+  9_end_of_iter_reeval           :       0.43s  ( 36.5%)  ##################
+  TOTAL                          :       1.17s
+  #simplices=6, #scenarios=3, total_ms_pairs=18
+  fresh ms solves=18, cache hits=0
+======================================================================
+
+[DBG] entering evaluate_all_tetra ...
+[DBG] evaluate_all_tetra: start
+[DBG] evaluate_all_tetra: building mesh ...
+[DBG] evaluate_all_tetra: 9 simplices, entering loop ...
+[Iter 1] #simplices = 9, #active = 4, bad-quality cut = 0, bad-shape cut = 0
+== [Iter 1] ACTIVE simplices: LB / UB / sum(ms_s) / sum(c_s) (per-scenario) ==
+simp                    LB                UB            sum_ms           sum_c_s                Range(As)             Range(As+ms) #InfV
+----------------------------------------------------------------------------------------------------------------------------------------
+T5           -1.142944e+05      2.683644e+04     -2.134907e+05     -3.428833e+05    [-3.23e+05, 2.94e+05]    [-5.37e+05, 8.05e+04]     0
+T6           -1.091722e+05      4.999865e+09     -1.500041e+10     -3.275167e+05    [-3.23e+05, 3.00e+10]    [-1.50e+10, 1.50e+10]     1
+T7           -1.152611e+05      4.999865e+09     -1.500041e+10     -3.457833e+05    [-3.23e+05, 3.00e+10]    [-1.50e+10, 1.50e+10]     1
+T8           -1.142944e+05      9.999932e+09     -2.045600e+05     -3.428833e+05    [-3.23e+05, 3.00e+10]    [-5.28e+05, 3.00e+10]     1
+
+== [Iter 1] INACTIVE simplices: LB / UB / sum(ms_s) / sum(c_s) (per-scenario) ==
+simp                    LB                UB            sum_ms           sum_c_s                Range(As)             Range(As+ms) #InfV
+----------------------------------------------------------------------------------------------------------------------------------------
+T0           -9.501111e+04      4.999865e+09     -1.500041e+10     -2.850333e+05    [-1.59e+05, 3.00e+10]    [-1.50e+10, 1.50e+10]     1
+T1           -5.310000e+04      1.000000e+10      0.000000e+00     -1.593000e+05    [-1.59e+05, 3.00e+10]    [-1.59e+05, 3.00e+10]     3
+T2           -5.310000e+04      1.000000e+10      0.000000e+00     -1.593000e+05    [-1.59e+05, 3.00e+10]    [-1.59e+05, 3.00e+10]     3
+T3           -6.292222e+04      9.999986e+09     -4.280533e+04     -1.887667e+05    [-1.59e+05, 3.00e+10]    [-2.02e+05, 3.00e+10]     2
+T4           -1.076833e+05      9.999932e+09     -2.045600e+05     -3.230500e+05    [-1.59e+05, 3.00e+10]    [-3.64e+05, 3.00e+10]     2
+
+[Iter 1] created=9 (cum=19), active=4, active+UB=4, ms_recomputed=0
+[BaseBundle.eval_at] Infeasible/Error for K=(170.0000033003596, 79.99999920032666, 250.0000024992864): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(170.0000033003596, 79.99999920032666, 250.0000024992864): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(170.0000033003596, 79.99999920032666, 250.0000024992864): status=warning, term=infeasible
+[Iter 1] EF-ipopt: ok=True, ef_obj=-108390.00259008259, true_obj=1.000000e+10, time=0.022s
+[Iter 1] Pre-split gap: 2.066000e+04 (6.355%)
+[Iter 1] Active simplex ratio = 0.166667
+[Iter 1] UB point (183.33333333333331, 66.66666666666667, 250.0) is geometrically in simplices [5, 6, 7, 8]
+  T5 verts=[8, 1, 4, 0]: lam=[1.000000, -0.000000, -0.000000, -0.000000], LB=-342883.333333333, c_s=[-167666.66666666666, -115266.66666666666, -59950.0]
+  T6 verts=[3, 8, 4, 0]: lam=[0.000000, 1.000000, -0.000000, -0.000000], LB=-327516.666666667, c_s=[-167666.66666666666, -109350.00000000003, -50500.0]
+  T7 verts=[3, 1, 8, 0]: lam=[0.000000, -0.000000, 1.000000, -0.000000], LB=-345783.333333333, c_s=[-167666.66666666666, -118600.0, -59516.666666666664]
+  T8 verts=[3, 1, 4, 8]: lam=[0.000000, -0.000000, -0.000000, 1.000000], LB=-342883.333333333, c_s=[-167666.66666666666, -115266.66666666666, -59950.0]
+
+== [Iter 1] CS DUAL vs PRIMAL diagnostic (simplices containing UB point) ==
+  --- T5 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666667, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(146.66666666666666, 53.33333333333334, 300.0)
+             indep_Q(cs_K)=-115266.666666667
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(100.0, 24.999999999999993, 375.0)
+             indep_Q(cs_K)=-59950.000000000
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+  --- T6 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666669, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(169.99999999999997, 80.0, 250.00000000000003)
+             indep_Q(cs_K)=-109350.000000000
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(150.0, 99.99999999999999, 250.0)
+             indep_Q(cs_K)=-50500.000000000
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+  --- T7 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666669, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(120.0, 80.0, 300.0)
+             indep_Q(cs_K)=-118600.000000000
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(91.66666666666666, 33.33333333333334, 375.0)
+             indep_Q(cs_K)=-59516.666666667
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+  --- T8 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666669, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(146.66666666666666, 53.33333333333334, 300.0)
+             indep_Q(cs_K)=-115266.666666667
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(100.0, 25.0, 375.0)
+             indep_Q(cs_K)=-59950.000000000
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+
+[Iter 1] LB = -345783.333333 = UB(-325123.333333) + ms_b(-1.500e+10) from T7
+[Iter 1] Scene 0: Kept ms point (c_s too close to verts). dist_ms_c=2.59e+02 < 1000.0 BUT dist_c_verts=1.42e-14 <= 1e-06
+[Iter 1] Scene 1: Switched to c_s point. dist_ms_c=2.14e+02 < 1000.0, dist_c_verts=8.18e+01 > 1e-06
+[Iter 1] Scene 2: Switched to c_s point. dist_ms_c=2.66e+02 < 1000.0, dist_c_verts=1.59e+02 > 1e-06
+Chosen node (0.0, 250.0, 250.0) with ms=-5.000e+09 (simp T7, scene 0, rank #1, source=ms(vert))
+[Iter 1] LB simplex = T7, next node simplex = T7, scene 0
+[Selected Simp Info] Iter 1 | Simplex T7 Vertices:
+  v0: (0.0, 500.0, 500.0)
+  v1: (0.0, 0.0, 500.0)
+  v2: (183.33333333333331, 66.66666666666667, 250.0)
+  v3: (0.0, 0.0, 0.0)
+  -> New Point: (0.0, 250.0, 250.0)
+[Iter 1] candidate rank #1: T7, scene=0, ms=-5.000e+09
+== ms candidates (sorted by (ms, -dist)) ==
+rank   simp   scene           ms    mind(all)                             pt
+----------------------------------------------------------------------------
+   1     T7       0  -5.0002e+09     2.59e+02   (0.0000, 250.0000, 250.0000)
+   2     T7       1  -5.0001e+09     8.18e+01  (120.0000, 80.0000, 300.0000)
+   3     T7       2  -5.0001e+09     1.59e+02   (91.6667, 33.3333, 375.0000)
+
+[Iter 1] per_tet=9, active after q_cut=4, tri_is_None=False
+[Iter 1] bad-quality active simplices (q < 0): 0
+[Iter 1] evaluating Q for scenario 0
+[Iter 1] evaluating Q for scenario 1
+[Iter 1] evaluating Q for scenario 2
+
+[Iter 1] Next Point Details:
+Simplex   Scene   Type    As             ms             As+ms          Q              (Kp, Ki, Kd)                  
+--------------------------------------------------------------------------------------------------------------------
+T7        0       ms(vert)5.0000e+09     -5.0002e+09    -1.4490e+05    -1.4490e+05    (0.0000, 250.0000, 250.0000)  
+
+[Iter 1] subdivision type = edge (code=2) on simplex T7
+           edge local verts = (3, 0)
+[Iter 1] Elapsed: 0.122s
+[DBG] evaluate_all_tetra: start
+[DBG] evaluate_all_tetra: building mesh ...
+[DBG] evaluate_all_tetra: 10 simplices, entering loop ...
+======================================================================
+[Iter 1] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 1, 3, 8)
+  Parent LB: -115261.111111111 (per-scen)
+  EF ef_obj(IPOPT): -36130.000863361, true_obj(recalc): 10000000000.000000000, used=min=-36130.000863361 (per-scen)
+  Simplex volume: 7.638889e+06
+  Children (2):
+    T8 (0, 1, 8, 9): LB = -115261.111111111
+    T9 (1, 3, 8, 9): LB = -115261.111111111
+  New global LB: -115261.111111111 (from T9 (1, 3, 8, 9))
+  Location: INSIDE
+  Avg CS point Q-value: -104063.888888889 (per-scen), point=(np.float64(131.66666666666666), np.float64(60.00000000000001), np.float64(308.3333333333333))
+  Current UB: -108374.444444444 (per-scen)
+  UB point: (183.33333333333331, 66.66666666666667, 250.0)
+  UB source: avgCS_new_simplex
+  UB simplex: (0, 3, 4, 8)
+  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.022s, ef_obj=-108390.00259008259, true_obj(per-scen)=10000000000.000000000
+======================================================================
+
+======================================================================
+[TIMING] === Iter 1 phase breakdown (total 0.41s) ===
+  1_vertex_UB                    :       0.00s  (  0.0%)  
+  2_evaluate_all_tetra           :       0.00s  (  1.2%)  
+  3_active_filter_print          :       0.00s  (  0.2%)  
+  4_LB_selection                 :       0.00s  (  0.0%)  
+  5_EF_UB_solve                  :       0.11s  ( 25.9%)  ############
+  6_candidate_selection          :       0.00s  (  0.1%)  
+  7_Q_eval_new_node              :       0.01s  (  2.5%)  #
+  8_mesh_subdivide               :       0.00s  (  0.0%)  
+  9_end_of_iter_reeval           :       0.29s  ( 70.2%)  ###################################
+  TOTAL                          :       0.41s
+  #simplices=9, #scenarios=3, total_ms_pairs=27
+  fresh ms solves=0, cache hits=27
+======================================================================
+
+[DBG] entering evaluate_all_tetra ...
+[DBG] evaluate_all_tetra: start
+[DBG] evaluate_all_tetra: building mesh ...
+[DBG] evaluate_all_tetra: 10 simplices, entering loop ...
+[Iter 2] #simplices = 10, #active = 5, bad-quality cut = 0, bad-shape cut = 0
+== [Iter 2] ACTIVE simplices: LB / UB / sum(ms_s) / sum(c_s) (per-scenario) ==
+simp                    LB                UB            sum_ms           sum_c_s                Range(As)             Range(As+ms) #InfV
+----------------------------------------------------------------------------------------------------------------------------------------
+T5           -1.142944e+05      2.683644e+04     -2.134907e+05     -3.428833e+05    [-3.23e+05, 2.94e+05]    [-5.37e+05, 8.05e+04]     0
+T6           -1.091722e+05      4.999865e+09     -1.500041e+10     -3.275167e+05    [-3.23e+05, 3.00e+10]    [-1.50e+10, 1.50e+10]     1
+T7           -1.142944e+05      9.999932e+09     -2.045600e+05     -3.428833e+05    [-3.23e+05, 3.00e+10]    [-5.28e+05, 3.00e+10]     1
+T8           -1.152611e+05      3.820000e+04     -1.794000e+05     -3.457833e+05    [-3.23e+05, 2.94e+05]    [-5.02e+05, 1.15e+05]     0
+T9           -1.152611e+05      9.999972e+09     -8.316727e+04     -3.457833e+05    [-3.23e+05, 3.00e+10]    [-4.06e+05, 3.00e+10]     1
+
+== [Iter 2] INACTIVE simplices: LB / UB / sum(ms_s) / sum(c_s) (per-scenario) ==
+simp                    LB                UB            sum_ms           sum_c_s                Range(As)             Range(As+ms) #InfV
+----------------------------------------------------------------------------------------------------------------------------------------
+T0           -9.501111e+04      4.999865e+09     -1.500041e+10     -2.850333e+05    [-1.59e+05, 3.00e+10]    [-1.50e+10, 1.50e+10]     1
+T1           -5.310000e+04      1.000000e+10      0.000000e+00     -1.593000e+05    [-1.59e+05, 3.00e+10]    [-1.59e+05, 3.00e+10]     3
+T2           -5.310000e+04      1.000000e+10      0.000000e+00     -1.593000e+05    [-1.59e+05, 3.00e+10]    [-1.59e+05, 3.00e+10]     3
+T3           -6.292222e+04      9.999986e+09     -4.280533e+04     -1.887667e+05    [-1.59e+05, 3.00e+10]    [-2.02e+05, 3.00e+10]     2
+T4           -1.076833e+05      9.999932e+09     -2.045600e+05     -3.230500e+05    [-1.59e+05, 3.00e+10]    [-3.64e+05, 3.00e+10]     2
+
+[Iter 2] created=10 (cum=31), active=5, active+UB=5, ms_recomputed=0
+[BaseBundle.eval_at] Infeasible/Error for K=(170.00000330035977, 79.99999920032667, 250.0000024992864): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(170.00000330035977, 79.99999920032667, 250.0000024992864): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(170.00000330035977, 79.99999920032667, 250.0000024992864): status=warning, term=infeasible
+[Iter 2] EF-ipopt: ok=True, ef_obj=-108390.00259008259, true_obj=1.000000e+10, time=0.030s
+[Iter 2] Pre-split gap: 2.066000e+04 (6.355%)
+[Iter 2] Active simplex ratio = 0.166667
+[Iter 2] UB point (183.33333333333331, 66.66666666666667, 250.0) is geometrically in simplices [5, 6, 7, 8, 9]
+  T5 verts=[8, 1, 4, 0]: lam=[1.000000, -0.000000, -0.000000, -0.000000], LB=-342883.333333333, c_s=[-167666.66666666666, -115266.66666666666, -59950.0]
+  T6 verts=[3, 8, 4, 0]: lam=[0.000000, 1.000000, -0.000000, -0.000000], LB=-327516.666666667, c_s=[-167666.66666666666, -109350.00000000003, -50500.0]
+  T7 verts=[3, 1, 4, 8]: lam=[0.000000, -0.000000, -0.000000, 1.000000], LB=-342883.333333333, c_s=[-167666.66666666666, -115266.66666666666, -59950.0]
+  T8 verts=[9, 1, 8, 0]: lam=[0.000000, -0.000000, 1.000000, -0.000000], LB=-345783.333333333, c_s=[-167666.66666666666, -118600.0, -59516.66666666666]
+  T9 verts=[3, 1, 8, 9]: lam=[0.000000, -0.000000, 1.000000, -0.000000], LB=-345783.333333333, c_s=[-167666.66666666666, -118600.0, -59516.666666666664]
+
+== [Iter 2] CS DUAL vs PRIMAL diagnostic (simplices containing UB point) ==
+  --- T5 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666667, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(146.66666666666666, 53.33333333333334, 300.0)
+             indep_Q(cs_K)=-115266.666666667
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(100.0, 24.999999999999993, 375.0)
+             indep_Q(cs_K)=-59950.000000000
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+  --- T6 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666669, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(169.99999999999997, 80.0, 250.00000000000003)
+             indep_Q(cs_K)=-109350.000000000
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(150.0, 99.99999999999999, 250.0)
+             indep_Q(cs_K)=-50500.000000000
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+  --- T7 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666669, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(146.66666666666666, 53.33333333333334, 300.0)
+             indep_Q(cs_K)=-115266.666666667
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(100.0, 25.0, 375.0)
+             indep_Q(cs_K)=-59950.000000000
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+  --- T8 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666667, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(120.00000000000001, 80.0, 300.0)
+             indep_Q(cs_K)=-118600.000000000
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(91.66666666666666, 33.333333333333336, 375.0)
+             indep_Q(cs_K)=-59516.666666667
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+  --- T9 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666667, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(120.0, 80.0, 300.0)
+             indep_Q(cs_K)=-118600.000000000
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(91.66666666666666, 33.33333333333334, 375.0)
+             indep_Q(cs_K)=-59516.666666667
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+
+[Iter 2] LB = -345783.333333 = UB(-325123.333333) + ms_b(-8.317e+04) from T9
+[Iter 2] Scene 0: Kept ms point (c_s too close to verts). dist_ms_c=1.65e+02 < 1000.0 BUT dist_c_verts=0.00e+00 <= 1e-06
+[Iter 2] Scene 1: Switched to c_s point. dist_ms_c=5.66e+01 < 1000.0, dist_c_verts=8.18e+01 > 1e-06
+[Iter 2] Scene 2: Switched to c_s point. dist_ms_c=9.43e+01 < 1000.0, dist_c_verts=1.59e+02 > 1e-06
+Chosen node (91.66666666666666, 33.333333333333336, 375.0) with ms=-3.540e+04 (simp T9, scene 2, rank #1, source=c_s)
+[Iter 2] LB simplex = T9, next node simplex = T9, scene 2
+[Selected Simp Info] Iter 2 | Simplex T9 Vertices:
+  v0: (0.0, 500.0, 500.0)
+  v1: (0.0, 0.0, 500.0)
+  v2: (183.33333333333331, 66.66666666666667, 250.0)
+  v3: (0.0, 250.0, 250.0)
+  -> New Point: (91.66666666666666, 33.333333333333336, 375.0)
+[Iter 2] candidate rank #1: T9, scene=2, ms=-3.540e+04
+== ms candidates (sorted by (ms, -dist)) ==
+rank   simp   scene           ms    mind(all)                             pt
+----------------------------------------------------------------------------
+   1     T9       2  -3.5400e+04     1.59e+02   (91.6667, 33.3333, 375.0000)
+   2     T9       1  -3.2393e+04     8.18e+01  (120.0000, 80.0000, 300.0000)
+   3     T9       0  -1.5375e+04     1.63e+02   (66.6667, 66.6667, 366.6667)
+
+[Iter 2] per_tet=10, active after q_cut=5, tri_is_None=False
+[Iter 2] bad-quality active simplices (q < 0): 0
+[Iter 2] evaluating Q for scenario 0
+[Iter 2] evaluating Q for scenario 1
+[Iter 2] evaluating Q for scenario 2
+
+[Iter 2] Next Point Details:
+Simplex   Scene   Type    As             ms             As+ms          Q              (Kp, Ki, Kd)                  
+--------------------------------------------------------------------------------------------------------------------
+T9        2       c_s     -2.7850e+04    -3.5400e+04    -6.3250e+04    -5.9517e+04    (91.6667, 33.3333, 375.0000)  
+
+[Iter 2] subdivision type = edge (code=2) on simplex T9
+           edge local verts = (1, 8)
+[Iter 2] Elapsed: 0.158s
+[DBG] evaluate_all_tetra: start
+[DBG] evaluate_all_tetra: building mesh ...
+[DBG] evaluate_all_tetra: 11 simplices, entering loop ...
+======================================================================
+[Iter 2] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (1, 3, 8, 9)
+  Parent LB: -115261.111111111 (per-scen)
+  EF ef_obj(IPOPT): -36130.000863361, true_obj(recalc): 10000000000.000000000, used=min=-36130.000863361 (per-scen)
+  Simplex volume: 3.819444e+06
+  Children (2):
+    T9 (3, 8, 9, 10): LB = -115124.396320210
+    T10 (1, 3, 9, 10): LB = -103688.888888889
+  New global LB: -115261.111111111 (from T8 (0, 1, 8, 9))
+  Location: OUTSIDE
+  Avg CS point Q-value: -104063.888888889 (per-scen), point=(np.float64(131.66666666666666), np.float64(60.00000000000001), np.float64(308.3333333333333))
+  Current UB: -108374.444444444 (per-scen)
+  UB point: (183.33333333333331, 66.66666666666667, 250.0)
+  UB source: avgCS_new_simplex
+  UB simplex: (0, 3, 4, 8)
+  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.030s, ef_obj=-108390.00259008259, true_obj(per-scen)=10000000000.000000000
+======================================================================
+
+======================================================================
+[TIMING] === Iter 2 phase breakdown (total 0.46s) ===
+  1_vertex_UB                    :       0.00s  (  0.0%)  
+  2_evaluate_all_tetra           :       0.01s  (  1.3%)  
+  3_active_filter_print          :       0.00s  (  0.1%)  
+  4_LB_selection                 :       0.00s  (  0.0%)  
+  5_EF_UB_solve                  :       0.14s  ( 31.0%)  ###############
+  6_candidate_selection          :       0.00s  (  0.1%)  
+  7_Q_eval_new_node              :       0.01s  (  2.2%)  #
+  8_mesh_subdivide               :       0.00s  (  0.0%)  
+  9_end_of_iter_reeval           :       0.30s  ( 65.2%)  ################################
+  TOTAL                          :       0.46s
+  #simplices=10, #scenarios=3, total_ms_pairs=30
+  fresh ms solves=0, cache hits=30
+======================================================================
+
+[DBG] entering evaluate_all_tetra ...
+[DBG] evaluate_all_tetra: start
+[DBG] evaluate_all_tetra: building mesh ...
+[DBG] evaluate_all_tetra: 11 simplices, entering loop ...
+[Iter 3] #simplices = 11, #active = 5, bad-quality cut = 0, bad-shape cut = 0
+== [Iter 3] ACTIVE simplices: LB / UB / sum(ms_s) / sum(c_s) (per-scenario) ==
+simp                    LB                UB            sum_ms           sum_c_s                Range(As)             Range(As+ms) #InfV
+----------------------------------------------------------------------------------------------------------------------------------------
+T5           -1.142944e+05      2.683644e+04     -2.134907e+05     -3.428833e+05    [-3.23e+05, 2.94e+05]    [-5.37e+05, 8.05e+04]     0
+T6           -1.091722e+05      4.999865e+09     -1.500041e+10     -3.275167e+05    [-3.23e+05, 3.00e+10]    [-1.50e+10, 1.50e+10]     1
+T7           -1.142944e+05      9.999932e+09     -2.045600e+05     -3.428833e+05    [-3.23e+05, 3.00e+10]    [-5.28e+05, 3.00e+10]     1
+T8           -1.152611e+05      3.820000e+04     -1.794000e+05     -3.457833e+05    [-3.23e+05, 2.94e+05]    [-5.02e+05, 1.15e+05]     0
+T9           -1.151244e+05      9.999986e+09     -4.283152e+04     -3.457833e+05    [-3.23e+05, 3.00e+10]    [-3.66e+05, 3.00e+10]     1
+
+== [Iter 3] INACTIVE simplices: LB / UB / sum(ms_s) / sum(c_s) (per-scenario) ==
+simp                    LB                UB            sum_ms           sum_c_s                Range(As)             Range(As+ms) #InfV
+----------------------------------------------------------------------------------------------------------------------------------------
+T0           -9.501111e+04      4.999865e+09     -1.500041e+10     -2.850333e+05    [-1.59e+05, 3.00e+10]    [-1.50e+10, 1.50e+10]     1
+T1           -5.310000e+04      1.000000e+10      0.000000e+00     -1.593000e+05    [-1.59e+05, 3.00e+10]    [-1.59e+05, 3.00e+10]     3
+T2           -5.310000e+04      1.000000e+10      0.000000e+00     -1.593000e+05    [-1.59e+05, 3.00e+10]    [-1.59e+05, 3.00e+10]     3
+T3           -6.292222e+04      9.999986e+09     -4.280533e+04     -1.887667e+05    [-1.59e+05, 3.00e+10]    [-2.02e+05, 3.00e+10]     2
+T4           -1.076833e+05      9.999932e+09     -2.045600e+05     -3.230500e+05    [-1.59e+05, 3.00e+10]    [-3.64e+05, 3.00e+10]     2
+T10          -1.036889e+05      9.999978e+09     -6.744000e+04     -3.110667e+05    [-2.62e+05, 3.00e+10]    [-3.29e+05, 3.00e+10]     1
+
+[Iter 3] created=11 (cum=44), active=5, active+UB=5, ms_recomputed=0
+[BaseBundle.eval_at] Infeasible/Error for K=(170.0000033003505, 79.99999920032666, 250.0000024992864): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(170.0000033003505, 79.99999920032666, 250.0000024992864): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(170.0000033003505, 79.99999920032666, 250.0000024992864): status=warning, term=infeasible
+[Iter 3] EF-ipopt: ok=True, ef_obj=-108390.00259008008, true_obj=1.000000e+10, time=0.022s
+[Iter 3] Pre-split gap: 2.066000e+04 (6.355%)
+[Iter 3] Active simplex ratio = 0.151389
+[Iter 3] UB point (183.33333333333331, 66.66666666666667, 250.0) is geometrically in simplices [5, 6, 7, 8, 9]
+  T5 verts=[8, 1, 4, 0]: lam=[1.000000, -0.000000, -0.000000, -0.000000], LB=-342883.333333333, c_s=[-167666.66666666666, -115266.66666666666, -59950.0]
+  T6 verts=[3, 8, 4, 0]: lam=[0.000000, 1.000000, -0.000000, -0.000000], LB=-327516.666666667, c_s=[-167666.66666666666, -109350.00000000003, -50500.0]
+  T7 verts=[3, 1, 4, 8]: lam=[0.000000, -0.000000, -0.000000, 1.000000], LB=-342883.333333333, c_s=[-167666.66666666666, -115266.66666666666, -59950.0]
+  T8 verts=[9, 1, 8, 0]: lam=[0.000000, -0.000000, 1.000000, -0.000000], LB=-345783.333333333, c_s=[-167666.66666666666, -118600.0, -59516.66666666666]
+  T9 verts=[3, 10, 8, 9]: lam=[0.000000, -0.000000, 1.000000, -0.000000], LB=-345373.188960631, c_s=[-167666.66666666666, -118600.0, -59516.666666666664]
+
+== [Iter 3] CS DUAL vs PRIMAL diagnostic (simplices containing UB point) ==
+  --- T5 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666667, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(146.66666666666666, 53.33333333333334, 300.0)
+             indep_Q(cs_K)=-115266.666666667
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(100.0, 24.999999999999993, 375.0)
+             indep_Q(cs_K)=-59950.000000000
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+  --- T6 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666669, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(169.99999999999997, 80.0, 250.00000000000003)
+             indep_Q(cs_K)=-109350.000000000
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(150.0, 99.99999999999999, 250.0)
+             indep_Q(cs_K)=-50500.000000000
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+  --- T7 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666669, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(146.66666666666666, 53.33333333333334, 300.0)
+             indep_Q(cs_K)=-115266.666666667
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(100.0, 25.0, 375.0)
+             indep_Q(cs_K)=-59950.000000000
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+  --- T8 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666667, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(120.00000000000001, 80.0, 300.0)
+             indep_Q(cs_K)=-118600.000000000
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(91.66666666666666, 33.333333333333336, 375.0)
+             indep_Q(cs_K)=-59516.666666667
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+  --- T9 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666669, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(120.0, 80.0, 300.0)
+             indep_Q(cs_K)=-118600.000000000
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(91.66666666666666, 33.33333333333334, 375.0)
+             indep_Q(cs_K)=-59516.666666667
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+
+[Iter 3] LB = -345783.333333 = UB(-325123.333333) + ms_b(-1.794e+05) from T8
+[Iter 3] Scene 0: Kept ms point (c_s too close to verts). dist_ms_c=1.95e+02 < 1000.0 BUT dist_c_verts=0.00e+00 <= 1e-06
+[Iter 3] Scene 1: Switched to c_s point. dist_ms_c=1.44e+02 < 1000.0, dist_c_verts=8.18e+01 > 1e-06
+[Iter 3] Scene 2: Switched to c_s point. dist_ms_c=9.75e+01 < 1000.0, dist_c_verts=1.59e+02 > 1e-06
+Chosen node (0.0, 0.0, 250.0) with ms=-7.800e+04 (simp T8, scene 0, rank #1, source=ms(vert))
+[Iter 3] LB simplex = T8, next node simplex = T8, scene 0
+[Selected Simp Info] Iter 3 | Simplex T8 Vertices:
+  v0: (0.0, 250.0, 250.0)
+  v1: (0.0, 0.0, 500.0)
+  v2: (183.33333333333331, 66.66666666666667, 250.0)
+  v3: (0.0, 0.0, 0.0)
+  -> New Point: (0.0, 0.0, 250.0)
+[Iter 3] candidate rank #1: T8, scene=0, ms=-7.800e+04
+== ms candidates (sorted by (ms, -dist)) ==
+rank   simp   scene           ms    mind(all)                             pt
+----------------------------------------------------------------------------
+   1     T8       0  -7.8000e+04     1.59e+02     (0.0000, 0.0000, 250.0000)
+   2     T8       1  -6.2400e+04     8.18e+01  (120.0000, 80.0000, 300.0000)
+   3     T8       2  -3.9000e+04     0.00e+00   (91.6667, 33.3333, 375.0000)
+
+[Iter 3] per_tet=11, active after q_cut=5, tri_is_None=False
+[Iter 3] bad-quality active simplices (q < 0): 0
+[Iter 3] evaluating Q for scenario 0
+[Iter 3] evaluating Q for scenario 1
+[Iter 3] evaluating Q for scenario 2
+
+[Iter 3] Next Point Details:
+Simplex   Scene   Type    As             ms             As+ms          Q              (Kp, Ki, Kd)                  
+--------------------------------------------------------------------------------------------------------------------
+T8        0       ms(vert)2.5000e+04     -7.8000e+04    -5.3000e+04    -5.3000e+04    (0.0000, 0.0000, 250.0000)    
+
+[Iter 3] subdivision type = edge (code=2) on simplex T8
+           edge local verts = (1, 0)
+[Iter 3] Elapsed: 0.152s
+[DBG] evaluate_all_tetra: start
+[DBG] evaluate_all_tetra: building mesh ...
+[DBG] evaluate_all_tetra: 12 simplices, entering loop ...
+======================================================================
+[Iter 3] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 1, 8, 9)
+  Parent LB: -115261.111111111 (per-scen)
+  EF ef_obj(IPOPT): -36130.000863360, true_obj(recalc): 10000000000.000000000, used=min=-36130.000863360 (per-scen)
+  Simplex volume: 3.819444e+06
+  Children (2):
+    T10 (0, 8, 9, 11): LB = -109172.222222222
+    T11 (1, 8, 9, 11): LB = -115261.111111111
+  New global LB: -115261.111111111 (from T11 (1, 8, 9, 11))
+  Location: INSIDE
+  Avg CS point Q-value: -104063.888888889 (per-scen), point=(np.float64(131.66666666666666), np.float64(60.00000000000001), np.float64(308.3333333333333))
+  Current UB: -108374.444444444 (per-scen)
+  UB point: (183.33333333333331, 66.66666666666667, 250.0)
+  UB source: avgCS_new_simplex
+  UB simplex: (0, 3, 4, 8)
+  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.022s, ef_obj=-108390.00259008008, true_obj(per-scen)=10000000000.000000000
+======================================================================
+[Iter 3] UB candidate from new simplex 10 (avgCS): -1.083744e+05 (per scenario)
+
+======================================================================
+[TIMING] === Iter 3 phase breakdown (total 0.43s) ===
+  1_vertex_UB                    :       0.00s  (  0.0%)  
+  2_evaluate_all_tetra           :       0.01s  (  1.3%)  
+  3_active_filter_print          :       0.00s  (  0.2%)  
+  4_LB_selection                 :       0.00s  (  0.0%)  
+  5_EF_UB_solve                  :       0.13s  ( 31.0%)  ###############
+  6_candidate_selection          :       0.00s  (  0.1%)  
+  7_Q_eval_new_node              :       0.01s  (  2.5%)  #
+  8_mesh_subdivide               :       0.00s  (  0.0%)  
+  9_end_of_iter_reeval           :       0.28s  ( 64.9%)  ################################
+  TOTAL                          :       0.43s
+  #simplices=11, #scenarios=3, total_ms_pairs=33
+  fresh ms solves=0, cache hits=33
+======================================================================
+
+[DBG] entering evaluate_all_tetra ...
+[DBG] evaluate_all_tetra: start
+[DBG] evaluate_all_tetra: building mesh ...
+[DBG] evaluate_all_tetra: 12 simplices, entering loop ...
+[Iter 4] #simplices = 12, #active = 6, bad-quality cut = 0, bad-shape cut = 0
+== [Iter 4] ACTIVE simplices: LB / UB / sum(ms_s) / sum(c_s) (per-scenario) ==
+simp                    LB                UB            sum_ms           sum_c_s                Range(As)             Range(As+ms) #InfV
+----------------------------------------------------------------------------------------------------------------------------------------
+T5           -1.142944e+05      2.683644e+04     -2.134907e+05     -3.428833e+05    [-3.23e+05, 2.94e+05]    [-5.37e+05, 8.05e+04]     0
+T6           -1.091722e+05      4.999865e+09     -1.500041e+10     -3.275167e+05    [-3.23e+05, 3.00e+10]    [-1.50e+10, 1.50e+10]     1
+T7           -1.142944e+05      9.999932e+09     -2.045600e+05     -3.428833e+05    [-3.23e+05, 3.00e+10]    [-5.28e+05, 3.00e+10]     1
+T8           -1.151244e+05      9.999986e+09     -4.283152e+04     -3.457833e+05    [-3.23e+05, 3.00e+10]    [-3.66e+05, 3.00e+10]     1
+T10          -1.091722e+05      8.434958e+04     -4.095127e+04     -3.275167e+05    [-3.23e+05, 2.94e+05]    [-3.64e+05, 2.53e+05]     0
+T11          -1.152611e+05     -4.549042e+04     -8.547127e+04     -3.457833e+05   [-3.23e+05, -5.10e+04]   [-4.09e+05, -1.36e+05]     0
+
+== [Iter 4] INACTIVE simplices: LB / UB / sum(ms_s) / sum(c_s) (per-scenario) ==
+simp                    LB                UB            sum_ms           sum_c_s                Range(As)             Range(As+ms) #InfV
+----------------------------------------------------------------------------------------------------------------------------------------
+T0           -9.501111e+04      4.999865e+09     -1.500041e+10     -2.850333e+05    [-1.59e+05, 3.00e+10]    [-1.50e+10, 1.50e+10]     1
+T1           -5.310000e+04      1.000000e+10      0.000000e+00     -1.593000e+05    [-1.59e+05, 3.00e+10]    [-1.59e+05, 3.00e+10]     3
+T2           -5.310000e+04      1.000000e+10      0.000000e+00     -1.593000e+05    [-1.59e+05, 3.00e+10]    [-1.59e+05, 3.00e+10]     3
+T3           -6.292222e+04      9.999986e+09     -4.280533e+04     -1.887667e+05    [-1.59e+05, 3.00e+10]    [-2.02e+05, 3.00e+10]     2
+T4           -1.076833e+05      9.999932e+09     -2.045600e+05     -3.230500e+05    [-1.59e+05, 3.00e+10]    [-3.64e+05, 3.00e+10]     2
+T9           -1.036889e+05      9.999978e+09     -6.744000e+04     -3.110667e+05    [-2.62e+05, 3.00e+10]    [-3.29e+05, 3.00e+10]     1
+
+[Iter 4] created=12 (cum=58), active=6, active+UB=6, ms_recomputed=0
+[BaseBundle.eval_at] Infeasible/Error for K=(170.0000008003778, 79.99999920032666, 250.00000249928644): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(170.0000008003778, 79.99999920032666, 250.00000249928644): status=warning, term=infeasible
+[BaseBundle.eval_at] Infeasible/Error for K=(170.0000008003778, 79.99999920032666, 250.00000249928644): status=warning, term=infeasible
+[Iter 4] EF-ipopt: ok=True, ef_obj=-108390.00190258761, true_obj=1.000000e+10, time=0.023s
+[Iter 4] Pre-split gap: 2.066000e+04 (6.355%)
+[Iter 4] Active simplex ratio = 0.151389
+[Iter 4] UB point (183.33333333333331, 66.66666666666667, 250.0) is geometrically in simplices [5, 6, 7, 8, 10, 11]
+  T5 verts=[8, 1, 4, 0]: lam=[1.000000, -0.000000, -0.000000, -0.000000], LB=-342883.333333333, c_s=[-167666.66666666666, -115266.66666666666, -59950.0]
+  T6 verts=[3, 8, 4, 0]: lam=[0.000000, 1.000000, -0.000000, -0.000000], LB=-327516.666666667, c_s=[-167666.66666666666, -109350.00000000003, -50500.0]
+  T7 verts=[3, 1, 4, 8]: lam=[0.000000, -0.000000, -0.000000, 1.000000], LB=-342883.333333333, c_s=[-167666.66666666666, -115266.66666666666, -59950.0]
+  T8 verts=[3, 10, 8, 9]: lam=[0.000000, -0.000000, 1.000000, -0.000000], LB=-345373.188960631, c_s=[-167666.66666666666, -118600.0, -59516.666666666664]
+  T10 verts=[9, 11, 8, 0]: lam=[0.000000, -0.000000, 1.000000, -0.000000], LB=-327516.666666667, c_s=[-167666.66666666666, -109350.0, -50500.0]
+  T11 verts=[9, 1, 8, 11]: lam=[0.000000, -0.000000, 1.000000, -0.000000], LB=-345783.333333333, c_s=[-167666.66666666666, -118600.0, -59516.666666666664]
+
+== [Iter 4] CS DUAL vs PRIMAL diagnostic (simplices containing UB point) ==
+  --- T5 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666667, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(146.66666666666666, 53.33333333333334, 300.0)
+             indep_Q(cs_K)=-115266.666666667
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(100.0, 24.999999999999993, 375.0)
+             indep_Q(cs_K)=-59950.000000000
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+  --- T6 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666669, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(169.99999999999997, 80.0, 250.00000000000003)
+             indep_Q(cs_K)=-109350.000000000
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(150.0, 99.99999999999999, 250.0)
+             indep_Q(cs_K)=-50500.000000000
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+  --- T7 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666669, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(146.66666666666666, 53.33333333333334, 300.0)
+             indep_Q(cs_K)=-115266.666666667
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(100.0, 25.0, 375.0)
+             indep_Q(cs_K)=-59950.000000000
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+  --- T8 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666669, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(120.0, 80.0, 300.0)
+             indep_Q(cs_K)=-118600.000000000
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(91.66666666666666, 33.33333333333334, 375.0)
+             indep_Q(cs_K)=-59516.666666667
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+  --- T10 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666667, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(170.0, 80.0, 250.0)
+             indep_Q(cs_K)=-109350.000000000
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(150.0, 99.99999999999999, 250.0)
+             indep_Q(cs_K)=-50500.000000000
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+  --- T11 ---
+    scen 0: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(183.33333333333331, 66.66666666666667, 250.0)
+             indep_Q(cs_K)=-167666.666666667
+    scen 1: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(120.00000000000001, 80.0, 300.0)
+             indep_Q(cs_K)=-118600.000000000
+    scen 2: status=?, dual=N/A, primal=N/A
+             cs_primal_K=(91.66666666666666, 33.33333333333334, 375.0)
+             indep_Q(cs_K)=-59516.666666667
+  sum(c_s_dual)=0.000000000, UB_total=-975370.000000000, UB_per_scen=-325123.333333333
+
+  == Per-scenario Q_s at K_EF = (183.33333333333331, 66.66666666666667, 250.0) ==
+    scen 0: Q_s(K_EF)=-167666.666666667, c_s_dual=N/A
+    scen 1: Q_s(K_EF)=-107683.333333333, c_s_dual=N/A
+    scen 2: Q_s(K_EF)=-47700.000000000, c_s_dual=N/A
+    SUM Q_s(K_EF)=-323050.000000000, sum(c_s)=0.000000000, diff=-3.230500e+05
+
+[Iter 4] LB = -345783.333333 = UB(-325123.333333) + ms_b(-8.547e+04) from T11
+[Iter 4] Scene 0: Kept ms point (c_s too close to verts). dist_ms_c=1.65e+02 < 1000.0 BUT dist_c_verts=0.00e+00 <= 1e-06
+[Iter 4] Scene 1: Switched to c_s point. dist_ms_c=4.00e+01 < 1000.0, dist_c_verts=8.18e+01 > 1e-06
+[Iter 4] Scene 2: Switched to c_s point. dist_ms_c=9.43e+01 < 1000.0, dist_c_verts=1.59e+02 > 1e-06
+Skip candidate (91.66666666666666, 33.33333333333334, 375.0) (simp T11, scene 2, rank #1) because too close to existing nodes (< 1e-08).
+[STOP] Candidate (91.66666666666666, 33.33333333333334, 375.0) (scene 2) is too close to existing node #10 at distance 7.105e-15 (< 1e-08). Highlighted simplices: [8, 9]
+[Iter 4] candidate rank #1: T11, scene=2, ms=-3.540e+04
+== ms candidates (sorted by (ms, -dist)) ==
+rank   simp   scene           ms    mind(all)                             pt
+----------------------------------------------------------------------------
+   1    T11       2  -3.5400e+04     7.11e-15   (91.6667, 33.3333, 375.0000)
+   2    T11       1  -3.4697e+04     8.18e+01  (120.0000, 80.0000, 300.0000)
+   3    T11       0  -1.5375e+04     4.25e+01   (66.6667, 66.6667, 366.6667)
+
+[Iter 4] Stop due to collision.
+
+===== Simplex search summary (per-scenario) =====
+  Time (s)  # Nodes             LB             UB   Rel. Gap   Abs. Gap   #simplex    #active   Split       Selection
+---------------------------------------------------------------------------------------------------------------------
+     0.570        8 -115261.111111111 -108374.444444444    6.3545% 6886.66667          6          6    none             c_s
+     1.216        9 -115261.111111111 -108374.444444444    6.3545% 6886.66667          9          4interior        ms(vert)
+     1.637       10 -115261.111111111 -108374.444444444    6.3545% 6886.66667         10          5    edge             c_s
+     2.085       11 -115261.111111111 -108374.444444444    6.3545% 6886.66667         11          5    edge        ms(vert)
+     2.532       12 -115261.111111111 -108374.444444444    6.3545% 6886.66667         12          6    edge             N/A
+----------------------------------------------------------------------
+    Simplex run completed in 2.82s
+
+======================================================================
+  RESULTS SUMMARY ù mode=SMOKE
+======================================================================
+  Iterations:      5
+  Final nodes:     12
+  Final LB (avg):  -115261.111111
+  Final UB (avg):  -108374.444444
+  Gap (abs):       6.886667e+03
+  Gap (rel):       6.354512e-02
+  Known optimal:   -108390.00
+  UB vs optimal:   1.435147e-04
+  Wall time:       2.82s
+======================================================================
+
+  Results written to:
+    C:\Users\pc\Desktop\GitWorkspace2026\219_simplex_fv\pid_simplex_fv\results\farmer_smoke\simplex_result.txt
+    C:\Users\pc\Desktop\GitWorkspace2026\219_simplex_fv\pid_simplex_fv\results\farmer_smoke\simplex_result.csv
+Warning: environment still referenced so free is deferred (Continue to use WLS)

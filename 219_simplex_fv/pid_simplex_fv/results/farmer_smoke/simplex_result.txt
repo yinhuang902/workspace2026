@@ -1,0 +1,10 @@
+mode=smoke
+scenarios=['good', 'fair', 'bad']
+iterations=5
+final_nodes=12
+final_LB_avg=-115261.11111111111
+final_UB_avg=-108390.00259008263
+gap_abs=6871.10852102848
+gap_rel=0.0633924564704934
+known_optimal=-108390.0
+wall_time_s=2.92

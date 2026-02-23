@@ -1,0 +1,86 @@
+# debug_lb_after_split.txt — LB analysis after simplex split
+# Shows: selected simplex LB, all child LBs, new global LB, INSIDE/OUTSIDE
+
+[Iter 0] Shape check: triggered=0, inactivated=0, passed=0
+======================================================================
+[Iter 0] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 1, 3, 4)
+  Parent LB: -115405.555555556 (per-scen)
+  EF ef_obj(IPOPT): -36130.000863361, true_obj(recalc): -108390.002590083, used=min=-108390.002590083 (per-scen)
+  Simplex volume: 2.083333e+07
+  Children (4):
+    T5 (0, 1, 4, 8): LB = -114294.444444444
+    T6 (0, 3, 4, 8): LB = -109172.222222222
+    T7 (0, 1, 3, 8): LB = -115261.111111111
+    T8 (1, 3, 4, 8): LB = -114294.444444444
+  New global LB: -115261.111111111 (from T7 (0, 1, 3, 8))
+  Location: INSIDE
+  Avg CS point Q-value: -103716.666666667 (per-scen), point=(134.44444444444443, 57.22222222222223, 308.3333333333333)
+  Current UB: -108390.002590083 (per-scen)
+  UB point: (170.0000033003596, 79.99999920032666, 250.0000024992864)
+  UB source: EF_ipopt
+  UB simplex: (0, 1, 3, 4)
+  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.021s, ef_obj=-108390.00259008261, true_obj(per-scen)=-108390.002590083
+======================================================================
+
+[Iter 1] Shape check: triggered=0, inactivated=0, passed=0
+======================================================================
+[Iter 1] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 1, 3, 8)
+  Parent LB: -115261.111111111 (per-scen)
+  EF ef_obj(IPOPT): -36130.000863361, true_obj(recalc): -108390.002590083, used=min=-108390.002590083 (per-scen)
+  Simplex volume: 7.638889e+06
+  Children (2):
+    T8 (0, 1, 8, 9): LB = -115261.111111111
+    T9 (1, 3, 8, 9): LB = -115261.111111111
+  New global LB: -115261.111111111 (from T9 (1, 3, 8, 9))
+  Location: INSIDE
+  Avg CS point Q-value: -104063.888888889 (per-scen), point=(131.66666666666666, 60.00000000000001, 308.3333333333333)
+  Current UB: -108390.002590083 (per-scen)
+  UB point: (183.33333333333331, 66.66666666666667, 250.0)
+  UB source: unknown
+  UB simplex: None
+  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.021s, ef_obj=-108390.00259008259, true_obj(per-scen)=-108390.002590083
+======================================================================
+
+[Iter 2] Shape check: triggered=0, inactivated=0, passed=0
+======================================================================
+[Iter 2] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (1, 3, 8, 9)
+  Parent LB: -115261.111111111 (per-scen)
+  EF ef_obj(IPOPT): -36130.000863361, true_obj(recalc): -108390.002590083, used=min=-108390.002590083 (per-scen)
+  Simplex volume: 3.819444e+06
+  Children (2):
+    T9 (3, 8, 9, 10): LB = -115124.396320210
+    T10 (1, 3, 9, 10): LB = -103688.888888889
+  New global LB: -115261.111111111 (from T8 (0, 1, 8, 9))
+  Location: OUTSIDE
+  Avg CS point Q-value: -104063.888888889 (per-scen), point=(131.66666666666666, 60.00000000000001, 308.3333333333333)
+  Current UB: -108390.002590083 (per-scen)
+  UB point: (183.33333333333331, 66.66666666666667, 250.0)
+  UB source: unknown
+  UB simplex: None
+  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.022s, ef_obj=-108390.00259008259, true_obj(per-scen)=-108390.002590083
+======================================================================
+
+[Iter 3] Shape check: triggered=0, inactivated=0, passed=0
+======================================================================
+[Iter 3] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 1, 8, 9)
+  Parent LB: -115261.111111111 (per-scen)
+  EF ef_obj(IPOPT): -36130.000863360, true_obj(recalc): -108390.002590080, used=min=-108390.002590080 (per-scen)
+  Simplex volume: 3.819444e+06
+  Children (2):
+    T10 (0, 8, 9, 11): LB = -109172.222222222
+    T11 (1, 8, 9, 11): LB = -115261.111111111
+  New global LB: -115261.111111111 (from T11 (1, 8, 9, 11))
+  Location: INSIDE
+  Avg CS point Q-value: -104063.888888889 (per-scen), point=(131.66666666666666, 60.00000000000001, 308.3333333333333)
+  Current UB: -108390.002590083 (per-scen)
+  UB point: (183.33333333333331, 66.66666666666667, 250.0)
+  UB source: unknown
+  UB simplex: None
+  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.028s, ef_obj=-108390.00259008008, true_obj(per-scen)=-108390.002590080
+======================================================================
+
+[Iter 4] Shape check: triggered=0, inactivated=0, passed=0

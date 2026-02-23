@@ -1,0 +1,1776 @@
+JobID: 22901855
+Node:  fc30356
+Start: Fri Feb 13 20:49:52 PST 2026
+Work:  /home/yinhuang/213_new_run2/snoglode-main-2-ori-record3-log-1e3TL60sc10/examples/stochastic_pid
+-rw-r----- 1 yinhuang yinhuang 16K Feb 13 20:18 /home/yinhuang/213_new_run2/snoglode-main-2-ori-record3-log-1e3TL60sc10/examples/stochastic_pid/stochastic_pid.py
+Python: /home/yinhuang/micromamba/envs/pidsp-sim-fir/bin/python
+Python 3.11.14
+No mpi4py detected - running in serial.
+--------------------------------------------------
+SNoGloDe Solver Parameters
+--------------------------------------------------
+
+Subproblem Names:
+  - scen_0
+  - scen_1
+  - scen_2
+  - scen_3
+  - scen_4
+  - scen_5
+  - scen_6
+  - scen_7
+  - scen_8
+  - scen_9
+Total # subproblems: 10
+
+LB solver: gurobi
+UB solver: gurobi
+CG solver: ipopt
+
+Global convergance guaranteed: True
+Epsilon: 0.001
+Perform FBBT: True
+Perform OBBT: True
+Relax binaries at LB: False
+Relax integers at LB: False
+
+Bounder Information
+  - Lower Bounder: GurobiLBLowerBounder
+  - Candidate Generator: SolveExtensiveForm
+
+Queuing strategy: QueueStrategy.bound
+Using a node feasibility checker? : False
+
+Branching Information
+  - Selection Strategy: HybridBranching
+  - Partition Strategy: ExpectedValue
+
+Verbose: True
+No log file generated.
+
+--------------------------------------------------
+Generating the models for the subproblems.
+	Scenario scen_0 has 3 first stage vars.
+	Scenario scen_1 has 3 first stage vars.
+	Scenario scen_2 has 3 first stage vars.
+	Scenario scen_3 has 3 first stage vars.
+	Scenario scen_4 has 3 first stage vars.
+	Scenario scen_5 has 3 first stage vars.
+	Scenario scen_6 has 3 first stage vars.
+	Scenario scen_7 has 3 first stage vars.
+	Scenario scen_8 has 3 first stage vars.
+	Scenario scen_9 has 3 first stage vars.
+Finished generating subproblem models.
+Node rooted.
+Using EF method for candidate solution. No EF bound. Building EF.
+EF built.
+        Time (s)  Nodes Explored       Pruned by                              LB              UB        Rel. Gap        Abs. Gap         # Nodes
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+           46.05               1                           * L U      0.95047324       0.9818602         3.1967%        0.031387               2
+          73.901               2                           * U        0.95047324      0.97900405         2.9143%        0.028531               3
+         114.193               3                                      0.95047324      0.97900405         2.9143%        0.028531               4
+         123.252               4                                      0.95047324      0.97900405         2.9143%        0.028531               5
+         128.452               5                           * L        0.95052759      0.97900405         2.9087%        0.028476               6
+          134.34               6                                      0.95052759      0.97900405         2.9087%        0.028476               7
+         144.667               7                           * L        0.95326699      0.97900405         2.6289%        0.025737               8
+         152.283               8                                      0.95326699      0.97900405         2.6289%        0.025737               9
+          165.14               9                           * L        0.95329832      0.97900405         2.6257%        0.025706              10
+         173.067              10                                      0.95329832      0.97900405         2.6257%        0.025706              11
+         180.666              11                           * L        0.95337844      0.97900405         2.6175%        0.025626              12
+         187.487              12                                      0.95337844      0.97900405         2.6175%        0.025626              13
+         195.528              13                           * L         0.9533981      0.97900405         2.6155%        0.025606              14
+         199.591              14                                       0.9533981      0.97900405         2.6155%        0.025606              15
+         206.546              15                           * L        0.95341214      0.97900405         2.6141%        0.025592              16
+         212.615              16                                      0.95341214      0.97900405         2.6141%        0.025592              17
+         218.899              17                           * L        0.95342685      0.97900405         2.6126%        0.025577              18
+         226.355              18                                      0.95342685      0.97900405         2.6126%        0.025577              19
+         235.515              19                           * L        0.95344153      0.97900405         2.6111%        0.025563              20
+         242.222              20                                      0.95344153      0.97900405         2.6111%        0.025563              21
+         250.631              21                           * L        0.95344768      0.97900405         2.6104%        0.025556              22
+         259.196              22                                      0.95344768      0.97900405         2.6104%        0.025556              23
+         268.691              23                           * L        0.95348189      0.97900405          2.607%        0.025522              24
+         277.325              24                                      0.95348189      0.97900405          2.607%        0.025522              25
+         285.941              25                           * L        0.95349691      0.97900405         2.6054%        0.025507              26
+         294.542              26                                      0.95349691      0.97900405         2.6054%        0.025507              27
+         302.096              27                           * L        0.95350254      0.97900405         2.6048%        0.025502              28
+         310.461              28                                      0.95350254      0.97900405         2.6048%        0.025502              29
+         318.125              29                           * L        0.95350794      0.97900405         2.6043%        0.025496              30
+         326.325              30                                      0.95350794      0.97900405         2.6043%        0.025496              31
+         333.778              31                           * L         0.9535131      0.97900405         2.6038%        0.025491              32
+         341.946              32                                       0.9535131      0.97900405         2.6038%        0.025491              33
+         350.708              33                           * L        0.95351801      0.97900405         2.6033%        0.025486              34
+          357.14              34                                      0.95351801      0.97900405         2.6033%        0.025486              35
+         363.659              35                           * L        0.95352502      0.97900405         2.6025%        0.025479              36
+         370.482              36                                      0.95352502      0.97900405         2.6025%        0.025479              37
+         376.642              37                           * L        0.95352939      0.97900405         2.6021%        0.025475              38
+         383.507              38                                      0.95352939      0.97900405         2.6021%        0.025475              39
+         392.762              39                           * L        0.95366441      0.97900405         2.5883%         0.02534              40
+         400.298              40                                      0.95366441      0.97900405         2.5883%         0.02534              41
+          408.17              41                           * L        0.95366959      0.97900405         2.5878%        0.025334              42
+          415.12              42                                      0.95366959      0.97900405         2.5878%        0.025334              43
+          421.23              43                           * L        0.95418637      0.97900405          2.535%        0.024818              44
+         429.888              44                                      0.95418637      0.97900405          2.535%        0.024818              45
+          438.88              45                           * L        0.95418693      0.97900405         2.5349%        0.024817              46
+         447.942              46                                      0.95418693      0.97900405         2.5349%        0.024817              47
+         458.793              47                           * L        0.95418742      0.97900405         2.5349%        0.024817              48
+         469.068              48                                      0.95418742      0.97900405         2.5349%        0.024817              49
+         475.838              49                           * L        0.95418787      0.97900405         2.5348%        0.024816              50
+         483.031              50                                      0.95418787      0.97900405         2.5348%        0.024816              51
+         491.226              51                           * L        0.95418828      0.97900405         2.5348%        0.024816              52
+         499.368              52                                      0.95418828      0.97900405         2.5348%        0.024816              53
+         506.667              53                           * L        0.95423094      0.97900405         2.5304%        0.024773              54
+         515.607              54                                      0.95423094      0.97900405         2.5304%        0.024773              55
+         525.404              55                           * L        0.95423161      0.97900405         2.5304%        0.024772              56
+         534.281              56                                      0.95423161      0.97900405         2.5304%        0.024772              57
+         540.195              57                           * L        0.95423222      0.97900405         2.5303%        0.024772              58
+          547.02              58                                      0.95423222      0.97900405         2.5303%        0.024772              59
+         559.659              59                           * L        0.95423583      0.97900405         2.5299%        0.024768              60
+         567.234              60                                      0.95423583      0.97900405         2.5299%        0.024768              61
+         573.998              61                           * L        0.95423584      0.97900405         2.5299%        0.024768              62
+         580.942              62                                      0.95423584      0.97900405         2.5299%        0.024768              63
+         591.856              63                           * L        0.95423585      0.97900405         2.5299%        0.024768              64
+         599.058              64                                      0.95423585      0.97900405         2.5299%        0.024768              65
+         606.652              65                           * L        0.95423585      0.97900405         2.5299%        0.024768              66
+         614.517              66                                      0.95423585      0.97900405         2.5299%        0.024768              67
+         621.881              67                           * L        0.95423586      0.97900405         2.5299%        0.024768              68
+         628.929              68                                      0.95423586      0.97900405         2.5299%        0.024768              69
+         635.203              69                           * L        0.95423586      0.97900405         2.5299%        0.024768              70
+         643.739              70                                      0.95423586      0.97900405         2.5299%        0.024768              71
+          651.55              71                           * L        0.95423587      0.97900405         2.5299%        0.024768              72
+         657.855              72                                      0.95423587      0.97900405         2.5299%        0.024768              73
+         664.766              73                           * L        0.95423587      0.97900405         2.5299%        0.024768              74
+         671.843              74                                      0.95423587      0.97900405         2.5299%        0.024768              75
+         681.134              75                           * L        0.95423587      0.97900405         2.5299%        0.024768              76
+         690.841              76                                      0.95423587      0.97900405         2.5299%        0.024768              77
+         698.394              77                           * L        0.95423587      0.97900405         2.5299%        0.024768              78
+         705.726              78                                      0.95423587      0.97900405         2.5299%        0.024768              79
+         713.363              79                           * L        0.95423588      0.97900405         2.5299%        0.024768              80
+         720.513              80                                      0.95423588      0.97900405         2.5299%        0.024768              81
+         728.563              81                           * L        0.95423588      0.97900405         2.5299%        0.024768              82
+         739.968              82                                      0.95423588      0.97900405         2.5299%        0.024768              83
+         746.631              83                           * L        0.95423588      0.97900405         2.5299%        0.024768              84
+         753.318              84                                      0.95423588      0.97900405         2.5299%        0.024768              85
+         761.988              85                           * L        0.95423654      0.97900405         2.5299%        0.024768              86
+         769.518              86                                      0.95423654      0.97900405         2.5299%        0.024768              87
+         776.163              87                           * L        0.95423654      0.97900405         2.5299%        0.024768              88
+         784.962              88                                      0.95423654      0.97900405         2.5299%        0.024768              89
+         790.177              89                                      0.95423654      0.97900405         2.5299%        0.024768              90
+          797.09              90                                      0.95423654      0.97900405         2.5299%        0.024768              91
+         802.626              91                           * L        0.95423662      0.97900405         2.5299%        0.024767              92
+          818.15              92                                      0.95423662      0.97900405         2.5299%        0.024767              93
+         826.512              93                           * L        0.95423662      0.97900405         2.5299%        0.024767              94
+         835.541              94                                      0.95423662      0.97900405         2.5299%        0.024767              95
+         843.757              95                           * L        0.95423662      0.97900405         2.5299%        0.024767              96
+         850.493              96                                      0.95423662      0.97900405         2.5299%        0.024767              97
+         854.781              97                                      0.95423662      0.97900405         2.5299%        0.024767              98
+         860.008              98                                      0.95423662      0.97900405         2.5299%        0.024767              99
+         869.657              99                           * L        0.95423669      0.97900405         2.5299%        0.024767             100
+         877.112             100                                      0.95423669      0.97900405         2.5299%        0.024767             101
+         886.403             101                           * L        0.95423669      0.97900405         2.5299%        0.024767             102
+[Iter 100] MIPGap restored from 0.1 to 0.001
+         896.586             102           Bound                      0.95423669      0.97900405         2.5299%        0.024767             101
+         900.659             103           Bound                      0.95423669      0.97900405         2.5299%        0.024767             100
+         912.022             104           Bound                      0.95423669      0.97900405         2.5299%        0.024767              99
+         916.019             105           Bound           * L        0.95423669      0.97900405         2.5299%        0.024767              98
+         936.044             106           Bound                      0.95423669      0.97900405         2.5299%        0.024767              97
+         956.491             107           Bound           * L        0.95423678      0.97900405         2.5298%        0.024767              96
+         975.225             108           Bound                      0.95423678      0.97900405         2.5298%        0.024767              95
+         994.021             109           Bound           * L        0.95423688      0.97900405         2.5298%        0.024767              94
+         1010.78             110           Bound                      0.95423688      0.97900405         2.5298%        0.024767              93
+        1031.812             111           Bound           * L        0.95423699      0.97900405         2.5298%        0.024767              92
+         1052.01             112           Bound                      0.95423699      0.97900405         2.5298%        0.024767              91
+        1071.436             113           Bound           * L        0.95423711      0.97900405         2.5298%        0.024767              90
+        1089.702             114           Bound                      0.95423711      0.97900405         2.5298%        0.024767              89
+        1109.772             115           Bound           * L        0.95423725      0.97900405         2.5298%        0.024767              88
+         1129.25             116           Bound                      0.95423725      0.97900405         2.5298%        0.024767              87
+        1146.925             117           Bound           * L         0.9542374      0.97900405         2.5298%        0.024767              86
+        1166.101             118           Bound                       0.9542374      0.97900405         2.5298%        0.024767              85
+        1184.265             119           Bound           * L        0.95423759      0.97900405         2.5298%        0.024766              84
+        1198.166             120           Bound                      0.95423759      0.97900405         2.5298%        0.024766              83
+        1203.423             121           Bound           * L        0.95423779      0.97900405         2.5297%        0.024766              82
+        1213.657             122           Bound                      0.95423779      0.97900405         2.5297%        0.024766              81
+        1218.481             123           Bound           * L        0.95423802      0.97900405         2.5297%        0.024766              80
+        1222.074             124           Bound                      0.95423802      0.97900405         2.5297%        0.024766              79
+        1233.059             125           Bound           * L        0.95423827      0.97900405         2.5297%        0.024766              78
+        1242.611             126           Bound                      0.95423827      0.97900405         2.5297%        0.024766              77
+        1246.846             127           Bound           * L        0.95424036      0.97900405         2.5295%        0.024764              76
+        1260.409             128           Bound                      0.95424036      0.97900405         2.5295%        0.024764              75
+        1269.905             129           Bound           * L        0.95424538      0.97900405          2.529%        0.024759              74
+        1275.617             130           Bound                      0.95424538      0.97900405          2.529%        0.024759              73
+        1284.329             131           Bound           * L        0.95425096      0.97900405         2.5284%        0.024753              72
+         1288.65             132           Bound                      0.95425096      0.97900405         2.5284%        0.024753              71
+         1298.86             133           Bound           * L        0.95425573      0.97900405         2.5279%        0.024748              70
+        1317.257             134           Bound                      0.95425573      0.97900405         2.5279%        0.024748              69
+        1334.698             135           Bound           * L        0.95425716      0.97900405         2.5278%        0.024747              68
+        1339.653             136           Bound                      0.95425716      0.97900405         2.5278%        0.024747              67
+        1352.943             137           Bound           * L        0.95427392      0.97900405         2.5261%         0.02473              66
+         1361.23             138                                      0.95427392      0.97900405         2.5261%         0.02473              67
+        1373.337             139                           * L        0.95430239      0.97900405         2.5231%        0.024702              68
+        1384.851             140           Bound                      0.95430239      0.97900405         2.5231%        0.024702              67
+        1389.811             141           Bound           * L        0.95430501      0.97900405         2.5229%        0.024699              66
+        1408.615             142           Bound                      0.95430501      0.97900405         2.5229%        0.024699              65
+        1429.164             143           Bound           * L        0.95431672      0.97900405         2.5217%        0.024687              64
+        1446.958             144           Bound                      0.95431672      0.97900405         2.5217%        0.024687              63
+        1463.482             145           Bound           * L        0.95431821      0.97900405         2.5215%        0.024686              62
+        1480.805             146           Bound                      0.95431821      0.97900405         2.5215%        0.024686              61
+        1501.865             147           Bound           * L        0.95432974      0.97900405         2.5203%        0.024674              60
+        1517.565             148           Bound                      0.95432974      0.97900405         2.5203%        0.024674              59
+        1532.545             149           Bound           * L        0.95436676      0.97900405         2.5166%        0.024637              58
+        1552.508             150           Bound                      0.95436676      0.97900405         2.5166%        0.024637              57
+        1572.167             151           Bound           * L        0.95438306      0.97900405         2.5149%        0.024621              56
+        1590.831             152           Bound                      0.95438306      0.97900405         2.5149%        0.024621              55
+        1610.061             153           Bound           * L        0.95440973      0.97900405         2.5122%        0.024594              54
+        1646.682             154           Bound                      0.95440973      0.97900405         2.5122%        0.024594              53
+        1657.513             155                           * L          0.954414      0.97900405         2.5117%         0.02459              54
+        1670.366             156           Bound                        0.954414      0.97900405         2.5117%         0.02459              53
+        1684.339             157           Bound           * L        0.95443782      0.97900405         2.5093%        0.024566              52
+        1695.373             158           Bound                      0.95443782      0.97900405         2.5093%        0.024566              51
+        1699.978             159                           * L        0.95451648      0.97900405         2.5013%        0.024488              52
+         1714.24             160           Bound                      0.95451648      0.97900405         2.5013%        0.024488              51
+        1728.684             161           Bound           * L        0.95469099      0.97900405         2.4834%        0.024313              50
+        1736.555             162           Bound                      0.95469099      0.97900405         2.4834%        0.024313              49
+          1746.2             163           Bound           * L        0.95469527      0.97900405          2.483%        0.024309              48
+        1750.207             164           Bound                      0.95469527      0.97900405          2.483%        0.024309              47
+         1758.67             165           Bound           * L        0.95476396      0.97900405          2.476%         0.02424              46
+        1764.032             166           Bound                      0.95476396      0.97900405          2.476%         0.02424              45
+        1776.725             167           Bound           * L        0.95487973      0.97900405         2.4642%        0.024124              44
+        1789.679             168           Bound                      0.95487973      0.97900405         2.4642%        0.024124              43
+        1803.857             169           Bound           * L         0.9549172      0.97900405         2.4603%        0.024087              42
+        1817.509             170           Bound                       0.9549172      0.97900405         2.4603%        0.024087              41
+        1822.328             171           Bound           * L        0.95500925      0.97900405         2.4509%        0.023995              40
+        1836.439             172           Bound                      0.95500925      0.97900405         2.4509%        0.023995              39
+        1851.817             173           Bound           * L        0.95517966      0.97900405         2.4335%        0.023824              38
+        1864.581             174           Bound                      0.95517966      0.97900405         2.4335%        0.023824              37
+        1874.793             175           Bound           * L        0.95536255      0.97900405         2.4149%        0.023642              36
+        1886.491             176           Bound                      0.95536255      0.97900405         2.4149%        0.023642              35
+        1895.417             177           Bound           * L        0.95555446      0.97900405         2.3952%         0.02345              34
+        1906.113             178           Bound                      0.95555446      0.97900405         2.3952%         0.02345              33
+        1915.724             179           Bound           * L        0.95556085      0.97900405         2.3946%        0.023443              32
+        1926.955             180           Bound                      0.95556085      0.97900405         2.3946%        0.023443              31
+        1936.749             181           Bound                      0.95556085      0.97900405         2.3946%        0.023443              30
+        1941.696             182           Bound                      0.95556085      0.97900405         2.3946%        0.023443              29
+        1945.935             183           Bound           * L        0.95556094      0.97900405         2.3946%        0.023443              28
+        1958.747             184           Bound                      0.95556094      0.97900405         2.3946%        0.023443              27
+        1965.504             185           Bound                      0.95556094      0.97900405         2.3946%        0.023443              26
+        1969.842             186           Bound                      0.95556094      0.97900405         2.3946%        0.023443              25
+        1981.181             187           Bound           * L        0.95575339      0.97900405         2.3749%        0.023251              24
+        1992.927             188                                      0.95575339      0.97900405         2.3749%        0.023251              25
+          2004.0             189                           * L        0.96329084      0.97900405          1.605%        0.015713              26
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+        2473.383             190                                      0.96329084      0.97900405          1.605%        0.015713              27
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+         2987.33             191                           * L         0.9663638      0.97900405         1.2911%         0.01264              28
+        2994.602             192           Bound                       0.9663638      0.97900405         1.2911%         0.01264              27
+        2999.659             193           Bound           * L        0.97065172      0.97900405         0.8531%        0.008352              26
+        3027.522             194           Bound                      0.97065172      0.97900405         0.8531%        0.008352              25
+        3057.721             195           Bound           * L        0.97115198      0.97900405          0.802%        0.007852              24
+        3062.693             196           Bound                      0.97115198      0.97900405          0.802%        0.007852              23
+        3067.066             197           Bound                      0.97115198      0.97900405          0.802%        0.007852              22
+        3071.078             198           Bound                      0.97115198      0.97900405          0.802%        0.007852              21
+        3076.019             199           Bound           * L        0.97115264      0.97900405          0.802%        0.007851              20
+        3080.087             200           Bound                      0.97115264      0.97900405          0.802%        0.007851              19
+        3083.586             201           Bound                      0.97115264      0.97900405          0.802%        0.007851              18
+         3087.98             202           Bound                      0.97115264      0.97900405          0.802%        0.007851              17
+        3091.563             203           Bound           * L        0.97438705      0.97900405         0.4716%        0.004617              16
+        3219.371             204           Bound                      0.97438705      0.97900405         0.4716%        0.004617              15
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+        3709.681             205                           * L        0.97468755      0.97900405         0.4409%        0.004317              16
+        3890.248             206           Bound                      0.97468755      0.97900405         0.4409%        0.004317              15
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+        4396.537             207                           * L        0.97468755      0.97900405         0.4409%        0.004317              16
+        4551.619             208           Bound                      0.97468755      0.97900405         0.4409%        0.004317              15
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+        5143.366             209                           * L        0.97468755      0.97900405         0.4409%        0.004317              16
+         5343.44             210           Bound                      0.97468755      0.97900405         0.4409%        0.004317              15
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+        5967.139             211                           * L        0.97468755      0.97900405         0.4409%        0.004317              16
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+        6302.477             212           Bound                      0.97468755      0.97900405         0.4409%        0.004317              15
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+        6938.952             213                           * L        0.97468755      0.97900405         0.4409%        0.004317              16
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+        7316.484             214           Bound                      0.97468755      0.97900405         0.4409%        0.004317              15
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+        7932.718             215                           * L        0.97468755      0.97900405         0.4409%        0.004317              16
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+        8248.576             216           Bound                      0.97468755      0.97900405         0.4409%        0.004317              15
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+        8889.881             217                           * L        0.97468755      0.97900405         0.4409%        0.004317              16
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+        9378.021             218           Bound                      0.97468755      0.97900405         0.4409%        0.004317              15
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       10017.365             219                           * L        0.97468755      0.97900405         0.4409%        0.004317              16
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+       10492.641             220           Bound                      0.97468755      0.97900405         0.4409%        0.004317              15
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       11126.209             221                           * L         0.9747783      0.97900405         0.4316%        0.004226              16
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       11604.923             222           Bound                       0.9747783      0.97900405         0.4316%        0.004226              15
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       12251.364             223                           * L        0.97535842      0.97900405         0.3724%        0.003646              16
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       12777.783             224           Bound                      0.97535842      0.97900405         0.3724%        0.003646              15
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       13426.518             225                           * L        0.97535842      0.97900405         0.3724%        0.003646              16
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       13982.608             226           Bound                      0.97535842      0.97900405         0.3724%        0.003646              15
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       14631.681             227                           * L        0.97535842      0.97900405         0.3724%        0.003646              16
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       15216.967             228           Bound                      0.97535842      0.97900405         0.3724%        0.003646              15
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       15875.315             229                           * L        0.97535842      0.97900405         0.3724%        0.003646              16
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+        16447.05             230           Bound                      0.97535842      0.97900405         0.3724%        0.003646              15
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       17114.037             231                           * L        0.97536719      0.97900405         0.3715%        0.003637              16
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       17698.409             232                                      0.97536719      0.97900405         0.3715%        0.003637              17
+       17842.609             233           Bound           * L        0.97536719      0.97900405         0.3715%        0.003637              16
+       18077.076             234           Bound                      0.97536719      0.97900405         0.3715%        0.003637              15
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       18732.286             235                           * L        0.97545749      0.97900405         0.3623%        0.003547              16
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       19383.677             236                                      0.97545749      0.97900405         0.3623%        0.003547              17
+WARNING: Unexpected condition for the variable scen_1.K_d LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_1.K_d LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_7.K_d LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_7.K_d LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_9.K_d LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_9.K_p LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_9.K_d LB
+problem.TerminationCondition = maxTimeLimit
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+        19980.13             237                           * L        0.97556022      0.97900405         0.3518%        0.003444              18
+       20260.318             238           Bound                      0.97556022      0.97900405         0.3518%        0.003444              17
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       20924.547             239                           * L        0.97556022      0.97900405         0.3518%        0.003444              18
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+       21241.862             240           Bound                      0.97556022      0.97900405         0.3518%        0.003444              17
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       21904.735             241                           * L        0.97556022      0.97900405         0.3518%        0.003444              18
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+       22293.737             242           Bound                      0.97556022      0.97900405         0.3518%        0.003444              17
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       22963.292             243                           * L        0.97556022      0.97900405         0.3518%        0.003444              18
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+       23389.597             244           Bound                      0.97556022      0.97900405         0.3518%        0.003444              17
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       24070.382             245                           * L        0.97556022      0.97900405         0.3518%        0.003444              18
+WARNING: Unexpected condition for the variable scen_0.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_0.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_1.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_1.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_2.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_2.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_4.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_4.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_6.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_6.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_7.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_7.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_9.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_9.K_d UB
+problem.TerminationCondition = maxTimeLimit
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       24774.199             246                                      0.97556022      0.97900405         0.3518%        0.003444              19
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       25443.086             247                           * L        0.97556022      0.97900405         0.3518%        0.003444              20
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       26104.177             248                                      0.97556022      0.97900405         0.3518%        0.003444              21
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       26742.464             249                           * L        0.97562101      0.97900405         0.3456%        0.003383              22
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       27396.205             250                                      0.97562101      0.97900405         0.3456%        0.003383              23
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       28034.246             251           Bound           * L        0.97562101      0.97900405         0.3456%        0.003383              22
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       28685.227             252                                      0.97562101      0.97900405         0.3456%        0.003383              23
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       29325.649             253           Bound           * L        0.97562101      0.97900405         0.3456%        0.003383              22
+WARNING: Unexpected condition for the variable scen_1.K_i UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_1.K_i UB
+problem.TerminationCondition = maxTimeLimit
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       29982.588             254                                      0.97562101      0.97900405         0.3456%        0.003383              23
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       30625.947             255           Bound           * L        0.97562101      0.97900405         0.3456%        0.003383              22
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       31245.703             256                                      0.97562101      0.97900405         0.3456%        0.003383              23
+WARNING: Unexpected condition for the variable scen_0.K_d LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_0.K_d LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_1.K_d LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_1.K_d LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_5.K_d LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_6.K_d LB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_8.K_d LB
+problem.TerminationCondition = maxTimeLimit
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       31950.128             257           Bound           * L        0.97571182      0.97900405         0.3363%        0.003292              22
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       32572.279             258                                      0.97571182      0.97900405         0.3363%        0.003292              23
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+        33186.84             259           Bound           * L        0.97571182      0.97900405         0.3363%        0.003292              22
+WARNING: Unexpected condition for the variable scen_1.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_1.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_1.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_4.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_4.K_d UB
+problem.TerminationCondition = maxTimeLimit
+WARNING: Unexpected condition for the variable scen_4.K_d UB
+problem.TerminationCondition = maxTimeLimit
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       33874.955             260           Bound                      0.97571182      0.97900405         0.3363%        0.003292              21
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       34499.109             261           Bound           * L        0.97599284      0.97900405         0.3076%        0.003011              20
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       35001.394             262           Bound                      0.97599284      0.97900405         0.3076%        0.003011              19
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       35633.716             263                           * L        0.97599284      0.97900405         0.3076%        0.003011              20
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       36245.352             264           Bound                      0.97599284      0.97900405         0.3076%        0.003011              19
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       36862.507             265                           * L        0.97667362      0.97900405          0.238%         0.00233              20
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       37423.667             266                                      0.97667362      0.97900405          0.238%         0.00233              21
+        37575.37             267           Bound           * L        0.97709912      0.97900405         0.1946%        0.001905              20
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+        38177.76             268           Bound                      0.97709912      0.97900405         0.1946%        0.001905              19
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       38843.636             269           Bound           * L        0.97727352      0.97900405         0.1768%        0.001731              18
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+        39464.43             270                                      0.97727352      0.97900405         0.1768%        0.001731              19
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       40076.002             271           Bound           * L        0.97727352      0.97900405         0.1768%        0.001731              18
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       40687.981             272           Bound                      0.97727352      0.97900405         0.1768%        0.001731              17
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       41304.889             273           Bound           * L        0.97813119      0.97900405         0.0892%        0.000873              16
+       41322.527             274                                      0.97813119      0.97900405         0.0892%        0.000873              17
+       41340.893             275                           * L        0.97818948      0.97900405         0.0832%        0.000815              18
+       41356.821             276                                      0.97818948      0.97900405         0.0832%        0.000815              19
+       41372.777             277                           * L         0.9782006      0.97900405         0.0821%        0.000803              20
+       41386.528             278                                       0.9782006      0.97900405         0.0821%        0.000803              21
+       41396.993             279                           * L        0.97821268      0.97900405         0.0808%        0.000791              22
+       41412.754             280                                      0.97821268      0.97900405         0.0808%        0.000791              23
+        41427.91             281                           * L        0.97824074      0.97900405          0.078%        0.000763              24
+       41434.872             282                                      0.97824074      0.97900405          0.078%        0.000763              25
+       41444.083             283                           * L        0.97824298      0.97900405         0.0777%        0.000761              26
+        41461.75             284                                      0.97824298      0.97900405         0.0777%        0.000761              27
+       41480.398             285                           * L        0.97825524      0.97900405         0.0765%        0.000749              28
+       41495.169             286           Bound                      0.97825524      0.97900405         0.0765%        0.000749              27
+       41506.762             287                           * L        0.97825794      0.97900405         0.0762%        0.000746              28
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+       41739.569             288           Bound                      0.97825794      0.97900405         0.0762%        0.000746              27
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       42303.244             289                           * L        0.97825844      0.97900405         0.0762%        0.000746              28
+       42311.098             290                                      0.97825844      0.97900405         0.0762%        0.000746              29
+       42320.343             291                           * L        0.97827587      0.97900405         0.0744%        0.000728              30
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       42933.538             292           Bound                      0.97827587      0.97900405         0.0744%        0.000728              29
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       43547.679             293                           * L        0.97828856      0.97900405         0.0731%        0.000715              30
+       43556.176             294                                      0.97828856      0.97900405         0.0731%        0.000715              31
+       43565.003             295                           * L        0.97830652      0.97900405         0.0712%        0.000698              32
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_7
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+        44174.47             296           Bound                      0.97830652      0.97900405         0.0712%        0.000698              31
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       44601.867             297           Bound           * L        0.97831934      0.97900405         0.0699%        0.000685              30
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+       44883.835             298           Bound                      0.97831934      0.97900405         0.0699%        0.000685              29
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       45446.856             299                           * L        0.97835974      0.97900405         0.0658%        0.000644              30
+       45458.659             300                                      0.97835974      0.97900405         0.0658%        0.000644              31
+       45473.838             301           Bound           * L        0.97836385      0.97900405         0.0654%         0.00064              30
+       45481.024             302                                      0.97836385      0.97900405         0.0654%         0.00064              31
+       45488.567             303                           * L        0.97836671      0.97900405         0.0651%        0.000637              32
+       45497.371             304                                      0.97836671      0.97900405         0.0651%        0.000637              33
+       45506.226             305                           * L        0.97836801      0.97900405          0.065%        0.000636              34
+       45522.537             306           Bound                      0.97836801      0.97900405          0.065%        0.000636              33
+       45535.706             307                           * L        0.97837254      0.97900405         0.0645%        0.000632              34
+       45545.304             308                                      0.97837254      0.97900405         0.0645%        0.000632              35
+        45555.24             309                           * L        0.97837934      0.97900405         0.0638%        0.000625              36
+       45563.596             310                                      0.97837934      0.97900405         0.0638%        0.000625              37
+       45572.491             311                           * L        0.97837956      0.97900405         0.0638%        0.000624              38
+       45580.327             312                                      0.97837956      0.97900405         0.0638%        0.000624              39
+       45587.725             313                           * L        0.97838661      0.97900405         0.0631%        0.000617              40
+       45599.532             314                                      0.97838661      0.97900405         0.0631%        0.000617              41
+        45608.33             315                           * L        0.97839371      0.97900405         0.0623%         0.00061              42
+       45615.692             316                                      0.97839371      0.97900405         0.0623%         0.00061              43
+       45625.061             317                           * L        0.97840739      0.97900405         0.0609%        0.000597              44
+       45635.785             318                                      0.97840739      0.97900405         0.0609%        0.000597              45
+       45643.992             319                           * L        0.97841484      0.97900405         0.0602%        0.000589              46
+       45655.441             320                                      0.97841484      0.97900405         0.0602%        0.000589              47
+       45664.418             321                           * L        0.97841821      0.97900405         0.0598%        0.000586              48
+       45672.868             322                                      0.97841821      0.97900405         0.0598%        0.000586              49
+       45685.264             323                           * L        0.97841877      0.97900405         0.0598%        0.000585              50
+       45694.491             324                                      0.97841877      0.97900405         0.0598%        0.000585              51
+       45705.104             325                           * L        0.97842054      0.97900405         0.0596%        0.000584              52
+       45715.828             326                                      0.97842054      0.97900405         0.0596%        0.000584              53
+       45731.278             327           Bound           * L        0.97842062      0.97900405         0.0596%        0.000583              52
+       45740.032             328                                      0.97842062      0.97900405         0.0596%        0.000583              53
+       45749.711             329                           * L         0.9784211      0.97900405         0.0595%        0.000583              54
+       45757.584             330                                       0.9784211      0.97900405         0.0595%        0.000583              55
+       45766.622             331                           * L        0.97842184      0.97900405         0.0595%        0.000582              56
+       45776.427             332                                      0.97842184      0.97900405         0.0595%        0.000582              57
+       45784.542             333                           * L        0.97842226      0.97900405         0.0594%        0.000582              58
+       45793.873             334                                      0.97842226      0.97900405         0.0594%        0.000582              59
+       45802.734             335                           * L        0.97842232      0.97900405         0.0594%        0.000582              60
+       45810.413             336                                      0.97842232      0.97900405         0.0594%        0.000582              61
+       45820.408             337                           * L        0.97842254      0.97900405         0.0594%        0.000582              62
+       45829.556             338                                      0.97842254      0.97900405         0.0594%        0.000582              63
+       45836.894             339                           * L        0.97842254      0.97900405         0.0594%        0.000582              64
+       45844.288             340                                      0.97842254      0.97900405         0.0594%        0.000582              65
+       45851.868             341                                      0.97842254      0.97900405         0.0594%        0.000582              66
+       45860.377             342                                      0.97842254      0.97900405         0.0594%        0.000582              67
+       45868.873             343                           * L        0.97842255      0.97900405         0.0594%        0.000582              68
+       45876.689             344                                      0.97842255      0.97900405         0.0594%        0.000582              69
+       45885.757             345                           * L        0.97842266      0.97900405         0.0594%        0.000581              70
+       45893.745             346                                      0.97842266      0.97900405         0.0594%        0.000581              71
+       45902.079             347                           * L        0.97842266      0.97900405         0.0594%        0.000581              72
+         45910.7             348                                      0.97842266      0.97900405         0.0594%        0.000581              73
+       45918.779             349                                      0.97842266      0.97900405         0.0594%        0.000581              74
+       45927.097             350                                      0.97842266      0.97900405         0.0594%        0.000581              75
+       45934.606             351                           * L        0.97842272      0.97900405         0.0594%        0.000581              76
+       45943.068             352                                      0.97842272      0.97900405         0.0594%        0.000581              77
+        45951.53             353                           * L        0.97842278      0.97900405         0.0594%        0.000581              78
+       45959.254             354                                      0.97842278      0.97900405         0.0594%        0.000581              79
+       45969.752             355                           * L        0.97842278      0.97900405         0.0594%        0.000581              80
+       45976.936             356                                      0.97842278      0.97900405         0.0594%        0.000581              81
+       45983.052             357                           * L        0.97842278      0.97900405         0.0594%        0.000581              82
+       45989.438             358                                      0.97842278      0.97900405         0.0594%        0.000581              83
+        45997.35             359                                      0.97842278      0.97900405         0.0594%        0.000581              84
+       46002.885             360                                      0.97842278      0.97900405         0.0594%        0.000581              85
+       46009.965             361                           * L        0.97842285      0.97900405         0.0594%        0.000581              86
+       46018.479             362                                      0.97842285      0.97900405         0.0594%        0.000581              87
+       46027.538             363                           * L        0.97842287      0.97900405         0.0594%        0.000581              88
+       46035.349             364                                      0.97842287      0.97900405         0.0594%        0.000581              89
+       46042.859             365                                      0.97842287      0.97900405         0.0594%        0.000581              90
+       46051.347             366                                      0.97842287      0.97900405         0.0594%        0.000581              91
+       46058.143             367                           * L        0.97842288      0.97900405         0.0594%        0.000581              92
+       46065.765             368                                      0.97842288      0.97900405         0.0594%        0.000581              93
+       46073.599             369                           * L        0.97842288      0.97900405         0.0594%        0.000581              94
+       46082.457             370                                      0.97842288      0.97900405         0.0594%        0.000581              95
+        46089.21             371                                      0.97842288      0.97900405         0.0594%        0.000581              96
+       46098.659             372                                      0.97842288      0.97900405         0.0594%        0.000581              97
+       46106.079             373                           * L        0.97842304      0.97900405         0.0593%        0.000581              98
+        46114.65             374                                      0.97842304      0.97900405         0.0593%        0.000581              99
+        46122.13             375                           * L        0.97842304      0.97900405         0.0593%        0.000581             100
+       46129.302             376                                      0.97842304      0.97900405         0.0593%        0.000581             101
+       46137.223             377                                      0.97842304      0.97900405         0.0593%        0.000581             102
+        46145.42             378                                      0.97842304      0.97900405         0.0593%        0.000581             103
+       46152.029             379                           * L        0.97842338      0.97900405         0.0593%        0.000581             104
+       46160.913             380                                      0.97842338      0.97900405         0.0593%        0.000581             105
+       46170.206             381                           * L        0.97842344      0.97900405         0.0593%        0.000581             106
+       46178.784             382                                      0.97842344      0.97900405         0.0593%        0.000581             107
+       46187.852             383                           * L        0.97842365      0.97900405         0.0593%         0.00058             108
+       46195.674             384                                      0.97842365      0.97900405         0.0593%         0.00058             109
+       46203.209             385                           * L        0.97842365      0.97900405         0.0593%         0.00058             110
+       46210.675             386                                      0.97842365      0.97900405         0.0593%         0.00058             111
+       46218.934             387                                      0.97842365      0.97900405         0.0593%         0.00058             112
+        46227.69             388                                      0.97842365      0.97900405         0.0593%         0.00058             113
+       46234.915             389                           * L        0.97842375      0.97900405         0.0593%         0.00058             114
+       46244.216             390                                      0.97842375      0.97900405         0.0593%         0.00058             115
+         46253.4             391                           * L        0.97842379      0.97900405         0.0593%         0.00058             116
+       46262.137             392                                      0.97842379      0.97900405         0.0593%         0.00058             117
+       46271.123             393                           * L         0.9784239      0.97900405         0.0593%         0.00058             118
+       46280.282             394                                       0.9784239      0.97900405         0.0593%         0.00058             119
+       46288.717             395                           * L        0.97842404      0.97900405         0.0592%         0.00058             120
+       46295.753             396                                      0.97842404      0.97900405         0.0592%         0.00058             121
+       46303.276             397                           * L        0.97842404      0.97900405         0.0592%         0.00058             122
+        46310.82             398                                      0.97842404      0.97900405         0.0592%         0.00058             123
+       46318.027             399                                      0.97842404      0.97900405         0.0592%         0.00058             124
+       46327.218             400                                      0.97842404      0.97900405         0.0592%         0.00058             125
+       46334.648             401                           * L         0.9784242      0.97900405         0.0592%         0.00058             126
+       46344.474             402                                       0.9784242      0.97900405         0.0592%         0.00058             127
+       46355.146             403                           * L        0.97842421      0.97900405         0.0592%         0.00058             128
+       46362.009             404                                      0.97842421      0.97900405         0.0592%         0.00058             129
+       46369.055             405                           * L        0.97842426      0.97900405         0.0592%         0.00058             130
+       46381.168             406                                      0.97842426      0.97900405         0.0592%         0.00058             131
+       46389.097             407                           * L        0.97842426      0.97900405         0.0592%         0.00058             132
+       46397.739             408                                      0.97842426      0.97900405         0.0592%         0.00058             133
+       46404.378             409                                      0.97842426      0.97900405         0.0592%         0.00058             134
+       46412.051             410                                      0.97842426      0.97900405         0.0592%         0.00058             135
+        46419.13             411                           * L         0.9784245      0.97900405         0.0592%         0.00058             136
+       46428.334             412                                       0.9784245      0.97900405         0.0592%         0.00058             137
+       46437.486             413                           * L        0.97842452      0.97900405         0.0592%         0.00058             138
+       46445.696             414                                      0.97842452      0.97900405         0.0592%         0.00058             139
+       46453.638             415                                      0.97842452      0.97900405         0.0592%         0.00058             140
+       46461.483             416                                      0.97842452      0.97900405         0.0592%         0.00058             141
+       46470.128             417                           * L        0.97842463      0.97900405         0.0592%        0.000579             142
+       46477.428             418                                      0.97842463      0.97900405         0.0592%        0.000579             143
+       46485.061             419                           * L        0.97842463      0.97900405         0.0592%        0.000579             144
+       46492.481             420                                      0.97842463      0.97900405         0.0592%        0.000579             145
+       46500.081             421                                      0.97842463      0.97900405         0.0592%        0.000579             146
+       46508.879             422                                      0.97842463      0.97900405         0.0592%        0.000579             147
+       46517.325             423                           * L        0.97842482      0.97900405         0.0592%        0.000579             148
+       46524.677             424                                      0.97842482      0.97900405         0.0592%        0.000579             149
+        46531.91             425                           * L        0.97842484      0.97900405         0.0592%        0.000579             150
+       46538.427             426                                      0.97842484      0.97900405         0.0592%        0.000579             151
+       46543.812             427                           * L        0.97842484      0.97900405         0.0592%        0.000579             152
+        46550.87             428                                      0.97842484      0.97900405         0.0592%        0.000579             153
+       46557.339             429                                      0.97842484      0.97900405         0.0592%        0.000579             154
+       46565.118             430                                      0.97842484      0.97900405         0.0592%        0.000579             155
+       46572.032             431                           * L        0.97842496      0.97900405         0.0592%        0.000579             156
+       46580.304             432                                      0.97842496      0.97900405         0.0592%        0.000579             157
+       46585.901             433                                      0.97842496      0.97900405         0.0592%        0.000579             158
+       46592.642             434                                      0.97842496      0.97900405         0.0592%        0.000579             159
+       46600.171             435                           * L        0.97842499      0.97900405         0.0591%        0.000579             160
+       46606.322             436                                      0.97842499      0.97900405         0.0591%        0.000579             161
+       46614.497             437                           * L        0.97842514      0.97900405         0.0591%        0.000579             162
+       46622.663             438                                      0.97842514      0.97900405         0.0591%        0.000579             163
+       46630.498             439                                      0.97842514      0.97900405         0.0591%        0.000579             164
+       46638.144             440                                      0.97842514      0.97900405         0.0591%        0.000579             165
+       46644.664             441                           * L        0.97842517      0.97900405         0.0591%        0.000579             166
+       46651.551             442                                      0.97842517      0.97900405         0.0591%        0.000579             167
+       46657.903             443                           * L        0.97842531      0.97900405         0.0591%        0.000579             168
+       46664.188             444                                      0.97842531      0.97900405         0.0591%        0.000579             169
+       46673.986             445                           * L        0.97842613      0.97900405          0.059%        0.000578             170
+       46681.378             446                                      0.97842613      0.97900405          0.059%        0.000578             171
+       46691.032             447                           * L        0.97842662      0.97900405          0.059%        0.000577             172
+       46699.508             448                                      0.97842662      0.97900405          0.059%        0.000577             173
+       46709.393             449                           * L        0.97842715      0.97900405         0.0589%        0.000577             174
+       46717.274             450                                      0.97842715      0.97900405         0.0589%        0.000577             175
+       46727.287             451                           * L         0.9784273      0.97900405         0.0589%        0.000577             176
+       46736.115             452                                       0.9784273      0.97900405         0.0589%        0.000577             177
+       46745.489             453                           * L         0.9784273      0.97900405         0.0589%        0.000577             178
+       46756.467             454                                       0.9784273      0.97900405         0.0589%        0.000577             179
+        46763.19             455                           * L        0.97842752      0.97900405         0.0589%        0.000577             180
+       46770.339             456                                      0.97842752      0.97900405         0.0589%        0.000577             181
+       46779.125             457                                      0.97842752      0.97900405         0.0589%        0.000577             182
+        46786.75             458                                      0.97842752      0.97900405         0.0589%        0.000577             183
+       46794.967             459                           * L        0.97842753      0.97900405         0.0589%        0.000577             184
+       46803.065             460                                      0.97842753      0.97900405         0.0589%        0.000577             185
+       46811.948             461                                      0.97842753      0.97900405         0.0589%        0.000577             186
+       46819.195             462                                      0.97842753      0.97900405         0.0589%        0.000577             187
+       46825.982             463                           * L        0.97842757      0.97900405         0.0589%        0.000576             188
+       46832.199             464                                      0.97842757      0.97900405         0.0589%        0.000576             189
+       46839.879             465                           * L        0.97842761      0.97900405         0.0589%        0.000576             190
+       46845.757             466                                      0.97842761      0.97900405         0.0589%        0.000576             191
+        46851.76             467                           * L        0.97842764      0.97900405         0.0589%        0.000576             192
+       46856.031             468                                      0.97842764      0.97900405         0.0589%        0.000576             193
+       46861.737             469                           * L        0.97842764      0.97900405         0.0589%        0.000576             194
+       46867.176             470                                      0.97842764      0.97900405         0.0589%        0.000576             195
+         46874.4             471                                      0.97842764      0.97900405         0.0589%        0.000576             196
+       46881.691             472                                      0.97842764      0.97900405         0.0589%        0.000576             197
+       46889.365             473                           * L         0.9784277      0.97900405         0.0589%        0.000576             198
+       46897.053             474                                       0.9784277      0.97900405         0.0589%        0.000576             199
+       46905.578             475                                       0.9784277      0.97900405         0.0589%        0.000576             200
+       46913.989             476                                       0.9784277      0.97900405         0.0589%        0.000576             201
+       46920.829             477                           * L        0.97842779      0.97900405         0.0589%        0.000576             202
+        46928.62             478                                      0.97842779      0.97900405         0.0589%        0.000576             203
+       46936.374             479                           * L        0.97842779      0.97900405         0.0589%        0.000576             204
+        46943.29             480                                      0.97842779      0.97900405         0.0589%        0.000576             205
+        46949.68             481                                      0.97842779      0.97900405         0.0589%        0.000576             206
+       46956.957             482                                      0.97842779      0.97900405         0.0589%        0.000576             207
+       46964.812             483                           * L        0.97842796      0.97900405         0.0588%        0.000576             208
+       46972.579             484                                      0.97842796      0.97900405         0.0588%        0.000576             209
+       46979.307             485                           * L         0.9784281      0.97900405         0.0588%        0.000576             210
+       46986.518             486                                       0.9784281      0.97900405         0.0588%        0.000576             211
+       46994.176             487                                       0.9784281      0.97900405         0.0588%        0.000576             212
+       47001.726             488                                       0.9784281      0.97900405         0.0588%        0.000576             213
+       47007.153             489                           * L        0.97842812      0.97900405         0.0588%        0.000576             214
+       47014.149             490                                      0.97842812      0.97900405         0.0588%        0.000576             215
+       47019.367             491                           * L        0.97842812      0.97900405         0.0588%        0.000576             216
+       47024.563             492                                      0.97842812      0.97900405         0.0588%        0.000576             217
+       47029.412             493                                      0.97842812      0.97900405         0.0588%        0.000576             218
+       47033.961             494                                      0.97842812      0.97900405         0.0588%        0.000576             219
+        47040.37             495                           * L         0.9784282      0.97900405         0.0588%        0.000576             220
+       47046.581             496                                       0.9784282      0.97900405         0.0588%        0.000576             221
+       47053.885             497                           * L         0.9784282      0.97900405         0.0588%        0.000576             222
+       47061.605             498                                       0.9784282      0.97900405         0.0588%        0.000576             223
+       47067.882             499                                       0.9784282      0.97900405         0.0588%        0.000576             224
+       47074.797             500                                       0.9784282      0.97900405         0.0588%        0.000576             225
+       47082.553             501                           * L        0.97842856      0.97900405         0.0588%        0.000575             226
+       47089.064             502                                      0.97842856      0.97900405         0.0588%        0.000575             227
+       47096.302             503                                      0.97842856      0.97900405         0.0588%        0.000575             228
+       47103.938             504                                      0.97842856      0.97900405         0.0588%        0.000575             229
+       47111.759             505                           * L        0.97842866      0.97900405         0.0588%        0.000575             230
+       47120.391             506                                      0.97842866      0.97900405         0.0588%        0.000575             231
+        47127.14             507                                      0.97842866      0.97900405         0.0588%        0.000575             232
+       47133.546             508                                      0.97842866      0.97900405         0.0588%        0.000575             233
+       47141.628             509                           * L        0.97842873      0.97900405         0.0588%        0.000575             234
+       47150.729             510                                      0.97842873      0.97900405         0.0588%        0.000575             235
+       47158.846             511                           * L        0.97842907      0.97900405         0.0587%        0.000575             236
+       47165.155             512                                      0.97842907      0.97900405         0.0587%        0.000575             237
+       47171.813             513                           * L        0.97842907      0.97900405         0.0587%        0.000575             238
+       47179.103             514                                      0.97842907      0.97900405         0.0587%        0.000575             239
+       47187.242             515                                      0.97842907      0.97900405         0.0587%        0.000575             240
+        47194.18             516                                      0.97842907      0.97900405         0.0587%        0.000575             241
+        47202.23             517                           * L        0.97842918      0.97900405         0.0587%        0.000575             242
+       47209.639             518                                      0.97842918      0.97900405         0.0587%        0.000575             243
+       47214.717             519                           * L        0.97842918      0.97900405         0.0587%        0.000575             244
+       47218.855             520                                      0.97842918      0.97900405         0.0587%        0.000575             245
+       47225.178             521                                      0.97842918      0.97900405         0.0587%        0.000575             246
+       47234.274             522                                      0.97842918      0.97900405         0.0587%        0.000575             247
+       47241.106             523                           * L        0.97842919      0.97900405         0.0587%        0.000575             248
+       47252.297             524                                      0.97842919      0.97900405         0.0587%        0.000575             249
+       47258.336             525                           * L        0.97843213      0.97900405         0.0584%        0.000572             250
+       47264.719             526                                      0.97843213      0.97900405         0.0584%        0.000572             251
+        47274.07             527                           * L        0.97843256      0.97900405         0.0584%        0.000571             252
+       47281.541             528                                      0.97843256      0.97900405         0.0584%        0.000571             253
+       47291.991             529                           * L        0.97843323      0.97900405         0.0583%        0.000571             254
+       47298.936             530                                      0.97843323      0.97900405         0.0583%        0.000571             255
+       47307.706             531                           * L          0.978434      0.97900405         0.0582%         0.00057             256
+       47314.638             532                                        0.978434      0.97900405         0.0582%         0.00057             257
+        47322.24             533                           * L        0.97843437      0.97900405         0.0582%         0.00057             258
+        47331.43             534                                      0.97843437      0.97900405         0.0582%         0.00057             259
+       47340.951             535                           * L        0.97843455      0.97900405         0.0582%         0.00057             260
+       47350.531             536                                      0.97843455      0.97900405         0.0582%         0.00057             261
+       47360.956             537                           * L        0.97843492      0.97900405         0.0581%        0.000569             262
+       47369.988             538                                      0.97843492      0.97900405         0.0581%        0.000569             263
+       47378.996             539                           * L        0.97843519      0.97900405         0.0581%        0.000569             264
+       47386.648             540                                      0.97843519      0.97900405         0.0581%        0.000569             265
+       47394.246             541                           * L        0.97843519      0.97900405         0.0581%        0.000569             266
+       47402.931             542                                      0.97843519      0.97900405         0.0581%        0.000569             267
+       47410.181             543                                      0.97843519      0.97900405         0.0581%        0.000569             268
+        47417.81             544                                      0.97843519      0.97900405         0.0581%        0.000569             269
+       47423.749             545                           * L        0.97843547      0.97900405         0.0581%        0.000569             270
+       47432.888             546                                      0.97843547      0.97900405         0.0581%        0.000569             271
+       47439.203             547                                      0.97843547      0.97900405         0.0581%        0.000569             272
+       47447.577             548                                      0.97843547      0.97900405         0.0581%        0.000569             273
+        47456.01             549                           * L        0.97843565      0.97900405         0.0581%        0.000568             274
+       47465.147             550                                      0.97843565      0.97900405         0.0581%        0.000568             275
+       47474.064             551                           * L        0.97843587      0.97900405          0.058%        0.000568             276
+       47481.456             552                                      0.97843587      0.97900405          0.058%        0.000568             277
+       47490.776             553                           * L         0.9784362      0.97900405          0.058%        0.000568             278
+       47499.045             554                                       0.9784362      0.97900405          0.058%        0.000568             279
+       47506.622             555                           * L         0.9784362      0.97900405          0.058%        0.000568             280
+       47516.656             556                                       0.9784362      0.97900405          0.058%        0.000568             281
+       47524.344             557                                       0.9784362      0.97900405          0.058%        0.000568             282
+       47532.292             558                                       0.9784362      0.97900405          0.058%        0.000568             283
+       47540.375             559                           * L        0.97843638      0.97900405          0.058%        0.000568             284
+       47548.045             560                                      0.97843638      0.97900405          0.058%        0.000568             285
+         47554.7             561                           * L        0.97843638      0.97900405          0.058%        0.000568             286
+       47562.567             562                                      0.97843638      0.97900405          0.058%        0.000568             287
+       47569.481             563                                      0.97843638      0.97900405          0.058%        0.000568             288
+       47574.356             564                                      0.97843638      0.97900405          0.058%        0.000568             289
+       47580.598             565                           * L        0.97843655      0.97900405          0.058%        0.000567             290
+       47589.699             566                                      0.97843655      0.97900405          0.058%        0.000567             291
+       47600.175             567                           * L        0.97843677      0.97900405         0.0579%        0.000567             292
+       47608.489             568                                      0.97843677      0.97900405         0.0579%        0.000567             293
+       47616.522             569                           * L        0.97843677      0.97900405         0.0579%        0.000567             294
+       47622.971             570                                      0.97843677      0.97900405         0.0579%        0.000567             295
+       47630.291             571                                      0.97843677      0.97900405         0.0579%        0.000567             296
+       47637.561             572                                      0.97843677      0.97900405         0.0579%        0.000567             297
+        47644.82             573                           * L        0.97843681      0.97900405         0.0579%        0.000567             298
+       47653.391             574                                      0.97843681      0.97900405         0.0579%        0.000567             299
+       47661.168             575                           * L        0.97843709      0.97900405         0.0579%        0.000567             300
+       47667.371             576                                      0.97843709      0.97900405         0.0579%        0.000567             301
+       47676.344             577                           * L        0.97843717      0.97900405         0.0579%        0.000567             302
+       47683.215             578                                      0.97843717      0.97900405         0.0579%        0.000567             303
+        47691.39             579                           * L        0.97843717      0.97900405         0.0579%        0.000567             304
+       47698.584             580                                      0.97843717      0.97900405         0.0579%        0.000567             305
+       47705.579             581                                      0.97843717      0.97900405         0.0579%        0.000567             306
+       47713.212             582                                      0.97843717      0.97900405         0.0579%        0.000567             307
+       47720.727             583                           * L        0.97843719      0.97900405         0.0579%        0.000567             308
+       47728.677             584                                      0.97843719      0.97900405         0.0579%        0.000567             309
+       47736.005             585                           * L        0.97843736      0.97900405         0.0579%        0.000567             310
+       47744.568             586                                      0.97843736      0.97900405         0.0579%        0.000567             311
+       47751.958             587                           * L        0.97843736      0.97900405         0.0579%        0.000567             312
+       47760.427             588                                      0.97843736      0.97900405         0.0579%        0.000567             313
+       47768.121             589                                      0.97843736      0.97900405         0.0579%        0.000567             314
+       47775.814             590                                      0.97843736      0.97900405         0.0579%        0.000567             315
+       47782.557             591                           * L        0.97843743      0.97900405         0.0579%        0.000567             316
+       47789.874             592                                      0.97843743      0.97900405         0.0579%        0.000567             317
+       47797.551             593                           * L        0.97843743      0.97900405         0.0579%        0.000567             318
+       47805.782             594                                      0.97843743      0.97900405         0.0579%        0.000567             319
+       47813.874             595                                      0.97843743      0.97900405         0.0579%        0.000567             320
+        47821.51             596                                      0.97843743      0.97900405         0.0579%        0.000567             321
+       47829.287             597                           * L        0.97843745      0.97900405         0.0579%        0.000567             322
+       47836.377             598                                      0.97843745      0.97900405         0.0579%        0.000567             323
+       47844.622             599                           * L        0.97843745      0.97900405         0.0579%        0.000567             324
+       47852.885             600                                      0.97843745      0.97900405         0.0579%        0.000567             325
+       47861.618             601                                      0.97843745      0.97900405         0.0579%        0.000567             326
+       47870.044             602                                      0.97843745      0.97900405         0.0579%        0.000567             327
+       47877.071             603                           * L        0.97843749      0.97900405         0.0579%        0.000567             328
+       47885.124             604                                      0.97843749      0.97900405         0.0579%        0.000567             329
+       47893.682             605                           * L        0.97843749      0.97900405         0.0579%        0.000567             330
+       47899.809             606                                      0.97843749      0.97900405         0.0579%        0.000567             331
+       47906.978             607                                      0.97843749      0.97900405         0.0579%        0.000567             332
+       47915.358             608                                      0.97843749      0.97900405         0.0579%        0.000567             333
+       47922.742             609                           * L        0.97843757      0.97900405         0.0579%        0.000566             334
+       47931.313             610                                      0.97843757      0.97900405         0.0579%        0.000566             335
+       47941.001             611                           * L        0.97843763      0.97900405         0.0579%        0.000566             336
+       47949.702             612                                      0.97843763      0.97900405         0.0579%        0.000566             337
+       47958.866             613                           * L        0.97843782      0.97900405         0.0578%        0.000566             338
+       47965.005             614                                      0.97843782      0.97900405         0.0578%        0.000566             339
+       47972.803             615                           * L        0.97843782      0.97900405         0.0578%        0.000566             340
+       47980.951             616                                      0.97843782      0.97900405         0.0578%        0.000566             341
+       47988.535             617                                      0.97843782      0.97900405         0.0578%        0.000566             342
+       47996.716             618                                      0.97843782      0.97900405         0.0578%        0.000566             343
+        48003.76             619                           * L        0.97843792      0.97900405         0.0578%        0.000566             344
+       48012.001             620                                      0.97843792      0.97900405         0.0578%        0.000566             345
+       48020.383             621                           * L        0.97843792      0.97900405         0.0578%        0.000566             346
+       48029.201             622                                      0.97843792      0.97900405         0.0578%        0.000566             347
+        48037.34             623                                      0.97843792      0.97900405         0.0578%        0.000566             348
+       48047.671             624                                      0.97843792      0.97900405         0.0578%        0.000566             349
+       48055.316             625                           * L        0.97843794      0.97900405         0.0578%        0.000566             350
+       48062.471             626                                      0.97843794      0.97900405         0.0578%        0.000566             351
+       48069.417             627                           * L        0.97843794      0.97900405         0.0578%        0.000566             352
+       48077.303             628                                      0.97843794      0.97900405         0.0578%        0.000566             353
+         48086.4             629                                      0.97843794      0.97900405         0.0578%        0.000566             354
+       48092.349             630                                      0.97843794      0.97900405         0.0578%        0.000566             355
+       48100.225             631                           * L        0.97843803      0.97900405         0.0578%        0.000566             356
+       48109.139             632                                      0.97843803      0.97900405         0.0578%        0.000566             357
+       48117.271             633                           * L        0.97843803      0.97900405         0.0578%        0.000566             358
+       48126.031             634                                      0.97843803      0.97900405         0.0578%        0.000566             359
+       48132.202             635                                      0.97843803      0.97900405         0.0578%        0.000566             360
+       48140.105             636                                      0.97843803      0.97900405         0.0578%        0.000566             361
+       48145.892             637                           * L        0.97843811      0.97900405         0.0578%        0.000566             362
+       48155.916             638                                      0.97843811      0.97900405         0.0578%        0.000566             363
+       48164.041             639                           * L        0.97843817      0.97900405         0.0578%        0.000566             364
+       48173.703             640                                      0.97843817      0.97900405         0.0578%        0.000566             365
+       48182.665             641                           * L        0.97843823      0.97900405         0.0578%        0.000566             366
+       48190.193             642                                      0.97843823      0.97900405         0.0578%        0.000566             367
+       48198.164             643                                      0.97843823      0.97900405         0.0578%        0.000566             368
+        48205.05             644                                      0.97843823      0.97900405         0.0578%        0.000566             369
+        48211.73             645                           * L        0.97843849      0.97900405         0.0578%        0.000566             370
+       48218.949             646                                      0.97843849      0.97900405         0.0578%        0.000566             371
+       48226.793             647                           * L        0.97843849      0.97900405         0.0578%        0.000566             372
+       48234.863             648                                      0.97843849      0.97900405         0.0578%        0.000566             373
+       48241.741             649                                      0.97843849      0.97900405         0.0578%        0.000566             374
+       48251.277             650                                      0.97843849      0.97900405         0.0578%        0.000566             375
+       48259.396             651                           * L        0.97843857      0.97900405         0.0578%        0.000565             376
+       48267.129             652                                      0.97843857      0.97900405         0.0578%        0.000565             377
+       48274.582             653                           * L        0.97843857      0.97900405         0.0578%        0.000565             378
+       48283.994             654                                      0.97843857      0.97900405         0.0578%        0.000565             379
+       48291.919             655                                      0.97843857      0.97900405         0.0578%        0.000565             380
+       48300.823             656                                      0.97843857      0.97900405         0.0578%        0.000565             381
+       48309.011             657                           * L        0.97843871      0.97900405         0.0577%        0.000565             382
+       48317.429             658                                      0.97843871      0.97900405         0.0577%        0.000565             383
+       48327.141             659                           * L        0.97843901      0.97900405         0.0577%        0.000565             384
+       48334.531             660                                      0.97843901      0.97900405         0.0577%        0.000565             385
+        48342.77             661                           * L        0.97843901      0.97900405         0.0577%        0.000565             386
+        48351.34             662                                      0.97843901      0.97900405         0.0577%        0.000565             387
+       48357.936             663                                      0.97843901      0.97900405         0.0577%        0.000565             388
+       48365.167             664                                      0.97843901      0.97900405         0.0577%        0.000565             389
+       48372.972             665                           * L        0.97843909      0.97900405         0.0577%        0.000565             390
+       48380.355             666                                      0.97843909      0.97900405         0.0577%        0.000565             391
+       48386.782             667                           * L         0.9784391      0.97900405         0.0577%        0.000565             392
+       48396.721             668                                       0.9784391      0.97900405         0.0577%        0.000565             393
+       48404.469             669                                       0.9784391      0.97900405         0.0577%        0.000565             394
+       48413.531             670                                       0.9784391      0.97900405         0.0577%        0.000565             395
+       48419.474             671                           * L        0.97843914      0.97900405         0.0577%        0.000565             396
+       48429.902             672                                      0.97843914      0.97900405         0.0577%        0.000565             397
+       48437.877             673                           * L         0.9784393      0.97900405         0.0577%        0.000565             398
+       48444.356             674                                       0.9784393      0.97900405         0.0577%        0.000565             399
+       48451.919             675                           * L         0.9784393      0.97900405         0.0577%        0.000565             400
+       48459.868             676                                       0.9784393      0.97900405         0.0577%        0.000565             401
+       48467.116             677                                       0.9784393      0.97900405         0.0577%        0.000565             402
+       48475.092             678                                       0.9784393      0.97900405         0.0577%        0.000565             403
+       48483.018             679                           * L        0.97843963      0.97900405         0.0577%        0.000564             404
+       48490.537             680                                      0.97843963      0.97900405         0.0577%        0.000564             405
+       48498.376             681                                      0.97843963      0.97900405         0.0577%        0.000564             406
+       48507.045             682                                      0.97843963      0.97900405         0.0577%        0.000564             407
+       48515.642             683                           * L        0.97843973      0.97900405         0.0576%        0.000564             408
+        48523.48             684                                      0.97843973      0.97900405         0.0576%        0.000564             409
+       48531.339             685                           * L        0.97843973      0.97900405         0.0576%        0.000564             410
+       48539.672             686                                      0.97843973      0.97900405         0.0576%        0.000564             411
+       48547.424             687                                      0.97843973      0.97900405         0.0576%        0.000564             412
+       48556.123             688                                      0.97843973      0.97900405         0.0576%        0.000564             413
+        48564.46             689                           * L        0.97844005      0.97900405         0.0576%        0.000564             414
+       48568.306             690                                      0.97844005      0.97900405         0.0576%        0.000564             415
+       48571.631             691                                      0.97844005      0.97900405         0.0576%        0.000564             416
+       48576.604             692                                      0.97844005      0.97900405         0.0576%        0.000564             417
+       48580.473             693                           * L        0.97844059      0.97900405         0.0576%        0.000563             418
+       48583.705             694                                      0.97844059      0.97900405         0.0576%        0.000563             419
+       48590.586             695                                      0.97844059      0.97900405         0.0576%        0.000563             420
+       48597.714             696                                      0.97844059      0.97900405         0.0576%        0.000563             421
+       48604.618             697                           * L        0.97844091      0.97900405         0.0575%        0.000563             422
+       48611.411             698                                      0.97844091      0.97900405         0.0575%        0.000563             423
+        48617.37             699                                      0.97844091      0.97900405         0.0575%        0.000563             424
+       48623.981             700                                      0.97844091      0.97900405         0.0575%        0.000563             425
+       48630.413             701                           * L        0.97844094      0.97900405         0.0575%        0.000563             426
+       48635.652             702                                      0.97844094      0.97900405         0.0575%        0.000563             427
+       48638.964             703                                      0.97844094      0.97900405         0.0575%        0.000563             428
+       48643.179             704                                      0.97844094      0.97900405         0.0575%        0.000563             429
+         48647.1             705                           * L        0.97844159      0.97900405         0.0575%        0.000562             430
+        48651.14             706                                      0.97844159      0.97900405         0.0575%        0.000562             431
+       48655.079             707                           * L        0.97844332      0.97900405         0.0573%        0.000561             432
+       48658.909             708                                      0.97844332      0.97900405         0.0573%        0.000561             433
+       48669.294             709                           * L        0.97844377      0.97900405         0.0572%         0.00056             434
+       48679.898             710                                      0.97844377      0.97900405         0.0572%         0.00056             435
+       48690.179             711                           * L        0.97844389      0.97900405         0.0572%         0.00056             436
+         48700.2             712                                      0.97844389      0.97900405         0.0572%         0.00056             437
+       48710.541             713                           * L        0.97844454      0.97900405         0.0572%         0.00056             438
+       48721.649             714                                      0.97844454      0.97900405         0.0572%         0.00056             439
+       48731.772             715                           * L        0.97844518      0.97900405         0.0571%        0.000559             440
+       48742.132             716                                      0.97844518      0.97900405         0.0571%        0.000559             441
+       48752.374             717                           * L        0.97844531      0.97900405         0.0571%        0.000559             442
+        48762.91             718                                      0.97844531      0.97900405         0.0571%        0.000559             443
+       48773.831             719                           * L        0.97844553      0.97900405          0.057%        0.000559             444
+       48781.627             720                                      0.97844553      0.97900405          0.057%        0.000559             445
+       48792.467             721                           * L        0.97844561      0.97900405          0.057%        0.000558             446
+        48802.24             722                                      0.97844561      0.97900405          0.057%        0.000558             447
+       48810.909             723                           * L        0.97844561      0.97900405          0.057%        0.000558             448
+       48821.428             724                                      0.97844561      0.97900405          0.057%        0.000558             449
+       48829.529             725                                      0.97844561      0.97900405          0.057%        0.000558             450
+       48833.181             726                                      0.97844561      0.97900405          0.057%        0.000558             451
+       48837.317             727                           * L        0.97844565      0.97900405          0.057%        0.000558             452
+       48841.891             728                                      0.97844565      0.97900405          0.057%        0.000558             453
+       48850.119             729                           * L        0.97844587      0.97900405          0.057%        0.000558             454
+       48860.547             730                                      0.97844587      0.97900405          0.057%        0.000558             455
+       48869.461             731                           * L        0.97844608      0.97900405          0.057%        0.000558             456
+        48879.27             732                                      0.97844608      0.97900405          0.057%        0.000558             457
+       48887.015             733                           * L        0.97844608      0.97900405          0.057%        0.000558             458
+        48894.52             734                                      0.97844608      0.97900405          0.057%        0.000558             459
+       48903.005             735                                      0.97844608      0.97900405          0.057%        0.000558             460
+       48910.772             736                                      0.97844608      0.97900405          0.057%        0.000558             461
+       48914.693             737                           * L        0.97844645      0.97900405          0.057%        0.000558             462
+       48919.153             738                                      0.97844645      0.97900405          0.057%        0.000558             463
+       48923.306             739                           * L        0.97844669      0.97900405         0.0569%        0.000557             464
+       48927.261             740                                      0.97844669      0.97900405         0.0569%        0.000557             465
+       48931.091             741                           * L        0.97844681      0.97900405         0.0569%        0.000557             466
+       48935.338             742                                      0.97844681      0.97900405         0.0569%        0.000557             467
+       48946.175             743                           * L        0.97844685      0.97900405         0.0569%        0.000557             468
+       48953.528             744                                      0.97844685      0.97900405         0.0569%        0.000557             469
+       48960.573             745                           * L        0.97844685      0.97900405         0.0569%        0.000557             470
+       48963.962             746                                      0.97844685      0.97900405         0.0569%        0.000557             471
+       48970.712             747                                      0.97844685      0.97900405         0.0569%        0.000557             472
+       48979.331             748                                      0.97844685      0.97900405         0.0569%        0.000557             473
+       48986.801             749                           * L        0.97844713      0.97900405         0.0569%        0.000557             474
+       48994.742             750                                      0.97844713      0.97900405         0.0569%        0.000557             475
+       49003.091             751                           * L        0.97844713      0.97900405         0.0569%        0.000557             476
+       49010.675             752                                      0.97844713      0.97900405         0.0569%        0.000557             477
+       49019.468             753                                      0.97844713      0.97900405         0.0569%        0.000557             478
+       49027.341             754                                      0.97844713      0.97900405         0.0569%        0.000557             479
+       49035.811             755                           * L        0.97844715      0.97900405         0.0569%        0.000557             480
+       49045.293             756                                      0.97844715      0.97900405         0.0569%        0.000557             481
+       49054.487             757                           * L        0.97844736      0.97900405         0.0569%        0.000557             482
+        49062.57             758                                      0.97844736      0.97900405         0.0569%        0.000557             483
+       49071.001             759                           * L        0.97844736      0.97900405         0.0569%        0.000557             484
+       49080.159             760                                      0.97844736      0.97900405         0.0569%        0.000557             485
+       49088.925             761                                      0.97844736      0.97900405         0.0569%        0.000557             486
+        49096.82             762                                      0.97844736      0.97900405         0.0569%        0.000557             487
+       49105.468             763                           * L         0.9784474      0.97900405         0.0569%        0.000557             488
+        49113.64             764                                       0.9784474      0.97900405         0.0569%        0.000557             489
+       49120.827             765                           * L         0.9784474      0.97900405         0.0569%        0.000557             490
+       49129.134             766                                       0.9784474      0.97900405         0.0569%        0.000557             491
+       49136.872             767                                       0.9784474      0.97900405         0.0569%        0.000557             492
+       49145.229             768                                       0.9784474      0.97900405         0.0569%        0.000557             493
+       49153.332             769                           * L         0.9784475      0.97900405         0.0568%        0.000557             494
+       49162.523             770                                       0.9784475      0.97900405         0.0568%        0.000557             495
+       49172.363             771                           * L        0.97844764      0.97900405         0.0568%        0.000556             496
+       49180.536             772                                      0.97844764      0.97900405         0.0568%        0.000556             497
+       49188.431             773                           * L        0.97844764      0.97900405         0.0568%        0.000556             498
+       49197.558             774                                      0.97844764      0.97900405         0.0568%        0.000556             499
+       49205.477             775                                      0.97844764      0.97900405         0.0568%        0.000556             500
+       49214.295             776                                      0.97844764      0.97900405         0.0568%        0.000556             501
+       49217.844             777                           * L        0.97844788      0.97900405         0.0568%        0.000556             502
+       49221.819             778                                      0.97844788      0.97900405         0.0568%        0.000556             503
+       49228.693             779                           * L        0.97844788      0.97900405         0.0568%        0.000556             504
+       49235.092             780                                      0.97844788      0.97900405         0.0568%        0.000556             505
+       49242.088             781                                      0.97844788      0.97900405         0.0568%        0.000556             506
+       49249.903             782                                      0.97844788      0.97900405         0.0568%        0.000556             507
+       49255.164             783                           * L        0.97844808      0.97900405         0.0568%        0.000556             508
+       49258.873             784                                      0.97844808      0.97900405         0.0568%        0.000556             509
+        49267.61             785                           * L        0.97844818      0.97900405         0.0568%        0.000556             510
+       49275.341             786                                      0.97844818      0.97900405         0.0568%        0.000556             511
+       49284.234             787                                      0.97844818      0.97900405         0.0568%        0.000556             512
+       49290.062             788                                      0.97844818      0.97900405         0.0568%        0.000556             513
+       49297.302             789                           * L        0.97844838      0.97900405         0.0568%        0.000556             514
+       49301.217             790                                      0.97844838      0.97900405         0.0568%        0.000556             515
+       49310.791             791                           * L        0.97844839      0.97900405         0.0568%        0.000556             516
+       49318.412             792                                      0.97844839      0.97900405         0.0568%        0.000556             517
+       49325.182             793                           * L        0.97844839      0.97900405         0.0568%        0.000556             518
+       49328.574             794                                      0.97844839      0.97900405         0.0568%        0.000556             519
+       49335.785             795                                      0.97844839      0.97900405         0.0568%        0.000556             520
+        49343.44             796                                      0.97844839      0.97900405         0.0568%        0.000556             521
+        49352.38             797                           * L        0.97844861      0.97900405         0.0567%        0.000555             522
+       49359.729             798                                      0.97844861      0.97900405         0.0567%        0.000555             523
+       49363.971             799                           * L        0.97844861      0.97900405         0.0567%        0.000555             524
+       49367.611             800                                      0.97844861      0.97900405         0.0567%        0.000555             525
+       49371.256             801                                      0.97844861      0.97900405         0.0567%        0.000555             526
+       49378.312             802                                      0.97844861      0.97900405         0.0567%        0.000555             527
+       49386.471             803                           * L        0.97844876      0.97900405         0.0567%        0.000555             528
+       49394.033             804                                      0.97844876      0.97900405         0.0567%        0.000555             529
+       49402.305             805                           * L        0.97844876      0.97900405         0.0567%        0.000555             530
+       49410.987             806                                      0.97844876      0.97900405         0.0567%        0.000555             531
+       49414.581             807                                      0.97844876      0.97900405         0.0567%        0.000555             532
+       49422.302             808                                      0.97844876      0.97900405         0.0567%        0.000555             533
+       49430.796             809                           * L        0.97844891      0.97900405         0.0567%        0.000555             534
+       49436.252             810                                      0.97844891      0.97900405         0.0567%        0.000555             535
+       49442.705             811                           * L        0.97844891      0.97900405         0.0567%        0.000555             536
+       49446.078             812                                      0.97844891      0.97900405         0.0567%        0.000555             537
+       49454.319             813                                      0.97844891      0.97900405         0.0567%        0.000555             538
+       49462.193             814                                      0.97844891      0.97900405         0.0567%        0.000555             539
+       49470.159             815                           * L        0.97845068      0.97900405         0.0565%        0.000553             540
+       49478.248             816                                      0.97845068      0.97900405         0.0565%        0.000553             541
+       49486.102             817                                      0.97845068      0.97900405         0.0565%        0.000553             542
+       49494.666             818                                      0.97845068      0.97900405         0.0565%        0.000553             543
+        49502.41             819                           * L        0.97845232      0.97900405         0.0564%        0.000552             544
+        49506.22             820                                      0.97845232      0.97900405         0.0564%        0.000552             545
+       49509.505             821                                      0.97845232      0.97900405         0.0564%        0.000552             546
+       49516.885             822                                      0.97845232      0.97900405         0.0564%        0.000552             547
+       49525.287             823                           * L        0.97845236      0.97900405         0.0564%        0.000552             548
+        49533.54             824                                      0.97845236      0.97900405         0.0564%        0.000552             549
+       49541.485             825                                      0.97845236      0.97900405         0.0564%        0.000552             550
+       49549.982             826                                      0.97845236      0.97900405         0.0564%        0.000552             551
+       49559.253             827                           * L        0.97845238      0.97900405         0.0564%        0.000552             552
+       49567.371             828                                      0.97845238      0.97900405         0.0564%        0.000552             553
+       49571.657             829                                      0.97845238      0.97900405         0.0564%        0.000552             554
+        49574.98             830                                      0.97845238      0.97900405         0.0564%        0.000552             555
+       49578.993             831                           * L        0.97845263      0.97900405         0.0563%        0.000551             556
+       49583.093             832                                      0.97845263      0.97900405         0.0563%        0.000551             557
+       49590.178             833                                      0.97845263      0.97900405         0.0563%        0.000551             558
+       49594.173             834                                      0.97845263      0.97900405         0.0563%        0.000551             559
+       49597.596             835                           * L        0.97845265      0.97900405         0.0563%        0.000551             560
+       49600.967             836                                      0.97845265      0.97900405         0.0563%        0.000551             561
+       49604.631             837                                      0.97845265      0.97900405         0.0563%        0.000551             562
+       49610.659             838                                      0.97845265      0.97900405         0.0563%        0.000551             563
+       49620.549             839                           * L        0.97845297      0.97900405         0.0563%        0.000551             564
+       49629.651             840                                      0.97845297      0.97900405         0.0563%        0.000551             565
+       49637.848             841                                      0.97845297      0.97900405         0.0563%        0.000551             566
+       49645.467             842                                      0.97845297      0.97900405         0.0563%        0.000551             567
+       49654.458             843                           * L        0.97845302      0.97900405         0.0563%        0.000551             568
+       49662.518             844                                      0.97845302      0.97900405         0.0563%        0.000551             569
+       49670.358             845                                      0.97845302      0.97900405         0.0563%        0.000551             570
+       49678.669             846                                      0.97845302      0.97900405         0.0563%        0.000551             571
+       49687.137             847                           * L        0.97845304      0.97900405         0.0563%        0.000551             572
+       49694.521             848                                      0.97845304      0.97900405         0.0563%        0.000551             573
+       49703.159             849                                      0.97845304      0.97900405         0.0563%        0.000551             574
+       49711.834             850                                      0.97845304      0.97900405         0.0563%        0.000551             575
+       49716.417             851                           * L        0.97845311      0.97900405         0.0563%        0.000551             576
+       49725.307             852                                      0.97845311      0.97900405         0.0563%        0.000551             577
+        49733.07             853                                      0.97845311      0.97900405         0.0563%        0.000551             578
+       49741.348             854                                      0.97845311      0.97900405         0.0563%        0.000551             579
+       49749.616             855                           * L        0.97845317      0.97900405         0.0563%        0.000551             580
+       49758.036             856                                      0.97845317      0.97900405         0.0563%        0.000551             581
+        49765.73             857                                      0.97845317      0.97900405         0.0563%        0.000551             582
+       49773.963             858                                      0.97845317      0.97900405         0.0563%        0.000551             583
+       49781.673             859                           * L        0.97845336      0.97900405         0.0563%        0.000551             584
+       49790.003             860                                      0.97845336      0.97900405         0.0563%        0.000551             585
+       49798.082             861                                      0.97845336      0.97900405         0.0563%        0.000551             586
+       49805.806             862                                      0.97845336      0.97900405         0.0563%        0.000551             587
+       49813.409             863                           * L        0.97845353      0.97900405         0.0562%        0.000551             588
+       49821.764             864                                      0.97845353      0.97900405         0.0562%        0.000551             589
+       49831.095             865                                      0.97845353      0.97900405         0.0562%        0.000551             590
+       49839.309             866                                      0.97845353      0.97900405         0.0562%        0.000551             591
+       49847.159             867                           * L        0.97845354      0.97900405         0.0562%        0.000551             592
+       49855.071             868                                      0.97845354      0.97900405         0.0562%        0.000551             593
+       49861.833             869                                      0.97845354      0.97900405         0.0562%        0.000551             594
+       49866.225             870                                      0.97845354      0.97900405         0.0562%        0.000551             595
+       49869.874             871                           * L         0.9784536      0.97900405         0.0562%         0.00055             596
+       49879.169             872                                       0.9784536      0.97900405         0.0562%         0.00055             597
+       49887.881             873                                       0.9784536      0.97900405         0.0562%         0.00055             598
+       49896.585             874                                       0.9784536      0.97900405         0.0562%         0.00055             599
+       49903.916             875                           * L        0.97845368      0.97900405         0.0562%         0.00055             600
+       49907.742             876                                      0.97845368      0.97900405         0.0562%         0.00055             601
+       49914.045             877                                      0.97845368      0.97900405         0.0562%         0.00055             602
+       49921.511             878                                      0.97845368      0.97900405         0.0562%         0.00055             603
+       49926.321             879                           * L         0.9784538      0.97900405         0.0562%         0.00055             604
+       49930.004             880                                       0.9784538      0.97900405         0.0562%         0.00055             605
+       49933.427             881                                       0.9784538      0.97900405         0.0562%         0.00055             606
+       49937.461             882                                       0.9784538      0.97900405         0.0562%         0.00055             607
+       49941.189             883                           * L        0.97845407      0.97900405         0.0562%         0.00055             608
+       49944.637             884                                      0.97845407      0.97900405         0.0562%         0.00055             609
+       49948.718             885                                      0.97845407      0.97900405         0.0562%         0.00055             610
+       49953.591             886                                      0.97845407      0.97900405         0.0562%         0.00055             611
+       49957.092             887                           * L        0.97845555      0.97900405          0.056%        0.000549             612
+       49965.521             888                                      0.97845555      0.97900405          0.056%        0.000549             613
+       49974.478             889                                      0.97845555      0.97900405          0.056%        0.000549             614
+       49980.365             890                                      0.97845555      0.97900405          0.056%        0.000549             615
+         49987.5             891                           * L        0.97845566      0.97900405          0.056%        0.000548             616
+       49996.799             892                                      0.97845566      0.97900405          0.056%        0.000548             617
+        50004.73             893                                      0.97845566      0.97900405          0.056%        0.000548             618
+       50011.957             894                                      0.97845566      0.97900405          0.056%        0.000548             619
+       50019.527             895                           * L        0.97845672      0.97900405         0.0559%        0.000547             620
+       50028.313             896                                      0.97845672      0.97900405         0.0559%        0.000547             621
+       50036.157             897                                      0.97845672      0.97900405         0.0559%        0.000547             622
+       50044.832             898                                      0.97845672      0.97900405         0.0559%        0.000547             623
+        50053.05             899                           * L        0.97845674      0.97900405         0.0559%        0.000547             624
+       50070.119             900           Bound                      0.97845674      0.97900405         0.0559%        0.000547             623
+       50084.671             901                           * L        0.97845685      0.97900405         0.0559%        0.000547             624
+       50093.682             902                                      0.97845685      0.97900405         0.0559%        0.000547             625
+       50100.747             903                                      0.97845685      0.97900405         0.0559%        0.000547             626
+       50107.696             904                                      0.97845685      0.97900405         0.0559%        0.000547             627
+       50115.788             905                           * L        0.97845839      0.97900405         0.0557%        0.000546             628
+       50124.443             906                                      0.97845839      0.97900405         0.0557%        0.000546             629
+       50132.627             907                                      0.97845839      0.97900405         0.0557%        0.000546             630
+       50140.892             908                                      0.97845839      0.97900405         0.0557%        0.000546             631
+        50149.57             909                           * L         0.9784586      0.97900405         0.0557%        0.000545             632
+       50157.827             910                                       0.9784586      0.97900405         0.0557%        0.000545             633
+       50166.129             911                                       0.9784586      0.97900405         0.0557%        0.000545             634
+       50173.356             912                                       0.9784586      0.97900405         0.0557%        0.000545             635
+       50178.545             913                           * L        0.97845913      0.97900405         0.0557%        0.000545             636
+       50185.461             914                                      0.97845913      0.97900405         0.0557%        0.000545             637
+       50193.161             915                                      0.97845913      0.97900405         0.0557%        0.000545             638
+       50201.907             916                                      0.97845913      0.97900405         0.0557%        0.000545             639
+        50209.73             917                           * L        0.97845914      0.97900405         0.0557%        0.000545             640
+       50217.758             918                                      0.97845914      0.97900405         0.0557%        0.000545             641
+       50226.226             919                                      0.97845914      0.97900405         0.0557%        0.000545             642
+       50233.231             920                                      0.97845914      0.97900405         0.0557%        0.000545             643
+       50241.589             921                           * L        0.97845939      0.97900405         0.0556%        0.000545             644
+       50248.594             922                                      0.97845939      0.97900405         0.0556%        0.000545             645
+       50256.867             923                                      0.97845939      0.97900405         0.0556%        0.000545             646
+       50265.016             924                                      0.97845939      0.97900405         0.0556%        0.000545             647
+         50273.4             925                           * L        0.97845964      0.97900405         0.0556%        0.000544             648
+       50281.823             926                                      0.97845964      0.97900405         0.0556%        0.000544             649
+       50288.672             927                                      0.97845964      0.97900405         0.0556%        0.000544             650
+       50295.241             928                                      0.97845964      0.97900405         0.0556%        0.000544             651
+       50304.174             929                           * L        0.97845977      0.97900405         0.0556%        0.000544             652
+       50312.619             930                                      0.97845977      0.97900405         0.0556%        0.000544             653
+       50321.644             931                                      0.97845977      0.97900405         0.0556%        0.000544             654
+       50331.396             932                                      0.97845977      0.97900405         0.0556%        0.000544             655
+       50339.618             933                           * L        0.97846041      0.97900405         0.0555%        0.000544             656
+       50347.675             934                                      0.97846041      0.97900405         0.0555%        0.000544             657
+        50356.84             935                                      0.97846041      0.97900405         0.0555%        0.000544             658
+       50365.938             936                                      0.97846041      0.97900405         0.0555%        0.000544             659
+       50374.384             937                           * L        0.97846062      0.97900405         0.0555%        0.000543             660
+       50381.056             938                                      0.97846062      0.97900405         0.0555%        0.000543             661
+       50389.679             939                                      0.97846062      0.97900405         0.0555%        0.000543             662
+        50397.31             940                                      0.97846062      0.97900405         0.0555%        0.000543             663
+       50405.633             941                           * L        0.97846071      0.97900405         0.0555%        0.000543             664
+       50413.833             942                                      0.97846071      0.97900405         0.0555%        0.000543             665
+       50422.649             943                                      0.97846071      0.97900405         0.0555%        0.000543             666
+       50431.268             944                                      0.97846071      0.97900405         0.0555%        0.000543             667
+       50435.971             945                           * L         0.9784608      0.97900405         0.0555%        0.000543             668
+       50441.595             946                                       0.9784608      0.97900405         0.0555%        0.000543             669
+       50450.703             947                                       0.9784608      0.97900405         0.0555%        0.000543             670
+       50461.387             948                                       0.9784608      0.97900405         0.0555%        0.000543             671
+        50471.09             949                           * L        0.97846185      0.97900405         0.0554%        0.000542             672
+       50478.987             950                                      0.97846185      0.97900405         0.0554%        0.000542             673
+       50487.915             951                                      0.97846185      0.97900405         0.0554%        0.000542             674
+        50496.07             952                                      0.97846185      0.97900405         0.0554%        0.000542             675
+       50501.825             953                           * L        0.97846236      0.97900405         0.0553%        0.000542             676
+       50509.402             954                                      0.97846236      0.97900405         0.0553%        0.000542             677
+       50516.837             955                                      0.97846236      0.97900405         0.0553%        0.000542             678
+       50524.848             956                                      0.97846236      0.97900405         0.0553%        0.000542             679
+       50532.553             957                           * L        0.97846303      0.97900405         0.0553%        0.000541             680
+       50542.389             958                                      0.97846303      0.97900405         0.0553%        0.000541             681
+       50554.476             959                           * L         0.9784632      0.97900405         0.0552%        0.000541             682
+       50561.598             960                                       0.9784632      0.97900405         0.0552%        0.000541             683
+        50565.33             961                                       0.9784632      0.97900405         0.0552%        0.000541             684
+       50569.289             962                                       0.9784632      0.97900405         0.0552%        0.000541             685
+       50574.159             963                           * L        0.97846354      0.97900405         0.0552%        0.000541             686
+       50582.647             964                                      0.97846354      0.97900405         0.0552%        0.000541             687
+       50589.082             965                                      0.97846354      0.97900405         0.0552%        0.000541             688
+       50595.839             966                                      0.97846354      0.97900405         0.0552%        0.000541             689
+       50602.796             967                           * L        0.97846389      0.97900405         0.0552%         0.00054             690
+       50606.026             968                                      0.97846389      0.97900405         0.0552%         0.00054             691
+       50609.626             969                                      0.97846389      0.97900405         0.0552%         0.00054             692
+       50612.664             970                                      0.97846389      0.97900405         0.0552%         0.00054             693
+        50616.34             971                           * L        0.97846406      0.97900405         0.0552%         0.00054             694
+       50619.678             972                                      0.97846406      0.97900405         0.0552%         0.00054             695
+       50623.774             973                                      0.97846406      0.97900405         0.0552%         0.00054             696
+       50627.681             974                                      0.97846406      0.97900405         0.0552%         0.00054             697
+       50631.128             975                           * L        0.97846459      0.97900405         0.0551%        0.000539             698
+        50636.41             976                                      0.97846459      0.97900405         0.0551%        0.000539             699
+       50640.942             977                                      0.97846459      0.97900405         0.0551%        0.000539             700
+       50644.472             978                                      0.97846459      0.97900405         0.0551%        0.000539             701
+       50647.859             979                           * L        0.97846734      0.97900405         0.0548%        0.000537             702
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+       50978.989             980           Bound                      0.97846734      0.97900405         0.0548%        0.000537             701
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_0
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_1
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_2
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_3
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_4
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_5
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_6
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_8
+DEBUG: 'maxTimeLimit' reached for subproblem: scen_9
+       51543.699             981                           * L        0.97846843      0.97900405         0.0547%        0.000536             702
+       51552.518             982                                      0.97846843      0.97900405         0.0547%        0.000536             703
+       51560.765             983                                      0.97846843      0.97900405         0.0547%        0.000536             704
+       51568.142             984                                      0.97846843      0.97900405         0.0547%        0.000536             705
+       51576.117             985                           * L        0.97847088      0.97900405         0.0545%        0.000533             706
+       51583.554             986                                      0.97847088      0.97900405         0.0545%        0.000533             707
+       51588.766             987                                      0.97847088      0.97900405         0.0545%        0.000533             708
+       51596.259             988                                      0.97847088      0.97900405         0.0545%        0.000533             709
+       51605.688             989                           * L        0.97847138      0.97900405         0.0544%        0.000533             710
+       51613.605             990                                      0.97847138      0.97900405         0.0544%        0.000533             711
+       51621.298             991                                      0.97847138      0.97900405         0.0544%        0.000533             712
+       51629.383             992                                      0.97847138      0.97900405         0.0544%        0.000533             713
+       51637.212             993                           * L        0.97847169      0.97900405         0.0544%        0.000532             714
+       51645.783             994                                      0.97847169      0.97900405         0.0544%        0.000532             715
+       51653.378             995                                      0.97847169      0.97900405         0.0544%        0.000532             716
+       51661.058             996                                      0.97847169      0.97900405         0.0544%        0.000532             717
+        51669.74             997                           * L        0.97847346      0.97900405         0.0542%        0.000531             718
+       51678.518             998                                      0.97847346      0.97900405         0.0542%        0.000531             719
+        51686.55             999                                      0.97847346      0.97900405         0.0542%        0.000531             720
+       51693.765            1000                                      0.97847346      0.97900405         0.0542%        0.000531             721
+        51700.59            1001                           * L        0.97847369      0.97900405         0.0542%         0.00053             722
+       51707.857            1002                                      0.97847369      0.97900405         0.0542%         0.00053             723
+       51712.694            1003                                      0.97847369      0.97900405         0.0542%         0.00053             724
+       51719.201            1004                                      0.97847369      0.97900405         0.0542%         0.00053             725
+       51727.137            1005                           * L        0.97847419      0.97900405         0.0541%         0.00053             726
+       51739.766            1006                                      0.97847419      0.97900405         0.0541%         0.00053             727
+       51750.418            1007                           * L        0.97847782      0.97900405         0.0538%        0.000526             728
+       51760.933            1008                                      0.97847782      0.97900405         0.0538%        0.000526             729
+       51770.467            1009                                      0.97847782      0.97900405         0.0538%        0.000526             730
