@@ -184,6 +184,15 @@ def main():
 
     tracker = SimplexTracker()
 
+    # Feasible tetrahedron: vertices of {x >= 0, x1+x2+x3 <= 500}
+    # All corners satisfy the acreage constraint — no infeasible vertices.
+    farmer_initial_nodes = [
+        (0.0, 0.0, 0.0),
+        (500.0, 0.0, 0.0),
+        (0.0, 500.0, 0.0),
+        (0.0, 0.0, 500.0),
+    ]
+
     result = run_pid_simplex_3d(
         base_bundles=base_bundles,
         ms_bundles=ms_bundles,
@@ -198,6 +207,9 @@ def main():
         time_limit=params["time_limit"],
         enable_ef_ub=params["enable_ef_ub"],
         ef_time_ub=params["ef_time_ub"],
+        initial_nodes=farmer_initial_nodes,
+        output_csv_path=str(results_dir / "simplex_result.csv"),
+        split_mode=2,  # Mode 2: kink-plane splitting
     )
 
     dt_run = perf_counter() - t0
@@ -229,6 +241,7 @@ def main():
         opt_gap = abs(final_UB - KNOWN_OPTIMAL) / (abs(KNOWN_OPTIMAL) + 1e-16)
         print(f"  UB vs optimal:   {opt_gap:.6e}")
     print(f"  Wall time:       {dt_run:.2f}s")
+    print(f"  Termination:     {result.get('termination_reason', 'unknown')}")
     print("=" * 70)
 
     # ── Write results text ────────────────────────────────────────────────
@@ -245,30 +258,7 @@ def main():
         f.write(f"known_optimal={KNOWN_OPTIMAL}\n")
         f.write(f"wall_time_s={dt_run:.2f}\n")
 
-    # ── Write CSV ─────────────────────────────────────────────────────────
     csv_path = results_dir / "simplex_result.csv"
-    with open(csv_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        writer.writerow([
-            "iter", "nodes", "LB", "UB",
-            "gap_abs", "gap_rel_pct", "active_ratio",
-        ])
-        for i in range(n_iters):
-            lb_i = LB_hist[i] / S
-            ub_i = UB_hist[i] / S
-            gap_i = ub_i - lb_i
-            gap_rel_i = gap_i / (abs(ub_i) + 1e-16) * 100.0
-            nodes_i = result["node_count"][i] if i < len(result["node_count"]) else ""
-            active_i = (
-                result["active_ratio"][i]
-                if "active_ratio" in result and i < len(result["active_ratio"])
-                else ""
-            )
-            writer.writerow([
-                i, nodes_i, f"{lb_i:.9f}", f"{ub_i:.9f}",
-                f"{gap_i:.6e}", f"{gap_rel_i:.6f}", active_i,
-            ])
-
     print(f"\n  Results written to:")
     print(f"    {txt_path}")
     print(f"    {csv_path}")

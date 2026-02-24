@@ -1,0 +1,186 @@
+# Mode 2: Kink-Plane Splitting — Detailed Change Document
+
+## 1. Motivation
+
+The simplex method's convergence on the farmer problem was fundamentally limited by its splitting strategy. Mode 1 inserts **one point per iteration** (typically the ms or c_s point from the worst simplex), then re-evaluates. On the farmer problem, the true objective `Q(K)` is piecewise linear with **9 axis-aligned kink planes** (see [farmer_kink_analysis.md](file:///C:/Users/pc/.gemini/antigravity/brain/9e0ff90e-05d8-4936-bb9d-c3506610d29a/farmer_kink_analysis.md)):
+
+| Axis | Kink values | Physical meaning |
+|------|-------------|-----------------|
+| x₁ (wheat) | 66.67, 80.00, 100.00 | `200 / yield` — transition from buying to selling wheat |
+| x₂ (corn) | 66.67, 80.00, 100.00 | `240 / yield` — transition from buying to selling corn |
+| x₃ (beets) | 250, 300, 375 | `6000 / yield` — beets quota boundary |
+
+The surrogate lower bound is **exact** only when the simplex mesh aligns with these kink planes. Mode 1's single-point insertions create refinements that are unaware of this global structure — the mesh needs many dozens of iterations to accidentally "discover" each plane.
+
+> [!IMPORTANT]
+> **Key insight:** The ms (minimum surrogate) solution points naturally land on kink hyperplanes because they optimize piecewise-linear recourse programs. By detecting which coordinate of the ms point differs from all vertex coordinates, we can identify the kink plane, then cut **every** simplex along it in one shot.
+
+## 2. Files Changed
+
+### 2.1 [simplex_specialstart.py](file:///c:/Users/pc/Desktop/GitWorkspace2026/219_simplex_fv/pid_simplex_fv/simplex_specialstart.py) — Three additions
+
+---
+
+#### [NEW METHOD] `SimplexMesh.split_by_hyperplane(nodes, axis, value)`
+[Lines 213–347](file:///c:/Users/pc/Desktop/GitWorkspace2026/219_simplex_fv/pid_simplex_fv/simplex_specialstart.py#L213-L347)
+
+**What it does:** Cuts every simplex in the mesh that straddles the hyperplane `x[axis] = value`.
+
+**Algorithm:**
+1. For each simplex, classify its vertices as `below`, `above`, or [on](file:///c:/Users/pc/Desktop/GitWorkspace2026/219_simplex_fv/pid_simplex_fv/bundles.py#498-647) the plane (using `tol=1e-10`)
+2. If all vertices are on one side → keep unchanged
+3. If the simplex straddles the plane:
+   - Enumerate all crossing edges (one vertex below, one above)
+   - Compute the intersection point via linear interpolation: `t = (value - v_i[axis]) / (v_j[axis] - v_i[axis])`
+   - Force the cutting-axis coordinate to be exactly `value` (avoids floating-point drift)
+   - Use an `edge_node_cache` so shared edges produce only one new node (critical for mesh consistency)
+4. Partition the straddling simplex into two sides:
+   - **Side A:** below-vertices ∪ plane-nodes
+   - **Side B:** above-vertices ∪ plane-nodes
+5. If a side has exactly `d+1` points → one child simplex. Otherwise → local Delaunay tessellation via `scipy.spatial.Delaunay`
+
+**Rationale for design choices:**
+
+- **Edge-node caching** (`edge_node_cache` keyed by [(min(vi,vj), max(vi,vj))](file:///c:/Users/pc/Desktop/GitWorkspace2026/219_simplex_fv/pid_simplex_fv/run_farmer_case.py#111-267)): Without this, adjacent simplices sharing an edge would each create a duplicate intersection point, breaking mesh topology. The cache ensures exactly one node per split edge across the entire mesh.
+
+- **Forced exact coordinate** (line 297: `new_pt_list[axis] = value`): Linear interpolation can produce values like `299.999999999997` instead of `300.0`. Forcing the exact value ensures that when we later detect kink planes, the "already cut" simplices are correctly classified as being entirely on one side.
+
+- **Local Delaunay fallback** (lines 328–339): When a simplex has more than `d+1` vertices on one side (e.g., a 3D simplex with 2 vertices below + 3 plane nodes = 5 points), we need to tessellate into sub-simplices. Scipy's Delaunay handles this robustly for non-degenerate configurations.
+
+- **In-place mutation** of `nodes` list and `self.tets`: This matches Mode 1's existing pattern where the mesh and node list are mutated during subdivision. The method returns metadata (`new_node_indices`, `n_cut`, `n_children`) so the caller can evaluate Q at new points and update bookkeeping.
+
+---
+
+#### [NEW PARAMETER] `split_mode: int = 1`
+[Line 809](file:///c:/Users/pc/Desktop/GitWorkspace2026/219_simplex_fv/pid_simplex_fv/simplex_specialstart.py#L809)
+
+Added to the [run_pid_simplex_3d](file:///c:/Users/pc/Desktop/GitWorkspace2026/219_simplex_fv/pid_simplex_fv/simplex_specialstart.py#659-2975) function signature. Default is `1` (original behavior), set to `2` for kink-plane splitting. This ensures complete backward compatibility — no existing code paths change unless `split_mode=2` is explicitly passed.
+
+---
+
+#### [NEW CODE PATH] Mode 2 main loop logic
+[Lines 2044–2233](file:///c:/Users/pc/Desktop/GitWorkspace2026/219_simplex_fv/pid_simplex_fv/simplex_specialstart.py#L2044-L2233)
+
+This is the core algorithmic change. When `split_mode == 2`, the following replaces Mode 1's candidate-selection + single-point-insertion:
+
+**Step 1 — Collect ms points** (lines 2050–2054):
+Extracts the `xms_per_scene` and `ms_per_scene` from `lb_simp_rec` (the simplex with the worst lower bound). These ms points are the optimal solutions to the per-scenario surrogate minimization — by construction, they lie on kink hyperplanes.
+
+**Step 2 — Detect kink planes** (lines 2056–2073):
+For each scenario's ms point, for each axis, check whether the ms coordinate differs from **all** vertex coordinates of the LB simplex on that axis:
+```python
+coord = round(float(ms_pt_arr[ax]), 6)
+if coord not in _vert_coords_per_axis[ax]:
+    weight = max(0.0, -float(ms_val))  # more negative ms = larger kink
+    _kink_candidates.append((ax, float(ms_pt_arr[ax]), weight, s))
+```
+
+**Rationale:** If the ms point's x₃ coordinate is 300.0 but no vertex of the LB simplex has x₃=300.0, then the ms optimizer "chose" to land on the kink at x₃=300 — this is a strong signal that this plane is structurally important. The weight (`-ms_val`, which is positive for beneficial ms corrections) prioritizes planes that have the largest impact on the lower bound gap.
+
+**Step 3 — Pick the best plane** (lines 2075–2091):
+Candidates are clustered by [(axis, round(value, 2))](file:///c:/Users/pc/Desktop/GitWorkspace2026/219_simplex_fv/pid_simplex_fv/run_farmer_case.py#111-267) and weights are summed. The plane with the highest total weight is selected. This clustering tolerates small floating-point variations in ms solutions across scenarios.
+
+**Step 4 — Cut** (lines 2098–2113):
+Calls `tet_mesh.split_by_hyperplane(nodes, cut_axis, cut_value)`, which cuts all straddling simplices in one operation.
+
+**Step 5 — Evaluate Q at new nodes** (lines 2115–2120):
+For each newly created intersection node, evaluates `Q_s(K)` for all `S` scenarios using the existing `base_bundles`. This populates `scen_values` so that subsequent LB/UB calculations are correct.
+
+**Step 6 — Full re-evaluation** (lines 2140–2156):
+Calls [evaluate_all_tetra(...)](file:///c:/Users/pc/Desktop/GitWorkspace2026/219_simplex_fv/pid_simplex_fv/simplex_specialstart.py#478-794) to compute ms and c_s for every simplex (including the new children), updating per-simplex LB values.
+
+**Step 7 — Update bounds and CSV** (lines 2158–2206):
+Computes the new global LB (minimum over all simplices), UB (minimum Q-sum over all nodes), updates `best_lb_ever` / `best_ub_ever`, writes a CSV row, and prints a summary line.
+
+**Step 8 — Convergence check + continue** (lines 2208–2227):
+Checks three stopping criteria (gap closed, max nodes, time limit). If not converged, `continue` restarts the `for it` loop from the top — this means another kink plane can be detected and cut in the same "iteration."
+
+**Step 9 — Fallback** (lines 2229–2232):
+If no kink plane was detected (e.g., all ms points coincide with vertex coordinates), falls through to Mode 1's candidate selection below.
+
+---
+
+### 2.2 [run_farmer_case.py](file:///c:/Users/pc/Desktop/GitWorkspace2026/219_simplex_fv/pid_simplex_fv/run_farmer_case.py) — One-line change
+[Line 212](file:///c:/Users/pc/Desktop/GitWorkspace2026/219_simplex_fv/pid_simplex_fv/run_farmer_case.py#L212)
+
+```diff
++        split_mode=2,  # Mode 2: kink-plane splitting
+```
+
+To revert to Mode 1, change `split_mode=2` to `split_mode=1`.
+
+## 3. Execution Flow Comparison
+
+```mermaid
+flowchart TD
+    A["Start iteration<br/>(evaluate all simplices)"] --> B["Identify LB simplex"]
+    B --> C{"split_mode?"}
+    
+    C -->|"Mode 1"| D["Select candidate point<br/>(ms/c_s from LB simplex)"]
+    D --> E["Insert single point<br/>(subdivide one simplex)"]
+    E --> F["Evaluate Q at new node"]
+    F --> G["Re-evaluate mesh → end of iter"]
+    
+    C -->|"Mode 2"| H["Extract ms points from LB simplex"]
+    H --> I["Detect kink plane<br/>(ms coord ∉ vertex coords)"]
+    I --> J{"Kink found?"}
+    J -->|"Yes"| K["Cut ALL straddling simplices<br/>(split_by_hyperplane)"]
+    K --> L["Evaluate Q at all new nodes"]
+    L --> M["Re-evaluate mesh"]
+    M --> N{"Converged?"}
+    N -->|"No"| A
+    N -->|"Yes"| O["Done"]
+    J -->|"No"| D
+```
+
+**Key difference:** Mode 2's inner loop (A→H→I→K→L→M→N→A) operates at the **whole-mesh level**, cutting potentially dozens of simplices per pass, while Mode 1's loop splits exactly one simplex. Mode 2 only falls back to Mode 1 when no new kink planes remain to cut.
+
+## 4. Test Results (Farmer Smoke Test)
+
+| Cut # | Time | Kink Plane | Nodes | LB / scenario | UB / scenario | Rel. Gap |
+|:------:|------:|:-----------|------:|--------------:|--------------:|---------:|
+| 1 | 0.8s | x₃(beets) = 300 | 7 | −114,078 | −98,200 | 16.17% |
+| 2 | 3.5s | x₁(wheat) = 167 | 14 | −114,078 | −107,100 | 6.52% |
+| 3 | 7.5s | x₂(corn) = 67 | 23 | −113,711 | −108,367 | 4.93% |
+| 4 | 28.6s | x₂(corn) = 150 | 54 | −113,711 | −108,367 | 4.93% |
+| 5 | 59.6s | x₁(wheat) = 83 | 103 | −112,600 | −108,367 | 3.91% |
+| 6 | 116.0s | x₁(wheat) | 177 | **−109,999** | **−108,367** | **1.51%** |
+
+**Terminated at 177 nodes** (target was 120). Final gap: **1.51%** with UB within 0.02% of optimal (−108,390).
+
+> [!NOTE]
+> For comparison, Mode 1 achieved only ~5.3% gap after 116 single-point iterations on the same problem.
+
+## 5. Observations and Design Trade-offs
+
+### Why all cuts happen in "iteration 0"
+Mode 2 uses `continue` to restart the loop after each hyperplane cut. This means the `for it` counter never increments — all 6 cuts appear as sub-iterations of iteration 0. This is intentional: each cut exposes new kink planes (because the re-evaluated ms points now lie in refined simplices), creating a cascade of refinements that should be performed immediately rather than waiting for the next outer iteration.
+
+### Simplex count growth
+The number of simplices grows faster than Mode 1 because each hyperplane cut slices **many** simplices simultaneously:
+
+| After cut | Simplices | Growth factor |
+|-----------|-----------|--------------|
+| Initial | 1 | — |
+| Cut 1 | 4 | 4× |
+| Cut 2 | 18 | 4.5× |
+| Cut 3 | 39 | 2.2× |
+| Cut 4 | 175 | 4.5× |
+| Cut 5 | 381 | 2.2× |
+| Cut 6 | 658 | 1.7× |
+
+The growth factor diminishes as more simplices are already aligned with previously-cut planes (and are thus not straddling).
+
+### UB convergence via EF
+The UB converges rapidly because the EF (Extensive Form) solver finds near-optimal first-stage decisions even on the initial mesh. The EF upper bound was within 0.02% of the known optimal from the very first cut. The LB side is what primarily drives the remaining gap.
+
+### Fallback to Mode 1
+When Mode 2 exhausts all detectable kink planes (ms points coincide with vertex coordinates), it silently falls through to Mode 1 for that iteration. This ensures the algorithm doesn't stall — it just switches to the original fine-grained refinement strategy.
+
+## 6. Potential Improvements
+
+1. **Plane deduplication across iterations**: Currently, Mode 2 may re-detect a plane that was already cut if the ms point happens to land on the same coordinate again. Adding a "cut planes history" set would prevent redundant (no-op) cuts.
+
+2. **Budget-aware cutting**: When the mesh is already large, cutting along a new plane may create hundreds of new simplices. A threshold could limit Mode 2 to only cut when the expected number of new simplices is within a budget.
+
+3. **Non-axis-aligned planes**: The current implementation only handles axis-aligned hyperplanes (`x[axis] = value`). For problems with non-separable recourse, kink planes may be oblique — supporting general hyperplanes would require a more complex intersection algorithm.

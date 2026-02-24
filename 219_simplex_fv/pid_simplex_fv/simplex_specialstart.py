@@ -209,6 +209,143 @@ class SimplexMesh:
         self.last_split_kind = "face"
         return len(face_verts)
 
+    # ---------- Mode 2: split ALL simplices by axis-aligned hyperplane ----------
+    def split_by_hyperplane(self, nodes, axis, value, tol=1e-10):
+        """
+        Cut every simplex that straddles the hyperplane x[axis] = value.
+
+        For each straddling simplex, intersection points are computed on
+        each edge that crosses the plane.  These new nodes are appended to
+        *nodes* (mutated in-place).  The straddling simplex is then replaced
+        by sub-simplices on each side of the plane.
+
+        Parameters
+        ----------
+        nodes : list[tuple]
+            Global node list (will be extended with new intersection nodes).
+        axis : int
+            Coordinate axis (0, 1, or 2 for 3-D).
+        value : float
+            Cut plane position: x[axis] = value.
+        tol : float
+            Tolerance for classifying a vertex as "on the plane".
+
+        Returns
+        -------
+        dict
+            ``new_node_indices`` : list[int] – global indices of added nodes.
+            ``n_cut``            : int – number of simplices that were cut.
+            ``n_children``       : int – total new simplices created.
+        """
+        pts = np.asarray(nodes, float)
+        new_tets = []
+        kept_tets = []
+        new_node_indices = []
+
+        # Cache for edge → new-node-index so shared edges are not duplicated
+        edge_node_cache = {}  # (min_idx, max_idx) → new_node_global_index
+
+        n_cut = 0
+
+        for tet in self.tets:
+            coords = np.array([nodes[v] for v in tet], float)  # (d+1, d)
+            vals = coords[:, axis]
+
+            below = vals < value - tol
+            above = vals > value + tol
+            on_plane = ~below & ~above  # within tol of the plane
+
+            n_below = int(below.sum())
+            n_above = int(above.sum())
+
+            # If all on one side (or all on the plane), keep as-is
+            if n_below == 0 or n_above == 0:
+                kept_tets.append(tet)
+                continue
+
+            # This simplex straddles the plane — need to split it
+            n_cut += 1
+
+            # Find intersection nodes on each crossing edge
+            tet_list = list(tet)
+            n_verts = len(tet_list)
+            crossing_nodes = []  # new node indices on the plane
+
+            for i in range(n_verts):
+                for j in range(i + 1, n_verts):
+                    vi, vj = tet_list[i], tet_list[j]
+                    vi_val, vj_val = vals[i], vals[j]
+
+                    # Edge crosses if one is below and one is above
+                    crosses = (below[i] and above[j]) or (above[i] and below[j])
+                    if not crosses:
+                        continue
+
+                    edge_key = (min(vi, vj), max(vi, vj))
+                    if edge_key in edge_node_cache:
+                        crossing_nodes.append(edge_node_cache[edge_key])
+                        continue
+
+                    # Compute intersection: linear interpolation
+                    t = (value - vi_val) / (vj_val - vi_val)
+                    new_pt = tuple(
+                        float((1 - t) * nodes[vi][d] + t * nodes[vj][d])
+                        for d in range(len(nodes[vi]))
+                    )
+                    # Force exact coordinate on the cutting axis
+                    new_pt_list = list(new_pt)
+                    new_pt_list[axis] = value
+                    new_pt = tuple(new_pt_list)
+
+                    new_idx = len(nodes)
+                    nodes.append(new_pt)
+                    new_node_indices.append(new_idx)
+                    edge_node_cache[edge_key] = new_idx
+                    crossing_nodes.append(new_idx)
+
+            # Also include vertices that are exactly on the plane
+            on_plane_verts = [tet_list[i] for i in range(n_verts) if on_plane[i]]
+
+            # Partition original vertices into below-set and above-set
+            below_verts = [tet_list[i] for i in range(n_verts) if below[i]]
+            above_verts = [tet_list[i] for i in range(n_verts) if above[i]]
+
+            # Plane nodes = crossing intersection nodes + vertices on the plane
+            plane_nodes = crossing_nodes + on_plane_verts
+
+            # Build child simplices for each side:
+            # Side A (below): below_verts + plane_nodes
+            # Side B (above): above_verts + plane_nodes
+            for side_verts in [below_verts, above_verts]:
+                all_verts = side_verts + plane_nodes
+                if len(all_verts) < self._dim + 1:
+                    continue  # degenerate — should not happen
+
+                if len(all_verts) == self._dim + 1:
+                    # Exactly one simplex
+                    new_tets.append(tuple(all_verts))
+                else:
+                    # Multiple points — need local Delaunay to tessellate
+                    local_pts = np.array([nodes[v] for v in all_verts], float)
+                    try:
+                        from scipy.spatial import Delaunay as _Del
+                        local_tri = _Del(local_pts)
+                        for simp in local_tri.simplices:
+                            child = tuple(all_verts[k] for k in simp)
+                            new_tets.append(child)
+                    except Exception:
+                        # Fallback: if Delaunay fails (degenerate), just make
+                        # one simplex from the first d+1 points
+                        new_tets.append(tuple(all_verts[:self._dim + 1]))
+
+        self.tets = kept_tets + new_tets
+        self.last_split_kind = "hyperplane"
+        return {
+            "new_node_indices": new_node_indices,
+            "n_cut": n_cut,
+            "n_children": len(new_tets),
+        }
+
     def as_delaunay_like(self):
         """
         Return a light-weight object with a 'simplices' attribute so that
@@ -666,7 +803,10 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                        exact_solver_opts: dict | None = None,
                        time_limit: float | None = None,
                        enable_ef_ub: bool = True,
-                       ef_time_ub: float = 60.0):
+                       ef_time_ub: float = 60.0,
+                       initial_nodes: list | None = None,
+                       output_csv_path: str | None = None,
+                       split_mode: int = 1):
     """
     Starting from the 8 corner nodes, in each iteration:
         - Compute global UB from current nodes (sum over scenarios)
@@ -768,9 +908,14 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
     # === TIMING INSTRUMENTATION: pre-loop phases ===
     _phase_times_preloop = {}
 
-    # === Generate initial simplex vertices from variable bounds (8 corners of the bounding box) ===
+    # === Generate initial simplex vertices ===
     _t_phase = perf_counter()
-    nodes = corners_from_var_bounds(first_vars_list[0])
+    if initial_nodes is not None:
+        nodes = [tuple(float(c) for c in pt) for pt in initial_nodes]
+        if verbose:
+            print(f"[Init] Using {len(nodes)} user-supplied initial nodes")
+    else:
+        nodes = corners_from_var_bounds(first_vars_list[0])
 
 
     # === Preload the exact optimal solution for plotting===
@@ -876,7 +1021,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
 
     # === Create CSV file for incremental logging ===
     # LB/UB per user definition: main columns use per-iteration values, extra columns for monotonic envelopes
-    csv_path = "simplex_result.csv"
+    csv_path = output_csv_path if output_csv_path else "simplex_result.csv"
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["Time (s)", "# Nodes", "LB", "UB", "Rel. Gap", "Abs. Gap", "best_LB_ever", "best_UB_ever", "LB_in_split", "UB_in_split"])
@@ -1006,6 +1151,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
     # === TIMING INSTRUMENTATION: per-iteration phase dict ===
     _iter_phase_times = []  # list of dicts, one per iteration
 
+    termination_reason = "max_nodes"  # default if loop ends naturally
 
     while len(nodes) < target_nodes:
         t_iter0 = perf_counter()
@@ -1895,15 +2041,207 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                     "_rec": rec
                 })
 
-        MODE2 = False   # Default False: Mode 1 (selects the point with the smallest ms)
+        # =====================================================================
+        # Mode 2: kink-plane splitting (if split_mode == 2)
+        # Instead of inserting a single point, detect an axis-aligned kink
+        # plane from the ms optimal points and cut ALL simplices along it.
+        # =====================================================================
+        if split_mode == 2:
+            # --- Step 1: collect ms points from the LB simplex -----------
+            _ms_pts = lb_simp_rec.get("xms_per_scene", [])
+            _ms_vals = lb_simp_rec.get("ms_per_scene", [])
+            _lb_verts = np.array(lb_simp_rec["verts"], float)  # (d+1, d)
+            _dim = _lb_verts.shape[1]
+
+            # --- Step 2: detect kink planes ---
+            # For each axis, check if ms points have coordinates that differ
+            # from ALL vertex coordinates on that axis → kink detected.
+            _kink_candidates = []  # list of (axis, value, total_ms_weight)
+            _vert_coords_per_axis = {}
+            for ax in range(_dim):
+                _vert_coords_per_axis[ax] = set(round(float(v), 6) for v in _lb_verts[:, ax])
+
+            for s, (ms_pt, ms_val) in enumerate(zip(_ms_pts, _ms_vals)):
+                if ms_pt is None:
+                    continue
+                ms_pt_arr = np.array(ms_pt, float)
+                for ax in range(_dim):
+                    coord = round(float(ms_pt_arr[ax]), 6)
+                    # Check if this coordinate differs from all vertex coords
+                    if coord not in _vert_coords_per_axis[ax]:
+                        weight = max(0.0, -float(ms_val))  # more negative ms = larger kink
+                        _kink_candidates.append((ax, float(ms_pt_arr[ax]), weight, s))
+
+            # --- Step 3: pick the best kink plane ---
+            # Cluster candidates by (axis, value) and sum weights
+            _plane_scores = {}
+            for ax, val, weight, s in _kink_candidates:
+                key = (ax, round(val, 2))  # cluster with tolerance
+                if key not in _plane_scores:
+                    _plane_scores[key] = {"axis": ax, "value": val, "weight": 0.0, "scenarios": []}
+                _plane_scores[key]["weight"] += weight
+                _plane_scores[key]["scenarios"].append(s)
+
+            _mode2_did_cut = False
+            if _plane_scores:
+                best_plane = max(_plane_scores.values(), key=lambda p: p["weight"])
+                cut_axis = best_plane["axis"]
+                cut_value = best_plane["value"]
+                axis_names = ["x₁(wheat)", "x₂(corn)", "x₃(beets)"]
+                axis_label = axis_names[cut_axis] if cut_axis < len(axis_names) else f"axis{cut_axis}"
+
+                if verbose:
+                    print(f"\n[Mode 2 Iter {it}] Detected kink plane: {axis_label} = {cut_value:.4f}")
+                    print(f"  Weight: {best_plane['weight']:.3e}, Scenarios: {best_plane['scenarios']}")
+                    print(f"  Simplices before cut: {len(tet_mesh.tets)}")
+
+                # --- Step 4: cut all simplices along the kink plane ---
+                n_before = len(tet_mesh.tets)
+                cut_result = tet_mesh.split_by_hyperplane(nodes, cut_axis, cut_value)
+                new_node_indices = cut_result["new_node_indices"]
+                n_cut = cut_result["n_cut"]
+                n_children_total = cut_result["n_children"]
+                n_after = len(tet_mesh.tets)
+
+                if verbose:
+                    print(f"  Cut {n_cut} simplices → {n_children_total} children ({len(new_node_indices)} new nodes)")
+                    print(f"  Simplices after cut: {n_after}")
+                    for ni in new_node_indices:
+                        print(f"    New node #{ni}: {nodes[ni]}")
+
+                if new_node_indices:
+                    _mode2_did_cut = True
+
+                    # --- Step 5: evaluate Q at all new intersection nodes ---
+                    for ni in new_node_indices:
+                        new_pt = nodes[ni]
+                        for ω in range(S):
+                            q_val = evaluate_Q_at(base_bundles[ω], first_vars_list[ω], new_pt)
+                            scen_values[ω].append(q_val)
+
+                    # Set downstream variables for end-of-iteration bookkeeping:
+                    new_node = nodes[new_node_indices[-1]]  # last added node (for logging)
+                    n_children = n_children_total
+                    selection_reason_hist.append(f"hyperplane_{axis_label}")
+                    selected_rec_before_split = lb_simp_rec
+                    selected_simplex_id = tuple(sorted(lb_simp_rec["vert_idx"]))
+                    add_node_hist.append(new_node)
+
+                    # Update tri for compatibility
+                    tri = tet_mesh.as_delaunay_like()
+
+                    # Track which simplex indices are "new"
+                    new_simplex_indices = list(range(n_after - n_children_total, n_after))
+
+                    _phases["6_candidate_selection"] = perf_counter() - _t_phase
+                    _phases["7_Q_eval_new_node"] = 0.0
+                    _phases["8_mesh_subdivide"] = 0.0
+
+                    # --- Re-evaluate all simplices (same as Mode 1 end-of-iteration) ---
+                    _t_phase = perf_counter()
+                    _, per_tet_end = evaluate_all_tetra(
+                        nodes, scen_values, ms_bundles, first_vars_list,
+                        ms_cache=ms_cache, cache_on=True, tracker=tracker,
+                        tet_mesh=tet_mesh,
+                        lb_sur_cache=lb_sur_cache,
+                        dbg_timelimit_path=dbg_timelimit_path,
+                        dbg_cs_timing_path=dbg_cs_timing_path,
+                        dbg_ms_timing_path=dbg_ms_timing_path,
+                        iter_num=it,
+                    )
+
+                    per_tet_dict = {r["simplex_index"]: r for r in per_tet_end}
+                    LB_global_end = float(min(r["LB"] for r in per_tet_end))
+                    lb_simp_rec_end = min(per_tet_end, key=lambda r: r["LB"])
+                    _phases["9_re_eval_after_split"] = perf_counter() - _t_phase
+
+                    # --- Compute UB from best node Q-sum ---
+                    Q_node = np.zeros(len(nodes))
+                    for ω in range(S):
+                        Q_node += np.array(scen_values[ω][:len(nodes)], float)
+                    ub_idx_end = int(np.argmin(Q_node))
+                    UB_incumbent = float(Q_node[ub_idx_end])
+                    UB_node = tuple(map(float, nodes[ub_idx_end]))
+
+                    # Update global trackers
+                    LB_global = LB_global_end
+                    UB_global = UB_incumbent
+                    best_lb_ever = max(best_lb_ever, LB_global_end)
+                    best_ub_ever = min(best_ub_ever, UB_incumbent)
+
+                    gap = UB_incumbent - LB_global_end
+                    rel_gap = abs(gap / UB_incumbent) if abs(UB_incumbent) > 1e-12 else float("inf")
+
+                    n_active = sum(1 for r in per_tet_end
+                                   if r["LB"] <= UB_incumbent + active_tol)
+                    n_tot = len(per_tet_end)
+
+                    # --- Print summary row ---
+                    t_elapsed = perf_counter() - t_start
+                    print(
+                        f"  {t_elapsed:>9.3f}"
+                        f"  {len(nodes):>6d}"
+                        f"  {LB_global_end:>15.9f}"
+                        f"  {UB_incumbent:>15.9f}"
+                        f"  {rel_gap:>8.4%}"
+                        f"  {gap:>10.5e}"
+                        f"  {n_tot:>8d}"
+                        f"  {n_active:>8d}"
+                        f"  plane_{axis_label}"
+                    )
+
+                    # Write CSV row (same format as Mode 1 end-of-iteration)
+                    lb_val = LB_global_end / S
+                    ub_val = UB_incumbent / S
+                    abs_gap_csv = gap / S
+                    rel_gap_csv = abs_gap_csv / (abs(ub_val) + 1e-16)
+                    lb_ever = best_lb_ever / S
+                    ub_ever = best_ub_ever / S
+                    with open(csv_path, "a", newline="", encoding="utf-8") as _f:
+                        _w = csv.writer(_f)
+                        _w.writerow([f"{t_elapsed:.3f}", len(nodes),
+                                     f"{lb_val:.9f}", f"{ub_val:.9f}",
+                                     f"{rel_gap_csv*100:.7f}%", f"{abs_gap_csv:.5f}",
+                                     f"{lb_ever:.9f}", f"{ub_ever:.9f}",
+                                     "N/A", "N/A"])
+
+                    # --- Check convergence ---
+                    if rel_gap <= gap_stop_tol:
+                        termination_reason = "gap_closed"
+                        if verbose:
+                            print(f"[Mode 2 Iter {it}] Converged! rel_gap={rel_gap:.2e}")
+                        break
+
+                    if len(nodes) >= target_nodes:
+                        termination_reason = "max_nodes"
+                        if verbose:
+                            print(f"[Mode 2 Iter {it}] Reached target_nodes={target_nodes}")
+                        break
+
+                    if time_limit is not None and t_elapsed > time_limit:
+                        termination_reason = "time_limit"
+                        break
+
+                    # Set per_tet for next iteration
+                    per_tet = per_tet_end
+                    continue  # Skip the Mode 1 sections below
+
+            if not _mode2_did_cut:
+                if verbose:
+                    print(f"[Mode 2 Iter {it}] No kink plane detected, falling back to Mode 1")
+                # Fall through to Mode 1 below
+
+        # --- MODE2 flag for legacy weighted-composite approach (disabled) ---
+        MODE2 = False
 
         new_node = None
         chosen_ms = None
         chosen_cand = None
         stop_due_to_collision = False
+        collision_node_idx = None    # index of the node the candidate collided with
 
         def handle_collision(cand_pt, ci, stage_note="active"):
-            nonlocal stop_due_to_collision
+            nonlocal stop_due_to_collision, collision_node_idx
             X = np.asarray(nodes, float)
             P = np.asarray(cand_pt, float)
             dists = np.linalg.norm(X - P, axis=1)
@@ -1953,6 +2291,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                     f"(< {min_dist:g}). Highlighted simplices: {sorted(orange_ids)}"
                 )
             stop_due_to_collision = True
+            collision_node_idx = j_star
 
         # ---------- Mode 2 (ms weighted composite point) ----------
         if MODE2:
@@ -2176,13 +2515,75 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 print(f"[debug_lIter0_summary] WARNING: failed to write: {_e}")
 
         # ------------------------------------------------
+        _fallback_used = False
+        _fallback_edge_verts = None
+        _fallback_simplex_idx = None
 
         if stop_due_to_collision:
-            if verbose:
-                print(f"[Iter {it}] Stop due to collision.")
-            break
+            # --- Edge-midpoint fallback for LP-type problems ---
+            # When the ms/cs candidate lands on an existing vertex (common for
+            # LP problems where optimizing a linear function over a simplex
+            # always yields a vertex), split an edge of the LB simplex.
+            # Priority: edges connected to the collision vertex first,
+            # sorted by length (longest first); random tie-break.
+            _verts_arr = np.array(lb_simp_rec["verts"], float)
+            _vert_idxs = list(lb_simp_rec["vert_idx"])
+            _lb_simp_idx = int(lb_simp_rec["simplex_index"])
+
+            # Collect edge midpoints, separated by collision-connected vs other
+            _collision_edges = []
+            _other_edges = []
+            for _ei in range(len(_vert_idxs)):
+                for _ej in range(_ei + 1, len(_vert_idxs)):
+                    _midpt = tuple(float(c) for c in 0.5 * (_verts_arr[_ei] + _verts_arr[_ej]))
+                    _elen = float(np.linalg.norm(_verts_arr[_ei] - _verts_arr[_ej]))
+                    _edge_info = (_elen, _ei, _ej, _midpt)
+                    if collision_node_idx is not None and \
+                       collision_node_idx in (_vert_idxs[_ei], _vert_idxs[_ej]):
+                        _collision_edges.append(_edge_info)
+                    else:
+                        _other_edges.append(_edge_info)
+
+            # Sort: shuffle first (random tie-break), then stable-sort longest first
+            _rng = np.random.default_rng()
+            for _lst in [_collision_edges, _other_edges]:
+                _rng.shuffle(_lst)
+                _lst.sort(key=lambda x: -x[0])
+
+            # Try collision-connected edges first, then others
+            _fallback_used = False
+            for _fb_group, _fb_list in [("collision_edge", _collision_edges),
+                                         ("other_edge", _other_edges)]:
+                for _elen, _ei, _ej, _midpt in _fb_list:
+                    _fb_dist = min_dist_to_nodes(_midpt, nodes)
+                    if _fb_dist >= min_dist:
+                        new_node = _midpt
+                        stop_due_to_collision = False
+                        _fallback_used = True
+                        if verbose:
+                            print(f"[Iter {it}] Collision fallback ({_fb_group} midpoint "
+                                  f"v{_vert_idxs[_ei]}-v{_vert_idxs[_ej]}, "
+                                  f"len={_elen:.3e}): {_midpt}, dist={_fb_dist:.3e}")
+                        # Store subdivision info for downstream mesh update
+                        _fallback_edge_verts = (_vert_idxs[_ei], _vert_idxs[_ej])
+                        _fallback_simplex_idx = _lb_simp_idx
+                        break
+                    else:
+                        if verbose:
+                            print(f"[Iter {it}] Collision fallback ({_fb_group} midpoint "
+                                  f"v{_vert_idxs[_ei]}-v{_vert_idxs[_ej]}): "
+                                  f"too close (dist={_fb_dist:.3e})")
+                if _fallback_used:
+                    break
+
+            if not _fallback_used:
+                termination_reason = "collision"
+                if verbose:
+                    print(f"[Iter {it}] Stop: all edge-midpoint fallbacks exhausted.")
+                break
 
         if new_node is None:
+            termination_reason = "no_valid_candidate"
             if verbose:
                 print("New node too close for all candidates (or infeasible ms); stop.")
             break
@@ -2362,7 +2763,21 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 # Default treated as interior point, star subdivision
                 n_children = tet_mesh.subdivide(sid, new_node_index)
         else:
-            n_children = 0  # No split happened
+            # Collision fallback: chosen_cand is None but we have edge info
+            if _fallback_used:
+                selection_reason_hist.append("collision_edge_midpoint")
+                sid = _fallback_simplex_idx
+                if verbose:
+                    print(f"[Iter {it}] subdivision type = edge (collision fallback) "
+                          f"on simplex T{sid}, edge={_fallback_edge_verts}")
+                n_children = tet_mesh.subdivide_edge(sid, new_node_index, _fallback_edge_verts)
+                # Also set selected_rec_before_split for LB split diagnostic
+                selected_rec_before_split = lb_simp_rec
+                selected_simplex_id = tuple(sorted(lb_simp_rec["vert_idx"]))
+            else:
+                n_children = 0  # No split happened
+                selected_rec_before_split = None
+                selected_simplex_id = None
 
         add_node_hist.append(new_node)
         if verbose:
@@ -2722,6 +3137,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
         if gap_stop_tol is not None and float(gap_stop_tol) > 0.0:
             gap_rel_end = float(UB_global_end - LB_global_end) / (abs(UB_global_end) + 1e-16)
             if gap_rel_end <= float(gap_stop_tol):
+                termination_reason = "gap_converged"
                 if verbose:
                     print(f"[Iter {it}] Stop: UB-LB gap {gap_rel_end:.6e} <= tol {float(gap_stop_tol):.6e}.")
                 break
@@ -2730,6 +3146,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
         if time_limit is not None and time_limit > 0:
             elapsed = perf_counter() - t_start
             if elapsed >= time_limit:
+                termination_reason = "time_limit"
                 if verbose:
                     print(f"[Iter {it}] Stop: Time limit reached ({elapsed:.2f}s >= {time_limit:.2f}s).")
                 break
@@ -2907,6 +3324,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
         "lb_c_per_scene_hist": lb_c_per_scene_hist, 
         "iter_ms_times_detail": iter_ms_times_detail,
         "per_iter_ms_counts": per_iter_ms_counts,
+        "termination_reason": termination_reason,
 
     }
 

@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "C:\Users\pc\Desktop\GitWorkspace2026\219_simplex_fv\pid_simplex_fv\run_farmer_case.py", line 271, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "C:\Users\pc\Desktop\GitWorkspace2026\219_simplex_fv\pid_simplex_fv\run_farmer_case.py", line 196, in main
+    result = run_pid_simplex_3d(
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\Desktop\GitWorkspace2026\219_simplex_fv\pid_simplex_fv\simplex_specialstart.py", line 2180, in run_pid_simplex_3d
+    t_elapsed = perf_counter() - t0
+                                 ^^
+UnboundLocalError: cannot access local variable 't0' where it is not associated with a value

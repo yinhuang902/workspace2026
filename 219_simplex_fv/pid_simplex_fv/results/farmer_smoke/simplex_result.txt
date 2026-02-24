@@ -1,10 +1,10 @@
 mode=smoke
 scenarios=['good', 'fair', 'bad']
-iterations=5
-final_nodes=12
-final_LB_avg=-115261.11111111111
-final_UB_avg=-108390.00259008263
-gap_abs=6871.10852102848
-gap_rel=0.0633924564704934
+iterations=6
+final_nodes=103
+final_LB_avg=-112600.0
+final_UB_avg=-108366.66666666667
+gap_abs=4233.3333333333285
+gap_rel=0.03906490310673634
 known_optimal=-108390.0
-wall_time_s=2.92
+wall_time_s=116.03
