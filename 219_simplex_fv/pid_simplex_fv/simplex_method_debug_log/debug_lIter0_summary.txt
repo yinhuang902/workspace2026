@@ -2,3 +2,30 @@
 # Per-simplex: LB, avg dual bound, avg c_s Q-value, IPOPT result
 # Plus: current UB, UB source, next chosen simplex
 
+======================================================================
+[Iter 0] FULL SIMPLEX SUMMARY
+  Number of simplices: 1
+  Number of scenarios: 3
+
+  --- T0 (0, 1, 2, 3) ---
+    LB: -113209.071398847 (per-scen)
+    Avg dual bound (ms): -113378.888888889
+    Avg c_s point Q-value: -106207.777777778 (per-scen), point=(np.float64(147.77777777777777), np.float64(62.22222222222223), np.float64(290.0))
+    Volume: 1.260000e+05
+
+  --- IPOPT EF Result (selected LB simplex only) ---
+    Selected simplex: T0 (0, 1, 2, 3)
+    EF-IPOPT: ok=True, ef_obj(per-scen)=-36130.000515029, true_obj(per-scen)=-108390.000230131, status=ok, term=optimal, time=0.045s
+    EF-IPOPT K point: (169.99999950037792, 79.99999920032667, 250.0000024992864)
+    Barycentric coords: [0.126984, 0.428571, 0.444444, -0.000000]
+
+  --- Current UB ---
+    UB value: -108390.000230131 (per-scen)
+    UB point: (169.99999950037792, 79.99999920032667, 250.0000024992864)
+    UB source: EF_ipopt
+
+  --- Next Chosen Simplex ---
+    Simplex: T0 (0, 1, 2, 3)
+    Scene: 0, source: ms
+    New point: (130.0, 50.0, 250.0)
+======================================================================

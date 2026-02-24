@@ -24,17 +24,22 @@ from iter_logger import IterationLogger
 from ef_upper_bounder import SimplexEFUb
 
 
-
+# we have 2 setting of tol
+# first one is tend to choose c_s point
 # Tolerances for candidate-point feature snapping (ms/c_s selection)
 # TOL_MS_C:    Switch to c_s if dist(ms, c_s) < TOL_MS_C.
 #              1e3 is intentionally loose — effectively always allow c_s.
 #              (Previous stricter value was 1e-3; override kept for current tuning.)
 TOL_MS_C = 1e3
-
 # TOL_C_VERTS: Only use c_s if min-dist(c_s, vertices) > TOL_C_VERTS.
 #              1e-6 is intentionally tight — reject only if c_s is essentially on a vertex.
 #              (Previous looser value was 1e2; override kept for current tuning.)
 TOL_C_VERTS = 1e-6
+
+# second one is tend to choose ms point
+
+TOL_MS_C = 1e-3
+TOL_C_VERTS = 1e2
 
 
 # EXPERIMENTAL: set to True to also solve EF with Gurobi alongside ipopt (remove later)
@@ -806,7 +811,9 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                        ef_time_ub: float = 60.0,
                        initial_nodes: list | None = None,
                        output_csv_path: str | None = None,
-                       split_mode: int = 1):
+                       split_mode: int = 1,
+                       plot_output_dir: str | None = None,
+                       axis_labels: tuple | None = None):
     """
     Starting from the 8 corner nodes, in each iteration:
         - Compute global UB from current nodes (sum over scenarios)
@@ -853,6 +860,14 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
     dict
         History and results including nodes, LB/UB/ms traces,
         added nodes, and active simplex ratios.
+
+    Notes
+    -----
+    split_mode:
+        1 = Standard Mode 1: start from corner nodes, add one ms point per iteration.
+        2 = Custom initial points: start from user-supplied initial_nodes
+            (which should include all desired kink/inflection points),
+            Delaunay-tessellate them, then run Mode 1 splitting.
     """
 
     iter_q_times_detail = []
@@ -914,6 +929,8 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
         nodes = [tuple(float(c) for c in pt) for pt in initial_nodes]
         if verbose:
             print(f"[Init] Using {len(nodes)} user-supplied initial nodes")
+            if split_mode == 2:
+                print(f"[Init] split_mode=2: custom initial point set → Delaunay tessellation → Mode 1 splitting")
     else:
         nodes = corners_from_var_bounds(first_vars_list[0])
 
@@ -1035,6 +1052,12 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
     with open(dbg_timelimit_path, "w", encoding="utf-8") as f:
         f.write("# debug_timelimit.txt — subproblems that hit Gurobi TimeLimit\n")
         f.write("# Format: [Iter N] [MS/CS TimeLimit] simplex_idx=..., verts=..., scenario=..., dual_bound=..., primal_obj=..., dual<primal=...\n\n")
+
+    # File: Candidate debug log
+    dbg_candidates_path = os.path.join(debug_log_dir, "debug_candidates.txt")
+    with open(dbg_candidates_path, "w", encoding="utf-8") as f:
+        f.write("# debug_candidates.txt — per-iteration ms/c_s candidate details\n")
+        f.write("# Records: simplex vertices, ms points, c_s points, distances to existing nodes\n\n")
 
     # File 2: Dual > Primal violations
     dbg_dual_gt_obj_path = os.path.join(debug_log_dir, "debug_dual_gt_obj.txt")
@@ -1973,264 +1996,79 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
             if use_c_fallback:
                 val_list = rec.get("c_per_scene", [])
                 pts_list = rec.get("c_point_per_scene", [None] * len(val_list))
-                # In fallback, we only have c_s points, so source is always c_s
-                sources = ["c_s_fallback"] * len(val_list)
+                # In fallback, we only have c_s points
+                for s in range(len(val_list)):
+                    cand_items.append({
+                        "simplex_index": sid,
+                        "scene": s,
+                        "cand_ms": val_list[s],
+                        "cand_pt": pts_list[s],
+                        "pt_source": "c_s_fallback",
+                        "_rec": rec
+                    })
             else:
                 ms_vals = rec.get("ms_per_scene", [])
                 ms_pts = rec.get("xms_per_scene", [None] * len(ms_vals))
                 c_vals = rec.get("c_per_scene", [])
                 c_pts = rec.get("c_point_per_scene", [None] * len(c_vals))
-                
-                val_list = []
-                pts_list = []
-                sources = []
 
+                # Always add BOTH ms and c_s as separate candidates
                 for s in range(len(ms_vals)):
                     ms_pt = ms_pts[s]
+                    # Add ms candidate
+                    cand_items.append({
+                        "simplex_index": sid,
+                        "scene": s,
+                        "cand_ms": ms_vals[s],
+                        "cand_pt": ms_pt,
+                        "pt_source": "ms",
+                        "_rec": rec
+                    })
+                    # Add c_s candidate (if available and different from ms)
                     c_pt = c_pts[s] if s < len(c_pts) else None
-                    
-                    # Default selection: ms point
-                    selected_val = ms_vals[s]
-                    selected_pt = ms_pt
-                    source = "ms(base)"
+                    if c_pt is not None:
+                        c_val = c_vals[s] if s < len(c_vals) else ms_vals[s]
+                        cand_items.append({
+                            "simplex_index": sid,
+                            "scene": s,
+                            "cand_ms": c_val,
+                            "cand_pt": c_pt,
+                            "pt_source": "c_s",
+                            "_rec": rec
+                        })
 
-                    if ms_pt is not None and c_pt is not None:
-                        # Check distances
-                        dist_ms_c = np.linalg.norm(np.array(ms_pt) - np.array(c_pt))
-                        
-                        # Check distance from c_pt to vertices
-                        dist_c_verts = min(np.linalg.norm(np.array(c_pt) - v) for v in verts)
+        # (Mode 2 note: when split_mode==2, the user supplies custom initial_nodes
+        #  which are already Delaunay-tessellated at init. No special in-loop logic
+        #  is needed — Mode 1 candidate selection runs normally from here.)
 
-                        if dist_ms_c < TOL_MS_C:
-                             if dist_c_verts > TOL_C_VERTS:
-                                selected_pt = c_pt
-                                source = "c_s"
-                                # Debug print
-                                if verbose:
-                                    print(f"[Iter {it}] Scene {s}: Switched to c_s point. "
-                                          f"dist_ms_c={dist_ms_c:.2e} < {TOL_MS_C}, "
-                                          f"dist_c_verts={dist_c_verts:.2e} > {TOL_C_VERTS}")
-                             else:
-                                 source = "ms(vert)"
-                                 if verbose:
-                                     print(f"[Iter {it}] Scene {s}: Kept ms point (c_s too close to verts). "
-                                           f"dist_ms_c={dist_ms_c:.2e} < {TOL_MS_C} BUT "
-                                           f"dist_c_verts={dist_c_verts:.2e} <= {TOL_C_VERTS}")
-                        else:
-                            source = "ms(dist)"
-                            # if verbose:
-                            #    print(f"[Iter {it}] Scene {s}: Kept ms point (ms too far from c_s). "
-                            #          f"dist_ms_c={dist_ms_c:.2e} >= {TOL_MS_C}")
-
-                    val_list.append(selected_val)
-                    pts_list.append(selected_pt)
-                    sources.append(source)
-
-            for s in range(len(val_list)):
-                cand_items.append({
-                    "simplex_index": sid,
-                    "scene": s,
-                    "cand_ms": val_list[s],   # Note: this might be ms_val even if we picked c_pt, depending on logic above. 
-                                              # Actually, if source is c_s_fallback, val_list has c_vals.
-                                              # If source is c_s_cond, val_list has ms_vals (based on my logic above).
-                                              # Ideally we want to sort by the "potential improvement". 
-                                              # ms is the gap. c is the cut value. 
-                                              # Let's stick to using ms_val for sorting unless fallback.
-                    "cand_pt": pts_list[s],
-                    "pt_source": sources[s],
-                    "_rec": rec
-                })
-
-        # =====================================================================
-        # Mode 2: kink-plane splitting (if split_mode == 2)
-        # Instead of inserting a single point, detect an axis-aligned kink
-        # plane from the ms optimal points and cut ALL simplices along it.
-        # =====================================================================
-        if split_mode == 2:
-            # --- Step 1: collect ms points from the LB simplex -----------
-            _ms_pts = lb_simp_rec.get("xms_per_scene", [])
-            _ms_vals = lb_simp_rec.get("ms_per_scene", [])
-            _lb_verts = np.array(lb_simp_rec["verts"], float)  # (d+1, d)
-            _dim = _lb_verts.shape[1]
-
-            # --- Step 2: detect kink planes ---
-            # For each axis, check if ms points have coordinates that differ
-            # from ALL vertex coordinates on that axis → kink detected.
-            _kink_candidates = []  # list of (axis, value, total_ms_weight)
-            _vert_coords_per_axis = {}
-            for ax in range(_dim):
-                _vert_coords_per_axis[ax] = set(round(float(v), 6) for v in _lb_verts[:, ax])
-
-            for s, (ms_pt, ms_val) in enumerate(zip(_ms_pts, _ms_vals)):
-                if ms_pt is None:
-                    continue
-                ms_pt_arr = np.array(ms_pt, float)
-                for ax in range(_dim):
-                    coord = round(float(ms_pt_arr[ax]), 6)
-                    # Check if this coordinate differs from all vertex coords
-                    if coord not in _vert_coords_per_axis[ax]:
-                        weight = max(0.0, -float(ms_val))  # more negative ms = larger kink
-                        _kink_candidates.append((ax, float(ms_pt_arr[ax]), weight, s))
-
-            # --- Step 3: pick the best kink plane ---
-            # Cluster candidates by (axis, value) and sum weights
-            _plane_scores = {}
-            for ax, val, weight, s in _kink_candidates:
-                key = (ax, round(val, 2))  # cluster with tolerance
-                if key not in _plane_scores:
-                    _plane_scores[key] = {"axis": ax, "value": val, "weight": 0.0, "scenarios": []}
-                _plane_scores[key]["weight"] += weight
-                _plane_scores[key]["scenarios"].append(s)
-
-            _mode2_did_cut = False
-            if _plane_scores:
-                best_plane = max(_plane_scores.values(), key=lambda p: p["weight"])
-                cut_axis = best_plane["axis"]
-                cut_value = best_plane["value"]
-                axis_names = ["x₁(wheat)", "x₂(corn)", "x₃(beets)"]
-                axis_label = axis_names[cut_axis] if cut_axis < len(axis_names) else f"axis{cut_axis}"
-
-                if verbose:
-                    print(f"\n[Mode 2 Iter {it}] Detected kink plane: {axis_label} = {cut_value:.4f}")
-                    print(f"  Weight: {best_plane['weight']:.3e}, Scenarios: {best_plane['scenarios']}")
-                    print(f"  Simplices before cut: {len(tet_mesh.tets)}")
-
-                # --- Step 4: cut all simplices along the kink plane ---
-                n_before = len(tet_mesh.tets)
-                cut_result = tet_mesh.split_by_hyperplane(nodes, cut_axis, cut_value)
-                new_node_indices = cut_result["new_node_indices"]
-                n_cut = cut_result["n_cut"]
-                n_children_total = cut_result["n_children"]
-                n_after = len(tet_mesh.tets)
-
-                if verbose:
-                    print(f"  Cut {n_cut} simplices → {n_children_total} children ({len(new_node_indices)} new nodes)")
-                    print(f"  Simplices after cut: {n_after}")
-                    for ni in new_node_indices:
-                        print(f"    New node #{ni}: {nodes[ni]}")
-
-                if new_node_indices:
-                    _mode2_did_cut = True
-
-                    # --- Step 5: evaluate Q at all new intersection nodes ---
-                    for ni in new_node_indices:
-                        new_pt = nodes[ni]
-                        for ω in range(S):
-                            q_val = evaluate_Q_at(base_bundles[ω], first_vars_list[ω], new_pt)
-                            scen_values[ω].append(q_val)
-
-                    # Set downstream variables for end-of-iteration bookkeeping:
-                    new_node = nodes[new_node_indices[-1]]  # last added node (for logging)
-                    n_children = n_children_total
-                    selection_reason_hist.append(f"hyperplane_{axis_label}")
-                    selected_rec_before_split = lb_simp_rec
-                    selected_simplex_id = tuple(sorted(lb_simp_rec["vert_idx"]))
-                    add_node_hist.append(new_node)
-
-                    # Update tri for compatibility
-                    tri = tet_mesh.as_delaunay_like()
-
-                    # Track which simplex indices are "new"
-                    new_simplex_indices = list(range(n_after - n_children_total, n_after))
-
-                    _phases["6_candidate_selection"] = perf_counter() - _t_phase
-                    _phases["7_Q_eval_new_node"] = 0.0
-                    _phases["8_mesh_subdivide"] = 0.0
-
-                    # --- Re-evaluate all simplices (same as Mode 1 end-of-iteration) ---
-                    _t_phase = perf_counter()
-                    _, per_tet_end = evaluate_all_tetra(
-                        nodes, scen_values, ms_bundles, first_vars_list,
-                        ms_cache=ms_cache, cache_on=True, tracker=tracker,
-                        tet_mesh=tet_mesh,
-                        lb_sur_cache=lb_sur_cache,
-                        dbg_timelimit_path=dbg_timelimit_path,
-                        dbg_cs_timing_path=dbg_cs_timing_path,
-                        dbg_ms_timing_path=dbg_ms_timing_path,
-                        iter_num=it,
-                    )
-
-                    per_tet_dict = {r["simplex_index"]: r for r in per_tet_end}
-                    LB_global_end = float(min(r["LB"] for r in per_tet_end))
-                    lb_simp_rec_end = min(per_tet_end, key=lambda r: r["LB"])
-                    _phases["9_re_eval_after_split"] = perf_counter() - _t_phase
-
-                    # --- Compute UB from best node Q-sum ---
-                    Q_node = np.zeros(len(nodes))
-                    for ω in range(S):
-                        Q_node += np.array(scen_values[ω][:len(nodes)], float)
-                    ub_idx_end = int(np.argmin(Q_node))
-                    UB_incumbent = float(Q_node[ub_idx_end])
-                    UB_node = tuple(map(float, nodes[ub_idx_end]))
-
-                    # Update global trackers
-                    LB_global = LB_global_end
-                    UB_global = UB_incumbent
-                    best_lb_ever = max(best_lb_ever, LB_global_end)
-                    best_ub_ever = min(best_ub_ever, UB_incumbent)
-
-                    gap = UB_incumbent - LB_global_end
-                    rel_gap = abs(gap / UB_incumbent) if abs(UB_incumbent) > 1e-12 else float("inf")
-
-                    n_active = sum(1 for r in per_tet_end
-                                   if r["LB"] <= UB_incumbent + active_tol)
-                    n_tot = len(per_tet_end)
-
-                    # --- Print summary row ---
-                    t_elapsed = perf_counter() - t_start
-                    print(
-                        f"  {t_elapsed:>9.3f}"
-                        f"  {len(nodes):>6d}"
-                        f"  {LB_global_end:>15.9f}"
-                        f"  {UB_incumbent:>15.9f}"
-                        f"  {rel_gap:>8.4%}"
-                        f"  {gap:>10.5e}"
-                        f"  {n_tot:>8d}"
-                        f"  {n_active:>8d}"
-                        f"  plane_{axis_label}"
-                    )
-
-                    # Write CSV row (same format as Mode 1 end-of-iteration)
-                    lb_val = LB_global_end / S
-                    ub_val = UB_incumbent / S
-                    abs_gap_csv = gap / S
-                    rel_gap_csv = abs_gap_csv / (abs(ub_val) + 1e-16)
-                    lb_ever = best_lb_ever / S
-                    ub_ever = best_ub_ever / S
-                    with open(csv_path, "a", newline="", encoding="utf-8") as _f:
-                        _w = csv.writer(_f)
-                        _w.writerow([f"{t_elapsed:.3f}", len(nodes),
-                                     f"{lb_val:.9f}", f"{ub_val:.9f}",
-                                     f"{rel_gap_csv*100:.7f}%", f"{abs_gap_csv:.5f}",
-                                     f"{lb_ever:.9f}", f"{ub_ever:.9f}",
-                                     "N/A", "N/A"])
-
-                    # --- Check convergence ---
-                    if rel_gap <= gap_stop_tol:
-                        termination_reason = "gap_closed"
-                        if verbose:
-                            print(f"[Mode 2 Iter {it}] Converged! rel_gap={rel_gap:.2e}")
-                        break
-
-                    if len(nodes) >= target_nodes:
-                        termination_reason = "max_nodes"
-                        if verbose:
-                            print(f"[Mode 2 Iter {it}] Reached target_nodes={target_nodes}")
-                        break
-
-                    if time_limit is not None and t_elapsed > time_limit:
-                        termination_reason = "time_limit"
-                        break
-
-                    # Set per_tet for next iteration
-                    per_tet = per_tet_end
-                    continue  # Skip the Mode 1 sections below
-
-            if not _mode2_did_cut:
-                if verbose:
-                    print(f"[Mode 2 Iter {it}] No kink plane detected, falling back to Mode 1")
-                # Fall through to Mode 1 below
-
+        # === Debug: write candidate details to debug_candidates.txt ===
+        with open(dbg_candidates_path, "a", encoding="utf-8") as _dbf:
+            _dbf.write(f"{'='*80}\n")
+            _dbf.write(f"[Iter {it}] LB simplex = T{lb_simp_idx}\n")
+            _dbf.write(f"  LB simplex vertices:\n")
+            for vi, v in enumerate(lb_simp_rec['verts']):
+                vidx = lb_simp_rec['vert_idx'][vi]
+                _dbf.write(f"    v{vi} (node #{vidx}): {tuple(map(float, v))}\n")
+            _dbf.write(f"  Existing nodes ({len(nodes)} total):\n")
+            for ni, nd in enumerate(nodes):
+                _dbf.write(f"    node #{ni}: {tuple(map(float, nd))}\n")
+            _dbf.write(f"\n  Candidates ({len(cand_items)} total):\n")
+            for ci_idx, ci in enumerate(cand_items):
+                pt = ci['cand_pt']
+                src = ci.get('pt_source', '?')
+                if pt is not None:
+                    dist = min_dist_to_nodes(pt, nodes)
+                    collision = "COLLISION" if dist < min_dist else "ok"
+                else:
+                    dist = float('inf')
+                    collision = "None_pt"
+                _dbf.write(
+                    f"    [{ci_idx}] simp=T{ci['simplex_index']}, scene={ci['scene']}, "
+                    f"source={src}, val={float(ci['cand_ms']):.6e}, "
+                    f"pt={tuple(map(float, pt)) if pt is not None else None}, "
+                    f"dist_to_nodes={dist:.6e}, {collision}\n"
+                )
+            _dbf.write("\n")
         # --- MODE2 flag for legacy weighted-composite approach (disabled) ---
         MODE2 = False
 
@@ -2345,17 +2183,33 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                     handle_collision(candidate_pt, dummy_ci, stage_note="mode2")
 
 
-        # ---------- Mode 1: Minimum point in milliseconds (default) ----------
+        # ---------- Mode 1: try ms candidates, then c_s, then edge midpoint ----------
         if (not MODE2) and (not stop_due_to_collision):
+            # Separate ms-sourced and c_s-sourced candidates
+            ms_cands = [ci for ci in cand_items if ci.get("pt_source", "ms") != "c_s"]
+            cs_cands = [ci for ci in cand_items if ci.get("pt_source", "") == "c_s"]
+
+            # Sort each group by ms value (ascending = most negative first)
             def score_item(ci):
                 ms = ci["cand_ms"]
                 pt = ci["cand_pt"]
                 d  = (float('inf') if pt is None else min_dist_to_nodes(pt, nodes))
-                return (ms, -d)   
+                return (ms, -d)
 
-            candidates_sorted = sorted(cand_items, key=score_item)
+            ms_cands_sorted = sorted(ms_cands, key=score_item)
+            cs_cands_sorted = sorted(cs_cands, key=score_item)
 
-            for rank, ci in enumerate(candidates_sorted, start=1):
+            # Build combined ordered list: all ms first, then all c_s
+            candidates_sorted = ms_cands_sorted + cs_cands_sorted
+
+            # Track selection info
+            _selection_source = None   # "ms" or "c_s"
+            _selection_rank = None     # rank within its group (1-based)
+            _ms_collisions = 0
+            _cs_collisions = 0
+
+            # Phase 1: try all ms candidates in order
+            for rank, ci in enumerate(ms_cands_sorted, start=1):
                 cand_pt = ci["cand_pt"]
                 if cand_pt is None:
                     continue
@@ -2365,37 +2219,95 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                     ci["loc_type"] = loc_type
                     ci["loc_info"] = loc_info
                     chosen_ms  = ci["cand_ms"]
-                    chosen_cand= ci
+                    chosen_cand = ci
+                    _selection_source = "ms"
+                    _selection_rank = rank
                     if verbose:
-                        metric_name = "ms" if not use_c_fallback else "c_s"
-                        pt_source = ci.get("pt_source", "unknown")
+                        pt_source = ci.get("pt_source", "ms")
                         print(
                             f"Chosen node {tuple(map(float, cand_pt_pert))} "
-                            f"with {metric_name}={chosen_ms:.3e} "
-                            f"(simp T{ci['simplex_index']}, scene {ci['scene']}, rank #{rank}, source={pt_source})"
+                            f"with ms={chosen_ms:.3e} "
+                            f"(simp T{ci['simplex_index']}, scene {ci['scene']}, "
+                            f"ms_rank #{rank}/{len(ms_cands_sorted)}, source={pt_source})"
                         )
-                        print(f"[Iter {it}] LB simplex = T{lb_simp_idx}, "
-                              f"next node simplex = T{int(ci['simplex_index'])}, scene {int(ci['scene'])}")
-
-                        # === NEW: Print simplex vertices and new point details ===
-                        simp_idx_sel = int(ci['simplex_index'])
-                        verts_sel = ci["_rec"]["verts"]
-                        print(f"[Selected Simp Info] Iter {it} | Simplex T{simp_idx_sel} Vertices:")
-                        for v_i, v in enumerate(verts_sel):
-                            print(f"  v{v_i}: {tuple(map(float, v))}")
-                        print(f"  -> New Point: {tuple(map(float, new_node))}")
                     break
                 else:
+                    _ms_collisions += 1
                     if verbose:
                         print(
-                            f"Skip candidate {tuple(map(float, cand_pt))} "
-                            f"(simp T{ci['simplex_index']}, scene {ci['scene']}, rank #{rank}) "
-                            f"because too close to existing nodes (< {min_dist:g})."
+                            f"[ms skip #{rank}] {tuple(map(float, cand_pt))} "
+                            f"(simp T{ci['simplex_index']}, scene {ci['scene']}) "
+                            f"too close to existing nodes (< {min_dist:g})."
                         )
-                    handle_collision(cand_pt, ci, stage_note="active")
-                    break
 
+            # Phase 2: if all ms collided, try c_s candidates
+            if new_node is None and cs_cands_sorted:
+                if verbose and _ms_collisions > 0:
+                    print(f"[Iter {it}] All {_ms_collisions} ms candidates collided, trying c_s candidates...")
+                for rank, ci in enumerate(cs_cands_sorted, start=1):
+                    cand_pt = ci["cand_pt"]
+                    if cand_pt is None:
+                        continue
+                    if min_dist_to_nodes(cand_pt, nodes) >= min_dist:
+                        cand_pt_pert, loc_type, loc_info = _snap_feature(cand_pt, ci.get("_rec", None))
+                        new_node = cand_pt_pert
+                        ci["loc_type"] = loc_type
+                        ci["loc_info"] = loc_info
+                        chosen_ms  = ci["cand_ms"]
+                        chosen_cand = ci
+                        _selection_source = "c_s"
+                        _selection_rank = rank
+                        if verbose:
+                            print(
+                                f"Chosen node (c_s) {tuple(map(float, cand_pt_pert))} "
+                                f"with c_s={chosen_ms:.3e} "
+                                f"(simp T{ci['simplex_index']}, scene {ci['scene']}, "
+                                f"c_s_rank #{rank}/{len(cs_cands_sorted)})"
+                            )
+                        break
+                    else:
+                        _cs_collisions += 1
+                        if verbose:
+                            print(
+                                f"[c_s skip #{rank}] {tuple(map(float, cand_pt))} "
+                                f"(simp T{ci['simplex_index']}, scene {ci['scene']}) "
+                                f"too close to existing nodes (< {min_dist:g})."
+                            )
+
+            # Phase 3: if ALL candidates collided, trigger edge midpoint fallback
+            if new_node is None and (_ms_collisions + _cs_collisions) > 0:
+                if verbose:
+                    print(f"[Iter {it}] ALL candidates collided "
+                          f"({_ms_collisions} ms + {_cs_collisions} c_s). "
+                          f"Falling back to edge midpoint.")
+                # Find the last collision candidate for handle_collision info
+                last_ci = (cs_cands_sorted[-1] if cs_cands_sorted
+                           else ms_cands_sorted[-1] if ms_cands_sorted else None)
+                if last_ci and last_ci["cand_pt"] is not None:
+                    handle_collision(last_ci["cand_pt"], last_ci, stage_note="all_collided")
+                _selection_source = "collision_edge_midpoint"
+
+            # Print selected simplex vertices
+            if new_node is not None and chosen_cand is not None and verbose:
+                simp_idx_sel = int(chosen_cand['simplex_index'])
+                verts_sel = chosen_cand["_rec"]["verts"]
+                print(f"[Selected Simp Info] Iter {it} | Simplex T{simp_idx_sel} Vertices:")
+                for v_i, v in enumerate(verts_sel):
+                    print(f"  v{v_i}: {tuple(map(float, v))}")
+                print(f"  -> New Point: {tuple(map(float, new_node))}")
+                print(f"[Iter {it}] LB simplex = T{lb_simp_idx}, "
+                      f"next node simplex = T{int(chosen_cand['simplex_index'])}, "
+                      f"scene {int(chosen_cand['scene'])}")
+
+            # Selection summary
             if verbose:
+                sel_info = f"source={_selection_source}, rank={_selection_rank}"
+                if _ms_collisions > 0:
+                    sel_info += f", ms_collisions={_ms_collisions}"
+                if _cs_collisions > 0:
+                    sel_info += f", cs_collisions={_cs_collisions}"
+                print(f"[Iter {it}] Selection: {sel_info}")
+
                 top_msg = "N/A"
                 if len(candidates_sorted) > 0:
                     t0 = candidates_sorted[0]
@@ -2639,6 +2551,8 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 true_opt_points=true_opt_points,
                 UB_global=UB_global,
                 LB_global=LB_global,
+                output_dir=plot_output_dir,
+                axis_labels=axis_labels,
             )
 
         _phases["6_candidate_selection"] = perf_counter() - _t_phase

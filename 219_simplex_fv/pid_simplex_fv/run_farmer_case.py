@@ -37,7 +37,7 @@ SCENARIOS = {
 # Solver options (Gurobi) — LP problem, no NonConvex needed
 UB_SOLVER_OPTS = {}   # LP — default Gurobi settings suffice
 LB_SOLVER_OPTS = {
-    "MIPGap": 1e-6,
+    "MIPGap": 1e-1,
     "TimeLimit": 30,
 }
 
@@ -45,8 +45,8 @@ LB_SOLVER_OPTS = {
 # ─────────────────────────────────────────────────────
 MODE_PARAMS = {
     "smoke": {
-        "target_nodes":   120,
-        "gap_stop_tol":   1e-8,
+        "target_nodes":   200,
+        "gap_stop_tol":   1e-2,
         "time_limit":     None,      # no wall-clock cap
         "enable_3d_plot": False,
         "enable_ef_ub":   True,
@@ -184,14 +184,40 @@ def main():
 
     tracker = SimplexTracker()
 
-    # Feasible tetrahedron: vertices of {x >= 0, x1+x2+x3 <= 500}
-    # All corners satisfy the acreage constraint — no infeasible vertices.
-    farmer_initial_nodes = [
+    # Feasible tetrahedron corners: {x >= 0, x1+x2+x3 <= 500}
+    corner_nodes = [
         (0.0, 0.0, 0.0),
         (500.0, 0.0, 0.0),
         (0.0, 500.0, 0.0),
         (0.0, 0.0, 500.0),
     ]
+
+    # ── Mode 2: kink-point enriched initial nodes ──
+    # Pure kink intersection points: one kink value per axis.
+    #   wheat kinks: x₁ = 200/(2.5*ym) → {66.667, 80, 100}
+    #   corn  kinks: x₂ = 240/(3.0*ym) → {66.667, 80, 100}
+    #   beets kinks: x₃ = 6000/(20*ym) → {250, 300, 375}
+    yield_mults = [1.2, 1.0, 0.8]
+    wheat_kinks = sorted(set(200.0 / (2.5 * ym) for ym in yield_mults))
+    corn_kinks  = sorted(set(240.0 / (3.0 * ym) for ym in yield_mults))
+    beets_kinks = sorted(set(6000.0 / (20.0 * ym) for ym in yield_mults))
+    TOTAL = 500.0
+
+    # Pure kink intersections (3×3×3 = 27, filter to feasible)
+    kink_pts = set()
+    for xw in wheat_kinks:
+        for xc in corn_kinks:
+            for xb in beets_kinks:
+                if xw + xc + xb <= TOTAL + 1e-8:
+                    kink_pts.add((round(xw, 6), round(xc, 6), round(xb, 6)))
+
+    # Feasible region corners
+    corners = {(0.0, 0.0, 0.0), (TOTAL, 0.0, 0.0),
+               (0.0, TOTAL, 0.0), (0.0, 0.0, TOTAL)}
+
+    all_initial = sorted(corners | kink_pts)
+    print(f"    Mode 2 initial nodes: {len(corners)} corners + {len(kink_pts)} kink points = {len(all_initial)} total")
+    print(f"    Kink planes — wheat: {wheat_kinks}, corn: {corn_kinks}, beets: {beets_kinks}")
 
     result = run_pid_simplex_3d(
         base_bundles=base_bundles,
@@ -202,14 +228,17 @@ def main():
         verbose=True,
         gap_stop_tol=params["gap_stop_tol"],
         tracker=tracker,
-        enable_3d_plot=params["enable_3d_plot"],
+        enable_3d_plot=True,
+        plot_every=1,
         use_exact_opt=params["use_exact_opt"],
         time_limit=params["time_limit"],
         enable_ef_ub=params["enable_ef_ub"],
         ef_time_ub=params["ef_time_ub"],
-        initial_nodes=farmer_initial_nodes,
+        initial_nodes=all_initial,
         output_csv_path=str(results_dir / "simplex_result.csv"),
-        split_mode=2,  # Mode 2: kink-plane splitting
+        split_mode=2,  # Mode 2: custom initial points + Mode 1 splitting
+        plot_output_dir=str(results_dir / "plots"),
+        axis_labels=("wheat (acres)", "corn (acres)", "beets (acres)"),
     )
 
     dt_run = perf_counter() - t0

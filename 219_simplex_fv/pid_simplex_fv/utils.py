@@ -484,7 +484,9 @@ def plot_iteration_plotly(iter_id, nodes, tri, active_mask,
                           highlight_simplices=None,
                           true_opt_points=None,
                           UB_global=None,
-                          LB_global=None):
+                          LB_global=None,
+                          output_dir=None,
+                          axis_labels=None):
 
 
     import numpy as np
@@ -688,12 +690,17 @@ def plot_iteration_plotly(iter_id, nodes, tri, active_mask,
             '''
             
 
+    # Axis labels: use provided labels or default to Kp/Ki/Kd
+    if axis_labels is None:
+        axis_labels = ("Kp", "Ki", "Kd")
+    ax0, ax1, ax2 = axis_labels
+
     fig.update_layout(
         title=f"Iteration {iter_id}",
         scene=dict(
-            xaxis_title="Kp",
-            yaxis_title="Ki",
-            zaxis_title="Kd",
+            xaxis_title=ax0,
+            yaxis_title=ax1,
+            zaxis_title=ax2,
             aspectmode="cube",
             zaxis=dict(tickformat=".2f"),
         ),
@@ -702,18 +709,17 @@ def plot_iteration_plotly(iter_id, nodes, tri, active_mask,
         legend=dict(itemsizing="constant")
     )
 
-    # show Kp,Ki,Kd
     fig.update_traces(
-        hovertemplate="Kp: %{x:.6f}<br>Ki: %{y:.6f}<br>Kd: %{z:.6f}",
+        hovertemplate=f"{ax0}: %{{x:.6f}}<br>{ax1}: %{{y:.6f}}<br>{ax2}: %{{z:.6f}}",
         selector=dict(type='scatter3d')
     )
     # Node trace: Displays sum Q
     if node_q_sum is not None:
         fig.update_traces(
             hovertemplate=(
-                "Kp: %{x:.6f}<br>"
-                "Ki: %{y:.6f}<br>"
-                "Kd: %{z:.6f}<br>"
+                f"{ax0}: %{{x:.6f}}<br>"
+                f"{ax1}: %{{y:.6f}}<br>"
+                f"{ax2}: %{{z:.6f}}<br>"
                 "sum Q: %{customdata:.6e}"
             ),
             selector=dict(type='scatter3d', name='nodes')
@@ -738,7 +744,22 @@ def plot_iteration_plotly(iter_id, nodes, tri, active_mask,
             font=dict(size=11)
         )
 
-    fig.show()
+    # Save as HTML and open in browser (works in .py scripts, not just Jupyter)
+    if output_dir is not None:
+        import os, webbrowser
+        os.makedirs(output_dir, exist_ok=True)
+        html_path = os.path.join(output_dir, f"simplex_iter_{iter_id}.html")
+        fig.write_html(html_path)
+        webbrowser.open(f"file:///{os.path.abspath(html_path)}")
+        print(f"[Plot] Saved: {html_path}")
+    else:
+        try:
+            fig.show()
+        except Exception:
+            # Fallback: save to current directory
+            html_path = f"simplex_iter_{iter_id}.html"
+            fig.write_html(html_path)
+            print(f"[Plot] fig.show() failed, saved to {html_path}")
     return fig
 
 
