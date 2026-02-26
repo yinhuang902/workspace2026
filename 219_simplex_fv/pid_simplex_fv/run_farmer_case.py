@@ -45,7 +45,7 @@ LB_SOLVER_OPTS = {
 # ─────────────────────────────────────────────────────
 MODE_PARAMS = {
     "smoke": {
-        "target_nodes":   200,
+        "target_nodes":   60,
         "gap_stop_tol":   1e-2,
         "time_limit":     None,      # no wall-clock cap
         "enable_3d_plot": False,

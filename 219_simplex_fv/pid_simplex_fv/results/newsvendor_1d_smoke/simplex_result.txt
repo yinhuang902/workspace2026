@@ -1,0 +1,16 @@
+mode=smoke
+B=10.0
+demands=[2.0, 4.0, 6.0]
+c_short=10.0
+c_hold=1.0
+F_star_true=2.0
+x_star_true=[6.0]
+iterations=18
+final_true_ub=6.0
+final_true_abs_gap=4.0
+final_true_rel_gap=0.6666666666666666
+final_sur_lb=2.0
+sur_gap=4.0
+wall_time_s=31.52
+final_nodes=[0.0, 0.125, 0.25, 0.375, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75, 4.0, 10.0]
+termination_reason=max_nodes
