@@ -1,0 +1,753 @@
+Simplex Iteration Log
+================================================================================
+
+--- Iteration 0 ---
+Selected tet: 0
+Vertices (idx -> coords, Q values):
+  v0 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v1 (node 1): (500.000000, 0.000000, 0.000000)  Q_0=-95600.0000
+  v2 (node 2): (0.000000, 500.000000, 0.000000)  Q_0=-71400.0000
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-102266.666667  argmin=(66.666667, 66.666667, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-167666.666667  status=optimal
+Simplex LB (A+ms): -197866.66666666666
+Insertion: type=ms_argmin  point=(66.666667, 66.666667, 250.000000)
+Global: UB=-95600.0000  LB=-197866.6667  gap=102266.6667
+
+--- Iteration 1 ---
+Selected tet: 0
+Vertices (idx -> coords, Q values):
+  v0 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v1 (node 1): (500.000000, 0.000000, 0.000000)  Q_0=-95600.0000
+  v2 (node 2): (0.000000, 500.000000, 0.000000)  Q_0=-71400.0000
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-99093.333333  argmin=(183.333333, 66.666667, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-167666.666667  status=optimal
+Simplex LB (A+ms): -224760.00000000003
+Insertion: type=ms_argmin  point=(183.333333, 66.666667, 250.000000)
+Global: UB=-125666.6667  LB=-224760.0000  gap=99093.3333
+
+--- Iteration 2 ---
+Selected tet: 1
+Vertices (idx -> coords, Q values):
+  v0 (node 5): (183.333333, 66.666667, 250.000000)  Q_0=-167666.6667
+  v1 (node 2): (0.000000, 500.000000, 0.000000)  Q_0=-71400.0000
+  v2 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+  v3 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+Per-scenario ms:
+  s=0: ms=-85200.000000  argmin=(0.000000, 250.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-167666.666667  status=optimal
+Simplex LB (A+ms): -252866.6666666667
+Insertion: type=ms_argmin  point=(0.000000, 250.000000, 250.000000)
+Global: UB=-167666.6667  LB=-252866.6667  gap=85200.0000
+
+--- Iteration 3 ---
+Selected tet: 4
+Vertices (idx -> coords, Q values):
+  v0 (node 5): (183.333333, 66.666667, 250.000000)  Q_0=-167666.6667
+  v1 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+  v2 (node 1): (500.000000, 0.000000, 0.000000)  Q_0=-95600.0000
+  v3 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+Per-scenario ms:
+  s=0: ms=-84800.000000  argmin=(250.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-167666.666667  status=optimal
+Simplex LB (A+ms): -252466.6666666667
+Insertion: type=ms_argmin  point=(250.000000, 0.000000, 250.000000)
+Global: UB=-167666.6667  LB=-252466.6667  gap=84800.0000
+
+--- Iteration 4 ---
+Selected tet: 7
+Vertices (idx -> coords, Q values):
+  v0 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v1 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v2 (node 2): (0.000000, 500.000000, 0.000000)  Q_0=-71400.0000
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-90480.000000  argmin=(0.000000, 66.666667, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-144900.000000  status=optimal
+Simplex LB (A+ms): -216146.6666666667
+Insertion: type=ms_argmin  point=(0.000000, 66.666667, 250.000000)
+Global: UB=-167666.6667  LB=-216146.6667  gap=48480.0000
+
+--- Iteration 5 ---
+Selected tet: 10
+Vertices (idx -> coords, Q values):
+  v0 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v1 (node 1): (500.000000, 0.000000, 0.000000)  Q_0=-95600.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-89786.666667  argmin=(66.666667, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-156600.000000  status=optimal
+Simplex LB (A+ms): -215453.33333333334
+Insertion: type=ms_argmin  point=(66.666667, 0.000000, 250.000000)
+Global: UB=-167666.6667  LB=-215453.3333  gap=47786.6667
+
+--- Iteration 6 ---
+Selected tet: 8
+Vertices (idx -> coords, Q values):
+  v0 (node 8): (0.000000, 66.666667, 250.000000)  Q_0=-88066.6667
+  v1 (node 2): (0.000000, 500.000000, 0.000000)  Q_0=-71400.0000
+  v2 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+  v3 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+Per-scenario ms:
+  s=0: ms=-85200.000000  argmin=(0.000000, 250.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-144900.000000  status=optimal
+Simplex LB (A+ms): -210866.66666666666
+Insertion: type=existing_node  point=(0.000000, 250.000000, 250.000000)
+Global: UB=-167666.6667  LB=-210866.6667  gap=43200.0000
+
+--- Iteration 7 ---
+Selected tet: 13
+Vertices (idx -> coords, Q values):
+  v0 (node 9): (66.666667, 0.000000, 250.000000)  Q_0=-90600.0000
+  v1 (node 1): (500.000000, 0.000000, 0.000000)  Q_0=-95600.0000
+  v2 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+  v3 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+Per-scenario ms:
+  s=0: ms=-84800.000000  argmin=(250.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-156600.000000  status=optimal
+Simplex LB (A+ms): -210466.6666666667
+Insertion: type=existing_node  point=(250.000000, 0.000000, 250.000000)
+Global: UB=-167666.6667  LB=-210466.6667  gap=42800.0000
+
+--- Iteration 8 ---
+Selected tet: 11
+Vertices (idx -> coords, Q values):
+  v0 (node 8): (0.000000, 66.666667, 250.000000)  Q_0=-88066.6667
+  v1 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+  v2 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v3 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+Per-scenario ms:
+  s=0: ms=-78000.000000  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.66666666666
+Insertion: type=ms_argmin  point=(0.000000, 0.000000, 250.000000)
+Global: UB=-167666.6667  LB=-203666.6667  gap=36000.0000
+
+--- Iteration 9 ---
+Selected tet: 18
+Vertices (idx -> coords, Q values):
+  v0 (node 9): (66.666667, 0.000000, 250.000000)  Q_0=-90600.0000
+  v1 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+  v2 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v3 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+Per-scenario ms:
+  s=0: ms=-78000.000000  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.66666666666
+Insertion: type=existing_node  point=(0.000000, 0.000000, 250.000000)
+Global: UB=-167666.6667  LB=-203666.6667  gap=36000.0000
+
+--- Iteration 10 ---
+Selected tet: 2
+Vertices (idx -> coords, Q values):
+  v0 (node 6): (0.000000, 250.000000, 250.000000)  Q_0=-144900.0000
+  v1 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+  v2 (node 5): (183.333333, 66.666667, 250.000000)  Q_0=-167666.6667
+  v3 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+Per-scenario ms:
+  s=0: ms=-15374.545455  argmin=(66.666667, 66.666667, 366.666667)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-167666.666667  status=optimal
+Simplex LB (A+ms): -183041.2121212121
+Insertion: type=ms_argmin  point=(66.666667, 66.666667, 366.666667)
+Global: UB=-167666.6667  LB=-183041.2121  gap=15374.5455
+
+--- Iteration 11 ---
+Selected tet: 0
+Vertices (idx -> coords, Q values):
+  v0 (node 5): (183.333333, 66.666667, 250.000000)  Q_0=-167666.6667
+  v1 (node 1): (500.000000, 0.000000, 0.000000)  Q_0=-95600.0000
+  v2 (node 2): (0.000000, 500.000000, 0.000000)  Q_0=-71400.0000
+  v3 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+Per-scenario ms:
+  s=0: ms=-14293.333333  argmin=(433.333333, 66.666667, 0.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-167666.666667  status=optimal
+Simplex LB (A+ms): -181960.0
+Insertion: type=ms_argmin  point=(433.333333, 66.666667, 0.000000)
+Global: UB=-167666.6667  LB=-181960.0000  gap=14293.3333
+
+--- Iteration 12 ---
+Selected tet: 1
+Vertices (idx -> coords, Q values):
+  v0 (node 12): (433.333333, 66.666667, 0.000000)  Q_0=-106666.6667
+  v1 (node 2): (0.000000, 500.000000, 0.000000)  Q_0=-71400.0000
+  v2 (node 5): (183.333333, 66.666667, 250.000000)  Q_0=-167666.6667
+  v3 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+Per-scenario ms:
+  s=0: ms=-11507.692308  argmin=(66.666667, 433.333333, 0.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-167666.666667  status=optimal
+Simplex LB (A+ms): -179174.358974359
+Insertion: type=ms_argmin  point=(66.666667, 433.333333, 0.000000)
+Global: UB=-167666.6667  LB=-179174.3590  gap=11507.6923
+
+--- Iteration 13 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 10): (0.000000, 0.000000, 250.000000)  Q_0=-53000.0000
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+  v3 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+Per-scenario ms:
+  s=0: ms=-52000.000000  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -177666.66666666663
+Insertion: type=centroid  point=(16.666667, 16.666667, 250.000000)
+Global: UB=-167666.6667  LB=-177666.6667  gap=10000.0000
+
+--- Iteration 14 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 14): (16.666667, 16.666667, 250.000000)  Q_0=-71166.6667
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-61674.418605  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -198224.80620155088
+Insertion: type=centroid  point=(20.833333, 20.833333, 250.000000)
+Global: UB=-167666.6667  LB=-198224.8062  gap=30558.1395
+
+--- Iteration 15 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 15): (20.833333, 20.833333, 250.000000)  Q_0=-75708.3333
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64181.551977  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -202410.44411908253
+Insertion: type=centroid  point=(21.875000, 21.875000, 250.000000)
+Global: UB=-167666.6667  LB=-202410.4441  gap=34743.7775
+
+--- Iteration 16 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 16): (21.875000, 21.875000, 250.000000)  Q_0=-76843.7500
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64796.484482  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203359.60816625465
+Insertion: type=centroid  point=(22.135417, 22.135417, 250.000000)
+Global: UB=-167666.6667  LB=-203359.6082  gap=35692.9415
+
+--- Iteration 17 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 17): (22.135417, 22.135417, 250.000000)  Q_0=-77127.6042
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64949.194051  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203590.34616404312
+Insertion: type=centroid  point=(22.200521, 22.200521, 250.000000)
+Global: UB=-167666.6667  LB=-203590.3462  gap=35923.6795
+
+--- Iteration 18 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 18): (22.200521, 22.200521, 250.000000)  Q_0=-77198.5677
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64987.303139  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203647.6144018631
+Insertion: type=centroid  point=(22.216797, 22.216797, 250.000000)
+Global: UB=-167666.6667  LB=-203647.6144  gap=35980.9477
+
+--- Iteration 19 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 19): (22.216797, 22.216797, 250.000000)  Q_0=-77216.3086
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64996.826075  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203661.90534336923
+Insertion: type=centroid  point=(22.220866, 22.220866, 250.000000)
+Global: UB=-167666.6667  LB=-203661.9053  gap=35995.2387
+
+--- Iteration 20 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 20): (22.220866, 22.220866, 250.000000)  Q_0=-77220.7438
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.206537  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203665.47644479878
+Insertion: type=centroid  point=(22.221883, 22.221883, 250.000000)
+Global: UB=-167666.6667  LB=-203665.4764  gap=35998.8098
+
+--- Iteration 21 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 21): (22.221883, 22.221883, 250.000000)  Q_0=-77221.8526
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.801635  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.3691180098
+Insertion: type=centroid  point=(22.222137, 22.222137, 250.000000)
+Global: UB=-167666.6667  LB=-203666.3691  gap=35999.7025
+
+--- Iteration 22 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 23 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 24 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 25 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 26 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 27 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 28 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 29 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 30 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 31 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 32 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 33 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 34 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 35 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 36 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 37 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 38 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 39 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 40 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 41 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 42 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 43 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 44 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 45 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 46 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 47 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 48 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
+--- Iteration 49 ---
+Selected tet: 17
+Vertices (idx -> coords, Q values):
+  v0 (node 22): (22.222137, 22.222137, 250.000000)  Q_0=-77222.1298
+  v1 (node 0): (0.000000, 0.000000, 0.000000)  Q_0=98000.0000
+  v2 (node 4): (66.666667, 66.666667, 250.000000)  Q_0=-125666.6667
+  v3 (node 3): (0.000000, 0.000000, 500.000000)  Q_0=-48000.0000
+Per-scenario ms:
+  s=0: ms=-64999.950409  argmin=(0.000000, 0.000000, 250.000000)  status=optimal
+Dual bound (min Q(x) over tet):
+  s=0: dual_bound=-125666.666667  status=optimal
+Simplex LB (A+ms): -203666.5922799281
+Insertion: type=centroid  point=(22.222201, 22.222201, 250.000000)
+Global: UB=-167666.6667  LB=-203666.5923  gap=35999.9256
+
