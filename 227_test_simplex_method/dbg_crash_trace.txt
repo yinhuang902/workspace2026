@@ -1,0 +1,102 @@
+simplex 0: start, simp=[3, 2, 4, 0]
+simplex 0: idxs=[3, 2, 4, 0]
+simplex 0: verts done
+simplex 0: V_arr done, shape=(4, 3), V_arr=[[-10.0, 100.0, 100.0], [-10.0, 100.0, -100.0], [10.0, -100.0, -100.0], [-10.0, -100.0, -100.0]]
+simplex 0: vol=133333.33333333334
+simplex 0: vol=133333.33333333334, tol=2.2797334581042585e-05
+simplex 0: fverts ready, calling ms_on_tetra_for_scene
+  scene 0: hit=True
+  scene 1: hit=True
+simplex 1: start, simp=[3, 1, 4, 0]
+simplex 1: idxs=[3, 1, 4, 0]
+simplex 1: verts done
+simplex 1: V_arr done, shape=(4, 3), V_arr=[[-10.0, 100.0, 100.0], [-10.0, -100.0, 100.0], [10.0, -100.0, -100.0], [-10.0, -100.0, -100.0]]
+simplex 1: vol=133333.33333333334
+simplex 1: vol=133333.33333333334, tol=2.2797334581042585e-05
+simplex 1: fverts ready, calling ms_on_tetra_for_scene
+  scene 0: hit=True
+  scene 1: hit=True
+simplex 2: start, simp=[3, 5, 7, 4]
+simplex 2: idxs=[3, 5, 7, 4]
+simplex 2: verts done
+simplex 2: V_arr done, shape=(4, 3), V_arr=[[-10.0, 100.0, 100.0], [10.0, -100.0, 100.0], [10.0, 100.0, 100.0], [10.0, -100.0, -100.0]]
+simplex 2: vol=133333.33333333334
+simplex 2: vol=133333.33333333334, tol=2.2797334581042585e-05
+simplex 2: fverts ready, calling ms_on_tetra_for_scene
+  scene 0: hit=True
+  scene 1: hit=True
+simplex 3: start, simp=[3, 6, 2, 4]
+simplex 3: idxs=[3, 6, 2, 4]
+simplex 3: verts done
+simplex 3: V_arr done, shape=(4, 3), V_arr=[[-10.0, 100.0, 100.0], [10.0, 100.0, -100.0], [-10.0, 100.0, -100.0], [10.0, -100.0, -100.0]]
+simplex 3: vol=133333.33333333334
+simplex 3: vol=133333.33333333334, tol=2.2797334581042585e-05
+simplex 3: fverts ready, calling ms_on_tetra_for_scene
+  scene 0: hit=True
+  scene 1: hit=True
+simplex 4: start, simp=[3, 5, 1, 4]
+simplex 4: idxs=[3, 5, 1, 4]
+simplex 4: verts done
+simplex 4: V_arr done, shape=(4, 3), V_arr=[[-10.0, 100.0, 100.0], [10.0, -100.0, 100.0], [-10.0, -100.0, 100.0], [10.0, -100.0, -100.0]]
+simplex 4: vol=133333.33333333334
+simplex 4: vol=133333.33333333334, tol=2.2797334581042585e-05
+simplex 4: fverts ready, calling ms_on_tetra_for_scene
+  scene 0: hit=True
+  scene 1: hit=True
+simplex 5: start, simp=[3, 8, 7, 4]
+simplex 5: idxs=[3, 8, 7, 4]
+simplex 5: verts done
+simplex 5: V_arr done, shape=(4, 3), V_arr=[[-10.0, 100.0, 100.0], [2.014187861313877, 100.00000000000001, -15.844743934550854], [10.0, 100.0, 100.0], [10.0, -100.0, -100.0]]
+simplex 5: vol=77229.82928970057
+simplex 5: vol=77229.82928970057, tol=2.2797334581042585e-05
+simplex 5: fverts ready, calling ms_on_tetra_for_scene
+  scene 0: hit=True
+  scene 1: hit=True
+simplex 6: start, simp=[3, 6, 8, 4]
+simplex 6: idxs=[3, 6, 8, 4]
+simplex 6: verts done
+simplex 6: V_arr done, shape=(4, 3), V_arr=[[-10.0, 100.0, 100.0], [10.0, 100.0, -100.0], [2.014187861313877, 100.00000000000001, -15.844743934550854], [10.0, -100.0, -100.0]]
+simplex 6: vol=2864.7564523919523
+simplex 6: vol=2864.7564523919523, tol=2.2797334581042585e-05
+simplex 6: fverts ready, calling ms_on_tetra_for_scene
+  scene 0: hit=True
+  scene 1: hit=True
+simplex 7: start, simp=[8, 6, 9, 4]
+simplex 7: idxs=[8, 6, 9, 4]
+simplex 7: verts done
+simplex 7: V_arr done, shape=(4, 3), V_arr=[[2.014187861313877, 100.00000000000001, -15.844743934550854], [10.0, 100.0, -100.0], [2.0352035201897927, 100.00000000000001, -15.539884068225863], [10.0, -100.0, -100.0]]
+simplex 7: vol=140.10439250610557
+simplex 7: vol=140.10439250610557, tol=2.2797334581042585e-05
+simplex 7: fverts ready, calling ms_on_tetra_for_scene
+  scene 0: hit=True
+  scene 1: hit=True
+simplex 8: start, simp=[9, 10, 7, 4]
+simplex 8: idxs=[9, 10, 7, 4]
+simplex 8: verts done
+simplex 8: V_arr done, shape=(4, 3), V_arr=[[2.0352035201897927, 100.00000000000001, -15.539884068225863], [10.0, 100.0, -18.92033780649411], [10.0, 100.0, 100.0], [10.0, -100.0, -100.0]]
+simplex 8: vol=31572.542931300162
+simplex 8: vol=31572.542931300162, tol=2.2797334581042585e-05
+simplex 8: fverts ready, calling ms_on_tetra_for_scene
+  scene 0: hit=False
+  scene 0: calling ms_on_tetra_for_scene ...
+  scene 1: hit=False
+  scene 1: calling ms_on_tetra_for_scene ...
+simplex 9: start, simp=[9, 6, 10, 4]
+simplex 9: idxs=[9, 6, 10, 4]
+simplex 9: verts done
+simplex 9: V_arr done, shape=(4, 3), V_arr=[[2.0352035201897927, 100.00000000000001, -15.539884068225863], [10.0, 100.0, -100.0], [10.0, 100.0, -18.92033780649411], [10.0, -100.0, -100.0]]
+simplex 9: vol=21526.100267434547
+simplex 9: vol=21526.100267434547, tol=2.2797334581042585e-05
+simplex 9: fverts ready, calling ms_on_tetra_for_scene
+  scene 0: hit=False
+  scene 0: calling ms_on_tetra_for_scene ...
+  scene 1: hit=False
+  scene 1: calling ms_on_tetra_for_scene ...
+olve_const_cut ...
+solve_const_cut ok=True
+update_tetra ...
+update_tetra OK
+solve ms ...
+solve ms ok=True
+solve_const_cut ...
+solve_const_cut ok=True

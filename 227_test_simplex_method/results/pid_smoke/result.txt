@@ -1,0 +1,15 @@
+PID Regression — mode=smoke
+==================================================
+Scenarios:   2
+Iterations:  3
+Final LB:    0.971448028
+Final UB:    0.971339579
+Abs gap:     -0.000108449
+Rel gap:     -0.0112%
+Runtime:     123.48s
+Timestamp:   2026-02-27 17:56:24
+
+LB history (avg per scenario):
+  iter   0: LB=0.971288824  UB=0.971339684
+  iter   1: LB=0.971288824  UB=0.971339579
+  iter   2: LB=0.971448028  UB=0.971339579
