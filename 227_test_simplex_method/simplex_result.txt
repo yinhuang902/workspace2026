@@ -2077,3 +2077,38 @@ LB: selected_simplex_id=(4, 8, 12), best_simplex_id_before_split=(4, 8, 12), bes
 MS(best LB simplex): status_summary={cached=10}, fallback_any=False, fallback_count=0, fallback_scenarios=[], fallback_reason_counts={}
 CS(best LB simplex): status_summary={cached=10}, fallback_any=False, fallback_count=0, fallback_scenarios=[], fallback_reason_counts={}
 ==================
+===== Iter 0 =====
+EF: EF_attempted=True, EF_enabled=True, time_sec=171.432, status=ipopt:ok, termination_condition=ipopt:optimal, solver_status=ipopt:ok, used_for_UB=True
+UB: updated_this_iter=True, source_after=avgCS_new_simplex, source_simplex_id_after=(0, 2, 4), origin_iter_after=0
+LB: selected_simplex_id=(0, 2, 3), best_simplex_id_before_split=(0, 2, 3), best_simplex_id_after_split=(0, 2, 4), stays_in_selected=True
+MS(best LB simplex): status_summary={optimal=1000}, fallback_any=False, fallback_count=0, fallback_scenarios=[], fallback_reason_counts={}
+CS(best LB simplex): status_summary={optimal=1000}, fallback_any=False, fallback_count=0, fallback_scenarios=[], fallback_reason_counts={}
+==================
+===== Iter 1 =====
+EF: EF_attempted=True, EF_enabled=True, time_sec=324.5, status=ipopt:ok, termination_condition=ipopt:optimal, solver_status=ipopt:ok, used_for_UB=False
+UB: updated_this_iter=True, source_after=avgCS_new_simplex, source_simplex_id_after=(0, 4, 5), origin_iter_after=1
+LB: selected_simplex_id=(0, 2, 4), best_simplex_id_before_split=(0, 2, 4), best_simplex_id_after_split=(2, 4, 5), stays_in_selected=True
+MS(best LB simplex): status_summary={infeasible=24, optimal=976}, fallback_any=True, fallback_count=24, fallback_scenarios=[0, 41, 73, 117, 153, 197, 244, 256, 262, 334, 349, 359, 375, 447, 522, 583, 685, 741, 794, 827, 830, 835, 884, 957], fallback_reason_counts={infeasible_or_unbounded=24}
+CS(best LB simplex): status_summary={infeasible=10, optimal=990}, fallback_any=True, fallback_count=10, fallback_scenarios=[0, 117, 197, 244, 349, 359, 522, 827, 830, 957], fallback_reason_counts={infeasible_or_error=10}
+==================
+===== Iter 2 =====
+EF: EF_attempted=True, EF_enabled=True, time_sec=330.009, status=ipopt:ok, termination_condition=ipopt:optimal, solver_status=ipopt:ok, used_for_UB=False
+UB: updated_this_iter=True, source_after=avgCS_new_simplex, source_simplex_id_after=(4, 5, 6), origin_iter_after=2
+LB: selected_simplex_id=(2, 4, 5), best_simplex_id_before_split=(2, 4, 5), best_simplex_id_after_split=(4, 5, 6), stays_in_selected=True
+MS(best LB simplex): status_summary={optimal=1000}, fallback_any=False, fallback_count=0, fallback_scenarios=[], fallback_reason_counts={}
+CS(best LB simplex): status_summary={optimal=1000}, fallback_any=False, fallback_count=0, fallback_scenarios=[], fallback_reason_counts={}
+==================
+===== Iter 3 =====
+EF: EF_attempted=True, EF_enabled=True, time_sec=330.786, status=ipopt:ok, termination_condition=ipopt:optimal, solver_status=ipopt:ok, used_for_UB=False
+UB: updated_this_iter=True, source_after=avgMS_new_simplex, source_simplex_id_after=(4, 6, 7), origin_iter_after=3
+LB: selected_simplex_id=(4, 5, 6), best_simplex_id_before_split=(4, 5, 6), best_simplex_id_after_split=(4, 6, 7), stays_in_selected=True
+MS(best LB simplex): status_summary={optimal=1000}, fallback_any=False, fallback_count=0, fallback_scenarios=[], fallback_reason_counts={}
+CS(best LB simplex): status_summary={optimal=1000}, fallback_any=False, fallback_count=0, fallback_scenarios=[], fallback_reason_counts={}
+==================
+===== Iter 4 =====
+EF: EF_attempted=True, EF_enabled=True, time_sec=303.825, status=ipopt:ok, termination_condition=ipopt:optimal, solver_status=ipopt:ok, used_for_UB=False
+UB: updated_this_iter=False, source_after=avgMS_new_simplex, source_simplex_id_after=(4, 6, 7), origin_iter_after=3
+LB: selected_simplex_id=(4, 6, 7), best_simplex_id_before_split=(4, 6, 7), best_simplex_id_after_split=(4, 7, 8), stays_in_selected=True
+MS(best LB simplex): status_summary={optimal=1000}, fallback_any=False, fallback_count=0, fallback_scenarios=[], fallback_reason_counts={}
+CS(best LB simplex): status_summary={optimal=1000}, fallback_any=False, fallback_count=0, fallback_scenarios=[], fallback_reason_counts={}
+==================
