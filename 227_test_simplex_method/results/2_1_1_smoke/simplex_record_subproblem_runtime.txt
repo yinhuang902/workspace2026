@@ -1,0 +1,73 @@
+# simplex_record_subproblem_runtime.txt — per-iteration subproblem runtime
+# ms/cs/Q timing, non-optimal subproblem detection
+
+=== Iter 0 ===
+ms: total_time=0.1207, calls=20, avg=0.0060
+cs: total_time=0.1828, calls=20, avg=0.0091
+Q:  total_time=0.0487, calls=10, avg=0.0049
+
+=== Iter 1 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0473, calls=10, avg=0.0047
+
+=== Iter 2 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0410, calls=10, avg=0.0041
+
+=== Iter 3 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0454, calls=10, avg=0.0045
+
+=== Iter 4 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0582, calls=10, avg=0.0058
+
+=== Iter 5 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0634, calls=10, avg=0.0063
+
+=== Iter 6 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0489, calls=10, avg=0.0049
+
+=== Iter 7 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0401, calls=10, avg=0.0040
+
+=== Iter 8 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0510, calls=10, avg=0.0051
+
+=== Iter 9 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0390, calls=10, avg=0.0039
+
+=== Iter 10 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0423, calls=10, avg=0.0042
+
+=== Iter 11 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0452, calls=10, avg=0.0045
+
+=== Iter 12 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0421, calls=10, avg=0.0042
+
+=== Iter 13 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0486, calls=10, avg=0.0049
+

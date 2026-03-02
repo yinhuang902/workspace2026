@@ -1,5 +1,3 @@
 # debug_q_timing.txt — NON-OPTIMAL Q-value (evaluate_Q_at) solves only
 # Format: [Iter N] scenario=..., point=..., time=...s, status=..., term=..., obj=...
 
-[Iter 0] scenario=0, point=(2.0142, 100.0000, -15.8447), time=0.0071s, status=warning, term=infeasibleOrUnbounded, obj=10000000000.0
-[Iter 2] scenario=0, point=(10.0000, 100.0000, -18.9203), time=0.0071s, status=warning, term=infeasibleOrUnbounded, obj=10000000000.0

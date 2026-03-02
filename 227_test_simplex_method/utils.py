@@ -45,7 +45,7 @@ def evaluate_Q_at(base_bundle, first_stg_vars, first_stg_vals, return_meta=False
 def evaluate_true_expected_obj(base_bundles, first_vars_list, K_tuple):
     """
     Evaluate the true expected objective (sum over all scenarios)
-    at the given first-stage point K_tuple = (Kp, Ki, Kd).
+    at the given first-stage point K_tuple = (x1, ..., xd).
 
     Returns the **total** (sum, not average) so it is directly comparable
     to UB_incumbent which is also stored as a sum.
@@ -690,9 +690,9 @@ def plot_iteration_plotly(iter_id, nodes, tri, active_mask,
             '''
             
 
-    # Axis labels: use provided labels or default to Kp/Ki/Kd
+    # Axis labels: use provided labels or default to generic x1/x2/x3
     if axis_labels is None:
-        axis_labels = ("Kp", "Ki", "Kd")
+        axis_labels = ("x1", "x2", "x3")
     ax0, ax1, ax2 = axis_labels
 
     fig.update_layout(

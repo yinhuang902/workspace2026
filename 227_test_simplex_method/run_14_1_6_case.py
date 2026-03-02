@@ -10,7 +10,7 @@ from simplex_specialstart import run_pid_simplex_3d
 
 
 # =============================================================================
-# Julia-equivalent RNG + noise (replicates Plasmo.jl RandomStochasticModel)
+# Julia-equivalent RNG + noise (Plasmo.jl RandomStochasticModel)
 # =============================================================================
 
 class JuliaMT19937:
@@ -60,6 +60,7 @@ class JuliaMT19937:
         return ((hi << 32) | lo) & 0xFFFFFFFFFFFFFFFF
 
     def rand_float64(self) -> float:
+        # Julia-style [0,1)
         u = self.rand_uint64()
         return ((u >> 12) * (1.0 / (1 << 52)))
 
@@ -75,32 +76,75 @@ def addnoise_julia(a: float, rng: JuliaMT19937) -> float:
 
 
 # =============================================================================
-# 2_1_1 base model (exact createModel translation)
+# 14_1_6 deterministic base model: exact translation of Julia createModel()
 # =============================================================================
 
-def create_model_2_1_1() -> pyo.ConcreteModel:
+def create_model_14_1_6() -> pyo.ConcreteModel:
     m = pyo.ConcreteModel()
 
-    m.x1 = pyo.Var(bounds=(0, 1), initialize=1)
-    m.x2 = pyo.Var(bounds=(0, 1), initialize=1)
-    m.x3 = pyo.Var(bounds=(0, 1), initialize=0)
-    m.x4 = pyo.Var(bounds=(0, 1), initialize=1)
-    m.x5 = pyo.Var(bounds=(0, 1), initialize=0)
+    # variables
+    m.x1 = pyo.Var(bounds=(-1, 1))
+    m.x2 = pyo.Var(bounds=(-1, 1))
+    m.x3 = pyo.Var(bounds=(-1, 1))
+    m.x4 = pyo.Var(bounds=(-1, 1))
+    m.x5 = pyo.Var(bounds=(-1, 1))
+    m.x6 = pyo.Var(bounds=(-1, 1))
+    m.x7 = pyo.Var(bounds=(-1, 1))
+    m.x8 = pyo.Var(bounds=(-1, 1))
+    m.x9 = pyo.Var()  # free in Julia; bounded implicitly by constraints
 
-    m.cap_rhs = pyo.Param(mutable=True, initialize=40.0)
-    m.cap = pyo.Constraint(expr=20*m.x1 + 12*m.x2 + 11*m.x3 + 7*m.x4 + 4*m.x5 <= m.cap_rhs)
+    # Julia constraint #1 RHS is stochastic under RandomStochasticModel (see below)
+    m.c1_rhs = pyo.Param(mutable=True, initialize=0.3571)
 
-    lin = 42*m.x1 + 44*m.x2 + 45*m.x3 + 47*m.x4 + 47.5*m.x5
-    quad = 50*(m.x1**2 + m.x2**2 + m.x3**2 + m.x4**2 + m.x5**2)
-    m.obj_expr = lin - quad
+    m.c1 = pyo.Constraint(expr=0.004731*m.x1*m.x3 - 0.1238*m.x1 - 0.3578*m.x2*m.x3 - 0.001637*m.x2
+                          - 0.9338*m.x4 + m.x7 - m.x9 <= m.c1_rhs)
+
+    m.c2 = pyo.Constraint(expr=0.1238*m.x1 - 0.004731*m.x1*m.x3 + 0.3578*m.x2*m.x3 + 0.001637*m.x2
+                          + 0.9338*m.x4 - m.x7 - m.x9 <= -0.3571)
+
+    m.c3 = pyo.Constraint(expr=0.2238*m.x1*m.x3 + 0.2638*m.x1 + 0.7623*m.x2*m.x3 - 0.07745*m.x2
+                          - 0.6734*m.x4 - m.x7 - m.x9 <= 0.6022)
+
+    m.c4 = pyo.Constraint(expr=-0.2238*m.x1*m.x3 - 0.2638*m.x1 - 0.7623*m.x2*m.x3 + 0.07745*m.x2
+                          + 0.6734*m.x4 + m.x7 - m.x9 <= -0.6022)
+
+    m.c5 = pyo.Constraint(expr=m.x6*m.x8 + 0.3578*m.x1 + 0.004731*m.x2 - m.x9 <= 0.0)
+    m.c6 = pyo.Constraint(expr=-m.x6*m.x8 - 0.3578*m.x1 - 0.004731*m.x2 - m.x9 <= 0.0)
+
+    m.c7 = pyo.Constraint(expr=-0.7623*m.x1 + 0.2238*m.x2 == -0.3461)
+
+    m.c8  = pyo.Constraint(expr=m.x1**2 + m.x2**2 - m.x9 <= 1.0)
+    m.c9  = pyo.Constraint(expr=-(m.x1**2) - (m.x2**2) - m.x9 <= -1.0)
+
+    m.c10 = pyo.Constraint(expr=m.x3**2 + m.x4**2 - m.x9 <= 1.0)
+    m.c11 = pyo.Constraint(expr=-(m.x3**2) - (m.x4**2) - m.x9 <= -1.0)
+
+    m.c12 = pyo.Constraint(expr=m.x5**2 + m.x6**2 - m.x9 <= 1.0)
+    m.c13 = pyo.Constraint(expr=-(m.x5**2) - (m.x6**2) - m.x9 <= -1.0)
+
+    m.c14 = pyo.Constraint(expr=m.x7**2 + m.x8**2 - m.x9 <= 1.0)
+    m.c15 = pyo.Constraint(expr=-(m.x7**2) - (m.x8**2) - m.x9 <= -1.0)
+
+    # objective: Min x9
+    m.obj_expr = pyo.Expression(expr=m.x9)
     return m
 
 
-def all_vars_2_1_1(m: pyo.ConcreteModel) -> List[pyo.Var]:
-    return [m.x1, m.x2, m.x3, m.x4, m.x5]
+def all_vars_14_1_6(m: pyo.ConcreteModel) -> List[pyo.Var]:
+    # match Julia variable order x1..x9
+    return [m.x1, m.x2, m.x3, m.x4, m.x5, m.x6, m.x7, m.x8, m.x9]
 
 
-def build_models_2_1_1(
+# =============================================================================
+# Scenario generator matching Plasmo.jl RandomStochasticModel(createModel, 1000, 2, 2)
+# For this model:
+# - first-stage = x1,x2
+# - nparam=2 => at most 1 modification per scenario
+# - no eligible second-stage linear constraints, so modify first eligible quadratic constraint bound.
+#   => c1_rhs = 0.3571 * U(0.5,2.0)
+# =============================================================================
+
+def build_models_14_1_6(
     nscen: int,
     nfirst: int = 2,
     nparam: int = 2,
@@ -108,24 +152,22 @@ def build_models_2_1_1(
     print_first_k_rhs: int = 0,
 ) -> Tuple[List[pyo.ConcreteModel], List[List[pyo.Var]]]:
     rng = JuliaMT19937(seed)
+    max_mods = max(nparam - 1, 0)
 
     model_list: List[pyo.ConcreteModel] = []
     first_vars_list: List[List[pyo.Var]] = []
 
-    max_mods = max(nparam - 1, 0)
-
     for s in range(nscen):
-        m = create_model_2_1_1()
-        allv = all_vars_2_1_1(m)
-        first = allv[:nfirst]
+        m = create_model_14_1_6()
+        allv = all_vars_14_1_6(m)
+        first = allv[:nfirst]  # x1,x2
 
-        # For 2_1_1: exactly one second-stage linear constraint bound is modified (ub)
         if max_mods >= 1:
-            base_ub = float(pyo.value(m.cap_rhs))  # 40.0
-            m.cap_rhs.set_value(addnoise_julia(base_ub, rng))
+            base_rhs = float(pyo.value(m.c1_rhs))  # 0.3571
+            m.c1_rhs.set_value(addnoise_julia(base_rhs, rng))
 
         if print_first_k_rhs > 0 and s < print_first_k_rhs:
-            print(f"[SCEN {s:04d}] cap_rhs = {float(pyo.value(m.cap_rhs)):.12f}")
+            print(f"[SCEN {s:04d}] c1_rhs = {float(pyo.value(m.c1_rhs)):.12f}")
 
         model_list.append(m)
         first_vars_list.append(first)
@@ -146,27 +188,27 @@ MODE_PARAMS = {
         "enable_ef_ub": True,
         "ef_time_ub": 30.0,
         "plot_every": None,
-        "plot_output_dir": "results/2_1_1_smoke/plots",
-        "output_csv_path": "results/2_1_1_smoke/simplex_result.csv",
+        "plot_output_dir": "results/14_1_6_smoke/plots",
+        "output_csv_path": "results/14_1_6_smoke/simplex_result.csv",
     },
     "full": {
         "nscen": 1000,
         "target_nodes": 300,
-        "gap_stop_tol": 1e-2,     # stopping tol for simplex outer loop (you can adjust)
+        "gap_stop_tol": 1e-2,
         "time_limit": None,
         "enable_ef_ub": True,
-        "ef_time_ub": 43200.0,    # Julia MaxTime=43200
+        "ef_time_ub": 43200.0,
         "plot_every": None,
-        "plot_output_dir": "results/2_1_1_full/plots",
-        "output_csv_path": "results/2_1_1_full/simplex_result.csv",
+        "plot_output_dir": "results/14_1_6_full/plots",
+        "output_csv_path": "results/14_1_6_full/simplex_result.csv",
     },
 }
 
-# Make solver options explicit for reproducible comparisons
+# This is nonconvex QCQP (bilinear/quadratic constraints). Gurobi needs NonConvex=2.
 BUNDLE_OPTIONS = {
     "NonConvex": 2,
-    "MIPGap": 1e-1,       # explicit (matches MSBundle default 1e-1)
-    # "TimeLimit": 60,    # optional per-solve cap; uncomment if needed
+    "MIPGap": 1e-1,
+    # "TimeLimit": 60,  # optional per-solve cap
 }
 
 
@@ -185,6 +227,7 @@ def main():
         Path(cfg["plot_output_dir"]).mkdir(parents=True, exist_ok=True)
 
     print("=" * 60)
+    print("14_1_6 (Python) — scenario generation matches Plasmo.jl RandomStochasticModel(createModel, 1000, 2, 2)")
     print(f"Mode: {args.mode}")
     print(f"nscen={cfg['nscen']}, seed={args.seed}, target_nodes={cfg['target_nodes']}")
     print(f"gap_stop_tol={cfg['gap_stop_tol']}, time_limit={cfg['time_limit']}")
@@ -194,7 +237,7 @@ def main():
 
     t0 = perf_counter()
 
-    model_list, first_vars_list = build_models_2_1_1(
+    model_list, first_vars_list = build_models_14_1_6(
         nscen=cfg["nscen"], nfirst=2, nparam=2,
         seed=args.seed, print_first_k_rhs=args.print_first_k_rhs
     )
@@ -216,13 +259,12 @@ def main():
         plot_every=cfg["plot_every"],
         plot_output_dir=cfg["plot_output_dir"],
         output_csv_path=str(out_csv),
-        enable_3d_plot=False,   # d=2
-        axis_labels=("x1", "x2"),  # 2D only (no None)
+        enable_3d_plot=False,   # first-stage dim = 2
+        axis_labels=("x1", "x2"),
     )
 
     t1 = perf_counter()
 
-    # Print per-scenario final numbers for fair comparison to Julia
     LB_hist = res.get("LB_hist", [])
     UB_hist = res.get("UB_hist", [])
     if LB_hist and UB_hist:

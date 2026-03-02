@@ -1,6 +1,7 @@
 # simplex_specialstart.py
 import csv, json, math, os, sys
 from pathlib import Path
+from typing import Optional
 
 # Ensure this file's directory is on sys.path so sibling modules are found
 _this_dir = str(Path(__file__).resolve().parent)
@@ -50,6 +51,12 @@ TOL_C_VERTS = 1e2
 
 # EXPERIMENTAL: set to True to also solve EF with Gurobi alongside ipopt (remove later)
 ENABLE_EF_GUROBI = False
+
+
+def _fmt_point(pt, prec=4):
+    """Format a point of any dimension as '(x, y, ...)' string."""
+    return "(" + ", ".join(f"{float(v):.{prec}f}" for v in pt) + ")"
+
 
 class SimplexMesh:
     """
@@ -453,34 +460,25 @@ def ms_on_tetra_for_scene(ms_bundle, tet_vertices, fverts_scene):
     Returns:
         tuple:
             ms_val (float): ms value; +inf if ms solve failed.
-            new_pt_ms (tuple | None): Interpolated point (Kp,Ki,Kd) from ms subproblem, None if failed.
+            new_pt_ms (tuple | None): Interpolated first-stage point from ms subproblem, None if failed.
             c_val (float): c_s = min_T Q_s(K), -inf if failed.
-            c_pt (tuple | None): (Kp,Ki,Kd) corresponding to c_s, None if failed.
+            c_pt (tuple | None): First-stage point corresponding to c_s, None if failed.
     """
-    # --- file-based debug trace (survives C-level crashes) ---
-    _dbg = Path(__file__).resolve().parent / "dbg_crash_trace.txt"
-    with open(_dbg, "a", encoding="utf-8") as _df:
-        _df.write("update_tetra ...\n"); _df.flush()
-        ms_bundle.update_tetra(tet_vertices, fverts_scene)
-        _df.write("update_tetra OK\n"); _df.flush()
+    ms_bundle.update_tetra(tet_vertices, fverts_scene)
 
-        _df.write("solve ms ...\n"); _df.flush()
-        ok_ms = ms_bundle.solve()
-        _df.write(f"solve ms ok={ok_ms}\n"); _df.flush()
-        if ok_ms:
-            ms_val, lam_star, new_pt_ms = ms_bundle.get_ms_and_point()
-        else:
-            ms_val = float('inf')
-            lam_star = None
-            new_pt_ms = None
+    ok_ms = ms_bundle.solve()
+    if ok_ms:
+        ms_val, lam_star, new_pt_ms = ms_bundle.get_ms_and_point()
+    else:
+        ms_val = float('inf')
+        lam_star = None
+        new_pt_ms = None
 
-        _df.write("solve_const_cut ...\n"); _df.flush()
-        ok_c, c_val, c_pt = ms_bundle.solve_const_cut()
-        _df.write(f"solve_const_cut ok={ok_c}\n"); _df.flush()
-        if not ok_c:
-            print("c_s solve wrong")
-            c_val = float('-inf')
-            c_pt = None
+    ok_c, c_val, c_pt = ms_bundle.solve_const_cut()
+    if not ok_c:
+        print("c_s solve wrong")
+        c_val = float('-inf')
+        c_pt = None
 
     return ms_val, new_pt_ms, c_val, c_pt
 
@@ -493,7 +491,9 @@ def evaluate_all_tetra(nodes, scen_values, ms_bundles, first_vars_list,
                        dbg_timelimit_path=None,  # path for timeout log
                        dbg_cs_timing_path=None,  # path for CS (Q-value) timing log
                        dbg_ms_timing_path=None,  # path for MS timing log
-                       iter_num=None):  # iteration number for logging
+                       iter_num=None,  # iteration number for logging
+                       _nonopt_buf=None,  # buffer for non-optimal events (list, append-only)
+                       _debug_buf=None):  # buffer for simplex_debug.txt (list, append-only)
     """
     Evaluate all Delaunay simplex formed by the node set
     across all scenarios, computing their ms values,
@@ -508,7 +508,7 @@ def evaluate_all_tetra(nodes, scen_values, ms_bundles, first_vars_list,
     Parameters
     ----------
     nodes : list[tuple[float]]
-        Current first-stage points (Kp, Ki, Kd, ...).
+        Current first-stage points (x1, x2, ..., xd).
     scen_values : list[list[float]]
         Cached Q evaluations for each scenario s at each node i.
         Shape: [S][N].
@@ -559,28 +559,18 @@ def evaluate_all_tetra(nodes, scen_values, ms_bundles, first_vars_list,
 
     # per_tet stores information for every simplex in the current iteration
     per_tet = []
-    _dbg = Path(__file__).resolve().parent / "dbg_crash_trace.txt"
-    _df = open(_dbg, "w", encoding="utf-8")
     for k, simp in enumerate(simplices):
-        _df.write(f"simplex {k}: start, simp={list(simp)}\n"); _df.flush()
         idxs = list(map(int, simp))
-        _df.write(f"simplex {k}: idxs={idxs}\n"); _df.flush()
         verts = [tuple(pts[i]) for i in idxs]
-        _df.write(f"simplex {k}: verts done\n"); _df.flush()
 
         # Generic d-dim volume calculation
         V_arr = np.array(verts, dtype=float)  # (d+1, d)
-        _df.write(f"simplex {k}: V_arr done, shape={V_arr.shape}, V_arr={V_arr.tolist()}\n"); _df.flush()
         try:
             vol = simplex_volume(V_arr)
         except Exception as _e_vol:
-            _df.write(f"simplex {k}: simplex_volume EXCEPTION: {_e_vol}\n"); _df.flush()
             vol = 0.0
-        _df.write(f"simplex {k}: vol={vol}\n"); _df.flush()
         vol_tol = vol_tolerance(pts, d)
-        _df.write(f"simplex {k}: vol={vol}, tol={vol_tol}\n"); _df.flush()
         if vol < vol_tol:
-            _df.write(f"simplex {k}: SKIPPED (degenerate)\n"); _df.flush()
             continue
 
         # Use the ordered tuple of vertex index as the unique ID of the simplex
@@ -590,7 +580,6 @@ def evaluate_all_tetra(nodes, scen_values, ms_bundles, first_vars_list,
 
         fverts_per_scene = [[scen_values[s][i] for i in idxs] for s in range(S)]
         fverts_sum = [sum(fverts_per_scene[s][j] for s in range(S)) for j in range(n_verts)]
-        _df.write(f"simplex {k}: fverts ready, calling ms_on_tetra_for_scene\n"); _df.flush()
 
         # ==========  per-scene ms + constant-cut solve with cache ==========
         key_base = tuple(sorted(idxs))
@@ -605,7 +594,6 @@ def evaluate_all_tetra(nodes, scen_values, ms_bundles, first_vars_list,
         for w in range(S):
             cache_key = (int(w), key_base)
             hit = (cache_on and (ms_cache is not None) and (cache_key in ms_cache))
-            _df.write(f"  scene {w}: hit={hit}\n"); _df.flush()
 
             if hit:
                 # cache is now (ms_val, new_pt_ms, c_val, c_pt)
@@ -614,7 +602,6 @@ def evaluate_all_tetra(nodes, scen_values, ms_bundles, first_vars_list,
                 ms_meta_per_scene.append(None)
                 cs_meta_per_scene.append(None)
             else:
-                _df.write(f"  scene {w}: calling ms_on_tetra_for_scene ...\n"); _df.flush()
                 ms_val, new_pt_ms, c_val, c_pt = ms_on_tetra_for_scene(
                     ms_bundles[w], verts, fverts_per_scene[w]
                 )
@@ -624,80 +611,49 @@ def evaluate_all_tetra(nodes, scen_values, ms_bundles, first_vars_list,
                 ms_meta_per_scene.append(_ms_meta)
                 cs_meta_per_scene.append(_cs_meta)
 
-                # --- TimeLimit logging for MS solve ---
-                if _ms_meta and _ms_meta.get("status") == "time_limit":
-                    _tl_dual = _ms_meta.get("dual_bound")
-                    _tl_prim = _ms_meta.get("primal_obj")
-                    if _tl_dual is not None and _tl_prim is not None:
-                        _dual_lt_prim = _tl_dual < _tl_prim
-                    else:
-                        _dual_lt_prim = None
-                    _tl_line = (
-                        f"[Iter {iter_num}] [MS TimeLimit] simplex_idx={k}, verts={simplex_id}, "
-                        f"scenario={w}, dual_bound={_tl_dual}, primal_obj={_tl_prim}, "
-                        f"dual<primal={_dual_lt_prim}\n"
-                    )
-                    if dbg_timelimit_path is not None:
-                        try:
-                            with open(dbg_timelimit_path, "a", encoding="utf-8") as _ftl:
-                                _ftl.write(_tl_line)
-                        except Exception as e:
-                            print(f"[timelimit-log] failed to write: {e}")
+                # --- Buffer non-optimal / time-limit events for end-of-iter write ---
+                if _nonopt_buf is not None:
+                    for _tag, _meta in [("ms", _ms_meta), ("cs", _cs_meta)]:
+                        if _meta is None:
+                            continue
+                        _st = _meta.get("status", "")
+                        if _st == "time_limit" or _st != "optimal":
+                            _nonopt_buf.append(
+                                f"  iter={iter_num} simp=T{k} scen={w} type={_tag} "
+                                f"status={_st} "
+                                f"term={_meta.get('termination_condition','?')} "
+                                f"ok={_meta.get('ok','?')} "
+                                f"val={_meta.get('dual_bound','?')} "
+                                f"time={_meta.get('time_sec',0.0):.4f}s\n"
+                            )
 
-                # --- TimeLimit logging for CS solve ---
-                if _cs_meta and _cs_meta.get("status") == "time_limit":
-                    _tl_dual = _cs_meta.get("dual_bound")
-                    _tl_prim = _cs_meta.get("primal_obj")
-                    if _tl_dual is not None and _tl_prim is not None:
-                        _dual_lt_prim = _tl_dual < _tl_prim
-                    else:
-                        _dual_lt_prim = None
-                    _tl_line = (
-                        f"[Iter {iter_num}] [CS TimeLimit] simplex_idx={k}, verts={simplex_id}, "
-                        f"scenario={w}, dual_bound={_tl_dual}, primal_obj={_tl_prim}, "
-                        f"dual<primal={_dual_lt_prim}\n"
-                    )
-                    if dbg_timelimit_path is not None:
-                        try:
-                            with open(dbg_timelimit_path, "a", encoding="utf-8") as _ftl:
-                                _ftl.write(_tl_line)
-                        except Exception as e:
-                            print(f"[timelimit-log] failed to write: {e}")
-
-                # --- MS timing log: record only NON-OPTIMAL MS solves ---
-                if dbg_ms_timing_path is not None and _ms_meta is not None and _ms_meta.get('status') != 'optimal':
-                    _ms_line = (
-                        f"[Iter {iter_num}] scenario={w}, "
-                        f"simplex_idx={k}, verts={simplex_id}, "
-                        f"time={_ms_meta.get('time_sec', 0.0):.4f}s, "
-                        f"status={_ms_meta.get('status', '?')}, "
-                        f"dual_bound={_ms_meta.get('dual_bound')}, "
-                        f"primal_obj={_ms_meta.get('primal_obj')}\n"
-                    )
-                    try:
-                        with open(dbg_ms_timing_path, "a", encoding="utf-8") as _fms:
-                            _fms.write(_ms_line)
-                    except Exception:
-                        pass
+                # --- Buffer debug events for simplex_debug.txt ---
+                if _debug_buf is not None:
+                    for _tag, _meta, _val in [("ms", _ms_meta, ms_val), ("cs", _cs_meta, c_val)]:
+                        if _meta is None:
+                            continue
+                        _st = _meta.get("status", "")
+                        _ok = _meta.get("ok", True)
+                        _tm = _meta.get("termination_condition", "")
+                        _is_bad = (not _ok
+                                   or _st in ("time_limit", "error", "infeasible", "unbounded")
+                                   or _tm not in ("optimal", "locallyOptimal", ""))
+                        # Also flag cs_dual NA
+                        _dual = _meta.get("dual_bound")
+                        _dual_na = (_tag == "cs" and
+                                    (_dual is None or (isinstance(_dual, float) and not math.isfinite(_dual))))
+                        if _is_bad or _dual_na:
+                            _issue = "cs_dual_NA" if _dual_na and not _is_bad else "solve_fail"
+                            _debug_buf.append(
+                                f"  simp=T{k} scen={w} type={_tag} issue={_issue} "
+                                f"ok={_ok} status={_st} term={_tm} "
+                                f"val={_val} dual={_dual} "
+                                f"time={_meta.get('time_sec',0.0):.4f}s\n"
+                            )
 
                 if cache_on and (ms_cache is not None):
                     ms_cache[cache_key] = (ms_val, new_pt_ms, c_val, c_pt)
 
-                # --- CS (Q-value) timing log: record only NON-OPTIMAL c_s solves ---
-                if dbg_cs_timing_path is not None and _cs_meta is not None and _cs_meta.get('status') != 'optimal':
-                    _cs_line = (
-                        f"[Iter {iter_num}] scenario={w}, "
-                        f"simplex_idx={k}, verts={simplex_id}, "
-                        f"time={_cs_meta.get('time_sec', 0.0):.4f}s, "
-                        f"status={_cs_meta.get('status', '?')}, "
-                        f"dual_bound={_cs_meta.get('dual_bound')}, "
-                        f"primal_obj={_cs_meta.get('primal_obj')}\n"
-                    )
-                    try:
-                        with open(dbg_cs_timing_path, "a", encoding="utf-8") as _fcs:
-                            _fcs.write(_cs_line)
-                    except Exception:
-                        pass
                 if tracker is not None:
                     tracker.note_ms_recomputed(simplex_id)
 
@@ -807,7 +763,7 @@ def evaluate_all_tetra(nodes, scen_values, ms_bundles, first_vars_list,
 def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                        target_nodes=30, min_dist=MIN_DIST, active_tol=ACTIVE_TOL, verbose=True,
                        agg_bundle=None, gap_stop_tol=GAP_STOP_TOL, tracker: SimplexTracker | None = None,
-                       enable_3d_plot: bool = True,
+                       enable_3d_plot: Optional[bool] = None,
                        plot_every: int | None = None,
                        use_exact_opt: bool = False,
                        exact_solver_name: str = "gurobi",
@@ -856,8 +812,8 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
         Convergence threshold for optimal rel-gap.
     tracker : SimplexTracker, 
         Tracks created/active simplices and ms recomputations.
-    enable_3d_plot : bool, default=True
-        Master switch for all 3D plotting. When False, no plots are generated.
+    enable_3d_plot : Optional[bool], default=None
+        Master switch for all 3D plotting. None = auto (True only when d==3).
     plot_every : int | None, optional
         Draw the 3D plot every n iterations (only used if enable_3d_plot=True).
 
@@ -940,6 +896,14 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
     else:
         nodes = corners_from_var_bounds(first_vars_list[0])
 
+    # === Dimension auto-detection and enable_3d_plot gating ===
+    d = len(first_vars_list[0])
+    if enable_3d_plot is None:
+        enable_3d_plot = (d == 3)
+    if d != 3:
+        enable_3d_plot = False
+    if axis_labels is None:
+        axis_labels = tuple(f"x{i+1}" for i in range(d))
 
     # === Preload the exact optimal solution for plotting===
     true_opt_points = None
@@ -1108,6 +1072,29 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
         f.write("# Per-simplex: LB, avg dual bound, avg c_s Q-value, IPOPT result\n")
         f.write("# Plus: current UB, UB source, next chosen simplex\n\n")
 
+    # File 9: Per-iteration split record (in CSV output folder for easy access)
+    _csv_output_dir = os.path.dirname(csv_path) if csv_path else "."
+    if _csv_output_dir:
+        os.makedirs(_csv_output_dir, exist_ok=True)
+    else:
+        _csv_output_dir = "."
+
+    # simplex_debug.txt — diagnostic log for ms/cs/Q failures
+    debug_path = os.path.join(_csv_output_dir, "simplex_debug.txt")
+    with open(debug_path, "w", encoding="utf-8") as f:
+        f.write("# simplex_debug.txt — ms/cs/Q subproblem failures\n")
+        f.write("# Fields: simp, scen, type, issue, ok, status, term, val, dual, time\n\n")
+    split_log_path = os.path.join(_csv_output_dir, "simplex_record_split.txt")
+    with open(split_log_path, "w", encoding="utf-8") as f:
+        f.write("# simplex_record_split.txt — per-iteration split record\n")
+        f.write("# selected_simplex LB_pre, UB_pre, children LBs, end LB/UB\n\n")
+
+    # File 10: Per-iteration subproblem runtime record (in CSV output folder)
+    runtime_log_path = os.path.join(_csv_output_dir, "simplex_record_subproblem_runtime.txt")
+    with open(runtime_log_path, "w", encoding="utf-8") as f:
+        f.write("# simplex_record_subproblem_runtime.txt — per-iteration subproblem runtime\n")
+        f.write("# ms/cs/Q timing, non-optimal subproblem detection\n\n")
+
     # === Initialize per-iteration diagnostic logger ===
     iter_logger = IterationLogger(path="simplex_result.txt")
     # UB provenance tracking state (note: logger also stores this, but we track here for clarity)
@@ -1243,6 +1230,8 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
 
         print("[DBG] entering evaluate_all_tetra ...", flush=True)
         t_ms0 = perf_counter()
+        _iter_nonopt_buf = []  # non-optimal events buffer for this iteration
+        _iter_debug_lines = []  # debug events buffer for simplex_debug.txt
         try:
             tri, per_tet = evaluate_all_tetra(
                 nodes, scen_values, ms_bundles, first_vars_list,
@@ -1253,6 +1242,8 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 dbg_cs_timing_path=dbg_cs_timing_path,
                 dbg_ms_timing_path=dbg_ms_timing_path,
                 iter_num=it,
+                _nonopt_buf=_iter_nonopt_buf,
+                _debug_buf=_iter_debug_lines,
             )
         except Exception as _e_eval:
             import traceback as _tb
@@ -2577,22 +2568,21 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
             new_vals.append(val)
             scene_times[s].append(dt_q)
             q_call_cnt += 1
-            # --- Q-value timing log: record only NON-OPTIMAL Q solves ---
+            # --- Q-eval failure/NaN/Inf detection for simplex_debug.txt ---
             _q_term = _q_meta.get('termination_condition', '') if _q_meta else ''
-            if _q_term not in ('optimal', 'locallyOptimal'):
-                try:
-                    _q_line = (
-                        f"[Iter {it}] scenario={s}, "
-                        f"point=({new_node[0]:.4f}, {new_node[1]:.4f}, {new_node[2]:.4f}), "
-                        f"time={_q_meta.get('time_sec', 0.0):.4f}s, "
-                        f"status={_q_meta.get('status', '?')}, "
-                        f"term={_q_meta.get('termination_condition', '?')}, "
-                        f"obj={_q_meta.get('obj')}\n"
-                    )
-                    with open(dbg_q_timing_path, "a", encoding="utf-8") as _fq:
-                        _fq.write(_q_line)
-                except Exception:
-                    pass
+            _q_bad = (_q_term not in ('optimal', 'locallyOptimal'))
+            _q_nan = (not math.isfinite(val)) if isinstance(val, float) else False
+            if _q_bad or _q_nan:
+                _issue = "Q_NaN_Inf" if _q_nan else "Q_solve_fail"
+                _iter_debug_lines.append(
+                    f"  scen={s} type=Q issue={_issue} "
+                    f"ok={_q_meta.get('ok','?') if _q_meta else '?'} "
+                    f"status={_q_meta.get('status','?') if _q_meta else '?'} "
+                    f"term={_q_term} "
+                    f"val={val} "
+                    f"time={dt_q:.4f}s\n"
+                )
+
         t_q = perf_counter() - t_q0
         timing["iter_Q_new_time"][timing_idx] = t_q
 
@@ -2616,7 +2606,8 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 as_plus_ms = as_val + ms_val
                 q_val = float(new_vals[scene])
                 
-                header = ["Simplex", "Scene", "Type", "As", "ms", "As+ms", "Q", "(Kp, Ki, Kd)"]
+                coord_header = "(" + ", ".join(f"x{i+1}" for i in range(len(new_node))) + ")"
+                header = ["Simplex", "Scene", "Type", "As", "ms", "As+ms", "Q", coord_header]
                 colw = [10, 8, 8, 15, 15, 15, 15, 30]
                 
                 def fmt_row(cols):
@@ -2626,7 +2617,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 print("-" * sum(colw))
                 
                 # Format coordinates
-                coords_str = f"({new_node[0]:.4f}, {new_node[1]:.4f}, {new_node[2]:.4f})"
+                coords_str = _fmt_point(new_node)
                 
                 row = [
                     f"T{sid}", scene, pt_type,
@@ -2727,6 +2718,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
             dbg_cs_timing_path=dbg_cs_timing_path,
             dbg_ms_timing_path=dbg_ms_timing_path,
             iter_num=it,
+            _nonopt_buf=None,  # no non-optimal tracking for post-split re-eval
         )
         
         # Build per_tet dict for quick lookup
@@ -2936,6 +2928,9 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
             iter_logger.update_ub_provenance(updated=False)
         
         # === OVERRIDE LB_hist/UB_hist with end-of-iteration values ===
+        # Capture pre-split values BEFORE override (used by split log below)
+        _lb_pre_split = float(LB_hist[-1]) if LB_hist else float('nan')
+        _ub_pre_split = float(UB_hist[-1]) if UB_hist else float('nan')
         # These will be used for both CSV and summary table
         if LB_hist:
             LB_hist[-1] = LB_global_end
@@ -2955,6 +2950,89 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
         # ====================================================================
 
         _phases["9_end_of_iter_reeval"] = perf_counter() - _t_phase
+
+        # ================================================================
+        # (A) simplex_record_split.txt — append per-iteration split record
+        # ================================================================
+        try:
+            _sel_lb_pre = float(selected_rec_before_split["LB"]) if selected_rec_before_split else float('nan')
+            _sel_sid = int(selected_rec_before_split["simplex_index"]) if selected_rec_before_split else "N/A"
+            _split_lines = []
+            _split_lines.append(f"=== Iter {it} ===\n")
+            _split_lines.append(f"selected_simplex: T{_sel_sid}  LB_pre={_sel_lb_pre/S:.9f}\n")
+            _split_lines.append(f"UB_pre={_ub_pre_split/S:.9f}  LB_global_pre={_lb_pre_split/S:.9f}\n")
+            _split_lines.append(f"children (created {n_children}):\n")
+            for _ci in new_simplex_indices:
+                if _ci in per_tet_dict:
+                    _cr = per_tet_dict[_ci]
+                    _cid = tuple(sorted(_cr["vert_idx"]))
+                    _split_lines.append(f"  child T{_ci} {_cid} LB={float(_cr['LB'])/S:.9f}\n")
+            _split_lines.append(f"end: UB={UB_global_end/S:.9f}  LB={LB_global_end/S:.9f}\n\n")
+            with open(split_log_path, "a", encoding="utf-8") as _fsplit:
+                _fsplit.writelines(_split_lines)
+        except Exception as _e_split_log:
+            print(f"[WARNING] split log write failed: {_e_split_log}")
+
+        # ================================================================
+        # (B) simplex_record_subproblem_runtime.txt — append per-iteration
+        # ================================================================
+        try:
+            # --- MS timing: extract from per_tet metadata (not timing dict) ---
+            _ms_total_time = 0.0
+            _ms_total_calls = 0
+            for _r in per_tet:
+                for _ms_m in (_r.get("ms_meta_per_scene") or []):
+                    if _ms_m is not None and _ms_m.get("time_sec") is not None:
+                        _ms_total_time += float(_ms_m["time_sec"])
+                        _ms_total_calls += 1
+            _ms_avg = _ms_total_time / _ms_total_calls if _ms_total_calls > 0 else 0.0
+
+            # --- CS timing: extract from per_tet metadata ---
+            _cs_total_time = 0.0
+            _cs_total_calls = 0
+            for _r in per_tet:
+                for _cs_m in (_r.get("cs_meta_per_scene") or []):
+                    if _cs_m is not None and _cs_m.get("time_sec") is not None:
+                        _cs_total_time += float(_cs_m["time_sec"])
+                        _cs_total_calls += 1
+            _cs_avg = _cs_total_time / _cs_total_calls if _cs_total_calls > 0 else 0.0
+
+            # --- Q-eval timing ---
+            _q_total_time = sum(sum(st) for st in scene_times) if scene_times else 0.0
+            _q_count = q_call_cnt
+            _q_avg = _q_total_time / _q_count if _q_count > 0 else 0.0
+
+            # --- Build compact per-iteration runtime block ---
+            _rt_lines = []
+            _rt_lines.append(f"=== Iter {it} ===\n")
+            _rt_lines.append(f"ms: total_time={_ms_total_time:.4f}, calls={_ms_total_calls}, avg={_ms_avg:.4f}\n")
+            _rt_lines.append(f"cs: total_time={_cs_total_time:.4f}, calls={_cs_total_calls}, avg={_cs_avg:.4f}\n")
+            _rt_lines.append(f"Q:  total_time={_q_total_time:.4f}, calls={_q_count}, avg={_q_avg:.4f}\n")
+            # Filter to timeout-only events
+            _timeout_lines = [
+                ln for ln in _iter_nonopt_buf
+                if any(kw in ln.lower() for kw in ("time_limit", "maxtimelimit", "timelimit"))
+            ] if _iter_nonopt_buf else []
+            if _timeout_lines:
+                _rt_lines.append(f"timeouts ({len(_timeout_lines)}):\n")
+                _rt_lines.extend(_timeout_lines)
+            _rt_lines.append(f"\n")
+            with open(runtime_log_path, "a", encoding="utf-8") as _frt:
+                _frt.writelines(_rt_lines)
+        except Exception as _e_rt_log:
+            print(f"[WARNING] runtime log write failed: {_e_rt_log}")
+
+        # ================================================================
+        # (C) simplex_debug.txt — append only if issues detected
+        # ================================================================
+        if _iter_debug_lines:
+            try:
+                with open(debug_path, "a", encoding="utf-8") as _fdbg:
+                    _fdbg.write(f"=== Iter {it} ===\n")
+                    _fdbg.writelines(_iter_debug_lines)
+                    _fdbg.flush()
+            except Exception as _e_dbg:
+                print(f"[WARNING] debug log write failed: {_e_dbg}")
 
         t_iter = perf_counter() - t_iter0
         _phases["TOTAL"] = t_iter
@@ -3248,3 +3326,5 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
 
     }
 
+# Backward-compatible alias: general callers can use run_simplex
+run_simplex = run_pid_simplex_3d
