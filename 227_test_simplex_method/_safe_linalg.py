@@ -40,8 +40,16 @@ def det(M):
             cofactor = det(minor)  # 3x3 recursion
             d += ((-1) ** j) * M[0, j] * cofactor
         return float(d)
+    if n == 5:
+        # Expand along first row (reuses 4x4 cofactor expansion)
+        d = 0.0
+        for j in range(5):
+            minor = np.delete(np.delete(M, 0, axis=0), j, axis=1)
+            cofactor = det(minor)  # 4x4 recursion
+            d += ((-1) ** j) * M[0, j] * cofactor
+        return float(d)
 
-    # Fallback (may crash on broken LAPACK)
+    # Fallback for n >= 6 (may crash on broken LAPACK)
     return float(np.linalg.det(M))
 
 

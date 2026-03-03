@@ -1,6 +1,6 @@
 # Adding a New Problem to the Simplex Method Solver
 
-> **Audience**: Future-me, or anyone who wants to solve a new 2-stage stochastic
+> **Audience**: anyone who wants to solve a new 2-stage stochastic
 > programming problem using this codebase without modifying the core algorithm.
 
 ---
