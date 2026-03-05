@@ -1894,9 +1894,9 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                         _check = ""
                         if _dual is not None and _prim is not None:
                             if _dual > _prim + 1e-8:
-                                _check = "  ⚠ DUAL > PRIMAL (Gurobi inconsistency!)"
+                                _check = "  [!] DUAL > PRIMAL (Gurobi inconsistency!)"
                             else:
-                                _check = f"  ✓ dual ≤ primal (gap={_prim - _dual:.6e})"
+                                _check = f"  [OK] dual <= primal (gap={_prim - _dual:.6e})"
 
                         print(f"    scen {_s_idx}: status={_status}, dual={_dual_str}, primal={_prim_str}{_check}")
                         print(f"             cs_primal_K={_cs_pt}")
@@ -1909,9 +1909,9 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                                 _verdict = ""
                                 if _dual is not None and math.isfinite(_indep_Q):
                                     if _indep_Q < _dual - 1e-8:
-                                        _verdict = "  → DUAL BOUND IS UNRELIABLE (indep_Q < dual)"
+                                        _verdict = "  -> DUAL BOUND IS UNRELIABLE (indep_Q < dual)"
                                     else:
-                                        _verdict = f"  → dual ≤ indep_Q (consistent, diff={_indep_Q - _dual:.6e})"
+                                        _verdict = f"  -> dual <= indep_Q (consistent, diff={_indep_Q - _dual:.6e})"
                                 print(f"             indep_Q(cs_K)={_indep_str}{_verdict}")
                             except Exception as _e:
                                 print(f"             indep_Q(cs_K): FAILED ({_e})")
@@ -1940,11 +1940,11 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                         _flag = ""
                         if _cs_dual_s is not None:
                             if _q_ef_s < _cs_dual_s - 1e-8:
-                                _flag = "  ⚠ Q_s(K_EF) < c_s_dual → GUROBI CS DUAL IS WRONG"
+                                _flag = "  [!] Q_s(K_EF) < c_s_dual -> GUROBI CS DUAL IS WRONG"
                             elif _q_ef_s < _cs_dual_s + 1e-6:
-                                _flag = "  ~ Q_s(K_EF) ≈ c_s_dual (within tol)"
+                                _flag = "  ~ Q_s(K_EF) ~= c_s_dual (within tol)"
                             else:
-                                _flag = f"  ✓ Q_s(K_EF) > c_s_dual (diff={_q_ef_s - _cs_dual_s:.6e})"
+                                _flag = f"  [OK] Q_s(K_EF) > c_s_dual (diff={_q_ef_s - _cs_dual_s:.6e})"
 
                         _cs_d_str = f"{_cs_dual_s:.9f}" if _cs_dual_s is not None else "N/A"
                         print(f"    scen {_s_idx}: Q_s(K_EF)={_q_ef_s:.9f}, c_s_dual={_cs_d_str}{_flag}")

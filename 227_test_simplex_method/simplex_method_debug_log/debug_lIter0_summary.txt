@@ -5,562 +5,562 @@
 ======================================================================
 [Iter 0] FULL SIMPLEX SUMMARY
   Number of simplices: 108
-  Number of scenarios: 10
+  Number of scenarios: 100
 
   --- T0 (0, 2, 3, 4, 8, 16) ---
-    LB: 64615.809845814 (per-scen)
-    Avg dual bound (ms): 64615.809845814
-    Avg c_s point Q-value: 85387.404070846 (per-scen), point=(np.float64(1.277028835250803e-08), np.float64(1.1146362938902906e-09), np.float64(6.992544424169834e-09), np.float64(4.0000000012138095), np.float64(4.0681489064294364e-10))
-    Volume: 8.533333e+05
+    LB: -354.343343799 (per-scen)
+    Avg dual bound (ms): -354.343343799
+    Avg c_s point Q-value: -355.641987365 (per-scen), point=(np.float64(0.0013542687317126077), np.float64(1.0798404604658117e-11), np.float64(28.762784027357988), np.float64(0.000675080993311316), np.float64(1.8735522470746992e-11))
+    Volume: 3.755645e+04
   --- T1 (0, 1, 3, 4, 8, 16) ---
-    LB: 65160.729077330 (per-scen)
-    Avg dual bound (ms): 65160.729077330
-    Avg c_s point Q-value: 65160.564219965 (per-scen), point=(np.float64(7.748174086732999e-11), np.float64(6.721531435469822e-12), np.float64(4.2297966428152234e-11), np.float64(2.644014424744376e-12), np.float64(5.104748058788986e-12))
-    Volume: 8.533333e+05
+    LB: -353.650928987 (per-scen)
+    Avg dual bound (ms): -353.650928987
+    Avg c_s point Q-value: -355.382640371 (per-scen), point=(np.float64(1.0374345198231893e-05), np.float64(7.948982114081774e-06), np.float64(28.751471140544123), np.float64(2.03534197272827e-12), np.float64(3.6379702461478137e-12))
+    Volume: 3.755645e+04
   --- T2 (3, 16, 25, 27, 28, 29) ---
-    LB: 170938.155223050 (per-scen)
-    Avg dual bound (ms): 170938.155223050
-    Avg c_s point Q-value: 174620.526443524 (per-scen), point=(np.float64(29.28909617226039), np.float64(9.145393435827932e-09), np.float64(2.207423576291463e-09), np.float64(10.710903483232116), np.float64(10.710903609453432))
-    Volume: 8.533333e+05
+    LB: -185.686758541 (per-scen)
+    Avg dual bound (ms): -185.686758541
+    Avg c_s point Q-value: -185.241890083 (per-scen), point=(np.float64(18.20214100293146), np.float64(1.6384204048037688e-10), np.float64(1.034545291060456e-10), np.float64(0.025269206688217548), np.float64(0.018760768743692622))
+    Volume: 3.755645e+04
   --- T3 (3, 4, 23, 28, 29, 30) ---
-    LB: 109006.311598846 (per-scen)
-    Avg dual bound (ms): 109006.311598846
-    Avg c_s point Q-value: 133569.152875874 (per-scen), point=(np.float64(9.23948389294849e-13), np.float64(5.691279080048633e-13), np.float64(36.40300522741069), np.float64(3.5969947725898663), np.float64(3.59699477258975))
-    Volume: 8.533333e+05
+    LB: -356.745736554 (per-scen)
+    Avg dual bound (ms): -356.745736554
+    Avg c_s point Q-value: -356.745657047 (per-scen), point=(np.float64(1.501925342346646e-10), np.float64(0.0), np.float64(28.809999999990563), np.float64(0.0), np.float64(0.0))
+    Volume: 3.755645e+04
   --- T4 (3, 16, 27, 29, 30, 31) ---
-    LB: 170938.155612676 (per-scen)
-    Avg dual bound (ms): 170938.155612676
-    Avg c_s point Q-value: 174620.527006624 (per-scen), point=(np.float64(29.28909639406831), np.float64(0.0), np.float64(0.0), np.float64(10.710903605931687), np.float64(10.710903605931687))
-    Volume: 8.533333e+05
+    LB: -185.686758550 (per-scen)
+    Avg dual bound (ms): -185.686758551
+    Avg c_s point Q-value: -185.241890088 (per-scen), point=(np.float64(18.20214100298083), np.float64(2.8476132780733786e-11), np.float64(2.9546968900660836e-11), np.float64(0.025269206573198203), np.float64(0.018760768572600492))
+    Volume: 3.755645e+04
   --- T5 (2, 3, 4, 8, 16, 30) ---
-    LB: 78221.614575066 (per-scen)
-    Avg dual bound (ms): 78221.614575066
-    Avg c_s point Q-value: 130171.647966470 (per-scen), point=(np.float64(4.974793806303168e-13), np.float64(4.1043041630093534e-13), np.float64(25.92448073572935), np.float64(14.075519264270458), np.float64(2.574817291427535e-13))
-    Volume: 2.560000e+06
+    LB: -356.748584806 (per-scen)
+    Avg dual bound (ms): -356.748584806
+    Avg c_s point Q-value: -356.742883745 (per-scen), point=(np.float64(7.017666354714135e-05), np.float64(3.5270361339731653e-10), np.float64(28.809889034986842), np.float64(5.592152985999549e-10), np.float64(2.6519653826992008e-11))
+    Volume: 1.126693e+05
   --- T6 (3, 4, 23, 29, 30, 31) ---
-    LB: 109005.977110811 (per-scen)
-    Avg dual bound (ms): 109005.977110811
-    Avg c_s point Q-value: 133569.152886321 (per-scen), point=(np.float64(9.509728097050078e-12), np.float64(6.372570077548601e-12), np.float64(36.40300522316625), np.float64(3.5969947730065095), np.float64(3.5969947748015665))
-    Volume: 8.533333e+05
+    LB: -356.745308574 (per-scen)
+    Avg dual bound (ms): -356.745308574
+    Avg c_s point Q-value: -356.745625989 (per-scen), point=(np.float64(4.3598744100012555e-11), np.float64(1.4446927875301451e-11), np.float64(28.809999999986548), np.float64(5.2183519723254426e-11), np.float64(1.4427597530292517e-11))
+    Volume: 3.755645e+04
   --- T7 (3, 16, 23, 29, 30, 31) ---
-    LB: 170938.155612676 (per-scen)
-    Avg dual bound (ms): 170938.155612676
-    Avg c_s point Q-value: 174620.527006624 (per-scen), point=(np.float64(29.28909639406831), np.float64(0.0), np.float64(0.0), np.float64(10.710903605931687), np.float64(10.710903605931687))
-    Volume: 8.533333e+05
+    LB: -185.686758553 (per-scen)
+    Avg dual bound (ms): -185.686758553
+    Avg c_s point Q-value: -185.241890089 (per-scen), point=(np.float64(18.2021410030081), np.float64(0.0), np.float64(0.0), np.float64(0.025269206501188534), np.float64(0.018760768519500103))
+    Volume: 3.755645e+04
   --- T8 (3, 4, 15, 29, 30, 31) ---
-    LB: 109006.166754402 (per-scen)
-    Avg dual bound (ms): 109006.166754402
-    Avg c_s point Q-value: 133569.152875822 (per-scen), point=(np.float64(2.1598363691762023e-12), np.float64(3.211390597290109e-12), np.float64(36.40300522742072), np.float64(3.596994772581978), np.float64(3.596994772581501))
-    Volume: 8.533333e+05
+    LB: -356.745566757 (per-scen)
+    Avg dual bound (ms): -356.745566757
+    Avg c_s point Q-value: -356.745910689 (per-scen), point=(np.float64(4.6286082147776614e-11), np.float64(2.1803005629798262e-11), np.float64(28.809999999987095), np.float64(9.650526733127207e-11), np.float64(1.5759269496403313e-11))
+    Volume: 3.755645e+04
   --- T9 (1, 3, 4, 8, 16, 29) ---
-    LB: 102475.360351446 (per-scen)
-    Avg dual bound (ms): 102475.360351446
-    Avg c_s point Q-value: 137355.337288026 (per-scen), point=(np.float64(4.702504549634805), np.float64(4.332089932853045e-13), np.float64(32.18719370923366), np.float64(2.221522695452632), np.float64(3.1103017411313743))
-    Volume: 2.560000e+06
+    LB: -356.749700435 (per-scen)
+    Avg dual bound (ms): -356.749700435
+    Avg c_s point Q-value: -356.742883747 (per-scen), point=(np.float64(7.017664910386094e-05), np.float64(3.394203319528741e-10), np.float64(28.809889034995148), np.float64(3.103788350382904e-11), np.float64(3.9839943887297213e-10))
+    Volume: 1.126693e+05
   --- T10 (3, 8, 27, 29, 30, 31) ---
-    LB: 231322.378517353 (per-scen)
-    Avg dual bound (ms): 231322.378517353
-    Avg c_s point Q-value: 242377.487500784 (per-scen), point=(np.float64(4.127696212599119e-05), np.float64(28.194016555738962), np.float64(4.1276962126346464e-05), np.float64(11.806023584005644), np.float64(11.80598458147856))
-    Volume: 8.533333e+05
+    LB: -176.305155957 (per-scen)
+    Avg dual bound (ms): -176.305155961
+    Avg c_s point Q-value: 11844.416308821 (per-scen), point=(np.float64(2.6343033902438047e-11), np.float64(17.38830925957329), np.float64(3.467674281329444e-11), np.float64(0.0173211085433117), np.float64(0.012859814497853067))
+    Volume: 3.755645e+04
   --- T11 (3, 16, 23, 27, 30, 31) ---
-    LB: 170938.155174179 (per-scen)
-    Avg dual bound (ms): 170938.155174179
-    Avg c_s point Q-value: 174620.526182206 (per-scen), point=(np.float64(29.289095556244256), np.float64(4.697196874100468e-10), np.float64(3.978154303983385e-10), np.float64(10.710903403270958), np.float64(10.710904444313382))
-    Volume: 8.533333e+05
+    LB: -185.686758547 (per-scen)
+    Avg dual bound (ms): -185.686758548
+    Avg c_s point Q-value: -185.241890086 (per-scen), point=(np.float64(18.20214100297907), np.float64(4.9665995409164266e-11), np.float64(7.283804855133174e-11), np.float64(0.025269206643649803), np.float64(0.018760768610704377))
+    Volume: 3.755645e+04
   --- T12 (3, 16, 19, 23, 25, 27) ---
-    LB: 170938.155420868 (per-scen)
-    Avg dual bound (ms): 170938.155420868
-    Avg c_s point Q-value: 174620.526777808 (per-scen), point=(np.float64(29.28909637521316), np.float64(6.466585396163254e-10), np.float64(5.311587105732021e-10), np.float64(10.710903626690786), np.float64(10.710903557427136))
-    Volume: 8.533333e+05
+    LB: -185.686758541 (per-scen)
+    Avg dual bound (ms): -185.686758542
+    Avg c_s point Q-value: -185.241890085 (per-scen), point=(np.float64(18.20214100294722), np.float64(0.0), np.float64(0.0), np.float64(0.02526920692240843), np.float64(0.01876076889840897))
+    Volume: 3.755645e+04
   --- T13 (3, 8, 15, 29, 30, 31) ---
-    LB: 231322.091275257 (per-scen)
-    Avg dual bound (ms): 231322.091275257
-    Avg c_s point Q-value: 242439.513447874 (per-scen), point=(np.float64(2.782339907625442e-06), np.float64(28.166603462894482), np.float64(2.782339907625442e-06), np.float64(11.833399319445423), np.float64(11.833396537105518))
-    Volume: 8.533333e+05
+    LB: -176.305155956 (per-scen)
+    Avg dual bound (ms): -176.305155961
+    Avg c_s point Q-value: 11844.416308821 (per-scen), point=(np.float64(2.551017147581584e-11), np.float64(17.388309259573287), np.float64(5.2781543685256314e-11), np.float64(0.0173211085514492), np.float64(0.012859814505318354))
+    Volume: 3.755645e+04
   --- T14 (3, 8, 15, 27, 30, 31) ---
-    LB: 231321.675356316 (per-scen)
-    Avg dual bound (ms): 231321.675356316
-    Avg c_s point Q-value: 242482.306587498 (per-scen), point=(np.float64(0.0), np.float64(28.14760196798211), np.float64(0.0), np.float64(11.85239803201789), np.float64(11.852398032017891))
-    Volume: 8.533333e+05
+    LB: -176.305155957 (per-scen)
+    Avg dual bound (ms): -176.305155961
+    Avg c_s point Q-value: 11844.416308821 (per-scen), point=(np.float64(1.4867504629153393e-11), np.float64(17.388309259573287), np.float64(2.7638444896058363e-11), np.float64(0.017321108555731282), np.float64(0.012859814492836085))
+    Volume: 3.755645e+04
   --- T15 (3, 16, 23, 27, 29, 31) ---
-    LB: 170938.155604366 (per-scen)
-    Avg dual bound (ms): 170938.155604366
-    Avg c_s point Q-value: 174620.526808673 (per-scen), point=(np.float64(29.28909639318249), np.float64(9.920696069886526e-12), np.float64(1.00510223267836e-11), np.float64(10.710903606825237), np.float64(10.710903604091019))
-    Volume: 8.533333e+05
+    LB: -185.686758553 (per-scen)
+    Avg dual bound (ms): -185.686758553
+    Avg c_s point Q-value: -185.241890089 (per-scen), point=(np.float64(18.2021410030081), np.float64(0.0), np.float64(0.0), np.float64(0.0252692065011917), np.float64(0.018760768519504388))
+    Volume: 3.755645e+04
   --- T16 (3, 4, 15, 23, 30, 31) ---
-    LB: 109006.417149385 (per-scen)
-    Avg dual bound (ms): 109006.417149385
-    Avg c_s point Q-value: 133569.152875875 (per-scen), point=(np.float64(6.771149276339498e-13), np.float64(6.398886848450786e-13), np.float64(36.40300522741089), np.float64(3.596994772590019), np.float64(3.596994772589808))
-    Volume: 8.533333e+05
+    LB: -356.745816091 (per-scen)
+    Avg dual bound (ms): -356.745816091
+    Avg c_s point Q-value: -356.745910687 (per-scen), point=(np.float64(1.722928378623408e-11), np.float64(1.7894632290639428e-11), np.float64(28.809999999979432), np.float64(4.4983675616390613e-10), np.float64(1.841261762137128e-11))
+    Volume: 3.755645e+04
   --- T17 (3, 4, 15, 23, 29, 31) ---
-    LB: 109006.345287413 (per-scen)
-    Avg dual bound (ms): 109006.345287413
-    Avg c_s point Q-value: 133554.159867180 (per-scen), point=(np.float64(7.958752636858167e-13), np.float64(7.485918449111389e-13), np.float64(36.40491687553712), np.float64(3.595083124463808), np.float64(3.595083124463959))
-    Volume: 8.533333e+05
+    LB: -356.745419227 (per-scen)
+    Avg dual bound (ms): -356.745419227
+    Avg c_s point Q-value: -356.745657045 (per-scen), point=(np.float64(1.2748095430831797e-11), np.float64(1.529345286781898e-11), np.float64(28.809999999976412), np.float64(3.930035198020981e-11), np.float64(9.627269031415519e-11))
+    Volume: 3.755645e+04
   --- T18 (3, 8, 15, 27, 29, 31) ---
-    LB: 231321.834094879 (per-scen)
-    Avg dual bound (ms): 231321.834094879
-    Avg c_s point Q-value: 242405.871310351 (per-scen), point=(np.float64(0.0), np.float64(28.18147169720391), np.float64(0.0), np.float64(11.818528302796093), np.float64(11.818528302796093))
-    Volume: 8.533333e+05
+    LB: -176.305155957 (per-scen)
+    Avg dual bound (ms): -176.305155961
+    Avg c_s point Q-value: 11844.416308821 (per-scen), point=(np.float64(2.1505495507529876e-11), np.float64(17.38830925957329), np.float64(3.758650063930687e-11), np.float64(0.01732110854581116), np.float64(0.01285981450400883))
+    Volume: 3.755645e+04
   --- T19 (3, 4, 15, 28, 29, 30) ---
-    LB: 109006.516203165 (per-scen)
-    Avg dual bound (ms): 109006.516203165
-    Avg c_s point Q-value: 133569.152875872 (per-scen), point=(np.float64(7.967566904835222e-13), np.float64(1.1482929213789803e-12), np.float64(36.403005227411356), np.float64(3.596994772589349), np.float64(3.5969947725891904))
-    Volume: 8.533333e+05
+    LB: -356.745940840 (per-scen)
+    Avg dual bound (ms): -356.745940840
+    Avg c_s point Q-value: -356.745910689 (per-scen), point=(np.float64(0.0), np.float64(1.3589668205085382e-10), np.float64(28.809999999989717), np.float64(0.0), np.float64(0.0))
+    Volume: 3.755645e+04
   --- T20 (3, 4, 8, 16, 28, 30) ---
-    LB: 102714.140495725 (per-scen)
-    Avg dual bound (ms): 102714.140495725
-    Avg c_s point Q-value: 139064.152886190 (per-scen), point=(np.float64(5.377291279528953), np.float64(1.118909652946748e-09), np.float64(32.2897664814205), np.float64(2.3329408688830333), np.float64(2.332940865431837))
-    Volume: 1.706667e+06
+    LB: -356.749701972 (per-scen)
+    Avg dual bound (ms): -356.749701972
+    Avg c_s point Q-value: -356.743217603 (per-scen), point=(np.float64(7.017692533681099e-05), np.float64(6.028466512151879e-10), np.float64(28.80988903502155), np.float64(3.4595507805268295e-10), np.float64(2.8035200168743157e-11))
+    Volume: 7.511289e+04
   --- T21 (3, 4, 8, 16, 28, 29) ---
-    LB: 102712.962374726 (per-scen)
-    Avg dual bound (ms): 102712.962374726
-    Avg c_s point Q-value: 139066.553405525 (per-scen), point=(np.float64(5.377071029917525), np.float64(4.33474412404678e-10), np.float64(32.29161409080605), np.float64(2.3313134460522162), np.float64(2.331313448386034))
-    Volume: 1.706667e+06
+    LB: -356.749649268 (per-scen)
+    Avg dual bound (ms): -356.749649268
+    Avg c_s point Q-value: -356.742853148 (per-scen), point=(np.float64(7.551835460817531e-05), np.float64(5.07158261296663e-06), np.float64(28.809887807348105), np.float64(3.214333411034306e-07), np.float64(2.153472409714907e-06))
+    Volume: 7.511289e+04
   --- T22 (3, 8, 27, 28, 29, 30) ---
-    LB: 231321.635054950 (per-scen)
-    Avg dual bound (ms): 231321.635054950
-    Avg c_s point Q-value: 242450.970450600 (per-scen), point=(np.float64(0.00010567164068103185), np.float64(28.16162727819285), np.float64(0.00010564850580284915), np.float64(11.838478302594698), np.float64(11.838372671018796))
-    Volume: 8.533333e+05
+    LB: -176.402198183 (per-scen)
+    Avg dual bound (ms): -176.402198186
+    Avg c_s point Q-value: 11844.621292134 (per-scen), point=(np.float64(0.02945188139857323), np.float64(17.3885832978654), np.float64(0.046570181289391235), np.float64(0.01691509086382679), np.float64(0.012558372348085321))
+    Volume: 3.755645e+04
   --- T23 (3, 16, 27, 28, 29, 30) ---
-    LB: 170938.155474815 (per-scen)
-    Avg dual bound (ms): 170938.155474815
-    Avg c_s point Q-value: 174620.526862219 (per-scen), point=(np.float64(29.289096336830614), np.float64(2.8567170682485245e-09), np.float64(1.191341956481172e-09), np.float64(10.710903582929008), np.float64(10.710903605656672))
-    Volume: 8.533333e+05
+    LB: -185.686758544 (per-scen)
+    Avg dual bound (ms): -185.686758544
+    Avg c_s point Q-value: -185.241890089 (per-scen), point=(np.float64(18.202141002925387), np.float64(2.1269881795112946e-12), np.float64(2.768272198360501e-12), np.float64(0.025269206522087154), np.float64(0.018760768535132668))
+    Volume: 3.755645e+04
   --- T24 (3, 16, 23, 28, 29, 30) ---
-    LB: 170938.155395413 (per-scen)
-    Avg dual bound (ms): 170938.155395413
-    Avg c_s point Q-value: 174620.526740750 (per-scen), point=(np.float64(29.2890962963952), np.float64(2.9413177964344707e-09), np.float64(3.213416475843626e-09), np.float64(10.710903541811515), np.float64(10.710903586209088))
-    Volume: 8.533333e+05
+    LB: -185.686758545 (per-scen)
+    Avg dual bound (ms): -185.686758546
+    Avg c_s point Q-value: -185.241890090 (per-scen), point=(np.float64(18.20214100294585), np.float64(0.0), np.float64(0.0), np.float64(0.025269206501193475), np.float64(0.01876076851950426))
+    Volume: 3.755645e+04
   --- T25 (2, 3, 16, 22, 26, 30) ---
-    LB: 93376.249765364 (per-scen)
-    Avg dual bound (ms): 93376.249765364
-    Avg c_s point Q-value: 93376.245567231 (per-scen), point=(np.float64(1.6688650711847907e-13), np.float64(7.237223496960867e-14), np.float64(1.078184417019392e-13), np.float64(39.99999999999998), np.float64(9.775198882543126e-14))
-    Volume: 8.533333e+05
+    LB: -210.491167048 (per-scen)
+    Avg dual bound (ms): -210.701728980
+    Avg c_s point Q-value: 20834.238271554 (per-scen), point=(np.float64(2.1949925934614978), np.float64(0.0), np.float64(0.0), np.float64(22.674242093334932), np.float64(0.0))
+    Volume: 3.755645e+04
   --- T26 (3, 8, 15, 28, 29, 30) ---
-    LB: 231321.732723283 (per-scen)
-    Avg dual bound (ms): 231321.732723283
-    Avg c_s point Q-value: 242486.823080666 (per-scen), point=(np.float64(3.4714852693426364e-08), np.float64(28.145590935901375), np.float64(5.971027384558413e-09), np.float64(11.854408789204784), np.float64(11.85440886005042))
-    Volume: 8.533333e+05
+    LB: -176.402198182 (per-scen)
+    Avg dual bound (ms): -176.402198186
+    Avg c_s point Q-value: 11844.621292134 (per-scen), point=(np.float64(0.02945188139857675), np.float64(17.388583297865402), np.float64(0.04657018128940527), np.float64(0.01691509086382853), np.float64(0.012558372348086788))
+    Volume: 3.755645e+04
   --- T27 (2, 3, 8, 14, 26, 30) ---
-    LB: 93376.239123183 (per-scen)
-    Avg dual bound (ms): 93376.239123183
-    Avg c_s point Q-value: 93376.244960853 (per-scen), point=(np.float64(5.267101366123702e-13), np.float64(8.096790748191596e-13), np.float64(4.790991006336499e-13), np.float64(39.99999999999993), np.float64(2.254209815325891e-13))
-    Volume: 8.533333e+05
+    LB: -222.261235580 (per-scen)
+    Avg dual bound (ms): -228.054436371
+    Avg c_s point Q-value: 52892.781103194 (per-scen), point=(np.float64(3.691848684207607e-11), np.float64(1.3460162265550115), np.float64(3.3437799717499645e-05), np.float64(23.78575990268236), np.float64(8.113895302326217e-06))
+    Volume: 3.755645e+04
   --- T28 (2, 3, 8, 16, 26, 30) ---
-    LB: 93376.299870883 (per-scen)
-    Avg dual bound (ms): 93376.299870883
-    Avg c_s point Q-value: 93376.245843934 (per-scen), point=(np.float64(1.5399064494770717e-13), np.float64(1.2344092380997685e-13), np.float64(2.3451967950013428e-14), np.float64(39.99999999999997), np.float64(1.2363380160904852e-13))
-    Volume: 1.706667e+06
+    LB: -227.678497233 (per-scen)
+    Avg dual bound (ms): -228.055896291
+    Avg c_s point Q-value: 52892.780358370 (per-scen), point=(np.float64(4.921748989228056e-12), np.float64(1.3459527129485755), np.float64(6.213621847177644e-13), np.float64(23.785824083913866), np.float64(1.5900083286868527e-12))
+    Volume: 7.511289e+04
   --- T29 (3, 8, 16, 26, 28, 30) ---
-    LB: 170938.155613106 (per-scen)
-    Avg dual bound (ms): 170938.155613106
-    Avg c_s point Q-value: 174620.527006624 (per-scen), point=(np.float64(29.28909639406831), np.float64(0.0), np.float64(0.0), np.float64(10.710903605931687), np.float64(10.710903605931687))
-    Volume: 8.533333e+05
+    LB: -185.083935715 (per-scen)
+    Avg dual bound (ms): -185.205370354
+    Avg c_s point Q-value: -179.675503864 (per-scen), point=(np.float64(17.840517283207266), np.float64(0.3528302359338141), np.float64(0.0022650852632889874), np.float64(0.027495258142389182), np.float64(0.016219850310999234))
+    Volume: 3.755645e+04
   --- T30 (3, 8, 26, 27, 28, 30) ---
-    LB: 230168.252608450 (per-scen)
-    Avg dual bound (ms): 230168.252608450
-    Avg c_s point Q-value: 234132.593029277 (per-scen), point=(np.float64(6.0329299911955525), np.float64(18.71358631884597), np.float64(0.0), np.float64(27.31934367234958), np.float64(21.286413681154027))
-    Volume: 8.533333e+05
+    LB: -176.402198181 (per-scen)
+    Avg dual bound (ms): -176.402198185
+    Avg c_s point Q-value: 11844.621292134 (per-scen), point=(np.float64(0.029451881389059208), np.float64(17.3885832978654), np.float64(0.04657018126871533), np.float64(0.01691509086383064), np.float64(0.012558372348087392))
+    Volume: 3.755645e+04
   --- T31 (3, 16, 26, 27, 28, 30) ---
-    LB: 170938.155147188 (per-scen)
-    Avg dual bound (ms): 170938.155147188
-    Avg c_s point Q-value: 174620.526435075 (per-scen), point=(np.float64(29.289096179822394), np.float64(1.699803088430073e-08), np.float64(3.3534557337810905e-09), np.float64(10.710903495710305), np.float64(10.710903582022365))
-    Volume: 8.533333e+05
+    LB: -185.686758551 (per-scen)
+    Avg dual bound (ms): -185.686758552
+    Avg c_s point Q-value: -185.241890089 (per-scen), point=(np.float64(18.20214100299336), np.float64(0.0), np.float64(0.0), np.float64(0.02526920650119285), np.float64(0.018760768519502025))
+    Volume: 3.755645e+04
   --- T32 (3, 16, 23, 26, 27, 30) ---
-    LB: 170938.155615019 (per-scen)
-    Avg dual bound (ms): 170938.155615019
-    Avg c_s point Q-value: 174620.527006624 (per-scen), point=(np.float64(29.28909639406831), np.float64(0.0), np.float64(0.0), np.float64(10.710903605931687), np.float64(10.710903605931687))
-    Volume: 8.533333e+05
+    LB: -185.686758549 (per-scen)
+    Avg dual bound (ms): -185.686758550
+    Avg c_s point Q-value: -185.241890087 (per-scen), point=(np.float64(18.202141002989244), np.float64(3.967465429589188e-11), np.float64(3.6889289733567915e-11), np.float64(0.025269206606958475), np.float64(0.018760768570258612))
+    Volume: 3.755645e+04
   --- T33 (3, 8, 15, 26, 27, 30) ---
-    LB: 230167.742909285 (per-scen)
-    Avg dual bound (ms): 230167.742909285
-    Avg c_s point Q-value: 234286.493532203 (per-scen), point=(np.float64(6.032565013861439), np.float64(18.680885475353122), np.float64(0.0), np.float64(27.351679538508314), np.float64(21.319114524646878))
-    Volume: 8.533333e+05
+    LB: -176.305155957 (per-scen)
+    Avg dual bound (ms): -176.305155962
+    Avg c_s point Q-value: 11844.416308821 (per-scen), point=(np.float64(0.0), np.float64(17.388309259573287), np.float64(0.0), np.float64(0.01732110851732567), np.float64(0.012859814469415677))
+    Volume: 3.755645e+04
   --- T34 (1, 3, 8, 16, 25, 29) ---
-    LB: 170795.319387270 (per-scen)
-    Avg dual bound (ms): 170795.319387270
-    Avg c_s point Q-value: 174173.017114043 (per-scen), point=(np.float64(28.786773731638313), np.float64(0.0), np.float64(0.0), np.float64(10.60133815647357), np.float64(11.213226268361684))
-    Volume: 1.706667e+06
+    LB: -184.600164547 (per-scen)
+    Avg dual bound (ms): -184.737238293
+    Avg c_s point Q-value: -178.867271998 (per-scen), point=(np.float64(17.75791579921413), np.float64(0.348554915575326), np.float64(0.0), np.float64(0.05515668091862185), np.float64(0.10202122571820159))
+    Volume: 7.511289e+04
   --- T35 (3, 16, 25, 26, 27, 28) ---
-    LB: 170938.155229142 (per-scen)
-    Avg dual bound (ms): 170938.155229142
-    Avg c_s point Q-value: 174620.526492429 (per-scen), point=(np.float64(29.289096211761528), np.float64(1.0258592370850389e-08), np.float64(1.3901991247731275e-09), np.float64(10.710903480415348), np.float64(10.710903558842393))
-    Volume: 8.533333e+05
+    LB: -185.686758546 (per-scen)
+    Avg dual bound (ms): -185.686758547
+    Avg c_s point Q-value: -185.241890086 (per-scen), point=(np.float64(18.20214100294382), np.float64(9.557327759099369e-11), np.float64(1.9841359546351572e-11), np.float64(0.02526920667599557), np.float64(0.018760768645370778))
+    Volume: 3.755645e+04
   --- T36 (3, 8, 25, 26, 27, 28) ---
-    LB: 230168.102484444 (per-scen)
-    Avg dual bound (ms): 230168.102484444
-    Avg c_s point Q-value: 234172.692739520 (per-scen), point=(np.float64(6.032793140588899), np.float64(18.705019765883893), np.float64(1.8107907952824576e-05), np.float64(27.327755266797055), np.float64(21.294980234116107))
-    Volume: 8.533333e+05
+    LB: -176.402198182 (per-scen)
+    Avg dual bound (ms): -176.402198186
+    Avg c_s point Q-value: 11844.621292134 (per-scen), point=(np.float64(0.02945188139857806), np.float64(17.3885832978654), np.float64(0.046570181289397654), np.float64(0.016915090863827663), np.float64(0.012558372348086317))
+    Volume: 3.755645e+04
   --- T37 (3, 8, 16, 25, 28, 29) ---
-    LB: 170938.155613106 (per-scen)
-    Avg dual bound (ms): 170938.155613106
-    Avg c_s point Q-value: 174620.527006624 (per-scen), point=(np.float64(29.28909639406831), np.float64(0.0), np.float64(0.0), np.float64(10.710903605931687), np.float64(10.710903605931687))
-    Volume: 8.533333e+05
+    LB: -184.845772695 (per-scen)
+    Avg dual bound (ms): -184.967781747
+    Avg c_s point Q-value: -171.098576425 (per-scen), point=(np.float64(17.283298835821586), np.float64(0.8726771200420975), np.float64(4.757485378224756e-07), np.float64(0.03241317782269167), np.float64(0.024075018243645104))
+    Volume: 3.755645e+04
   --- T38 (3, 8, 25, 27, 28, 29) ---
-    LB: 231321.520575907 (per-scen)
-    Avg dual bound (ms): 231321.520575907
-    Avg c_s point Q-value: 242448.295225848 (per-scen), point=(np.float64(1.114340708877626e-07), np.float64(28.16270908718007), np.float64(2.537890858028836e-09), np.float64(11.837290626638932), np.float64(11.837290696042912))
-    Volume: 8.533333e+05
+    LB: -176.402198183 (per-scen)
+    Avg dual bound (ms): -176.402198186
+    Avg c_s point Q-value: 11844.621292134 (per-scen), point=(np.float64(0.029451881398575148), np.float64(17.3885832978654), np.float64(0.04657018128939136), np.float64(0.01691509086382767), np.float64(0.012558372348086148))
+    Volume: 3.755645e+04
   --- T39 (3, 16, 23, 25, 27, 29) ---
-    LB: 170938.155615019 (per-scen)
-    Avg dual bound (ms): 170938.155615019
-    Avg c_s point Q-value: 174620.527006624 (per-scen), point=(np.float64(29.28909639406831), np.float64(0.0), np.float64(0.0), np.float64(10.710903605931687), np.float64(10.710903605931687))
-    Volume: 8.533333e+05
+    LB: -185.686758542 (per-scen)
+    Avg dual bound (ms): -185.686758542
+    Avg c_s point Q-value: -185.241890083 (per-scen), point=(np.float64(18.202141002949265), np.float64(1.1679582317808847e-10), np.float64(1.1305709675027653e-10), np.float64(0.025269206716612164), np.float64(0.01876076875730411))
+    Volume: 3.755645e+04
   --- T40 (3, 16, 21, 23, 28, 29) ---
-    LB: 170938.155104784 (per-scen)
-    Avg dual bound (ms): 170938.155104784
-    Avg c_s point Q-value: 174620.526322932 (per-scen), point=(np.float64(29.289096190984928), np.float64(3.4380220089960767e-09), np.float64(7.895591012591359e-09), np.float64(10.710903511067128), np.float64(10.710903598626633))
-    Volume: 8.533333e+05
+    LB: -185.686758542 (per-scen)
+    Avg dual bound (ms): -185.686758543
+    Avg c_s point Q-value: -185.241890084 (per-scen), point=(np.float64(18.202141002936997), np.float64(5.5594407259260276e-11), np.float64(2.072376230288742e-10), np.float64(0.025269206655663016), np.float64(0.018760768699511907))
+    Volume: 3.755645e+04
   --- T41 (3, 8, 15, 25, 27, 29) ---
-    LB: 231321.725329671 (per-scen)
-    Avg dual bound (ms): 231321.725329671
-    Avg c_s point Q-value: 242460.094717845 (per-scen), point=(np.float64(5.0385914488331624e-05), np.float64(28.15757902763496), np.float64(5.968055972409901e-10), np.float64(11.84242097318722), np.float64(11.842471345020881))
-    Volume: 8.533333e+05
+    LB: -176.305155959 (per-scen)
+    Avg dual bound (ms): -176.305155963
+    Avg c_s point Q-value: 11844.416308821 (per-scen), point=(np.float64(0.0), np.float64(17.38830925957329), np.float64(0.0), np.float64(0.01732110851731685), np.float64(0.012859814469418642))
+    Volume: 3.755645e+04
   --- T42 (3, 8, 13, 15, 28, 29) ---
-    LB: 231321.850999016 (per-scen)
-    Avg dual bound (ms): 231321.850999016
-    Avg c_s point Q-value: 242442.983194634 (per-scen), point=(np.float64(5.297264390468124e-09), np.float64(28.165063245723655), np.float64(7.4235436978782025e-09), np.float64(11.834936421102546), np.float64(11.834936510716798))
-    Volume: 8.533333e+05
+    LB: -176.400675491 (per-scen)
+    Avg dual bound (ms): -176.401783572
+    Avg c_s point Q-value: 11844.655384615 (per-scen), point=(np.float64(0.02836511844052608), np.float64(17.388715453017333), np.float64(0.06199894823065013), np.float64(0.016719665813302035), np.float64(0.023804781937794596))
+    Volume: 3.755645e+04
   --- T43 (2, 3, 4, 16, 22, 30) ---
-    LB: 78221.605643023 (per-scen)
-    Avg dual bound (ms): 78221.605643023
-    Avg c_s point Q-value: 130171.647966471 (per-scen), point=(np.float64(5.060508015048009e-12), np.float64(1.8681958183002882e-13), np.float64(25.9244807357342), np.float64(14.075519264270287), np.float64(2.6942243774542987e-13))
-    Volume: 1.706667e+06
+    LB: -356.749519522 (per-scen)
+    Avg dual bound (ms): -356.749519522
+    Avg c_s point Q-value: -356.742941568 (per-scen), point=(np.float64(7.074694841555459e-05), np.float64(0.0), np.float64(28.809888132827304), np.float64(1.522698774966974e-10), np.float64(0.0))
+    Volume: 7.511289e+04
   --- T44 (3, 4, 16, 22, 28, 30) ---
-    LB: 102712.109273186 (per-scen)
-    Avg dual bound (ms): 102712.109273186
-    Avg c_s point Q-value: 139077.909538653 (per-scen), point=(np.float64(5.380293204732614), np.float64(4.2492191486212144e-13), np.float64(32.28861865035773), np.float64(2.3310881449115444), np.float64(2.3310881449107717))
-    Volume: 8.533333e+05
+    LB: -356.749679945 (per-scen)
+    Avg dual bound (ms): -356.749679945
+    Avg c_s point Q-value: -356.742963663 (per-scen), point=(np.float64(7.017696805702929e-05), np.float64(2.4750502866398503e-11), np.float64(28.809889035061843), np.float64(1.7605775290755742e-10), np.float64(0.0))
+    Volume: 3.755645e+04
   --- T45 (3, 4, 22, 23, 28, 30) ---
-    LB: 108997.751446330 (per-scen)
-    Avg dual bound (ms): 108997.751446330
-    Avg c_s point Q-value: 133613.301215685 (per-scen), point=(np.float64(0.014454081886108056), np.float64(3.6611666364915854e-10), np.float64(36.40467733704732), np.float64(3.6097767443287743), np.float64(3.595322663169415))
-    Volume: 8.533333e+05
+    LB: -356.745940836 (per-scen)
+    Avg dual bound (ms): -356.745940836
+    Avg c_s point Q-value: -356.745681559 (per-scen), point=(np.float64(3.36864108892088e-10), np.float64(1.0708920270872555e-11), np.float64(28.809999999981354), np.float64(3.2724516850050634e-10), np.float64(7.935305536266663e-12))
+    Volume: 3.755645e+04
   --- T46 (3, 16, 22, 23, 28, 30) ---
-    LB: 170914.594599848 (per-scen)
-    Avg dual bound (ms): 170914.594599848
-    Avg c_s point Q-value: 174680.982028196 (per-scen), point=(np.float64(29.303305267849602), np.float64(4.286406951499986e-09), np.float64(0.05293272710713518), np.float64(10.749627067075746), np.float64(10.6966944162123))
-    Volume: 8.533333e+05
+    LB: -185.686758553 (per-scen)
+    Avg dual bound (ms): -185.686758553
+    Avg c_s point Q-value: -185.241890089 (per-scen), point=(np.float64(18.2021410030081), np.float64(0.0), np.float64(0.0), np.float64(0.025269206501190525), np.float64(0.01876076851949982))
+    Volume: 3.755645e+04
   --- T47 (3, 16, 22, 23, 26, 30) ---
-    LB: 170914.594829733 (per-scen)
-    Avg dual bound (ms): 170914.594829733
-    Avg c_s point Q-value: 174680.981932085 (per-scen), point=(np.float64(29.303304635999844), np.float64(4.267568203631156e-10), np.float64(0.052932705108343206), np.float64(10.74962696758618), np.float64(10.696695364125214))
-    Volume: 8.533333e+05
+    LB: -185.686758549 (per-scen)
+    Avg dual bound (ms): -185.686758550
+    Avg c_s point Q-value: -185.241890088 (per-scen), point=(np.float64(18.202141002969736), np.float64(1.1775488518122914e-12), np.float64(3.0322929798380824e-12), np.float64(0.025269206646969886), np.float64(0.018760768534854533))
+    Volume: 3.755645e+04
   --- T48 (3, 4, 15, 22, 23, 30) ---
-    LB: 108998.770042893 (per-scen)
-    Avg dual bound (ms): 108998.770042893
-    Avg c_s point Q-value: 133613.301227074 (per-scen), point=(np.float64(0.01445408050451411), np.float64(5.106172974510312e-13), np.float64(36.404677334607996), np.float64(3.609776745896742), np.float64(3.5953226653924952))
-    Volume: 8.533333e+05
+    LB: -356.745535795 (per-scen)
+    Avg dual bound (ms): -356.745535795
+    Avg c_s point Q-value: -356.745935204 (per-scen), point=(np.float64(7.433295402300306e-11), np.float64(2.9081475813542795e-11), np.float64(28.80999999998896), np.float64(3.4358437108430427e-10), np.float64(3.031227530597742e-11))
+    Volume: 3.755645e+04
   --- T49 (1, 3, 4, 16, 21, 29) ---
-    LB: 102485.154100861 (per-scen)
-    Avg dual bound (ms): 102485.154100861
-    Avg c_s point Q-value: 137403.720109206 (per-scen), point=(np.float64(4.71420474689808), np.float64(6.431895222437262e-14), np.float64(32.15661364820455), np.float64(2.2215226954524665), np.float64(3.1291816048977785))
-    Volume: 1.706667e+06
+    LB: -356.749408868 (per-scen)
+    Avg dual bound (ms): -356.749408868
+    Avg c_s point Q-value: -356.742833257 (per-scen), point=(np.float64(8.549521612594825e-11), np.float64(0.0), np.float64(28.809892968622037), np.float64(0.0), np.float64(7.110658361473471e-05))
+    Volume: 7.511289e+04
   --- T50 (1, 3, 16, 21, 25, 29) ---
-    LB: 170795.316948066 (per-scen)
-    Avg dual bound (ms): 170795.316948066
-    Avg c_s point Q-value: 174173.014990472 (per-scen), point=(np.float64(28.786773034513818), np.float64(3.1536671301498237e-09), np.float64(4.700242807444243e-09), np.float64(10.601338259621459), np.float64(11.213226527200096))
-    Volume: 8.533333e+05
+    LB: -185.756158626 (per-scen)
+    Avg dual bound (ms): -185.756158627
+    Avg c_s point Q-value: -185.380013261 (per-scen), point=(np.float64(18.209696786170557), np.float64(0.0), np.float64(0.0), np.float64(0.00019076209521341533), np.float64(0.010823463924024865))
+    Volume: 3.755645e+04
   --- T51 (3, 16, 24, 25, 26, 28) ---
-    LB: 170938.155390805 (per-scen)
-    Avg dual bound (ms): 170938.155390805
-    Avg c_s point Q-value: 174620.526727920 (per-scen), point=(np.float64(29.289096295048278), np.float64(4.276590448071018e-09), np.float64(7.002897099201545e-10), np.float64(10.710903541666115), np.float64(10.710903586189783))
-    Volume: 8.533333e+05
+    LB: -185.686758549 (per-scen)
+    Avg dual bound (ms): -185.686758549
+    Avg c_s point Q-value: -185.241890089 (per-scen), point=(np.float64(18.20214100295828), np.float64(2.5931395283202078e-12), np.float64(7.72797956902669e-13), np.float64(0.025269206521469814), np.float64(0.018760768534727964))
+    Volume: 3.755645e+04
   --- T52 (3, 16, 21, 22, 23, 28) ---
-    LB: 170914.594823131 (per-scen)
-    Avg dual bound (ms): 170914.594823131
-    Avg c_s point Q-value: 174680.981907806 (per-scen), point=(np.float64(29.303305364140932), np.float64(8.464999424582964e-10), np.float64(0.052932712739715296), np.float64(10.74962711331344), np.float64(10.696694450084783))
-    Volume: 8.533333e+05
+    LB: -185.686758544 (per-scen)
+    Avg dual bound (ms): -185.686758545
+    Avg c_s point Q-value: -185.241890086 (per-scen), point=(np.float64(18.20214100292112), np.float64(1.3875337392829488e-12), np.float64(1.6883151404305533e-10), np.float64(0.025269206710256165), np.float64(0.018760768672242564))
+    Volume: 3.755645e+04
   --- T53 (3, 4, 21, 22, 23, 28) ---
-    LB: 108997.774963276 (per-scen)
-    Avg dual bound (ms): 108997.774963276
-    Avg c_s point Q-value: 133613.301228337 (per-scen), point=(np.float64(0.014454080524041088), np.float64(1.951207394026288e-13), np.float64(36.404677334605175), np.float64(3.6097767459183827), np.float64(3.5953226653955093))
-    Volume: 8.533333e+05
+    LB: -356.745763821 (per-scen)
+    Avg dual bound (ms): -356.745763821
+    Avg c_s point Q-value: -356.745940840 (per-scen), point=(np.float64(3.663839631361503e-10), np.float64(0.0), np.float64(28.809999999981006), np.float64(1.216235930739848e-11), np.float64(0.0))
+    Volume: 3.755645e+04
   --- T54 (3, 4, 16, 21, 28, 29) ---
-    LB: 102712.109010731 (per-scen)
-    Avg dual bound (ms): 102712.109010731
-    Avg c_s point Q-value: 139077.909247462 (per-scen), point=(np.float64(5.3802931659876645), np.float64(3.959843515927302e-10), np.float64(32.28861860537662), np.float64(2.3310881456042662), np.float64(2.3310881459789115))
-    Volume: 8.533333e+05
+    LB: -356.748661092 (per-scen)
+    Avg dual bound (ms): -356.748661092
+    Avg c_s point Q-value: -356.743193285 (per-scen), point=(np.float64(7.017685496822399e-05), np.float64(3.130265659073859e-11), np.float64(28.80988903506111), np.float64(0.0), np.float64(1.0474142364281664e-10))
+    Volume: 3.755645e+04
   --- T55 (3, 4, 21, 23, 28, 29) ---
-    LB: 109006.311585533 (per-scen)
-    Avg dual bound (ms): 109006.311585533
-    Avg c_s point Q-value: 133569.152875879 (per-scen), point=(np.float64(5.992122611922175e-13), np.float64(2.5049828933154016e-13), np.float64(36.40300522740972), np.float64(3.596994772590493), np.float64(3.5969947725907367))
-    Volume: 8.533333e+05
+    LB: -356.745772583 (per-scen)
+    Avg dual bound (ms): -356.745772583
+    Avg c_s point Q-value: -356.745625989 (per-scen), point=(np.float64(2.0157514769674114e-10), np.float64(0.0), np.float64(28.809999999989778), np.float64(0.0), np.float64(5.4149654555474525e-11))
+    Volume: 3.755645e+04
   --- T56 (3, 16, 21, 23, 25, 29) ---
-    LB: 170938.142402439 (per-scen)
-    Avg dual bound (ms): 170938.142402439
-    Avg c_s point Q-value: 174620.514664397 (per-scen), point=(np.float64(29.289095308896282), np.float64(4.4360264350813096e-10), np.float64(8.998357294474426e-10), np.float64(10.710904688641685), np.float64(10.71090138365752))
-    Volume: 8.533333e+05
+    LB: -185.686758538 (per-scen)
+    Avg dual bound (ms): -185.686758539
+    Avg c_s point Q-value: -185.241890082 (per-scen), point=(np.float64(18.20214100291738), np.float64(1.0577159548530351e-10), np.float64(2.1861520398084939e-10), np.float64(0.02526920670712894), np.float64(0.018760768840620615))
+    Volume: 3.755645e+04
   --- T57 (3, 4, 15, 21, 23, 29) ---
-    LB: 109006.311601287 (per-scen)
-    Avg dual bound (ms): 109006.311601287
-    Avg c_s point Q-value: 133569.150493164 (per-scen), point=(np.float64(2.7936799935148655e-12), np.float64(1.8520461489226406e-12), np.float64(36.40300553123548), np.float64(3.5969944687668707), np.float64(3.596994468768107))
-    Volume: 8.533333e+05
+    LB: -356.745702182 (per-scen)
+    Avg dual bound (ms): -356.745702182
+    Avg c_s point Q-value: -356.745935205 (per-scen), point=(np.float64(1.004730455180962e-11), np.float64(0.0), np.float64(28.809999999989632), np.float64(0.0), np.float64(1.9771947596558613e-10))
+    Volume: 3.755645e+04
   --- T58 (3, 16, 20, 21, 22, 28) ---
-    LB: 170914.594866899 (per-scen)
-    Avg dual bound (ms): 170914.594866899
-    Avg c_s point Q-value: 174680.982325463 (per-scen), point=(np.float64(29.30330531318095), np.float64(1.178506687346429e-09), np.float64(0.052932731932574084), np.float64(10.749627098915454), np.float64(10.69669448302945))
-    Volume: 8.533333e+05
+    LB: -185.686758544 (per-scen)
+    Avg dual bound (ms): -185.686758545
+    Avg c_s point Q-value: -185.241890090 (per-scen), point=(np.float64(18.202141002922154), np.float64(0.0), np.float64(0.0), np.float64(0.025269206501194238), np.float64(0.018760768519504725))
+    Volume: 3.755645e+04
   --- T59 (3, 16, 19, 22, 23, 26) ---
-    LB: 170914.595304392 (per-scen)
-    Avg dual bound (ms): 170914.595304392
-    Avg c_s point Q-value: 174680.982594678 (per-scen), point=(np.float64(29.303305522748047), np.float64(0.0), np.float64(0.05293270462594224), np.float64(10.749627181877893), np.float64(10.69669447725195))
-    Volume: 8.533333e+05
+    LB: -185.686758538 (per-scen)
+    Avg dual bound (ms): -185.686758539
+    Avg c_s point Q-value: -185.241890081 (per-scen), point=(np.float64(18.202141002938628), np.float64(4.8913951618092756e-11), np.float64(1.805869215147097e-10), np.float64(0.025269207082085736), np.float64(0.018760768831067955))
+    Volume: 3.755645e+04
   --- T60 (3, 16, 19, 23, 26, 27) ---
-    LB: 170938.155615019 (per-scen)
-    Avg dual bound (ms): 170938.155615019
-    Avg c_s point Q-value: 174620.527006624 (per-scen), point=(np.float64(29.28909639406831), np.float64(0.0), np.float64(0.0), np.float64(10.710903605931687), np.float64(10.710903605931687))
-    Volume: 8.533333e+05
+    LB: -185.686758546 (per-scen)
+    Avg dual bound (ms): -185.686758546
+    Avg c_s point Q-value: -185.241890085 (per-scen), point=(np.float64(18.20214100289935), np.float64(5.57406318093211e-11), np.float64(2.4291040920820806e-11), np.float64(0.025269206850851603), np.float64(0.018760768744455467))
+    Volume: 3.755645e+04
   --- T61 (3, 16, 18, 19, 22, 26) ---
-    LB: 169534.340035573 (per-scen)
-    Avg dual bound (ms): 169534.340035573
-    Avg c_s point Q-value: 174037.942385167 (per-scen), point=(np.float64(30.36046794514602), np.float64(5.569890920445809e-13), np.float64(2.0208838854417682e-12), np.float64(12.11185473796418), np.float64(9.639532054854742))
-    Volume: 8.533333e+05
+    LB: -185.686758534 (per-scen)
+    Avg dual bound (ms): -185.686758535
+    Avg c_s point Q-value: -185.241890078 (per-scen), point=(np.float64(18.202141002917077), np.float64(6.173774894216633e-11), np.float64(8.158567412946622e-11), np.float64(0.02526920771729086), np.float64(0.01876076885373289))
+    Volume: 3.755645e+04
   --- T62 (3, 16, 19, 21, 23, 25) ---
-    LB: 170938.155615019 (per-scen)
-    Avg dual bound (ms): 170938.155615019
-    Avg c_s point Q-value: 174620.527006624 (per-scen), point=(np.float64(29.28909639406831), np.float64(0.0), np.float64(0.0), np.float64(10.710903605931687), np.float64(10.710903605931687))
-    Volume: 8.533333e+05
+    LB: -185.686758542 (per-scen)
+    Avg dual bound (ms): -185.686758542
+    Avg c_s point Q-value: -185.241890085 (per-scen), point=(np.float64(18.20214100294742), np.float64(0.0), np.float64(0.0), np.float64(0.025269206869717963), np.float64(0.018760768887041174))
+    Volume: 3.755645e+04
   --- T63 (3, 8, 11, 15, 25, 27) ---
-    LB: 231321.977044990 (per-scen)
-    Avg dual bound (ms): 231321.977044990
-    Avg c_s point Q-value: 242507.316270565 (per-scen), point=(np.float64(5.300823473934287e-14), np.float64(28.136465149500687), np.float64(2.20866604188643e-14), np.float64(11.86353995019373), np.float64(11.86353995019375))
-    Volume: 8.533333e+05
+    LB: -176.305155959 (per-scen)
+    Avg dual bound (ms): -176.305155963
+    Avg c_s point Q-value: 11844.416308821 (per-scen), point=(np.float64(0.0), np.float64(17.38830925957329), np.float64(0.0), np.float64(0.017321108517312386), np.float64(0.012859814469408435))
+    Volume: 3.755645e+04
   --- T64 (2, 3, 4, 14, 22, 30) ---
-    LB: 78221.549696501 (per-scen)
-    Avg dual bound (ms): 78221.549696501
-    Avg c_s point Q-value: 130171.647966471 (per-scen), point=(np.float64(6.084758957145906e-13), np.float64(4.882524187114941e-13), np.float64(25.92448073573022), np.float64(14.075519264270621), np.float64(2.9774045290429036e-13))
-    Volume: 8.533333e+05
+    LB: -356.743972390 (per-scen)
+    Avg dual bound (ms): -356.743972390
+    Avg c_s point Q-value: -356.740031703 (per-scen), point=(np.float64(0.0), np.float64(5.495344987857653e-05), np.float64(28.809820323334208), np.float64(0.00024219927810109623), np.float64(0.0))
+    Volume: 3.755645e+04
   --- T65 (2, 3, 4, 8, 14, 30) ---
-    LB: 78221.558630132 (per-scen)
-    Avg dual bound (ms): 78221.558630132
-    Avg c_s point Q-value: 130171.647966471 (per-scen), point=(np.float64(1.1590273987755279e-13), np.float64(6.313455375645108e-13), np.float64(25.92448073573014), np.float64(14.07551926427036), np.float64(3.296200436245367e-13))
-    Volume: 1.706667e+06
+    LB: -356.744825880 (per-scen)
+    Avg dual bound (ms): -356.744825880
+    Avg c_s point Q-value: -356.742590139 (per-scen), point=(np.float64(0.0), np.float64(7.015075302014397e-05), np.float64(28.80988384808685), np.float64(0.0), np.float64(0.0))
+    Volume: 7.511289e+04
   --- T66 (3, 4, 8, 14, 28, 30) ---
-    LB: 108542.848715442 (per-scen)
-    Avg dual bound (ms): 108542.848715442
-    Avg c_s point Q-value: 133519.731055605 (per-scen), point=(np.float64(3.2891702302526363e-13), np.float64(0.9467396201997426), np.float64(35.75557118220555), np.float64(3.2976891975958957), np.float64(3.29768919759537))
-    Volume: 8.533333e+05
+    LB: -356.744859965 (per-scen)
+    Avg dual bound (ms): -356.744859965
+    Avg c_s point Q-value: -356.742898744 (per-scen), point=(np.float64(7.351352451437343e-07), np.float64(7.072685143263993e-05), np.float64(28.809884056669613), np.float64(1.2092454729264959e-11), np.float64(0.0))
+    Volume: 3.755645e+04
   --- T67 (3, 4, 14, 15, 28, 30) ---
-    LB: 109006.579368029 (per-scen)
-    Avg dual bound (ms): 109006.579368029
-    Avg c_s point Q-value: 133569.152875880 (per-scen), point=(np.float64(5.418852421712385e-13), np.float64(1.5371204804399245e-12), np.float64(36.403005227410304), np.float64(3.5969947725908007), np.float64(3.5969947725899707))
-    Volume: 8.533333e+05
+    LB: -356.745584057 (per-scen)
+    Avg dual bound (ms): -356.745584057
+    Avg c_s point Q-value: -356.745592445 (per-scen), point=(np.float64(1.0414718832693652e-06), np.float64(9.948439256858343e-07), np.float64(28.809999999983415), np.float64(4.417896551367309e-11), np.float64(0.0))
+    Volume: 3.755645e+04
   --- T68 (3, 8, 14, 15, 28, 30) ---
-    LB: 229928.985238169 (per-scen)
-    Avg dual bound (ms): 229928.985238169
-    Avg c_s point Q-value: 248548.066568547 (per-scen), point=(np.float64(9.313298674213633e-09), np.float64(26.606126326532014), np.float64(3.7330312355448596), np.float64(17.126904660672672), np.float64(13.393873453857065))
-    Volume: 8.533333e+05
+    LB: -176.419492918 (per-scen)
+    Avg dual bound (ms): -176.419514368
+    Avg c_s point Q-value: 11844.753505399 (per-scen), point=(np.float64(0.03434838544415216), np.float64(17.38834265951653), np.float64(0.06493630061152768), np.float64(0.0267779402172303), np.float64(0.012823074534717396))
+    Volume: 3.755645e+04
   --- T69 (3, 8, 14, 15, 26, 30) ---
-    LB: 228587.486176257 (per-scen)
-    Avg dual bound (ms): 228587.486176257
-    Avg c_s point Q-value: 1000208800.448658347 (per-scen), point=(np.float64(4.007646134743425), np.float64(20.40845409473228), np.float64(7.669836254088551), np.float64(31.26902829409969), np.float64(19.59154590526772))
-    Volume: 8.533333e+05
+    LB: -176.315212854 (per-scen)
+    Avg dual bound (ms): -176.315212858
+    Avg c_s point Q-value: 11844.557968326 (per-scen), point=(np.float64(1.3081958805938817e-12), np.float64(17.38849602790589), np.float64(0.01798411404210648), np.float64(0.033137082960072325), np.float64(0.012654369304064238))
+    Volume: 3.755645e+04
   --- T70 (3, 4, 14, 15, 22, 30) ---
-    LB: 108998.769290030 (per-scen)
-    Avg dual bound (ms): 108998.769290030
-    Avg c_s point Q-value: 133613.301228200 (per-scen), point=(np.float64(0.014454080499485239), np.float64(1.4824094044387033e-12), np.float64(36.404677334610895), np.float64(3.60977674588939), np.float64(3.5953226653894292))
-    Volume: 8.533333e+05
+    LB: -356.745891705 (per-scen)
+    Avg dual bound (ms): -356.745891705
+    Avg c_s point Q-value: -356.745681560 (per-scen), point=(np.float64(1.7740868690896e-11), np.float64(3.9681815354053116e-11), np.float64(28.80999999998309), np.float64(4.2522316653146363e-10), np.float64(9.579512157549704e-12))
+    Volume: 3.755645e+04
   --- T71 (1, 3, 4, 13, 21, 29) ---
-    LB: 107755.801486754 (per-scen)
-    Avg dual bound (ms): 107755.801486754
-    Avg c_s point Q-value: 135053.050078352 (per-scen), point=(np.float64(1.6914796137644074e-11), np.float64(1.6040229680250763e-11), np.float64(35.76183506041852), np.float64(2.8482574538100622), np.float64(4.238164939607329))
-    Volume: 8.533333e+05
+    LB: -356.745497119 (per-scen)
+    Avg dual bound (ms): -356.745497119
+    Avg c_s point Q-value: -356.742888897 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(28.809892968737998), np.float64(0.0), np.float64(7.110655912824459e-05))
+    Volume: 3.755645e+04
   --- T72 (1, 3, 4, 8, 13, 29) ---
-    LB: 107543.294651039 (per-scen)
-    Avg dual bound (ms): 107543.294651039
-    Avg c_s point Q-value: 135106.027525588 (per-scen), point=(np.float64(8.686608812353127e-14), np.float64(0.530744811540288), np.float64(35.44800334564107), np.float64(2.8482574539604366), np.float64(4.0212518428191295))
-    Volume: 1.706667e+06
+    LB: -356.748225226 (per-scen)
+    Avg dual bound (ms): -356.748225226
+    Avg c_s point Q-value: -356.742923843 (per-scen), point=(np.float64(0.0), np.float64(6.902777799875909e-05), np.float64(28.809885707375432), np.float64(0.0), np.float64(2.8834597713547464e-11))
+    Volume: 7.511289e+04
   --- T73 (1, 3, 8, 13, 25, 29) ---
-    LB: 230983.842956140 (per-scen)
-    Avg dual bound (ms): 230983.842956140
-    Avg c_s point Q-value: 239775.978861468 (per-scen), point=(np.float64(5.238400765796887e-09), np.float64(28.780487805133703), np.float64(4.973542695936346e-09), np.float64(9.798439068437691), np.float64(11.219512086039517))
-    Volume: 8.533333e+05
+    LB: -169.515869130 (per-scen)
+    Avg dual bound (ms): -176.307536083
+    Avg c_s point Q-value: 10842.681936671 (per-scen), point=(np.float64(8.939361887363807e-06), np.float64(17.381469919267637), np.float64(0.04978958971641419), np.float64(5.172317907979019e-12), np.float64(0.05347032572276057))
+    Volume: 3.755645e+04
   --- T74 (3, 16, 17, 19, 21, 25) ---
-    LB: 170938.152330913 (per-scen)
-    Avg dual bound (ms): 170938.152330913
-    Avg c_s point Q-value: 174620.521105430 (per-scen), point=(np.float64(29.28909598628032), np.float64(3.602023539349675e-08), np.float64(6.311816904994808e-08), np.float64(10.710904109889222), np.float64(10.710902224295845))
-    Volume: 8.533333e+05
+    LB: -185.686758534 (per-scen)
+    Avg dual bound (ms): -185.686758534
+    Avg c_s point Q-value: -185.241890081 (per-scen), point=(np.float64(18.202141002881664), np.float64(5.700037189540614e-11), np.float64(7.791352100471465e-11), np.float64(0.025269207010958614), np.float64(0.018760769293964318))
+    Volume: 3.755645e+04
   --- T75 (3, 8, 13, 14, 15, 28) ---
-    LB: 229897.181534533 (per-scen)
-    Avg dual bound (ms): 229897.181534533
-    Avg c_s point Q-value: 248561.887036727 (per-scen), point=(np.float64(1.5398185151851357e-09), np.float64(26.564886540398682), np.float64(3.7392310535582305), np.float64(17.174344334270966), np.float64(13.435113306089614))
-    Volume: 8.533333e+05
+    LB: -176.419492910 (per-scen)
+    Avg dual bound (ms): -176.419824465
+    Avg c_s point Q-value: 11844.761561023 (per-scen), point=(np.float64(0.03284232123174077), np.float64(17.388615205073044), np.float64(0.0736427684081671), np.float64(0.025830147170011735), np.float64(0.02029342641071872))
+    Volume: 3.755645e+04
   --- T76 (3, 4, 13, 14, 15, 28) ---
-    LB: 109005.936027526 (per-scen)
-    Avg dual bound (ms): 109005.936027526
-    Avg c_s point Q-value: 133569.152875888 (per-scen), point=(np.float64(1.0783992366315264e-13), np.float64(7.782044200927436e-13), np.float64(36.4030052274087), np.float64(3.596994772591838), np.float64(3.5969947725916214))
-    Volume: 8.533333e+05
+    LB: -356.745586282 (per-scen)
+    Avg dual bound (ms): -356.745586282
+    Avg c_s point Q-value: -356.745622190 (per-scen), point=(np.float64(4.385128151430694e-07), np.float64(4.188713302425196e-07), np.float64(28.809999999988598), np.float64(1.1123907592322935e-10), np.float64(2.5336169898487354e-11))
+    Volume: 3.755645e+04
   --- T77 (3, 4, 8, 13, 28, 29) ---
-    LB: 108543.245346206 (per-scen)
-    Avg dual bound (ms): 108543.245346206
-    Avg c_s point Q-value: 133519.731040319 (per-scen), point=(np.float64(3.0524348447927666e-10), np.float64(0.9467396210376089), np.float64(35.755571184725966), np.float64(3.2976891948216207), np.float64(3.297689195089584))
-    Volume: 8.533333e+05
+    LB: -356.746293268 (per-scen)
+    Avg dual bound (ms): -356.746293268
+    Avg c_s point Q-value: -356.742536767 (per-scen), point=(np.float64(0.0), np.float64(7.801543366308953e-05), np.float64(28.809885707469622), np.float64(0.0), np.float64(9.886406878290349e-06))
+    Volume: 3.755645e+04
   --- T78 (3, 4, 13, 15, 28, 29) ---
-    LB: 109006.311598846 (per-scen)
-    Avg dual bound (ms): 109006.311598846
-    Avg c_s point Q-value: 133569.152875873 (per-scen), point=(np.float64(3.6397696505051024e-13), np.float64(8.501043578466643e-13), np.float64(36.40300522741079), np.float64(3.596994772589477), np.float64(3.5969947725898046))
-    Volume: 8.533333e+05
+    LB: -356.745924444 (per-scen)
+    Avg dual bound (ms): -356.745924444
+    Avg c_s point Q-value: -356.745681561 (per-scen), point=(np.float64(0.0), np.float64(2.6778629650267667e-10), np.float64(28.809999999984125), np.float64(1.6823955768157306e-11), np.float64(2.0033537118915453e-11))
+    Volume: 3.755645e+04
   --- T79 (3, 8, 13, 15, 25, 29) ---
-    LB: 231321.568083405 (per-scen)
-    Avg dual bound (ms): 231321.568083405
-    Avg c_s point Q-value: 242454.634077115 (per-scen), point=(np.float64(0.0), np.float64(28.159898300907503), np.float64(0.0), np.float64(11.840101699092497), np.float64(11.840101699092493))
-    Volume: 8.533333e+05
+    LB: -176.291293904 (per-scen)
+    Avg dual bound (ms): -176.305167438
+    Avg c_s point Q-value: 11844.466315670 (per-scen), point=(np.float64(2.227230864331406e-11), np.float64(17.388541806054608), np.float64(0.021713583940167192), np.float64(0.016976565530627628), np.float64(0.027029490493017755))
+    Volume: 3.755645e+04
   --- T80 (3, 4, 13, 15, 21, 29) ---
-    LB: 109005.936027535 (per-scen)
-    Avg dual bound (ms): 109005.936027535
-    Avg c_s point Q-value: 133569.152875881 (per-scen), point=(np.float64(4.737896265398383e-13), np.float64(6.792545247050342e-13), np.float64(36.403005227410056), np.float64(3.5969947725902403), np.float64(3.596994772590935))
-    Volume: 8.533333e+05
+    LB: -356.745387758 (per-scen)
+    Avg dual bound (ms): -356.745387758
+    Avg c_s point Q-value: -356.745910689 (per-scen), point=(np.float64(0.0), np.float64(1.799305485023953e-11), np.float64(28.809999999985866), np.float64(1.6901564030116e-11), np.float64(2.628370980719564e-10))
+    Volume: 3.755645e+04
   --- T81 (3, 8, 12, 13, 14, 28) ---
-    LB: 229897.974941184 (per-scen)
-    Avg dual bound (ms): 229897.974941184
-    Avg c_s point Q-value: 248569.598045709 (per-scen), point=(np.float64(1.41640206010474e-09), np.float64(26.60678958245844), np.float64(3.7655262513861927), np.float64(17.158736497508816), np.float64(13.39321026179771))
-    Volume: 8.533333e+05
+    LB: -177.455240975 (per-scen)
+    Avg dual bound (ms): -177.455240978
+    Avg c_s point Q-value: 10842.256925908 (per-scen), point=(np.float64(7.746469534249623e-12), np.float64(17.399941363794014), np.float64(0.13633119805710506), np.float64(8.687595334724758e-05), np.float64(6.449986526804037e-05))
+    Volume: 3.755645e+04
   --- T82 (3, 8, 11, 14, 15, 26) ---
-    LB: 228599.469216234 (per-scen)
-    Avg dual bound (ms): 228599.469216234
-    Avg c_s point Q-value: 1000208082.072207689 (per-scen), point=(np.float64(4.101295600027235), np.float64(20.368396629734416), np.float64(7.267204032809855), np.float64(31.00010300310267), np.float64(19.631603370265584))
-    Volume: 8.533333e+05
+    LB: -176.315212856 (per-scen)
+    Avg dual bound (ms): -176.315212861
+    Avg c_s point Q-value: 11844.557968326 (per-scen), point=(np.float64(0.0), np.float64(17.388496027916634), np.float64(0.01798411403521253), np.float64(0.033137082937207844), np.float64(0.012654369291726237))
+    Volume: 3.755645e+04
   --- T83 (3, 8, 11, 15, 26, 27) ---
-    LB: 230168.013974263 (per-scen)
-    Avg dual bound (ms): 230168.013974263
-    Avg c_s point Q-value: 234343.409092944 (per-scen), point=(np.float64(6.032192660049733), np.float64(18.66883311777118), np.float64(0.0), np.float64(27.363359542278545), np.float64(21.33116688222882))
-    Volume: 8.533333e+05
+    LB: -176.305155959 (per-scen)
+    Avg dual bound (ms): -176.305155963
+    Avg c_s point Q-value: 11844.416308821 (per-scen), point=(np.float64(0.0), np.float64(17.38830925957329), np.float64(0.0), np.float64(0.017321108517313978), np.float64(0.012859814469410626))
+    Volume: 3.755645e+04
   --- T84 (3, 8, 10, 11, 14, 26) ---
-    LB: 203645.785290146 (per-scen)
-    Avg dual bound (ms): 203645.785290146
-    Avg c_s point Q-value: 1000183582.547335029 (per-scen), point=(np.float64(0.0), np.float64(25.565982954382797), np.float64(0.0), np.float64(36.28134461304581), np.float64(14.434017045617207))
-    Volume: 8.533333e+05
+    LB: -176.315212854 (per-scen)
+    Avg dual bound (ms): -176.315212859
+    Avg c_s point Q-value: 11844.557968325 (per-scen), point=(np.float64(0.0), np.float64(17.388496027916634), np.float64(0.017984113921788936), np.float64(0.03313708286643123), np.float64(0.012654369291726782))
+    Volume: 3.755645e+04
   --- T85 (3, 8, 11, 13, 15, 25) ---
-    LB: 231321.524757447 (per-scen)
-    Avg dual bound (ms): 231321.524757447
-    Avg c_s point Q-value: 242446.566043827 (per-scen), point=(np.float64(0.0), np.float64(28.163476007155918), np.float64(0.0), np.float64(11.836523992844082), np.float64(11.836523992844082))
-    Volume: 8.533333e+05
+    LB: -176.291293902 (per-scen)
+    Avg dual bound (ms): -176.305098469
+    Avg c_s point Q-value: 11844.466072238 (per-scen), point=(np.float64(0.0), np.float64(17.38855016196451), np.float64(0.02169712637031201), np.float64(0.016964185355186085), np.float64(0.02700936538188249))
+    Volume: 3.755645e+04
   --- T86 (3, 8, 9, 11, 13, 25) ---
-    LB: 231321.532636537 (per-scen)
-    Avg dual bound (ms): 231321.532636537
-    Avg c_s point Q-value: 242448.223897299 (per-scen), point=(np.float64(2.467826848710963e-10), np.float64(28.162741099989887), np.float64(2.8846466182218483e-10), np.float64(11.837258900457545), np.float64(11.837258891695717))
-    Volume: 8.533333e+05
+    LB: -176.304761314 (per-scen)
+    Avg dual bound (ms): -176.304986645
+    Avg c_s point Q-value: 11844.483360428 (per-scen), point=(np.float64(1.546874756612813e-12), np.float64(17.388621444148015), np.float64(0.029148916988167482), np.float64(0.016858572984330876), np.float64(0.031881572242601))
+    Volume: 3.755645e+04
   --- T87 (3, 4, 7, 14, 15, 22) ---
-    LB: 108998.323915065 (per-scen)
-    Avg dual bound (ms): 108998.323915065
-    Avg c_s point Q-value: 133710.269777917 (per-scen), point=(np.float64(0.03335453029232471), np.float64(7.243159175557114e-13), np.float64(36.4018467247961), np.float64(3.631507805499291), np.float64(3.598153275206471))
-    Volume: 8.533333e+05
+    LB: -356.745724323 (per-scen)
+    Avg dual bound (ms): -356.745724323
+    Avg c_s point Q-value: -356.745681560 (per-scen), point=(np.float64(0.0), np.float64(3.3457823294386275e-11), np.float64(28.809999999986577), np.float64(3.797966100604632e-10), np.float64(2.3603004414180442e-11))
+    Volume: 3.755645e+04
   --- T88 (3, 4, 7, 15, 22, 23) ---
-    LB: 108997.752368081 (per-scen)
-    Avg dual bound (ms): 108997.752368081
-    Avg c_s point Q-value: 133613.301228071 (per-scen), point=(np.float64(0.014454080506341721), np.float64(2.0320039885087222e-12), np.float64(36.4046773346671), np.float64(3.6097767458721584), np.float64(3.595322665365392))
-    Volume: 8.533333e+05
+    LB: -356.745547794 (per-scen)
+    Avg dual bound (ms): -356.745547794
+    Avg c_s point Q-value: -356.745910688 (per-scen), point=(np.float64(2.308504415011176e-11), np.float64(0.0), np.float64(28.809999999987348), np.float64(3.1848990377941787e-10), np.float64(2.748611657137834e-11))
+    Volume: 3.755645e+04
   --- T89 (3, 4, 6, 7, 14, 22) ---
-    LB: 95165.912898753 (per-scen)
-    Avg dual bound (ms): 95165.912898753
-    Avg c_s point Q-value: 147240.631392442 (per-scen), point=(np.float64(2.1470014550372896e-13), np.float64(1.5834302697612006e-13), np.float64(37.53336226102613), np.float64(12.848348830034997), np.float64(2.466637738974122))
-    Volume: 8.533333e+05
+    LB: -356.745982598 (per-scen)
+    Avg dual bound (ms): -356.745982598
+    Avg c_s point Q-value: -356.744914229 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(28.80999999998808), np.float64(0.00014570401412742446), np.float64(2.2096109661350764e-11))
+    Volume: 3.755645e+04
   --- T90 (3, 4, 7, 13, 15, 21) ---
-    LB: 109006.311491095 (per-scen)
-    Avg dual bound (ms): 109006.311491095
-    Avg c_s point Q-value: 133569.029393248 (per-scen), point=(np.float64(1.6546102076073483e-12), np.float64(5.569254122332472e-12), np.float64(36.40302096491551), np.float64(3.5969790351060524), np.float64(3.5969790247551217))
-    Volume: 8.533333e+05
+    LB: -356.745609451 (per-scen)
+    Avg dual bound (ms): -356.745609451
+    Avg c_s point Q-value: -356.745625989 (per-scen), point=(np.float64(5.3222119489995385e-12), np.float64(2.3275680722801147e-11), np.float64(28.809999999989), np.float64(7.628632291825757e-11), np.float64(2.4291373862647544e-10))
+    Volume: 3.755645e+04
   --- T91 (3, 4, 7, 15, 21, 23) ---
-    LB: 109005.936786160 (per-scen)
-    Avg dual bound (ms): 109005.936786160
-    Avg c_s point Q-value: 133569.152875883 (per-scen), point=(np.float64(3.6473725036038766e-13), np.float64(1.24763573328407e-13), np.float64(36.40300522741104), np.float64(3.5969947725909877), np.float64(3.5969947725911253))
-    Volume: 8.533333e+05
+    LB: -356.745458882 (per-scen)
+    Avg dual bound (ms): -356.745458882
+    Avg c_s point Q-value: -356.745625988 (per-scen), point=(np.float64(9.518191681037992e-12), np.float64(4.7438133339453756e-12), np.float64(28.809999999987966), np.float64(5.317759447199893e-11), np.float64(2.571081325057214e-10))
+    Volume: 3.755645e+04
   --- T92 (3, 4, 5, 7, 13, 21) ---
-    LB: 109005.964312640 (per-scen)
-    Avg dual bound (ms): 109005.964312640
-    Avg c_s point Q-value: 133568.835286445 (per-scen), point=(np.float64(1.4269594807889966e-10), np.float64(1.3183173224692338e-10), np.float64(36.403045706399894), np.float64(3.596954295945328), np.float64(3.5969542700229837))
-    Volume: 8.533333e+05
+    LB: -356.745768575 (per-scen)
+    Avg dual bound (ms): -356.745768575
+    Avg c_s point Q-value: -356.745929856 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(28.80999999998253), np.float64(6.267502611444081e-11), np.float64(1.080076510284121e-06))
+    Volume: 3.755645e+04
   --- T93 (3, 8, 24, 25, 26, 28) ---
-    LB: 230168.321036557 (per-scen)
-    Avg dual bound (ms): 230168.321036557
-    Avg c_s point Q-value: 234276.837018840 (per-scen), point=(np.float64(6.03258377281444), np.float64(18.682799233123326), np.float64(0.0), np.float64(27.349270060209374), np.float64(21.317200766876674))
-    Volume: 8.533333e+05
+    LB: -176.402198182 (per-scen)
+    Avg dual bound (ms): -176.402198186
+    Avg c_s point Q-value: 11844.621292134 (per-scen), point=(np.float64(0.02945188139877656), np.float64(17.3885832978654), np.float64(0.046570181289723116), np.float64(0.016915090863826747), np.float64(0.012558372348085368))
+    Volume: 3.755645e+04
   --- T94 (3, 8, 16, 24, 26, 28) ---
-    LB: 170938.155458771 (per-scen)
-    Avg dual bound (ms): 170938.155458771
-    Avg c_s point Q-value: 174620.526808284 (per-scen), point=(np.float64(29.289096310744053), np.float64(8.430823709603726e-10), np.float64(1.8761205891054984e-10), np.float64(10.710903599458291), np.float64(10.710903643931465))
-    Volume: 8.533333e+05
+    LB: -184.991574863 (per-scen)
+    Avg dual bound (ms): -185.114932353
+    Avg c_s point Q-value: -179.581173935 (per-scen), point=(np.float64(17.830262561310448), np.float64(0.3545930116898374), np.float64(1.9204085810144883e-05), np.float64(0.0349105096300153), np.float64(0.022648046434762863))
+    Volume: 3.755645e+04
   --- T95 (3, 8, 16, 24, 25, 28) ---
-    LB: 170938.155217639 (per-scen)
-    Avg dual bound (ms): 170938.155217639
-    Avg c_s point Q-value: 174620.526526032 (per-scen), point=(np.float64(29.289096302004594), np.float64(6.528703595504119e-10), np.float64(1.8718272516946918e-10), np.float64(10.710903619137213), np.float64(10.710903572215852))
-    Volume: 8.533333e+05
+    LB: -185.130416363 (per-scen)
+    Avg dual bound (ms): -185.253313252
+    Avg c_s point Q-value: -185.170618087 (per-scen), point=(np.float64(18.192870091813358), np.float64(0.00362671553887506), np.float64(2.950972576145049e-05), np.float64(0.03303991540386048), np.float64(0.024530022530251425))
+    Volume: 3.755645e+04
   --- T96 (3, 4, 20, 21, 22, 28) ---
-    LB: 108998.608725882 (per-scen)
-    Avg dual bound (ms): 108998.608725882
-    Avg c_s point Q-value: 133619.697001017 (per-scen), point=(np.float64(0.01667440053519383), np.float64(2.1226588799651252e-13), np.float64(36.40498297676958), np.float64(3.6116914237640154), np.float64(3.5950170232307292))
-    Volume: 8.533333e+05
+    LB: -356.745940840 (per-scen)
+    Avg dual bound (ms): -356.745940840
+    Avg c_s point Q-value: -356.745657045 (per-scen), point=(np.float64(3.69298083138014e-10), np.float64(0.0), np.float64(28.80999999998908), np.float64(2.3644502873303825e-11), np.float64(0.0))
+    Volume: 3.755645e+04
   --- T97 (3, 4, 16, 20, 22, 28) ---
-    LB: 102712.109552589 (per-scen)
-    Avg dual bound (ms): 102712.109552589
-    Avg c_s point Q-value: 139077.184701422 (per-scen), point=(np.float64(5.380291581984439), np.float64(1.228257502343591e-10), np.float64(32.28824829042475), np.float64(2.3314582763662517), np.float64(2.3314582773930304))
-    Volume: 8.533333e+05
+    LB: -356.749772382 (per-scen)
+    Avg dual bound (ms): -356.749772382
+    Avg c_s point Q-value: -356.742963661 (per-scen), point=(np.float64(7.017762828354096e-05), np.float64(0.0), np.float64(28.80988903506929), np.float64(1.3834976492749993e-10), np.float64(0.0))
+    Volume: 3.755645e+04
   --- T98 (3, 4, 16, 20, 21, 28) ---
-    LB: 102713.083570393 (per-scen)
-    Avg dual bound (ms): 102713.083570393
-    Avg c_s point Q-value: 139063.516399328 (per-scen), point=(np.float64(5.376187596778612), np.float64(1.3388554454494667e-13), np.float64(32.292475058946195), np.float64(2.3313373442760414), np.float64(2.3313373442762404))
-    Volume: 8.533333e+05
+    LB: -356.749687080 (per-scen)
+    Avg dual bound (ms): -356.749687080
+    Avg c_s point Q-value: -356.743193284 (per-scen), point=(np.float64(7.01775955975439e-05), np.float64(0.0), np.float64(28.809889035066238), np.float64(0.0), np.float64(0.0))
+    Volume: 3.755645e+04
   --- T99 (2, 3, 16, 18, 22, 26) ---
-    LB: 93156.764564285 (per-scen)
-    Avg dual bound (ms): 93156.764564285
-    Avg c_s point Q-value: 93894.829207988 (per-scen), point=(np.float64(1.0361627214653395), np.float64(2.4346826848544744e-14), np.float64(4.180469226680194e-14), np.float64(39.99999999999998), np.float64(9.472014031023614e-14))
-    Volume: 8.533333e+05
+    LB: -210.491167048 (per-scen)
+    Avg dual bound (ms): -210.701728980
+    Avg c_s point Q-value: 20834.238271554 (per-scen), point=(np.float64(2.194992593461496), np.float64(0.0), np.float64(0.0), np.float64(22.674242093334943), np.float64(0.0))
+    Volume: 3.755645e+04
   --- T100 (1, 3, 16, 17, 21, 25) ---
-    LB: 170795.314102626 (per-scen)
-    Avg dual bound (ms): 170795.314102626
-    Avg c_s point Q-value: 174173.013131858 (per-scen), point=(np.float64(28.786775250209207), np.float64(6.149483031851066e-10), np.float64(1.0093988217850768e-09), np.float64(10.601340910166453), np.float64(11.213224659132546))
-    Volume: 8.533333e+05
+    LB: -185.805861934 (per-scen)
+    Avg dual bound (ms): -185.805861935
+    Avg c_s point Q-value: -185.377004774 (per-scen), point=(np.float64(18.210132952666886), np.float64(0.0), np.float64(2.210417001144908e-06), np.float64(4.773720550939087e-05), np.float64(0.010785170469038098))
+    Volume: 3.755645e+04
   --- T101 (3, 4, 12, 13, 14, 28) ---
-    LB: 109005.936027528 (per-scen)
-    Avg dual bound (ms): 109005.936027528
-    Avg c_s point Q-value: 133569.152875883 (per-scen), point=(np.float64(1.1201582593537155e-13), np.float64(8.808928554786146e-13), np.float64(36.40300522740925), np.float64(3.596994772591129), np.float64(3.596994772590885))
-    Volume: 8.533333e+05
+    LB: -356.745814104 (per-scen)
+    Avg dual bound (ms): -356.745814104
+    Avg c_s point Q-value: -356.745935204 (per-scen), point=(np.float64(2.88087268926284e-12), np.float64(4.0556739212195364e-10), np.float64(28.809999999979752), np.float64(4.8583788062170744e-11), np.float64(6.897830835402078e-12))
+    Volume: 3.755645e+04
   --- T102 (3, 4, 8, 12, 14, 28) ---
-    LB: 108542.848854432 (per-scen)
-    Avg dual bound (ms): 108542.848854432
-    Avg c_s point Q-value: 133519.731057773 (per-scen), point=(np.float64(7.670648537298807e-14), np.float64(0.9467396201995731), np.float64(35.755571182206), np.float64(3.2976891975953118), np.float64(3.297689197595028))
-    Volume: 8.533333e+05
+    LB: -356.744707707 (per-scen)
+    Avg dual bound (ms): -356.744707707
+    Avg c_s point Q-value: -356.742614323 (per-scen), point=(np.float64(0.0), np.float64(6.902775281725075e-05), np.float64(28.809885707496587), np.float64(0.0), np.float64(0.0))
+    Volume: 3.755645e+04
   --- T103 (3, 4, 8, 12, 13, 28) ---
-    LB: 108543.356028093 (per-scen)
-    Avg dual bound (ms): 108543.356028093
-    Avg c_s point Q-value: 133519.731057773 (per-scen), point=(np.float64(7.792725471953851e-14), np.float64(0.9467396201993641), np.float64(35.7555711822059), np.float64(3.297689197595113), np.float64(3.2976891975952185))
-    Volume: 8.533333e+05
+    LB: -356.745232649 (per-scen)
+    Avg dual bound (ms): -356.745232649
+    Avg c_s point Q-value: -356.742847584 (per-scen), point=(np.float64(0.0), np.float64(7.079026174379753e-05), np.float64(28.809882789225593), np.float64(0.0), np.float64(0.0))
+    Volume: 3.755645e+04
   --- T104 (2, 3, 8, 10, 14, 26) ---
-    LB: 93376.253235977 (per-scen)
-    Avg dual bound (ms): 93376.253235977
-    Avg c_s point Q-value: 93376.246057526 (per-scen), point=(np.float64(2.29921613543232e-13), np.float64(6.801935813281523e-13), np.float64(1.6453024904139097e-13), np.float64(39.999999999999936), np.float64(2.3510777865980617e-13))
-    Volume: 8.533333e+05
+    LB: -223.958603937 (per-scen)
+    Avg dual bound (ms): -228.055765618
+    Avg c_s point Q-value: 52892.780467847 (per-scen), point=(np.float64(1.6912200843846224e-11), np.float64(1.3459600202798045), np.float64(9.134091677976887e-11), np.float64(23.785813257477137), np.float64(8.205286022795933e-11))
+    Volume: 3.755645e+04
   --- T105 (1, 3, 8, 9, 13, 25) ---
-    LB: 230983.825462114 (per-scen)
-    Avg dual bound (ms): 230983.825462114
-    Avg c_s point Q-value: 239758.955665526 (per-scen), point=(np.float64(1.4265719120659593e-09), np.float64(28.78538944526801), np.float64(1.7157923867193256e-09), np.float64(9.793538222123088), np.float64(11.214610526104623))
-    Volume: 8.533333e+05
+    LB: -170.637629333 (per-scen)
+    Avg dual bound (ms): -175.755062229
+    Avg c_s point Q-value: 3831.338223048 (per-scen), point=(np.float64(7.69242257062663e-06), np.float64(17.3272215704953), np.float64(0.08408911133507563), np.float64(0.0011357376006277508), np.float64(0.1621431178318362))
+    Volume: 3.755645e+04
   --- T106 (2, 3, 4, 6, 14, 22) ---
-    LB: 77875.755006440 (per-scen)
-    Avg dual bound (ms): 77875.755006440
-    Avg c_s point Q-value: 130839.538513702 (per-scen), point=(np.float64(1.319094555160167e-06), np.float64(9.437870679759088e-07), np.float64(27.566278629671597), np.float64(14.569461704269694), np.float64(8.443418345891054e-07))
-    Volume: 8.533333e+05
+    LB: -356.741052668 (per-scen)
+    Avg dual bound (ms): -356.741052668
+    Avg c_s point Q-value: -356.740613692 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(28.80982712963794), np.float64(0.00020706337741207453), np.float64(0.0))
+    Volume: 3.755645e+04
   --- T107 (1, 3, 4, 5, 13, 21) ---
-    LB: 107755.833012709 (per-scen)
-    Avg dual bound (ms): 107755.833012709
-    Avg c_s point Q-value: 135053.044492196 (per-scen), point=(np.float64(2.146701684145282e-07), np.float64(1.982688711200897e-07), np.float64(35.761836288157944), np.float64(2.848255438214883), np.float64(4.238164770575794))
-    Volume: 8.533333e+05
+    LB: -356.742913904 (per-scen)
+    Avg dual bound (ms): -356.742913904
+    Avg c_s point Q-value: -356.742425275 (per-scen), point=(np.float64(6.288110693917422e-06), np.float64(0.0), np.float64(28.80989083957794), np.float64(0.0), np.float64(0.00015116411254537676))
+    Volume: 3.755645e+04
 
   --- IPOPT EF Result (selected LB simplex only) ---
-    Selected simplex: T0 (0, 2, 3, 4, 8, 16)
-    EF-IPOPT: ok=True, ef_obj(per-scen)=9337.624438407, true_obj(per-scen)=93376.244988493, status=ok, term=optimal, time=0.108s
-    EF-IPOPT K point: (0.0, 0.0, 0.0, 40.0, 0.0)
-    Barycentric coords: [0.000000, 1.000000, -0.000000, -0.000000, -0.000000, -0.000000]
+    Selected simplex: T97 (3, 4, 16, 20, 22, 28)
+    EF-IPOPT: ok=True, ef_obj(per-scen)=-3.567434804, true_obj(per-scen)=-356.745600802, status=ok, term=optimal, time=0.398s
+    EF-IPOPT K point: (7.419298748815086e-08, 3.327901229177973e-08, 28.81, 3.883702373489638e-08, 9.447565229352663e-09)
+    Barycentric coords: [0.000000, 0.000000, 0.000000, 0.000000, 1.000000, -0.000000]
 
   --- Current UB ---
-    UB value: 65160.564219780 (per-scen)
-    UB point: (0.0, 0.0, 0.0, 0.0, 0.0)
+    UB value: -356.745681563 (per-scen)
+    UB point: (0.0, 0.0, 28.81, 0.0, 0.0)
     UB source: unknown
 
   --- Next Chosen Simplex ---
-    Simplex: T0 (0, 2, 3, 4, 8, 16)
+    Simplex: T97 (3, 4, 16, 20, 22, 28)
     Scene: 0, source: ms
-    New point: (0.0, 0.0, 0.0, 30.666666666666668, 30.666666666666668)
+    New point: (18.099476756358115, 2.749129946492458e-11, 2.575250236331508e-10, 0.17053179045990582, 0.12660893980821494)
 ======================================================================

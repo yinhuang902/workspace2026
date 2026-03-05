@@ -7,7 +7,7 @@ from pyomo.opt import SolverStatus, TerminationCondition
 from time import perf_counter
 
 # if model is infeasible, just set it to Q_max
-Q_max = 1e10
+Q_max = 1e5
 
 # Set to True to log Pyomo→Gurobi persistent map sizes after each update_tetra call
 DEBUG_PERSISTENT_MAPS = False
