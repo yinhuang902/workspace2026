@@ -2,7 +2,12 @@
 # Each iteration has per-solver lines + winner line
 
 --- [Iter 0] ---
-  [ipopt ] ok=True, status=ok, term=optimal, time=0.398s, ef_obj=-356.7434803917964, true_obj(per-scen)=-356.745600802, gurobi_LB=-inf
+  [ipopt ] ok=True, status=ok, term=optimal, time=1.040s, ef_obj=0.9802247713023516, true_obj(per-scen)=0.980224790, gurobi_LB=-inf
   [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
-  [winner] ipopt, ub_updated=False, UB_incumbent=-356.745681563, LB_global_end=-356.749727876, UB_global_end=-356.745681563
+  [winner] ipopt, ub_updated=True, UB_incumbent=0.979916640, LB_global_end=0.979444163, UB_global_end=0.979916640
+
+--- [Iter 1] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.567s, ef_obj=0.979664386256811, true_obj(per-scen)=0.979664409, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=True, UB_incumbent=0.979664409, LB_global_end=0.979632190, UB_global_end=0.979664409
 

@@ -6,8 +6,7 @@ from pyomo.solvers.plugins.solvers.gurobi_persistent import GurobiPersistent
 from pyomo.opt import SolverStatus, TerminationCondition
 from time import perf_counter
 
-# if model is infeasible, just set it to Q_max
-Q_max = 1e5
+Q_max = 1e10  # default fallback; prefer passing q_max to BaseBundle()
 
 # Set to True to log Pyomo→Gurobi persistent map sizes after each update_tetra call
 DEBUG_PERSISTENT_MAPS = False
@@ -46,8 +45,9 @@ s
         model, reads the objective value at `model.obj_expr`, and then unfixes
         the variables. Returns the scalar objective value.
     """
-    def __init__(self, model: pyo.ConcreteModel, options: dict | None = None):
+    def __init__(self, model: pyo.ConcreteModel, options: dict | None = None, q_max: float = 1e10):
         self.model = model
+        self.q_max = q_max
         self.gp = GurobiPersistent()
         self.gp.set_instance(model)
         if hasattr(model, 'obj'):
@@ -126,27 +126,27 @@ s
                 else:
                     print(f"[BaseBundle.eval_at] Gurobi {term} for K={K_tuple}, "
                           f"no feasible incumbent found. Returning Q_max.")
-                    _meta["obj"] = Q_max
+                    _meta["obj"] = self.q_max
                     if return_meta:
-                        return Q_max, _meta
-                    return Q_max
+                        return self.q_max, _meta
+                    return self.q_max
 
             else:
                 # Infeasible or error
                 print(f"[BaseBundle.eval_at] Infeasible/Error for K={K_tuple}: status={status}, term={term}")
-                _meta["obj"] = Q_max
+                _meta["obj"] = self.q_max
                 if return_meta:
-                    return Q_max, _meta
-                return Q_max
+                    return self.q_max, _meta
+                return self.q_max
 
         except Exception as err:
             print(f"\n[BaseBundle.eval_at] Exception when solving Q_s for K={K_tuple}: {err}")
-            _meta["obj"] = Q_max
+            _meta["obj"] = self.q_max
             _meta["status"] = "exception"
             _meta["termination_condition"] = str(err)
             if return_meta:
-                return Q_max, _meta
-            return Q_max
+                return self.q_max, _meta
+            return self.q_max
 
         finally:
             for v in first_vars:

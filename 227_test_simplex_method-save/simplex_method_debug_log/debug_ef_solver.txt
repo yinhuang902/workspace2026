@@ -1,0 +1,8 @@
+# debug_ef_solver.txt — EF solver details per iteration (dual: ipopt + gurobi)
+# Each iteration has per-solver lines + winner line
+
+--- [Iter 0] ---
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.398s, ef_obj=-356.7434803917964, true_obj(per-scen)=-356.745600802, gurobi_LB=-inf
+  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
+  [winner] ipopt, ub_updated=False, UB_incumbent=-356.745681563, LB_global_end=-356.749727876, UB_global_end=-356.745681563
+

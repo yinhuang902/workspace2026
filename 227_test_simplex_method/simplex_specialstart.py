@@ -3323,6 +3323,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
         "iter_ms_times_detail": iter_ms_times_detail,
         "per_iter_ms_counts": per_iter_ms_counts,
         "termination_reason": termination_reason,
+        "iter_time_hist": iter_time_hist,
 
     }
 

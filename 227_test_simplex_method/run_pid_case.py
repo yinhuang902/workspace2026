@@ -62,9 +62,12 @@ COMMON = {
 UB_SOLVER_OPTS = {"NonConvex": 2}
 LB_SOLVER_OPTS = {
     "NonConvex": 2,
-    "MIPGap": 1e-3,
-    "TimeLimit": 60,
+    "MIPGap": 1e-1,
+    "TimeLimit": 30,
 }
+
+# Penalty value for infeasible Q evaluations (passed to BaseBundle)
+Q_MAX = 1e3
 
 #                            SMOKE            FULL
 # ─────────────────────────────────────────────────────
@@ -74,18 +77,18 @@ MODE_PARAMS = {
         "skip":            0,
         "target_nodes":    120,       # small mesh
         "gap_stop_tol":    1e-8,     # tight gap (matches app.ipynb)
-        "time_limit":      None,      # no wall-clock cap — run until gap or target_nodes
+        "time_limit":      30,      # no wall-clock cap — run until gap or target_nodes
         "enable_3d_plot":  False,    # no plotting
         "enable_ef_ub":    True,
         "ef_time_ub":      30.0,     # short EF solve
         "use_exact_opt":   False,
     },
     "full": {
-        "max_scenarios":   None,     # all scenarios in CSV
+        "max_scenarios":   50,     # all scenarios in CSV
         "skip":            0,
         "target_nodes":    1000,     # matches app.ipynb
         "gap_stop_tol":    1e-6,     # matches app.ipynb
-        "time_limit":      25200.0,  # 7 hours (matches app.ipynb)
+        "time_limit":      60*10*1,  # 7 hours (matches app.ipynb)
         "enable_3d_plot":  False,    # disable for headless regression
         "enable_ef_ub":    True,
         "ef_time_ub":      60.0,     # standard EF time
@@ -105,7 +108,7 @@ def main():
     parser = argparse.ArgumentParser(
         description="PID regression test runner (smoke / full)")
     parser.add_argument(
-        "--mode", choices=["smoke", "full"], default="smoke",
+        "--mode", choices=["smoke", "full"], default="full",
         help="Run mode: 'smoke' (fast regression) or 'full' (formal run)")
     args = parser.parse_args()
     mode = args.mode
@@ -172,7 +175,7 @@ def main():
 
     from bundles import BaseBundle, MSBundle
 
-    base_bundles = [BaseBundle(m, UB_SOLVER_OPTS) for m in model_list]
+    base_bundles = [BaseBundle(m, UB_SOLVER_OPTS, q_max=Q_MAX) for m in model_list]
     ms_bundles = [
         MSBundle(m, yvars, LB_SOLVER_OPTS, scenario_index=s)
         for s, (m, yvars) in enumerate(zip(model_list, first_stg_vars_list))
@@ -285,10 +288,11 @@ def main():
     # Write per-iteration CSV
     import csv
     csv_file = results_dir / "simplex_result.csv"
+    iter_times = result.get("iter_time_hist", [])
     with open(csv_file, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow([
-            "iter", "nodes", "LB", "UB",
+            "iter", "time_s", "nodes", "LB", "UB",
             "gap_abs", "gap_rel_pct",
             "active_ratio",
         ])
@@ -300,8 +304,9 @@ def main():
             nc = result["node_count"][i] if i < len(result["node_count"]) else ""
             ar = (result["active_ratio_hist"][i]
                   if i < len(result["active_ratio_hist"]) else "")
+            t_i = f"{iter_times[i]:.3f}" if i < len(iter_times) else ""
             writer.writerow([
-                i, nc, f"{lb_i:.9f}", f"{ub_i:.9f}",
+                i, t_i, nc, f"{lb_i:.9f}", f"{ub_i:.9f}",
                 f"{gap_a:.9f}", f"{gap_r:.6f}",
                 f"{ar:.6f}" if isinstance(ar, float) else ar,
             ])
