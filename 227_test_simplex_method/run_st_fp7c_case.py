@@ -1,8 +1,8 @@
 """
-run_st_fp7c_case.py — Simplex runner for SNGO-master/Global/st_fp7c
+run_st_fp7c_case.py �?Simplex runner for SNGO-master/Global/st_fp7c
 
 Same constraints as st_fp7a (identical to 2_1_7).
-Objective: Min Σ (−10*xi²) for i=1..20  (concave quadratic, no linear term)
+Objective: Min Σ (�?0*xi²) for i=1..20  (concave quadratic, no linear term)
 """
 import argparse
 from pathlib import Path
@@ -101,7 +101,7 @@ def create_model_st_fp7c() -> pyo.ConcreteModel:
     m.c9  = pyo.Constraint(expr=-x[0]-x[1]-9*x[2]+3*x[3]+5*x[4]+x[7]+7*x[8]-7*x[9]-4*x[10]-6*x[11]-3*x[12]+7*x[13]-5*x[15]+x[16]+x[17]+2*x[19] <= m.c9_rhs)
     m.c10 = pyo.Constraint(expr=sum(x) <= m.c10_rhs)
 
-    # Objective: Min Σ (−10*xi²) for i=1..20
+    # Objective: Min Σ (�?0*xi²) for i=1..20
     m.obj_expr = sum(-10*v**2 for v in x)
     return m
 
@@ -134,6 +134,7 @@ MODE_PARAMS = {
     "full":  {"nscen":100,"target_nodes":300,"gap_stop_tol":1e-2,"time_limit":None,"enable_ef_ub":True,"ef_time_ub":43200.0,"plot_every":None,"plot_output_dir":"results/st_fp7c_full/plots","output_csv_path":"results/st_fp7c_full/simplex_result.csv"},
 }
 BUNDLE_OPTIONS = {"NonConvex": 2, "MIPGap": 1e-1}
+Q_MAX = 1e10
 
 def main():
     ap = argparse.ArgumentParser()
@@ -146,11 +147,11 @@ def main():
     cfg = dict(MODE_PARAMS[args.mode])
     out_csv = Path(cfg["output_csv_path"]); out_csv.parent.mkdir(parents=True, exist_ok=True)
     if cfg["plot_output_dir"]: Path(cfg["plot_output_dir"]).mkdir(parents=True, exist_ok=True)
-    print("="*60); print(f"st_fp7c (Python) — nfirst={nfirst}, nparam={nparam}, seed={args.seed}"); print("="*60)
+    print("="*60); print(f"st_fp7c (Python) �?nfirst={nfirst}, nparam={nparam}, seed={args.seed}"); print("="*60)
     t0 = perf_counter()
     model_list, first_vars_list = build_models(nscen=cfg["nscen"], nfirst=nfirst, nparam=nparam, seed=args.seed, print_first_k_rhs=args.print_first_k_rhs)
     S = len(model_list)
-    base_bundles = [BaseBundle(model_list[s], options=BUNDLE_OPTIONS) for s in range(S)]
+    base_bundles = [BaseBundle(model_list[s], options=BUNDLE_OPTIONS, q_max=Q_MAX) for s in range(S)]
     ms_bundles   = [MSBundle(model_list[s], first_vars_list[s], options=BUNDLE_OPTIONS) for s in range(S)]
     res = run_pid_simplex_3d(model_list=model_list, first_vars_list=first_vars_list, base_bundles=base_bundles, ms_bundles=ms_bundles,
         target_nodes=cfg["target_nodes"], gap_stop_tol=cfg["gap_stop_tol"], time_limit=cfg["time_limit"],

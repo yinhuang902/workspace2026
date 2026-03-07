@@ -1,5 +1,5 @@
 """
-run_2_1_10_sngo_case.py — Simplex runner for SNGO-master/Global/2_1_10
+run_2_1_10_sngo_case.py --Simplex runner for SNGO-master/Global/2_1_10
 
 Julia reference (PlasmoOld.jl):
   RandomStochasticModel(createModel, NS=100)  =>  nscen=100, nfirst=5, nparam=5
@@ -102,12 +102,12 @@ def create_model_2_1_10() -> pyo.ConcreteModel:
     m = pyo.ConcreteModel()
 
     # x1-x5 bounded [0,40] for simplex. c10 gives theoretical upper of 200
-    # but that makes most corners infeasible → Q_max → Gurobi crash.
-    m.x1  = pyo.Var(bounds=(0, 40), initialize=0)
-    m.x2  = pyo.Var(bounds=(0, 40), initialize=0)
-    m.x3  = pyo.Var(bounds=(0, 40), initialize=0)
-    m.x4  = pyo.Var(bounds=(0, 40), initialize=0)
-    m.x5  = pyo.Var(bounds=(0, 40), initialize=0)
+    # but that makes most corners infeasible --Q_max --Gurobi crash.
+    m.x1  = pyo.Var(bounds=(0, 500), initialize=0)
+    m.x2  = pyo.Var(bounds=(0, 500), initialize=0)
+    m.x3  = pyo.Var(bounds=(0, 500), initialize=0)
+    m.x4  = pyo.Var(bounds=(0, 500), initialize=0)
+    m.x5  = pyo.Var(bounds=(0, 500), initialize=0)
     m.x6  = pyo.Var(bounds=(0, None), initialize=4.348)
     m.x7  = pyo.Var(bounds=(0, None), initialize=0)
     m.x8  = pyo.Var(bounds=(0, None), initialize=0)
@@ -199,10 +199,10 @@ def build_models_2_1_10(
 
 MODE_PARAMS = {
     "smoke": {
-        "nscen": 10,
-        "target_nodes": 60,
+        "nscen": 5,
+        "target_nodes": 150,
         "gap_stop_tol": 1e-6,
-        "time_limit": 300,
+        "time_limit": 60*10,
         "enable_ef_ub": True,
         "ef_time_ub": 30.0,
         "plot_every": None,
@@ -212,17 +212,18 @@ MODE_PARAMS = {
     "full": {
         "nscen": 100,
         "target_nodes": 300,
-        "gap_stop_tol": 1e-2,
-        "time_limit": None,
+        "gap_stop_tol": 1e-3,
+        "time_limit": 60*60*1,
         "enable_ef_ub": True,
-        "ef_time_ub": 43200.0,
+        "ef_time_ub": 60,
         "plot_every": None,
         "plot_output_dir": "results/2_1_10_sngo_full/plots",
         "output_csv_path": "results/2_1_10_sngo_full/simplex_result.csv",
     },
 }
 
-BUNDLE_OPTIONS = {"NonConvex": 2, "MIPGap": 1e-1}
+BUNDLE_OPTIONS = {"NonConvex": 2, "MIPGap": 1e-3, "TimeLimit": 60}
+Q_MAX = 5*1e4
 
 
 def main():
@@ -239,7 +240,7 @@ def main():
         Path(cfg["plot_output_dir"]).mkdir(parents=True, exist_ok=True)
 
     print("=" * 60)
-    print("2_1_10 SNGO (Python) — PlasmoOld RandomStochasticModel")
+    print("2_1_10 SNGO (Python) --PlasmoOld RandomStochasticModel")
     print(f"Mode: {args.mode}, nscen={cfg['nscen']}, nfirst=5, nparam=5, seed={args.seed}")
     print(f"Bundle options: {BUNDLE_OPTIONS}")
     print("=" * 60)
@@ -249,8 +250,17 @@ def main():
         nscen=cfg["nscen"], seed=args.seed, print_first_k_rhs=args.print_first_k_rhs)
     S = len(model_list)
 
-    base_bundles = [BaseBundle(model_list[s], options=BUNDLE_OPTIONS) for s in range(S)]
+    base_bundles = [BaseBundle(model_list[s], options=BUNDLE_OPTIONS, q_max=Q_MAX) for s in range(S)]
     ms_bundles   = [MSBundle(model_list[s], first_vars_list[s], options=BUNDLE_OPTIONS) for s in range(S)]
+
+    INITIAL_VERTICES = [
+        (0.0, 0.0, 0.0, 0.0, 0.0),
+        (133.33333333333334, 0.0, 0.0, 0.0, 0.0),
+        (0.0, 66.66666666666667, 0.0, 0.0, 0.0),
+        (0.0, 0.0, 66.66666666666667, 0.0, 0.0),
+        (0.0, 0.0, 0.0, 133.33333333333334, 0.0),
+        (0.0, 0.0, 0.0, 0.0, 400.0),
+    ]
 
     res = run_pid_simplex_3d(
         model_list=model_list,
@@ -267,6 +277,8 @@ def main():
         output_csv_path=str(out_csv),
         enable_3d_plot=False,
         axis_labels=("x1", "x2", "x3", "x4", "x5"),
+        initial_nodes=INITIAL_VERTICES,
+        split_mode=2,
     )
     t1 = perf_counter()
 

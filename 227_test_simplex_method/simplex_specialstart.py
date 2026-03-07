@@ -48,6 +48,12 @@ TOL_C_VERTS = 1e-6
 TOL_MS_C = 1e-3
 TOL_C_VERTS = 1e2
 
+TOL_MS_C = 1e5
+# TOL_C_VERTS: Only use c_s if min-dist(c_s, vertices) > TOL_C_VERTS.
+#              1e-6 is intentionally tight — reject only if c_s is essentially on a vertex.
+#              (Previous looser value was 1e2; override kept for current tuning.)
+TOL_C_VERTS = 1e-6
+
 
 # EXPERIMENTAL: set to True to also solve EF with Gurobi alongside ipopt (remove later)
 ENABLE_EF_GUROBI = False
@@ -1094,6 +1100,12 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
     with open(runtime_log_path, "w", encoding="utf-8") as f:
         f.write("# simplex_record_subproblem_runtime.txt — per-iteration subproblem runtime\n")
         f.write("# ms/cs/Q timing, non-optimal subproblem detection\n\n")
+
+    # File 11: Per-iteration selected simplex volume & shape quality
+    shape_log_path = os.path.join(_csv_output_dir, "simplex_record_selected_shape.txt")
+    with open(shape_log_path, "w", encoding="utf-8") as f:
+        f.write("# simplex_record_selected_shape.txt -- selected simplex volume & quality per iteration\n")
+        f.write("# Fields: iter, simplex_id, volume, quality, n_verts, loc_type, bounding_box_diag\n\n")
 
     # === Initialize per-iteration diagnostic logger ===
     iter_logger = IterationLogger(path="simplex_result.txt")
@@ -2691,6 +2703,27 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 selected_simplex_id = None
 
         add_node_hist.append(new_node)
+
+        # --- Log selected simplex volume & quality to shape file ---
+        try:
+            _sel_rec = selected_rec_before_split
+            if _sel_rec is not None:
+                _sel_vol = _sel_rec.get("volume", float('nan'))
+                _sel_q = _sel_rec.get("quality", float('nan'))
+                _sel_verts = _sel_rec.get("verts", [])
+                _sel_id = selected_simplex_id
+                _bb_diag = float('nan')
+                if len(_sel_verts) > 0:
+                    _varr = np.array(_sel_verts, dtype=float)
+                    _bb_diag = float(np.linalg.norm(_varr.max(axis=0) - _varr.min(axis=0)))
+                with open(shape_log_path, "a", encoding="utf-8") as _sf:
+                    _sf.write(f"iter={it}  simplex={_sel_id}  "
+                              f"vol={_sel_vol:.6e}  quality={_sel_q:.6e}  "
+                              f"n_verts={len(_sel_verts)}  loc_type={loc_type}  "
+                              f"bb_diag={_bb_diag:.6e}\n")
+        except Exception:
+            pass  # Never crash the algorithm for logging
+
         if verbose:
             print(f"[Iter {it}] Elapsed: {perf_counter() - t_iter0:.3f}s")
 

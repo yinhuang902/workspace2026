@@ -1,12 +1,12 @@
 """
-run_st_fp7a_case.py â€” Simplex runner for SNGO-master/Global/st_fp7a
+run_st_fp7a_case.py â€?Simplex runner for SNGO-master/Global/st_fp7a
 
 Julia reference (PlasmoOld):
   RandomStochasticModel(createModel, NS=100) => nscen=100, nfirst=5, nparam=5
   srand(1234), scenario 1 unperturbed
 
-Model: 20 variables, 10 â‰¤ constraints, concave quadratic objective
-  Objective: Min  Î£ (2*xi âˆ’ 0.5*xiÂ²)  for i=1..20
+Model: 20 variables, 10 â‰?constraints, concave quadratic objective
+  Objective: Min  Î£ (2*xi âˆ?0.5*xiÂ²)  for i=1..20
 
 Stage split (nfirst=2 for simplex safety):
   First-stage:  x1, x2   (cols 1-2)
@@ -99,7 +99,7 @@ def addnoise_le(a: float, rng: JuliaMT19937) -> float:
 
 
 # =============================================================================
-# Deterministic base model â€” exact translation of Julia st_fp7a
+# Deterministic base model â€?exact translation of Julia st_fp7a
 # =============================================================================
 
 def create_model_st_fp7a() -> pyo.ConcreteModel:
@@ -139,7 +139,7 @@ def create_model_st_fp7a() -> pyo.ConcreteModel:
     m.c9_rhs  = pyo.Param(mutable=True, initialize=9.0)
     m.c10_rhs = pyo.Param(mutable=True, initialize=40.0)
 
-    # Constraints â€” identical to 2_1_7 / st_fp7a
+    # Constraints â€?identical to 2_1_7 / st_fp7a
     m.c1  = pyo.Constraint(expr=-3*m.x1 + 7*m.x2 - 5*m.x4 + m.x5 + m.x6 + 2*m.x8 - m.x9 - m.x10 - 9*m.x11 + 3*m.x12 + 5*m.x13 + m.x16 + 7*m.x17 - 7*m.x18 - 4*m.x19 - 6*m.x20 <= m.c1_rhs)
     m.c2  = pyo.Constraint(expr=7*m.x1 - 5*m.x3 + m.x4 + m.x5 + 2*m.x7 - m.x8 - m.x9 - 9*m.x10 + 3*m.x11 + 5*m.x12 + m.x15 + 7*m.x16 - 7*m.x17 - 4*m.x18 - 6*m.x19 - 3*m.x20 <= m.c2_rhs)
     m.c3  = pyo.Constraint(expr=-5*m.x2 + m.x3 + m.x4 + 2*m.x6 - m.x7 - m.x8 - 9*m.x9 + 3*m.x10 + 5*m.x11 + m.x14 + 7*m.x15 - 7*m.x16 - 4*m.x17 - 6*m.x18 - 3*m.x19 + 7*m.x20 <= m.c3_rhs)
@@ -246,6 +246,7 @@ MODE_PARAMS = {
 }
 
 BUNDLE_OPTIONS = {"NonConvex": 2, "MIPGap": 1e-1}
+Q_MAX = 1e10
 
 
 def main():
@@ -266,7 +267,7 @@ def main():
         Path(cfg["plot_output_dir"]).mkdir(parents=True, exist_ok=True)
 
     print("=" * 60)
-    print("st_fp7a (Python) â€” PlasmoOld RandomStochasticModel")
+    print("st_fp7a (Python) â€?PlasmoOld RandomStochasticModel")
     print(f"Mode: {args.mode}, nscen={cfg['nscen']}, nfirst={nfirst}, nparam={nparam}, seed={args.seed}")
     print(f"Bundle options: {BUNDLE_OPTIONS}")
     print("=" * 60)
@@ -277,7 +278,7 @@ def main():
         seed=args.seed, print_first_k_rhs=args.print_first_k_rhs)
     S = len(model_list)
 
-    base_bundles = [BaseBundle(model_list[s], options=BUNDLE_OPTIONS) for s in range(S)]
+    base_bundles = [BaseBundle(model_list[s], options=BUNDLE_OPTIONS, q_max=Q_MAX) for s in range(S)]
     ms_bundles   = [MSBundle(model_list[s], first_vars_list[s], options=BUNDLE_OPTIONS) for s in range(S)]
 
     axis_labels = tuple(f"x{i+1}" for i in range(nfirst))

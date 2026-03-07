@@ -103,11 +103,11 @@ def create_model_2_1_10() -> pyo.ConcreteModel:
 
     # x1-x5 bounded [0,40] for simplex. c10 gives theoretical upper of 200
     # but that makes most corners infeasible → Q_max → Gurobi crash.
-    m.x1  = pyo.Var(bounds=(0, 40), initialize=0)
-    m.x2  = pyo.Var(bounds=(0, 40), initialize=0)
-    m.x3  = pyo.Var(bounds=(0, 40), initialize=0)
-    m.x4  = pyo.Var(bounds=(0, 40), initialize=0)
-    m.x5  = pyo.Var(bounds=(0, 40), initialize=0)
+    m.x1  = pyo.Var(bounds=(0, 50), initialize=0)
+    m.x2  = pyo.Var(bounds=(0, 67), initialize=0)
+    m.x3  = pyo.Var(bounds=(0, 67), initialize=0)
+    m.x4  = pyo.Var(bounds=(0, 64), initialize=0)
+    m.x5  = pyo.Var(bounds=(0, 55), initialize=0)
     m.x6  = pyo.Var(bounds=(0, None), initialize=4.348)
     m.x7  = pyo.Var(bounds=(0, None), initialize=0)
     m.x8  = pyo.Var(bounds=(0, None), initialize=0)
@@ -199,7 +199,7 @@ def build_models_2_1_10(
 
 MODE_PARAMS = {
     "smoke": {
-        "nscen": 10,
+        "nscen": 5,
         "target_nodes": 60,
         "gap_stop_tol": 1e-6,
         "time_limit": 300,

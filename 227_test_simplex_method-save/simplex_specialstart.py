@@ -31,24 +31,6 @@ from iter_logger import IterationLogger
 from ef_upper_bounder import SimplexEFUb
 
 
-# we have 2 setting of tol
-# first one is tend to choose c_s point
-# Tolerances for candidate-point feature snapping (ms/c_s selection)
-# TOL_MS_C:    Switch to c_s if dist(ms, c_s) < TOL_MS_C.
-#              1e3 is intentionally loose — effectively always allow c_s.
-#              (Previous stricter value was 1e-3; override kept for current tuning.)
-TOL_MS_C = 1e3
-# TOL_C_VERTS: Only use c_s if min-dist(c_s, vertices) > TOL_C_VERTS.
-#              1e-6 is intentionally tight — reject only if c_s is essentially on a vertex.
-#              (Previous looser value was 1e2; override kept for current tuning.)
-TOL_C_VERTS = 1e-6
-
-# second one is tend to choose ms point
-
-TOL_MS_C = 1e-3
-TOL_C_VERTS = 1e2
-
-
 # EXPERIMENTAL: set to True to also solve EF with Gurobi alongside ipopt (remove later)
 ENABLE_EF_GUROBI = False
 
@@ -2128,56 +2110,134 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
             stop_due_to_collision = True
             collision_node_idx = j_star
 
-        # ---------- Mode 2 (ms weighted composite point) ----------
-        if MODE2:
-            rec = lb_simp_rec
-            ms_list  = rec.get("ms_per_scene", [])
-            pts_list = rec.get("xms_per_scene", [])
+        # ---------- Mode 2: try c_s candidates first, then ms, then edge midpoint ----------
+        if MODE2 and (not stop_due_to_collision):
+            # Separate ms-sourced and c_s-sourced candidates
+            ms_cands = [ci for ci in cand_items if ci.get("pt_source", "ms") != "c_s"]
+            cs_cands = [ci for ci in cand_items if ci.get("pt_source", "") == "c_s"]
 
-            weights = []
-            points  = []
-            for ms_val, pt in zip(ms_list, pts_list):
-                if pt is None:
+            # Sort each group by value (ascending = most negative first)
+            def score_item_m2(ci):
+                ms = ci["cand_ms"]
+                pt = ci["cand_pt"]
+                d  = (float('inf') if pt is None else min_dist_to_nodes(pt, nodes))
+                return (ms, -d)
+
+            cs_cands_sorted = sorted(cs_cands, key=score_item_m2)
+            ms_cands_sorted = sorted(ms_cands, key=score_item_m2)
+
+            # Build combined ordered list: all c_s first, then all ms
+            candidates_sorted = cs_cands_sorted + ms_cands_sorted
+
+            # Track selection info
+            _selection_source = None   # "c_s" or "ms"
+            _selection_rank = None     # rank within its group (1-based)
+            _cs_collisions = 0
+            _ms_collisions = 0
+
+            # Phase 1: try all c_s candidates in order
+            for rank, ci in enumerate(cs_cands_sorted, start=1):
+                cand_pt = ci["cand_pt"]
+                if cand_pt is None:
                     continue
-                w = max(0.0, -float(ms_val))
-                weights.append(w)
-                points.append(np.asarray(pt, float))
-
-            if weights:
-                w_arr = np.asarray(weights, float)
-                if w_arr.sum() <= 0:
-                    w_arr[:] = 1.0
-                w_arr /= w_arr.sum()
-
-                candidate_pt = sum(w * p for w, p in zip(w_arr, points))
-
-                if min_dist_to_nodes(candidate_pt, nodes) >= min_dist:
-                    cand_pt_pert, loc_type, loc_info = _snap_feature(candidate_pt, rec)
-                    new_node   = cand_pt_pert
-                    chosen_ms  = float(np.dot(w_arr, np.array(ms_list, float)))
-                    chosen_cand = {
-                        "simplex_index": rec["simplex_index"],
-                        "scene": -1,
-                        "cand_ms": chosen_ms,
-                        "cand_pt": cand_pt_pert,
-                        "_rec": rec,
-                        "loc_type": loc_type,
-                        "loc_info": loc_info,
-                    }
+                if min_dist_to_nodes(cand_pt, nodes) >= min_dist:
+                    cand_pt_pert, loc_type, loc_info = _snap_feature(cand_pt, ci.get("_rec", None))
+                    new_node = cand_pt_pert
+                    ci["loc_type"] = loc_type
+                    ci["loc_info"] = loc_info
+                    chosen_ms  = ci["cand_ms"]
+                    chosen_cand = ci
+                    _selection_source = "c_s"
+                    _selection_rank = rank
                     if verbose:
                         print(
-                            f"Chosen node (MODE2) {tuple(map(float, cand_pt_pert))} "
-                            f"with weighted ms={chosen_ms:.3e} "
-                            f"(simp T{rec['simplex_index']})"
+                            f"Chosen node (MODE2 c_s) {tuple(map(float, cand_pt_pert))} "
+                            f"with c_s={chosen_ms:.3e} "
+                            f"(simp T{ci['simplex_index']}, scene {ci['scene']}, "
+                            f"c_s_rank #{rank}/{len(cs_cands_sorted)})"
                         )
+                    break
                 else:
-                    dummy_ci = {
-                        "simplex_index": rec["simplex_index"],
-                        "scene": -1,
-                        "cand_ms": 0.0,
-                        "cand_pt": tuple(candidate_pt),
-                    }
-                    handle_collision(candidate_pt, dummy_ci, stage_note="mode2")
+                    _cs_collisions += 1
+                    if verbose:
+                        print(
+                            f"[MODE2 c_s skip #{rank}] {tuple(map(float, cand_pt))} "
+                            f"(simp T{ci['simplex_index']}, scene {ci['scene']}) "
+                            f"too close to existing nodes (< {min_dist:g})."
+                        )
+
+            # Phase 2: if all c_s collided, try ms candidates
+            if new_node is None and ms_cands_sorted:
+                if verbose and _cs_collisions > 0:
+                    print(f"[Iter {it}] MODE2: All {_cs_collisions} c_s candidates collided, trying ms candidates...")
+                for rank, ci in enumerate(ms_cands_sorted, start=1):
+                    cand_pt = ci["cand_pt"]
+                    if cand_pt is None:
+                        continue
+                    if min_dist_to_nodes(cand_pt, nodes) >= min_dist:
+                        cand_pt_pert, loc_type, loc_info = _snap_feature(cand_pt, ci.get("_rec", None))
+                        new_node = cand_pt_pert
+                        ci["loc_type"] = loc_type
+                        ci["loc_info"] = loc_info
+                        chosen_ms  = ci["cand_ms"]
+                        chosen_cand = ci
+                        _selection_source = "ms"
+                        _selection_rank = rank
+                        if verbose:
+                            print(
+                                f"Chosen node (MODE2 ms fallback) {tuple(map(float, cand_pt_pert))} "
+                                f"with ms={chosen_ms:.3e} "
+                                f"(simp T{ci['simplex_index']}, scene {ci['scene']}, "
+                                f"ms_rank #{rank}/{len(ms_cands_sorted)})"
+                            )
+                        break
+                    else:
+                        _ms_collisions += 1
+                        if verbose:
+                            print(
+                                f"[MODE2 ms skip #{rank}] {tuple(map(float, cand_pt))} "
+                                f"(simp T{ci['simplex_index']}, scene {ci['scene']}) "
+                                f"too close to existing nodes (< {min_dist:g})."
+                            )
+
+            # Phase 3: if ALL candidates collided, trigger edge midpoint fallback
+            if new_node is None and (_cs_collisions + _ms_collisions) > 0:
+                if verbose:
+                    print(f"[Iter {it}] MODE2: ALL candidates collided "
+                          f"({_cs_collisions} c_s + {_ms_collisions} ms). "
+                          f"Falling back to edge midpoint.")
+                last_ci = (ms_cands_sorted[-1] if ms_cands_sorted
+                           else cs_cands_sorted[-1] if cs_cands_sorted else None)
+                if last_ci and last_ci["cand_pt"] is not None:
+                    handle_collision(last_ci["cand_pt"], last_ci, stage_note="mode2_all_collided")
+                _selection_source = "collision_edge_midpoint"
+
+            # Print selected simplex vertices
+            if new_node is not None and chosen_cand is not None and verbose:
+                simp_idx_sel = int(chosen_cand['simplex_index'])
+                verts_sel = chosen_cand["_rec"]["verts"]
+                print(f"[Selected Simp Info] Iter {it} | MODE2 | Simplex T{simp_idx_sel} Vertices:")
+                for v_i, v in enumerate(verts_sel):
+                    print(f"  v{v_i}: {tuple(map(float, v))}")
+                print(f"  -> New Point: {tuple(map(float, new_node))}")
+
+            # Selection summary
+            if verbose:
+                sel_info = f"source={_selection_source}, rank={_selection_rank}"
+                if _cs_collisions > 0:
+                    sel_info += f", cs_collisions={_cs_collisions}"
+                if _ms_collisions > 0:
+                    sel_info += f", ms_collisions={_ms_collisions}"
+                print(f"[Iter {it}] MODE2 Selection: {sel_info}")
+
+                top_msg = "N/A"
+                if len(candidates_sorted) > 0:
+                    t0 = candidates_sorted[0]
+                    top_msg = (f"T{int(t0['simplex_index'])}, scene={t0['scene']}, "
+                               f"c_s={float(t0['cand_ms']):.3e}")
+                print(f"[Iter {it}] MODE2 candidate rank #1: {top_msg}")
+                _print_candidates_table(candidates_sorted, nodes, topN=10)
+                print()
 
 
         # ---------- Mode 1: try ms candidates, then c_s, then edge midpoint ----------

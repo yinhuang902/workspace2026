@@ -1,5 +1,5 @@
 """
-run_2_1_7_case.py â€” Simplex runner for SNGO-master/Global/2_1_7
+run_2_1_7_case.py â€?Simplex runner for SNGO-master/Global/2_1_7
 
 Julia reference (PlasmoOld.jl):
   RandomStochasticModel(createModel, NS=100)  =>  nscen=100, nfirst=5, nparam=5
@@ -226,6 +226,7 @@ MODE_PARAMS = {
 }
 
 BUNDLE_OPTIONS = {"NonConvex": 2, "MIPGap": 1e-1}
+Q_MAX = 1e10
 
 
 def main():
@@ -242,7 +243,7 @@ def main():
         Path(cfg["plot_output_dir"]).mkdir(parents=True, exist_ok=True)
 
     print("=" * 60)
-    print("2_1_7 (Python) â€” PlasmoOld RandomStochasticModel")
+    print("2_1_7 (Python) â€?PlasmoOld RandomStochasticModel")
     print(f"Mode: {args.mode}, nscen={cfg['nscen']}, nfirst=5, nparam=5, seed={args.seed}")
     print(f"Bundle options: {BUNDLE_OPTIONS}")
     print("=" * 60)
@@ -252,7 +253,7 @@ def main():
         nscen=cfg["nscen"], seed=args.seed, print_first_k_rhs=args.print_first_k_rhs)
     S = len(model_list)
 
-    base_bundles = [BaseBundle(model_list[s], options=BUNDLE_OPTIONS) for s in range(S)]
+    base_bundles = [BaseBundle(model_list[s], options=BUNDLE_OPTIONS, q_max=Q_MAX) for s in range(S)]
     ms_bundles   = [MSBundle(model_list[s], first_vars_list[s], options=BUNDLE_OPTIONS) for s in range(S)]
 
     res = run_pid_simplex_3d(

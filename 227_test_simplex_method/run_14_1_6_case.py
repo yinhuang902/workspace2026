@@ -210,6 +210,7 @@ BUNDLE_OPTIONS = {
     "MIPGap": 1e-1,
     # "TimeLimit": 60,  # optional per-solve cap
 }
+Q_MAX = 1e10
 
 
 def main():
@@ -227,7 +228,7 @@ def main():
         Path(cfg["plot_output_dir"]).mkdir(parents=True, exist_ok=True)
 
     print("=" * 60)
-    print("14_1_6 (Python) â€” scenario generation matches Plasmo.jl RandomStochasticModel(createModel, 1000, 2, 2)")
+    print("14_1_6 (Python) â€?scenario generation matches Plasmo.jl RandomStochasticModel(createModel, 1000, 2, 2)")
     print(f"Mode: {args.mode}")
     print(f"nscen={cfg['nscen']}, seed={args.seed}, target_nodes={cfg['target_nodes']}")
     print(f"gap_stop_tol={cfg['gap_stop_tol']}, time_limit={cfg['time_limit']}")
@@ -243,7 +244,7 @@ def main():
     )
     S = len(model_list)
 
-    base_bundles = [BaseBundle(model_list[s], options=BUNDLE_OPTIONS) for s in range(S)]
+    base_bundles = [BaseBundle(model_list[s], options=BUNDLE_OPTIONS, q_max=Q_MAX) for s in range(S)]
     ms_bundles   = [MSBundle(model_list[s], first_vars_list[s], options=BUNDLE_OPTIONS) for s in range(S)]
 
     res = run_pid_simplex_3d(

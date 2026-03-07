@@ -1,9 +1,9 @@
 """
-run_st_rv3_case.py â€” Simplex runner for SNGO-master/Global/st_rv3
+run_st_rv3_case.py â€?Simplex runner for SNGO-master/Global/st_rv3
 
 20 variables, 20 <= constraints (19 structural + sum<=200).
 Concave quadratic objective with varying coefficients per variable.
-More constraints than st_rv2 â†’ richer stochastic perturbation.
+More constraints than st_rv2 â†?richer stochastic perturbation.
 
 Stage split: nfirst=2 (default), x1-x2 bounded [0,200].
 PlasmoOld addnoise: ub + |ub|*U(0,2) for nonzero, U(0,10) for zero.
@@ -75,15 +75,16 @@ def build_models(nscen,nfirst=2,nparam=2,seed=1234,**kw):
 MODE_PARAMS={"smoke":{"nscen":10,"target_nodes":60,"gap_stop_tol":1e-6,"time_limit":300,"enable_ef_ub":True,"ef_time_ub":30.,"plot_every":None,"plot_output_dir":"results/st_rv3_smoke/plots","output_csv_path":"results/st_rv3_smoke/simplex_result.csv"},
  "full":{"nscen":100,"target_nodes":300,"gap_stop_tol":1e-2,"time_limit":None,"enable_ef_ub":True,"ef_time_ub":43200.,"plot_every":None,"plot_output_dir":"results/st_rv3_full/plots","output_csv_path":"results/st_rv3_full/simplex_result.csv"}}
 BUNDLE_OPTIONS={"NonConvex":2,"MIPGap":1e-1}
+Q_MAX = 1e10
 
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument("--mode",choices=("smoke","full"),default="smoke"); ap.add_argument("--seed",type=int,default=1234); ap.add_argument("--nfirst",type=int,default=2)
     args=ap.parse_args(); nf=args.nfirst; cfg=dict(MODE_PARAMS[args.mode])
     out=Path(cfg["output_csv_path"]); out.parent.mkdir(parents=True,exist_ok=True)
     if cfg["plot_output_dir"]: Path(cfg["plot_output_dir"]).mkdir(parents=True,exist_ok=True)
-    print("="*60+f"\nst_rv3 â€” nfirst={nf}, seed={args.seed}\n"+"="*60)
+    print("="*60+f"\nst_rv3 â€?nfirst={nf}, seed={args.seed}\n"+"="*60)
     t0=perf_counter(); ml,fl=build_models(cfg["nscen"],nf,nf,args.seed); S=len(ml)
-    bb=[BaseBundle(ml[s],options=BUNDLE_OPTIONS) for s in range(S)]
+    bb=[BaseBundle(ml[s], options=BUNDLE_OPTIONS, q_max=Q_MAX) for s in range(S)]
     mb=[MSBundle(ml[s],fl[s],options=BUNDLE_OPTIONS) for s in range(S)]
     res=run_pid_simplex_3d(model_list=ml,first_vars_list=fl,base_bundles=bb,ms_bundles=mb,target_nodes=cfg["target_nodes"],gap_stop_tol=cfg["gap_stop_tol"],time_limit=cfg["time_limit"],enable_ef_ub=cfg["enable_ef_ub"],ef_time_ub=cfg["ef_time_ub"],plot_every=cfg["plot_every"],plot_output_dir=cfg["plot_output_dir"],output_csv_path=str(out),enable_3d_plot=False,axis_labels=tuple(f"x{i+1}" for i in range(nf)))
     t1=perf_counter(); LB=res.get("LB_hist",[]); UB=res.get("UB_hist",[])

@@ -1,0 +1,47 @@
+name: pidsp-sim-try
+channels:
+  - defaults
+dependencies:
+  - notebook-shim
+  - networkx
+  - ipympl
+  - coin-or-cbc
+  - clarabel
+  - sympy
+  - traitlets
+  - pyomo
+  - qdldl-python
+  - python=3.11
+  - requests
+  - jupyter_client
+  - ipykernel
+  - scikit-image
+  - tqdm
+  - jupyter_core
+  - joblib
+  - jupyterlab
+  - packaging
+  - psutil
+  - cvxpy
+  - coin-or-osi
+  - ipopt
+  - pandas
+  - tornado
+  - urllib3
+  - jupyter_server
+  - scipy
+  - osqp
+  - coin-or-utils
+  - imageio
+  - scs
+  - numpy
+  - matplotlib
+  - jupyterlab_server
+  - ipywidgets
+  - ecos
+  - pillow
+  - coin-or-clp
+  - pip
+  - imagecodecs
+  - plotly
+prefix: /media/software/yinhuang/miniconda3/envs/pidsp-sim-try

@@ -1,8 +1,8 @@
 """
-run_st_fp7b_case.py — Simplex runner for SNGO-master/Global/st_fp7b
+run_st_fp7b_case.py �?Simplex runner for SNGO-master/Global/st_fp7b
 
 Same constraints as st_fp7a (identical to 2_1_7).
-Objective: Min Σ (−0.5*xi² − 5*xi) for i=1..20  (concave quadratic)
+Objective: Min Σ (�?.5*xi² �?5*xi) for i=1..20  (concave quadratic)
 """
 import argparse
 from pathlib import Path
@@ -70,7 +70,7 @@ def addnoise_le(a: float, rng: JuliaMT19937) -> float:
 
 
 # =============================================================================
-# Deterministic base model — st_fp7b
+# Deterministic base model �?st_fp7b
 # =============================================================================
 
 def create_model_st_fp7b() -> pyo.ConcreteModel:
@@ -119,7 +119,7 @@ def create_model_st_fp7b() -> pyo.ConcreteModel:
     m.c9  = pyo.Constraint(expr=-m.x1 - m.x2 - 9*m.x3 + 3*m.x4 + 5*m.x5 + m.x8 + 7*m.x9 - 7*m.x10 - 4*m.x11 - 6*m.x12 - 3*m.x13 + 7*m.x14 - 5*m.x16 + m.x17 + m.x18 + 2*m.x20 <= m.c9_rhs)
     m.c10 = pyo.Constraint(expr=m.x1+m.x2+m.x3+m.x4+m.x5+m.x6+m.x7+m.x8+m.x9+m.x10+m.x11+m.x12+m.x13+m.x14+m.x15+m.x16+m.x17+m.x18+m.x19+m.x20 <= m.c10_rhs)
 
-    # Objective: Min Σ (−0.5*xi² − 5*xi) for i=1..20
+    # Objective: Min Σ (�?.5*xi² �?5*xi) for i=1..20
     m.obj_expr = sum(-0.5*v**2 - 5*v for v in [
         m.x1, m.x2, m.x3, m.x4, m.x5, m.x6, m.x7, m.x8, m.x9, m.x10,
         m.x11, m.x12, m.x13, m.x14, m.x15, m.x16, m.x17, m.x18, m.x19, m.x20])
@@ -154,6 +154,7 @@ MODE_PARAMS = {
     "full":  {"nscen":100,"target_nodes":300,"gap_stop_tol":1e-2,"time_limit":None,"enable_ef_ub":True,"ef_time_ub":43200.0,"plot_every":None,"plot_output_dir":"results/st_fp7b_full/plots","output_csv_path":"results/st_fp7b_full/simplex_result.csv"},
 }
 BUNDLE_OPTIONS = {"NonConvex": 2, "MIPGap": 1e-1}
+Q_MAX = 1e10
 
 def main():
     ap = argparse.ArgumentParser()
@@ -166,11 +167,11 @@ def main():
     cfg = dict(MODE_PARAMS[args.mode])
     out_csv = Path(cfg["output_csv_path"]); out_csv.parent.mkdir(parents=True, exist_ok=True)
     if cfg["plot_output_dir"]: Path(cfg["plot_output_dir"]).mkdir(parents=True, exist_ok=True)
-    print("="*60); print(f"st_fp7b (Python) — nfirst={nfirst}, nparam={nparam}, seed={args.seed}"); print("="*60)
+    print("="*60); print(f"st_fp7b (Python) �?nfirst={nfirst}, nparam={nparam}, seed={args.seed}"); print("="*60)
     t0 = perf_counter()
     model_list, first_vars_list = build_models_st_fp7b(nscen=cfg["nscen"], nfirst=nfirst, nparam=nparam, seed=args.seed, print_first_k_rhs=args.print_first_k_rhs)
     S = len(model_list)
-    base_bundles = [BaseBundle(model_list[s], options=BUNDLE_OPTIONS) for s in range(S)]
+    base_bundles = [BaseBundle(model_list[s], options=BUNDLE_OPTIONS, q_max=Q_MAX) for s in range(S)]
     ms_bundles   = [MSBundle(model_list[s], first_vars_list[s], options=BUNDLE_OPTIONS) for s in range(S)]
     res = run_pid_simplex_3d(model_list=model_list, first_vars_list=first_vars_list, base_bundles=base_bundles, ms_bundles=ms_bundles,
         target_nodes=cfg["target_nodes"], gap_stop_tol=cfg["gap_stop_tol"], time_limit=cfg["time_limit"],

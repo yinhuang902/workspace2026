@@ -1,0 +1,11 @@
+# simplex_record_split.txt — per-iteration split record
+# selected_simplex LB_pre, UB_pre, children LBs, end LB/UB
+
+=== Iter 0 ===
+selected_simplex: T1  LB_pre=-634.747466760
+UB_pre=-634.750612406  LB_global_pre=-634.747466760
+children (created 2):
+  child T1 (0, 3, 4) LB=-634.580083378
+  child T2 (2, 3, 4) LB=-462.306319220
+end: UB=-634.750612406  LB=-634.580083378
+

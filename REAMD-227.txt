@@ -1,0 +1,10 @@
+227_test_simplex_method-save - save
+most original one
+
+
+227_test_simplex_method-save
+try to change mode 1:select ms pt, mode2: cs pt
+
+
+227_test_simplex_method
+let Q_max be an input
