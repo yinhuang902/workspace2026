@@ -1,4 +1,4 @@
-# Simplex-Based Stochastic Global Optimization
+# Simplex-Based 2 StageStochastic Programming Global Optimization
 
 A spatial branch-and-bound method that partitions the first-stage variable domain using Delaunay simplices, computing lower bounds via McCormick–Style (ms) and constant-cut (cs) relaxations and upper bounds via scenario-wise Q evaluations and an optional extensive-form (EF) solver.
 
@@ -14,9 +14,16 @@ A spatial branch-and-bound method that partitions the first-stage variable domai
 | `iter_logger.py` | Per-iteration structured logging (UB provenance, phase timing). |
 | `_safe_linalg.py` | Robust linear algebra helpers (barycentric coords, safe `linalg.solve`). |
 
-## Test-Case Runners
+## Output Files
 
-Each `run_*_case.py` file defines a stochastic optimization problem (model, scenarios, solver options) and calls `run_pid_simplex_3d()`.
+All outputs are written to `results/<case_name>/`:
+
+| `simplex_result.csv` | Per-iteration: time, node count, LB, UB, gap |
+| `simplex_debug.txt` | ms/cs/Q failures (only when issues occur) |
+| `simplex_record_split.txt` | Per-iteration split details: parent LB, child LBs |
+| `simplex_record_subproblem_runtime.txt` | Per-iteration ms/cs/Q aggregate timing |
+
+## Test-Cases
 
 | Runner | Problem | First-stage dim | Scenarios | Notes |
 |--------|---------|:-:|:-:|-------|
@@ -31,21 +38,3 @@ Each `run_*_case.py` file defines a stochastic optimization problem (model, scen
 | `run_pid_case.py` | PID controller | 3 | varies | Simulation-based Q (black-box) |
 | `run_st_fp7*.py` | ST_FP7 variants (nonconvex QP) | 2 | varies | |
 | `run_st_rv*.py` | ST_RV variants (nonconvex QP) | 2 | varies | |
-
-## Output Files
-
-All outputs are written to `results/<case_name>/`:
-
-| File | Content |
-|------|---------|
-| `simplex_result.csv` | Per-iteration: time, node count, LB, UB, gap |
-| `simplex_debug.txt` | ms/cs/Q failures (only when issues occur) |
-| `simplex_record_split.txt` | Per-iteration split details: parent LB, child LBs |
-| `simplex_record_subproblem_runtime.txt` | Per-iteration ms/cs/Q aggregate timing |
-
-
-## Dependencies
-
-- Python 3.8+
-- Pyomo, Gurobi (with license), IPOPT
-- NumPy, SciPy (`scipy.spatial.Delaunay`)

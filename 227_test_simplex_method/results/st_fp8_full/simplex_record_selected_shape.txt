@@ -1,0 +1,3 @@
+# simplex_record_selected_shape.txt -- selected simplex volume & quality per iteration
+# Fields: iter, simplex_id, volume, quality, n_verts, loc_type, bounding_box_diag
+

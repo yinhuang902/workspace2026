@@ -1,0 +1,72 @@
+# simplex_record_split.txt — per-iteration split record
+# selected_simplex LB_pre, UB_pre, children LBs, end LB/UB
+
+=== Iter 0 ===
+selected_simplex: T89  LB_pre=1.664704825
+UB_pre=1.743535603  LB_global_pre=1.664704825
+children (created 5):
+  child T108 (3, 4, 7, 14, 22, 32) LB=1.669607737
+  child T109 (3, 4, 6, 14, 22, 32) LB=1.685234109
+  child T110 (3, 4, 6, 7, 14, 32) LB=0.262438676
+  child T111 (3, 6, 7, 14, 22, 32) LB=0.267339863
+end: UB=1.743535603  LB=0.262438676
+
+=== Iter 1 ===
+selected_simplex: T110  LB_pre=0.262438676
+UB_pre=1.743535603  LB_global_pre=0.262438676
+children (created 6):
+  child T112 (3, 4, 7, 14, 32, 33) LB=0.262437856
+  child T115 (3, 4, 6, 7, 14, 33) LB=0.136415433
+  child T116 (3, 6, 7, 14, 32, 33) LB=0.262441284
+end: UB=1.743535603  LB=0.136415433
+
+=== Iter 2 ===
+selected_simplex: T115  LB_pre=0.136415433
+UB_pre=1.743535603  LB_global_pre=0.136415433
+children (created 6):
+  child T120 (3, 4, 6, 7, 14, 34) LB=0.136415429
+end: UB=1.743535603  LB=0.136415429
+
+=== Iter 3 ===
+selected_simplex: T120  LB_pre=0.136415429
+UB_pre=1.743535603  LB_global_pre=0.136415429
+children (created 6):
+  child T125 (3, 4, 6, 7, 14, 35) LB=inf
+end: UB=1.743535603  LB=0.262437856
+
+=== Iter 4 ===
+selected_simplex: T112  LB_pre=0.262437856
+UB_pre=1.743535603  LB_global_pre=0.262437856
+children (created 2):
+  child T127 (3, 4, 7, 14, 33, 36) LB=0.262442915
+end: UB=1.743535603  LB=0.262441284
+
+=== Iter 5 ===
+selected_simplex: T114  LB_pre=0.262441284
+UB_pre=1.743535603  LB_global_pre=0.262441284
+children (created 2):
+  child T127 (3, 6, 7, 14, 33, 37) LB=0.262441652
+end: UB=1.743535603  LB=0.262441652
+
+=== Iter 6 ===
+selected_simplex: T127  LB_pre=0.262441652
+UB_pre=1.743535603  LB_global_pre=0.262441652
+children (created 2):
+  child T129 (3, 6, 7, 14, 37, 38) LB=0.262440615
+end: UB=1.743535603  LB=0.262440615
+
+=== Iter 7 ===
+selected_simplex: T129  LB_pre=0.262440615
+UB_pre=1.743535603  LB_global_pre=0.262440615
+children (created 2):
+  child T129 (3, 6, 7, 14, 38, 39) LB=0.135401402
+  child T130 (3, 6, 7, 14, 37, 39) LB=0.262439247
+end: UB=1.743535603  LB=0.135401402
+
+=== Iter 8 ===
+selected_simplex: T129  LB_pre=0.135401402
+UB_pre=1.743535603  LB_global_pre=0.135401402
+children (created 2):
+  child T131 (3, 6, 7, 14, 38, 40) LB=0.136415434
+end: UB=1.743535603  LB=0.136415434
+

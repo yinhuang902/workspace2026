@@ -1,7 +1,7 @@
-"""
-run_st_fp7e_case.py �?Simplex runner for SNGO-master/Global/st_fp7e
-Same constraints as st_fp7a. Objective: Min Σ(2i·xi �?(0.5i)·xi²) i=1..20
-  i.e. coefficients scale with variable index: lin_i=2i, quad_i=�?.5i
+﻿"""
+run_st_fp7e_case.py �?Simplex runner for SNGO-master/Global/st_fp7e
+Same constraints as st_fp7a. Objective: Min Σ(2i·xi �?(0.5i)·xi²) i=1..20
+  i.e. coefficients scale with variable index: lin_i=2i, quad_i=�?.5i
 """
 import argparse
 from pathlib import Path
@@ -38,12 +38,12 @@ def create_model():
     for i in range(6,21): setattr(m,f"x{i}",pyo.Var(bounds=(0,None),initialize=0))
     x=[getattr(m,f"x{i}") for i in range(1,21)]
     _add_constraints(m, x)
-    # Objective: Min Σ(2i·xi �?0.5i·xi²) for i=1..20
+    # Objective: Min Σ(2i·xi �?0.5i·xi²) for i=1..20
     m.obj_expr = sum(2*(i+1)*x[i] - 0.5*(i+1)*x[i]**2 for i in range(20))
     return m
 
 def build_models(nscen,nfirst=2,nparam=2,seed=1234,print_first_k_rhs=0):
-    rng=JuliaMT19937(seed); ml=[]; fl=[]; mx=max(nparam-1,0)
+    rng=JuliaMT19937(seed); ml=[]; fl=[]; mx=nparam  # PlasmoOld cap is nparam, not nparam-1
     for s in range(nscen):
         m=create_model(); av=[getattr(m,f"x{i}") for i in range(1,21)]; f=av[:nfirst]
         if s>0:
@@ -52,17 +52,17 @@ def build_models(nscen,nfirst=2,nparam=2,seed=1234,print_first_k_rhs=0):
         ml.append(m); fl.append(f)
     return ml,fl
 
-MODE_PARAMS={"smoke":{"nscen":10,"target_nodes":60,"gap_stop_tol":1e-6,"time_limit":300,"enable_ef_ub":True,"ef_time_ub":30.,"plot_every":None,"plot_output_dir":"results/st_fp7e_smoke/plots","output_csv_path":"results/st_fp7e_smoke/simplex_result.csv"},
- "full":{"nscen":100,"target_nodes":300,"gap_stop_tol":1e-2,"time_limit":None,"enable_ef_ub":True,"ef_time_ub":43200.,"plot_every":None,"plot_output_dir":"results/st_fp7e_full/plots","output_csv_path":"results/st_fp7e_full/simplex_result.csv"}}
+MODE_PARAMS={"smoke":{"nscen":5,"target_nodes":60,"gap_stop_tol":1e-6,"time_limit":300,"enable_ef_ub":True,"ef_time_ub":30.,"plot_every":None,"plot_output_dir":"results/st_fp7e_smoke/plots","output_csv_path":"results/st_fp7e_smoke/simplex_result.csv"},
+ "full":{"nscen":100,"target_nodes":900,"gap_stop_tol":1e-3,"time_limit":60*60*12,"enable_ef_ub":True,"ef_time_ub":60.,"plot_every":None,"plot_output_dir":"results/st_fp7e_full/plots","output_csv_path":"results/st_fp7e_full/simplex_result.csv"}}
 BUNDLE_OPTIONS={"NonConvex":2,"MIPGap":1e-1}
-Q_MAX = 1e10
+Q_MAX = -1e3
 
 def main():
-    ap=argparse.ArgumentParser(); ap.add_argument("--mode",choices=("smoke","full"),default="smoke"); ap.add_argument("--seed",type=int,default=1234); ap.add_argument("--nfirst",type=int,default=5)
+    ap=argparse.ArgumentParser(); ap.add_argument("--mode",choices=("smoke","full"),default="full"); ap.add_argument("--seed",type=int,default=1234); ap.add_argument("--nfirst",type=int,default=5)
     args=ap.parse_args(); nf=args.nfirst; cfg=dict(MODE_PARAMS[args.mode])
     out=Path(cfg["output_csv_path"]); out.parent.mkdir(parents=True,exist_ok=True)
     if cfg["plot_output_dir"]: Path(cfg["plot_output_dir"]).mkdir(parents=True,exist_ok=True)
-    print("="*60+f"\nst_fp7e �?nfirst={nf}, seed={args.seed}\n"+"="*60)
+    print("="*60+f"\nst_fp7e �?nfirst={nf}, seed={args.seed}\n"+"="*60)
     t0=perf_counter(); ml,fl=build_models(cfg["nscen"],nf,nf,args.seed); S=len(ml)
     bb=[BaseBundle(ml[s], options=BUNDLE_OPTIONS, q_max=Q_MAX) for s in range(S)]
     mb=[MSBundle(ml[s],fl[s],options=BUNDLE_OPTIONS) for s in range(S)]

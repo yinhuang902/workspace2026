@@ -63,7 +63,7 @@ def create_model():
     return m
 
 def build_models(nscen,nfirst=2,nparam=2,seed=1234,**kw):
-    rng=JuliaMT19937(seed); ml=[]; fl=[]; mx=max(nparam-1,0)
+    rng=JuliaMT19937(seed); ml=[]; fl=[]; mx=nparam
     for s in range(nscen):
         m=create_model(); av=[getattr(m,f"x{i}") for i in range(1,21)]; f=av[:nfirst]
         if s>0:

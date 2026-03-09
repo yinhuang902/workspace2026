@@ -1,8 +1,8 @@
-"""
-run_st_fp7b_case.py â€?Simplex runner for SNGO-master/Global/st_fp7b
+ï»¿"""
+run_st_fp7b_case.py ï¿½?Simplex runner for SNGO-master/Global/st_fp7b
 
 Same constraints as st_fp7a (identical to 2_1_7).
-Objective: Min Î£ (âˆ?.5*xiÂ² âˆ?5*xi) for i=1..20  (concave quadratic)
+Objective: Min Î£ (ï¿½?.5*xiÂ² ï¿½?5*xi) for i=1..20  (concave quadratic)
 """
 import argparse
 from pathlib import Path
@@ -70,7 +70,7 @@ def addnoise_le(a: float, rng: JuliaMT19937) -> float:
 
 
 # =============================================================================
-# Deterministic base model â€?st_fp7b
+# Deterministic base model ï¿½?st_fp7b
 # =============================================================================
 
 def create_model_st_fp7b() -> pyo.ConcreteModel:
@@ -119,7 +119,7 @@ def create_model_st_fp7b() -> pyo.ConcreteModel:
     m.c9  = pyo.Constraint(expr=-m.x1 - m.x2 - 9*m.x3 + 3*m.x4 + 5*m.x5 + m.x8 + 7*m.x9 - 7*m.x10 - 4*m.x11 - 6*m.x12 - 3*m.x13 + 7*m.x14 - 5*m.x16 + m.x17 + m.x18 + 2*m.x20 <= m.c9_rhs)
     m.c10 = pyo.Constraint(expr=m.x1+m.x2+m.x3+m.x4+m.x5+m.x6+m.x7+m.x8+m.x9+m.x10+m.x11+m.x12+m.x13+m.x14+m.x15+m.x16+m.x17+m.x18+m.x19+m.x20 <= m.c10_rhs)
 
-    # Objective: Min Î£ (âˆ?.5*xiÂ² âˆ?5*xi) for i=1..20
+    # Objective: Min Î£ (ï¿½?.5*xiÂ² ï¿½?5*xi) for i=1..20
     m.obj_expr = sum(-0.5*v**2 - 5*v for v in [
         m.x1, m.x2, m.x3, m.x4, m.x5, m.x6, m.x7, m.x8, m.x9, m.x10,
         m.x11, m.x12, m.x13, m.x14, m.x15, m.x16, m.x17, m.x18, m.x19, m.x20])
@@ -134,7 +134,7 @@ _RHS_BASE = [("c1_rhs",-5.),("c2_rhs",2.),("c3_rhs",-1.),("c4_rhs",-3.),("c5_rhs
 def build_models_st_fp7b(nscen, nfirst=2, nparam=2, seed=1234, print_first_k_rhs=0):
     rng = JuliaMT19937(seed)
     model_list, first_vars_list = [], []
-    max_mods = max(nparam - 1, 0)
+    max_mods = nparam  # PlasmoOld: nmodified >= nparam (cap is nparam, not nparam-1)
     for s in range(nscen):
         m = create_model_st_fp7b()
         allv = all_vars_st_fp7b(m)
@@ -150,11 +150,11 @@ def build_models_st_fp7b(nscen, nfirst=2, nparam=2, seed=1234, print_first_k_rhs
     return model_list, first_vars_list
 
 MODE_PARAMS = {
-    "smoke": {"nscen":10,"target_nodes":60,"gap_stop_tol":1e-6,"time_limit":300,"enable_ef_ub":True,"ef_time_ub":30.0,"plot_every":None,"plot_output_dir":"results/st_fp7b_smoke/plots","output_csv_path":"results/st_fp7b_smoke/simplex_result.csv"},
-    "full":  {"nscen":100,"target_nodes":300,"gap_stop_tol":1e-2,"time_limit":None,"enable_ef_ub":True,"ef_time_ub":43200.0,"plot_every":None,"plot_output_dir":"results/st_fp7b_full/plots","output_csv_path":"results/st_fp7b_full/simplex_result.csv"},
+    "smoke": {"nscen":5,"target_nodes":60,"gap_stop_tol":1e-3,"time_limit":60*3,"enable_ef_ub":True,"ef_time_ub":30.0,"plot_every":None,"plot_output_dir":"results/st_fp7b_smoke/plots","output_csv_path":"results/st_fp7b_smoke/simplex_result.csv"},
+    "full":  {"nscen":100,"target_nodes":900,"gap_stop_tol":1e-4,"time_limit":60*60*12,"enable_ef_ub":True,"ef_time_ub":60,"plot_every":None,"plot_output_dir":"results/st_fp7b_full/plots","output_csv_path":"results/st_fp7b_full/simplex_result.csv"},
 }
-BUNDLE_OPTIONS = {"NonConvex": 2, "MIPGap": 1e-1}
-Q_MAX = 1e10
+BUNDLE_OPTIONS = {"NonConvex": 2, "MIPGap": 1e-2, "TimeLimit": 60}
+Q_MAX = -1e2
 
 def main():
     ap = argparse.ArgumentParser()
@@ -167,7 +167,7 @@ def main():
     cfg = dict(MODE_PARAMS[args.mode])
     out_csv = Path(cfg["output_csv_path"]); out_csv.parent.mkdir(parents=True, exist_ok=True)
     if cfg["plot_output_dir"]: Path(cfg["plot_output_dir"]).mkdir(parents=True, exist_ok=True)
-    print("="*60); print(f"st_fp7b (Python) â€?nfirst={nfirst}, nparam={nparam}, seed={args.seed}"); print("="*60)
+    print("="*60); print(f"st_fp7b (Python) ï¿½?nfirst={nfirst}, nparam={nparam}, seed={args.seed}"); print("="*60)
     t0 = perf_counter()
     model_list, first_vars_list = build_models_st_fp7b(nscen=cfg["nscen"], nfirst=nfirst, nparam=nparam, seed=args.seed, print_first_k_rhs=args.print_first_k_rhs)
     S = len(model_list)

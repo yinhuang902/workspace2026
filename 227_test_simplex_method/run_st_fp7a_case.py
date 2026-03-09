@@ -1,26 +1,26 @@
-"""
-run_st_fp7a_case.py â€?Simplex runner for SNGO-master/Global/st_fp7a
+ï»¿"""
+run_st_fp7a_case.py ï¿½?Simplex runner for SNGO-master/Global/st_fp7a
 
 Julia reference (PlasmoOld):
   RandomStochasticModel(createModel, NS=100) => nscen=100, nfirst=5, nparam=5
   srand(1234), scenario 1 unperturbed
 
-Model: 20 variables, 10 â‰?constraints, concave quadratic objective
-  Objective: Min  Î£ (2*xi âˆ?0.5*xiÂ²)  for i=1..20
+Model: 20 variables, 10 ï¿½?constraints, concave quadratic objective
+  Objective: Min  Î£ (2*xi ï¿½?0.5*xiÂ²)  for i=1..20
 
-Stage split (nfirst=2 for simplex safety):
-  First-stage:  x1, x2   (cols 1-2)
-  Second-stage: x3..x20  (cols 3-20)
+Stage split (default nfirst=5):
+  First-stage:  x1..x5   (cols 1-5)
+  Second-stage: x6..x20  (cols 6-20)
 
 All 20 variables: xi >= 0 (no upper bound in Julia)
-  x1-x2 bounded [0, 40] for simplex (from c10: sum xi <= 40)
+  x1-x5 bounded individually for simplex (e.g. x1=[0,18.22], x2=[0,17.40], ...)
 
 Stochastic perturbation (PlasmoOld addnoise for <= constraints):
   addnoise(ub, 0, 10, 0, 2) = ub + |ub| * U(0, 2)  if ub != 0
   9 eligible <= constraints (c1-c9) with nonzero RHS are perturbed.
   Constraint c10 (sum xi <= 40) is also perturbed.
   With nfirst=5, nparam=5 => 5 perturbations per scenario.
-  With nfirst=2, nparam=2 => 1 perturbation per scenario (c1 only).
+  With nfirst=2, nparam=2 => 2 perturbations per scenario (c1, c2).
 
   c1  RHS -5: addnoise(-5) = -5 + 5*U(0,2)
   c2  RHS  2: addnoise(2)  =  2 + 2*U(0,2)
@@ -99,18 +99,18 @@ def addnoise_le(a: float, rng: JuliaMT19937) -> float:
 
 
 # =============================================================================
-# Deterministic base model â€?exact translation of Julia st_fp7a
+# Deterministic base model ï¿½?exact translation of Julia st_fp7a
 # =============================================================================
 
 def create_model_st_fp7a() -> pyo.ConcreteModel:
     m = pyo.ConcreteModel()
 
     # Variables: xi >= 0, UB from Julia SNGO feasibility reduction for first-stage
-    m.x1  = pyo.Var(bounds=(0, 18.22), initialize=0)
-    m.x2  = pyo.Var(bounds=(0, 17.40), initialize=0)
-    m.x3  = pyo.Var(bounds=(0, 28.81), initialize=0)
-    m.x4  = pyo.Var(bounds=(0, 25.78), initialize=0)
-    m.x5  = pyo.Var(bounds=(0, 19.14), initialize=0)
+    m.x1 = pyo.Var(bounds=(0, 18.22), initialize=0)
+    m.x2 = pyo.Var(bounds=(0, 17.41), initialize=0)
+    m.x3 = pyo.Var(bounds=(0, 28.82), initialize=0)
+    m.x4 = pyo.Var(bounds=(0, 25.79), initialize=0)
+    m.x5 = pyo.Var(bounds=(0, 19.15), initialize=0)
     m.x6  = pyo.Var(bounds=(0, None), initialize=0)
     m.x7  = pyo.Var(bounds=(0, None), initialize=0)
     m.x8  = pyo.Var(bounds=(0, None), initialize=0)
@@ -139,7 +139,7 @@ def create_model_st_fp7a() -> pyo.ConcreteModel:
     m.c9_rhs  = pyo.Param(mutable=True, initialize=9.0)
     m.c10_rhs = pyo.Param(mutable=True, initialize=40.0)
 
-    # Constraints â€?identical to 2_1_7 / st_fp7a
+    # Constraints ï¿½?identical to 2_1_7 / st_fp7a
     m.c1  = pyo.Constraint(expr=-3*m.x1 + 7*m.x2 - 5*m.x4 + m.x5 + m.x6 + 2*m.x8 - m.x9 - m.x10 - 9*m.x11 + 3*m.x12 + 5*m.x13 + m.x16 + 7*m.x17 - 7*m.x18 - 4*m.x19 - 6*m.x20 <= m.c1_rhs)
     m.c2  = pyo.Constraint(expr=7*m.x1 - 5*m.x3 + m.x4 + m.x5 + 2*m.x7 - m.x8 - m.x9 - 9*m.x10 + 3*m.x11 + 5*m.x12 + m.x15 + 7*m.x16 - 7*m.x17 - 4*m.x18 - 6*m.x19 - 3*m.x20 <= m.c2_rhs)
     m.c3  = pyo.Constraint(expr=-5*m.x2 + m.x3 + m.x4 + 2*m.x6 - m.x7 - m.x8 - 9*m.x9 + 3*m.x10 + 5*m.x11 + m.x14 + 7*m.x15 - 7*m.x16 - 4*m.x17 - 6*m.x18 - 3*m.x19 + 7*m.x20 <= m.c3_rhs)
@@ -194,7 +194,7 @@ def build_models_st_fp7a(
     model_list: List[pyo.ConcreteModel] = []
     first_vars_list: List[List[pyo.Var]] = []
 
-    max_mods = max(nparam - 1, 0)
+    max_mods = nparam  # PlasmoOld: nmodified >= nparam (cap is nparam, not nparam-1)
 
     for s in range(nscen):
         m = create_model_st_fp7a()
@@ -225,7 +225,7 @@ MODE_PARAMS = {
         "nscen": 10,
         "target_nodes": 100,
         "gap_stop_tol": 1e-3,
-        "time_limit": 30,
+        "time_limit": 60*3,
         "enable_ef_ub": True,
         "ef_time_ub": 30.0,
         "plot_every": None,
@@ -234,19 +234,19 @@ MODE_PARAMS = {
     },
     "full": {
         "nscen": 100,
-        "target_nodes": 300,
-        "gap_stop_tol": 1e-3,
-        "time_limit": 30,
+        "target_nodes": 900,
+        "gap_stop_tol": 1e-4,
+        "time_limit": 60*60*12,
         "enable_ef_ub": True,
-        "ef_time_ub": 30,
+        "ef_time_ub": 60,
         "plot_every": None,
         "plot_output_dir": "results/st_fp7a_full/plots",
         "output_csv_path": "results/st_fp7a_full/simplex_result.csv",
     },
 }
 
-BUNDLE_OPTIONS = {"NonConvex": 2, "MIPGap": 1e-1}
-Q_MAX = 1e10
+BUNDLE_OPTIONS = {"NonConvex": 2, "MIPGap": 1e-2, "TimeLimit": 60}
+Q_MAX = -1e2
 
 
 def main():
@@ -267,7 +267,7 @@ def main():
         Path(cfg["plot_output_dir"]).mkdir(parents=True, exist_ok=True)
 
     print("=" * 60)
-    print("st_fp7a (Python) â€?PlasmoOld RandomStochasticModel")
+    print("st_fp7a (Python) ï¿½?PlasmoOld RandomStochasticModel")
     print(f"Mode: {args.mode}, nscen={cfg['nscen']}, nfirst={nfirst}, nparam={nparam}, seed={args.seed}")
     print(f"Bundle options: {BUNDLE_OPTIONS}")
     print("=" * 60)

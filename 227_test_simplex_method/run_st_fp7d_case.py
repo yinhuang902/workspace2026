@@ -1,6 +1,6 @@
-"""
-run_st_fp7d_case.py â€?Simplex runner for SNGO-master/Global/st_fp7d
-Same constraints as st_fp7a. Objective: Min Î£(8xi âˆ?0.5xiÂ²) i=1..20
+ï»¿"""
+run_st_fp7d_case.py ï¿½?Simplex runner for SNGO-master/Global/st_fp7d
+Same constraints as st_fp7a. Objective: Min Î£(8xi ï¿½?0.5xiÂ²) i=1..20
 """
 import argparse
 from pathlib import Path
@@ -41,7 +41,7 @@ def create_model():
     return m
 
 def build_models(nscen,nfirst=2,nparam=2,seed=1234,print_first_k_rhs=0):
-    rng=JuliaMT19937(seed); ml=[]; fl=[]; mx=max(nparam-1,0)
+    rng=JuliaMT19937(seed); ml=[]; fl=[]; mx=nparam  # PlasmoOld cap is nparam, not nparam-1
     for s in range(nscen):
         m=create_model(); av=[getattr(m,f"x{i}") for i in range(1,21)]; f=av[:nfirst]
         if s>0:
@@ -51,16 +51,16 @@ def build_models(nscen,nfirst=2,nparam=2,seed=1234,print_first_k_rhs=0):
     return ml,fl
 
 MODE_PARAMS={"smoke":{"nscen":10,"target_nodes":60,"gap_stop_tol":1e-6,"time_limit":300,"enable_ef_ub":True,"ef_time_ub":30.,"plot_every":None,"plot_output_dir":"results/st_fp7d_smoke/plots","output_csv_path":"results/st_fp7d_smoke/simplex_result.csv"},
- "full":{"nscen":100,"target_nodes":300,"gap_stop_tol":1e-2,"time_limit":None,"enable_ef_ub":True,"ef_time_ub":43200.,"plot_every":None,"plot_output_dir":"results/st_fp7d_full/plots","output_csv_path":"results/st_fp7d_full/simplex_result.csv"}}
-BUNDLE_OPTIONS={"NonConvex":2,"MIPGap":1e-1}
-Q_MAX = 1e10
+ "full":{"nscen":100,"target_nodes":900,"gap_stop_tol":1e-3,"time_limit": 60*60*12,"enable_ef_ub":True,"ef_time_ub":60,"plot_every":None,"plot_output_dir":"results/st_fp7d_full/plots","output_csv_path":"results/st_fp7d_full/simplex_result.csv"}}
+BUNDLE_OPTIONS={"NonConvex":2,"MIPGap":1e-2, "TimeLimit":60}
+Q_MAX = -1e1
 
 def main():
-    ap=argparse.ArgumentParser(); ap.add_argument("--mode",choices=("smoke","full"),default="smoke"); ap.add_argument("--seed",type=int,default=1234); ap.add_argument("--nfirst",type=int,default=5)
+    ap=argparse.ArgumentParser(); ap.add_argument("--mode",choices=("smoke","full"),default="full"); ap.add_argument("--seed",type=int,default=1234); ap.add_argument("--nfirst",type=int,default=5)
     args=ap.parse_args(); nf=args.nfirst; cfg=dict(MODE_PARAMS[args.mode])
     out=Path(cfg["output_csv_path"]); out.parent.mkdir(parents=True,exist_ok=True)
     if cfg["plot_output_dir"]: Path(cfg["plot_output_dir"]).mkdir(parents=True,exist_ok=True)
-    print("="*60+f"\nst_fp7d â€?nfirst={nf}, seed={args.seed}\n"+"="*60)
+    print("="*60+f"\nst_fp7d ï¿½?nfirst={nf}, seed={args.seed}\n"+"="*60)
     t0=perf_counter(); ml,fl=build_models(cfg["nscen"],nf,nf,args.seed); S=len(ml)
     bb=[BaseBundle(ml[s], options=BUNDLE_OPTIONS, q_max=Q_MAX) for s in range(S)]
     mb=[MSBundle(ml[s],fl[s],options=BUNDLE_OPTIONS) for s in range(S)]
