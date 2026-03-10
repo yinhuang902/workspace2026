@@ -1,8 +1,8 @@
 """
-run_st_rv2_case.py �?Simplex runner for SNGO-master/Global/st_rv2
+run_st_rv2_case.py �?Simplex runner for SNGO-master/Global/st_rv2
 
 20 variables, 10 <= constraints, concave quadratic objective.
-Objective: Min Σ(−ai·xi² �?bi·xi) with varying coefficients per variable.
+Objective: Min Σ(−ai·xi² �?bi·xi) with varying coefficients per variable.
 All constraints are linear <=. 9 constraints with nonzero RHS + sum<=200.
 
 Stage split: nfirst=2 (default), x1-x2 bounded [0,200] from sum constraint.
@@ -64,11 +64,11 @@ BUNDLE_OPTIONS={"NonConvex":2,"MIPGap":1e-1}
 Q_MAX = 1e10
 
 def main():
-    ap=argparse.ArgumentParser(); ap.add_argument("--mode",choices=("smoke","full"),default="smoke"); ap.add_argument("--seed",type=int,default=1234); ap.add_argument("--nfirst",type=int,default=2)
+    ap=argparse.ArgumentParser(); ap.add_argument("--mode",choices=("smoke","full"),default="full"); ap.add_argument("--seed",type=int,default=1234); ap.add_argument("--nfirst",type=int,default=2)
     args=ap.parse_args(); nf=args.nfirst; cfg=dict(MODE_PARAMS[args.mode])
     out=Path(cfg["output_csv_path"]); out.parent.mkdir(parents=True,exist_ok=True)
     if cfg["plot_output_dir"]: Path(cfg["plot_output_dir"]).mkdir(parents=True,exist_ok=True)
-    print("="*60+f"\nst_rv2 �?nfirst={nf}, seed={args.seed}\n"+"="*60)
+    print("="*60+f"\nst_rv2 �?nfirst={nf}, seed={args.seed}\n"+"="*60)
     t0=perf_counter(); ml,fl=build_models(cfg["nscen"],nf,nf,args.seed); S=len(ml)
     bb=[BaseBundle(ml[s], options=BUNDLE_OPTIONS, q_max=Q_MAX) for s in range(S)]
     mb=[MSBundle(ml[s],fl[s],options=BUNDLE_OPTIONS) for s in range(S)]

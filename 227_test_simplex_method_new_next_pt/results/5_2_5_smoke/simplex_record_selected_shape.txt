@@ -1,0 +1,4 @@
+# simplex_record_selected_shape.txt -- selected simplex volume & quality per iteration
+# Fields: iter, simplex_id, volume, quality, n_verts, loc_type, bounding_box_diag
+
+iter=0  simplex=(3, 4, 15, 21, 23, 29)  vol=8.333333e-03  quality=6.193029e-03  n_verts=6  loc_type=interior  bb_diag=2.236068e+00

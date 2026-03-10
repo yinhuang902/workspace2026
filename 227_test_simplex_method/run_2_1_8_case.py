@@ -231,10 +231,10 @@ def build_models_2_1_8(
 
 MODE_PARAMS = {
     "smoke": {
-        "nscen": 10,
+        "nscen": 5,
         "target_nodes": 60,
         "gap_stop_tol": 1e-6,
-        "time_limit": 300,
+        "time_limit": 120,
         "enable_ef_ub": True,
         "ef_time_ub": 30.0,
         "plot_every": None,
@@ -260,7 +260,7 @@ Q_MAX = 1e4
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--mode", choices=("smoke", "full"), default="full")
+    ap.add_argument("--mode", choices=("smoke", "full"), default="smoke")
     ap.add_argument("--seed", type=int, default=1234)
     ap.add_argument("--print_first_k_rhs", type=int, default=0)
     args = ap.parse_args()

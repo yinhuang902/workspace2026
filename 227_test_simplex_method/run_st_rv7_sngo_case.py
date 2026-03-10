@@ -71,13 +71,13 @@ def build_models(nscen,nfirst=5,nparam=5,seed=1234,**kw):
         ml.append(m); fl.append(f)
     return ml,fl
 
-MODE_PARAMS={"smoke":{"nscen":10,"target_nodes":60,"gap_stop_tol":1e-6,"time_limit":300,"enable_ef_ub":True,"ef_time_ub":30.,"plot_every":None,"plot_output_dir":"results/st_rv7_smoke/plots","output_csv_path":"results/st_rv7_smoke/simplex_result.csv"},
+MODE_PARAMS={"smoke":{"nscen":5,"target_nodes":60,"gap_stop_tol":1e-6,"time_limit":300,"enable_ef_ub":True,"ef_time_ub":30.,"plot_every":None,"plot_output_dir":"results/st_rv7_smoke/plots","output_csv_path":"results/st_rv7_smoke/simplex_result.csv"},
  "full":{"nscen":100,"target_nodes":300,"gap_stop_tol":1e-2,"time_limit":None,"enable_ef_ub":True,"ef_time_ub":43200.,"plot_every":None,"plot_output_dir":"results/st_rv7_full/plots","output_csv_path":"results/st_rv7_full/simplex_result.csv"}}
 BUNDLE_OPTIONS={"NonConvex":2,"MIPGap":1e-1}
-Q_MAX = 1e10
+Q_MAX = -1e0
 
 def main():
-    ap=argparse.ArgumentParser(); ap.add_argument("--mode",choices=("smoke","full"),default="smoke"); ap.add_argument("--seed",type=int,default=1234); ap.add_argument("--nfirst",type=int,default=5)
+    ap=argparse.ArgumentParser(); ap.add_argument("--mode",choices=("smoke","full"),default="full"); ap.add_argument("--seed",type=int,default=1234); ap.add_argument("--nfirst",type=int,default=5)
     args=ap.parse_args(); nf=args.nfirst; cfg=dict(MODE_PARAMS[args.mode])
     out=Path(cfg["output_csv_path"]); out.parent.mkdir(parents=True,exist_ok=True)
     if cfg["plot_output_dir"]: Path(cfg["plot_output_dir"]).mkdir(parents=True,exist_ok=True)

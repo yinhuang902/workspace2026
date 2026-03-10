@@ -112,7 +112,7 @@ def build_models(nscen, nfirst=5, nparam=5, seed=1234, **kw):
 
 
 MODE_PARAMS = {
-    "smoke": {"nscen":10,"target_nodes":60,"gap_stop_tol":1e-6,"time_limit":300,"enable_ef_ub":True,"ef_time_ub":30.,"plot_every":None,
+    "smoke": {"nscen":5,"target_nodes":60,"gap_stop_tol":1e-6,"time_limit":60,"enable_ef_ub":True,"ef_time_ub":30.,"plot_every":None,
               "plot_output_dir":"results/hydro_smoke/plots","output_csv_path":"results/hydro_smoke/simplex_result.csv"},
     "full":  {"nscen":100,"target_nodes":300,"gap_stop_tol":1e-2,"time_limit":None,"enable_ef_ub":True,"ef_time_ub":43200.,"plot_every":None,
               "plot_output_dir":"results/hydro_full/plots","output_csv_path":"results/hydro_full/simplex_result.csv"},

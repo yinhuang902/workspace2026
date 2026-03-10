@@ -2,47 +2,42 @@
 # ms/cs/Q timing, non-optimal subproblem detection
 
 === Iter 0 ===
-ms: total_time=24.0799, calls=1080, avg=0.0223
-cs: total_time=25.1896, calls=1080, avg=0.0233
-Q:  total_time=0.1242, calls=10, avg=0.0124
+ms: total_time=8.4923, calls=540, avg=0.0157
+cs: total_time=9.8967, calls=540, avg=0.0183
+Q:  total_time=0.0454, calls=5, avg=0.0091
 
 === Iter 1 ===
 ms: total_time=0.0000, calls=0, avg=0.0000
 cs: total_time=0.0000, calls=0, avg=0.0000
-Q:  total_time=0.1776, calls=10, avg=0.0178
+Q:  total_time=0.0767, calls=5, avg=0.0153
 
 === Iter 2 ===
 ms: total_time=0.0000, calls=0, avg=0.0000
 cs: total_time=0.0000, calls=0, avg=0.0000
-Q:  total_time=0.1610, calls=10, avg=0.0161
+Q:  total_time=0.0773, calls=5, avg=0.0155
 
 === Iter 3 ===
 ms: total_time=0.0000, calls=0, avg=0.0000
 cs: total_time=0.0000, calls=0, avg=0.0000
-Q:  total_time=0.1810, calls=10, avg=0.0181
+Q:  total_time=0.0543, calls=5, avg=0.0109
 
 === Iter 4 ===
 ms: total_time=0.0000, calls=0, avg=0.0000
 cs: total_time=0.0000, calls=0, avg=0.0000
-Q:  total_time=0.1423, calls=10, avg=0.0142
+Q:  total_time=0.0843, calls=5, avg=0.0169
 
 === Iter 5 ===
 ms: total_time=0.0000, calls=0, avg=0.0000
 cs: total_time=0.0000, calls=0, avg=0.0000
-Q:  total_time=0.1737, calls=10, avg=0.0174
+Q:  total_time=0.0672, calls=5, avg=0.0134
 
 === Iter 6 ===
 ms: total_time=0.0000, calls=0, avg=0.0000
 cs: total_time=0.0000, calls=0, avg=0.0000
-Q:  total_time=0.2178, calls=10, avg=0.0218
+Q:  total_time=0.0704, calls=5, avg=0.0141
 
 === Iter 7 ===
 ms: total_time=0.0000, calls=0, avg=0.0000
 cs: total_time=0.0000, calls=0, avg=0.0000
-Q:  total_time=0.2460, calls=10, avg=0.0246
-
-=== Iter 8 ===
-ms: total_time=0.0000, calls=0, avg=0.0000
-cs: total_time=0.0000, calls=0, avg=0.0000
-Q:  total_time=0.2093, calls=10, avg=0.0209
+Q:  total_time=0.0700, calls=5, avg=0.0140
 

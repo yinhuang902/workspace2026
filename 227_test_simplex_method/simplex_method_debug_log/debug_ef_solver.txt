@@ -2,52 +2,42 @@
 # Each iteration has per-solver lines + winner line
 
 --- [Iter 0] ---
-  [ipopt ] ok=True, status=ok, term=optimal, time=0.049s, ef_obj=-132.73641988151508, true_obj(per-scen)=-132.736418515, gurobi_LB=-inf
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.071s, ef_obj=7585.672487856136, true_obj(per-scen)=7585.672610803, gurobi_LB=-inf
   [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
-  [winner] ipopt, ub_updated=True, UB_incumbent=-132.736418515, LB_global_end=-133.375013301, UB_global_end=-132.736418515
+  [winner] ipopt, ub_updated=False, UB_incumbent=7585.672610803, LB_global_end=7120.879003673, UB_global_end=7585.672610803
 
 --- [Iter 1] ---
-  [ipopt ] ok=True, status=ok, term=optimal, time=0.052s, ef_obj=-132.73641988261534, true_obj(per-scen)=-132.736418516, gurobi_LB=-inf
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.059s, ef_obj=7585.672487826033, true_obj(per-scen)=7585.672610803, gurobi_LB=-inf
   [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
-  [winner] ipopt, ub_updated=True, UB_incumbent=-132.736418516, LB_global_end=-133.375013301, UB_global_end=-132.736418516
+  [winner] ipopt, ub_updated=False, UB_incumbent=7585.672610803, LB_global_end=7174.893985718, UB_global_end=7585.672610803
 
 --- [Iter 2] ---
-  [ipopt ] ok=True, status=ok, term=optimal, time=0.058s, ef_obj=-132.73641987552648, true_obj(per-scen)=-132.736418509, gurobi_LB=-inf
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.060s, ef_obj=7585.6724878481355, true_obj(per-scen)=7585.672610803, gurobi_LB=-inf
   [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
-  [winner] ipopt, ub_updated=False, UB_incumbent=-132.736418516, LB_global_end=-133.375013301, UB_global_end=-132.736418516
+  [winner] ipopt, ub_updated=False, UB_incumbent=7585.672610803, LB_global_end=7224.050594738, UB_global_end=7585.672610803
 
 --- [Iter 3] ---
-  [ipopt ] ok=True, status=ok, term=optimal, time=0.048s, ef_obj=-132.73641988078555, true_obj(per-scen)=-132.736418514, gurobi_LB=-inf
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.062s, ef_obj=7585.672515814597, true_obj(per-scen)=7585.672646791, gurobi_LB=-inf
   [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
-  [winner] ipopt, ub_updated=False, UB_incumbent=-132.736418516, LB_global_end=-133.375324220, UB_global_end=-132.736418516
+  [winner] ipopt, ub_updated=False, UB_incumbent=7585.672610803, LB_global_end=7224.050594741, UB_global_end=7585.672610803
 
 --- [Iter 4] ---
-  [ipopt ] ok=True, status=ok, term=optimal, time=0.049s, ef_obj=-132.73642020775594, true_obj(per-scen)=-132.736418542, gurobi_LB=-inf
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.070s, ef_obj=7585.672487777459, true_obj(per-scen)=7585.672610803, gurobi_LB=-inf
   [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
-  [winner] ipopt, ub_updated=True, UB_incumbent=-132.736418542, LB_global_end=-133.375324220, UB_global_end=-132.736418542
+  [winner] ipopt, ub_updated=False, UB_incumbent=7585.672610803, LB_global_end=7224.050594741, UB_global_end=7585.672610803
 
 --- [Iter 5] ---
-  [ipopt ] ok=True, status=ok, term=optimal, time=0.049s, ef_obj=-132.73641986832808, true_obj(per-scen)=-132.736418502, gurobi_LB=-inf
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.062s, ef_obj=7585.672668835783, true_obj(per-scen)=7585.672792796, gurobi_LB=-inf
   [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
-  [winner] ipopt, ub_updated=False, UB_incumbent=-132.736418542, LB_global_end=-133.375324220, UB_global_end=-132.736418542
+  [winner] ipopt, ub_updated=False, UB_incumbent=7585.672610803, LB_global_end=7224.050594741, UB_global_end=7585.672610803
 
 --- [Iter 6] ---
-  [ipopt ] ok=True, status=ok, term=optimal, time=0.052s, ef_obj=-132.73642020765493, true_obj(per-scen)=-132.736418542, gurobi_LB=-inf
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.063s, ef_obj=7585.672487754916, true_obj(per-scen)=7585.672610803, gurobi_LB=-inf
   [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
-  [winner] ipopt, ub_updated=False, UB_incumbent=-132.736418542, LB_global_end=-133.375322815, UB_global_end=-132.736418542
+  [winner] ipopt, ub_updated=False, UB_incumbent=7585.672610803, LB_global_end=7224.106389568, UB_global_end=7585.672610803
 
 --- [Iter 7] ---
-  [ipopt ] ok=True, status=ok, term=optimal, time=0.061s, ef_obj=-132.73641986882114, true_obj(per-scen)=-132.736418502, gurobi_LB=-inf
+  [ipopt ] ok=True, status=ok, term=optimal, time=0.058s, ef_obj=7585.672487839224, true_obj(per-scen)=7585.672610803, gurobi_LB=-inf
   [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
-  [winner] ipopt, ub_updated=False, UB_incumbent=-132.736418542, LB_global_end=-133.375324211, UB_global_end=-132.736418542
-
---- [Iter 8] ---
-  [ipopt ] ok=True, status=ok, term=optimal, time=0.052s, ef_obj=-132.73641986882114, true_obj(per-scen)=-132.736418502, gurobi_LB=-inf
-  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
-  [winner] ipopt, ub_updated=False, UB_incumbent=-132.736418542, LB_global_end=-133.375324211, UB_global_end=-132.736418542
-
---- [Iter 9] ---
-  [ipopt ] ok=True, status=ok, term=optimal, time=0.049s, ef_obj=-132.73641986876174, true_obj(per-scen)=-132.736418502, gurobi_LB=-inf
-  [gurobi] ok=False, status=not_initialized, term=None, time=0.000s, ef_obj=None, true_obj(per-scen)=N/A
-  [winner] ipopt, ub_updated=False, UB_incumbent=-132.736418542, LB_global_end=-133.375324208, UB_global_end=-132.736418542
+  [winner] ipopt, ub_updated=False, UB_incumbent=7585.672610803, LB_global_end=7225.679618181, UB_global_end=7585.672610803
 
