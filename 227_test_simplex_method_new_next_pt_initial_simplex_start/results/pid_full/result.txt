@@ -1,0 +1,14 @@
+PID Regression — mode=full
+==================================================
+Scenarios:   50
+Iterations:  2
+Final LB:    0.979632190
+Final UB:    0.979664409
+Abs gap:     0.000032219
+Rel gap:     0.0033%
+Runtime:     1714.44s
+Timestamp:   2026-03-05 16:00:19
+
+LB history (avg per scenario):
+  iter   0: LB=0.979444163  UB=0.979916640
+  iter   1: LB=0.979632190  UB=0.979664409

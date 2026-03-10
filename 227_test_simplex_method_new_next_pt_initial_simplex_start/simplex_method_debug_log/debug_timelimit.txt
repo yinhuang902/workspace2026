@@ -1,0 +1,3 @@
+# debug_timelimit.txt — subproblems that hit Gurobi TimeLimit
+# Format: [Iter N] [MS/CS TimeLimit] simplex_idx=..., verts=..., scenario=..., dual_bound=..., primal_obj=..., dual<primal=...
+
