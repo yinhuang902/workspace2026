@@ -234,7 +234,7 @@ MODE_PARAMS = {
         "nscen": 5,
         "target_nodes": 900,
         "gap_stop_tol": 1e-6,
-        "time_limit": 60*60,
+        "time_limit": 1000,
         "enable_ef_ub": True,
         "ef_time_ub": 30.0,
         "plot_every": None,
@@ -254,13 +254,13 @@ MODE_PARAMS = {
     },
 }
 
-BUNDLE_OPTIONS = {"NonConvex": 2, "MIPGap": 1e-2, "TimeLimit": 60}
+BUNDLE_OPTIONS = {"NonConvex": 2, "MIPGap": 1e-3, "TimeLimit": 60}
 Q_MAX = 1e4
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--mode", choices=("smoke", "full"), default="smoke")
+    ap.add_argument("--mode", choices=("smoke", "full"), default="full")
     ap.add_argument("--seed", type=int, default=1234)
     ap.add_argument("--print_first_k_rhs", type=int, default=0)
     args = ap.parse_args()

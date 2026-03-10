@@ -1,0 +1,41 @@
+# simplex_debug.txt — ms/cs/Q subproblem failures
+# Fields: simp, scen, type, issue, ok, status, term, val, dual, time
+
+=== Iter 11 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0027s
+=== Iter 12 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0034s
+=== Iter 14 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0054s
+=== Iter 15 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0028s
+=== Iter 16 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0038s
+=== Iter 17 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0034s
+=== Iter 18 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0031s
+=== Iter 20 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0031s
+=== Iter 21 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0032s
+=== Iter 22 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0031s
+=== Iter 23 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0035s
+=== Iter 24 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0034s
+=== Iter 25 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0027s
+=== Iter 26 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0040s
+=== Iter 27 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0035s
+=== Iter 28 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0033s
+=== Iter 29 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0034s
+=== Iter 30 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0032s
+=== Iter 31 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0037s

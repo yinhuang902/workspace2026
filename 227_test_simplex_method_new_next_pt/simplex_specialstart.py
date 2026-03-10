@@ -3134,13 +3134,46 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
             _split_lines = []
             _split_lines.append(f"=== Iter {it} ===\n")
             _split_lines.append(f"selected_simplex: T{_sel_sid}  LB_pre={_sel_lb_pre/S:.9f}\n")
+            # Log vertex coordinates of the selected simplex
+            if selected_rec_before_split is not None:
+                _sel_verts = selected_rec_before_split.get("verts", [])
+                _sel_vidxs = selected_rec_before_split.get("vert_idx", [])
+                for _vi, (_vidx, _vc) in enumerate(zip(_sel_vidxs, _sel_verts)):
+                    _vc_str = _fmt_point(_vc)
+                    _split_lines.append(f"  v{_vidx}: {_vc_str}\n")
             _split_lines.append(f"UB_pre={_ub_pre_split/S:.9f}  LB_global_pre={_lb_pre_split/S:.9f}\n")
             _split_lines.append(f"children (created {n_children}):\n")
             for _ci in new_simplex_indices:
                 if _ci in per_tet_dict:
                     _cr = per_tet_dict[_ci]
                     _cid = tuple(sorted(_cr["vert_idx"]))
-                    _split_lines.append(f"  child T{_ci} {_cid} LB={float(_cr['LB'])/S:.9f}\n")
+                    _c_sum = sum(float(x) for x in _cr.get("c_per_scene", []) if np.isfinite(float(x)))
+                    _split_lines.append(f"  child T{_ci} {_cid} LB={float(_cr['LB'])/S:.9f} sum_cs={_c_sum/S:.9f}\n")
+            # Log next-node coordinates and barycentric coordinates
+            _nn_str = _fmt_point(new_node) if new_node is not None else "None"
+            _split_lines.append(f"next_node: {_nn_str}\n")
+            # Barycentric coordinates
+            _bary_str = "N/A"
+            if new_node is not None and chosen_cand is not None:
+                _bary_lambdas = chosen_cand.get("loc_info", {}).get("lambdas", None) if chosen_cand.get("loc_info") else None
+                if _bary_lambdas is not None:
+                    _bary_str = "(" + ", ".join(f"{float(l):.6f}" for l in _bary_lambdas) + ")"
+                else:
+                    # Compute barycentric coords from simplex vertices
+                    try:
+                        _nn_rec = chosen_cand.get("_rec", selected_rec_before_split)
+                        if _nn_rec is not None:
+                            _nn_verts = np.array(_nn_rec["verts"], dtype=float)
+                            _nn_pt = np.array(new_node, dtype=float)
+                            # Solve V^T * lambda = pt, with sum(lambda)=1
+                            _d = _nn_verts.shape[1]
+                            _A = np.vstack([_nn_verts.T, np.ones((1, _d + 1))])
+                            _b = np.append(_nn_pt, 1.0)
+                            _lam = np.linalg.lstsq(_A, _b, rcond=None)[0]
+                            _bary_str = "(" + ", ".join(f"{float(l):.6f}" for l in _lam) + ")"
+                    except Exception:
+                        _bary_str = "error"
+            _split_lines.append(f"barycentric: {_bary_str}\n")
             _split_lines.append(f"sample_retry_triggered={'yes' if _q_retry_triggered else 'no'}  retry_count={_q_retry_count}\n")
             _split_lines.append(f"end: UB={UB_global_end/S:.9f}  LB={LB_global_end/S:.9f}\n\n")
             with open(split_log_path, "a", encoding="utf-8") as _fsplit:
@@ -3152,20 +3185,20 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
         # (B) simplex_record_subproblem_runtime.txt — append per-iteration
         # ================================================================
         try:
-            # --- MS timing: extract from per_tet metadata (not timing dict) ---
+            # --- MS timing: extract from per_tet_end metadata (post-split) ---
             _ms_total_time = 0.0
             _ms_total_calls = 0
-            for _r in per_tet:
+            for _r in per_tet_end:
                 for _ms_m in (_r.get("ms_meta_per_scene") or []):
                     if _ms_m is not None and _ms_m.get("time_sec") is not None:
                         _ms_total_time += float(_ms_m["time_sec"])
                         _ms_total_calls += 1
             _ms_avg = _ms_total_time / _ms_total_calls if _ms_total_calls > 0 else 0.0
 
-            # --- CS timing: extract from per_tet metadata ---
+            # --- CS timing: extract from per_tet_end metadata (post-split) ---
             _cs_total_time = 0.0
             _cs_total_calls = 0
-            for _r in per_tet:
+            for _r in per_tet_end:
                 for _cs_m in (_r.get("cs_meta_per_scene") or []):
                     if _cs_m is not None and _cs_m.get("time_sec") is not None:
                         _cs_total_time += float(_cs_m["time_sec"])
