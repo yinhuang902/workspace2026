@@ -10,547 +10,547 @@
   --- T0 (0, 2, 3, 4, 8, 16) ---
     LB: 7120.879003671 (per-scen)
     Avg dual bound (ms): 6764.729157880
-    Avg c_s point Q-value: 8274.992666525 (per-scen), point=(np.float64(4.4), np.float64(0.4), np.float64(2.26801808503991), np.float64(0.9319819149600894), np.float64(0.0))
+    Avg c_s point Q-value: 8274.992666525 (per-scen), point=(4.4, 0.4, 2.26801808503991, 0.9319819149600894, 0.0)
     Volume: 8.192000e+02
   --- T1 (0, 1, 3, 4, 8, 16) ---
-    LB: 7224.050594738 (per-scen)
-    Avg dual bound (ms): 6845.362379103
-    Avg c_s point Q-value: 8123.620676502 (per-scen), point=(np.float64(4.4), np.float64(0.4), np.float64(3.2), np.float64(0.0), np.float64(0.0))
+    LB: 7224.571019286 (per-scen)
+    Avg dual bound (ms): 6847.341478833
+    Avg c_s point Q-value: 8123.620676502 (per-scen), point=(4.4, 0.4, 3.2, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T2 (3, 16, 25, 27, 28, 29) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T3 (3, 4, 23, 28, 29, 30) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T4 (3, 16, 27, 29, 30, 31) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T5 (2, 3, 4, 8, 16, 30) ---
     LB: 7120.879003673 (per-scen)
     Avg dual bound (ms): 6764.715070801
-    Avg c_s point Q-value: 8274.992666525 (per-scen), point=(np.float64(4.4), np.float64(0.4), np.float64(2.26801808503991), np.float64(0.9319819149600903), np.float64(0.0))
+    Avg c_s point Q-value: 8274.992666525 (per-scen), point=(4.4, 0.4, 2.26801808503991, 0.9319819149600903, 0.0)
     Volume: 2.457600e+03
   --- T6 (3, 4, 23, 29, 30, 31) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T7 (3, 16, 23, 29, 30, 31) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T8 (3, 4, 15, 29, 30, 31) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T9 (1, 3, 4, 8, 16, 29) ---
-    LB: 7224.050594741 (per-scen)
-    Avg dual bound (ms): 6845.348292180
-    Avg c_s point Q-value: 8123.620676502 (per-scen), point=(np.float64(4.4), np.float64(0.4), np.float64(3.2), np.float64(0.0), np.float64(0.0))
+    LB: 7224.071830717 (per-scen)
+    Avg dual bound (ms): 6847.327391910
+    Avg c_s point Q-value: 8123.620676502 (per-scen), point=(4.4, 0.4, 3.2, 0.0, 0.0)
     Volume: 2.457600e+03
   --- T10 (3, 8, 27, 29, 30, 31) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T11 (3, 16, 23, 27, 30, 31) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T12 (3, 16, 19, 23, 25, 27) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T13 (3, 8, 15, 29, 30, 31) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T14 (3, 8, 15, 27, 30, 31) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T15 (3, 16, 23, 27, 29, 31) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T16 (3, 4, 15, 23, 30, 31) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T17 (3, 4, 15, 23, 29, 31) ---
-    LB: 7910.759862571 (per-scen)
-    Avg dual bound (ms): 7910.759862571
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.713536390 (per-scen)
+    Avg dual bound (ms): 7910.713536382
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T18 (3, 8, 15, 27, 29, 31) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T19 (3, 4, 15, 28, 29, 30) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T20 (3, 4, 8, 16, 28, 30) ---
     LB: 7224.050594741 (per-scen)
-    Avg dual bound (ms): 6845.348294897
-    Avg c_s point Q-value: 8123.620676660 (per-scen), point=(np.float64(4.40000000055458), np.float64(0.40000000057081503), np.float64(3.1999999987947), np.float64(7.99002233939632e-11), np.float64(2.397263183240231e-10))
+    Avg dual bound (ms): 6847.327394627
+    Avg c_s point Q-value: 8123.620676660 (per-scen), point=(4.40000000055458, 0.40000000057081503, 3.1999999987947, 7.99002233939632e-11, 2.397263183240231e-10)
     Volume: 1.638400e+03
   --- T21 (3, 4, 8, 16, 28, 29) ---
-    LB: 7224.050594741 (per-scen)
-    Avg dual bound (ms): 6845.348293236
-    Avg c_s point Q-value: 8123.620676502 (per-scen), point=(np.float64(4.4), np.float64(0.4), np.float64(3.2), np.float64(0.0), np.float64(0.0))
+    LB: 7224.623451566 (per-scen)
+    Avg dual bound (ms): 6847.327392966
+    Avg c_s point Q-value: 8123.620676502 (per-scen), point=(4.4, 0.4, 3.2, 0.0, 0.0)
     Volume: 1.638400e+03
   --- T22 (3, 8, 27, 28, 29, 30) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T23 (3, 16, 27, 28, 29, 30) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T24 (3, 16, 23, 28, 29, 30) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T25 (2, 3, 16, 22, 26, 30) ---
     LB: 7553.962634478 (per-scen)
     Avg dual bound (ms): 7470.633318321
-    Avg c_s point Q-value: 8374.739076467 (per-scen), point=(np.float64(5.176720830520779), np.float64(0.0), np.float64(0.0), np.float64(2.8232791694792216), np.float64(0.0))
+    Avg c_s point Q-value: 8374.739076467 (per-scen), point=(5.176720830520779, 0.0, 0.0, 2.8232791694792216, 0.0)
     Volume: 8.192000e+02
   --- T26 (3, 8, 15, 28, 29, 30) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T27 (2, 3, 8, 14, 26, 30) ---
     LB: 8329.951970630 (per-scen)
     Avg dual bound (ms): 8042.120085654
-    Avg c_s point Q-value: 9336.533665241 (per-scen), point=(np.float64(0.0), np.float64(1.9767208305207422), np.float64(0.0), np.float64(6.023279169479258), np.float64(0.0))
+    Avg c_s point Q-value: 9336.518867354 (per-scen), point=(0.0, 1.9767208305207773, 0.0, 6.023279169479222, 0.0)
     Volume: 8.192000e+02
   --- T28 (2, 3, 8, 16, 26, 30) ---
     LB: 7336.767743569 (per-scen)
     Avg dual bound (ms): 7248.233318321
-    Avg c_s point Q-value: 8514.902366718 (per-scen), point=(np.float64(4.776720830520741), np.float64(0.4), np.float64(0.0), np.float64(2.823279169479259), np.float64(0.0))
+    Avg c_s point Q-value: 8514.902366718 (per-scen), point=(4.776720830520739, 0.4, 0.0, 2.823279169479261, 0.0)
     Volume: 1.638400e+03
   --- T29 (3, 8, 16, 26, 28, 30) ---
     LB: 7363.272610803 (per-scen)
     Avg dual bound (ms): 7363.272610803
-    Avg c_s point Q-value: 7655.567203912 (per-scen), point=(np.float64(7.6), np.float64(0.4), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7655.567203912 (per-scen), point=(7.6, 0.4, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T30 (3, 8, 26, 27, 28, 30) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T31 (3, 16, 26, 27, 28, 30) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T32 (3, 16, 23, 26, 27, 30) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T33 (3, 8, 15, 26, 27, 30) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T34 (1, 3, 8, 16, 25, 29) ---
     LB: 7363.272610803 (per-scen)
     Avg dual bound (ms): 7363.272610803
-    Avg c_s point Q-value: 7655.567203912 (per-scen), point=(np.float64(7.6), np.float64(0.4), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7655.567203912 (per-scen), point=(7.6, 0.4, 0.0, 0.0, 0.0)
     Volume: 1.638400e+03
   --- T35 (3, 16, 25, 26, 27, 28) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T36 (3, 8, 25, 26, 27, 28) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T37 (3, 8, 16, 25, 28, 29) ---
     LB: 7363.272610803 (per-scen)
     Avg dual bound (ms): 7363.272610803
-    Avg c_s point Q-value: 7655.567203912 (per-scen), point=(np.float64(7.6), np.float64(0.4), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7655.567203912 (per-scen), point=(7.6, 0.4, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T38 (3, 8, 25, 27, 28, 29) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T39 (3, 16, 23, 25, 27, 29) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T40 (3, 16, 21, 23, 28, 29) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T41 (3, 8, 15, 25, 27, 29) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T42 (3, 8, 13, 15, 28, 29) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T43 (2, 3, 4, 16, 22, 30) ---
-    LB: 7300.122874503 (per-scen)
-    Avg dual bound (ms): 6987.205507792
-    Avg c_s point Q-value: 8241.000306521 (per-scen), point=(np.float64(4.800000001531137), np.float64(0.0), np.float64(2.267980166912708), np.float64(0.9320198315560816), np.float64(3.5238955465429076e-10))
+    LB: 7300.032444403 (per-scen)
+    Avg dual bound (ms): 6987.115070945
+    Avg c_s point Q-value: 8240.995598707 (per-scen), point=(4.8, 0.0, 2.2680180850399245, 0.9319819149600654, 0.0)
     Volume: 1.638400e+03
   --- T44 (3, 4, 16, 22, 28, 30) ---
     LB: 7571.706656733 (per-scen)
-    Avg dual bound (ms): 7067.751749734
-    Avg c_s point Q-value: 8087.237735074 (per-scen), point=(np.float64(4.800000000289266), np.float64(0.0), np.float64(3.199999999676675), np.float64(3.4034932843614405e-11), np.float64(1.0203974606545046e-10))
+    Avg dual bound (ms): 7067.753919560
+    Avg c_s point Q-value: 8087.237735074 (per-scen), point=(4.800000000289266, 0.0, 3.199999999676675, 3.4034932843614405e-11, 1.0203974606545046e-10)
     Volume: 8.192000e+02
   --- T45 (3, 4, 22, 23, 28, 30) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T46 (3, 16, 22, 23, 28, 30) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T47 (3, 16, 22, 23, 26, 30) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T48 (3, 4, 15, 22, 23, 30) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T49 (1, 3, 4, 16, 21, 29) ---
     LB: 7571.706656733 (per-scen)
-    Avg dual bound (ms): 7067.748292190
-    Avg c_s point Q-value: 8087.237734982 (per-scen), point=(np.float64(4.8), np.float64(0.0), np.float64(3.2), np.float64(0.0), np.float64(0.0))
+    Avg dual bound (ms): 7067.796309766
+    Avg c_s point Q-value: 8087.236366107 (per-scen), point=(4.800039220562257, 0.0, 3.1999607794377423, 0.0, 0.0)
     Volume: 1.638400e+03
   --- T50 (1, 3, 16, 21, 25, 29) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T51 (3, 16, 24, 25, 26, 28) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T52 (3, 16, 21, 22, 23, 28) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T53 (3, 4, 21, 22, 23, 28) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T54 (3, 4, 16, 21, 28, 29) ---
     LB: 7571.706656733 (per-scen)
-    Avg dual bound (ms): 7067.748293868
-    Avg c_s point Q-value: 8087.237734982 (per-scen), point=(np.float64(4.8), np.float64(0.0), np.float64(3.2), np.float64(0.0), np.float64(0.0))
+    Avg dual bound (ms): 7067.753273598
+    Avg c_s point Q-value: 8087.237734982 (per-scen), point=(4.8, 0.0, 3.2, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T55 (3, 4, 21, 23, 28, 29) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T56 (3, 16, 21, 23, 25, 29) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T57 (3, 4, 15, 21, 23, 29) ---
-    LB: 7910.759862571 (per-scen)
-    Avg dual bound (ms): 7910.759862571
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.713536390 (per-scen)
+    Avg dual bound (ms): 7910.713536382
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T58 (3, 16, 20, 21, 22, 28) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T59 (3, 16, 19, 22, 23, 26) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T60 (3, 16, 19, 23, 26, 27) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T61 (3, 16, 18, 19, 22, 26) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T62 (3, 16, 19, 21, 23, 25) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T63 (3, 8, 11, 15, 25, 27) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T64 (2, 3, 4, 14, 22, 30) ---
-    LB: 7810.639688061 (per-scen)
-    Avg dual bound (ms): 7598.864096082
-    Avg c_s point Q-value: 8562.841173698 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(5.46801808503991), np.float64(2.5319819149600904), np.float64(0.0))
+    LB: 7810.639688040 (per-scen)
+    Avg dual bound (ms): 7598.864096061
+    Avg c_s point Q-value: 8562.841173698 (per-scen), point=(0.0, 0.0, 5.46801808503991, 2.5319819149600904, 0.0)
     Volume: 8.192000e+02
   --- T65 (2, 3, 4, 8, 14, 30) ---
-    LB: 7501.029229595 (per-scen)
-    Avg dual bound (ms): 7113.264096089
-    Avg c_s point Q-value: 8764.554890695 (per-scen), point=(np.float64(0.0), np.float64(1.6), np.float64(3.8680180850399095), np.float64(2.531981914960091), np.float64(0.0))
+    LB: 7501.029230460 (per-scen)
+    Avg dual bound (ms): 7113.264096954
+    Avg c_s point Q-value: 8764.491626121 (per-scen), point=(0.0, 1.600000000435695, 3.868018084691529, 2.5319819148727705, 4.2987253707452574e-11)
     Volume: 1.638400e+03
   --- T66 (3, 4, 8, 14, 28, 30) ---
     LB: 7691.857470866 (per-scen)
     Avg dual bound (ms): 7348.723096079
-    Avg c_s point Q-value: 8319.018937745 (per-scen), point=(np.float64(0.0), np.float64(3.2), np.float64(4.8), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 8319.018937663 (per-scen), point=(0.0, 3.2, 4.8, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T67 (3, 4, 14, 15, 28, 30) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T68 (3, 8, 14, 15, 28, 30) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T69 (3, 8, 14, 15, 26, 30) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T70 (3, 4, 14, 15, 22, 30) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T71 (1, 3, 4, 13, 21, 29) ---
     LB: 7910.713536390 (per-scen)
     Avg dual bound (ms): 7910.713536374
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T72 (1, 3, 4, 8, 13, 29) ---
     LB: 7691.857470848 (per-scen)
     Avg dual bound (ms): 7348.723096063
-    Avg c_s point Q-value: 8319.018937745 (per-scen), point=(np.float64(0.0), np.float64(3.2), np.float64(4.8), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 8319.018937663 (per-scen), point=(0.0, 3.2, 4.8, 0.0, 0.0)
     Volume: 1.638400e+03
   --- T73 (1, 3, 8, 13, 25, 29) ---
     LB: 8523.990351251 (per-scen)
     Avg dual bound (ms): 8523.990351251
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T74 (3, 16, 17, 19, 21, 25) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T75 (3, 8, 13, 14, 15, 28) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T76 (3, 4, 13, 14, 15, 28) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T77 (3, 4, 8, 13, 28, 29) ---
     LB: 7691.857470863 (per-scen)
     Avg dual bound (ms): 7348.723096079
-    Avg c_s point Q-value: 8319.018937745 (per-scen), point=(np.float64(0.0), np.float64(3.2), np.float64(4.8), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 8319.018937663 (per-scen), point=(0.0, 3.2, 4.8, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T78 (3, 4, 13, 15, 28, 29) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T79 (3, 8, 13, 15, 25, 29) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T80 (3, 4, 13, 15, 21, 29) ---
-    LB: 7910.759862571 (per-scen)
-    Avg dual bound (ms): 7910.759862571
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.713536390 (per-scen)
+    Avg dual bound (ms): 7910.713536382
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T81 (3, 8, 12, 13, 14, 28) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T82 (3, 8, 11, 14, 15, 26) ---
-    LB: 8524.031171169 (per-scen)
-    Avg dual bound (ms): 8524.031171169
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T83 (3, 8, 11, 15, 26, 27) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T84 (3, 8, 10, 11, 14, 26) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T85 (3, 8, 11, 13, 15, 25) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T86 (3, 8, 9, 11, 13, 25) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T87 (3, 4, 7, 14, 15, 22) ---
     LB: 7910.727661743 (per-scen)
     Avg dual bound (ms): 7910.727661743
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T88 (3, 4, 7, 15, 22, 23) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T89 (3, 4, 6, 7, 14, 22) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T90 (3, 4, 7, 13, 15, 21) ---
-    LB: 7910.759862571 (per-scen)
-    Avg dual bound (ms): 7910.759862571
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.713536390 (per-scen)
+    Avg dual bound (ms): 7910.713536382
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T91 (3, 4, 7, 15, 21, 23) ---
-    LB: 7910.759862571 (per-scen)
-    Avg dual bound (ms): 7910.759862571
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.713536390 (per-scen)
+    Avg dual bound (ms): 7910.713536382
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T92 (3, 4, 5, 7, 13, 21) ---
-    LB: 7910.759862571 (per-scen)
-    Avg dual bound (ms): 7910.759862571
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.713536382 (per-scen)
+    Avg dual bound (ms): 7910.713536382
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T93 (3, 8, 24, 25, 26, 28) ---
-    LB: 8523.992227845 (per-scen)
-    Avg dual bound (ms): 8523.992227845
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    LB: 8523.971410232 (per-scen)
+    Avg dual bound (ms): 8523.971410232
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T94 (3, 8, 16, 24, 26, 28) ---
     LB: 7363.272610803 (per-scen)
     Avg dual bound (ms): 7363.272610803
-    Avg c_s point Q-value: 7655.567203912 (per-scen), point=(np.float64(7.6), np.float64(0.4), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7655.567203912 (per-scen), point=(7.6, 0.4, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T95 (3, 8, 16, 24, 25, 28) ---
     LB: 7363.272610803 (per-scen)
     Avg dual bound (ms): 7363.272610803
-    Avg c_s point Q-value: 7655.567203912 (per-scen), point=(np.float64(7.6), np.float64(0.4), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7655.567203912 (per-scen), point=(7.6, 0.4, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T96 (3, 4, 20, 21, 22, 28) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T97 (3, 4, 16, 20, 22, 28) ---
     LB: 7571.706656733 (per-scen)
-    Avg dual bound (ms): 7069.437544850
-    Avg c_s point Q-value: 8087.235164082 (per-scen), point=(np.float64(4.8000736664626755), np.float64(0.0), np.float64(3.199926333431796), np.float64(1.0549216594613479e-10), np.float64(3.164901486330073e-10))
+    Avg dual bound (ms): 7067.803110678
+    Avg c_s point Q-value: 8087.237735268 (per-scen), point=(4.8000000008968255, 0.0, 3.199999998997646, 1.0549216594613479e-10, 3.164901486330073e-10)
     Volume: 8.192000e+02
   --- T98 (3, 4, 16, 20, 21, 28) ---
     LB: 7571.706656733 (per-scen)
-    Avg dual bound (ms): 7067.797225121
-    Avg c_s point Q-value: 8087.237735085 (per-scen), point=(np.float64(4.800000000323183), np.float64(0.0), np.float64(3.1999999996388033), np.float64(3.8005252631277895e-11), np.float64(1.1406052544199401e-10))
+    Avg dual bound (ms): 7067.748292187
+    Avg c_s point Q-value: 8087.237734982 (per-scen), point=(4.8, 0.0, 3.2, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T99 (2, 3, 16, 18, 22, 26) ---
     LB: 7553.962634478 (per-scen)
     Avg dual bound (ms): 7470.633318321
-    Avg c_s point Q-value: 8374.739076467 (per-scen), point=(np.float64(5.176720830520779), np.float64(0.0), np.float64(0.0), np.float64(2.8232791694792216), np.float64(0.0))
+    Avg c_s point Q-value: 8374.739076467 (per-scen), point=(5.176720830520779, 0.0, 0.0, 2.8232791694792216, 0.0)
     Volume: 8.192000e+02
   --- T100 (1, 3, 16, 17, 21, 25) ---
     LB: 7585.672610803 (per-scen)
     Avg dual bound (ms): 7585.672610803
-    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7585.672610803 (per-scen), point=(8.0, 0.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T101 (3, 4, 12, 13, 14, 28) ---
-    LB: 7910.727638584 (per-scen)
-    Avg dual bound (ms): 7910.727638584
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    LB: 7910.727623305 (per-scen)
+    Avg dual bound (ms): 7910.727623305
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T102 (3, 4, 8, 12, 14, 28) ---
     LB: 7691.857470866 (per-scen)
     Avg dual bound (ms): 7348.723096079
-    Avg c_s point Q-value: 8319.018937745 (per-scen), point=(np.float64(0.0), np.float64(3.2), np.float64(4.8), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 8319.018937663 (per-scen), point=(0.0, 3.2, 4.8, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T103 (3, 4, 8, 12, 13, 28) ---
     LB: 7691.857470866 (per-scen)
     Avg dual bound (ms): 7348.723096079
-    Avg c_s point Q-value: 8319.018937745 (per-scen), point=(np.float64(0.0), np.float64(3.2), np.float64(4.8), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 8319.018937663 (per-scen), point=(0.0, 3.2, 4.8, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T104 (2, 3, 8, 10, 14, 26) ---
     LB: 8329.951970630 (per-scen)
     Avg dual bound (ms): 8042.120085654
-    Avg c_s point Q-value: 9336.533665241 (per-scen), point=(np.float64(0.0), np.float64(1.9767208305207422), np.float64(0.0), np.float64(6.023279169479258), np.float64(0.0))
+    Avg c_s point Q-value: 9336.518867354 (per-scen), point=(0.0, 1.9767208305207773, 0.0, 6.023279169479222, 0.0)
     Volume: 8.192000e+02
   --- T105 (1, 3, 8, 9, 13, 25) ---
     LB: 8523.990351251 (per-scen)
     Avg dual bound (ms): 8523.990351251
-    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 8523.971410232 (per-scen), point=(0.0, 8.0, 0.0, 0.0, 0.0)
     Volume: 8.192000e+02
   --- T106 (2, 3, 4, 6, 14, 22) ---
-    LB: 7810.639688061 (per-scen)
-    Avg dual bound (ms): 7598.864096082
-    Avg c_s point Q-value: 8562.841173698 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(5.46801808503991), np.float64(2.5319819149600904), np.float64(0.0))
+    LB: 7810.639688040 (per-scen)
+    Avg dual bound (ms): 7598.864096061
+    Avg c_s point Q-value: 8562.841173698 (per-scen), point=(0.0, 0.0, 5.46801808503991, 2.5319819149600904, 0.0)
     Volume: 8.192000e+02
   --- T107 (1, 3, 4, 5, 13, 21) ---
     LB: 7910.758688220 (per-scen)
     Avg dual bound (ms): 7910.758688220
-    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(np.float64(0.0), np.float64(0.0), np.float64(8.0), np.float64(0.0), np.float64(0.0))
+    Avg c_s point Q-value: 7910.713536390 (per-scen), point=(0.0, 0.0, 8.0, 0.0, 0.0)
     Volume: 8.192000e+02
 
   --- IPOPT EF Result (selected LB simplex only) ---
     Selected simplex: T0 (0, 2, 3, 4, 8, 16)
-    EF-IPOPT: ok=True, ef_obj(per-scen)=1517.134497571, true_obj(per-scen)=7585.672610803, status=ok, term=optimal, time=0.072s
+    EF-IPOPT: ok=True, ef_obj(per-scen)=1517.134497571, true_obj(per-scen)=7585.672610803, status=ok, term=optimal, time=0.054s
     EF-IPOPT K point: (8.0, 0.0, 0.0, 0.0, 0.0)
     Barycentric coords: [0.000000, -0.000000, -0.000000, -0.000000, 1.000000, -0.000000]
 
@@ -561,6 +561,6 @@
 
   --- Next Chosen Simplex ---
     Simplex: T0 (0, 2, 3, 4, 8, 16)
-    Scene: -1, source: mode2_weighted
-    New point: (0.7819325072165821, 2.7807539251922746, 1.3898301404629219, 3.0474834271282223, 3.002565320997258)
+    Scene: 0, source: ms
+    New point: (0.0, 5.0, 0.0, 2.9999999999910685, 6.0)
 ======================================================================

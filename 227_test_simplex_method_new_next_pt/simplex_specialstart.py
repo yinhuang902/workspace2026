@@ -2064,7 +2064,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 )
             _dbf.write("\n")
         # --- POINT_SELECT_MODE: 1=ms-first, 2=weighted composite (LB-best), 3=weighted avg all ms ---
-        POINT_SELECT_MODE = 3
+        POINT_SELECT_MODE = 1
 
         new_node = None
         chosen_ms = None

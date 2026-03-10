@@ -1,3 +1,711 @@
 # simplex_debug.txt — ms/cs/Q subproblem failures
 # Fields: simp, scen, type, issue, ok, status, term, val, dual, time
 
+=== Iter 13 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0033s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0051s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+=== Iter 14 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0051s
+=== Iter 27 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+=== Iter 28 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+=== Iter 30 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0051s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+=== Iter 33 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0033s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+=== Iter 38 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0049s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+=== Iter 47 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0045s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+=== Iter 49 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+=== Iter 53 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0065s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0049s
+=== Iter 61 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0050s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+=== Iter 64 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0045s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+=== Iter 66 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+=== Iter 67 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0050s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+=== Iter 68 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0051s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+=== Iter 69 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0046s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+=== Iter 72 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0046s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+=== Iter 73 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+=== Iter 74 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+=== Iter 75 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0045s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0046s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+=== Iter 76 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+=== Iter 81 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+=== Iter 82 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0045s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+=== Iter 83 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0047s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+=== Iter 84 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0045s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0047s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0033s
+=== Iter 87 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0047s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0032s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+=== Iter 88 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0032s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+=== Iter 89 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0045s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+=== Iter 90 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0045s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+=== Iter 91 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0033s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+=== Iter 92 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0049s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+=== Iter 93 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+=== Iter 94 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0047s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+=== Iter 95 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0046s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+=== Iter 96 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0047s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0031s
+=== Iter 97 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0046s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0031s
+=== Iter 98 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0032s
+=== Iter 100 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0047s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+=== Iter 101 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0050s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+=== Iter 102 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+=== Iter 103 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0045s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+=== Iter 105 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0045s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+=== Iter 106 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0031s
+=== Iter 107 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0032s
+=== Iter 108 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+=== Iter 109 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0046s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0046s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+=== Iter 111 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+=== Iter 112 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0049s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+=== Iter 113 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0051s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+=== Iter 114 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+=== Iter 115 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0050s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+=== Iter 116 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0047s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+=== Iter 118 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+=== Iter 119 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0050s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+=== Iter 120 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0050s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+=== Iter 121 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0047s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0045s
+=== Iter 122 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0033s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0049s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+=== Iter 123 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+=== Iter 124 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0049s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+=== Iter 125 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0071s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0050s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0058s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0058s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0049s
+=== Iter 126 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0046s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+=== Iter 127 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+=== Iter 128 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0053s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0045s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+=== Iter 131 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0047s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+=== Iter 132 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0049s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+=== Iter 133 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0033s
+=== Iter 134 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0045s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0032s
+=== Iter 135 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0047s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+=== Iter 136 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0051s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0049s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0045s
+=== Iter 137 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0031s
+=== Iter 139 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0052s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+=== Iter 140 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+=== Iter 141 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0047s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0032s
+=== Iter 142 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0050s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+=== Iter 143 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+=== Iter 144 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+=== Iter 145 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0050s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+=== Iter 147 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0049s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0032s
+=== Iter 148 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+=== Iter 149 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0046s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0032s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+=== Iter 150 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+=== Iter 151 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0033s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+=== Iter 152 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0050s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+=== Iter 153 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0049s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+=== Iter 154 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0049s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0033s
+=== Iter 156 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+=== Iter 157 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0045s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+=== Iter 158 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0050s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+=== Iter 159 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0058s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0064s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0051s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0055s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0046s
+=== Iter 160 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+=== Iter 161 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0045s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+=== Iter 162 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0049s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+=== Iter 163 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0047s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+=== Iter 164 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+=== Iter 165 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+=== Iter 167 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0051s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+=== Iter 168 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0050s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+=== Iter 169 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0053s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+=== Iter 170 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0049s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+=== Iter 171 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+=== Iter 172 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0032s
+=== Iter 173 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0047s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+=== Iter 174 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0050s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0050s
+=== Iter 175 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+=== Iter 177 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0034s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0051s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+=== Iter 178 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0049s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+=== Iter 179 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0047s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+=== Iter 180 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0053s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0043s
+=== Iter 181 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0050s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+=== Iter 182 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+=== Iter 183 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0044s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0052s
+=== Iter 184 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0031s
+=== Iter 185 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0047s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0032s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+=== Iter 186 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0047s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+=== Iter 187 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0049s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0042s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+=== Iter 188 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0036s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0059s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0046s
+=== Iter 190 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0035s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0039s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0038s
+=== Iter 191 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0041s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0037s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0050s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000.0 time=0.0040s

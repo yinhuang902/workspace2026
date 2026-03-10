@@ -232,9 +232,9 @@ def build_models_2_1_8(
 MODE_PARAMS = {
     "smoke": {
         "nscen": 5,
-        "target_nodes": 60,
+        "target_nodes": 900,
         "gap_stop_tol": 1e-6,
-        "time_limit": 60*5,
+        "time_limit": 60*60,
         "enable_ef_ub": True,
         "ef_time_ub": 30.0,
         "plot_every": None,
