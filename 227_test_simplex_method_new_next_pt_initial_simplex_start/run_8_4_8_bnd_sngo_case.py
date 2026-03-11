@@ -129,7 +129,7 @@ def main():
     bb = [BaseBundle(ml[s], options=BUNDLE_OPTIONS, q_max=Q_MAX) for s in range(S)]
     mb = [MSBundle(ml[s], fl[s], options=BUNDLE_OPTIONS) for s in range(S)]
     res = run_pid_simplex_3d(model_list=ml, first_vars_list=fl, base_bundles=bb, ms_bundles=mb,
-        target_nodes=cfg["target_nodes"], gap_stop_tol=cfg["gap_stop_tol"], time_limit=cfg["time_limit"],
+        target_nodes=cfg["target_nodes"], min_dist=1e-3, gap_stop_tol=cfg["gap_stop_tol"], time_limit=cfg["time_limit"],
         enable_ef_ub=cfg["enable_ef_ub"], ef_time_ub=cfg["ef_time_ub"], plot_every=cfg["plot_every"],
         plot_output_dir=cfg["plot_output_dir"], output_csv_path=str(out), enable_3d_plot=False,
         axis_labels=("x1","x2","x3","x4","x5"))

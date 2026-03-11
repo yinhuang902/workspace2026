@@ -10,7 +10,7 @@ from simplex_specialstart import run_pid_simplex_3d
 
 
 # =============================================================================
-# Julia-equivalent RNG + noise (Plasmo.jl RandomStochasticModel)
+# Julia-equivalent RNG + noise (replicates Plasmo.jl RandomStochasticModel)
 # =============================================================================
 
 class JuliaMT19937:
@@ -76,50 +76,47 @@ def addnoise_julia(a: float, rng: JuliaMT19937) -> float:
 
 
 # =============================================================================
-# 2_1_1 deterministic base model: exact translation of Julia createModel()
+# 2_1_2 base model (exact createModel translation)
 # =============================================================================
 
-def create_model_2_1_1() -> pyo.ConcreteModel:
-    """
-    Exact translation of Julia createModel():
-      variables: 0<=xi<=1 with starts
-      constraint: 20x1+12x2+11x3+7x4+4x5 <= 40
-      objective:
-        Min 42*x1 - 0.5*(100*x1^2+...+100*x5^2) + 44*x2 + 45*x3 + 47*x4 + 47.5*x5
-        = Min (42*x1 + 44*x2 + 45*x3 + 47*x4 + 47.5*x5) - 50*(x1^2+...+x5^2)
-    """
+def create_model_2_1_2() -> pyo.ConcreteModel:
     m = pyo.ConcreteModel()
 
-    m.x1 = pyo.Var(bounds=(0, 1), initialize=1)
-    m.x2 = pyo.Var(bounds=(0, 1), initialize=1)
+    # Variables (match JuMP)
+    m.x1 = pyo.Var(bounds=(0, 1), initialize=0)
+    m.x2 = pyo.Var(bounds=(0, 1), initialize=1)   # start=1
     m.x3 = pyo.Var(bounds=(0, 1), initialize=0)
-    m.x4 = pyo.Var(bounds=(0, 1), initialize=1)
-    m.x5 = pyo.Var(bounds=(0, 1), initialize=0)
+    m.x4 = pyo.Var(bounds=(0, 1), initialize=1)   # start=1
+    m.x5 = pyo.Var(bounds=(0, 1), initialize=1)   # start=1
+    m.x6 = pyo.Var(bounds=(0, None), initialize=20)  # x6 >= 0, start=20
 
-    # Constraint RHS is stochastic under RandomStochasticModel (nfirst=2, nparam=2)
-    # This is the first linear constraint involving second-stage vars (x3, x4, x5).
-    m.c1_rhs = pyo.Param(mutable=True, initialize=40.0)
-    m.c1 = pyo.Constraint(expr=20*m.x1 + 12*m.x2 + 11*m.x3 + 7*m.x4 + 4*m.x5 <= m.c1_rhs)
+    # Constraint 1 RHS is stochastic in RandomStochasticModel (lb=-Inf, ub=6.5)
+    m.c1_rhs = pyo.Param(mutable=True, initialize=6.5)
+    m.c1 = pyo.Constraint(expr=6*m.x1 + 3*m.x2 + 3*m.x3 + 2*m.x4 + 1*m.x5 <= m.c1_rhs)
 
-    lin = 42*m.x1 + 44*m.x2 + 45*m.x3 + 47*m.x4 + 47.5*m.x5
-    quad = 50*(m.x1**2 + m.x2**2 + m.x3**2 + m.x4**2 + m.x5**2)
+    # Constraint 2 (not modified when nparam=2 because only 1 constraint gets modified)
+    m.c2 = pyo.Constraint(expr=10*m.x1 + 10*m.x3 + m.x6 <= 20)
 
-    m.obj_expr = lin - quad
+    # Objective (JuMP: Min, -0.5*(x1^2+...+x5^2) - 10.5*x1 - ... -10*x6)
+    m.obj_expr = (
+        -0.5 * (m.x1**2 + m.x2**2 + m.x3**2 + m.x4**2 + m.x5**2)
+        - 10.5*m.x1 - 7.5*m.x2 - 3.5*m.x3 - 2.5*m.x4 - 1.5*m.x5 - 10*m.x6
+    )
+
     return m
 
 
-def all_vars_2_1_1(m: pyo.ConcreteModel) -> List[pyo.Var]:
-    # Must match JuMP variable order: x1..x5
-    return [m.x1, m.x2, m.x3, m.x4, m.x5]
+def all_vars_2_1_2(m: pyo.ConcreteModel) -> List[pyo.Var]:
+    # Must match JuMP variable order: x1..x6
+    return [m.x1, m.x2, m.x3, m.x4, m.x5, m.x6]
 
 
 # =============================================================================
-# Scenario generator matching Plasmo.jl RandomStochasticModel(createModel, 1000, 2, 2)
-# For 2_1_1: the FIRST linear constraint involving second-stage vars is c1,
-#            so c1_rhs (40) is modified: addnoise(40) -> 40 * U(0.5, 2.0)
+# Scenario generator matching Plasmo.jl RandomStochasticModel(createModel, nscen, nfirst=2, nparam=2)
+# For 2_1_2: the FIRST linear constraint involving second-stage vars is c1, so only c1_rhs is modified.
 # =============================================================================
 
-def build_models_2_1_1(
+def build_models_2_1_2(
     nscen: int,
     nfirst: int = 2,
     nparam: int = 2,
@@ -131,16 +128,16 @@ def build_models_2_1_1(
     model_list: List[pyo.ConcreteModel] = []
     first_vars_list: List[List[pyo.Var]] = []
 
-    max_mods = max(nparam - 1, 0)  # nparam=2 => 1 modification per scenario
+    max_mods = max(nparam - 1, 0)  # with nparam=2 => 1 modification per scenario
 
     for s in range(nscen):
-        m = create_model_2_1_1()
-        allv = all_vars_2_1_1(m)
-        first = allv[:nfirst]  # x1, x2
+        m = create_model_2_1_2()
+        allv = all_vars_2_1_2(m)
+        first = allv[:nfirst]  # x1,x2
 
         # Plasmo.jl modifies first eligible second-stage linear constraint bound (<=) via addnoise(ub)
         if max_mods >= 1:
-            base_ub = float(pyo.value(m.c1_rhs))  # 40.0
+            base_ub = float(pyo.value(m.c1_rhs))  # 6.5
             m.c1_rhs.set_value(addnoise_julia(base_ub, rng))
 
         if print_first_k_rhs > 0 and s < print_first_k_rhs:
@@ -153,7 +150,7 @@ def build_models_2_1_1(
 
 
 # =============================================================================
-# Runner config (same style as 2_1_2 / 2_1_3)
+# Runner config (same style as run_2_1_1_case)
 # =============================================================================
 
 MODE_PARAMS = {
@@ -165,8 +162,8 @@ MODE_PARAMS = {
         "enable_ef_ub": True,
         "ef_time_ub": 30.0,
         "plot_every": None,
-        "plot_output_dir": "results/2_1_1_smoke/plots",
-        "output_csv_path": "results/2_1_1_smoke/simplex_result.csv",
+        "plot_output_dir": "results/2_1_2_smoke/plots",
+        "output_csv_path": "results/2_1_2_smoke/simplex_result.csv",
     },
     "full": {
         "nscen": 1000,
@@ -176,12 +173,13 @@ MODE_PARAMS = {
         "enable_ef_ub": True,
         "ef_time_ub": 43200.0,  # Julia scripts set 43200 sec
         "plot_every": None,
-        "plot_output_dir": "results/2_1_1_full/plots",
-        "output_csv_path": "results/2_1_1_full/simplex_result.csv",
+        "plot_output_dir": "results/2_1_2_full/plots",
+        "output_csv_path": "results/2_1_2_full/simplex_result.csv",
     },
 }
 
 # Nonconvex QP => Gurobi NonConvex=2
+# Make MIPGap explicit to reduce ambiguity when comparing logs.
 BUNDLE_OPTIONS = {
     "NonConvex": 2,
     "MIPGap": 1e-1,
@@ -205,62 +203,3 @@ def main():
         Path(cfg["plot_output_dir"]).mkdir(parents=True, exist_ok=True)
 
     print("=" * 60)
-    print("2_1_1 (Python) â€?scenario generation matches Plasmo.jl RandomStochasticModel")
-    print(f"Mode: {args.mode}")
-    print(f"nscen={cfg['nscen']}, seed={args.seed}, target_nodes={cfg['target_nodes']}")
-    print(f"gap_stop_tol={cfg['gap_stop_tol']}, time_limit={cfg['time_limit']}")
-    print(f"EF UB enabled={cfg['enable_ef_ub']}, ef_time_ub={cfg['ef_time_ub']}")
-    print(f"Bundle options: {BUNDLE_OPTIONS}")
-    print("=" * 60)
-
-    t0 = perf_counter()
-
-    model_list, first_vars_list = build_models_2_1_1(
-        nscen=cfg["nscen"], nfirst=2, nparam=2,
-        seed=args.seed, print_first_k_rhs=args.print_first_k_rhs
-    )
-    S = len(model_list)
-
-    base_bundles = [BaseBundle(model_list[s], options=BUNDLE_OPTIONS, q_max=Q_MAX) for s in range(S)]
-    ms_bundles   = [MSBundle(model_list[s], first_vars_list[s], options=BUNDLE_OPTIONS) for s in range(S)]
-
-    res = run_pid_simplex_3d(
-        model_list=model_list,
-        first_vars_list=first_vars_list,
-        base_bundles=base_bundles,
-        ms_bundles=ms_bundles,
-        target_nodes=cfg["target_nodes"],
-        min_dist=1e-3,        gap_stop_tol=cfg["gap_stop_tol"],
-        time_limit=cfg["time_limit"],
-        enable_ef_ub=cfg["enable_ef_ub"],
-        ef_time_ub=cfg["ef_time_ub"],
-        plot_every=cfg["plot_every"],
-        plot_output_dir=cfg["plot_output_dir"],
-        output_csv_path=str(out_csv),
-        enable_3d_plot=False,   # first-stage dim = 2
-        axis_labels=("x1", "x2"),
-    )
-
-    t1 = perf_counter()
-
-    # Print per-scenario final numbers for fair comparison to Julia (expectation scale)
-    LB_hist = res.get("LB_hist", [])
-    UB_hist = res.get("UB_hist", [])
-    if LB_hist and UB_hist:
-        final_LB_sum = float(LB_hist[-1])
-        final_UB_sum = float(UB_hist[-1])
-        print("\n=== Final (sum over scenarios) ===")
-        print(f"LB_sum = {final_LB_sum:.12f}")
-        print(f"UB_sum = {final_UB_sum:.12f}")
-        print("\n=== Final (per-scenario / expectation) ===")
-        print(f"LB_per_scen = {final_LB_sum / S:.12f}")
-        print(f"UB_per_scen = {final_UB_sum / S:.12f}")
-
-    print("=" * 60)
-    print(f"Done. Wall time: {t1 - t0:.2f} sec")
-    print(f"CSV: {out_csv}")
-    print("=" * 60)
-
-
-if __name__ == "__main__":
-    main()

@@ -259,7 +259,7 @@ def main():
         base_bundles=base_bundles,
         ms_bundles=ms_bundles,
         target_nodes=cfg["target_nodes"],
-        gap_stop_tol=cfg["gap_stop_tol"],
+        min_dist=1e-3,        gap_stop_tol=cfg["gap_stop_tol"],
         time_limit=cfg["time_limit"],
         enable_ef_ub=cfg["enable_ef_ub"],
         ef_time_ub=cfg["ef_time_ub"],

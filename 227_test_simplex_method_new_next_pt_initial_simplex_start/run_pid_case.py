@@ -199,7 +199,7 @@ def main():
         model_list=model_list,
         first_vars_list=first_stg_vars_list,
         target_nodes=params["target_nodes"],
-        verbose=True,
+        min_dist=1e-3,        verbose=True,
         gap_stop_tol=params["gap_stop_tol"],
         tracker=tracker,
         enable_3d_plot=params["enable_3d_plot"],

@@ -234,7 +234,7 @@ MODE_PARAMS = {
         "nscen": 5,
         "target_nodes": 900,
         "gap_stop_tol": 1e-6,
-        "time_limit": 100,
+        "time_limit": 60*10,
         "enable_ef_ub": True,
         "ef_time_ub": 30.0,
         "plot_every": None,
@@ -254,7 +254,7 @@ MODE_PARAMS = {
     },
 }
 
-BUNDLE_OPTIONS = {"NonConvex": 2, "MIPGap": 1e-3, "TimeLimit": 60}
+BUNDLE_OPTIONS = {"NonConvex": 2, "MIPGap": 1e-2, "TimeLimit": 60}
 Q_MAX = 1e4
 
 
@@ -285,13 +285,28 @@ def main():
     base_bundles = [BaseBundle(model_list[s], options=BUNDLE_OPTIONS, q_max=Q_MAX) for s in range(S)]
     ms_bundles   = [MSBundle(model_list[s], first_vars_list[s], options=BUNDLE_OPTIONS) for s in range(S)]
 
+    # === Initial simplex for split_mode=2 ===
+    # 6 vertices for d=5, spanning full 5D. Vertices do NOT need to satisfy
+    # constraint c1 (x1+x2+x3+x4=8) — that is enforced by the solver
+    # during Q/ms evaluations.  The simplex just defines the search domain.
+    # Bounds: x1-x4 ∈ [0,8], x5 ∈ [0,24].
+    #                       x1    x2    x3    x4    x5
+    INITIAL_VERTICES = [
+        (0.0,  0.0,  0.0,  0.0,   0.0),   # origin corner
+        (8.0,  0.0,  0.0,  0.0,   0.0),   # max x1
+        (0.0,  8.0,  0.0,  0.0,   0.0),   # max x2
+        (0.0,  0.0,  8.0,  0.0,   0.0),   # max x3
+        (0.0,  0.0,  0.0,  8.0,   0.0),   # max x4
+        (0.0,  0.0,  0.0,  0.0,  24.0),   # max x5
+    ]
+
     res = run_pid_simplex_3d(
         model_list=model_list,
         first_vars_list=first_vars_list,
         base_bundles=base_bundles,
         ms_bundles=ms_bundles,
         target_nodes=cfg["target_nodes"],
-        min_dist=1e-3,        
+        min_dist=1e-3,
         gap_stop_tol=cfg["gap_stop_tol"],
         time_limit=cfg["time_limit"],
         enable_ef_ub=cfg["enable_ef_ub"],
@@ -301,6 +316,8 @@ def main():
         output_csv_path=str(out_csv),
         enable_3d_plot=False,
         axis_labels=("x1", "x2", "x3", "x4", "x5"),
+        initial_nodes=INITIAL_VERTICES,
+        split_mode=2,
     )
     t1 = perf_counter()
 

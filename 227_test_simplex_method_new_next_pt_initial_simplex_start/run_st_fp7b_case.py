@@ -174,7 +174,7 @@ def main():
     base_bundles = [BaseBundle(model_list[s], options=BUNDLE_OPTIONS, q_max=Q_MAX) for s in range(S)]
     ms_bundles   = [MSBundle(model_list[s], first_vars_list[s], options=BUNDLE_OPTIONS) for s in range(S)]
     res = run_pid_simplex_3d(model_list=model_list, first_vars_list=first_vars_list, base_bundles=base_bundles, ms_bundles=ms_bundles,
-        target_nodes=cfg["target_nodes"], gap_stop_tol=cfg["gap_stop_tol"], time_limit=cfg["time_limit"],
+        target_nodes=cfg["target_nodes"], min_dist=1e-3, gap_stop_tol=cfg["gap_stop_tol"], time_limit=cfg["time_limit"],
         enable_ef_ub=cfg["enable_ef_ub"], ef_time_ub=cfg["ef_time_ub"], plot_every=cfg["plot_every"],
         plot_output_dir=cfg["plot_output_dir"], output_csv_path=str(out_csv), enable_3d_plot=False, axis_labels=tuple(f"x{i+1}" for i in range(nfirst)))
     t1 = perf_counter()

@@ -1104,6 +1104,14 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
         f.write("# simplex_record_subproblem_runtime.txt — per-iteration subproblem runtime\n")
         f.write("# ms/cs/Q timing, non-optimal subproblem detection\n\n")
 
+    # File 11: Per-iteration ms/cs detail log (per-scenario ms/cs values, points, barycentric)
+    ms_cs_detail_path = os.path.join(_csv_output_dir, "simplex_record_ms_cs_detail.txt")
+    with open(ms_cs_detail_path, "w", encoding="utf-8") as f:
+        f.write("# simplex_record_ms_cs_detail.txt — per-scenario ms/cs values and points\n")
+        f.write("# For the selected (LB) simplex each iteration\n")
+        f.write("# ms_val, ms_pt (coordinates), ms_bary (barycentric)\n")
+        f.write("# cs_val, cs_pt (coordinates), cs_bary (barycentric)\n\n")
+
     # === Initialize per-iteration diagnostic logger ===
     iter_logger = IterationLogger(path="simplex_result.txt")
     # UB provenance tracking state (note: logger also stores this, but we track here for clarity)
@@ -3189,6 +3197,80 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 _fsplit.writelines(_split_lines)
         except Exception as _e_split_log:
             print(f"[WARNING] split log write failed: {_e_split_log}")
+
+        # ================================================================
+        # (A2) simplex_record_ms_cs_detail.txt — per-scenario ms/cs values and points
+        # ================================================================
+        try:
+            _mscs_lines = []
+            _mscs_lines.append(f"=== Iter {it} ===")
+            _sel_rec = selected_rec_before_split if selected_rec_before_split else lb_simp_rec
+            _sel_vidxs = _sel_rec.get("vert_idx", [])
+            _sel_verts = np.array(_sel_rec.get("verts", []), dtype=float)
+            _sel_sid = int(_sel_rec.get("simplex_index", -1))
+            _mscs_lines.append(f"simplex: T{_sel_sid}  verts={tuple(sorted(_sel_vidxs))}")
+
+            # Helper: compute barycentric coordinates of point p in simplex V
+            def _compute_bary(p, V):
+                """p: (d,) array, V: (d+1, d) array. Returns (d+1,) barycentric coords."""
+                try:
+                    d = V.shape[1]
+                    T = (V[1:] - V[0]).T  # (d, d)
+                    lam_rest = np.linalg.solve(T, p - V[0])
+                    lam0 = 1.0 - lam_rest.sum()
+                    return np.concatenate([[lam0], lam_rest])
+                except Exception:
+                    return None
+
+            def _fmt_pt(pt):
+                if pt is None:
+                    return "None"
+                return "(" + ", ".join(f"{float(c):.6f}" for c in pt) + ")"
+
+            def _fmt_bary(bary):
+                if bary is None:
+                    return "N/A"
+                return "(" + ", ".join(f"{float(l):.6f}" for l in bary) + ")"
+
+            # --- MS per scenario ---
+            _ms_vals = _sel_rec.get("ms_per_scene", [])
+            _ms_pts = _sel_rec.get("xms_per_scene", [])
+            _mscs_lines.append(f"")
+            _mscs_lines.append(f"  MS per scenario ({len(_ms_vals)} scenarios):")
+            for _s_idx in range(len(_ms_vals)):
+                _mv = float(_ms_vals[_s_idx]) if _s_idx < len(_ms_vals) else float('nan')
+                _mp = _ms_pts[_s_idx] if _s_idx < len(_ms_pts) else None
+                if _mp is not None:
+                    _mp_arr = np.asarray(_mp, dtype=float)
+                    _mb = _compute_bary(_mp_arr, _sel_verts)
+                else:
+                    _mb = None
+                _mscs_lines.append(
+                    f"    s={_s_idx}  ms={_mv:.6e}  pt={_fmt_pt(_mp)}  bary={_fmt_bary(_mb)}"
+                )
+
+            # --- CS per scenario ---
+            _cs_vals = _sel_rec.get("c_per_scene", [])
+            _cs_pts = _sel_rec.get("c_point_per_scene", [])
+            _mscs_lines.append(f"")
+            _mscs_lines.append(f"  CS per scenario ({len(_cs_vals)} scenarios):")
+            for _s_idx in range(len(_cs_vals)):
+                _cv = float(_cs_vals[_s_idx]) if _s_idx < len(_cs_vals) else float('nan')
+                _cp = _cs_pts[_s_idx] if _s_idx < len(_cs_pts) else None
+                if _cp is not None:
+                    _cp_arr = np.asarray(_cp, dtype=float)
+                    _cb = _compute_bary(_cp_arr, _sel_verts)
+                else:
+                    _cb = None
+                _mscs_lines.append(
+                    f"    s={_s_idx}  cs={_cv:.6e}  pt={_fmt_pt(_cp)}  bary={_fmt_bary(_cb)}"
+                )
+
+            _mscs_lines.append(f"")
+            with open(ms_cs_detail_path, "a", encoding="utf-8") as _fmscs:
+                _fmscs.write("\n".join(_mscs_lines) + "\n")
+        except Exception as _e_mscs_log:
+            print(f"[WARNING] ms/cs detail log write failed: {_e_mscs_log}")
 
         # ================================================================
         # (B) simplex_record_subproblem_runtime.txt — append per-iteration
