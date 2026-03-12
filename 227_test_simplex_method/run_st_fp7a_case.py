@@ -222,9 +222,9 @@ def build_models_st_fp7a(
 
 MODE_PARAMS = {
     "smoke": {
-        "nscen": 10,
-        "target_nodes": 100,
-        "gap_stop_tol": 1e-3,
+        "nscen": 5,
+        "target_nodes": 900,
+        "gap_stop_tol": 1e-5,
         "time_limit": 60*3,
         "enable_ef_ub": True,
         "ef_time_ub": 30.0,
@@ -251,7 +251,7 @@ Q_MAX = -1e2
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--mode", choices=("smoke", "full"), default="full")
+    ap.add_argument("--mode", choices=("smoke", "full"), default="smoke")
     ap.add_argument("--seed", type=int, default=1234)
     ap.add_argument("--nfirst", type=int, default=5)
     ap.add_argument("--print_first_k_rhs", type=int, default=0)

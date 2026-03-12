@@ -1,0 +1,24 @@
+# debug_lb_after_split.txt — LB analysis after simplex split
+# Shows: selected simplex LB, all child LBs, new global LB, INSIDE/OUTSIDE
+
+[Iter 0] Shape check: triggered=0, inactivated=0, passed=0
+======================================================================
+[Iter 0] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (2, 3, 4, 8, 16, 30)
+  Parent LB: 7114.575797421 (per-scen)
+  EF ef_obj(IPOPT): 1517.134497560, true_obj(recalc): 7585.672610803, used=min=1517.134497560 (per-scen)
+  Simplex volume: 4.915200e+04
+  Children (6):
+    T107 (2, 4, 8, 16, 30, 32): LB = 7174.893986177
+    T109 (3, 4, 8, 16, 30, 32): LB = 7224.084738564
+    T111 (2, 3, 4, 16, 30, 32): LB = 7300.032444403
+  New global LB: 6810.720145041 (from T0 (0, 2, 3, 4, 8, 16))
+  Location: OUTSIDE
+  Avg CS point Q-value: 8274.992666525 (per-scen), point=(np.float64(4.4), np.float64(0.4), np.float64(2.26801808503991), np.float64(0.9319819149600903), np.float64(0.0))
+  Current UB: 7585.672610803 (per-scen)
+  UB point: (8.0, 0.0, 0.0, 0.0, 0.0)
+  UB source: unknown
+  UB simplex: None
+  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.048s, ef_obj=7585.672487801103, true_obj(per-scen)=7585.672610803
+======================================================================
+

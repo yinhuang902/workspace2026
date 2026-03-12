@@ -1,0 +1,228 @@
+# simplex_record_subproblem_runtime.txt — per-iteration subproblem runtime
+# ms/cs/Q timing, non-optimal subproblem detection
+
+=== Iter 0 ===
+ms: total_time=4.4588, calls=200, avg=0.0223
+cs: total_time=6.2322, calls=200, avg=0.0312
+Q:  total_time=1.6329, calls=100, avg=0.0163
+
+=== Iter 1 ===
+ms: total_time=4.4984, calls=200, avg=0.0225
+cs: total_time=5.8946, calls=200, avg=0.0295
+Q:  total_time=1.5548, calls=100, avg=0.0155
+
+=== Iter 2 ===
+ms: total_time=4.5771, calls=200, avg=0.0229
+cs: total_time=6.1394, calls=200, avg=0.0307
+Q:  total_time=1.6198, calls=100, avg=0.0162
+
+=== Iter 3 ===
+ms: total_time=8.1891, calls=300, avg=0.0273
+cs: total_time=11.9410, calls=300, avg=0.0398
+Q:  total_time=1.5512, calls=100, avg=0.0155
+
+=== Iter 4 ===
+ms: total_time=4.5986, calls=200, avg=0.0230
+cs: total_time=6.3585, calls=200, avg=0.0318
+Q:  total_time=1.4930, calls=100, avg=0.0149
+
+=== Iter 5 ===
+ms: total_time=6.7303, calls=300, avg=0.0224
+cs: total_time=9.1865, calls=300, avg=0.0306
+Q:  total_time=1.5817, calls=100, avg=0.0158
+
+=== Iter 6 ===
+ms: total_time=5.7019, calls=200, avg=0.0285
+cs: total_time=8.0240, calls=200, avg=0.0401
+Q:  total_time=1.5788, calls=100, avg=0.0158
+
+=== Iter 7 ===
+ms: total_time=7.4884, calls=300, avg=0.0250
+cs: total_time=9.3613, calls=300, avg=0.0312
+Q:  total_time=1.3509, calls=100, avg=0.0135
+
+=== Iter 8 ===
+ms: total_time=5.0396, calls=200, avg=0.0252
+cs: total_time=6.6723, calls=200, avg=0.0334
+Q:  total_time=1.6665, calls=100, avg=0.0167
+
+=== Iter 9 ===
+ms: total_time=7.0431, calls=300, avg=0.0235
+cs: total_time=9.0761, calls=300, avg=0.0303
+Q:  total_time=1.6273, calls=100, avg=0.0163
+
+=== Iter 10 ===
+ms: total_time=4.6725, calls=200, avg=0.0234
+cs: total_time=5.6794, calls=200, avg=0.0284
+Q:  total_time=1.7027, calls=100, avg=0.0170
+
+=== Iter 11 ===
+ms: total_time=4.6649, calls=200, avg=0.0233
+cs: total_time=6.0162, calls=200, avg=0.0301
+Q:  total_time=1.5067, calls=100, avg=0.0151
+
+=== Iter 12 ===
+ms: total_time=5.0489, calls=200, avg=0.0252
+cs: total_time=6.2442, calls=200, avg=0.0312
+Q:  total_time=1.6811, calls=100, avg=0.0168
+
+=== Iter 13 ===
+ms: total_time=5.0093, calls=200, avg=0.0250
+cs: total_time=6.3702, calls=200, avg=0.0319
+Q:  total_time=1.3823, calls=100, avg=0.0138
+
+=== Iter 14 ===
+ms: total_time=5.6148, calls=200, avg=0.0281
+cs: total_time=7.4803, calls=200, avg=0.0374
+Q:  total_time=1.5191, calls=100, avg=0.0152
+
+=== Iter 15 ===
+ms: total_time=8.0984, calls=300, avg=0.0270
+cs: total_time=10.8240, calls=300, avg=0.0361
+Q:  total_time=1.5365, calls=100, avg=0.0154
+
+=== Iter 16 ===
+ms: total_time=8.8210, calls=300, avg=0.0294
+cs: total_time=11.2960, calls=300, avg=0.0377
+Q:  total_time=1.5439, calls=100, avg=0.0154
+
+=== Iter 17 ===
+ms: total_time=4.8234, calls=200, avg=0.0241
+cs: total_time=6.7344, calls=200, avg=0.0337
+Q:  total_time=1.5520, calls=100, avg=0.0155
+
+=== Iter 18 ===
+ms: total_time=5.3912, calls=200, avg=0.0270
+cs: total_time=6.9616, calls=200, avg=0.0348
+Q:  total_time=1.3987, calls=100, avg=0.0140
+
+=== Iter 19 ===
+ms: total_time=8.4698, calls=300, avg=0.0282
+cs: total_time=10.5906, calls=300, avg=0.0353
+Q:  total_time=1.4134, calls=100, avg=0.0141
+
+=== Iter 20 ===
+ms: total_time=5.6417, calls=200, avg=0.0282
+cs: total_time=6.7072, calls=200, avg=0.0335
+Q:  total_time=1.4033, calls=100, avg=0.0140
+
+=== Iter 21 ===
+ms: total_time=5.7991, calls=200, avg=0.0290
+cs: total_time=6.5748, calls=200, avg=0.0329
+Q:  total_time=1.4003, calls=100, avg=0.0140
+
+=== Iter 22 ===
+ms: total_time=5.0011, calls=200, avg=0.0250
+cs: total_time=6.7897, calls=200, avg=0.0339
+Q:  total_time=1.3789, calls=100, avg=0.0138
+
+=== Iter 23 ===
+ms: total_time=7.7377, calls=300, avg=0.0258
+cs: total_time=9.5887, calls=300, avg=0.0320
+Q:  total_time=1.4004, calls=100, avg=0.0140
+
+=== Iter 24 ===
+ms: total_time=5.5398, calls=200, avg=0.0277
+cs: total_time=6.5152, calls=200, avg=0.0326
+Q:  total_time=1.4639, calls=100, avg=0.0146
+
+=== Iter 25 ===
+ms: total_time=5.4609, calls=200, avg=0.0273
+cs: total_time=6.4071, calls=200, avg=0.0320
+Q:  total_time=1.3908, calls=100, avg=0.0139
+
+=== Iter 26 ===
+ms: total_time=5.8215, calls=200, avg=0.0291
+cs: total_time=7.2659, calls=200, avg=0.0363
+Q:  total_time=1.4690, calls=100, avg=0.0147
+
+=== Iter 27 ===
+ms: total_time=4.9319, calls=200, avg=0.0247
+cs: total_time=6.1992, calls=200, avg=0.0310
+Q:  total_time=1.4602, calls=100, avg=0.0146
+
+=== Iter 28 ===
+ms: total_time=8.7257, calls=300, avg=0.0291
+cs: total_time=11.8653, calls=300, avg=0.0396
+Q:  total_time=1.5513, calls=100, avg=0.0155
+
+=== Iter 29 ===
+ms: total_time=7.5533, calls=300, avg=0.0252
+cs: total_time=9.3223, calls=300, avg=0.0311
+Q:  total_time=1.5288, calls=100, avg=0.0153
+
+=== Iter 30 ===
+ms: total_time=5.4148, calls=200, avg=0.0271
+cs: total_time=6.0460, calls=200, avg=0.0302
+Q:  total_time=1.4208, calls=100, avg=0.0142
+
+=== Iter 31 ===
+ms: total_time=5.1588, calls=200, avg=0.0258
+cs: total_time=6.4334, calls=200, avg=0.0322
+Q:  total_time=1.3422, calls=100, avg=0.0134
+
+=== Iter 32 ===
+ms: total_time=4.9659, calls=200, avg=0.0248
+cs: total_time=6.1953, calls=200, avg=0.0310
+Q:  total_time=1.3693, calls=100, avg=0.0137
+
+=== Iter 33 ===
+ms: total_time=5.4883, calls=200, avg=0.0274
+cs: total_time=6.5853, calls=200, avg=0.0329
+Q:  total_time=1.3787, calls=100, avg=0.0138
+
+=== Iter 34 ===
+ms: total_time=5.4953, calls=200, avg=0.0275
+cs: total_time=6.1373, calls=200, avg=0.0307
+Q:  total_time=1.4523, calls=100, avg=0.0145
+
+=== Iter 35 ===
+ms: total_time=5.3852, calls=200, avg=0.0269
+cs: total_time=6.2200, calls=200, avg=0.0311
+Q:  total_time=1.3402, calls=100, avg=0.0134
+
+=== Iter 36 ===
+ms: total_time=4.5717, calls=200, avg=0.0229
+cs: total_time=6.1028, calls=200, avg=0.0305
+Q:  total_time=1.4729, calls=100, avg=0.0147
+
+=== Iter 37 ===
+ms: total_time=5.3146, calls=200, avg=0.0266
+cs: total_time=5.9577, calls=200, avg=0.0298
+Q:  total_time=1.3242, calls=100, avg=0.0132
+
+=== Iter 38 ===
+ms: total_time=5.0227, calls=200, avg=0.0251
+cs: total_time=6.2733, calls=200, avg=0.0314
+Q:  total_time=1.5002, calls=100, avg=0.0150
+
+=== Iter 39 ===
+ms: total_time=9.0631, calls=300, avg=0.0302
+cs: total_time=11.8720, calls=300, avg=0.0396
+Q:  total_time=1.5834, calls=100, avg=0.0158
+
+=== Iter 40 ===
+ms: total_time=10.7168, calls=400, avg=0.0268
+cs: total_time=13.0738, calls=400, avg=0.0327
+Q:  total_time=1.6467, calls=100, avg=0.0165
+
+=== Iter 41 ===
+ms: total_time=8.6875, calls=300, avg=0.0290
+cs: total_time=11.3670, calls=300, avg=0.0379
+Q:  total_time=1.6767, calls=100, avg=0.0168
+
+=== Iter 42 ===
+ms: total_time=10.3788, calls=400, avg=0.0259
+cs: total_time=13.4413, calls=400, avg=0.0336
+Q:  total_time=1.6169, calls=100, avg=0.0162
+
+=== Iter 43 ===
+ms: total_time=8.8707, calls=300, avg=0.0296
+cs: total_time=11.8367, calls=300, avg=0.0395
+Q:  total_time=1.5096, calls=100, avg=0.0151
+
+=== Iter 44 ===
+ms: total_time=6.4187, calls=200, avg=0.0321
+cs: total_time=8.0792, calls=200, avg=0.0404
+Q:  total_time=1.4533, calls=100, avg=0.0145
+

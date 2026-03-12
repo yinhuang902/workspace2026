@@ -1,0 +1,66 @@
+# simplex_debug.txt — ms/cs/Q subproblem failures
+# Fields: simp, scen, type, issue, ok, status, term, val, dual, time
+
+=== Iter 0 ===
+  simp=T0 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0195s
+  simp=T0 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0109s
+  simp=T1 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0038s
+  simp=T1 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0038s
+  simp=T9 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0096s
+  simp=T9 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0129s
+  simp=T21 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0099s
+  simp=T21 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0111s
+  simp=T34 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0095s
+  simp=T34 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0114s
+  simp=T37 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0075s
+  simp=T37 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0091s
+  simp=T49 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0038s
+  simp=T49 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0051s
+  simp=T50 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0101s
+  simp=T50 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0107s
+  simp=T54 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0107s
+  simp=T54 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0110s
+  simp=T71 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0109s
+  simp=T71 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0114s
+  simp=T72 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0086s
+  simp=T72 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0099s
+  simp=T73 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0104s
+  simp=T73 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0131s
+  simp=T74 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0107s
+  simp=T74 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0115s
+  simp=T77 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0109s
+  simp=T77 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0130s
+  simp=T86 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0104s
+  simp=T86 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0119s
+  simp=T92 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0096s
+  simp=T92 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0118s
+  simp=T95 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0066s
+  simp=T95 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0085s
+  simp=T98 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0038s
+  simp=T98 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0046s
+  simp=T100 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0105s
+  simp=T100 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0111s
+  simp=T103 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0103s
+  simp=T103 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0125s
+  simp=T105 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0101s
+  simp=T105 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0117s
+  simp=T107 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0103s
+  simp=T107 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0107s
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0033s
+=== Iter 1 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0031s
+=== Iter 2 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0057s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0045s
+=== Iter 3 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0039s
+=== Iter 4 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0037s
+=== Iter 5 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0056s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0046s
+=== Iter 6 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0041s
+=== Iter 7 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0031s

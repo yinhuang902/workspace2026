@@ -1,0 +1,3 @@
+# debug_ms_timing.txt — NON-OPTIMAL MS (ms_on_tetra) solves only
+# Format: [Iter N] scenario=..., simplex_idx=..., verts=..., time=...s, status=..., dual_bound=..., primal_obj=...
+

@@ -1,0 +1,29 @@
+Traceback (most recent call last):
+  File "c:\Users\Administrator\OneDrive\Desktop\workspace2026\227_test_simplex_method\run_pid_case.py", line 332, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "c:\Users\Administrator\OneDrive\Desktop\workspace2026\227_test_simplex_method\run_pid_case.py", line 193, in main
+    result = run_pid_simplex_3d(
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\OneDrive\Desktop\workspace2026\227_test_simplex_method\simplex_specialstart.py", line 2721, in run_pid_simplex_3d
+    _, per_tet_end = evaluate_all_tetra(
+                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\OneDrive\Desktop\workspace2026\227_test_simplex_method\simplex_specialstart.py", line 618, in evaluate_all_tetra
+    ms_val, new_pt_ms, c_val, c_pt = ms_on_tetra_for_scene(
+                                     ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\OneDrive\Desktop\workspace2026\227_test_simplex_method\simplex_specialstart.py", line 478, in ms_on_tetra_for_scene
+    ok_c, c_val, c_pt = ms_bundle.solve_const_cut()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\OneDrive\Desktop\workspace2026\227_test_simplex_method\bundles.py", line 524, in solve_const_cut
+    res = self.gp.solve(load_solutions=True, tee=False, warmstart=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\ProgramData\anaconda3\envs\snoglode-win\Lib\site-packages\pyomo\solvers\plugins\solvers\persistent_solver.py", line 457, in solve
+    self.available(exception_flag=True)
+  File "C:\ProgramData\anaconda3\envs\snoglode-win\Lib\site-packages\pyomo\solvers\plugins\solvers\gurobi_direct.py", line 221, in available
+    with capture_output(capture_fd=True) as OUT:
+  File "C:\ProgramData\anaconda3\envs\snoglode-win\Lib\site-packages\pyomo\common\tee.py", line 371, in __exit__
+    return self._exit_impl(et, ev, tb)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\ProgramData\anaconda3\envs\snoglode-win\Lib\site-packages\pyomo\common\tee.py", line 520, in _exit_impl
+    raise RuntimeError("\n".join(FAIL))
+RuntimeError: KeyboardInterrupt:  (4: <pyomo.common.tee.TeeStream object at 0x00000158447810D0>@158447810d0)

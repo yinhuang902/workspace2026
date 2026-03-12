@@ -1,0 +1,9 @@
+# debug_ms_timing.txt — NON-OPTIMAL MS (ms_on_tetra) solves only
+# Format: [Iter N] scenario=..., simplex_idx=..., verts=..., time=...s, status=..., dual_bound=..., primal_obj=...
+
+[Iter 0] scenario=0, simplex_idx=5, verts=(1, 3, 4, 5), time=0.0222s, status=infeasible, dual_bound=None, primal_obj=-2576070168.7349443
+[Iter 0] scenario=0, simplex_idx=6, verts=(0, 3, 4, 8), time=60.0112s, status=time_limit, dual_bound=-1.2286219702851546, primal_obj=-1.2286219702851546
+[Iter 0] scenario=1, simplex_idx=6, verts=(0, 3, 4, 8), time=60.0107s, status=time_limit, dual_bound=-1.516815524867548, primal_obj=-1.5168155248675481
+[Iter 0] scenario=2, simplex_idx=6, verts=(0, 3, 4, 8), time=60.0112s, status=time_limit, dual_bound=-1.427282775766861, primal_obj=-1.4272827757668614
+[Iter 0] scenario=3, simplex_idx=6, verts=(0, 3, 4, 8), time=60.0090s, status=time_limit, dual_bound=-1.187130085646387, primal_obj=-1.187130085646387
+[Iter 0] scenario=4, simplex_idx=6, verts=(0, 3, 4, 8), time=60.0155s, status=time_limit, dual_bound=-1.3515400861334683, primal_obj=-1.351540086133468
