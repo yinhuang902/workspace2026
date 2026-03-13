@@ -2,10 +2,10 @@
 # selected_simplex LB_pre, UB_pre, children LBs, end LB/UB
 
 === Iter 0 ===
-selected_simplex: T1  LB_pre=-634.734813623
-UB_pre=-634.420577917  LB_global_pre=-634.734813623
+selected_simplex: T89  LB_pre=-636.649654857
+UB_pre=-636.652552409  LB_global_pre=-636.649654857
 children (created 2):
-  child T1 (0, 3, 4) LB=-634.296952442
-  child T2 (2, 3, 4) LB=-462.306319221
-end: UB=-634.420577917  LB=-634.640958138
+  child T107 (3, 4, 7, 14, 22, 32) LB=-636.653440126
+  child T108 (3, 6, 7, 14, 22, 32) LB=-566.879262847
+end: UB=-636.652552409  LB=-636.656264551
 

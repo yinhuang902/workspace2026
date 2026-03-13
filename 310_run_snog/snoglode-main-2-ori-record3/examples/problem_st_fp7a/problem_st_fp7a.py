@@ -78,7 +78,7 @@ def build_scenario_model(scenario_name):
     return [m,first_stage,1.0/NUM_SCENARIOS]
 
 if __name__=='__main__':
-    lb_solver=pyo.SolverFactory("gurobi");lb_solver.options["NonConvex"]=2;lb_solver.options["MIPGap"]=1e-2;lb_solver.options["TimeLimit"]=60
+    lb_solver=pyo.SolverFactory("gurobi");lb_solver.options["NonConvex"]=2;lb_solver.options["MIPGap"]=1e-1;lb_solver.options["TimeLimit"]=60
     cg_solver=pyo.SolverFactory("gurobi");cg_solver.options["NonConvex"]=2;cg_solver.options["TimeLimit"]=60
     ub_solver=pyo.SolverFactory("gurobi");ub_solver.options["NonConvex"]=2;ub_solver.options["TimeLimit"]=60
     params=sno.SolverParameters(subproblem_names=scenarios,subproblem_creator=build_scenario_model,lb_solver=lb_solver,cg_solver=cg_solver,ub_solver=ub_solver)
@@ -89,6 +89,10 @@ if __name__=='__main__':
     else:params.set_logging(fname=os.path.join(_log_dir,"problem_st_fp7a_log_parallel"))
     if rank==0:params.display()
     solver=sno.Solver(params)
+    # Enable per-subproblem LB logging
+    _subproblem_log_path = os.path.join(_log_dir, "problem_st_fp7a_subproblem_log.txt")
+    if os.path.exists(_subproblem_log_path): os.remove(_subproblem_log_path)
+    solver.lower_bounder._subproblem_log = _subproblem_log_path
     # ---------------------------------------------------------
     # CSV Logging Implementation (Monkey Patch)
     # ---------------------------------------------------------

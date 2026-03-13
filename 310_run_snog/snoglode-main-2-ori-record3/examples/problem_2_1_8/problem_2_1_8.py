@@ -41,7 +41,7 @@ size = MPI.COMM_WORLD.Get_size()
 # ============================================================================
 # Parameters matching Julia setup.jl
 # ============================================================================
-NUM_SCENARIOS = 5
+NUM_SCENARIOS = 100
 NFIRST = 5
 NPARAM = 5
 SEED = 1234

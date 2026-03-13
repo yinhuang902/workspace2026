@@ -53,6 +53,11 @@ class AbstractLowerBounder(BoundingProblemBase):
         # indicate if we want to check for inheritable solutions from parent nodes
         self.inhert_solutions = None
 
+        # subproblem logging: set _subproblem_log to a file path to enable
+        self._subproblem_log = None
+        self._lb_iteration = 0
+        self._last_eval_detail = None
+
 
     def solve(self, 
               node: Node, 
@@ -74,6 +79,8 @@ class AbstractLowerBounder(BoundingProblemBase):
         assert type(subproblems)==Subproblems
 
         statistics = OneLowerBoundSolve(subproblems.names)
+        self._lb_iteration += 1
+        _iter_log_entries = []  # collect per-subproblem log entries
         
         # for each subproblems's model
         for subproblem_name in subproblems.names:
@@ -93,6 +100,11 @@ class AbstractLowerBounder(BoundingProblemBase):
                                             subproblems = subproblems,
                                             subproblem_objective = node.lb_problem.subproblem_solutions[subproblem_name].objective,
                                             parent_lifted_var_solution = node.lb_problem.subproblem_solutions[subproblem_name].lifted_var_solution)
+                _iter_log_entries.append({
+                    "name": subproblem_name, "method": "inherited",
+                    "obj_used": node.lb_problem.subproblem_solutions[subproblem_name].objective,
+                    "primal": None, "dual": None, "termination": "inherited"
+                })
             
             # if we cannot inhert the solution, then solve
             if not inheritable_solution:
@@ -107,6 +119,7 @@ class AbstractLowerBounder(BoundingProblemBase):
                                              subproblem_model = subproblems.model[subproblem_name])
 
                 # solve the current model representing this scenario - returns bool (feasible) & obj value (float)
+                self._last_eval_detail = None
                 subproblem_is_feasible, subproblem_objective = \
                     self.solve_a_subproblem(subproblem_name = subproblem_name,
                                             subproblem_model = subproblems.model[subproblem_name],
@@ -115,12 +128,24 @@ class AbstractLowerBounder(BoundingProblemBase):
                 # deactivate bound cuts
                 self.deactivate_bound_cuts(subproblems.model[subproblem_name])
 
+                # collect log entry
+                detail = self._last_eval_detail or {}
+                _iter_log_entries.append({
+                    "name": subproblem_name, "method": "solved",
+                    "obj_used": subproblem_objective,
+                    "primal": detail.get("primal"),
+                    "dual": detail.get("dual"),
+                    "termination": detail.get("termination", "unknown"),
+                    "feasible": subproblem_is_feasible
+                })
+
                 # if we have one infeasible scenario, the entire node is infeasible
                 if not subproblem_is_feasible:
                     
                     # if we are infeasible, both UB/LB are infeasible -> add appropriate stats
                     node.lb_problem.is_infeasible()
                     node.ub_problem.is_infeasible()
+                    self._write_subproblem_log(node, _iter_log_entries, feasible=False)
                     
                     return False
             
@@ -131,6 +156,7 @@ class AbstractLowerBounder(BoundingProblemBase):
             
         # if we were successful, add statistics to node
         node.lb_problem.is_feasible(statistics)
+        self._write_subproblem_log(node, _iter_log_entries, feasible=True)
 
         return True
 
@@ -222,6 +248,133 @@ class AbstractLowerBounder(BoundingProblemBase):
         subproblem_model.successor_lb_cut.deactivate()
 
 
+    def _write_subproblem_log(self, node, entries, feasible):
+        """
+        Write per-subproblem results to the log file if logging is enabled.
+        Set self._subproblem_log to a file path to enable.
+        """
+        if not self._subproblem_log:
+            return
+        try:
+            with open(self._subproblem_log, "a") as f:
+                f.write(f"\n{'='*80}\n")
+                f.write(f"LB Iteration {self._lb_iteration}  |  Node ID: {node.id}  |  Feasible: {feasible}\n")
+                f.write(f"{'='*80}\n")
+                f.write(f"{'Scenario':<16} {'Method':<12} {'Termination':<20} {'Primal Obj':>16} {'Dual Bound':>16} {'Obj Used (LB)':>16}\n")
+                f.write(f"{'-'*96}\n")
+                total_obj_used = 0
+                for e in entries:
+                    primal_str = f"{e['primal']:.6f}" if e.get('primal') is not None else "N/A"
+                    dual_str = f"{e['dual']:.6f}" if e.get('dual') is not None else "N/A"
+                    obj_str = f"{e['obj_used']:.6f}" if e.get('obj_used') is not None else "N/A"
+                    if e.get('obj_used') is not None:
+                        total_obj_used += e['obj_used']
+                    f.write(f"{e['name']:<16} {e['method']:<12} {e.get('termination',''):<20} {primal_str:>16} {dual_str:>16} {obj_str:>16}\n")
+                f.write(f"{'-'*96}\n")
+                f.write(f"{'Sum of Obj Used (node LB):':<60} {total_obj_used:>16.6f}\n")
+        except Exception as ex:
+            print(f"[WARNING] Failed to write subproblem log: {ex}")
+
+
+    def evaluate_termination(self,
+                             results, 
+                             subproblem_model: pyo.ConcreteModel) -> None:
+        """
+        After a model is solved in solve_a_subproblem(), need to evaluate what
+        the termination status means.
+
+        Parameters
+        ----------
+        results: pyo.SolverResults
+            solver results object
+        subproblem_model : pyo.ConcreteModel
+            pyomo model corresponding to this subproblem
+        """
+        
+        # check again if locally optimal, raise error
+        if results.solver.termination_condition==TerminationCondition.locallyOptimal:
+            raise RuntimeError(f"While solving a subproblem at the lower bound, found a locally optimal solution. We *must* have global solutions to subproblems at the lower bound.")
+            
+        # if the solution is OPTIMAL: load solutions & retrieve dual bound (valid LB)
+        if results.solver.termination_condition in [TerminationCondition.optimal, 
+                                                    TerminationCondition.globallyOptimal] \
+                and results.solver.status==SolverStatus.ok:
+
+            # load in solutions (needed for variable values / solution inheritance)
+            subproblem_model.solutions.load_from(results)
+
+            # Use the solver's dual bound (valid lower bound) rather than the primal
+            # objective. With MIPGap > 0, the primal obj is an upper bound on the
+            # subproblem, which is invalid as a component of the global LB.
+            primal_obj = pyo.value(get_active_objective(subproblem_model))
+            solver_lb = self.retrieve_solver_lb(results)
+            obj_used = solver_lb if solver_lb > float("-inf") else primal_obj
+            self._last_eval_detail = {"primal": primal_obj, "dual": solver_lb,
+                                      "termination": str(results.solver.termination_condition)}
+            return True, obj_used
+        
+        # if the solution is STOPPED SHORT:, we can retrieve the lb solution & return that / parent
+        if results.solver.termination_condition in [TerminationCondition.maxTimeLimit, 
+                                                    TerminationCondition.maxIterations,
+                                                    TerminationCondition.maxEvaluations,
+                                                    TerminationCondition.feasible]:
+            subproblem_lb = self.retrieve_solver_lb(results)            # returns -inf if not retrievable
+            parent_obj = pyo.value(subproblem_model.successor_obj)      # returns -inf if parent did not have a solution
+            obj_used = max(subproblem_lb, parent_obj)
+            self._last_eval_detail = {"primal": None, "dual": subproblem_lb,
+                                      "termination": str(results.solver.termination_condition)}
+            return True, obj_used
+        
+        # if the solution is not feasible, return None
+        elif results.solver.termination_condition == TerminationCondition.infeasible:
+            self._last_eval_detail = {"primal": None, "dual": None,
+                                      "termination": "infeasible"}
+            return False, None
+
+        else:
+            raise RuntimeError(f"unexpected termination_condition for lower bounding problem: {results.solver.termination_condition}")
+
+
+    def retrieve_solver_lb(self,
+                           results) -> float:
+        """
+        When we do not find an incumbent, or we fail to reach the optimality gap 
+        (due to time limit, for example) we can retrieve the lb for the subproblem
+        and use this.
+
+        Parameters
+        ----------
+        results: pyo.SolverResults
+            solver results object
+        """
+        if "gurobi" in self.solver:
+            try: # retrieve via pyomo's default interface
+                return results.problem.lower_bound
+            except:
+                pass
+            try: # retrieve via another method
+                return results.problem[0]["Lower bound"]
+            except:
+                pass
+            try: # access gurobipy model, compute gap manually
+                gurobi_model = self.solver._solver_model
+                lb = gurobi_model.ObjBound
+                ub = gurobi_model.ObjVal
+                return (ub - lb) / max(1.0, abs(ub))
+            except:
+                return float("-inf")
+        
+        elif "baron" == self.solver:
+            try:
+                return results.problem.lower_bound
+            except:
+                return float("-inf")
+
+            
+        else:
+            raise RuntimeError(f"Attemping to retrieve a lower bound for a subproblem solve, but did not anticipate solver = {self.solver.name}")
+
+
     def solve_a_subproblem(self, 
                            subproblem_name: str, 
                            subproblem_model: pyo.ConcreteModel, 
@@ -280,6 +433,13 @@ class DropNonants(AbstractLowerBounder):
         -----------
         subproblem_model : pyo.ConcreteModel
             subproblem's Pyomo model.
+
+        Returns
+        -----------
+        feasible : bool
+            if the solve of the subproblem model was feasible or not
+        objective : float
+            objective value of the subproblem model; None if infeasible.
         """
         
         # solve model
@@ -288,19 +448,5 @@ class DropNonants(AbstractLowerBounder):
                                  symbolic_solver_labels=True,
                                  tee = False)
 
-        # if the solution is optimal, return objective value
-        if results.solver.termination_condition==TerminationCondition.optimal and \
-            results.solver.status==SolverStatus.ok:
-
-            # load in solutions, return [feasibility = True, obj, results]
-            subproblem_model.solutions.load_from(results)
-
-            # return the value of the singular active objective.
-            return True, pyo.value(get_active_objective(subproblem_model))
-        
-        # if the solution is not feasible, return None
-        elif results.solver.termination_condition == TerminationCondition.infeasible:
-            return False, None
-
-        else:
-            raise RuntimeError(f"unexpected termination_condition for lower bounding problem: {results.solver.termination_condition}")
+        return self.evaluate_termination(results = results,
+                                         subproblem_model = subproblem_model)

@@ -52,7 +52,7 @@ def build_models(nscen,nfirst=2,nparam=2,seed=1234,print_first_k_rhs=0):
 
 MODE_PARAMS={"smoke":{"nscen":10,"target_nodes":60,"gap_stop_tol":1e-6,"time_limit":300,"enable_ef_ub":True,"ef_time_ub":30.,"plot_every":None,"plot_output_dir":"results/st_fp7d_smoke/plots","output_csv_path":"results/st_fp7d_smoke/simplex_result.csv"},
  "full":{"nscen":100,"target_nodes":900,"gap_stop_tol":1e-3,"time_limit": 60*60*12,"enable_ef_ub":True,"ef_time_ub":60,"plot_every":None,"plot_output_dir":"results/st_fp7d_full/plots","output_csv_path":"results/st_fp7d_full/simplex_result.csv"}}
-BUNDLE_OPTIONS={"NonConvex":2,"MIPGap":1e-2, "TimeLimit":60}
+BUNDLE_OPTIONS={"NonConvex":2,"MIPGap":1e-1, "TimeLimit":60}
 Q_MAX = -1e1
 
 def main():

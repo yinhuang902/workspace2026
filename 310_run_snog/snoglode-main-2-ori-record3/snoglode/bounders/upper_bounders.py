@@ -455,15 +455,25 @@ class SolveExtensiveForm(AbstractCandidateGenerator):
             return True, sol, best_obj
 
         # if we have successfully generated a candidate solution
-        if ef_results.solver.termination_condition==TerminationCondition.optimal and \
-            ef_results.solver.status==SolverStatus.ok:
-                
-                # (4) deactivate EF
+        # Accept optimal, OR feasible incumbent from early termination (e.g., TimeLimit)
+        tc = ef_results.solver.termination_condition
+        has_optimal = (tc == TerminationCondition.optimal and
+                       ef_results.solver.status == SolverStatus.ok)
+        has_feasible_incumbent = tc in [TerminationCondition.maxTimeLimit,
+                                        TerminationCondition.maxIterations,
+                                        TerminationCondition.maxEvaluations,
+                                        TerminationCondition.feasible]
+
+        if has_optimal or has_feasible_incumbent:
+            # Try to load solution — may fail if no incumbent was found
+            try:
+                subproblems.ef.model.solutions.load_from(ef_results)
                 for obj in subproblems.ef.model.component_objects(pyo.Objective):
                     subproblems.ef.deactivate()
                     return True, subproblems.ef.save_solution(), pyo.value(obj)
+            except Exception:
+                pass  # no incumbent available, fall through
 
-        else:
-            # (4) deactivate EF
-            subproblems.ef.deactivate()
-            return False, None, math.nan
+        # (4) deactivate EF — no candidate found
+        subproblems.ef.deactivate()
+        return False, None, math.nan

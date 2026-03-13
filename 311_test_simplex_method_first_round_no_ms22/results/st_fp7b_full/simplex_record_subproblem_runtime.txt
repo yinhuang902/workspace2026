@@ -2,7 +2,7 @@
 # ms/cs/Q timing, non-optimal subproblem detection
 
 === Iter 0 ===
-ms: total_time=1.7516, calls=200, avg=0.0088
-cs: total_time=7.1373, calls=200, avg=0.0357
-Q:  total_time=1.6771, calls=100, avg=0.0168
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=145.5712, calls=10800, avg=0.0135
+Q:  total_time=0.5616, calls=100, avg=0.0056
 

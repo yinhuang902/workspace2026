@@ -2251,7 +2251,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                         "ms_per_scene": [float(x) for x in r.get("ms_per_scene", [])],
                         "LB": float(r["LB"]),
                         "UB": float(r["UB"]),
-                        "best_scene": int(r["best_scene"]),
+                        "best_scene": int(r["best_scene"]) if r.get("best_scene") is not None else -1,
                         "x_ms_best_scene": tuple(map(float, r["x_ms_best_scene"])) if r.get("x_ms_best_scene") is not None else None,
                         "volume": float(r["volume"]),
                     } for r in per_tet

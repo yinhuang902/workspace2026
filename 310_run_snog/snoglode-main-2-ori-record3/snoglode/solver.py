@@ -19,6 +19,7 @@ size = MPI.COMM_WORLD.Get_size()
 
 import time, math
 import pyomo.environ as pyo
+import snoglode.utils.compute as compute
 
 class Solver():
     """
@@ -308,54 +309,74 @@ class Solver():
         """
         Everything related to solving the CG & UB problem of a current node.
 
+        Tries TWO candidate strategies each iteration:
+          (1) The configured candidate generator (e.g., SolveExtensiveForm)
+          (2) AverageLowerBoundSolution (average of per-scenario LB solutions)
+        Keeps the better (lower) feasible UB.
+
         Nothing is returned because all information is appended
         to the current objects in place.
         """
         # if feasible & LB < UB -> proceed to UB problem
-        if current_node.lb_problem.feasible and \
-            (current_node.lb_problem.objective <= self.tree.metrics.ub):
-                    
-                # generate a candidate
-                self.logger.cg_start()
-                candidate_found, candidate_solution, candidate_objective = \
-                    self.upper_bounder.candidate_solution_finder.generate(node = current_node,
-                                                                        subproblems = self.subproblems)
-                self.logger.cg_stop()
+        if not (current_node.lb_problem.feasible and
+                (current_node.lb_problem.objective <= self.tree.metrics.ub)):
+            current_node.ub_problem.is_infeasible()
+            return
 
-                # if we found a candidate & we need to solve for globally optimal subproblem specific vars
-                if (candidate_found):
+        best_ub_obj = float("inf")
+        best_ub_feasible = False
 
-                    # if we solve ub, fix to candidate and solve subproblems again.
-                    if (self.solve_ub):
-                        self.logger.ub_start()
-                        self.upper_bounder.solve(subproblems = self.subproblems,
-                                                    node = current_node,
-                                                    candidate_solution = candidate_solution)
-                        self.logger.ub_stop()
-                    
-                    # otw, the candidate solution is representative of our ub feasible solution
-                    else:
-                        current_node.ub_problem.is_feasible(candidate_objective)
-                
-                # if we did not find a candidate, set to infeasible and move on
-                else:
-                    assert not candidate_found
-                    current_node.ub_problem.is_infeasible()
-                    
-                # wait for all of the parallel upper bound problems to solve
+        # ------- Strategy 1: Configured CG (e.g., EF) -------
+        self.logger.cg_start()
+        cg_found, cg_solution, cg_objective = \
+            self.upper_bounder.candidate_solution_finder.generate(node=current_node,
+                                                                  subproblems=self.subproblems)
+        self.logger.cg_stop()
+
+        if cg_found:
+            if self.solve_ub:
+                self.logger.ub_start()
+                self.upper_bounder.solve(subproblems=self.subproblems,
+                                        node=current_node,
+                                        candidate_solution=cg_solution)
+                self.logger.ub_stop()
+
                 MPI.COMM_WORLD.barrier()
+                cg_ub_feasible = MPI.COMM_WORLD.allreduce(current_node.ub_problem.feasible, op=MPI.PROD)
+                cg_ub_obj = MPI.COMM_WORLD.allreduce(current_node.ub_problem.objective, op=MPI.SUM)
+                if cg_ub_feasible and cg_ub_obj < best_ub_obj:
+                    best_ub_obj = cg_ub_obj
+                    best_ub_feasible = True
+            else:
+                # EF with ub_required=False: candidate objective IS the UB
+                if cg_objective is not None and not math.isnan(cg_objective) and cg_objective < best_ub_obj:
+                    best_ub_obj = cg_objective
+                    best_ub_feasible = True
 
-                # if we solved upper bound again - agregated objective & determine feasibility
-                if (self.solve_ub):
+        # ------- Strategy 2: Average LB solution -------
+        avg_solution = compute.average_lb_solution(current_node, self.subproblems)
+        has_none = any(v is None for v in avg_solution.values())
 
-                    ub_feasible = MPI.COMM_WORLD.allreduce(current_node.ub_problem.feasible, op=MPI.PROD)
-                    ub_obj = MPI.COMM_WORLD.allreduce(current_node.ub_problem.objective, op=MPI.SUM)
-                    
-                    # update node metrics
-                    if (ub_feasible): current_node.ub_problem.is_feasible(ub_obj)
-                    else: current_node.ub_problem.is_infeasible()
-        
-        else: current_node.ub_problem.is_infeasible()
+        if not has_none:
+            # reset node UB state for this attempt
+            current_node.ub_problem.is_infeasible()
+
+            self.upper_bounder.solve(subproblems=self.subproblems,
+                                    node=current_node,
+                                    candidate_solution=avg_solution)
+
+            MPI.COMM_WORLD.barrier()
+            avg_ub_feasible = MPI.COMM_WORLD.allreduce(current_node.ub_problem.feasible, op=MPI.PROD)
+            avg_ub_obj = MPI.COMM_WORLD.allreduce(current_node.ub_problem.objective, op=MPI.SUM)
+            if avg_ub_feasible and avg_ub_obj < best_ub_obj:
+                best_ub_obj = avg_ub_obj
+                best_ub_feasible = True
+
+        # ------- Set final UB on node -------
+        if best_ub_feasible:
+            current_node.ub_problem.is_feasible(best_ub_obj)
+        else:
+            current_node.ub_problem.is_infeasible()
 
 
     def node_feasibility_checks(self,
