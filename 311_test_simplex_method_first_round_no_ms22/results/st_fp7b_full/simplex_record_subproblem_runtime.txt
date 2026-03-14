@@ -3,6 +3,6 @@
 
 === Iter 0 ===
 ms: total_time=0.0000, calls=0, avg=0.0000
-cs: total_time=145.5712, calls=10800, avg=0.0135
-Q:  total_time=0.5616, calls=100, avg=0.0056
+cs: total_time=296.1134, calls=10800, avg=0.0274
+Q:  total_time=0.6405, calls=100, avg=0.0064
 
