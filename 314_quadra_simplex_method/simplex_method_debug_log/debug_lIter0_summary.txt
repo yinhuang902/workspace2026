@@ -1,0 +1,56 @@
+# debug_lIter0_summary.txt — Iteration 0 summary
+# Per-simplex: LB, avg dual bound, avg c_s Q-value, IPOPT result
+# Plus: current UB, UB source, next chosen simplex
+
+======================================================================
+[Iter 0] FULL SIMPLEX SUMMARY
+  Number of simplices: 6
+  Number of scenarios: 5
+
+  --- T0 (0, 2, 3, 4) ---
+    LB: 3.949286507 (per-scen)
+    Avg constant-cut c_s: 3.949286507
+    Avg c_s point Q-value: 3.949291156 (per-scen), point=(-1.0, -0.999998632342869, -0.9999986323428688)
+    Volume: 1.333333e+00
+  --- T1 (0, 1, 3, 4) ---
+    LB: 3.797740711 (per-scen)
+    Avg constant-cut c_s: 3.797740711
+    Avg c_s point Q-value: 3.919948594 (per-scen), point=(-1.0, -0.9991008458335131, -0.5135173869728364)
+    Volume: 1.333333e+00
+  --- T2 (3, 4, 5, 7) ---
+    LB: 9.984011486 (per-scen)
+    Avg constant-cut c_s: 9.984011486
+    Avg c_s point Q-value: 411.785337851 (per-scen), point=(0.9999999998753957, 0.5999993180086461, 0.5999993182491187)
+    Volume: 1.333333e+00
+  --- T3 (3, 4, 6, 7) ---
+    LB: 9.989023329 (per-scen)
+    Avg constant-cut c_s: 9.989023329
+    Avg c_s point Q-value: 411.794013202 (per-scen), point=(0.9999054342809502, 0.6000006472484822, 0.599792250358363)
+    Volume: 1.333333e+00
+  --- T4 (2, 3, 4, 6) ---
+    LB: 20.881682609 (per-scen)
+    Avg constant-cut c_s: 20.881682609
+    Avg c_s point Q-value: 33.110364560 (per-scen), point=(0.42379668992166347, -0.42379668990077973, -0.8425433360521237)
+    Volume: 1.333333e+00
+  --- T5 (1, 3, 4, 5) ---
+    LB: 6.962691100 (per-scen)
+    Avg constant-cut c_s: 6.962691100
+    Avg c_s point Q-value: 7.439149107 (per-scen), point=(-0.649003139235496, -0.9999999998912292, 0.6490031393776198)
+    Volume: 1.333333e+00
+
+  --- IPOPT EF Result (selected LB simplex only) ---
+    Selected simplex: T1 (0, 1, 3, 4)
+    EF-IPOPT: ok=True, ef_obj(per-scen)=0.782471596, true_obj(per-scen)=3.912358050, status=ok, term=optimal, time=0.132s
+    EF-IPOPT K point: (-1.0, -1.0, -0.6428391719436267)
+    Barycentric coords: [0.000000, 0.178580, -0.000000, 0.821420]
+
+  --- Current UB ---
+    UB value: 3.912358050 (per-scen)
+    UB point: (-1.0, -1.0, -0.6428391719436267)
+    UB source: EF_ipopt
+
+  --- Next Chosen Simplex ---
+    Simplex: T1 (0, 1, 3, 4)
+    Scene: 1, source: c_s_fallback
+    New point: (-1.0, -1.0, 0.21137188327290657)
+======================================================================

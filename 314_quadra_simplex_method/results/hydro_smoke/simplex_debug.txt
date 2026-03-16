@@ -1,0 +1,1041 @@
+# simplex_debug.txt — ms/cs/Q subproblem failures
+# Fields: simp, scen, type, issue, ok, status, term, val, dual, time
+
+=== Iter 0 ===
+  simp=T0 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0117s
+  simp=T0 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0110s
+  simp=T1 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0030s
+  simp=T1 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0041s
+  simp=T9 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0105s
+  simp=T9 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0117s
+  simp=T21 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0102s
+  simp=T21 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0109s
+  simp=T34 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0097s
+  simp=T34 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0106s
+  simp=T37 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0080s
+  simp=T37 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0095s
+  simp=T49 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0042s
+  simp=T49 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0054s
+  simp=T50 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0138s
+  simp=T50 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0174s
+  simp=T54 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0116s
+  simp=T54 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0141s
+  simp=T71 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0119s
+  simp=T71 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0131s
+  simp=T72 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0103s
+  simp=T72 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0152s
+  simp=T73 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0150s
+  simp=T73 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0152s
+  simp=T74 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0121s
+  simp=T74 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0139s
+  simp=T77 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0134s
+  simp=T77 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0133s
+  simp=T86 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0117s
+  simp=T86 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0134s
+  simp=T92 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0117s
+  simp=T92 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0173s
+  simp=T95 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0093s
+  simp=T95 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0089s
+  simp=T98 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0046s
+  simp=T98 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0049s
+  simp=T100 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0133s
+  simp=T100 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0157s
+  simp=T103 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0151s
+  simp=T103 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0166s
+  simp=T105 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0116s
+  simp=T105 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0113s
+  simp=T107 scen=0 type=ms issue=solve_fail ok=False status=infeasible term=infeasible val=inf dual=None time=0.0135s
+  simp=T107 scen=0 type=cs issue=solve_fail ok=False status=infeasible term=infeasible val=-inf dual=None time=0.0134s
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0038s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0051s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0046s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0043s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0044s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0057s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0048s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0043s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+=== Iter 1 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0041s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0042s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0047s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0056s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0043s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0045s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+=== Iter 2 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0044s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0040s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0048s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0042s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0046s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+=== Iter 3 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0043s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0045s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0046s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0054s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0051s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0042s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0060s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0048s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0044s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0050s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0053s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0048s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+=== Iter 4 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0038s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0042s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+=== Iter 5 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0049s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0024s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0042s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0042s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+=== Iter 6 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0025s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+=== Iter 7 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0037s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0043s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0024s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0025s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0023s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0024s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0023s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+=== Iter 8 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0023s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0025s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0022s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0022s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0023s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0026s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+=== Iter 9 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0039s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0024s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0024s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0022s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0043s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+=== Iter 10 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0045s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0024s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0023s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0023s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0025s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0026s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0026s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+=== Iter 11 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0052s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0040s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0024s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0024s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0026s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0025s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+=== Iter 12 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0040s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0044s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0023s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0026s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0024s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0025s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0025s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0022s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+=== Iter 13 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0042s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0055s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0073s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+=== Iter 14 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0040s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0022s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0025s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+=== Iter 15 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0042s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0026s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0025s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0023s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0043s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0042s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0024s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0023s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+=== Iter 16 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0038s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0024s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0023s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0023s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+=== Iter 17 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0050s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0022s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0025s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0025s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+=== Iter 18 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0025s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0039s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0026s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0026s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0026s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0021s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0021s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0023s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0023s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0023s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+=== Iter 19 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0024s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0023s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0026s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0028s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0024s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+=== Iter 20 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0039s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0044s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0061s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0059s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0042s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0042s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0054s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0047s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0053s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0045s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0042s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0042s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0047s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0051s
+=== Iter 21 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0040s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0050s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0045s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0043s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0043s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+=== Iter 22 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0041s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0048s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0054s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0031s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0037s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0032s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0033s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0029s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0027s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0030s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0040s
+=== Iter 23 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0048s
+  scen=2 type=Q issue=Q_solve_fail ok=? status=warning term=infeasible val=10000000000.0 time=0.0046s
+  scen=0 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#1 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0046s
+  scen=0 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#2 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0047s
+  scen=0 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0052s
+  scen=2 type=Q_retry#3 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0044s
+  scen=0 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0048s
+  scen=2 type=Q_retry#4 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0045s
+  scen=0 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0051s
+  scen=2 type=Q_retry#5 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0061s
+  scen=0 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0060s
+  scen=2 type=Q_retry#6 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0055s
+  scen=0 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0049s
+  scen=2 type=Q_retry#7 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0047s
+  scen=0 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0044s
+  scen=2 type=Q_retry#8 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0046s
+  scen=0 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0055s
+  scen=2 type=Q_retry#9 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0059s
+  scen=0 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0043s
+  scen=2 type=Q_retry#10 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=0 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0048s
+  scen=2 type=Q_retry#11 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=0 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#12 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=0 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0044s
+  scen=2 type=Q_retry#13 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=0 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0035s
+  scen=2 type=Q_retry#14 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=0 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0044s
+  scen=2 type=Q_retry#15 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0038s
+  scen=0 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0039s
+  scen=2 type=Q_retry#16 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0034s
+  scen=0 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=2 type=Q_retry#17 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0042s
+  scen=0 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s
+  scen=2 type=Q_retry#18 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=0 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0041s
+  scen=2 type=Q_retry#19 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0051s
+  scen=0 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0052s
+  scen=2 type=Q_retry#20 issue=Q_solve_fail ok=? term=infeasible val=10000000000.0 time=0.0036s

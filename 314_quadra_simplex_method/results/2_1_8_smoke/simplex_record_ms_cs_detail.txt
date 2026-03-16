@@ -1,0 +1,5 @@
+# simplex_record_ms_cs_detail.txt — per-scenario ms/cs values and points
+# For the selected (LB) simplex each iteration
+# ms_val, ms_pt (coordinates), ms_bary (barycentric)
+# cs_val, cs_pt (coordinates), cs_bary (barycentric)
+

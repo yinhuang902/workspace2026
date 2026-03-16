@@ -1,0 +1,18 @@
+# simplex_record_split.txt — per-iteration split record
+# selected_simplex LB_pre, UB_pre, children LBs, end LB/UB
+
+=== Iter 0 ===
+selected_simplex: T1  LB_pre=3.797740711
+  v3: (-1.0000, 1.0000, 1.0000)
+  v1: (-1.0000, -1.0000, 1.0000)
+  v4: (1.0000, -1.0000, -1.0000)
+  v0: (-1.0000, -1.0000, -1.0000)
+UB_pre=3.912358050  LB_global_pre=3.797740711
+children (created 2):
+  child T5 (0, 3, 4, 8) LB=3.796843849 sum_cs=3.796843849
+  child T6 (1, 3, 4, 8) LB=4.341070754 sum_cs=4.341070754
+next_node: (-1.0000, -1.0000, 0.2114)
+barycentric: (0.000000, 0.605686, -0.000000, 0.394314)
+sample_retry_triggered=no  retry_count=0
+end: UB=3.912358050  LB=3.796843849
+

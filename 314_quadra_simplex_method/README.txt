@@ -1,0 +1,3 @@
+
+修改自227_test_simplex_method_new_next_pt_initial_simplex_start
+将linear插值函数改成二次插值函数
