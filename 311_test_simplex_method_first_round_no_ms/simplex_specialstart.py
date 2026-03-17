@@ -3767,7 +3767,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                             _d = _nn_verts.shape[1]
                             _A = np.vstack([_nn_verts.T, np.ones((1, _d + 1))])
                             _b = np.append(_nn_pt, 1.0)
-                            _lam = np.linalg.lstsq(_A, _b, rcond=None)[0]
+                            _lam = _safe_linalg.solve(_A, _b)
                             _bary_str = "(" + ", ".join(f"{float(l):.6f}" for l in _lam) + ")"
                     except Exception:
                         _bary_str = "error"
@@ -3799,7 +3799,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 try:
                     d = V.shape[1]
                     T = (V[1:] - V[0]).T  # (d, d)
-                    lam_rest = np.linalg.solve(T, p - V[0])
+                    lam_rest = _safe_linalg.solve(T, p - V[0])
                     lam0 = 1.0 - lam_rest.sum()
                     return np.concatenate([[lam0], lam_rest])
                 except Exception:

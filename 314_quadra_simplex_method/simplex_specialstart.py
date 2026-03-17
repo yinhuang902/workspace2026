@@ -471,9 +471,12 @@ def ms_on_tetra_for_scene(ms_bundle, tet_vertices, fverts_scene,
 
     # ---- Step 1: Solve constant cut FIRST ----
     # update_tetra with quad_coeffs=None sets up geometry but does NOT set ms objective.
+    print(f"[DBG ms_on_tetra] scen {scenario_id}: update_tetra ...", flush=True)
     ms_bundle.update_tetra(tet_vertices, None)
 
+    print(f"[DBG ms_on_tetra] scen {scenario_id}: solve_const_cut ...", flush=True)
     cs_result = ms_bundle.solve_const_cut()
+    print(f"[DBG ms_on_tetra] scen {scenario_id}: solve_const_cut done, bound_ok={cs_result['bound_ok']}", flush=True)
     if cs_result["bound_ok"]:
         result["c_val"] = cs_result["c_val"]
         result["quad_status"]["cs_bound_ok"] = True
@@ -489,14 +492,48 @@ def ms_on_tetra_for_scene(ms_bundle, tet_vertices, fverts_scene,
         result["quad_status"]["cs_point_ok"] = True
 
     # ---- Step 2: Build quadratic interpolation set ----
+    # PRE-CHECK: If ALL vertex Q-values for this scenario are infeasible (q_max),
+    # skip the entire interpolation to avoid Gurobi C-library segfaults at interior
+    # points in the infeasible region.
+    _q_max_threshold = base_bundle.q_max - 1.0 if base_bundle else 1e9
+    _n_infeas_verts = sum(
+        1 for fv in fverts_scene
+        if fv is None or not math.isfinite(fv) or fv >= _q_max_threshold
+    )
+    if _n_infeas_verts >= len(fverts_scene):
+        # ALL vertices are infeasible for this scenario → skip Q evaluations
+        result["quad_status"]["skip_reason"] = "all_vertices_infeasible"
+        return result
+
+    _eval_q_fail_count = [0]  # mutable counter in closure
+    _EVAL_Q_MAX_CONSECUTIVE_FAILS = 1  # stop after this many to avoid Gurobi segfault
+
+    # Pre-populate failure counter from vertex Q-values: if ANY vertex is
+    # infeasible/q_max, interior points are likely to crash Gurobi too.
+    if _n_infeas_verts > 0:
+        _eval_q_fail_count[0] = _EVAL_Q_MAX_CONSECUTIVE_FAILS
+
     def _eval_q(pt):
-        """Evaluate Q_s at an arbitrary point using the base bundle."""
+        """Evaluate Q_s at an arbitrary point using the base bundle.
+        
+        Tracks consecutive failures and stops calling Gurobi after a threshold
+        to prevent C-level segfaults from corrupted Gurobi state.
+        """
+        if _eval_q_fail_count[0] >= _EVAL_Q_MAX_CONSECUTIVE_FAILS:
+            return float('inf')  # Skip Gurobi call entirely
         try:
             val = base_bundle.eval_at(first_vars, pt)
-            return float(val)
+            fval = float(val)
+            if fval >= base_bundle.q_max - 1e-6:
+                _eval_q_fail_count[0] += 1
+            else:
+                _eval_q_fail_count[0] = 0  # Reset on success
+            return fval
         except Exception:
+            _eval_q_fail_count[0] += 1
             return float('inf')
 
+    print(f"[DBG ms_on_tetra] scen {scenario_id}: build_interpolation_set ...", flush=True)
     interp_result = build_interpolation_set(
         tet_vertices=tet_vertices,
         cs_point=cs_point_use,
@@ -505,6 +542,7 @@ def ms_on_tetra_for_scene(ms_bundle, tet_vertices, fverts_scene,
         eval_q_fn=_eval_q,
         d=d,
     )
+    print(f"[DBG ms_on_tetra] scen {scenario_id}: build_interpolation done, success={interp_result['success']}", flush=True)
 
     # ---- Step 3: Handle interpolation result ----
     if not interp_result["success"]:
@@ -540,8 +578,11 @@ def ms_on_tetra_for_scene(ms_bundle, tet_vertices, fverts_scene,
     result["quad_status"]["quad_interp_ok"] = True
 
     # ---- Step 4: Update tetra with quad coeffs and solve ms ----
+    print(f"[DBG ms_on_tetra] scen {scenario_id}: update_tetra (quad) ...", flush=True)
     ms_bundle.update_tetra(tet_vertices, quad_coeffs)
+    print(f"[DBG ms_on_tetra] scen {scenario_id}: ms_bundle.solve() ...", flush=True)
     solve_result = ms_bundle.solve()
+    print(f"[DBG ms_on_tetra] scen {scenario_id}: solve done, bound_ok={solve_result['bound_ok']}", flush=True)
 
     result["quad_status"]["ms_bound_ok"] = solve_result["bound_ok"]
     result["quad_status"]["ms_point_ok"] = solve_result["point_ok"]
@@ -680,6 +721,7 @@ def evaluate_all_tetra(nodes, scen_values, ms_bundles, first_vars_list,
                 ms_meta_per_scene.append(None)
                 cs_meta_per_scene.append(None)
             else:
+                print(f"[DBG] T{k} scen {w}: calling ms_on_tetra_for_scene ...", flush=True)
                 scene_result = ms_on_tetra_for_scene(
                     ms_bundle=ms_bundles[w],
                     tet_vertices=verts,
@@ -692,6 +734,7 @@ def evaluate_all_tetra(nodes, scen_values, ms_bundles, first_vars_list,
                     simplex_id=simplex_id,
                     scenario_id=w,
                 )
+                print(f"[DBG] T{k} scen {w}: done (ms={scene_result['ms_val']:.3e}, c={scene_result['c_val']:.3e})", flush=True)
 
                 ms_scene.append(scene_result["ms_val"])
                 xms_scene.append(scene_result["new_pt_ms"])
@@ -3318,7 +3361,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                             _d = _nn_verts.shape[1]
                             _A = np.vstack([_nn_verts.T, np.ones((1, _d + 1))])
                             _b = np.append(_nn_pt, 1.0)
-                            _lam = np.linalg.lstsq(_A, _b, rcond=None)[0]
+                            _lam = _safe_linalg.solve(_A, _b)
                             _bary_str = "(" + ", ".join(f"{float(l):.6f}" for l in _lam) + ")"
                     except Exception:
                         _bary_str = "error"
@@ -3348,7 +3391,7 @@ def run_pid_simplex_3d(base_bundles, ms_bundles, model_list, first_vars_list,
                 try:
                     d = V.shape[1]
                     T = (V[1:] - V[0]).T  # (d, d)
-                    lam_rest = np.linalg.solve(T, p - V[0])
+                    lam_rest = _safe_linalg.solve(T, p - V[0])
                     lam0 = 1.0 - lam_rest.sum()
                     return np.concatenate([[lam0], lam_rest])
                 except Exception:

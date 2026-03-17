@@ -1,0 +1,16 @@
+# simplex_record_ms_cs_detail.txt — per-scenario ms/cs values and points
+# For the selected (LB) simplex each iteration
+# ms_val, ms_pt (coordinates), ms_bary (barycentric)
+# cs_val, cs_pt (coordinates), cs_bary (barycentric)
+
+=== Iter 0 ===
+simplex: T5  verts=(1, 3, 4, 5)  cs_status=full  ms_status=full
+
+  MS per scenario (2 scenarios):
+    s=0  ms=-5.715754e+02  pt=(-1.510047, -100.000000, 15.100470)  bary=(0.000000, 0.000000, 0.575502, 0.424498)
+    s=1  ms=-5.685614e+02  pt=(-1.301717, -99.997533, 14.475772)  bary=(0.000012, 0.007293, 0.565074, 0.427621)
+
+  CS per scenario (2 scenarios):
+    s=0  cs=1.004449e+00  pt=(-0.025820, -80.508684, 0.258202)  bary=(0.097457, 0.000000, 0.403834, 0.498709)
+    s=1  cs=9.460826e-01  pt=(0.000000, -99.667236, 0.000000)  bary=(0.001664, 0.000000, 0.498336, 0.500000)
+

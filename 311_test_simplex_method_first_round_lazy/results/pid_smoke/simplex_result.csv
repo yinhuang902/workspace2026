@@ -1,0 +1,2 @@
+iter,time_s,nodes,LB,UB,gap_abs,gap_rel_pct,active_ratio
+0,,8,0.978793990,0.979002305,0.000208315,0.021278,1.000000

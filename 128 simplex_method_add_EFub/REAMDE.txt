@@ -15,15 +15,6 @@ I'd like to understand my algorithm logic: In the current version of the code, e
 
 
 
-simp1e1sc10  22784302 7h
-simp 1e3sc10  22784326 7h
-snog 1e1sc10   22784282 2d
-snog 1e3sc10    22784278 2d
-
-
-
-
-sbatch run_app_7h.sbatch
 
 
 

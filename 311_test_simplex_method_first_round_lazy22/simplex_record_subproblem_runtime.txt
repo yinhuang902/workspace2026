@@ -1,0 +1,8 @@
+# simplex_record_subproblem_runtime.txt — per-iteration subproblem runtime
+# ms/cs/Q timing, non-optimal subproblem detection
+
+=== Iter 0 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=1.4260, calls=18, avg=0.0792
+Q:  total_time=0.0189, calls=3, avg=0.0063
+

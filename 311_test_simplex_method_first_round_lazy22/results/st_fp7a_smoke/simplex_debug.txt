@@ -1,0 +1,87 @@
+# simplex_debug.txt — ms/cs/Q subproblem failures
+# Fields: simp, scen, type, issue, ok, status, term, val, dual, time
+
+=== Iter 1 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0056s
+=== Iter 3 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0093s
+=== Iter 4 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0058s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0051s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0059s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0051s
+=== Iter 5 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0067s
+=== Iter 6 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0054s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0048s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0066s
+=== Iter 7 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0084s
+=== Iter 8 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0067s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0059s
+=== Iter 10 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0076s
+=== Iter 12 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0051s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0052s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0051s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0052s
+=== Iter 13 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0061s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0056s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0055s
+=== Iter 14 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0055s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0055s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0052s
+=== Iter 15 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0053s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0054s
+=== Iter 16 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0070s
+=== Iter 17 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0053s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0051s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0054s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0049s
+=== Iter 18 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0053s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0051s
+=== Iter 19 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0059s
+=== Iter 20 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0049s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0057s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0050s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0047s
+=== Iter 21 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0061s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0065s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0063s
+=== Iter 23 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0086s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0069s
+=== Iter 24 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0053s
+=== Iter 25 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0065s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0074s
+=== Iter 26 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0056s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0046s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0050s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0050s
+=== Iter 27 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0063s
+  scen=1 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0050s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0054s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0051s
+=== Iter 28 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0056s
+  scen=3 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0055s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0058s
+=== Iter 29 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0052s
+  scen=4 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=100.0 time=0.0051s

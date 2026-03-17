@@ -1,0 +1,7 @@
+# simplex_debug.txt — ms/cs/Q subproblem failures
+# Fields: simp, scen, type, issue, ok, status, term, val, dual, time
+
+=== Iter 0 ===
+  scen=0 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=10000000000.0 time=0.0043s
+  scen=5 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=10000000000.0 time=0.0047s
+  scen=6 type=Q issue=Q_solve_fail ok=? status=warning term=infeasibleOrUnbounded val=10000000000.0 time=0.0036s

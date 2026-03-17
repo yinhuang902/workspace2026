@@ -4,21 +4,61 @@
 [Iter 0] Shape check: triggered=0, inactivated=0, passed=0
 ======================================================================
 [Iter 0] LB SPLIT DIAGNOSTIC
-  Selected (parent) simplex: (1, 3, 4, 5, 13, 21)
-  Parent LB: -636.656570190 (per-scen)
-  EF ef_obj(IPOPT): -6.366488680, true_obj(recalc): -636.648870035, used=min=-636.648870035 (per-scen)
-  Simplex volume: 7.511289e+05
-  Children (6):
-    T107 (1, 4, 5, 13, 21, 32): LB = -636.652837416
-    T108 (1, 3, 4, 13, 21, 32): LB = -636.652837414
-    T111 (3, 4, 5, 13, 21, 32): LB = -636.651369056
-  New global LB: -636.655375670 (from T65 (2, 3, 4, 8, 14, 30))
+  Selected (parent) simplex: (3, 4, 6, 7)
+  Parent LB: 0.981419705 (per-scen)
+  EF ef_obj(IPOPT): 0.098177997, true_obj(recalc): 0.981779980, used=min=0.098177997 (per-scen)
+  Simplex volume: 1.333333e+05
+  Children (2):
+    T5 (3, 4, 7, 8): LB = 0.981785236
+    T6 (3, 4, 6, 8): LB = 0.982130146
+  New global LB: 0.979054168 (from T1 (0, 1, 3, 4))
   Location: OUTSIDE
-  Avg CS point Q-value: -636.646088790 (per-scen), point=(np.float64(2.4071164197154233e-13), np.float64(2.1061753273485453e-13), np.float64(28.809892968652417), np.float64(3.557104548062266e-13), np.float64(7.110649463102363e-05))
-  Current UB: -636.648870643 (per-scen)
-  UB point: (0.0, 0.0, 28.81, 0.0, 0.0)
+  Avg CS point Q-value: 0.981780479 (per-scen), point=(np.float64(9.999968180236966), np.float64(99.9999463789076), np.float64(1.3654635045552848))
+  Current UB: 0.981779980 (per-scen)
+  UB point: (9.999846985482968, 99.99973287853527, 1.3905094847647754)
+  UB source: EF_ipopt
+  UB simplex: (3, 4, 6, 7)
+  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.141s, ef_obj=0.9817799699194911, true_obj(per-scen)=0.981779980
+======================================================================
+
+[Iter 1] Shape check: triggered=0, inactivated=0, passed=0
+======================================================================
+[Iter 1] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 1, 3, 4)
+  Parent LB: 0.979054168 (per-scen)
+  EF ef_obj(IPOPT): 0.097900230, true_obj(recalc): 0.979002304, used=min=0.097900230 (per-scen)
+  Simplex volume: 1.333333e+05
+  Children (3):
+    T6 (0, 3, 4, 9): LB = 0.978810943
+    T8 (1, 3, 4, 9): LB = 0.979376846
+  New global LB: 0.978810943 (from T6 (0, 3, 4, 9))
+  Location: INSIDE
+  Avg CS point Q-value: 0.979472795 (per-scen), point=(np.float64(-9.344871019510409), np.float64(-95.92326689362721), np.float64(0.8426078229515841))
+  Current UB: 0.979002304 (per-scen)
+  UB point: (-9.999805722349743, -99.99963140191196, 0.9180308476769972)
+  UB source: EF_ipopt
+  UB simplex: (0, 1, 3, 4)
+  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.174s, ef_obj=0.9790022966191209, true_obj(per-scen)=0.979002304
+======================================================================
+
+[Iter 2] Shape check: triggered=0, inactivated=0, passed=0
+======================================================================
+[Iter 2] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (0, 3, 4, 9)
+  Parent LB: 0.978810943 (per-scen)
+  EF ef_obj(IPOPT): 0.097900230, true_obj(recalc): 0.979002305, used=min=0.097900230 (per-scen)
+  Simplex volume: 7.964382e+04
+  Children (4):
+    T9 (0, 3, 4, 10): LB = 0.979225718
+    T10 (0, 3, 9, 10): LB = 0.979101902
+    T11 (3, 4, 9, 10): LB = 0.979425353
+  New global LB: 0.979101902 (from T10 (0, 3, 9, 10))
+  Location: INSIDE
+  Avg CS point Q-value: 0.979003383 (per-scen), point=(np.float64(-9.999094529323575), np.float64(-99.99807095968887), np.float64(0.8859108773098852))
+  Current UB: 0.979002304 (per-scen)
+  UB point: (10.0, 100.0, 100.0)
   UB source: unknown
   UB simplex: None
-  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.409s, ef_obj=-636.6488680197685, true_obj(per-scen)=-636.648870035
+  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.215s, ef_obj=0.9790022969813914, true_obj(per-scen)=0.979002305
 ======================================================================
 

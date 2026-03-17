@@ -2,26 +2,23 @@
 # Records: simplex vertices, ms points, c_s points, distances to existing nodes
 
 ================================================================================
-[Iter 0] LB simplex = T1
+[Iter 0] LB simplex = T3
   LB simplex vertices:
-    v0 (node #3): (-1.0, 1.0, 1.0)
-    v1 (node #1): (-1.0, -1.0, 1.0)
-    v2 (node #4): (1.0, -1.0, -1.0)
-    v3 (node #0): (-1.0, -1.0, -1.0)
+    v0 (node #3): (-10.0, 10.0, 10.0)
+    v1 (node #6): (10.0, 10.0, -10.0)
+    v2 (node #7): (10.0, 10.0, 10.0)
+    v3 (node #4): (10.0, -10.0, -10.0)
   Existing nodes (8 total):
-    node #0: (-1.0, -1.0, -1.0)
-    node #1: (-1.0, -1.0, 1.0)
-    node #2: (-1.0, 1.0, -1.0)
-    node #3: (-1.0, 1.0, 1.0)
-    node #4: (1.0, -1.0, -1.0)
-    node #5: (1.0, -1.0, 1.0)
-    node #6: (1.0, 1.0, -1.0)
-    node #7: (1.0, 1.0, 1.0)
+    node #0: (-10.0, -10.0, -10.0)
+    node #1: (-10.0, -10.0, 10.0)
+    node #2: (-10.0, 10.0, -10.0)
+    node #3: (-10.0, 10.0, 10.0)
+    node #4: (10.0, -10.0, -10.0)
+    node #5: (10.0, -10.0, 10.0)
+    node #6: (10.0, 10.0, -10.0)
+    node #7: (10.0, 10.0, 10.0)
 
-  Candidates (5 total):
-    [0] simp=T1, scene=0, source=c_s_fallback, val=5.598872e+00, pt=(-1.0, -1.0, -0.9999989303123837), dist_to_nodes=1.069688e-06, COLLISION
-    [1] simp=T1, scene=1, source=c_s_fallback, val=1.696829e+00, pt=(-1.0, -1.0, 0.21137188327290662), dist_to_nodes=7.886281e-01, ok
-    [2] simp=T1, scene=2, source=c_s_fallback, val=2.416061e+00, pt=(-1.0, -0.9955042291675655, -0.06768244667100151), dist_to_nodes=9.323284e-01, ok
-    [3] simp=T1, scene=3, source=c_s_fallback, val=5.650145e+00, pt=(-1.0, -1.0, -0.9999987953561937), dist_to_nodes=1.204644e-06, COLLISION
-    [4] simp=T1, scene=4, source=c_s_fallback, val=3.626796e+00, pt=(-1.0, -1.0, -0.7112786457975101), dist_to_nodes=2.887214e-01, ok
+  Candidates (2 total):
+    [0] simp=T3, scene=0, source=c_s_fallback, val=1.101572e+00, pt=(9.999999873940201, 9.999999755898456, 2.205812004463261), dist_to_nodes=7.794188e+00, ok
+    [1] simp=T3, scene=1, source=c_s_fallback, val=9.648176e-01, pt=(8.382712404667686, 8.35580900157898, 0.3103128005583609), dist_to_nodes=9.960373e+00, ok
 

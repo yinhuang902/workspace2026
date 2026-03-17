@@ -46,9 +46,9 @@ COMMON = {
     "nfe": 20,             # finite elements
     "weights": (10.0, 0.01),
     "bounds": {
-        "Kp": (-1.0, 1.0),
-        "Ki": (-1.0, 1.0),
-        "Kd": (-1.0, 1.0),
+        "Kp": (-10.0, 10.0),
+        "Ki": (-10.0, 10.0),
+        "Kd": (-10.0, 10.0),
         "x": (-2.5, 2.5),
         "u": (-5.0, 5.0),
         "e": (None, None),
@@ -73,11 +73,11 @@ Q_MAX = 1e3
 # ─────────────────────────────────────────────────────
 MODE_PARAMS = {
     "smoke": {
-        "max_scenarios":   5,        # few scenarios for speed
+        "max_scenarios":   2,        # few scenarios for speed
         "skip":            0,
         "target_nodes":    120,       # small mesh
         "gap_stop_tol":    1e-5,     # tight gap (matches app.ipynb)
-        "time_limit":      60*10,      # no wall-clock cap — run until gap or target_nodes
+        "time_limit":      60*1,      # no wall-clock cap — run until gap or target_nodes
         "enable_3d_plot":  False,    # no plotting
         "enable_ef_ub":    True,
         "ef_time_ub":      30.0,     # short EF solve

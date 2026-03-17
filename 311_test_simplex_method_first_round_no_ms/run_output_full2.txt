@@ -1,0 +1,216 @@
+﻿======================================================================
+  PID Regression Test — mode=SMOKE
+======================================================================
+  Data file:       C:\Users\Administrator\OneDrive\Desktop\workspace2026\311_test_simplex_method_first_round_no_ms\data.csv
+  Results dir:     C:\Users\Administrator\OneDrive\Desktop\workspace2026\311_test_simplex_method_first_round_no_ms\results\pid_smoke
+  Random seed:     42
+  T=15.0, nfe=20, weights=(10.0, 0.01)
+  max_scenarios:   2
+  target_nodes:    120
+  gap_stop_tol:    1e-08
+  time_limit:      60
+  enable_ef_ub:    True
+  ef_time_ub:      30.0
+  enable_3d_plot:  False
+  use_exact_opt:   False
+======================================================================
+
+[1] Building PID scenario models...
+    2 scenarios built in 1.02s
+
+[2] Building solver bundles (BaseBundle + MSBundle)...
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2689754
+Academic license 2689754 - for non-commercial use only - registered to yi___@math.ubc.ca
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter MIPGap to value 0.1
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 30
+Set parameter MIPGap to value 0.1
+Set parameter NumericFocus to value 1
+Set parameter Presolve to value 2
+Set parameter NonConvex to value 2
+Set parameter TimeLimit to value 30
+    Done in 1.01s
+
+[3] Running simplex algorithm...
+----------------------------------------------------------------------
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(-10.0, 100.0, -100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=error, term=error
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, -100.0, 100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[BaseBundle.eval_at] Infeasible/Error for K=(10.0, 100.0, -100.0): status=warning, term=infeasibleOrUnbounded
+[TIMING] Pre-loop vertex Q evals: 0.12s  (8 nodes x 2 scenarios = 16 solves)
+[EF-UB] Initialized ipopt EF with 2 scenarios, time_ub=30.0s
+
+======================================================================
+[TIMING] === Pre-loop phase summary ===
+  corners_and_mesh               :       0.00s
+  vertex_Q_evals                 :       0.12s
+  exact_optima                   :       0.00s
+  ef_init                        :       0.01s
+  TOTAL                          :       0.13s
+======================================================================
+
+Set parameter MIPGap to value 0.1
+Set parameter MIPGap to value 0.1
+[Iter 0] MIPGap overridden to 0.1 (original: 0.1)
+[DBG] entering evaluate_all_tetra ...
+[Iter 0] CS-only evaluation (box start): skipping MS solves
+[DBG] evaluate_all_tetra_cs_only: start
+[DBG] evaluate_all_tetra_cs_only: 6 simplices
+Discarded solution information
+Discarded solution information
+[Iter 0] MIPGap restored to 0.1
+[Iter 0] #simplices = 6, #active = 6, bad-quality cut = 0, bad-shape cut = 0
+== [Iter 0] ACTIVE simplices: LB / UB / sum(ms_s) / sum(c_s) (per-scenario) ==
+simp                    LB                UB            sum_ms           sum_c_s                Range(As)             Range(As+ms) #InfV
+----------------------------------------------------------------------------------------------------------------------------------------
+T0            9.754179e-01               inf               inf      1.950836e+00     [4.49e+00, 2.00e+03]               [inf, inf]     0
+T1            1.002491e+00               inf               inf      2.004982e+00     [4.49e+00, 2.00e+03]               [inf, inf]     0
+T2            9.748831e-01               inf               inf      1.949766e+00     [4.37e+00, 2.00e+03]               [inf, inf]     0
+T3            9.712888e-01               inf               inf      1.942578e+00     [4.37e+00, 2.00e+03]               [inf, inf]     0
+T4            9.728052e-01               inf               inf      1.945610e+00     [5.34e+00, 2.00e+03]               [inf, inf]     0
+T5            9.720443e-01               inf               inf      1.944089e+00     [5.34e+00, 2.00e+03]               [inf, inf]     0
+
+== [Iter 0] INACTIVE simplices: LB / UB / sum(ms_s) / sum(c_s) (per-scenario) ==
+  (none)
+[Iter 0] created=6 (cum=6), active=6, active+UB=2, ms_recomputed=0
+[Iter 0] Computing MS for selected simplex T3 (ms_status=none) ...
+Set parameter Cutoff to value 1e+100
+[ensure_ms] simplex T3: ms_status=full, cs_status=full, ms=-1.138054e+03, LB=1.942578e+00
+[Iter 0] MS computed: ms_status=full, ms=-1.138054e+03, LB=1.942578e+00
+[Iter 0] EF-ipopt: ok=True, ef_obj=0.9713395115857962, true_obj=9.713395e-01, time=0.045s
+[Iter 0] EF-UB improved by ipopt: 9.713395e-01 (per-scen), K=(9.999914744536248, 99.99985028690497, 1.1526584884516742)
+[Iter 0] Pre-split gap: 1.013787e-04 (0.005%)
+[Iter 0] Active simplex ratio = 1.000000
+[Iter 0] UB point (9.999914744536248, 99.99985028690497, 1.1526584884516742) is geometrically in simplices [3]
+  T3 verts=[3, 6, 7, 4]: lam=[0.000004, 0.494236, 0.505759, 0.000001], LB=1.942577651, c_s=[0.997376197200199, 0.9452014538046013]
+
+== [Iter 0] CS DUAL vs PRIMAL diagnostic (simplices containing UB point) ==
+  --- T3 ---
+    scen 0: status=optimal, dual=0.997376197, primal=0.997376197  [OK] dual <= primal (gap=0.000000e+00)
+             cs_primal_K=(9.99999520502606, 99.99999169075441, 1.3957906476750999)
+             indep_Q(cs_K)=0.997376311  -> dual <= indep_Q (consistent, diff=1.134199e-07)
+    scen 1: status=optimal, dual=0.945201454, primal=0.945201454  [OK] dual <= primal (gap=2.220446e-16)
+             cs_primal_K=(9.999938858906715, 99.9998885283054, 0.8992690408864943)
+             indep_Q(cs_K)=0.945201468  -> dual <= indep_Q (consistent, diff=1.432716e-08)
+  sum(c_s_dual)=1.942577651, UB_total=3.885358059, UB_per_scen=1.942679030
+
+  == Per-scenario Q_s at K_EF = (9.999914744536248, 99.99985028690497, 1.1526584884516742) ==
+    scen 0: Q_s(K_EF)=0.997425501, c_s_dual=0.997376197  [OK] Q_s(K_EF) > c_s_dual (diff=4.930378e-05)
+    scen 1: Q_s(K_EF)=0.945253529, c_s_dual=0.945201454  [OK] Q_s(K_EF) > c_s_dual (diff=5.207489e-05)
+    SUM Q_s(K_EF)=1.942679030, sum(c_s)=1.942577651, diff=1.013787e-04
+
+[Iter 0] LB = 1.942578 = UB(1.942679) + ms_b(-1.138e+03) from T3
+Chosen node (9.999999994193079, 99.99999999824027, -16.13123288221269) with ms=-5.751e+02 (simp T3, scene 0, ms_rank #1/2, source=ms)
+[Selected Simp Info] Iter 0 | Simplex T3 Vertices:
+  v0: (-10.0, 100.0, 100.0)
+  v1: (10.0, 100.0, -100.0)
+  v2: (10.0, 100.0, 100.0)
+  v3: (10.0, -100.0, -100.0)
+  -> New Point: (9.999999994193079, 99.99999999824027, -16.13123288221269)
+[Iter 0] LB simplex = T3, next node simplex = T3, scene 0
+[Iter 0] Selection: source=ms, rank=1
+[Iter 0] candidate rank #1: T3, scene=0, ms=-5.751e+02
+== ms candidates (sorted by (ms, -dist)) ==
+rank   simp   scene           ms    mind(all)                             pt
+----------------------------------------------------------------------------
+   1     T3       0  -5.7511e+02     8.39e+01  (10.0000, 100.0000, -16.1312)
+   2     T3       1  -5.6295e+02     8.74e+01   (4.8416, 100.0000, -12.7932)
+   3     T3       1   9.4520e-01     9.91e+01      (9.9999, 99.9999, 0.8993)
+   4     T3       0   9.9738e-01     9.86e+01    (10.0000, 100.0000, 1.3958)
+
+[Iter 0] per_tet=6, active after q_cut=6, tri_is_None=False
+[Iter 0] bad-quality active simplices (q < 0): 0
+[Iter 0] evaluating Q for scenario 0
+[Iter 0] evaluating Q for scenario 1
+
+[Iter 0] Next Point Details:
+Simplex   Scene   Type    As             ms             As+ms          Q              (x1, x2, x3)                  
+--------------------------------------------------------------------------------------------------------------------
+T3        0       ms      5.8158e+02     -5.7511e+02    6.4711e+00     6.4711e+00     (10.0000, 100.0000, -16.1312) 
+
+[Iter 0] subdivision type = interior (code=1) on simplex T3
+[Iter 0] Elapsed: 2.589s
+[DBG] evaluate_all_tetra: start
+[DBG] evaluate_all_tetra: building mesh ...
+[DBG] evaluate_all_tetra: 9 simplices, entering loop ...
+======================================================================
+[Iter 0] LB SPLIT DIAGNOSTIC
+  Selected (parent) simplex: (3, 4, 6, 7)
+  Parent LB: 0.971288826 (per-scen)
+  EF ef_obj(IPOPT): 0.485669756, true_obj(recalc): 0.971339515, used=min=0.485669756 (per-scen)
+  Simplex volume: 1.333333e+05
+  Children (4):
+    T5 (4, 6, 7, 8): LB = 0.972199888
+    T6 (3, 4, 7, 8): LB = 1.032975210
+    T7 (3, 4, 6, 8): LB = 0.971662378
+  New global LB: 0.971662378 (from T7 (3, 4, 6, 8))
+  Location: INSIDE
+  Avg CS point Q-value: 0.971339524 (per-scen), point=(np.float64(9.999967031966388), np.float64(99.99994010952992), np.float64(1.147529844280797))
+  Current UB: 0.971339515 (per-scen)
+  UB point: (9.999914744536248, 99.99985028690497, 1.1526584884516742)
+  UB source: EF_ipopt
+  UB simplex: (3, 4, 6, 7)
+  EF-IPOPT: ok=True, status=ok, term=optimal, time=0.045s, ef_obj=0.9713395115857962, true_obj(per-scen)=0.971339515
+======================================================================
+[DBG] starting UB candidate processing, new_simplex_indices=[5, 6, 7, 8]
+[DBG] LB/UB override section, LB_global_end=1.9433247555090194, UB_global_end=1.942679029671776
+
+======================================================================
+[TIMING] === Iter 0 phase breakdown (total 7.85s) ===
+  1_vertex_UB                    :       0.00s  (  0.0%)  
+  2_evaluate_all_tetra           :       1.60s  ( 20.4%)  ##########
+  3_active_filter_print          :       0.00s  (  0.0%)  
+  4_LB_selection                 :       0.83s  ( 10.6%)  #####
+  5_EF_UB_solve                  :       0.08s  (  1.0%)  
+  6_candidate_selection          :       0.06s  (  0.8%)  
+  7_Q_eval_new_node              :       0.01s  (  0.1%)  
+  8_mesh_subdivide               :       0.00s  (  0.0%)  
+  9_end_of_iter_reeval           :       5.26s  ( 67.0%)  #################################
+  TOTAL                          :       7.85s
+  #simplices=6, #scenarios=2, total_ms_pairs=12
+  fresh ms solves=0, cache hits=12
+======================================================================
+
+[DBG] about to write CSV, LB_global_end=1.9433247555090194, UB_global_end=1.942679029671776
+[Iter 0] Stop: UB-LB gap -3.323894e-04 <= tol 1.000000e-08.
+
+===== Simplex search summary (per-scenario) =====
+  Time (s)  # Nodes             LB             UB   Rel. Gap   Abs. Gap   #simplex    #active   Split       Selection
+---------------------------------------------------------------------------------------------------------------------
+     2.507        8    0.971662378    0.971339515   -0.0332%   -0.00032          6          6    none              ms
+----------------------------------------------------------------------
+    Simplex run completed in 8.01s
+
+======================================================================
+  RESULTS SUMMARY — mode=SMOKE
+======================================================================
+  Iterations:      1
+  Final nodes:     8
+  Final LB (avg):  0.971662378
+  Final UB (avg):  0.971339515
+  Abs gap (avg):   -0.000322863
+  Rel gap:         -0.0332%
+  Total time:      8.01s
+  Build time:      2.03s
+======================================================================
+
+  Result file: C:\Users\Administrator\OneDrive\Desktop\workspace2026\311_test_simplex_method_first_round_no_ms\results\pid_smoke\result.json
+  Text file:   C:\Users\Administrator\OneDrive\Desktop\workspace2026\311_test_simplex_method_first_round_no_ms\results\pid_smoke\result.txt
+  CSV file:    C:\Users\Administrator\OneDrive\Desktop\workspace2026\311_test_simplex_method_first_round_no_ms\results\pid_smoke\simplex_result.csv
+
+  ? PID smoke regression complete.
+Warning: environment still referenced so free is deferred (Continue to use WLS)

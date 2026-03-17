@@ -1,0 +1,3 @@
+
+修改自311_test_simplex_method_first_round_no_ms
+第一轮改为完全不对每个simplex单独求解，第一轮所有simplex只用总的box中的lb信息，平均cs点所在simplex为第一轮选定simplex

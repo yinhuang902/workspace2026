@@ -2,19 +2,17 @@
 # selected_simplex LB_pre, UB_pre, children LBs, end LB/UB
 
 === Iter 0 ===
-selected_simplex: T1  LB_pre=0.984534279
-UB_pre=0.980224790  LB_global_pre=0.984534279
-children (created 3):
-  child T5 (0, 3, 4, 8) LB=0.979444163
-  child T7 (1, 3, 4, 8) LB=0.979974285
-end: UB=0.979916640  LB=0.979444163
-
-=== Iter 1 ===
-selected_simplex: T5  LB_pre=0.979444163
-UB_pre=0.979664409  LB_global_pre=0.979444163
+selected_simplex: T5  LB_pre=0.975265937
+  v3: (-10.0000, 100.0000, 100.0000)
+  v5: (10.0000, -100.0000, 100.0000)
+  v1: (-10.0000, -100.0000, 100.0000)
+  v4: (10.0000, -100.0000, -100.0000)
+UB_pre=0.972046724  LB_global_pre=0.972859624
 children (created 4):
-  child T8 (0, 3, 4, 9) LB=0.979824086
-  child T9 (0, 3, 8, 9) LB=0.979632190
-  child T10 (3, 4, 8, 9) LB=0.980333467
-end: UB=0.979664409  LB=0.979632190
+  child T7 (3, 4, 5, 8) LB=0.972482532 sum_cs=0.972482532
+  child T8 (1, 3, 5, 8) LB=2.692799032 sum_cs=2.692799032
+next_node: (-1.5100, -100.0000, 15.1005)
+barycentric: (0.000000, 0.000000, 0.575502, 0.424498)
+sample_retry_triggered=no  retry_count=0
+end: UB=0.972046724  LB=0.972482532
 

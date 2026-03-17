@@ -1,0 +1,31 @@
+# simplex_record_selected_shape.txt -- selected simplex volume & quality per iteration
+# Fields: iter, simplex_id, volume, quality, n_verts, loc_type, bounding_box_diag
+
+iter=0  simplex=(3, 4, 8, 16, 28, 29)  vol=1.666667e-02  quality=9.243273e-03  n_verts=6  loc_type=interior  bb_diag=2.236068e+00
+iter=1  simplex=(3, 4, 8, 16, 29, 32)  vol=1.929879e-03  quality=1.530611e-03  n_verts=6  loc_type=face  bb_diag=2.236068e+00
+iter=2  simplex=(3, 4, 16, 29, 32, 33)  vol=1.186246e-04  quality=1.258189e-04  n_verts=6  loc_type=face  bb_diag=2.236068e+00
+iter=3  simplex=(4, 16, 29, 32, 33, 34)  vol=4.401074e-05  quality=9.957786e-05  n_verts=6  loc_type=face  bb_diag=2.043127e+00
+iter=4  simplex=(3, 4, 8, 29, 32, 33)  vol=1.948465e-04  quality=2.055173e-04  n_verts=6  loc_type=face  bb_diag=2.236068e+00
+iter=5  simplex=(4, 8, 29, 32, 33, 36)  vol=7.529531e-05  quality=1.674374e-04  n_verts=6  loc_type=sub_face  bb_diag=2.043127e+00
+iter=6  simplex=(4, 8, 32, 33, 36, 37)  vol=2.445444e-05  quality=1.315703e-04  n_verts=6  loc_type=interior  bb_diag=1.706496e+00
+iter=7  simplex=(4, 29, 32, 33, 34, 35)  vol=3.521769e-06  quality=1.421301e-05  n_verts=6  loc_type=interior  bb_diag=1.863158e+00
+iter=8  simplex=(4, 32, 33, 34, 35, 39)  vol=1.143802e-06  quality=1.884090e-05  n_verts=6  loc_type=interior  bb_diag=1.184963e+00
+iter=9  simplex=(4, 32, 33, 34, 35, 40)  vol=8.467232e-07  quality=1.318351e-05  n_verts=6  loc_type=interior  bb_diag=1.184963e+00
+iter=10  simplex=(4, 8, 16, 29, 32, 33)  vol=7.372458e-04  quality=1.114581e-03  n_verts=6  loc_type=sub_face  bb_diag=2.043127e+00
+iter=11  simplex=(4, 8, 29, 32, 33, 42)  vol=1.211289e-08  quality=2.675890e-08  n_verts=6  loc_type=sub_face  bb_diag=2.043127e+00
+iter=12  simplex=(4, 8, 16, 29, 32, 42)  vol=4.415077e-07  quality=6.689955e-07  n_verts=6  loc_type=sub_face  bb_diag=2.043127e+00
+iter=13  simplex=(4, 8, 16, 29, 32, 44)  vol=4.414553e-07  quality=6.689289e-07  n_verts=6  loc_type=sub_face  bb_diag=2.043127e+00
+iter=14  simplex=(8, 16, 29, 32, 33, 42)  vol=2.220752e-08  quality=4.879339e-08  n_verts=6  loc_type=interior  bb_diag=2.043127e+00
+iter=15  simplex=(4, 8, 16, 29, 44, 45)  vol=4.414370e-07  quality=6.689024e-07  n_verts=6  loc_type=edge  bb_diag=2.043123e+00
+iter=16  simplex=(8, 29, 32, 33, 42, 46)  vol=2.466392e-09  quality=9.386752e-09  n_verts=6  loc_type=interior  bb_diag=1.899659e+00
+iter=17  simplex=(8, 29, 32, 42, 46, 48)  vol=2.263264e-09  quality=8.736409e-09  n_verts=6  loc_type=interior  bb_diag=1.899659e+00
+iter=18  simplex=(8, 32, 42, 46, 48, 49)  vol=1.807554e-10  quality=1.890446e-09  n_verts=6  loc_type=interior  bb_diag=1.278613e+00
+iter=19  simplex=(8, 32, 46, 48, 49, 50)  vol=1.678352e-10  quality=1.868143e-09  n_verts=6  loc_type=interior  bb_diag=1.278613e+00
+iter=20  simplex=(8, 29, 32, 46, 48, 49)  vol=2.082503e-09  quality=8.145780e-09  n_verts=6  loc_type=interior  bb_diag=1.899659e+00
+iter=21  simplex=(8, 16, 29, 32, 42, 46)  vol=1.974113e-08  quality=4.413423e-08  n_verts=6  loc_type=interior  bb_diag=2.043127e+00
+iter=22  simplex=(4, 8, 29, 32, 33, 43)  vol=1.211260e-08  quality=2.675832e-08  n_verts=6  loc_type=face  bb_diag=2.043127e+00
+iter=23  simplex=(4, 8, 29, 33, 43, 54)  vol=1.209050e-08  quality=2.670999e-08  n_verts=6  loc_type=sub_face  bb_diag=2.043116e+00
+iter=24  simplex=(4, 8, 29, 33, 54, 55)  vol=1.209024e-08  quality=2.670953e-08  n_verts=6  loc_type=sub_face  bb_diag=2.043114e+00
+iter=25  simplex=(4, 8, 29, 33, 54, 56)  vol=1.209021e-08  quality=2.670946e-08  n_verts=6  loc_type=sub_face  bb_diag=2.043114e+00
+iter=26  simplex=(4, 8, 29, 33, 54, 57)  vol=1.209018e-08  quality=2.670940e-08  n_verts=6  loc_type=sub_face  bb_diag=2.043114e+00
+iter=27  simplex=(4, 8, 29, 33, 54, 58)  vol=6.045090e-09  quality=1.323128e-08  n_verts=6  loc_type=sub_face  bb_diag=2.043106e+00

@@ -1,0 +1,53 @@
+# simplex_record_subproblem_runtime.txt — per-iteration subproblem runtime
+# ms/cs/Q timing, non-optimal subproblem detection
+
+=== Iter 0 ===
+ms: total_time=4.3751, calls=540, avg=0.0081
+cs: total_time=21.2261, calls=540, avg=0.0393
+Q:  total_time=0.1055, calls=5, avg=0.0211
+
+=== Iter 1 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.1027, calls=5, avg=0.0205
+
+=== Iter 2 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.1026, calls=5, avg=0.0205
+
+=== Iter 3 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.1047, calls=5, avg=0.0209
+
+=== Iter 4 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.1084, calls=5, avg=0.0217
+
+=== Iter 5 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0851, calls=5, avg=0.0170
+
+=== Iter 6 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0895, calls=5, avg=0.0179
+
+=== Iter 7 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0767, calls=5, avg=0.0153
+
+=== Iter 8 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.0858, calls=5, avg=0.0172
+
+=== Iter 9 ===
+ms: total_time=0.0000, calls=0, avg=0.0000
+cs: total_time=0.0000, calls=0, avg=0.0000
+Q:  total_time=0.1074, calls=5, avg=0.0215
+

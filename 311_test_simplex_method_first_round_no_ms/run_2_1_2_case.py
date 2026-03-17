@@ -155,10 +155,10 @@ def build_models_2_1_2(
 
 MODE_PARAMS = {
     "smoke": {
-        "nscen": 10,
+        "nscen": 3,
         "target_nodes": 60,
         "gap_stop_tol": 1e-6,
-        "time_limit": 300,
+        "time_limit": 100,
         "enable_ef_ub": True,
         "ef_time_ub": 30.0,
         "plot_every": None,
@@ -203,7 +203,7 @@ def main():
         Path(cfg["plot_output_dir"]).mkdir(parents=True, exist_ok=True)
 
     print("=" * 60)
-    print("2_1_2 (Python) â€?stochastic scenario generation matches Plasmo.jl RandomStochasticModel")
+    print("2_1_2 (Python) ï¿½?stochastic scenario generation matches Plasmo.jl RandomStochasticModel")
     print(f"Mode: {args.mode}")
     print(f"nscen={cfg['nscen']}, seed={args.seed}, target_nodes={cfg['target_nodes']}")
     print(f"gap_stop_tol={cfg['gap_stop_tol']}, time_limit={cfg['time_limit']}")

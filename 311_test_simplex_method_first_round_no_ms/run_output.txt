@@ -1,0 +1,3 @@
+Traceback (most recent call last):
+  File "<string>", line 33, in <module>
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 23: illegal multibyte sequence

@@ -1,0 +1,28 @@
+# debug_candidates.txt — per-iteration ms/c_s candidate details
+# Records: simplex vertices, ms points, c_s points, distances to existing nodes
+
+================================================================================
+[Iter 0] LB simplex = T3
+  LB simplex vertices:
+    v0 (node #3): (-10.0, 100.0, 100.0)
+    v1 (node #6): (10.0, 100.0, -100.0)
+    v2 (node #7): (10.0, 100.0, 100.0)
+    v3 (node #4): (10.0, -100.0, -100.0)
+  Existing nodes (8 total):
+    node #0: (-10.0, -100.0, -100.0)
+    node #1: (-10.0, -100.0, 100.0)
+    node #2: (-10.0, 100.0, -100.0)
+    node #3: (-10.0, 100.0, 100.0)
+    node #4: (10.0, -100.0, -100.0)
+    node #5: (10.0, -100.0, 100.0)
+    node #6: (10.0, 100.0, -100.0)
+    node #7: (10.0, 100.0, 100.0)
+
+  Candidates (6 total):
+    [0] simp=T3, scene=0, source=ms, val=-5.751053e+02, pt=(9.999999994193079, 99.99999999824027, -16.13123288221269), dist_to_nodes=8.386877e+01, ok
+    [1] simp=T3, scene=0, source=c_s, val=9.973762e-01, pt=(9.99999520502606, 99.99999169075441, 1.3957906476750999), dist_to_nodes=9.860421e+01, ok
+    [2] simp=T3, scene=1, source=ms, val=-5.629488e+02, pt=(4.841634614329376, 100.00000000000001, -12.793159122776924), dist_to_nodes=8.735927e+01, ok
+    [3] simp=T3, scene=1, source=c_s, val=9.452015e-01, pt=(9.999938858906715, 99.9998885283054, 0.8992690408864943), dist_to_nodes=9.910073e+01, ok
+    [4] simp=T3, scene=2, source=ms, val=-5.740576e+02, pt=(9.99999999417117, 99.99999999823987, -15.874338181524221), dist_to_nodes=8.412566e+01, ok
+    [5] simp=T3, scene=2, source=c_s, val=9.559882e-01, pt=(9.999957793692085, 99.99994136836533, 2.0319762145792), dist_to_nodes=9.796802e+01, ok
+

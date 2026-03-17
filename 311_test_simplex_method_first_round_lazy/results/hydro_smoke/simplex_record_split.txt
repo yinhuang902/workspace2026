@@ -1,0 +1,211 @@
+# simplex_record_split.txt — per-iteration split record
+# selected_simplex LB_pre, UB_pre, children LBs, end LB/UB
+
+=== Iter 0 ===
+selected_simplex: T0  LB_pre=1127000.985657431
+UB_pre=5812535.947659058  LB_global_pre=1127000.985657431
+children (created 6):
+  child T107 (0, 2, 4, 8, 16, 32) LB=1127902.782773598
+  child T109 (0, 2, 3, 8, 16, 32) LB=1128632.800477074
+  child T112 (2, 3, 4, 8, 16, 32) LB=1594413.222483299
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1127902.782773598
+
+=== Iter 1 ===
+selected_simplex: T107  LB_pre=1127902.782773598
+UB_pre=5812535.947659058  LB_global_pre=1127902.782773598
+children (created 6):
+  child T112 (0, 2, 4, 8, 16, 33) LB=1131742.391210214
+  child T113 (0, 4, 8, 16, 32, 33) LB=1133139.372597113
+  child T114 (0, 2, 8, 16, 32, 33) LB=1128281.625677957
+  child T115 (0, 2, 4, 16, 32, 33) LB=1127899.637163056
+  child T116 (0, 2, 4, 8, 32, 33) LB=1127899.637163056
+  child T117 (2, 4, 8, 16, 32, 33) LB=1373845.234462304
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1127899.637163056
+
+=== Iter 2 ===
+selected_simplex: T115  LB_pre=1127899.637163056
+UB_pre=5812535.947659058  LB_global_pre=1127899.637163056
+children (created 5):
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1127899.637163056
+
+=== Iter 3 ===
+selected_simplex: T115  LB_pre=1127899.637163056
+UB_pre=5812535.947659058  LB_global_pre=1127899.637163056
+children (created 5):
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1128281.625677957
+
+=== Iter 4 ===
+selected_simplex: T114  LB_pre=1128281.625677957
+UB_pre=5812535.947659058  LB_global_pre=1128281.625677957
+children (created 6):
+  child T126 (0, 8, 16, 32, 33, 36) LB=1128353.304652888
+  child T127 (0, 2, 8, 16, 32, 36) LB=1129510.968215821
+  child T130 (2, 8, 16, 32, 33, 36) LB=1343703.690938770
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1128353.304652888
+
+=== Iter 5 ===
+selected_simplex: T126  LB_pre=1128353.304652888
+UB_pre=5812535.947659058  LB_global_pre=1128353.304652888
+children (created 6):
+  child T130 (0, 8, 16, 33, 36, 37) LB=1133788.956182741
+  child T131 (0, 8, 16, 32, 33, 37) LB=1129269.994925895
+  child T135 (8, 16, 32, 33, 36, 37) LB=1337792.104022061
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1128632.800477074
+
+=== Iter 6 ===
+selected_simplex: T108  LB_pre=1128632.800477074
+UB_pre=5812535.947659058  LB_global_pre=1128632.800477074
+children (created 6):
+  child T135 (0, 2, 8, 16, 32, 38) LB=1128632.800966181
+  child T137 (0, 2, 3, 8, 16, 38) LB=1132518.094196573
+  child T140 (2, 3, 8, 16, 32, 38) LB=1566901.702476392
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1128632.800966181
+
+=== Iter 7 ===
+selected_simplex: T135  LB_pre=1128632.800966181
+UB_pre=5812535.947659058  LB_global_pre=1128632.800966181
+children (created 6):
+  child T140 (0, 2, 8, 16, 32, 39) LB=1129510.841629726
+  child T141 (0, 8, 16, 32, 38, 39) LB=1128637.114502415
+  child T142 (0, 2, 8, 16, 38, 39) LB=1129612.364976254
+  child T145 (2, 8, 16, 32, 38, 39) LB=1344931.423321979
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1128637.114502415
+
+=== Iter 8 ===
+selected_simplex: T141  LB_pre=1128637.114502415
+UB_pre=5812535.947659058  LB_global_pre=1128637.114502415
+children (created 6):
+  child T146 (0, 8, 16, 32, 38, 40) LB=1129519.973803328
+  child T147 (0, 8, 16, 38, 39, 40) LB=1129764.233134375
+  child T150 (8, 16, 32, 38, 39, 40) LB=1338975.587320506
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1129269.994925895
+
+=== Iter 9 ===
+selected_simplex: T130  LB_pre=1129269.994925895
+UB_pre=5812535.947659058  LB_global_pre=1129269.994925895
+children (created 6):
+  child T151 (0, 8, 16, 32, 33, 41) LB=1129269.995769536
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1129269.995769536
+
+=== Iter 10 ===
+selected_simplex: T151  LB_pre=1129269.995769536
+UB_pre=5812535.947659058  LB_global_pre=1129269.995769536
+children (created 6):
+  child T156 (0, 8, 16, 32, 33, 42) LB=1129269.996616296
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1129269.996616296
+
+=== Iter 11 ===
+selected_simplex: T156  LB_pre=1129269.996616296
+UB_pre=5812535.947659058  LB_global_pre=1129269.996616296
+children (created 6):
+  child T161 (0, 8, 16, 32, 33, 43) LB=1129269.997461048
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1129269.997461048
+
+=== Iter 12 ===
+selected_simplex: T161  LB_pre=1129269.997461048
+UB_pre=5812535.947659058  LB_global_pre=1129269.997461048
+children (created 6):
+  child T166 (0, 8, 16, 32, 33, 44) LB=1129269.998307175
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1129269.998307175
+
+=== Iter 13 ===
+selected_simplex: T166  LB_pre=1129269.998307175
+UB_pre=5812535.947659058  LB_global_pre=1129269.998307175
+children (created 6):
+  child T171 (0, 8, 16, 32, 33, 45) LB=1129269.999153180
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1129269.999153180
+
+=== Iter 14 ===
+selected_simplex: T171  LB_pre=1129269.999153180
+UB_pre=5812535.947659058  LB_global_pre=1129269.999153180
+children (created 6):
+  child T176 (0, 8, 16, 32, 33, 46) LB=1129269.999998555
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1129269.999998555
+
+=== Iter 15 ===
+selected_simplex: T176  LB_pre=1129269.999998555
+UB_pre=5812535.947659058  LB_global_pre=1129269.999998555
+children (created 6):
+  child T181 (0, 8, 16, 32, 33, 47) LB=1129270.000843558
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1129270.000843558
+
+=== Iter 16 ===
+selected_simplex: T181  LB_pre=1129270.000843558
+UB_pre=5812535.947659058  LB_global_pre=1129270.000843558
+children (created 6):
+  child T186 (0, 8, 16, 32, 33, 48) LB=1129270.001688935
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1129270.001688935
+
+=== Iter 17 ===
+selected_simplex: T186  LB_pre=1129270.001688935
+UB_pre=5812535.947659058  LB_global_pre=1129270.001688935
+children (created 6):
+  child T191 (0, 8, 16, 32, 33, 49) LB=1129270.002532921
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1129270.002532921
+
+=== Iter 18 ===
+selected_simplex: T191  LB_pre=1129270.002532921
+UB_pre=5812535.947659058  LB_global_pre=1129270.002532921
+children (created 6):
+  child T196 (0, 8, 16, 32, 33, 50) LB=1129270.003380715
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1129270.003380715
+
+=== Iter 19 ===
+selected_simplex: T196  LB_pre=1129270.003380715
+UB_pre=5812535.947659058  LB_global_pre=1129270.003380715
+children (created 6):
+  child T201 (0, 8, 16, 32, 33, 51) LB=1129270.004224536
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1129270.004224536
+
+=== Iter 20 ===
+selected_simplex: T201  LB_pre=1129270.004224536
+UB_pre=5812535.947659058  LB_global_pre=1129270.004224536
+children (created 6):
+  child T206 (0, 8, 16, 32, 33, 52) LB=1129270.005068359
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1129270.005068359
+
+=== Iter 21 ===
+selected_simplex: T206  LB_pre=1129270.005068359
+UB_pre=5812535.947659058  LB_global_pre=1129270.005068359
+children (created 6):
+  child T211 (0, 8, 16, 32, 33, 53) LB=1129270.005912021
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1129270.005912021
+
+=== Iter 22 ===
+selected_simplex: T211  LB_pre=1129270.005912021
+UB_pre=5812535.947659058  LB_global_pre=1129270.005912021
+children (created 6):
+  child T216 (0, 8, 16, 32, 33, 54) LB=1129270.006759765
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1129270.006759765
+
+=== Iter 23 ===
+selected_simplex: T216  LB_pre=1129270.006759765
+UB_pre=5812535.947659058  LB_global_pre=1129270.006759765
+children (created 6):
+  child T221 (0, 8, 16, 32, 33, 55) LB=1129270.007603422
+sample_retry_triggered=yes  retry_count=20
+end: UB=5812535.947659058  LB=1129270.007603422
+

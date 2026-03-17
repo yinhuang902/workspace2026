@@ -1,14 +1,14 @@
 {
   "mode": "smoke",
-  "timestamp": "2026-03-16 00:23:54",
-  "scenarios": 5,
+  "timestamp": "2026-03-16 17:05:23",
+  "scenarios": 2,
   "random_seed": 42,
   "params": {
-    "max_scenarios": 5,
+    "max_scenarios": 2,
     "skip": 0,
     "target_nodes": 120,
     "gap_stop_tol": 1e-05,
-    "time_limit": 600,
+    "time_limit": 60,
     "enable_3d_plot": false,
     "enable_ef_ub": true,
     "ef_time_ub": 30.0,
@@ -17,19 +17,19 @@
   "results": {
     "iterations": 1,
     "final_nodes": 8,
-    "final_LB_avg": 3.796843849289523,
-    "final_UB_avg": 3.9123580502681015,
-    "gap_abs_avg": 0.11551420097857834,
-    "gap_rel": 0.029525467632151543,
-    "total_runtime_s": 1135.7083129002713,
-    "build_time_s": 2.5523414998315275
+    "final_LB_avg": 1.0276864102333947,
+    "final_UB_avg": 1.568562201965074,
+    "gap_abs_avg": 0.5408757917316793,
+    "gap_rel": 0.3448226605575968,
+    "total_runtime_s": 249.30345659999875,
+    "build_time_s": 1.788655899999867
   },
   "histories": {
     "LB_per_iter": [
-      3.796843849289523
+      1.0276864102333947
     ],
     "UB_per_iter": [
-      3.9123580502681015
+      1.568562201965074
     ],
     "node_count": [
       8

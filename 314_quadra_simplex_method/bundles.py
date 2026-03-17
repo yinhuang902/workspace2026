@@ -48,12 +48,18 @@ s
     def __init__(self, model: pyo.ConcreteModel, options: dict | None = None, q_max: float = 1e10):
         self.model = model
         self.q_max = q_max
+        self._options = options or {}
         self.gp = GurobiPersistent()
         self.gp.set_instance(model)
         if hasattr(model, 'obj'):
             model.del_component('obj')
         model.obj = pyo.Objective(expr=model.obj_expr, sense=pyo.minimize)
         self.gp.set_objective(model.obj)
+        self._apply_options()
+
+    def _apply_options(self):
+        """Apply stored solver options to the persistent solver."""
+        options = self._options
         if options:
             if 'MIPGap' in options:
                 self.gp.set_gurobi_param('MIPGap', options['MIPGap'])
@@ -62,6 +68,22 @@ s
             self.gp.set_gurobi_param('NonConvex', options.get('NonConvex', 2))
             if 'TimeLimit' in options:
                 self.gp.set_gurobi_param('TimeLimit', options['TimeLimit'])
+
+    def _rebuild_solver(self):
+        """Fully recreate the GurobiPersistent solver to recover from C-level corruption.
+        
+        Called after Gurobi returns error/infeasible/unbounded status which can
+        leave the internal model in a corrupted state, causing segfaults on the
+        next solve() call.
+        """
+        try:
+            del self.gp
+        except Exception:
+            pass
+        self.gp = GurobiPersistent()
+        self.gp.set_instance(self.model)
+        self.gp.set_objective(self.model.obj)
+        self._apply_options()
 
     '''
     def eval_at(self, first_vars, first_vals):
@@ -132,8 +154,10 @@ s
                     return self.q_max
 
             else:
-                # Infeasible or error
+                # Infeasible or error — reset Gurobi model to prevent state
+                # corruption that causes segfaults on subsequent solves
                 print(f"[BaseBundle.eval_at] Infeasible/Error for K={K_tuple}: status={status}, term={term}")
+                self._rebuild_solver()
                 _meta["obj"] = self.q_max
                 if return_meta:
                     return self.q_max, _meta
@@ -141,6 +165,7 @@ s
 
         except Exception as err:
             print(f"\n[BaseBundle.eval_at] Exception when solving Q_s for K={K_tuple}: {err}")
+            self._rebuild_solver()
             _meta["obj"] = self.q_max
             _meta["status"] = "exception"
             _meta["termination_condition"] = str(err)
@@ -149,9 +174,12 @@ s
             return self.q_max
 
         finally:
-            for v in first_vars:
-                v.unfix()
-                self.gp.update_var(v)
+            try:
+                for v in first_vars:
+                    v.unfix()
+                    self.gp.update_var(v)
+            except Exception as _fin_err:
+                print(f"[BaseBundle.eval_at] FINALLY block error: {_fin_err}", flush=True)
 
 
 class MSBundle:
@@ -495,9 +523,13 @@ class MSBundle:
             _bound_ok = True
 
         else:
-            # Infeasible / error / unknown — do NOT load
+            # Infeasible / error / unknown — do NOT load, reset Gurobi state
             print(f"[Bundle] MS scen {self.scenario_index}: not optimal. "
                   f"Status={solver_status}, Term={termination}.")
+            try:
+                self.gp._solver_model.reset(1)
+            except Exception:
+                pass
             used_fallback = True
             fallback_reason = "infeasible_or_error"
 
@@ -659,6 +691,10 @@ class MSBundle:
             else:
                 print(f"[Bundle] CS scen {self.scenario_index}: failed. "
                       f"Status={solver_status}, Term={termination}.")
+                try:
+                    self.gp._solver_model.reset(1)
+                except Exception:
+                    pass
                 used_fallback = True
                 fallback_reason = "infeasible_or_error"
 

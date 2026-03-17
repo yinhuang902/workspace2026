@@ -62,8 +62,8 @@ COMMON = {
 UB_SOLVER_OPTS = {"NonConvex": 2}
 LB_SOLVER_OPTS = {
     "NonConvex": 2,
-    "MIPGap": 1e-1,
-    "TimeLimit": 30,
+    "MIPGap": 1e-2,
+    "TimeLimit": 60,
 }
 
 # Penalty value for infeasible Q evaluations (passed to BaseBundle)
@@ -73,11 +73,11 @@ Q_MAX = 1e3
 # ─────────────────────────────────────────────────────
 MODE_PARAMS = {
     "smoke": {
-        "max_scenarios":   2,        # few scenarios for speed
+        "max_scenarios":   10,        # few scenarios for speed
         "skip":            0,
         "target_nodes":    120,       # small mesh
         "gap_stop_tol":    1e-8,     # tight gap (matches app.ipynb)
-        "time_limit":      30,      # no wall-clock cap — run until gap or target_nodes
+        "time_limit":      60*20,      # no wall-clock cap — run until gap or target_nodes
         "enable_3d_plot":  False,    # no plotting
         "enable_ef_ub":    True,
         "ef_time_ub":      30.0,     # short EF solve
@@ -108,7 +108,7 @@ def main():
     parser = argparse.ArgumentParser(
         description="PID regression test runner (smoke / full)")
     parser.add_argument(
-        "--mode", choices=["smoke", "full"], default="full",
+        "--mode", choices=["smoke", "full"], default="smoke",
         help="Run mode: 'smoke' (fast regression) or 'full' (formal run)")
     args = parser.parse_args()
     mode = args.mode

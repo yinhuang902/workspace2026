@@ -1,0 +1,42 @@
+# debug_candidates.txt — per-iteration ms/c_s candidate details
+# Records: simplex vertices, ms points, c_s points, distances to existing nodes
+
+================================================================================
+[Iter 0] LB simplex = T1
+  LB simplex vertices:
+    v0 (node #3): (-10.0, 100.0, 100.0)
+    v1 (node #1): (-10.0, -100.0, 100.0)
+    v2 (node #4): (10.0, -100.0, -100.0)
+    v3 (node #0): (-10.0, -100.0, -100.0)
+  Existing nodes (8 total):
+    node #0: (-10.0, -100.0, -100.0)
+    node #1: (-10.0, -100.0, 100.0)
+    node #2: (-10.0, 100.0, -100.0)
+    node #3: (-10.0, 100.0, 100.0)
+    node #4: (10.0, -100.0, -100.0)
+    node #5: (10.0, -100.0, 100.0)
+    node #6: (10.0, 100.0, -100.0)
+    node #7: (10.0, 100.0, 100.0)
+
+  Candidates (20 total):
+    [0] simp=T1, scene=0, source=ms, val=-5.859019e+02, pt=(-9.999999998993214, -100.0, 18.12893636093724), dist_to_nodes=8.187106e+01, ok
+    [1] simp=T1, scene=0, source=c_s, val=9.960026e-01, pt=(-9.99999195482144, -99.99998498275718, 0.938839155548281), dist_to_nodes=9.906116e+01, ok
+    [2] simp=T1, scene=1, source=ms, val=-5.833944e+02, pt=(-9.999999999000277, -99.99999999969873, 17.692106635442777), dist_to_nodes=8.230789e+01, ok
+    [3] simp=T1, scene=1, source=c_s, val=9.451258e-01, pt=(-9.999859025195006, -99.99976139123004, 0.7896361834628085), dist_to_nodes=9.921036e+01, ok
+    [4] simp=T1, scene=2, source=ms, val=-5.869245e+02, pt=(-9.999999998997055, -100.0, 18.369874314157514), dist_to_nodes=8.163013e+01, ok
+    [5] simp=T1, scene=2, source=c_s, val=9.559330e-01, pt=(-9.999927352683624, -99.99988996382336, 1.6482321876749502), dist_to_nodes=9.835177e+01, ok
+    [6] simp=T1, scene=3, source=ms, val=-5.915882e+02, pt=(-9.999999999006683, -99.99999999969884, 19.46573575148463), dist_to_nodes=8.053426e+01, ok
+    [7] simp=T1, scene=3, source=c_s, val=1.054552e+00, pt=(-10.0, -100.0, 0.3476079635338606), dist_to_nodes=9.965239e+01, ok
+    [8] simp=T1, scene=4, source=ms, val=-5.842079e+02, pt=(-10.0, -100.0, 17.8572332799177), dist_to_nodes=8.214277e+01, ok
+    [9] simp=T1, scene=4, source=c_s, val=9.683376e-01, pt=(-9.99998442391556, -99.99997113290753, 0.3937636213622695), dist_to_nodes=9.960624e+01, ok
+    [10] simp=T1, scene=5, source=ms, val=-5.847419e+02, pt=(-9.999999998999947, -100.0, 17.973720637596813), dist_to_nodes=8.202628e+01, ok
+    [11] simp=T1, scene=5, source=c_s, val=9.433459e-01, pt=(-0.11183060908823318, -91.62458742993527, 0.0), dist_to_nodes=1.008361e+02, ok
+    [12] simp=T1, scene=6, source=ms, val=-5.890545e+02, pt=(-9.99999999899636, -100.0, 18.797416606250408), dist_to_nodes=8.120258e+01, ok
+    [13] simp=T1, scene=6, source=c_s, val=1.010819e+00, pt=(-9.99999239957924, -99.99998740661776, 1.9640688503056498), dist_to_nodes=9.803593e+01, ok
+    [14] simp=T1, scene=7, source=ms, val=-5.857285e+02, pt=(-9.999999999000197, -99.99999999969876, 18.170358734813135), dist_to_nodes=8.182964e+01, ok
+    [15] simp=T1, scene=7, source=c_s, val=9.467111e-01, pt=(-9.999632209426453, -99.99948575154482, 0.8197147654449153), dist_to_nodes=9.918029e+01, ok
+    [16] simp=T1, scene=8, source=ms, val=-5.875225e+02, pt=(-9.999999998998875, -100.0, 18.531953777729186), dist_to_nodes=8.146805e+01, ok
+    [17] simp=T1, scene=8, source=c_s, val=1.010766e+00, pt=(-9.999995750425917, -99.99999144024486, 0.663666880475226), dist_to_nodes=9.933633e+01, ok
+    [18] simp=T1, scene=9, source=ms, val=-5.847571e+02, pt=(-9.999999998999767, -100.0, 17.96666039254042), dist_to_nodes=8.203334e+01, ok
+    [19] simp=T1, scene=9, source=c_s, val=9.569139e-01, pt=(-10.0, -100.0, 1.270011249351347), dist_to_nodes=9.872999e+01, ok
+

@@ -1,0 +1,13 @@
+# simplex_record_selected_shape.txt -- selected simplex volume & quality per iteration
+# Fields: iter, simplex_id, volume, quality, n_verts, loc_type, bounding_box_diag
+
+iter=0  simplex=(3, 4, 6, 7, 14, 22)  vol=2.027027e+08  quality=2.627378e-04  n_verts=6  loc_type=face  bb_diag=5.274621e+02
+iter=1  simplex=(3, 4, 6, 7, 14, 32)  vol=2.096341e+07  quality=4.831866e-05  n_verts=6  loc_type=sub_face  bb_diag=4.349469e+02
+iter=2  simplex=(3, 4, 6, 7, 14, 33)  vol=9.400307e+06  quality=2.173158e-05  n_verts=6  loc_type=sub_face  bb_diag=4.340620e+02
+iter=3  simplex=(3, 4, 6, 7, 14, 34)  vol=9.400306e+06  quality=2.173157e-05  n_verts=6  loc_type=sub_face  bb_diag=4.340620e+02
+iter=4  simplex=(3, 4, 7, 14, 32, 33)  vol=8.090697e+06  quality=1.897049e-05  n_verts=6  loc_type=edge  bb_diag=4.349469e+02
+iter=5  simplex=(3, 6, 7, 14, 32, 33)  vol=3.472402e+06  quality=1.690805e-05  n_verts=6  loc_type=edge  bb_diag=3.374135e+02
+iter=6  simplex=(3, 6, 7, 14, 33, 37)  vol=3.472402e+06  quality=1.690804e-05  n_verts=6  loc_type=edge  bb_diag=3.374135e+02
+iter=7  simplex=(3, 6, 7, 14, 37, 38)  vol=3.472402e+06  quality=1.690804e-05  n_verts=6  loc_type=edge  bb_diag=3.374135e+02
+iter=8  simplex=(3, 6, 7, 14, 38, 39)  vol=1.167867e+06  quality=5.731284e-06  n_verts=6  loc_type=edge  bb_diag=3.326409e+02
+iter=9  simplex=(3, 6, 7, 14, 38, 40)  vol=1.167867e+06  quality=5.731284e-06  n_verts=6  loc_type=sub_face  bb_diag=3.326409e+02

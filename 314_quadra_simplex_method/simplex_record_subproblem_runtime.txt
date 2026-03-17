@@ -3,29 +3,12 @@
 
 === Iter 0 ===
 ms: total_time=0.0000, calls=0, avg=0.0000
-cs: total_time=299.2336, calls=10, avg=29.9234
-Q:  total_time=0.0544, calls=5, avg=0.0109
-timeouts (22):
-  iter=0 simp=T0 scen=1 type=cs status=time_limit term=maxTimeLimit ok=True val=2.2319018554761008 time=30.3222s
-  iter=0 simp=T0 scen=4 type=cs status=time_limit term=maxTimeLimit ok=True val=3.6641066653811794 time=30.1489s
-  iter=0 simp=T1 scen=0 type=cs status=time_limit term=maxTimeLimit ok=True val=5.598871749831592 time=30.2378s
-  iter=0 simp=T1 scen=1 type=cs status=time_limit term=maxTimeLimit ok=True val=1.6968294356875804 time=30.2646s
-  iter=0 simp=T1 scen=2 type=cs status=time_limit term=maxTimeLimit ok=True val=2.41606129869314 time=30.6020s
-  iter=0 simp=T1 scen=3 type=cs status=time_limit term=maxTimeLimit ok=True val=5.650144730858124 time=30.4934s
-  iter=0 simp=T1 scen=4 type=cs status=time_limit term=maxTimeLimit ok=True val=3.626796341600956 time=30.2851s
-  iter=0 simp=T2 scen=0 type=cs status=time_limit term=maxTimeLimit ok=True val=13.228185931440237 time=30.2375s
-  iter=0 simp=T2 scen=1 type=cs status=time_limit term=maxTimeLimit ok=True val=1.614508351776879 time=30.1675s
-  iter=0 simp=T2 scen=2 type=cs status=time_limit term=maxTimeLimit ok=True val=5.440140498303658 time=30.1398s
-  iter=0 simp=T2 scen=3 type=cs status=time_limit term=maxTimeLimit ok=True val=22.307953926640415 time=30.7046s
-  iter=0 simp=T2 scen=4 type=cs status=time_limit term=maxTimeLimit ok=True val=7.329268719685854 time=30.1278s
-  iter=0 simp=T3 scen=1 type=cs status=time_limit term=maxTimeLimit ok=True val=1.6145113814328405 time=30.1446s
-  iter=0 simp=T3 scen=4 type=cs status=time_limit term=maxTimeLimit ok=True val=7.329267180227982 time=30.1901s
-  iter=0 simp=T4 scen=0 type=cs status=time_limit term=maxTimeLimit ok=True val=25.504336673872096 time=30.0884s
-  iter=0 simp=T4 scen=1 type=cs status=time_limit term=maxTimeLimit ok=True val=13.259252883890419 time=30.3216s
-  iter=0 simp=T4 scen=2 type=cs status=time_limit term=maxTimeLimit ok=True val=18.371203632456442 time=30.1554s
-  iter=0 simp=T4 scen=4 type=cs status=time_limit term=maxTimeLimit ok=True val=24.96567680129192 time=30.5217s
-  iter=0 simp=T5 scen=0 type=cs status=time_limit term=maxTimeLimit ok=True val=13.433829138704109 time=30.9169s
-  iter=0 simp=T5 scen=1 type=cs status=time_limit term=maxTimeLimit ok=True val=2.559198064573136 time=30.6377s
-  iter=0 simp=T5 scen=2 type=cs status=time_limit term=maxTimeLimit ok=True val=2.9478363961804477 time=30.0824s
-  iter=0 simp=T5 scen=4 type=cs status=time_limit term=maxTimeLimit ok=True val=8.591539198896454 time=30.8611s
+cs: total_time=83.3590, calls=8, avg=10.4199
+Q:  total_time=0.0080, calls=2, avg=0.0040
+timeouts (5):
+  iter=0 simp=T1 scen=0 type=cs status=time_limit term=maxTimeLimit ok=True val=1.1095327025494757 time=30.0087s
+  iter=0 simp=T2 scen=0 type=cs status=time_limit term=maxTimeLimit ok=True val=1.170795035617112 time=30.0129s
+  iter=0 simp=T3 scen=0 type=cs status=time_limit term=maxTimeLimit ok=True val=1.1015724452408742 time=30.0079s
+  iter=0 simp=T4 scen=0 type=cs status=time_limit term=maxTimeLimit ok=True val=2.1813253018608485 time=30.0104s
+  iter=0 simp=T5 scen=0 type=cs status=time_limit term=maxTimeLimit ok=True val=1.6938241877402678 time=30.0128s
 

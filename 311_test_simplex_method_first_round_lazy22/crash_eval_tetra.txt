@@ -1,0 +1,30 @@
+Crash in evaluate_all_tetra at iter 0
+Traceback (most recent call last):
+  File "c:\Users\Administrator\OneDrive\Desktop\workspace2026\227_test_simplex_method\simplex_specialstart.py", line 1242, in run_pid_simplex_3d
+    tri, per_tet = evaluate_all_tetra(
+                   ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Administrator\OneDrive\Desktop\workspace2026\227_test_simplex_method\simplex_specialstart.py", line 689, in evaluate_all_tetra
+    LB_sur = solve_surrogate_lb_for_tet(fverts_per_scene, ms_scene, c_scene)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Administrator\OneDrive\Desktop\workspace2026\227_test_simplex_method\simplex_specialstart.py", line 446, in solve_surrogate_lb_for_tet
+    LB_sur = _LB_BUNDLE.compute_lb(
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Administrator\OneDrive\Desktop\workspace2026\227_test_simplex_method\bundles.py", line 776, in compute_lb
+    res = self.gp.solve(load_solutions=True, tee=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\ProgramData\anaconda3\envs\snoglode-win\Lib\site-packages\pyomo\solvers\plugins\solvers\persistent_solver.py", line 500, in solve
+    self._presolve(**kwds)
+  File "C:\ProgramData\anaconda3\envs\snoglode-win\Lib\site-packages\pyomo\solvers\plugins\solvers\persistent_solver.py", line 64, in _presolve
+    DirectOrPersistentSolver._presolve(self, **kwds)
+  File "C:\ProgramData\anaconda3\envs\snoglode-win\Lib\site-packages\pyomo\solvers\plugins\solvers\direct_or_persistent_solver.py", line 138, in _presolve
+    OptSolver._presolve(self, **kwds)
+  File "C:\ProgramData\anaconda3\envs\snoglode-win\Lib\site-packages\pyomo\opt\base\solvers.py", line 725, in _presolve
+    self.available()
+  File "C:\ProgramData\anaconda3\envs\snoglode-win\Lib\site-packages\pyomo\solvers\plugins\solvers\gurobi_direct.py", line 221, in available
+    with capture_output(capture_fd=True) as OUT:
+  File "C:\ProgramData\anaconda3\envs\snoglode-win\Lib\site-packages\pyomo\common\tee.py", line 371, in __exit__
+    return self._exit_impl(et, ev, tb)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\ProgramData\anaconda3\envs\snoglode-win\Lib\site-packages\pyomo\common\tee.py", line 520, in _exit_impl
+    raise RuntimeError("\n".join(FAIL))
+RuntimeError: KeyboardInterrupt:  (4: <pyomo.common.tee.TeeStream object at 0x000001D1E584C190>@1d1e584c190)

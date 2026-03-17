@@ -1,0 +1,93 @@
+# simplex_record_split.txt — per-iteration split record
+# selected_simplex LB_pre, UB_pre, children LBs, end LB/UB
+
+=== Iter 0 ===
+selected_simplex: T5  LB_pre=-356.781084788
+UB_pre=-356.516687148  LB_global_pre=-356.781084788
+children (created 5):
+  child T109 (2, 3, 8, 16, 30, 32) LB=-356.205055550
+  child T111 (2, 3, 4, 8, 30, 32) LB=-356.778760766
+end: UB=-356.516687148  LB=-356.781084777
+
+=== Iter 1 ===
+selected_simplex: T42  LB_pre=-356.781084777
+UB_pre=-356.516687148  LB_global_pre=-356.781084777
+children (created 2):
+  child T111 (3, 4, 16, 22, 30, 33) LB=-356.781084777
+  child T112 (2, 3, 16, 22, 30, 33) LB=-257.375354866
+end: UB=-356.516687148  LB=-356.781084777
+
+=== Iter 2 ===
+selected_simplex: T111  LB_pre=-356.781084777
+UB_pre=-356.516687148  LB_global_pre=-356.781084777
+children (created 6):
+  child T115 (3, 4, 16, 22, 30, 34) LB=-356.781084777
+  child T116 (3, 16, 22, 30, 33, 34) LB=-258.279716842
+end: UB=-356.516687148  LB=-356.781084777
+
+=== Iter 3 ===
+selected_simplex: T115  LB_pre=-356.781084777
+UB_pre=-356.516687148  LB_global_pre=-356.781084777
+children (created 6):
+  child T120 (3, 4, 16, 22, 30, 35) LB=-356.781084777
+  child T121 (3, 16, 22, 30, 34, 35) LB=-260.226443961
+end: UB=-356.516687148  LB=-356.781084777
+
+=== Iter 4 ===
+selected_simplex: T120  LB_pre=-356.781084777
+UB_pre=-356.516687148  LB_global_pre=-356.781084777
+children (created 6):
+  child T125 (3, 4, 16, 22, 30, 36) LB=-356.777653885
+  child T126 (3, 16, 22, 30, 35, 36) LB=-260.969546976
+end: UB=-356.516687148  LB=-356.780899083
+
+=== Iter 5 ===
+selected_simplex: T96  LB_pre=-356.780899083
+UB_pre=-356.516687148  LB_global_pre=-356.780899083
+children (created 6):
+  child T128 (3, 4, 16, 21, 28, 37) LB=-356.780897255
+  child T131 (3, 16, 20, 21, 28, 37) LB=-351.451439344
+  child T132 (3, 4, 20, 21, 28, 37) LB=-356.601011217
+end: UB=-356.516687148  LB=-356.780899083
+
+=== Iter 6 ===
+selected_simplex: T95  LB_pre=-356.780899083
+UB_pre=-356.516687148  LB_global_pre=-356.780899083
+children (created 6):
+  child T133 (3, 4, 16, 22, 28, 38) LB=-356.776575122
+  child T136 (3, 16, 20, 22, 28, 38) LB=-352.899692636
+  child T137 (3, 4, 20, 22, 28, 38) LB=-356.603426010
+end: UB=-356.516687148  LB=-356.780897255
+
+=== Iter 7 ===
+selected_simplex: T127  LB_pre=-356.780897255
+UB_pre=-356.516687148  LB_global_pre=-356.780897255
+children (created 6):
+  child T138 (3, 4, 16, 21, 28, 39) LB=-356.780897252
+  child T142 (3, 4, 21, 28, 37, 39) LB=-356.598725927
+end: UB=-356.516687148  LB=-356.780897252
+
+=== Iter 8 ===
+selected_simplex: T138  LB_pre=-356.780897252
+UB_pre=-356.516687148  LB_global_pre=-356.780897252
+children (created 6):
+  child T143 (3, 4, 16, 21, 28, 40) LB=-356.780897575
+  child T147 (3, 4, 21, 28, 39, 40) LB=-356.598722928
+end: UB=-356.516687148  LB=-356.780897575
+
+=== Iter 9 ===
+selected_simplex: T143  LB_pre=-356.780897575
+UB_pre=-356.516687148  LB_global_pre=-356.780897575
+children (created 6):
+  child T148 (3, 4, 16, 21, 28, 41) LB=-356.780897575
+  child T152 (3, 4, 21, 28, 40, 41) LB=-356.601135956
+end: UB=-356.516687148  LB=-356.780897575
+
+=== Iter 10 ===
+selected_simplex: T148  LB_pre=-356.780897575
+UB_pre=-356.516687148  LB_global_pre=-356.780897575
+children (created 2):
+  child T152 (3, 4, 16, 28, 41, 42) LB=-356.778983134
+  child T153 (3, 16, 21, 28, 41, 42) LB=-350.835245383
+end: UB=-356.516687148  LB=-356.780887793
+

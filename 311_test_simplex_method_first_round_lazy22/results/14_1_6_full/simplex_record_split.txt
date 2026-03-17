@@ -1,0 +1,45 @@
+# simplex_record_split.txt — per-iteration split record
+# selected_simplex LB_pre, UB_pre, children LBs, end LB/UB
+
+=== Iter 0 ===
+selected_simplex: T1  LB_pre=0.115730469
+UB_pre=0.094379868  LB_global_pre=0.115730469
+children (created 3):
+  child T1 (0, 3, 4) LB=0.019715544
+  child T2 (0, 2, 4) LB=0.015049051
+  child T3 (2, 3, 4) LB=0.019715605
+end: UB=0.015786189  LB=0.015049051
+
+=== Iter 1 ===
+selected_simplex: T2  LB_pre=0.015049051
+UB_pre=0.015786189  LB_global_pre=0.015049051
+children (created 2):
+  child T3 (0, 4, 5) LB=0.015025601
+  child T4 (2, 4, 5) LB=0.014592550
+end: UB=0.015663821  LB=0.014592550
+
+=== Iter 2 ===
+selected_simplex: T4  LB_pre=0.014592550
+UB_pre=0.015663821  LB_global_pre=0.014592550
+children (created 3):
+  child T4 (4, 5, 6) LB=0.015025585
+  child T5 (2, 5, 6) LB=0.033645042
+  child T6 (2, 4, 6) LB=0.019715901
+end: UB=0.015627128  LB=0.015025585
+
+=== Iter 3 ===
+selected_simplex: T4  LB_pre=0.015025585
+UB_pre=0.015627128  LB_global_pre=0.015025585
+children (created 3):
+  child T7 (5, 6, 7) LB=0.015025577
+  child T8 (4, 6, 7) LB=0.015025523
+end: UB=0.015366038  LB=0.015025523
+
+=== Iter 4 ===
+selected_simplex: T8  LB_pre=0.015025523
+UB_pre=0.015366038  LB_global_pre=0.015025523
+children (created 2):
+  child T8 (4, 7, 8) LB=0.015025389
+  child T9 (6, 7, 8) LB=0.015025428
+end: UB=0.015366038  LB=0.015025389
+
